@@ -23,7 +23,7 @@ class ThesaurusArrayTest {
 	void factory() throws java.text.ParseException {
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		thesaurusArray.setConcepts(new HashSet<ThesaurusArrayConcept>());
-		thesaurusArray.setIdentifier("foo");
+		thesaurusArray.setIdentifier("data");
 		thesaurusArray.setNotation("DE");
 		thesaurusArray.setOrdered(false);
 		ThesaurusConcept superOrdinateConcept = new ThesaurusConcept();
@@ -31,7 +31,7 @@ class ThesaurusArrayTest {
 		superOrdinateConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		superOrdinateConcept.setConceptArrays(new HashSet<ThesaurusArray>());
 		superOrdinateConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		superOrdinateConcept.setIdentifier("hello");
+		superOrdinateConcept.setIdentifier("data");
 		superOrdinateConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		superOrdinateConcept.setNotation("DE");
 		superOrdinateConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -50,7 +50,7 @@ class ThesaurusArrayTest {
 		thesaurus2.setDefaultTopConcept(false);
 		thesaurus2.setDescription("some text");
 		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus2.setIdentifier("foo");
+		thesaurus2.setIdentifier("data");
 		thesaurus2.setLang(new HashSet<Language>());
 		thesaurus2.setPolyHierarchical(false);
 		thesaurus2.setPublisher("foo");
@@ -63,7 +63,7 @@ class ThesaurusArrayTest {
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusArray.setThesaurus(thesaurus2);
 		assertThat(thesaurusArray.getConcepts(), empty());
-		assertThat(thesaurusArray.getIdentifier(), is("foo"));
+		assertThat(thesaurusArray.getIdentifier(), is("data"));
 		assertThat(thesaurusArray.getNotation(), is("DE"));
 		assertThat(thesaurusArray.getOrdered(), is(false));
 		assertThat(thesaurusArray.getParent(), is(nullValue()));

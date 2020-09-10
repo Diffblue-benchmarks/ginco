@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -36,16 +35,6 @@ public class SuggestionServiceImplTest {
 	}
 
 	@Test
-	public void createOrUpdateSuggestionReturnsNull() {
-		assertNull(service.createOrUpdateSuggestion(new Suggestion()));
-	}
-
-	@Test
-	public void deleteSuggestionReturnsNull() {
-		assertNull(service.deleteSuggestion(new Suggestion()));
-	}
-
-	@Test
 	public void getConceptSuggestionCountReturnsOne() {
 		when(suggestionDAO.getConceptSuggestionCount(Mockito.<String>any()))
 			.thenReturn(1L);
@@ -53,15 +42,10 @@ public class SuggestionServiceImplTest {
 	}
 
 	@Test
-	public void getConceptSuggestionPaginatedListLimitIsOneAndStartIndexIsZeroReturnsEmpty() {
+	public void getConceptSuggestionPaginatedListLimitIsOneAndStartIndexIsOneReturnsEmpty() {
 		when(suggestionDAO.findConceptPaginatedSuggestions(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(new ArrayList<Suggestion>());
-		assertTrue((service.getConceptSuggestionPaginatedList("1234", 0, 1)).isEmpty());
-	}
-
-	@Test
-	public void getSuggestionByIdIdIsOneReturnsNull() {
-		assertNull(service.getSuggestionById(1));
+		assertTrue((service.getConceptSuggestionPaginatedList("1234", 1, 1)).isEmpty());
 	}
 
 	@Test
@@ -72,10 +56,10 @@ public class SuggestionServiceImplTest {
 	}
 
 	@Test
-	public void getSuggestionPaginatedListByRecipientLimitIsOneAndStartIndexIsZeroReturnsEmpty() {
+	public void getSuggestionPaginatedListByRecipientLimitIsOneAndStartIndexIsOneReturnsEmpty() {
 		when(suggestionDAO.findPaginatedSuggestionsByRecipient(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(new ArrayList<Suggestion>());
-		assertTrue((service.getSuggestionPaginatedListByRecipient("1234", 0, 1)).isEmpty());
+		assertTrue((service.getSuggestionPaginatedListByRecipient("1234", 1, 1)).isEmpty());
 	}
 
 	@Test

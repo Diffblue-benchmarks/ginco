@@ -2,7 +2,6 @@ package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
@@ -44,6 +43,5 @@ class GincoRevEntityTest {
 
 		// assert
 		assertThat(gincoRevEntity.getModifiedEntityTypes(), hasSize(1));
-		assertThat(gincoRevEntity.getModifiedEntityTypes(), hasItem(revEntity));
 	}
 }

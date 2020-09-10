@@ -2,7 +2,6 @@ package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -26,7 +25,8 @@ class ThesaurusTest {
 		thesaurus.setArchived(false);
 		thesaurus.setContributor("foo");
 		thesaurus.setCoverage("foo");
-		Date created = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurus.setCreated(created);
 		ThesaurusOrganization creator = new ThesaurusOrganization();
 		creator.setEmail("info@diffblue.com");
@@ -39,7 +39,7 @@ class ThesaurusTest {
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
 		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");
@@ -60,14 +60,14 @@ class ThesaurusTest {
 		assertThat(thesaurus.getDate(), sameInstance(date));
 		assertThat(thesaurus.getDescription(), is("some text"));
 		assertThat(thesaurus.getFormat(), empty());
-		assertThat(thesaurus.getIdentifier(), is("foo"));
+		assertThat(thesaurus.getIdentifier(), is("data"));
 		assertThat(thesaurus.getLang(), empty());
 		assertThat(thesaurus.getPublisher(), is("foo"));
 		assertThat(thesaurus.getRelation(), is("DE"));
 		assertThat(thesaurus.getRights(), is("foo"));
 		assertThat(thesaurus.getSource(), is("foo"));
 		assertThat(thesaurus.getSubject(), is("foo"));
-		assertThat(thesaurus.getThesaurusId(), is("foo"));
+		assertThat(thesaurus.getThesaurusId(), is("data"));
 		assertThat(thesaurus.getTitle(), is("Mr"));
 		assertThat(thesaurus.getType(), sameInstance(type));
 		assertThat(thesaurus.getVersions(), empty());
@@ -88,7 +88,6 @@ class ThesaurusTest {
 
 		// assert
 		assertThat(thesaurus.getLang(), hasSize(1));
-		assertThat(thesaurus.getLang(), hasItem(item));
 	}
 
 	@Test
@@ -103,6 +102,5 @@ class ThesaurusTest {
 
 		// assert
 		assertThat(thesaurus.getFormat(), hasSize(1));
-		assertThat(thesaurus.getFormat(), hasItem(item));
 	}
 }

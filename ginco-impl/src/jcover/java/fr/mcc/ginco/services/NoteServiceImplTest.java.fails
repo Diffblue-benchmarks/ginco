@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -36,17 +35,9 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
-	public void createOrUpdateNoteReturnsNull() {
-		assertNull(service.createOrUpdateNote(new Note()));
-	}
-
-	@Test
-	public void deleteNoteReturnsNull() {
-		assertNull(service.deleteNote(new Note()));
-	}
-
-	@Test
 	public void getAllNotesReturnsEmpty() {
+		when(noteDAO.findAll())
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getAllNotes()).isEmpty());
 	}
 
@@ -58,15 +49,10 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
-	public void getConceptNotePaginatedListLimitIsOneAndStartIndexIsZeroReturnsEmpty() {
+	public void getConceptNotePaginatedListLimitIsOneAndStartIndexIsOneReturnsEmpty() {
 		when(noteDAO.findConceptPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(new ArrayList<Note>());
-		assertTrue((service.getConceptNotePaginatedList("1234", 0, 1)).isEmpty());
-	}
-
-	@Test
-	public void getNoteByIdReturnsNull() {
-		assertNull(service.getNoteById("1234"));
+		assertTrue((service.getConceptNotePaginatedList("1234", 1, 1)).isEmpty());
 	}
 
 	@Test
@@ -84,9 +70,9 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
-	public void getTermNotePaginatedListLimitIsOneAndStartIndexIsZeroReturnsEmpty() {
+	public void getTermNotePaginatedListLimitIsOneAndStartIndexIsOneReturnsEmpty() {
 		when(noteDAO.findTermPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(new ArrayList<Note>());
-		assertTrue((service.getTermNotePaginatedList("1234", 0, 1)).isEmpty());
+		assertTrue((service.getTermNotePaginatedList("1234", 1, 1)).isEmpty());
 	}
 }

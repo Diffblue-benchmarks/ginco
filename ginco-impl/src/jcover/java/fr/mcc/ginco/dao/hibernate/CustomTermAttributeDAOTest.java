@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 public class CustomTermAttributeDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
 		CustomTermAttributeDAO customTermAttributeDAO = new CustomTermAttributeDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		customTermAttributeDAO.setSessionFactory(sessionFactory);

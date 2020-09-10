@@ -26,7 +26,7 @@ class NoteTest {
 		concept1.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		concept1.setConceptArrays(new HashSet<ThesaurusArray>());
 		concept1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept1.setIdentifier("hello");
+		concept1.setIdentifier("data");
 		concept1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		concept1.setNotation("DE");
 		concept1.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -37,7 +37,7 @@ class NoteTest {
 		note.setConcept(concept1);
 		Date created2 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		note.setCreated(created2);
-		note.setIdentifier("foo");
+		note.setIdentifier("data");
 		Language lang = new Language();
 		lang.setId("1234");
 		lang.setPart1("foo");
@@ -59,7 +59,7 @@ class NoteTest {
 		termId.setConcept(new ThesaurusConcept());
 		termId.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		termId.setHidden(false);
-		termId.setIdentifier("foo");
+		termId.setIdentifier("data");
 		termId.setLanguage(new Language());
 		termId.setLexicalValue("value");
 		termId.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -71,7 +71,7 @@ class NoteTest {
 		note.setTerm(termId);
 		assertThat(note.getConcept(), sameInstance(concept1));
 		assertThat(note.getCreated(), sameInstance(created2));
-		assertThat(note.getIdentifier(), is("foo"));
+		assertThat(note.getIdentifier(), is("data"));
 		assertThat(note.getLanguage(), sameInstance(lang));
 		assertThat(note.getLexicalValue(), is("value"));
 		assertThat(note.getModified(), sameInstance(modified2));

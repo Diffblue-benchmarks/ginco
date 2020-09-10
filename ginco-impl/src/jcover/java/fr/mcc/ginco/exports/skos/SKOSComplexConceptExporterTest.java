@@ -45,7 +45,7 @@ public class SKOSComplexConceptExporterTest {
 		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		splitNonPreferredTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		splitNonPreferredTerm.setIdentifier("foo");
+		splitNonPreferredTerm.setIdentifier("data");
 		splitNonPreferredTerm.setLanguage(new Language());
 		splitNonPreferredTerm.setLexicalValue("value");
 		splitNonPreferredTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));

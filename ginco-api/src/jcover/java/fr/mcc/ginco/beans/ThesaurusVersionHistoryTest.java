@@ -20,10 +20,11 @@ class ThesaurusVersionHistoryTest {
 
 	@Test
 	void factory() throws java.text.ParseException {
-		ThesaurusVersionHistory thesaurusVersionHistory = new ThesaurusVersionHistory();
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 new ThesaurusVersionHistory();
 		Date date3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusVersionHistory.setDate(date3);
-		thesaurusVersionHistory.setIdentifier("1.0");
+		thesaurusVersionHistory.setIdentifier("data");
 		thesaurusVersionHistory.setStatus(1);
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setArchived(false);
@@ -35,7 +36,7 @@ class ThesaurusVersionHistoryTest {
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
 		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");
@@ -51,7 +52,7 @@ class ThesaurusVersionHistoryTest {
 		thesaurusVersionHistory.setUserId("root");
 		thesaurusVersionHistory.setVersionNote("1.0");
 		assertThat(thesaurusVersionHistory.getDate(), sameInstance(date3));
-		assertThat(thesaurusVersionHistory.getIdentifier(), is("1.0"));
+		assertThat(thesaurusVersionHistory.getIdentifier(), is("data"));
 		assertThat(thesaurusVersionHistory.getStatus(), is(1));
 		assertThat(thesaurusVersionHistory.getThesaurus(), sameInstance(thesaurus));
 		assertThat(thesaurusVersionHistory.getThisVersion(), is(false));

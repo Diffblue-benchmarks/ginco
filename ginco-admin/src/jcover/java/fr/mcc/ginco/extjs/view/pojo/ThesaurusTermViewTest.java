@@ -23,7 +23,7 @@ class ThesaurusTermViewTest {
 		thesaurusTermView.setConceptsPath(new ArrayList<String>());
 		thesaurusTermView.setCreated("foo");
 		thesaurusTermView.setHidden(false);
-		thesaurusTermView.setIdentifier("foo");
+		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
 		thesaurusTermView.setLexicalValue("value");
 		thesaurusTermView.setModified("foo");
@@ -37,7 +37,7 @@ class ThesaurusTermViewTest {
 		assertThat(thesaurusTermView.getConceptsPath(), empty());
 		assertThat(thesaurusTermView.getCreated(), is("foo"));
 		assertThat(thesaurusTermView.getHidden(), is(false));
-		assertThat(thesaurusTermView.getIdentifier(), is("foo"));
+		assertThat(thesaurusTermView.getIdentifier(), is("data"));
 		assertThat(thesaurusTermView.getLanguage(), is("foo"));
 		assertThat(thesaurusTermView.getLexicalValue(), is("value"));
 		assertThat(thesaurusTermView.getModified(), is("foo"));

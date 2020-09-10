@@ -38,7 +38,8 @@ public class SKOSHierarchicalRelationshipExporterTest {
 
 	@Test
 	public void exportHierarchicalRelationships1() {
-		ConceptHierarchicalRelationship conceptHierarchicalRelationship = new ConceptHierarchicalRelationship();
+		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
+			 new ConceptHierarchicalRelationship();
 		conceptHierarchicalRelationship.setRole(0);
 		when(conceptHierarchicalRelationshipService.getByChildAndParentIds(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(conceptHierarchicalRelationship);
@@ -49,7 +50,8 @@ public class SKOSHierarchicalRelationshipExporterTest {
 
 	@Test
 	public void exportHierarchicalRelationships2() {
-		ConceptHierarchicalRelationship conceptHierarchicalRelationship = new ConceptHierarchicalRelationship();
+		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
+			 new ConceptHierarchicalRelationship();
 		conceptHierarchicalRelationship.setRole(1);
 		when(conceptHierarchicalRelationshipService.getByChildAndParentIds(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(conceptHierarchicalRelationship);

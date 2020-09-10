@@ -26,7 +26,7 @@ class SuggestionTest {
 		concept1.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		concept1.setConceptArrays(new HashSet<ThesaurusArray>());
 		concept1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept1.setIdentifier("hello");
+		concept1.setIdentifier("data");
 		concept1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		concept1.setNotation("DE");
 		concept1.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -45,7 +45,7 @@ class SuggestionTest {
 		term.setConcept(new ThesaurusConcept());
 		term.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		term.setHidden(false);
-		term.setIdentifier("foo");
+		term.setIdentifier("data");
 		term.setLanguage(new Language());
 		term.setLexicalValue("value");
 		term.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));

@@ -15,7 +15,8 @@ class ConceptHierarchicalRelationsEnumTest {
 
 	@Test
 	void valuesReturnsNORELATIONSPARENTCHILD() {
-		ConceptHierarchicalRelationsEnum[] result = ConceptHierarchicalRelationsEnum.values();
+		ConceptHierarchicalRelationsEnum[] result =
+			 ConceptHierarchicalRelationsEnum.values();
 		assertThat(result[0], is(ConceptHierarchicalRelationsEnum.NORELATIONS));
 		assertThat(result[1], is(ConceptHierarchicalRelationsEnum.PARENT));
 		assertThat(result[2], is(ConceptHierarchicalRelationsEnum.CHILD));

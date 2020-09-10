@@ -59,7 +59,8 @@ public class GincoConceptExporterTest {
 
 	@Test
 	public void getExportAssociativeRelationShip() {
-		List<AssociativeRelationship> list = new ArrayList<AssociativeRelationship>();
+		List<AssociativeRelationship> list =
+			 new ArrayList<AssociativeRelationship>();
 		when(associativeRelationshipService.getAssociatedConceptsRelationships(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(list);
 		assertSame(list, service.getExportAssociativeRelationShip(new ThesaurusConcept()).getList());

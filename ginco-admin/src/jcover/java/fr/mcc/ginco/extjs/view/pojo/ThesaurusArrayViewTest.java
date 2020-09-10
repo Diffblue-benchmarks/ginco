@@ -21,7 +21,7 @@ class ThesaurusArrayViewTest {
 		ThesaurusArrayView thesaurusArrayView = new ThesaurusArrayView();
 		thesaurusArrayView.setConcepts(new ArrayList<ThesaurusArrayConceptView>());
 		thesaurusArrayView.setCreated("foo");
-		thesaurusArrayView.setIdentifier("foo");
+		thesaurusArrayView.setIdentifier("data");
 		thesaurusArrayView.setLabel("label");
 		thesaurusArrayView.setLanguage("foo");
 		thesaurusArrayView.setModified("foo");
@@ -34,7 +34,7 @@ class ThesaurusArrayViewTest {
 		thesaurusArrayView.setThesaurusId("1234");
 		assertThat(thesaurusArrayView.getConcepts(), empty());
 		assertThat(thesaurusArrayView.getCreated(), is("foo"));
-		assertThat(thesaurusArrayView.getIdentifier(), is("foo"));
+		assertThat(thesaurusArrayView.getIdentifier(), is("data"));
 		assertThat(thesaurusArrayView.getLabel(), is("label"));
 		assertThat(thesaurusArrayView.getLanguage(), is("foo"));
 		assertThat(thesaurusArrayView.getModified(), is("foo"));

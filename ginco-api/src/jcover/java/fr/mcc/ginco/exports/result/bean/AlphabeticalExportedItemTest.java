@@ -16,7 +16,8 @@ class AlphabeticalExportedItemTest {
 
 	@Test
 	void factory() {
-		AlphabeticalExportedItem alphabeticalExportedItem = new AlphabeticalExportedItem();
+		AlphabeticalExportedItem alphabeticalExportedItem =
+			 new AlphabeticalExportedItem();
 		alphabeticalExportedItem.setLexicalValue("value");
 		Object objectToExport = new Object();
 		alphabeticalExportedItem.setObjectToExport(objectToExport);

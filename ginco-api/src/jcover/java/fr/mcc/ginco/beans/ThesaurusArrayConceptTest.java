@@ -26,7 +26,7 @@ class ThesaurusArrayConceptTest {
 		concept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		concept.setConceptArrays(new HashSet<ThesaurusArray>());
 		concept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept.setIdentifier("hello");
+		concept.setIdentifier("data");
 		concept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		concept.setNotation("DE");
 		concept.setParentConcepts(new HashSet<ThesaurusConcept>());

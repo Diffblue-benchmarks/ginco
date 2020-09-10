@@ -36,7 +36,7 @@ class SOAPThesaurusServiceImplTest {
 		SOAPThesaurusServiceImpl obj = new SOAPThesaurusServiceImpl();
 		List<Thesaurus> list = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setTitle("Mr");
 		list.add(thesaurus);
 		IThesaurusService thesaurusService = mock(IThesaurusService.class);
@@ -49,7 +49,7 @@ class SOAPThesaurusServiceImplTest {
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getIdentifier(), is("foo"));
+		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getTitle(), is("Mr"));
 	}
 
@@ -79,7 +79,7 @@ class SOAPThesaurusServiceImplTest {
 		thesaurus.setCreator(creator);
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDescription("some text");
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setPublisher("foo");
 		thesaurus.setRelation("DE");
 		thesaurus.setRights("foo");
@@ -114,7 +114,7 @@ class SOAPThesaurusServiceImplTest {
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getSubject(), is("foo"));
 		assertThat(result.getType(), is("label"));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getTitle(), is("Mr"));
 	}
 
@@ -129,7 +129,7 @@ class SOAPThesaurusServiceImplTest {
 		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDescription("some text");
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setPublisher("foo");
 		thesaurus.setRelation("DE");
 		thesaurus.setRights("foo");
@@ -164,7 +164,7 @@ class SOAPThesaurusServiceImplTest {
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getSubject(), is("foo"));
 		assertThat(result.getType(), is("label"));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getTitle(), is("Mr"));
 	}
 
@@ -184,7 +184,7 @@ class SOAPThesaurusServiceImplTest {
 		thesaurus.setCreator(creator);
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDescription("some text");
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setPublisher("foo");
 		thesaurus.setRelation("DE");
 		thesaurus.setRights("foo");
@@ -219,7 +219,7 @@ class SOAPThesaurusServiceImplTest {
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getSubject(), is("foo"));
 		assertThat(result.getType(), is("label"));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getTitle(), is("Mr"));
 	}
 
@@ -239,7 +239,7 @@ class SOAPThesaurusServiceImplTest {
 		thesaurus.setCreator(creator);
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDescription("some text");
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setPublisher("foo");
 		thesaurus.setRelation("DE");
 		thesaurus.setRights("foo");
@@ -271,7 +271,7 @@ class SOAPThesaurusServiceImplTest {
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getSubject(), is("foo"));
 		assertThat(result.getType(), is(nullValue()));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getTitle(), is("Mr"));
 	}
 }

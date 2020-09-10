@@ -73,7 +73,7 @@ class ThesaurusViewConverterTest {
 		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setDefaultTopConcept(false);
 		source1.setDescription("some text");
-		source1.setIdentifier("foo");
+		source1.setIdentifier("data");
 		source1.setPolyHierarchical(false);
 		source1.setPublisher("foo");
 		source1.setRelation("DE");
@@ -99,7 +99,7 @@ class ThesaurusViewConverterTest {
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), empty());
-		assertThat(result.getId(), is("foo"));
+		assertThat(result.getId(), is("data"));
 		assertThat(result.getLanguages(), empty());
 		assertThat(result.getPolyHierarchical(), is(false));
 		assertThat(result.getPublisher(), is("foo"));
@@ -107,7 +107,7 @@ class ThesaurusViewConverterTest {
 		assertThat(result.getRights(), is("foo"));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getSubject(), is("foo"));
-		assertThat(result.getThesaurusId(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getTitle(), is("Mr"));
 		assertThat(result.getType(), is(nullValue()));
 	}
@@ -127,7 +127,7 @@ class ThesaurusViewConverterTest {
 		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setDefaultTopConcept(false);
 		source1.setDescription("some text");
-		source1.setIdentifier("foo");
+		source1.setIdentifier("data");
 		source1.setPolyHierarchical(false);
 		source1.setPublisher("foo");
 		source1.setRelation("DE");
@@ -153,7 +153,7 @@ class ThesaurusViewConverterTest {
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), empty());
-		assertThat(result.getId(), is("foo"));
+		assertThat(result.getId(), is("data"));
 		assertThat(result.getLanguages(), empty());
 		assertThat(result.getPolyHierarchical(), is(false));
 		assertThat(result.getPublisher(), is("foo"));
@@ -161,60 +161,7 @@ class ThesaurusViewConverterTest {
 		assertThat(result.getRights(), is("foo"));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getSubject(), is("foo"));
-		assertThat(result.getThesaurusId(), is("foo"));
-		assertThat(result.getTitle(), is("Mr"));
-		assertThat(result.getType(), is(nullValue()));
-	}
-
-	@Test
-	void convert3() throws java.text.ParseException {
-
-		// arrange
-		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
-			.thenReturn(false);
-		Thesaurus source1 = new Thesaurus();
-		source1.setContributor("foo");
-		source1.setCoverage("foo");
-		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source1.setCreator(new ThesaurusOrganization());
-		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source1.setDefaultTopConcept(false);
-		source1.setDescription("some text");
-		source1.setIdentifier("foo");
-		source1.setPolyHierarchical(false);
-		source1.setPublisher("foo");
-		source1.setRelation("DE");
-		source1.setRights("foo");
-		source1.setSource("foo");
-		source1.setSubject("foo");
-		source1.setTitle("Mr");
-		source1.setType(new ThesaurusType());
-
-		// act
-		ThesaurusView result = service.convert(source1);
-
-		// assert
-		assertThat(result.getArchived(), is(nullValue()));
-		assertThat(result.getCanBeDeleted(), is(true));
-		assertThat(result.getContributor(), is("foo"));
-		assertThat(result.getCoverage(), is("foo"));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getCreatorEmail(), is(nullValue()));
-		assertThat(result.getCreatorHomepage(), is(nullValue()));
-		assertThat(result.getCreatorName(), is(nullValue()));
-		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
-		assertThat(result.getDefaultTopConcept(), is(false));
-		assertThat(result.getDescription(), is("some text"));
-		assertThat(result.getFormats(), empty());
-		assertThat(result.getId(), is("foo"));
-		assertThat(result.getLanguages(), empty());
-		assertThat(result.getPolyHierarchical(), is(false));
-		assertThat(result.getPublisher(), is("foo"));
-		assertThat(result.getRelation(), is("DE"));
-		assertThat(result.getRights(), is("foo"));
-		assertThat(result.getSource(), is("foo"));
-		assertThat(result.getSubject(), is("foo"));
-		assertThat(result.getThesaurusId(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getTitle(), is("Mr"));
 		assertThat(result.getType(), is(nullValue()));
 	}

@@ -16,7 +16,8 @@ class BusinessExceptionTest {
 
 	@Test
 	void factory() {
-		BusinessException businessException = new BusinessException("jpg", "John Smith");
+		BusinessException businessException =
+			 new BusinessException("jpg", "John Smith");
 		assertThat(businessException.getToFormat(), is(nullValue()));
 		assertThat(businessException.getUserMessageKey(), is("John Smith"));
 		assertThat(businessException.getCause(), is(nullValue()));

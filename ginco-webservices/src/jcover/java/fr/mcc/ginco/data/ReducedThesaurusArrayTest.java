@@ -19,11 +19,11 @@ class ReducedThesaurusArrayTest {
 	@Test
 	void factory() {
 		ReducedThesaurusArray reducedThesaurusArray = new ReducedThesaurusArray();
-		reducedThesaurusArray.setIdentifier("something");
+		reducedThesaurusArray.setIdentifier("data");
 		reducedThesaurusArray.setOrdered(false);
 		reducedThesaurusArray.setTerms(new ArrayList<ReducedThesaurusTerm>());
 		reducedThesaurusArray.setTitle("Mr");
-		assertThat(reducedThesaurusArray.getIdentifier(), is("something"));
+		assertThat(reducedThesaurusArray.getIdentifier(), is("data"));
 		assertThat(reducedThesaurusArray.getOrdered(), is(false));
 		assertThat(reducedThesaurusArray.getTerms(), empty());
 		assertThat(reducedThesaurusArray.getTitle(), is("Mr"));

@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -38,21 +37,6 @@ public class ThesaurusVersionHistoryServiceImplTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
-	}
-
-	@Test
-	public void createOrUpdateVersionReturnsNull() {
-		when(thesaurusVersionHistoryDAO.findThisVersionByThesaurusId(Mockito.<String>any()))
-			.thenReturn(new ThesaurusVersionHistory());
-		ThesaurusVersionHistory version = new ThesaurusVersionHistory();
-		version.setThesaurus(new Thesaurus());
-		version.setThisVersion(false);
-		assertNull(service.createOrUpdateVersion(version));
-	}
-
-	@Test
-	public void getThesaurusVersionHistoryByIdReturnsNull() {
-		assertNull(service.getThesaurusVersionHistoryById("1234"));
 	}
 
 	@Test

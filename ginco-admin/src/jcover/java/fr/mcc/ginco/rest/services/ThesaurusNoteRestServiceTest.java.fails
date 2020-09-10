@@ -76,7 +76,8 @@ class ThesaurusNoteRestServiceTest {
 			.thenReturn(new ArrayList<Note>());
 
 		// act
-		ExtJsonFormLoadData<List<ThesaurusNoteView>> result = service.createNotes(new ArrayList<ThesaurusNoteView>(), "1234", "1234");
+		ExtJsonFormLoadData<List<ThesaurusNoteView>> result =
+			 service.createNotes(new ArrayList<ThesaurusNoteView>(), "1234", "1234");
 
 		// assert
 		assertThat(result.getData(), sameInstance(list1));
@@ -105,12 +106,12 @@ class ThesaurusNoteRestServiceTest {
 	void getNoteParentEntity() throws fr.mcc.ginco.exceptions.TechnicalException, java.io.IOException {
 		Note note = new Note();
 		ThesaurusConcept concept1 = new ThesaurusConcept();
-		concept1.setIdentifier("hello");
+		concept1.setIdentifier("data");
 		note.setConcept(concept1);
 		note.setTerm(new ThesaurusTerm());
 		when(noteService.getNoteById(Mockito.<String>any()))
 			.thenReturn(note);
-		assertThat(service.getNoteParentEntity("1234"), is("{\"success\":true,\"data\":{\"parentEntityId\":\"hello\",\"isConcept\":true},\"total\":null}"));
+		assertThat(service.getNoteParentEntity("1234"), is("{\"success\":true,\"data\":{\"parentEntityId\":\"data\",\"isConcept\":true},\"total\":null}"));
 	}
 
 	@Test

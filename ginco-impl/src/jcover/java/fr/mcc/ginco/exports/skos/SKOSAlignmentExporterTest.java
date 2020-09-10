@@ -40,7 +40,8 @@ public class SKOSAlignmentExporterTest {
 	public void exportAlignmentsDefaultModelIsEmpty() {
 		when(alignmentService.getAlignmentsBySourceConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<Alignment>());
-		Model defaultModel = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model defaultModel =
+			 com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
 		assertSame(defaultModel, service.exportAlignments("1234", defaultModel));
 		assertFalse(defaultModel.isEmpty());
 	}

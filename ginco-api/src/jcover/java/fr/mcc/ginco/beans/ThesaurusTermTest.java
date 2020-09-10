@@ -26,7 +26,7 @@ class ThesaurusTermTest {
 		concept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		concept.setConceptArrays(new HashSet<ThesaurusArray>());
 		concept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept.setIdentifier("hello");
+		concept.setIdentifier("data");
 		concept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		concept.setNotation("DE");
 		concept.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -38,7 +38,7 @@ class ThesaurusTermTest {
 		Date created2 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusTerm.setCreated(created2);
 		thesaurusTerm.setHidden(false);
-		thesaurusTerm.setIdentifier("foo");
+		thesaurusTerm.setIdentifier("data");
 		Language language = new Language();
 		language.setId("1234");
 		language.setPart1("foo");
@@ -67,7 +67,7 @@ class ThesaurusTermTest {
 		thesaurus2.setDefaultTopConcept(false);
 		thesaurus2.setDescription("some text");
 		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus2.setIdentifier("foo");
+		thesaurus2.setIdentifier("data");
 		thesaurus2.setLang(new HashSet<Language>());
 		thesaurus2.setPolyHierarchical(false);
 		thesaurus2.setPublisher("foo");
@@ -82,7 +82,7 @@ class ThesaurusTermTest {
 		assertThat(thesaurusTerm.getConcept(), sameInstance(concept));
 		assertThat(thesaurusTerm.getCreated(), sameInstance(created2));
 		assertThat(thesaurusTerm.getHidden(), is(false));
-		assertThat(thesaurusTerm.getIdentifier(), is("foo"));
+		assertThat(thesaurusTerm.getIdentifier(), is("data"));
 		assertThat(thesaurusTerm.getLanguage(), sameInstance(language));
 		assertThat(thesaurusTerm.getLexicalValue(), is("value"));
 		assertThat(thesaurusTerm.getModified(), sameInstance(modified2));
@@ -94,11 +94,11 @@ class ThesaurusTermTest {
 	}
 
 	@Test
-	void getThesaurusIdReturnsFoo() {
+	void getThesaurusIdReturnsData() {
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		Thesaurus thesaurus2 = new Thesaurus();
-		thesaurus2.setIdentifier("foo");
+		thesaurus2.setIdentifier("data");
 		thesaurusTerm.setThesaurus(thesaurus2);
-		assertThat(thesaurusTerm.getThesaurusId(), is("foo"));
+		assertThat(thesaurusTerm.getThesaurusId(), is("data"));
 	}
 }

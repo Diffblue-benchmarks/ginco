@@ -43,7 +43,8 @@ public class MistralStructuresBuilderTest {
 			.thenReturn(new ArrayList<ThesaurusConcept>());
 		when(auditHelper.getPreferredTermAtRevision(Mockito.<Number>any(), Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(thesaurusTerm);
-		ArrayList<ThesaurusConcept> conceptsAtRevision = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> conceptsAtRevision =
+			 new ArrayList<ThesaurusConcept>();
 		conceptsAtRevision.add(new ThesaurusConcept());
 		assertTrue((service.buildHierarchyStructure(conceptsAtRevision, 1, "mpeg").get("value")).isEmpty());
 	}

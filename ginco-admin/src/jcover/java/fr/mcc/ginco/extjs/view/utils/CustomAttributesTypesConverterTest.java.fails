@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
@@ -75,6 +76,8 @@ class CustomAttributesTypesConverterTest {
 		Thesaurus thesaurus = new Thesaurus();
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus);
+		when(customTermAttributeTypeService.getAttributeTypeById(anyInt()))
+			.thenReturn(new Object());
 		GenericCustomAttributeTypeView view = new GenericCustomAttributeTypeView();
 		view.setCode("DE");
 		view.setValue("value");
@@ -93,8 +96,10 @@ class CustomAttributesTypesConverterTest {
 	void convertList() {
 
 		// arrange
-		ArrayList<GenericCustomAttributeType> sourceList = new ArrayList<GenericCustomAttributeType>();
-		GenericCustomAttributeType genericCustomAttributeType = new GenericCustomAttributeType();
+		ArrayList<GenericCustomAttributeType> sourceList =
+			 new ArrayList<GenericCustomAttributeType>();
+		GenericCustomAttributeType genericCustomAttributeType =
+			 new GenericCustomAttributeType();
 		genericCustomAttributeType.setCode("DE");
 		genericCustomAttributeType.setIdentifier(1);
 		genericCustomAttributeType.setThesaurus(new Thesaurus());
@@ -102,7 +107,8 @@ class CustomAttributesTypesConverterTest {
 		sourceList.add(genericCustomAttributeType);
 
 		// act
-		List<GenericCustomAttributeTypeView> result = service.convertList(sourceList, false);
+		List<GenericCustomAttributeTypeView> result =
+			 service.convertList(sourceList, false);
 
 		// assert
 		assertThat(result.size(), is(1));

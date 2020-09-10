@@ -40,11 +40,6 @@ public class ThesaurusConceptGroupServiceImplTest {
 	}
 
 	@Test
-	public void destroyThesaurusConceptGroupReturnsNull() {
-		assertNull(service.destroyThesaurusConceptGroup(new ThesaurusConceptGroup()));
-	}
-
-	@Test
 	public void getAllThesaurusConceptGroupsByThesaurusIdExcludedConceptGroupIdIsBarReturnsEmpty() {
 		when(thesaurusConceptGroupDAO.findThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConceptGroup>());
@@ -59,13 +54,9 @@ public class ThesaurusConceptGroupServiceImplTest {
 	}
 
 	@Test
-	public void getConceptGroupByIdReturnsNull() {
-		assertNull(service.getConceptGroupById("1234"));
-	}
-
-	@Test
 	public void updateThesaurusConceptGroupConceptGroupIsNull() {
-		ThesaurusConceptGroup result = service.updateThesaurusConceptGroup(null, new ThesaurusConceptGroupLabel());
+		ThesaurusConceptGroup result =
+			 service.updateThesaurusConceptGroup(null, new ThesaurusConceptGroupLabel());
 		assertNull(result.getConceptGroupType());
 		assertNull(result.getConcepts());
 		assertNull(result.getIdentifier());
@@ -78,7 +69,8 @@ public class ThesaurusConceptGroupServiceImplTest {
 
 	@Test
 	public void updateThesaurusConceptGroupConceptGroupLabelIsNull() {
-		ThesaurusConceptGroup result = service.updateThesaurusConceptGroup(new ThesaurusConceptGroup(), null);
+		ThesaurusConceptGroup result =
+			 service.updateThesaurusConceptGroup(new ThesaurusConceptGroup(), null);
 		assertNull(result.getConceptGroupType());
 		assertNull(result.getConcepts());
 		assertNull(result.getIdentifier());
@@ -87,12 +79,5 @@ public class ThesaurusConceptGroupServiceImplTest {
 		assertNull(result.getParent());
 		assertNull(result.getParentConcept());
 		assertNull(result.getThesaurus());
-	}
-
-	@Test
-	public void updateThesaurusConceptGroupReturnsNull() {
-		ThesaurusConceptGroupLabel conceptGroupLabel = new ThesaurusConceptGroupLabel();
-		assertNull(service.updateThesaurusConceptGroup(new ThesaurusConceptGroup(), conceptGroupLabel));
-		assertNull(conceptGroupLabel.getConceptGroup());
 	}
 }

@@ -15,7 +15,8 @@ class GincoRevModifiedEntityTypeTest {
 
 	@Test
 	void factory() {
-		GincoRevModifiedEntityType gincoRevModifiedEntityType = new GincoRevModifiedEntityType();
+		GincoRevModifiedEntityType gincoRevModifiedEntityType =
+			 new GincoRevModifiedEntityType();
 		gincoRevModifiedEntityType.setEntityClassName("entity");
 		gincoRevModifiedEntityType.setId(1);
 		gincoRevModifiedEntityType.setRevision(1);

@@ -69,13 +69,13 @@ class ThesaurusConceptViewConverterTest {
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
 			.thenReturn("foo");
 		ThesaurusConcept concept = new ThesaurusConcept();
-		concept.setIdentifier("hello");
+		concept.setIdentifier("data");
 
 		// act
 		ThesaurusConceptReducedView result = service.convert(concept);
 
 		// assert
-		assertThat(result.getIdentifier(), is("hello"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("foo"));
 		assertThat(result.getLang(), is(nullValue()));
 	}

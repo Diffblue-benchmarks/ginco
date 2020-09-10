@@ -62,20 +62,23 @@ public class AssociativeRelationshipServiceImplTest {
 	public void getAssociativeRelationshipById() {
 
 		// arrange
-		AssociativeRelationship associativeRelationship = new AssociativeRelationship();
+		AssociativeRelationship associativeRelationship =
+			 new AssociativeRelationship();
 		ThesaurusConcept conceptLeft = new ThesaurusConcept();
 		associativeRelationship.setConceptLeft(conceptLeft);
 		ThesaurusConcept conceptRight = new ThesaurusConcept();
 		associativeRelationship.setConceptRight(conceptRight);
 		AssociativeRelationship.Id identifier3 = new AssociativeRelationship.Id();
 		associativeRelationship.setIdentifier(identifier3);
-		AssociativeRelationshipRole relationshipRole = new AssociativeRelationshipRole();
+		AssociativeRelationshipRole relationshipRole =
+			 new AssociativeRelationshipRole();
 		associativeRelationship.setRelationshipRole(relationshipRole);
 		when(associativeRelationshipDAO.getAssociativeRelationship(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(associativeRelationship);
 
 		// act
-		AssociativeRelationship result = service.getAssociativeRelationshipById("1234", "1234");
+		AssociativeRelationship result =
+			 service.getAssociativeRelationshipById("1234", "1234");
 
 		// assert
 		assertSame(conceptLeft, result.getConceptLeft());

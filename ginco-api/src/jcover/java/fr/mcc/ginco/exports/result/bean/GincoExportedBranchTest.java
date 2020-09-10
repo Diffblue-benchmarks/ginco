@@ -35,16 +35,20 @@ class GincoExportedBranchTest {
 	@Test
 	void factory() throws java.text.ParseException {
 		GincoExportedBranch gincoExportedBranch = new GincoExportedBranch();
-		HashMap<String, JaxbList<Alignment>> alignments = new HashMap<String, JaxbList<Alignment>>();
+		HashMap<String, JaxbList<Alignment>> alignments =
+			 new HashMap<String, JaxbList<Alignment>>();
 		JaxbList<Alignment> x4 = new JaxbList<Alignment>();
 		alignments.put("foo", x4);
 		gincoExportedBranch.setAlignments(alignments);
-		HashMap<String, JaxbList<Note>> conceptNotes = new HashMap<String, JaxbList<Note>>();
+		HashMap<String, JaxbList<Note>> conceptNotes =
+			 new HashMap<String, JaxbList<Note>>();
 		JaxbList<Note> x39 = new JaxbList<Note>();
 		conceptNotes.put("foo", x39);
 		gincoExportedBranch.setConceptNotes(conceptNotes);
-		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> parentConceptRelationship = new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		JaxbList<ConceptHierarchicalRelationship> x70 = new JaxbList<ConceptHierarchicalRelationship>();
+		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> parentConceptRelationship =
+			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
+		JaxbList<ConceptHierarchicalRelationship> x70 =
+			 new JaxbList<ConceptHierarchicalRelationship>();
 		parentConceptRelationship.put("foo", x70);
 		gincoExportedBranch.setHierarchicalRelationship(parentConceptRelationship);
 		ThesaurusConcept rootConcept = new ThesaurusConcept();
@@ -52,7 +56,7 @@ class GincoExportedBranchTest {
 		rootConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		rootConcept.setConceptArrays(new HashSet<ThesaurusArray>());
 		rootConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		rootConcept.setIdentifier("hello");
+		rootConcept.setIdentifier("data");
 		rootConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		rootConcept.setNotation("DE");
 		rootConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -61,18 +65,22 @@ class GincoExportedBranchTest {
 		rootConcept.setThesaurus(new Thesaurus());
 		rootConcept.setTopConcept(false);
 		gincoExportedBranch.setRootConcept(rootConcept);
-		HashMap<String, JaxbList<Note>> termNotes = new HashMap<String, JaxbList<Note>>();
+		HashMap<String, JaxbList<Note>> termNotes =
+			 new HashMap<String, JaxbList<Note>>();
 		JaxbList<Note> x98 = new JaxbList<Note>();
 		termNotes.put("foo", x98);
 		gincoExportedBranch.setTermNotes(termNotes);
 		gincoExportedBranch.setConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>());
-		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes = new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x136 = new JaxbList<CustomConceptAttribute>();
+		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
+			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
+		JaxbList<CustomConceptAttribute> x136 =
+			 new JaxbList<CustomConceptAttribute>();
 		conceptAttributes.put("foo", x136);
 		gincoExportedBranch.setConceptAttributes(conceptAttributes);
 		gincoExportedBranch.setConcepts(new ArrayList<ThesaurusConcept>());
 		gincoExportedBranch.setTermAttributeTypes(new ArrayList<CustomTermAttributeType>());
-		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes = new HashMap<String, JaxbList<CustomTermAttribute>>();
+		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
+			 new HashMap<String, JaxbList<CustomTermAttribute>>();
 		JaxbList<CustomTermAttribute> x177 = new JaxbList<CustomTermAttribute>();
 		termAttributes.put("foo", x177);
 		gincoExportedBranch.setTermAttributes(termAttributes);

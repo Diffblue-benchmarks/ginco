@@ -16,7 +16,8 @@ public class UpdateEnversListernerTest {
 
 	@Test
 	public void factory() {
-		AuditConfiguration enversConfiguration = AuditConfiguration.getFor(new Configuration());
+		AuditConfiguration enversConfiguration =
+			 AuditConfiguration.getFor(new Configuration());
 		assertSame(enversConfiguration, new UpdateEnversListerner(enversConfiguration).getAuditConfiguration());
 	}
 }

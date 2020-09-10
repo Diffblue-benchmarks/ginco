@@ -2,7 +2,6 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -37,11 +36,6 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguageByIdReturnsNull() {
-		assertNull(service.getLanguageById("1234"));
-	}
-
-	@Test
 	public void getLanguageByPart1Part1IsBar() {
 
 		// arrange
@@ -64,8 +58,10 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguageCountReturnsZero() {
-		assertEquals(0L, (long) service.getLanguageCount());
+	public void getLanguageCountReturnsOne() {
+		when(languagesDAO.count())
+			.thenReturn(1L);
+		assertEquals(1L, (long) service.getLanguageCount());
 	}
 
 	@Test

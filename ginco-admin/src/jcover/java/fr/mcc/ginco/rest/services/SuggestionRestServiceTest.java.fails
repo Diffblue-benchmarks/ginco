@@ -47,7 +47,8 @@ class SuggestionRestServiceTest {
 
 	@Test
 	void createSuggestionsConceptIdIsBarAndSuggestionViewsIsEmpty() {
-		ExtJsonFormLoadData<List<SuggestionView>> result = service.createSuggestions(new ArrayList<SuggestionView>(), "bar", "1234");
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.createSuggestions(new ArrayList<SuggestionView>(), "bar", "1234");
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
@@ -64,7 +65,8 @@ class SuggestionRestServiceTest {
 			.thenReturn(1L);
 		when(suggestionService.getConceptSuggestionPaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(new ArrayList<Suggestion>());
-		ExtJsonFormLoadData<List<SuggestionView>> result = service.getSuggestions("1234", "1234", 0, 1);
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.getSuggestions("1234", "1234", 0, 1);
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
@@ -72,7 +74,8 @@ class SuggestionRestServiceTest {
 
 	@Test
 	void updateSuggestionsSuggestionViewsIsEmpty() {
-		ExtJsonFormLoadData<List<SuggestionView>> result = service.updateSuggestions(new ArrayList<SuggestionView>());
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.updateSuggestions(new ArrayList<SuggestionView>());
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));

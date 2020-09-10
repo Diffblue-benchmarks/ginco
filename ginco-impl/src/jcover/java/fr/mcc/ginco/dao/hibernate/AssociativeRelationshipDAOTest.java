@@ -16,8 +16,9 @@ import org.mockito.Mockito;
 public class AssociativeRelationshipDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
-		AssociativeRelationshipDAO associativeRelationshipDAO = new AssociativeRelationshipDAO();
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+		AssociativeRelationshipDAO associativeRelationshipDAO =
+			 new AssociativeRelationshipDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		associativeRelationshipDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, associativeRelationshipDAO.getSessionFactory());

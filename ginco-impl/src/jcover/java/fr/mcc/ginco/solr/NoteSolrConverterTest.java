@@ -38,7 +38,7 @@ public class NoteSolrConverterTest {
 		Note thesaurusNote = new Note();
 		thesaurusNote.setConcept(null);
 		thesaurusNote.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusNote.setIdentifier("foo");
+		thesaurusNote.setIdentifier("data");
 		thesaurusNote.setLanguage(new Language());
 		thesaurusNote.setLexicalValue("value");
 		thesaurusNote.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -58,7 +58,7 @@ public class NoteSolrConverterTest {
 		assertEquals(4, (int) (Integer) result.get("ext_type").getValue());
 		assertEquals(1.0f, result.get("identifier").getBoost(), 0);
 		assertEquals("identifier", result.get("identifier").getName());
-		assertEquals("foo", (String) result.get("identifier").getValue());
+		assertEquals("data", (String) result.get("identifier").getValue());
 		assertEquals(1.0f, result.get("language").getBoost(), 0);
 		assertEquals("language", result.get("language").getName());
 		assertNull(result.get("language").getValue());

@@ -26,7 +26,7 @@ class AlignmentConceptTest {
 		alignment.setAuthor("Ernest Hemingway");
 		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
-		alignment.setIdentifier("foo");
+		alignment.setIdentifier("data");
 		alignment.setInternalTargetThesaurus(new Thesaurus());
 		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		alignment.setSourceConcept(new ThesaurusConcept());
@@ -40,7 +40,7 @@ class AlignmentConceptTest {
 		internalTargetConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		internalTargetConcept.setConceptArrays(new HashSet<ThesaurusArray>());
 		internalTargetConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		internalTargetConcept.setIdentifier("hello");
+		internalTargetConcept.setIdentifier("data");
 		internalTargetConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		internalTargetConcept.setNotation("DE");
 		internalTargetConcept.setParentConcepts(new HashSet<ThesaurusConcept>());

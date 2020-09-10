@@ -45,7 +45,8 @@ class ThesaurusVersionRestServiceTest {
 
 	@Test
 	void getAllVersionStatus() {
-		ExtJsonFormLoadData<List<GenericStatusView>> result = service.getAllVersionStatus();
+		ExtJsonFormLoadData<List<GenericStatusView>> result =
+			 service.getAllVersionStatus();
 		assertThat(result.getData().size(), is(5));
 		assertThat(result.getData().get(0).getStatus(), is(0));
 		assertThat(result.getData().get(0).getStatusLabel(), is("Projet"));
@@ -65,14 +66,16 @@ class ThesaurusVersionRestServiceTest {
 	void getVersions() {
 
 		// arrange
-		List<ThesaurusVersionHistoryView> list1 = new ArrayList<ThesaurusVersionHistoryView>();
+		List<ThesaurusVersionHistoryView> list1 =
+			 new ArrayList<ThesaurusVersionHistoryView>();
 		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
 			.thenReturn(list1);
 		when(thesaurusVersionHistoryService.getVersionsByThesaurusId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusVersionHistory>());
 
 		// act
-		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result = service.getVersions("1234");
+		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result =
+			 service.getVersions("1234");
 
 		// assert
 		assertThat(result.getData(), sameInstance(list1));
@@ -84,14 +87,16 @@ class ThesaurusVersionRestServiceTest {
 	void updateVersionsVersionViewsIsEmpty() {
 
 		// arrange
-		List<ThesaurusVersionHistoryView> list1 = new ArrayList<ThesaurusVersionHistoryView>();
+		List<ThesaurusVersionHistoryView> list1 =
+			 new ArrayList<ThesaurusVersionHistoryView>();
 		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
 			.thenReturn(list1);
 		when(thesaurusVersionHistoryViewConverter.convertViewList(Mockito.<List<ThesaurusVersionHistoryView>>any()))
 			.thenReturn(new ArrayList<ThesaurusVersionHistory>());
 
 		// act
-		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result = service.updateVersions(new ArrayList<ThesaurusVersionHistoryView>());
+		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result =
+			 service.updateVersions(new ArrayList<ThesaurusVersionHistoryView>());
 
 		// assert
 		assertThat(result.getData(), sameInstance(list1));

@@ -18,7 +18,8 @@ class ImportedThesaurusResponseTest {
 
 	@Test
 	void factory() {
-		ImportedThesaurusResponse importedThesaurusResponse = new ImportedThesaurusResponse();
+		ImportedThesaurusResponse importedThesaurusResponse =
+			 new ImportedThesaurusResponse();
 		importedThesaurusResponse.setConceptsMissingAlignments(new ArrayList<String>());
 		importedThesaurusResponse.setExternalConceptIds(new ArrayList<String>());
 		importedThesaurusResponse.setThesaurusTitle("Mr");

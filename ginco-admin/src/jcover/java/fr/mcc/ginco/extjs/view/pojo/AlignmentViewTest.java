@@ -23,7 +23,7 @@ class AlignmentViewTest {
 		alignmentView.setAndRelation(false);
 		alignmentView.setCreated("foo");
 		alignmentView.setExternalThesaurus(new ArrayList<ExternalThesaurusView>());
-		alignmentView.setIdentifier("foo");
+		alignmentView.setIdentifier("data");
 		alignmentView.setInternalThesaurusId("1234");
 		alignmentView.setModified("foo");
 		alignmentView.setTargetConcepts(new ArrayList<AlignmentConceptView>());
@@ -32,7 +32,7 @@ class AlignmentViewTest {
 		assertThat(alignmentView.getAndRelation(), is(false));
 		assertThat(alignmentView.getCreated(), is("foo"));
 		assertThat(alignmentView.getExternalThesaurus(), empty());
-		assertThat(alignmentView.getIdentifier(), is("foo"));
+		assertThat(alignmentView.getIdentifier(), is("data"));
 		assertThat(alignmentView.getInternalThesaurusId(), is("1234"));
 		assertThat(alignmentView.getModified(), is("foo"));
 		assertThat(alignmentView.getTargetConcepts(), empty());

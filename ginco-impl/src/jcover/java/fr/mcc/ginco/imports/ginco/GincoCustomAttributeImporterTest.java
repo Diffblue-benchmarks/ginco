@@ -1,6 +1,5 @@
 package fr.mcc.ginco.imports.ginco;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import fr.mcc.ginco.beans.CustomConceptAttribute;
@@ -60,32 +59,19 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void getBranchCustomConceptAttributeTypes() {
-		ArrayList<CustomConceptAttributeType> customAttributeTypesToImport = new ArrayList<CustomConceptAttributeType>();
-		customAttributeTypesToImport.add(new CustomConceptAttributeType());
-		assertTrue(service.getBranchCustomConceptAttributeTypes(customAttributeTypesToImport, new Thesaurus()).isEmpty());
-	}
-
-	@Test
-	public void getBranchCustomConceptAttributeTypesCustomAttributeTypesToImportIsEmpty() {
+	public void getBranchCustomConceptAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
 		assertTrue(service.getBranchCustomConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>(), new Thesaurus()).isEmpty());
 	}
 
 	@Test
-	public void getBranchCustomTermAttributeTypes() {
-		ArrayList<CustomTermAttributeType> customAttributeTypesToImport = new ArrayList<CustomTermAttributeType>();
-		customAttributeTypesToImport.add(new CustomTermAttributeType());
-		assertTrue(service.getBranchCustomTermAttributeTypes(customAttributeTypesToImport, new Thesaurus()).isEmpty());
-	}
-
-	@Test
-	public void getBranchCustomTermAttributeTypesCustomAttributeTypesToImportIsEmpty() {
+	public void getBranchCustomTermAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
 		assertTrue(service.getBranchCustomTermAttributeTypes(new ArrayList<CustomTermAttributeType>(), new Thesaurus()).isEmpty());
 	}
 
 	@Test
 	public void storeCustomConceptAttribute() {
-		ArrayList<CustomConceptAttribute> customAttributeToImport = new ArrayList<CustomConceptAttribute>();
+		ArrayList<CustomConceptAttribute> customAttributeToImport =
+			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
 		customConceptAttribute.setType(new CustomConceptAttributeType());
 		customAttributeToImport.add(customConceptAttribute);
@@ -100,13 +86,6 @@ public class GincoCustomAttributeImporterTest {
 	@Test
 	public void storeCustomConceptAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
 		assertTrue(service.storeCustomConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>(), new Thesaurus()).isEmpty());
-	}
-
-	@Test
-	public void storeCustomConceptAttributeTypesReturnsNull() {
-		ArrayList<CustomConceptAttributeType> customAttributeTypesToImport = new ArrayList<CustomConceptAttributeType>();
-		customAttributeTypesToImport.add(new CustomConceptAttributeType());
-		assertNull(service.storeCustomConceptAttributeTypes(customAttributeTypesToImport, new Thesaurus()).get("DE"));
 	}
 
 	@Test

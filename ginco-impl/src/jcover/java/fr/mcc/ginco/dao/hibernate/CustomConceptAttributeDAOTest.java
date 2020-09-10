@@ -16,8 +16,9 @@ import org.mockito.Mockito;
 public class CustomConceptAttributeDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
-		CustomConceptAttributeDAO customConceptAttributeDAO = new CustomConceptAttributeDAO();
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+		CustomConceptAttributeDAO customConceptAttributeDAO =
+			 new CustomConceptAttributeDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		customConceptAttributeDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, customConceptAttributeDAO.getSessionFactory());

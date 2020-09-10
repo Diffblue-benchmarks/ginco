@@ -24,7 +24,7 @@ class ThesaurusConceptViewTest {
 		thesaurusConceptView.setChildConcepts(new ArrayList<HierarchicalRelationshipView>());
 		thesaurusConceptView.setConceptsPath(new ArrayList<String>());
 		thesaurusConceptView.setCreated("hello");
-		thesaurusConceptView.setIdentifier("hello");
+		thesaurusConceptView.setIdentifier("data");
 		thesaurusConceptView.setModified("hello");
 		thesaurusConceptView.setNotation("DE");
 		thesaurusConceptView.setParentConcepts(new ArrayList<HierarchicalRelationshipView>());
@@ -39,7 +39,7 @@ class ThesaurusConceptViewTest {
 		assertThat(thesaurusConceptView.getChildConcepts(), empty());
 		assertThat(thesaurusConceptView.getConceptsPath(), empty());
 		assertThat(thesaurusConceptView.getCreated(), is("hello"));
-		assertThat(thesaurusConceptView.getIdentifier(), is("hello"));
+		assertThat(thesaurusConceptView.getIdentifier(), is("data"));
 		assertThat(thesaurusConceptView.getModified(), is("hello"));
 		assertThat(thesaurusConceptView.getNotation(), is("DE"));
 		assertThat(thesaurusConceptView.getParentConcepts(), empty());

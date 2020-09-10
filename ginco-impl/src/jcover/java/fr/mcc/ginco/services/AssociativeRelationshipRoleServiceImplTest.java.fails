@@ -2,12 +2,13 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationshipRole;
 import fr.mcc.ginco.dao.IAssociativeRelationshipRoleDAO;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,8 @@ public class AssociativeRelationshipRoleServiceImplTest {
 
 	@Test
 	public void getAllAssociationTermRoleReturnsEmpty() {
+		when(associativeRelationshipRoleDAO.findAll())
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getAllAssociationTermRole()).isEmpty());
 	}
 
@@ -43,7 +46,8 @@ public class AssociativeRelationshipRoleServiceImplTest {
 	public void getDefaultAssociativeRelationshipRoleRole() {
 
 		// arrange
-		AssociativeRelationshipRole associativeRelationshipRole = new AssociativeRelationshipRole();
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
 		associativeRelationshipRole.setCode("DE");
 		associativeRelationshipRole.setLabel("label");
 		associativeRelationshipRole.setSkosLabel("label");
@@ -51,7 +55,8 @@ public class AssociativeRelationshipRoleServiceImplTest {
 			.thenReturn(associativeRelationshipRole);
 
 		// act
-		AssociativeRelationshipRole result = service.getDefaultAssociativeRelationshipRoleRole();
+		AssociativeRelationshipRole result =
+			 service.getDefaultAssociativeRelationshipRoleRole();
 
 		// assert
 		assertEquals("DE", result.getCode());
@@ -61,15 +66,11 @@ public class AssociativeRelationshipRoleServiceImplTest {
 	}
 
 	@Test
-	public void getRoleByIdReturnsNull() {
-		assertNull(service.getRoleById("1234"));
-	}
-
-	@Test
 	public void getRoleBySkosLabelSkosLabelIsBar() {
 
 		// arrange
-		AssociativeRelationshipRole associativeRelationshipRole = new AssociativeRelationshipRole();
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
 		associativeRelationshipRole.setCode("DE");
 		associativeRelationshipRole.setLabel("label");
 		associativeRelationshipRole.setSkosLabel("label");

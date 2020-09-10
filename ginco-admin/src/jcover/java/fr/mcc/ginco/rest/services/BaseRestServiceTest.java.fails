@@ -65,9 +65,9 @@ class BaseRestServiceTest {
 	private BaseRestService service;
 
 	@Test
-	void getTreeContentNodeParamIsNameReturnsEmpty() {
+	void getTreeContentNodeParamIsDataReturnsEmpty() {
 		when(thesaurusService.getThesaurusList())
 			.thenReturn(new ArrayList<Thesaurus>());
-		assertThat(service.getTreeContent("name"), empty());
+		assertThat(service.getTreeContent("data"), empty());
 	}
 }

@@ -35,7 +35,8 @@ public class AuditHelperTest {
 
 	@Test
 	public void getConceptChildrenAtRevisionRevisionNumberIsZeroReturnsEmpty() {
-		ArrayList<ThesaurusConcept> allThesaurusConcepts = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> allThesaurusConcepts =
+			 new ArrayList<ThesaurusConcept>();
 		allThesaurusConcepts.add(new ThesaurusConcept());
 		assertTrue((service.getConceptChildrenAtRevision(0, new ThesaurusConcept(), allThesaurusConcepts)).isEmpty());
 	}

@@ -15,11 +15,12 @@ class AssociativeRelationshipViewTest {
 
 	@Test
 	void factory() {
-		AssociativeRelationshipView associativeRelationshipView = new AssociativeRelationshipView();
-		associativeRelationshipView.setIdentifier("foo");
+		AssociativeRelationshipView associativeRelationshipView =
+			 new AssociativeRelationshipView();
+		associativeRelationshipView.setIdentifier("data");
 		associativeRelationshipView.setLabel("label");
 		associativeRelationshipView.setRoleCode("DE");
-		assertThat(associativeRelationshipView.getIdentifier(), is("foo"));
+		assertThat(associativeRelationshipView.getIdentifier(), is("data"));
 		assertThat(associativeRelationshipView.getLabel(), is("label"));
 		assertThat(associativeRelationshipView.getRoleCode(), is("DE"));
 	}

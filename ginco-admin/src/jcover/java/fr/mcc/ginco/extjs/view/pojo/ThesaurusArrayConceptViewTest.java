@@ -15,11 +15,12 @@ class ThesaurusArrayConceptViewTest {
 
 	@Test
 	void factory() {
-		ThesaurusArrayConceptView thesaurusArrayConceptView = new ThesaurusArrayConceptView();
-		thesaurusArrayConceptView.setIdentifier("hello");
+		ThesaurusArrayConceptView thesaurusArrayConceptView =
+			 new ThesaurusArrayConceptView();
+		thesaurusArrayConceptView.setIdentifier("data");
 		thesaurusArrayConceptView.setLabel("label");
 		thesaurusArrayConceptView.setOrder(1);
-		assertThat(thesaurusArrayConceptView.getIdentifier(), is("hello"));
+		assertThat(thesaurusArrayConceptView.getIdentifier(), is("data"));
 		assertThat(thesaurusArrayConceptView.getLabel(), is("label"));
 		assertThat(thesaurusArrayConceptView.getOrder(), is(1));
 	}

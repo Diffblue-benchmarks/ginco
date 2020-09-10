@@ -16,8 +16,10 @@ class ConceptHierarchicalRelationshipTest {
 
 	@Test
 	void factory() {
-		ConceptHierarchicalRelationship conceptHierarchicalRelationship = new ConceptHierarchicalRelationship();
-		ConceptHierarchicalRelationship.Id identifier = new ConceptHierarchicalRelationship.Id();
+		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
+			 new ConceptHierarchicalRelationship();
+		ConceptHierarchicalRelationship.Id identifier =
+			 new ConceptHierarchicalRelationship.Id();
 		identifier.setChildconceptid("1234");
 		identifier.setParentconceptid("1234");
 		conceptHierarchicalRelationship.setIdentifier(identifier);

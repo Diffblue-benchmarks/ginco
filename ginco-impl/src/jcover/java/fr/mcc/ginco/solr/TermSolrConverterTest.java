@@ -58,7 +58,7 @@ public class TermSolrConverterTest {
 		concept1.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		concept1.setConceptArrays(new HashSet<ThesaurusArray>());
 		concept1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept1.setIdentifier("hello");
+		concept1.setIdentifier("data");
 		concept1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		concept1.setNotation("DE");
 		concept1.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -68,7 +68,7 @@ public class TermSolrConverterTest {
 		concept1.setTopConcept(false);
 		note.setConcept(concept1);
 		note.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		note.setIdentifier("foo");
+		note.setIdentifier("data");
 		Language lang = new Language();
 		lang.setId("1234");
 		lang.setPart1("foo");
@@ -89,7 +89,7 @@ public class TermSolrConverterTest {
 		termId.setConcept(new ThesaurusConcept());
 		termId.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		termId.setHidden(false);
-		termId.setIdentifier("foo");
+		termId.setIdentifier("data");
 		termId.setLanguage(new Language());
 		termId.setLexicalValue("value");
 		termId.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -106,7 +106,7 @@ public class TermSolrConverterTest {
 		thesaurusTerm.setConcept(new ThesaurusConcept());
 		thesaurusTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusTerm.setHidden(false);
-		thesaurusTerm.setIdentifier("foo");
+		thesaurusTerm.setIdentifier("data");
 		thesaurusTerm.setLanguage(new Language());
 		thesaurusTerm.setLexicalValue("value");
 		thesaurusTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -131,7 +131,7 @@ public class TermSolrConverterTest {
 		assertEquals(3, (int) (Integer) result.get("ext_type").getValue());
 		assertEquals(1.0f, result.get("identifier").getBoost(), 0);
 		assertEquals("identifier", result.get("identifier").getName());
-		assertEquals("foo", (String) result.get("identifier").getValue());
+		assertEquals("data", (String) result.get("identifier").getValue());
 		assertEquals(1.0f, result.get("language").getBoost(), 0);
 		assertEquals("language", result.get("language").getName());
 		assertNull(result.get("language").getValue());
@@ -168,7 +168,7 @@ public class TermSolrConverterTest {
 		thesaurusTerm.setConcept(null);
 		thesaurusTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusTerm.setHidden(false);
-		thesaurusTerm.setIdentifier("foo");
+		thesaurusTerm.setIdentifier("data");
 		thesaurusTerm.setLanguage(new Language());
 		thesaurusTerm.setLexicalValue("value");
 		thesaurusTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -190,7 +190,7 @@ public class TermSolrConverterTest {
 		assertEquals(3, (int) (Integer) result.get("ext_type").getValue());
 		assertEquals(1.0f, result.get("identifier").getBoost(), 0);
 		assertEquals("identifier", result.get("identifier").getName());
-		assertEquals("foo", (String) result.get("identifier").getValue());
+		assertEquals("data", (String) result.get("identifier").getValue());
 		assertEquals(1.0f, result.get("language").getBoost(), 0);
 		assertEquals("language", result.get("language").getName());
 		assertNull(result.get("language").getValue());
@@ -224,7 +224,7 @@ public class TermSolrConverterTest {
 		thesaurusTerm.setConcept(new ThesaurusConcept());
 		thesaurusTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusTerm.setHidden(true);
-		thesaurusTerm.setIdentifier("foo");
+		thesaurusTerm.setIdentifier("data");
 		thesaurusTerm.setLanguage(new Language());
 		thesaurusTerm.setLexicalValue("value");
 		thesaurusTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -249,7 +249,7 @@ public class TermSolrConverterTest {
 		assertEquals(3, (int) (Integer) result.get("ext_type").getValue());
 		assertEquals(1.0f, result.get("identifier").getBoost(), 0);
 		assertEquals("identifier", result.get("identifier").getName());
-		assertEquals("foo", (String) result.get("identifier").getValue());
+		assertEquals("data", (String) result.get("identifier").getValue());
 		assertEquals(1.0f, result.get("language").getBoost(), 0);
 		assertEquals("language", result.get("language").getName());
 		assertNull(result.get("language").getValue());

@@ -1,6 +1,5 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -46,15 +45,10 @@ public class ThesaurusArrayServiceImplTest {
 	}
 
 	@Test
-	public void destroyThesaurusArrayReturnsNull() {
-		assertNull(service.destroyThesaurusArray(new ThesaurusArray()));
-	}
-
-	@Test
-	public void getAllThesaurusArrayByThesaurusIdExcludedConceptArrayIdIsBarReturnsEmpty() {
+	public void getAllThesaurusArrayByThesaurusIdReturnsEmpty() {
 		when(thesaurusArrayDAO.getThesaurusArrayListByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
-		assertTrue((service.getAllThesaurusArrayByThesaurusId("bar", "1234")).isEmpty());
+		assertTrue((service.getAllThesaurusArrayByThesaurusId("1234", "1234")).isEmpty());
 	}
 
 	@Test
@@ -83,15 +77,5 @@ public class ThesaurusArrayServiceImplTest {
 		when(thesaurusArrayDAO.getConceptSuperOrdinateArrays(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
 		assertTrue((service.getSubOrdinatedArrays("1234")).isEmpty());
-	}
-
-	@Test
-	public void getThesaurusArrayByIdReturnsNull() {
-		assertNull(service.getThesaurusArrayById("1234"));
-	}
-
-	@Test
-	public void updateOnlyThesaurusArrayReturnsNull() {
-		assertNull(service.updateOnlyThesaurusArray(new ThesaurusArray()));
 	}
 }

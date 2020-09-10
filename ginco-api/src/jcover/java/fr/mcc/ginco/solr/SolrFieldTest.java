@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class SolrFieldTest {
 
 	@Test
-	void getCheckedValueFieldNameIsAcmeReturnsNull() {
-		assertThat(SolrField.getCheckedValue("Acme"), is(nullValue()));
+	void getCheckedValueFieldNameIsDataReturnsNull() {
+		assertThat(SolrField.getCheckedValue("data"), is(nullValue()));
 	}
 }

@@ -93,7 +93,7 @@ class NodeLabelViewConverterTest {
 		nodeLabel.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		thesaurusArray.setConcepts(new HashSet<ThesaurusArrayConcept>());
-		thesaurusArray.setIdentifier("foo");
+		thesaurusArray.setIdentifier("data");
 		thesaurusArray.setNotation("DE");
 		thesaurusArray.setOrdered(false);
 		thesaurusArray.setSuperOrdinateConcept(new ThesaurusConcept());
@@ -109,10 +109,11 @@ class NodeLabelViewConverterTest {
 		language2.setTopLanguage(false);
 		when(languagesService.getLanguageById(Mockito.<String>any()))
 			.thenReturn(language2);
-		ThesaurusArrayView thesaurusConceptViewJAXBElement = new ThesaurusArrayView();
+		ThesaurusArrayView thesaurusConceptViewJAXBElement =
+			 new ThesaurusArrayView();
 		thesaurusConceptViewJAXBElement.setConcepts(new ArrayList<ThesaurusArrayConceptView>());
 		thesaurusConceptViewJAXBElement.setCreated("foo");
-		thesaurusConceptViewJAXBElement.setIdentifier("foo");
+		thesaurusConceptViewJAXBElement.setIdentifier("data");
 		thesaurusConceptViewJAXBElement.setLabel("label");
 		thesaurusConceptViewJAXBElement.setLanguage("foo");
 		thesaurusConceptViewJAXBElement.setModified("foo");

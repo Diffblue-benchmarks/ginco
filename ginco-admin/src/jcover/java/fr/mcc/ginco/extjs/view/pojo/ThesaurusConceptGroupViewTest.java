@@ -18,11 +18,12 @@ class ThesaurusConceptGroupViewTest {
 
 	@Test
 	void factory() {
-		ThesaurusConceptGroupView thesaurusConceptGroupView = new ThesaurusConceptGroupView();
+		ThesaurusConceptGroupView thesaurusConceptGroupView =
+			 new ThesaurusConceptGroupView();
 		thesaurusConceptGroupView.setConcepts(new ArrayList<String>());
 		thesaurusConceptGroupView.setCreated("hello");
 		thesaurusConceptGroupView.setGroupConceptLabelId(1);
-		thesaurusConceptGroupView.setIdentifier("hello");
+		thesaurusConceptGroupView.setIdentifier("data");
 		thesaurusConceptGroupView.setIsDynamic(false);
 		thesaurusConceptGroupView.setLabel("label");
 		thesaurusConceptGroupView.setLanguage("hello");
@@ -37,7 +38,7 @@ class ThesaurusConceptGroupViewTest {
 		assertThat(thesaurusConceptGroupView.getConcepts(), empty());
 		assertThat(thesaurusConceptGroupView.getCreated(), is("hello"));
 		assertThat(thesaurusConceptGroupView.getGroupConceptLabelId(), is(1));
-		assertThat(thesaurusConceptGroupView.getIdentifier(), is("hello"));
+		assertThat(thesaurusConceptGroupView.getIdentifier(), is("data"));
 		assertThat(thesaurusConceptGroupView.getIsDynamic(), is(false));
 		assertThat(thesaurusConceptGroupView.getLabel(), is("label"));
 		assertThat(thesaurusConceptGroupView.getLanguage(), is("hello"));

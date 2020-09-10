@@ -19,7 +19,8 @@ class CustomConceptAttributeTypeTest {
 
 	@Test
 	void factory() throws java.text.ParseException {
-		CustomConceptAttributeType customConceptAttributeType = new CustomConceptAttributeType();
+		CustomConceptAttributeType customConceptAttributeType =
+			 new CustomConceptAttributeType();
 		customConceptAttributeType.setExportable(false);
 		customConceptAttributeType.setCode("DE");
 		customConceptAttributeType.setIdentifier(1);
@@ -33,7 +34,7 @@ class CustomConceptAttributeTypeTest {
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
 		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");

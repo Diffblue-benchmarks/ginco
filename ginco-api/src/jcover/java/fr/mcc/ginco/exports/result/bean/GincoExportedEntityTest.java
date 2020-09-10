@@ -28,13 +28,16 @@ class GincoExportedEntityTest {
 	void factory() {
 		GincoExportedEntity gincoExportedEntity = new GincoExportedBranch();
 		gincoExportedEntity.setConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>());
-		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes = new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x11 = new JaxbList<CustomConceptAttribute>();
+		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
+			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
+		JaxbList<CustomConceptAttribute> x11 =
+			 new JaxbList<CustomConceptAttribute>();
 		conceptAttributes.put("foo", x11);
 		gincoExportedEntity.setConceptAttributes(conceptAttributes);
 		gincoExportedEntity.setConcepts(new ArrayList<ThesaurusConcept>());
 		gincoExportedEntity.setTermAttributeTypes(new ArrayList<CustomTermAttributeType>());
-		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes = new HashMap<String, JaxbList<CustomTermAttribute>>();
+		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
+			 new HashMap<String, JaxbList<CustomTermAttribute>>();
 		JaxbList<CustomTermAttribute> x52 = new JaxbList<CustomTermAttribute>();
 		termAttributes.put("foo", x52);
 		gincoExportedEntity.setTermAttributes(termAttributes);

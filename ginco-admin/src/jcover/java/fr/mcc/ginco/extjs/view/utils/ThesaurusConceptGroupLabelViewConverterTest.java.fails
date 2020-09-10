@@ -34,7 +34,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Diffblue Cover
  */
 
-@ContextConfiguration(classes = {ThesaurusConceptGroupLabelViewConverter.class})
+@ContextConfiguration(classes =
+	 {ThesaurusConceptGroupLabelViewConverter.class})
 @ExtendWith(SpringExtension.class)
 class ThesaurusConceptGroupLabelViewConverterTest {
 
@@ -51,11 +52,12 @@ class ThesaurusConceptGroupLabelViewConverterTest {
 	void convert() throws java.text.ParseException {
 
 		// arrange
-		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel = new ThesaurusConceptGroupLabel();
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
+			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		conceptGroup.setConceptGroupType(new ThesaurusConceptGroupType());
 		conceptGroup.setConcepts(new HashSet<ThesaurusConcept>());
-		conceptGroup.setIdentifier("hello");
+		conceptGroup.setIdentifier("data");
 		conceptGroup.setIsDynamic(false);
 		conceptGroup.setNotation("DE");
 		conceptGroup.setParentConcept(new ThesaurusConcept());
@@ -83,11 +85,12 @@ class ThesaurusConceptGroupLabelViewConverterTest {
 		language2.setTopLanguage(false);
 		when(languagesService.getLanguageById(Mockito.<String>any()))
 			.thenReturn(language2);
-		ThesaurusConceptGroupView thesaurusConceptGroupViewJAXBElement = new ThesaurusConceptGroupView();
+		ThesaurusConceptGroupView thesaurusConceptGroupViewJAXBElement =
+			 new ThesaurusConceptGroupView();
 		thesaurusConceptGroupViewJAXBElement.setConcepts(new ArrayList<String>());
 		thesaurusConceptGroupViewJAXBElement.setCreated("hello");
 		thesaurusConceptGroupViewJAXBElement.setGroupConceptLabelId(1);
-		thesaurusConceptGroupViewJAXBElement.setIdentifier("hello");
+		thesaurusConceptGroupViewJAXBElement.setIdentifier("data");
 		thesaurusConceptGroupViewJAXBElement.setIsDynamic(false);
 		thesaurusConceptGroupViewJAXBElement.setLabel("label");
 		thesaurusConceptGroupViewJAXBElement.setLanguage("hello");
@@ -101,7 +104,8 @@ class ThesaurusConceptGroupLabelViewConverterTest {
 		thesaurusConceptGroupViewJAXBElement.setType("text/plain");
 
 		// act
-		ThesaurusConceptGroupLabel result = service.convert(thesaurusConceptGroupViewJAXBElement);
+		ThesaurusConceptGroupLabel result =
+			 service.convert(thesaurusConceptGroupViewJAXBElement);
 
 		// assert
 		assertThat(result.getConceptGroup(), sameInstance(conceptGroup));

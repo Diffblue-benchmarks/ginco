@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
@@ -35,11 +34,6 @@ public class ExternalThesaurusServiceImplTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
-	}
-
-	@Test
-	public void getExternalThesaurusByIdIdentifierIsOneReturnsNull() {
-		assertNull(service.getExternalThesaurusById(1));
 	}
 
 	@Test

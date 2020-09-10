@@ -2,10 +2,10 @@ package fr.mcc.ginco.exports.skos;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.ThesaurusTerm;
@@ -47,7 +47,7 @@ public class SKOSTermsExporterTest {
 	public void exportConceptNotPreferredTerms1() {
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusTerm>());
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
 		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, GINCO.getResource("BASIC")));
 	}
 
@@ -59,28 +59,27 @@ public class SKOSTermsExporterTest {
 		list.add(thesaurusTerm);
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
 			.thenReturn(list);
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
 		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, GINCO.getResource("BASIC")));
 	}
 
 	@Test
 	public void exportConceptPreferredTerms() {
-		Model model1 = mock(Model.class);
 		when(skosModelTermsExporter.exportConceptPreferredTerm(Mockito.<ThesaurusTerm>any(), Mockito.<Model>any()))
-			.thenReturn(model1);
+			.thenReturn(ModelFactory.createDefaultModel());
 		ArrayList<ThesaurusTerm> prefTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setLanguage(new Language());
 		thesaurusTerm.setLexicalValue("value");
 		prefTerms.add(thesaurusTerm);
-		Model model2 = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model model2 = ModelFactory.createDefaultModel();
 		assertSame(model2, service.exportConceptPreferredTerms(prefTerms, model2, GINCO.getResource("BASIC")));
 		assertFalse(model2.isEmpty());
 	}
 
 	@Test
 	public void exportConceptPreferredTermsPrefTermsIsEmpty() {
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
 		assertSame(model, service.exportConceptPreferredTerms(new ArrayList<ThesaurusTerm>(), model, GINCO.getResource("BASIC")));
 	}
 }

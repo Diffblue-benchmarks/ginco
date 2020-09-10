@@ -45,17 +45,21 @@ class HierarchicalRelationshipViewConverterTest {
 	void convertRelationFromChildToParent() {
 
 		// arrange
-		ConceptHierarchicalRelationship conceptHierarchicalRelationship1 = new ConceptHierarchicalRelationship();
-		ConceptHierarchicalRelationship.Id identifier1 = new ConceptHierarchicalRelationship.Id();
+		ConceptHierarchicalRelationship conceptHierarchicalRelationship1 =
+			 new ConceptHierarchicalRelationship();
+		ConceptHierarchicalRelationship.Id identifier1 =
+			 new ConceptHierarchicalRelationship.Id();
 		conceptHierarchicalRelationship1.setIdentifier(identifier1);
 		when(conceptHierarchicalRelationshipService.getByChildAndParentIds(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ConceptHierarchicalRelationship())
 			.thenReturn(conceptHierarchicalRelationship1);
-		HierarchicalRelationshipView hierarchicalRelationView = new HierarchicalRelationshipView();
+		HierarchicalRelationshipView hierarchicalRelationView =
+			 new HierarchicalRelationshipView();
 		hierarchicalRelationView.setRole(1);
 
 		// act
-		ConceptHierarchicalRelationship result = service.convertRelationFromChildToParent(hierarchicalRelationView, new ThesaurusConcept());
+		ConceptHierarchicalRelationship result =
+			 service.convertRelationFromChildToParent(hierarchicalRelationView, new ThesaurusConcept());
 
 		// assert
 		assertThat(result.getIdentifier(), sameInstance(identifier1));

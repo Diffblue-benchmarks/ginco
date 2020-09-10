@@ -15,7 +15,8 @@ class ExtJsonFormLoadDataTest {
 
 	@Test
 	void factory1() {
-		ExtJsonFormLoadData<String> extJsonFormLoadData = new ExtJsonFormLoadData<String>("bar");
+		ExtJsonFormLoadData<String> extJsonFormLoadData =
+			 new ExtJsonFormLoadData<String>("bar");
 		extJsonFormLoadData.setData("something");
 		extJsonFormLoadData.setSuccess(false);
 		extJsonFormLoadData.setTotal(1L);
@@ -26,7 +27,8 @@ class ExtJsonFormLoadDataTest {
 
 	@Test
 	void factory2() {
-		ExtJsonFormLoadData<String> extJsonFormLoadData = new ExtJsonFormLoadData<String>("bar", 0L);
+		ExtJsonFormLoadData<String> extJsonFormLoadData =
+			 new ExtJsonFormLoadData<String>("bar", 0L);
 		extJsonFormLoadData.setData("something");
 		extJsonFormLoadData.setSuccess(false);
 		extJsonFormLoadData.setTotal(1L);

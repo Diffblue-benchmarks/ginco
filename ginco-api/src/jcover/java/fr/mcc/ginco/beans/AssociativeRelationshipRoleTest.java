@@ -15,7 +15,8 @@ class AssociativeRelationshipRoleTest {
 
 	@Test
 	void factory() {
-		AssociativeRelationshipRole associativeRelationshipRole = new AssociativeRelationshipRole();
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
 		associativeRelationshipRole.setCode("DE");
 		associativeRelationshipRole.setDefaultRole(false);
 		associativeRelationshipRole.setLabel("bar");

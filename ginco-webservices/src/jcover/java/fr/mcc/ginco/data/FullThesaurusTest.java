@@ -35,7 +35,7 @@ class FullThesaurusTest {
 		fullThesaurus.setSource("something");
 		fullThesaurus.setSubject("something");
 		fullThesaurus.setType("BASIC");
-		fullThesaurus.setIdentifier("something");
+		fullThesaurus.setIdentifier("data");
 		fullThesaurus.setTitle("Mr");
 		assertThat(fullThesaurus.getContributor(), is("something"));
 		assertThat(fullThesaurus.getCoverage(), is("something"));
@@ -53,7 +53,7 @@ class FullThesaurusTest {
 		assertThat(fullThesaurus.getSource(), is("something"));
 		assertThat(fullThesaurus.getSubject(), is("something"));
 		assertThat(fullThesaurus.getType(), is("BASIC"));
-		assertThat(fullThesaurus.getIdentifier(), is("something"));
+		assertThat(fullThesaurus.getIdentifier(), is("data"));
 		assertThat(fullThesaurus.getTitle(), is("Mr"));
 	}
 }

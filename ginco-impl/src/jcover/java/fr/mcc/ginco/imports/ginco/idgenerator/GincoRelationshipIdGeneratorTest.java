@@ -37,8 +37,10 @@ public class GincoRelationshipIdGeneratorTest {
 	public void getIdsForHierarchicalRelationsIdMappingIsEmpty() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("bar");
-		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relations = new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		JaxbList<ConceptHierarchicalRelationship> x5 = new JaxbList<ConceptHierarchicalRelationship>();
+		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relations =
+			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
+		JaxbList<ConceptHierarchicalRelationship> x5 =
+			 new JaxbList<ConceptHierarchicalRelationship>();
 		relations.put("foo", x5);
 		assertSame(x5, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("bar"));
 	}

@@ -15,7 +15,8 @@ class ThesaurusConceptGroupTypeTest {
 
 	@Test
 	void factory() {
-		ThesaurusConceptGroupType thesaurusConceptGroupType = new ThesaurusConceptGroupType();
+		ThesaurusConceptGroupType thesaurusConceptGroupType =
+			 new ThesaurusConceptGroupType();
 		thesaurusConceptGroupType.setCode("DE");
 		thesaurusConceptGroupType.setLabel("label");
 		thesaurusConceptGroupType.setSkosLabel("label");

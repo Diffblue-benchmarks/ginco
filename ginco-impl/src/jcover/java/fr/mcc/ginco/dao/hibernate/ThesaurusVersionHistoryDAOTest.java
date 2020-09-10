@@ -16,8 +16,9 @@ import org.mockito.Mockito;
 public class ThesaurusVersionHistoryDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
-		ThesaurusVersionHistoryDAO thesaurusVersionHistoryDAO = new ThesaurusVersionHistoryDAO();
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+		ThesaurusVersionHistoryDAO thesaurusVersionHistoryDAO =
+			 new ThesaurusVersionHistoryDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		thesaurusVersionHistoryDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, thesaurusVersionHistoryDAO.getSessionFactory());

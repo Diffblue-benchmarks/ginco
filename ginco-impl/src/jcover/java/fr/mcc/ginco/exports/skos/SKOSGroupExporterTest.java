@@ -56,7 +56,8 @@ public class SKOSGroupExporterTest {
 		// arrange
 		when(thesaurusConceptGroupService.getChildGroups(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConceptGroup>());
-		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel = new ThesaurusConceptGroupLabel();
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
+			 new ThesaurusConceptGroupLabel();
 		thesaurusConceptGroupLabel.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusConceptGroupLabel.setLanguage(new Language());
 		thesaurusConceptGroupLabel.setLexicalValue("value");

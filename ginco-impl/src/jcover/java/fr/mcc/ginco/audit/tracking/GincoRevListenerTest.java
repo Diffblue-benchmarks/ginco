@@ -31,7 +31,7 @@ public class GincoRevListenerTest {
 	}
 
 	@Test
-	public void setApplicationContext() throws IllegalStateException, org.springframework.beans.BeansException {
+	public void setApplicationContext() throws IllegalStateException, org.springframework.beans.BeansException, org.springframework.beans.factory.NoSuchBeanDefinitionException, org.springframework.context.NoSuchMessageException, java.io.IOException {
 		ApplicationContext applicationContext = mock(ApplicationContext.class);
 		service.setApplicationContext(applicationContext);
 	}

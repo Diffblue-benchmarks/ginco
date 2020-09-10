@@ -15,7 +15,8 @@ class NoteParentEntityResponseTest {
 
 	@Test
 	void factory() {
-		NoteParentEntityResponse noteParentEntityResponse = new NoteParentEntityResponse();
+		NoteParentEntityResponse noteParentEntityResponse =
+			 new NoteParentEntityResponse();
 		noteParentEntityResponse.setIsConcept(false);
 		noteParentEntityResponse.setParentEntityId("entity");
 		assertThat(noteParentEntityResponse.getIsConcept(), is(false));

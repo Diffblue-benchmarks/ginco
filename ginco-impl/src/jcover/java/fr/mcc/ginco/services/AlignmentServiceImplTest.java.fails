@@ -1,6 +1,5 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
@@ -9,14 +8,12 @@ import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.beans.AlignmentConcept;
 import fr.mcc.ginco.beans.AlignmentResource;
-import fr.mcc.ginco.beans.ExternalThesaurus;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IExternalThesaurusDAO;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,62 +54,29 @@ public class AlignmentServiceImplTest {
 
 	@Test
 	public void deleteExternalThesauruses() {
+		when(externalThesaurusDAO.findAll())
+			.thenReturn(new ArrayList<Object>());
 		service.deleteExternalThesauruses();
 	}
 
 	@Test
-	public void getAlignmentByIdReturnsNull() {
-		assertNull(service.getAlignmentById("1234"));
-	}
-
-	@Test
-	public void getAlignmentsBySourceConceptIdConceptIdentifierIsHelloReturnsEmpty() {
+	public void getAlignmentsBySourceConceptIdConceptIdentifierIsDataReturnsEmpty() {
 		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<Alignment>());
-		assertTrue((service.getAlignmentsBySourceConceptId("hello")).isEmpty());
+		assertTrue((service.getAlignmentsBySourceConceptId("data")).isEmpty());
 	}
 
 	@Test
-	public void saveAlignments1() {
+	public void saveAlignments() {
 		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<Alignment>());
 		ThesaurusConcept concept = new ThesaurusConcept();
 		assertSame(concept, service.saveAlignments(concept, new ArrayList<Alignment>()));
+		Mockito.verify(alignmentDAO).flush();
 	}
 
 	@Test
-	public void saveAlignments2() {
-		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(new ArrayList<Alignment>());
-		ThesaurusConcept concept = new ThesaurusConcept();
-		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
-		Alignment alignment2 = new Alignment();
-		alignment2.setIdentifier("foo");
-		alignments.add(alignment2);
-		assertSame(concept, service.saveAlignments(concept, alignments));
-	}
-
-	@Test
-	public void saveAlignments3() {
-		List<Alignment> list = new ArrayList<Alignment>();
-		list.add(new Alignment());
-		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(list);
-		ThesaurusConcept concept = new ThesaurusConcept();
-		assertSame(concept, service.saveAlignments(concept, new ArrayList<Alignment>()));
-	}
-
-	@Test
-	public void saveExternalThesauruses1() {
-		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
-		Alignment alignment = new Alignment();
-		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
-		alignments.add(alignment);
-		service.saveExternalThesauruses(alignments);
-	}
-
-	@Test
-	public void saveExternalThesauruses2() {
+	public void saveExternalThesauruses() {
 		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
 		alignments.add(new Alignment());
 		service.saveExternalThesauruses(alignments);

@@ -15,11 +15,12 @@ class ThesaurusConceptReducedViewTest {
 
 	@Test
 	void factory() {
-		ThesaurusConceptReducedView thesaurusConceptReducedView = new ThesaurusConceptReducedView();
-		thesaurusConceptReducedView.setIdentifier("hello");
+		ThesaurusConceptReducedView thesaurusConceptReducedView =
+			 new ThesaurusConceptReducedView();
+		thesaurusConceptReducedView.setIdentifier("data");
 		thesaurusConceptReducedView.setLabel("label");
 		thesaurusConceptReducedView.setLang("hello");
-		assertThat(thesaurusConceptReducedView.getIdentifier(), is("hello"));
+		assertThat(thesaurusConceptReducedView.getIdentifier(), is("data"));
 		assertThat(thesaurusConceptReducedView.getLabel(), is("label"));
 		assertThat(thesaurusConceptReducedView.getLang(), is("hello"));
 	}

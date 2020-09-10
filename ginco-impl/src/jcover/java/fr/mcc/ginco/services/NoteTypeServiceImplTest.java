@@ -1,6 +1,5 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -38,11 +37,6 @@ public class NoteTypeServiceImplTest {
 		when(noteTypeDAO.findConceptNoteTypes())
 			.thenReturn(new ArrayList<NoteType>());
 		assertTrue((service.getConceptNoteTypeList()).isEmpty());
-	}
-
-	@Test
-	public void getNoteTypeByIdTypeIdIsBASICReturnsNull() {
-		assertNull(service.getNoteTypeById("BASIC"));
 	}
 
 	@Test

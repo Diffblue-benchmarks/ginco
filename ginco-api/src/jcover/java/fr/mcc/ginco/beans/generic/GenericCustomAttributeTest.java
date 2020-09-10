@@ -20,9 +20,10 @@ class GenericCustomAttributeTest {
 
 	@Test
 	void factory() {
-		GenericCustomAttribute<CustomConceptAttributeType, String> genericCustomAttribute = new GenericCustomAttribute<CustomConceptAttributeType, String>();
+		GenericCustomAttribute<CustomConceptAttributeType, String> genericCustomAttribute =
+			 new GenericCustomAttribute<CustomConceptAttributeType, String>();
 		genericCustomAttribute.setEntity("entity");
-		genericCustomAttribute.setIdentifier("name");
+		genericCustomAttribute.setIdentifier("data");
 		Language language = new Language();
 		language.setId("1234");
 		language.setPart1("foo");
@@ -39,7 +40,7 @@ class GenericCustomAttributeTest {
 		type.setValue("value");
 		genericCustomAttribute.setType(type);
 		assertThat(genericCustomAttribute.getEntity(), is("entity"));
-		assertThat(genericCustomAttribute.getIdentifier(), is("name"));
+		assertThat(genericCustomAttribute.getIdentifier(), is("data"));
 		assertThat(genericCustomAttribute.getLanguage(), sameInstance(language));
 		assertThat(genericCustomAttribute.getLexicalValue(), is("value"));
 		assertThat(genericCustomAttribute.getType(), sameInstance(type));

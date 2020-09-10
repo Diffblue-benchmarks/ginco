@@ -1,9 +1,11 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.dao.IThesaurusConceptGroupTypeDAO;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,11 +33,8 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 
 	@Test
 	public void getConceptGroupTypeListReturnsEmpty() {
+		when(thesaurusConceptGroupTypeDAO.findAll())
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getConceptGroupTypeList()).isEmpty());
-	}
-
-	@Test
-	public void getTypeByIdReturnsNull() {
-		assertNull(service.getTypeById("text/plain"));
 	}
 }

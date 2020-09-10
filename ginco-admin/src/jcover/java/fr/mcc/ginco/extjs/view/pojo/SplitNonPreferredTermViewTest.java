@@ -18,9 +18,10 @@ class SplitNonPreferredTermViewTest {
 
 	@Test
 	void factory() {
-		SplitNonPreferredTermView splitNonPreferredTermView = new SplitNonPreferredTermView();
+		SplitNonPreferredTermView splitNonPreferredTermView =
+			 new SplitNonPreferredTermView();
 		splitNonPreferredTermView.setCreated("foo");
-		splitNonPreferredTermView.setIdentifier("foo");
+		splitNonPreferredTermView.setIdentifier("data");
 		splitNonPreferredTermView.setLanguage("foo");
 		splitNonPreferredTermView.setLexicalValue("value");
 		splitNonPreferredTermView.setModified("foo");
@@ -29,7 +30,7 @@ class SplitNonPreferredTermViewTest {
 		splitNonPreferredTermView.setStatus(1);
 		splitNonPreferredTermView.setThesaurusId("1234");
 		assertThat(splitNonPreferredTermView.getCreated(), is("foo"));
-		assertThat(splitNonPreferredTermView.getIdentifier(), is("foo"));
+		assertThat(splitNonPreferredTermView.getIdentifier(), is("data"));
 		assertThat(splitNonPreferredTermView.getLanguage(), is("foo"));
 		assertThat(splitNonPreferredTermView.getLexicalValue(), is("value"));
 		assertThat(splitNonPreferredTermView.getModified(), is("foo"));

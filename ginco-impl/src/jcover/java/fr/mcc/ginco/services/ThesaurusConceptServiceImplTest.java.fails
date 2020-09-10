@@ -1,6 +1,5 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -80,11 +80,13 @@ public class ThesaurusConceptServiceImplTest {
 	@Test
 	public void calculateChildrenRoot() {
 		service.calculateChildrenRoot("1234");
-		Mockito.verify(conceptHierarchicalRelationshipServiceUtil).calculateChildrenRoots("1234", "1234");
+		Mockito.verify(conceptHierarchicalRelationshipServiceUtil).calculateChildrenRoots(ArgumentMatchers.eq("1234"), ArgumentMatchers.eq("1234"));
 	}
 
 	@Test
 	public void getAllConceptsReturnsEmpty() {
+		when(thesaurusConceptDAO.findAll())
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getAllConcepts()).isEmpty());
 	}
 
@@ -103,22 +105,7 @@ public class ThesaurusConceptServiceImplTest {
 	}
 
 	@Test
-	public void getConceptLabelConceptIdIsHelloReturnsNull() {
-		assertNull(service.getConceptLabel("hello"));
-	}
-
-	@Test
-	public void getRecursiveParentsByConceptIdReturnsEmpty() {
-		assertTrue((service.getRecursiveParentsByConceptId("1234")).isEmpty());
-	}
-
-	@Test
-	public void getThesaurusConceptList() {
-		assertTrue((service.getThesaurusConceptList()).isEmpty());
-	}
-
-	@Test
-	public void getThesaurusConceptListIdsIsEmpty() {
+	public void getThesaurusConceptListIdsIsEmptyReturnsEmpty() {
 		assertTrue((service.getThesaurusConceptList(new ArrayList<String>())).isEmpty());
 	}
 }

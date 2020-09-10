@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
@@ -38,22 +37,19 @@ public class NodeLabelServiceImplTest {
 	}
 
 	@Test
-	public void getByIdIdIsOneReturnsNull() {
-		assertNull(service.getById(1));
-	}
-
-	@Test
 	public void getByThesaurusArrayAndLanguageThesaurusArrayIdIsBar() throws java.text.ParseException {
 
 		// arrange
 		NodeLabel nodeLabel = new NodeLabel();
-		Date created = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel.setCreated(created);
 		nodeLabel.setIdentifier(1);
 		Language language = new Language();
 		nodeLabel.setLanguage(language);
 		nodeLabel.setLexicalValue("value");
-		Date modified = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel.setModified(modified);
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		nodeLabel.setThesaurusArray(thesaurusArray);
@@ -77,13 +73,15 @@ public class NodeLabelServiceImplTest {
 
 		// arrange
 		NodeLabel nodeLabel = new NodeLabel();
-		Date created = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel.setCreated(created);
 		nodeLabel.setIdentifier(1);
 		Language language = new Language();
 		nodeLabel.setLanguage(language);
 		nodeLabel.setLexicalValue("value");
-		Date modified = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel.setModified(modified);
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		nodeLabel.setThesaurusArray(thesaurusArray);
@@ -100,10 +98,5 @@ public class NodeLabelServiceImplTest {
 		assertEquals("value", result.getLexicalValue());
 		assertSame(modified, result.getModified());
 		assertSame(thesaurusArray, result.getThesaurusArray());
-	}
-
-	@Test
-	public void updateOrCreateReturnsNull() {
-		assertNull(service.updateOrCreate(new NodeLabel()));
 	}
 }

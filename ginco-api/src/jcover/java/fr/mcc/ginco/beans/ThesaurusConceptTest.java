@@ -27,7 +27,7 @@ class ThesaurusConceptTest {
 		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
 		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConcept.setCreated(created1);
-		thesaurusConcept.setIdentifier("hello");
+		thesaurusConcept.setIdentifier("data");
 		Date modified = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConcept.setModified(modified);
 		thesaurusConcept.setNotation("DE");
@@ -44,7 +44,7 @@ class ThesaurusConceptTest {
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
 		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");
@@ -61,7 +61,7 @@ class ThesaurusConceptTest {
 		assertThat(thesaurusConcept.getAssociativeRelationshipRight(), empty());
 		assertThat(thesaurusConcept.getConceptArrays(), empty());
 		assertThat(thesaurusConcept.getCreated(), sameInstance(created1));
-		assertThat(thesaurusConcept.getIdentifier(), is("hello"));
+		assertThat(thesaurusConcept.getIdentifier(), is("data"));
 		assertThat(thesaurusConcept.getModified(), sameInstance(modified));
 		assertThat(thesaurusConcept.getNotation(), is("DE"));
 		assertThat(thesaurusConcept.getParentConcepts(), empty());
@@ -72,12 +72,12 @@ class ThesaurusConceptTest {
 	}
 
 	@Test
-	void getThesaurusIdReturnsFoo() {
+	void getThesaurusIdReturnsData() {
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurusConcept.setThesaurus(thesaurus);
-		assertThat(thesaurusConcept.getThesaurusId(), is("foo"));
+		assertThat(thesaurusConcept.getThesaurusId(), is("data"));
 	}
 
 	@Test

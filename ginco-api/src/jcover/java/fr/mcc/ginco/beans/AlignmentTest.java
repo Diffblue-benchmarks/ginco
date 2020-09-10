@@ -39,7 +39,7 @@ class AlignmentTest {
 		externalTargetThesaurus.setExternalThesaurusType(new ExternalThesaurusType());
 		externalTargetThesaurus.setIdentifier(1);
 		alignment.setExternalTargetThesaurus(externalTargetThesaurus);
-		alignment.setIdentifier("foo");
+		alignment.setIdentifier("data");
 		Thesaurus internalTargetThesaurus = new Thesaurus();
 		internalTargetThesaurus.setArchived(false);
 		internalTargetThesaurus.setContributor("foo");
@@ -50,7 +50,7 @@ class AlignmentTest {
 		internalTargetThesaurus.setDefaultTopConcept(false);
 		internalTargetThesaurus.setDescription("some text");
 		internalTargetThesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		internalTargetThesaurus.setIdentifier("foo");
+		internalTargetThesaurus.setIdentifier("data");
 		internalTargetThesaurus.setLang(new HashSet<Language>());
 		internalTargetThesaurus.setPolyHierarchical(false);
 		internalTargetThesaurus.setPublisher("foo");
@@ -69,7 +69,7 @@ class AlignmentTest {
 		sourceConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		sourceConcept.setConceptArrays(new HashSet<ThesaurusArray>());
 		sourceConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		sourceConcept.setIdentifier("hello");
+		sourceConcept.setIdentifier("data");
 		sourceConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		sourceConcept.setNotation("DE");
 		sourceConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -84,7 +84,7 @@ class AlignmentTest {
 		assertThat(alignment.getAuthor(), is("Ernest Hemingway"));
 		assertThat(alignment.getCreated(), sameInstance(created1));
 		assertThat(alignment.getExternalTargetThesaurus(), sameInstance(externalTargetThesaurus));
-		assertThat(alignment.getIdentifier(), is("foo"));
+		assertThat(alignment.getIdentifier(), is("data"));
 		assertThat(alignment.getInternalTargetThesaurus(), sameInstance(internalTargetThesaurus));
 		assertThat(alignment.getModified(), sameInstance(modified1));
 		assertThat(alignment.getSourceConcept(), sameInstance(sourceConcept));

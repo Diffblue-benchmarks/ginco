@@ -1,19 +1,15 @@
 package fr.mcc.ginco.helpers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusArrayConcept;
-import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IThesaurusArrayConceptDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,23 +51,6 @@ public class ThesaurusArrayHelperTest {
 		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
 			.thenReturn(new ArrayList<String>());
 		assertTrue((service.getArrayConcepts("1234")).isEmpty());
-	}
-
-	@Test
-	public void getArrayConceptsReturnsNull() {
-
-		// arrange
-		List<String> list = new ArrayList<String>();
-		list.add("foo");
-		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
-			.thenReturn(list);
-
-		// act
-		List<ThesaurusConcept> result = service.getArrayConcepts("1234");
-
-		// assert
-		assertEquals(1, result.size());
-		assertNull(result.get(0));
 	}
 
 	@Test

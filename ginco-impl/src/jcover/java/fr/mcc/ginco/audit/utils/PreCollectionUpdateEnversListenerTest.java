@@ -16,7 +16,8 @@ public class PreCollectionUpdateEnversListenerTest {
 
 	@Test
 	public void factory() {
-		AuditConfiguration enversConfiguration = AuditConfiguration.getFor(new Configuration());
+		AuditConfiguration enversConfiguration =
+			 AuditConfiguration.getFor(new Configuration());
 		assertSame(enversConfiguration, new PreCollectionUpdateEnversListener(enversConfiguration).getAuditConfiguration());
 	}
 }

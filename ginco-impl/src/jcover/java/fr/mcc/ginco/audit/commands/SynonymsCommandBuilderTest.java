@@ -41,9 +41,9 @@ public class SynonymsCommandBuilderTest {
 
 		// arrange
 		Map<String, List<String>> map1 = new HashMap<String, List<String>>();
-		ArrayList<String> x93 = new ArrayList<String>();
-		x93.add("foo");
-		map1.put("foo", x93);
+		ArrayList<String> x104 = new ArrayList<String>();
+		x104.add("foo");
+		map1.put("foo", x104);
 		Map<String, List<String>> map2 = new HashMap<String, List<String>>();
 		map2.put("foo", new ArrayList<String>());
 		when(mistralStructuresBuilder.buildSynonymsStructure(Mockito.<List<ThesaurusConcept>>any(), Mockito.<Number>any(), Mockito.<String>any()))
@@ -51,7 +51,8 @@ public class SynonymsCommandBuilderTest {
 			.thenReturn(map1);
 
 		// act
-		List<CommandLine> result = service.buildSynonyms(new ArrayList<ThesaurusConcept>(), new ArrayList<ThesaurusConcept>(), 1, 1, "Diffblue");
+		List<CommandLine> result =
+			 service.buildSynonyms(new ArrayList<ThesaurusConcept>(), new ArrayList<ThesaurusConcept>(), 1, 1, "Diffblue");
 
 		// assert
 		assertEquals(1, result.size());
@@ -65,15 +66,16 @@ public class SynonymsCommandBuilderTest {
 		Map<String, List<String>> map1 = new HashMap<String, List<String>>();
 		map1.put("foo", new ArrayList<String>());
 		Map<String, List<String>> map2 = new HashMap<String, List<String>>();
-		ArrayList<String> x45 = new ArrayList<String>();
-		x45.add("foo");
-		map2.put("foo", x45);
+		ArrayList<String> x46 = new ArrayList<String>();
+		x46.add("foo");
+		map2.put("foo", x46);
 		when(mistralStructuresBuilder.buildSynonymsStructure(Mockito.<List<ThesaurusConcept>>any(), Mockito.<Number>any(), Mockito.<String>any()))
 			.thenReturn(map2)
 			.thenReturn(map1);
 
 		// act
-		List<CommandLine> result = service.buildSynonyms(new ArrayList<ThesaurusConcept>(), new ArrayList<ThesaurusConcept>(), 1, 1, "Diffblue");
+		List<CommandLine> result =
+			 service.buildSynonyms(new ArrayList<ThesaurusConcept>(), new ArrayList<ThesaurusConcept>(), 1, 1, "Diffblue");
 
 		// assert
 		assertEquals(1, result.size());

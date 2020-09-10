@@ -16,8 +16,9 @@ import org.mockito.Mockito;
 public class ThesaurusArrayConceptDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
-		ThesaurusArrayConceptDAO thesaurusArrayConceptDAO = new ThesaurusArrayConceptDAO();
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+		ThesaurusArrayConceptDAO thesaurusArrayConceptDAO =
+			 new ThesaurusArrayConceptDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		thesaurusArrayConceptDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, thesaurusArrayConceptDAO.getSessionFactory());

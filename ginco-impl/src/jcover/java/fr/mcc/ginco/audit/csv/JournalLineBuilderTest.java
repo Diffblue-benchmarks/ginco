@@ -40,17 +40,18 @@ public class JournalLineBuilderTest {
 
 		// arrange
 		ThesaurusConcept conceptAtRevision = new ThesaurusConcept();
-		conceptAtRevision.setIdentifier("hello");
+		conceptAtRevision.setIdentifier("data");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("entity");
 		revision.setId(1);
 
 		// act
-		JournalLine result = service.buildConceptHierarchyChanged(conceptAtRevision, revision, new HashSet<ThesaurusConcept>(), new HashSet<ThesaurusConcept>());
+		JournalLine result =
+			 service.buildConceptHierarchyChanged(conceptAtRevision, revision, new HashSet<ThesaurusConcept>(), new HashSet<ThesaurusConcept>());
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
-		assertEquals("hello", result.getConceptId());
+		assertEquals("data", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSCONCEPT_HIERARCHY_UPDATE == result.getEventType());
 		assertTrue((result.getNewGenericTerm()).isEmpty());
@@ -72,7 +73,8 @@ public class JournalLineBuilderTest {
 		gincoRevEntity.setId(1);
 
 		// act
-		JournalLine result = service.buildLineBase(JournalEventsEnum.THESAURUS_CREATED, gincoRevEntity);
+		JournalLine result =
+			 service.buildLineBase(JournalEventsEnum.THESAURUS_CREATED, gincoRevEntity);
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
@@ -94,7 +96,7 @@ public class JournalLineBuilderTest {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
-		term.setIdentifier("foo");
+		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("entity");
@@ -114,7 +116,7 @@ public class JournalLineBuilderTest {
 		assertNull(result.getOldLexicalValue());
 		assertEquals(1, (int) result.getRevisionNumber());
 		assertNull(result.getStatus());
-		assertEquals("foo", result.getTermId());
+		assertEquals("data", result.getTermId());
 		assertNull(result.getTermRole());
 	}
 
@@ -124,7 +126,7 @@ public class JournalLineBuilderTest {
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setConcept(new ThesaurusConcept());
-		term.setIdentifier("foo");
+		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("entity");
@@ -144,7 +146,7 @@ public class JournalLineBuilderTest {
 		assertNull(result.getOldLexicalValue());
 		assertEquals(1, (int) result.getRevisionNumber());
 		assertNull(result.getStatus());
-		assertEquals("foo", result.getTermId());
+		assertEquals("data", result.getTermId());
 		assertNull(result.getTermRole());
 	}
 
@@ -154,14 +156,15 @@ public class JournalLineBuilderTest {
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setConcept(new ThesaurusConcept());
-		term.setIdentifier("foo");
+		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("entity");
 		revision.setId(1);
 
 		// act
-		JournalLine result = service.buildTermAttachmentChangedLine(term, revision, new ThesaurusTerm());
+		JournalLine result =
+			 service.buildTermAttachmentChangedLine(term, revision, new ThesaurusTerm());
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
@@ -174,7 +177,7 @@ public class JournalLineBuilderTest {
 		assertEquals("value", result.getOldLexicalValue());
 		assertEquals(1, (int) result.getRevisionNumber());
 		assertNull(result.getStatus());
-		assertEquals("foo", result.getTermId());
+		assertEquals("data", result.getTermId());
 		assertNull(result.getTermRole());
 	}
 
@@ -183,14 +186,15 @@ public class JournalLineBuilderTest {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
-		term.setIdentifier("foo");
+		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("entity");
 		revision.setId(1);
 
 		// act
-		JournalLine result = service.buildTermLexicalValueChangedLine(term, revision, "value");
+		JournalLine result =
+			 service.buildTermLexicalValueChangedLine(term, revision, "value");
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
@@ -203,7 +207,7 @@ public class JournalLineBuilderTest {
 		assertEquals("value", result.getOldLexicalValue());
 		assertEquals(1, (int) result.getRevisionNumber());
 		assertNull(result.getStatus());
-		assertEquals("foo", result.getTermId());
+		assertEquals("data", result.getTermId());
 		assertNull(result.getTermRole());
 	}
 
@@ -213,14 +217,15 @@ public class JournalLineBuilderTest {
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setConcept(new ThesaurusConcept());
-		term.setIdentifier("foo");
+		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("entity");
 		revision.setId(1);
 
 		// act
-		JournalLine result = service.buildTermLexicalValueChangedLine(term, revision, "value");
+		JournalLine result =
+			 service.buildTermLexicalValueChangedLine(term, revision, "value");
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
@@ -233,7 +238,7 @@ public class JournalLineBuilderTest {
 		assertEquals("value", result.getOldLexicalValue());
 		assertEquals(1, (int) result.getRevisionNumber());
 		assertNull(result.getStatus());
-		assertEquals("foo", result.getTermId());
+		assertEquals("data", result.getTermId());
 		assertNull(result.getTermRole());
 	}
 
@@ -243,7 +248,7 @@ public class JournalLineBuilderTest {
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setConcept(new ThesaurusConcept());
-		term.setIdentifier("foo");
+		term.setIdentifier("data");
 		term.setPrefered(false);
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("entity");
@@ -263,7 +268,7 @@ public class JournalLineBuilderTest {
 		assertNull(result.getOldLexicalValue());
 		assertEquals(1, (int) result.getRevisionNumber());
 		assertNull(result.getStatus());
-		assertEquals("foo", result.getTermId());
+		assertEquals("data", result.getTermId());
 		assertEquals("TNP", result.getTermRole());
 	}
 }

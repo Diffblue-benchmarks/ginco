@@ -61,7 +61,7 @@ class AlignmentViewConverterTest {
 		Alignment alignment = new Alignment();
 		alignment.setAlignmentType(new AlignmentType());
 		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		alignment.setIdentifier("foo");
+		alignment.setIdentifier("data");
 		alignment.setInternalTargetThesaurus(new Thesaurus());
 		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 
@@ -73,7 +73,7 @@ class AlignmentViewConverterTest {
 		assertThat(result.getAndRelation(), is(false));
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
 		assertThat(result.getExternalThesaurus(), is(nullValue()));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is(nullValue()));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getTargetConcepts(), empty());
@@ -91,7 +91,7 @@ class AlignmentViewConverterTest {
 		alignment.setAlignmentType(new AlignmentType());
 		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
-		alignment.setIdentifier("foo");
+		alignment.setIdentifier("data");
 		alignment.setInternalTargetThesaurus(new Thesaurus());
 		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 
@@ -104,7 +104,7 @@ class AlignmentViewConverterTest {
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
 		assertThat(result.getExternalThesaurus().size(), is(1));
 		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is(nullValue()));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getTargetConcepts(), empty());
@@ -122,7 +122,7 @@ class AlignmentViewConverterTest {
 		alignment.setAlignmentType(new AlignmentType());
 		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
-		alignment.setIdentifier("foo");
+		alignment.setIdentifier("data");
 		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 
 		// act
@@ -134,7 +134,7 @@ class AlignmentViewConverterTest {
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
 		assertThat(result.getExternalThesaurus().size(), is(1));
 		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is(nullValue()));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getTargetConcepts(), empty());

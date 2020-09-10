@@ -46,7 +46,8 @@ class AlignmentConceptViewConverterTest {
 		alignmentConcept.setInternalTargetConcept(new ThesaurusConcept());
 
 		// act
-		AlignmentConceptView result = service.convertAlignmentConcept(alignmentConcept);
+		AlignmentConceptView result =
+			 service.convertAlignmentConcept(alignmentConcept);
 
 		// assert
 		assertThat(result.getExternalTargetConcept(), is("hello"));
@@ -63,7 +64,8 @@ class AlignmentConceptViewConverterTest {
 		alignmentConcept.setIdentifier(1);
 
 		// act
-		AlignmentConceptView result = service.convertAlignmentConcept(alignmentConcept);
+		AlignmentConceptView result =
+			 service.convertAlignmentConcept(alignmentConcept);
 
 		// assert
 		assertThat(result.getExternalTargetConcept(), is("hello"));
@@ -81,7 +83,8 @@ class AlignmentConceptViewConverterTest {
 		Alignment alignment = new Alignment();
 
 		// act
-		AlignmentConcept result = service.convertAlignmentConceptView(alignmentConceptView, alignment);
+		AlignmentConcept result =
+			 service.convertAlignmentConceptView(alignmentConceptView, alignment);
 
 		// assert
 		assertThat(result.getAlignment(), sameInstance(alignment));
@@ -104,7 +107,8 @@ class AlignmentConceptViewConverterTest {
 		Alignment alignment = new Alignment();
 
 		// act
-		AlignmentConcept result = service.convertAlignmentConceptView(alignmentConceptView, alignment);
+		AlignmentConcept result =
+			 service.convertAlignmentConceptView(alignmentConceptView, alignment);
 
 		// assert
 		assertThat(result.getAlignment(), sameInstance(alignment));

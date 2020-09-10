@@ -43,10 +43,12 @@ public class ThesaurusArrayBuilderTest {
 
 		// arrange
 		Thesaurus thesaurus1 = new Thesaurus();
-		HashMap<String, ThesaurusArray> builtArrays = new HashMap<String, ThesaurusArray>();
+		HashMap<String, ThesaurusArray> builtArrays =
+			 new HashMap<String, ThesaurusArray>();
 
 		// act
-		ThesaurusArray result = service.buildArray(GINCO.getResource("BASIC"), ModelFactory.createDefaultModel(), thesaurus1, builtArrays);
+		ThesaurusArray result =
+			 service.buildArray(GINCO.getResource("BASIC"), ModelFactory.createDefaultModel(), thesaurus1, builtArrays);
 
 		// assert
 		assertTrue((result.getConcepts()).isEmpty());

@@ -55,12 +55,14 @@ class ThesaurusConceptGroupRestServiceTest {
 	void getConceptGroupTypes() {
 
 		// arrange
-		List<ThesaurusConceptGroupType> list = new ArrayList<ThesaurusConceptGroupType>();
+		List<ThesaurusConceptGroupType> list =
+			 new ArrayList<ThesaurusConceptGroupType>();
 		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
 			.thenReturn(list);
 
 		// act
-		ExtJsonFormLoadData<List<ThesaurusConceptGroupType>> result = service.getConceptGroupTypes();
+		ExtJsonFormLoadData<List<ThesaurusConceptGroupType>> result =
+			 service.getConceptGroupTypes();
 
 		// assert
 		assertThat(result.getData(), sameInstance(list));

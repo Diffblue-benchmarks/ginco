@@ -19,12 +19,13 @@ class ThesaurusArkTest {
 	@Test
 	void factory() throws java.text.ParseException {
 		ThesaurusArk thesaurusArk = new ThesaurusArk();
-		Date created = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusArk.setCreated(created);
 		thesaurusArk.setEntity("entity");
-		thesaurusArk.setIdentifier("foo");
+		thesaurusArk.setIdentifier("data");
 		assertThat(thesaurusArk.getCreated(), sameInstance(created));
 		assertThat(thesaurusArk.getEntity(), is("entity"));
-		assertThat(thesaurusArk.getIdentifier(), is("foo"));
+		assertThat(thesaurusArk.getIdentifier(), is("data"));
 	}
 }

@@ -25,7 +25,8 @@ class ThesaurusArchivedAccessDeniedExceptionMapperTest {
 		exception.setStackTrace(new StackTraceElement[] { });
 
 		// act
-		Response result = new ThesaurusArchivedAccessDeniedExceptionMapper().toResponse(exception);
+		Response result =
+			 new ThesaurusArchivedAccessDeniedExceptionMapper().toResponse(exception);
 
 		// assert
 		assertThat(result.getAllowedMethods(), empty());

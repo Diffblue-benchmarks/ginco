@@ -24,7 +24,7 @@ class SplitNonPreferredTermTest {
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		splitNonPreferredTerm.setCreated(created1);
-		splitNonPreferredTerm.setIdentifier("foo");
+		splitNonPreferredTerm.setIdentifier("data");
 		Language language = new Language();
 		language.setId("1234");
 		language.setPart1("foo");
@@ -48,7 +48,7 @@ class SplitNonPreferredTermTest {
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
 		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");
@@ -61,7 +61,7 @@ class SplitNonPreferredTermTest {
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		splitNonPreferredTerm.setThesaurus(thesaurus);
 		assertThat(splitNonPreferredTerm.getCreated(), sameInstance(created1));
-		assertThat(splitNonPreferredTerm.getIdentifier(), is("foo"));
+		assertThat(splitNonPreferredTerm.getIdentifier(), is("data"));
 		assertThat(splitNonPreferredTerm.getLanguage(), sameInstance(language));
 		assertThat(splitNonPreferredTerm.getLexicalValue(), is("value"));
 		assertThat(splitNonPreferredTerm.getModified(), sameInstance(modified));
@@ -72,11 +72,11 @@ class SplitNonPreferredTermTest {
 	}
 
 	@Test
-	void getThesaurusIdReturnsFoo() {
+	void getThesaurusIdReturnsData() {
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		splitNonPreferredTerm.setThesaurus(thesaurus);
-		assertThat(splitNonPreferredTerm.getThesaurusId(), is("foo"));
+		assertThat(splitNonPreferredTerm.getThesaurusId(), is("data"));
 	}
 }

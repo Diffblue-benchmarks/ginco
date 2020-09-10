@@ -39,7 +39,8 @@ public class GincoAlignmentIdGeneratorTest {
 	public void getIdsForAlignments1() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("bar");
-		HashMap<String, JaxbList<Alignment>> alignments = new HashMap<String, JaxbList<Alignment>>();
+		HashMap<String, JaxbList<Alignment>> alignments =
+			 new HashMap<String, JaxbList<Alignment>>();
 		JaxbList<Alignment> x5 = new JaxbList<Alignment>();
 		alignments.put("foo", x5);
 		assertSame(x5, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("bar"));
@@ -49,7 +50,8 @@ public class GincoAlignmentIdGeneratorTest {
 	public void getIdsForAlignments2() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("foo");
-		HashMap<String, JaxbList<Alignment>> alignments = new HashMap<String, JaxbList<Alignment>>();
+		HashMap<String, JaxbList<Alignment>> alignments =
+			 new HashMap<String, JaxbList<Alignment>>();
 		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
 		Alignment alignment1 = new Alignment();
 		alignment1.setSourceConcept(new ThesaurusConcept());

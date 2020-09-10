@@ -27,13 +27,13 @@ class ReducedThesaurusTermTest {
 	void factory() {
 		ReducedThesaurusTerm reducedThesaurusTerm = new ReducedThesaurusTerm();
 		reducedThesaurusTerm.setConceptId("1234");
-		reducedThesaurusTerm.setIdentifier("something");
+		reducedThesaurusTerm.setIdentifier("data");
 		reducedThesaurusTerm.setLanguageId("1234");
 		reducedThesaurusTerm.setLexicalValue("value");
 		reducedThesaurusTerm.setNotes(new ArrayList<Note>());
 		reducedThesaurusTerm.setStatus(TermStatusEnum.CANDIDATE);
 		assertThat(reducedThesaurusTerm.getConceptId(), is("1234"));
-		assertThat(reducedThesaurusTerm.getIdentifier(), is("something"));
+		assertThat(reducedThesaurusTerm.getIdentifier(), is("data"));
 		assertThat(reducedThesaurusTerm.getLanguageId(), is("1234"));
 		assertThat(reducedThesaurusTerm.getLexicalValue(), is("value"));
 		assertThat(reducedThesaurusTerm.getNotes(), empty());
@@ -51,7 +51,8 @@ class ReducedThesaurusTermTest {
 		term.setStatus(1);
 
 		// act
-		ReducedThesaurusTerm result = ReducedThesaurusTerm.getReducedThesaurusTerm(term);
+		ReducedThesaurusTerm result =
+			 ReducedThesaurusTerm.getReducedThesaurusTerm(term);
 
 		// assert
 		assertThat(result.getConceptId(), is(nullValue()));

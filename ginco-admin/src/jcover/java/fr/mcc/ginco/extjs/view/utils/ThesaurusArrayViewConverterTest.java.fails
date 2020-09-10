@@ -74,7 +74,7 @@ class ThesaurusArrayViewConverterTest {
 		when(nodeLabelService.getByThesaurusArrayAndLanguage(Mockito.<String>any()))
 			.thenReturn(nodeLabel);
 		ThesaurusArray source = new ThesaurusArray();
-		source.setIdentifier("foo");
+		source.setIdentifier("data");
 		source.setOrdered(false);
 		source.setSuperOrdinateConcept(new ThesaurusConcept());
 		source.setThesaurus(new Thesaurus());
@@ -85,7 +85,7 @@ class ThesaurusArrayViewConverterTest {
 		// assert
 		assertThat(result.getConcepts(), empty());
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("value"));
 		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));

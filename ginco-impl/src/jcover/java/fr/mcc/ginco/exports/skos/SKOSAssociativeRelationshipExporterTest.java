@@ -47,7 +47,8 @@ public class SKOSAssociativeRelationshipExporterTest {
 			.thenReturn(new HashSet<ThesaurusConcept>());
 		when(associativeRelationshipService.getAssociatedConceptsId(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(new ArrayList<String>());
-		Model defaultModel = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model defaultModel =
+			 com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
 		assertSame(defaultModel, service.exportAssociativeRelationships(new ThesaurusConcept(), defaultModel));
 		assertFalse(defaultModel.isEmpty());
 	}

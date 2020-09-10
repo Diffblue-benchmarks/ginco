@@ -18,7 +18,7 @@ class ThesaurusNoteViewTest {
 		ThesaurusNoteView thesaurusNoteView = new ThesaurusNoteView();
 		thesaurusNoteView.setConceptId("1234");
 		thesaurusNoteView.setCreated("foo");
-		thesaurusNoteView.setIdentifier("foo");
+		thesaurusNoteView.setIdentifier("data");
 		thesaurusNoteView.setLanguage("foo");
 		thesaurusNoteView.setLexicalValue("value");
 		thesaurusNoteView.setModified("foo");
@@ -28,7 +28,7 @@ class ThesaurusNoteViewTest {
 		thesaurusNoteView.setType("BASIC");
 		assertThat(thesaurusNoteView.getConceptId(), is("1234"));
 		assertThat(thesaurusNoteView.getCreated(), is("foo"));
-		assertThat(thesaurusNoteView.getIdentifier(), is("foo"));
+		assertThat(thesaurusNoteView.getIdentifier(), is("data"));
 		assertThat(thesaurusNoteView.getLanguage(), is("foo"));
 		assertThat(thesaurusNoteView.getLexicalValue(), is("value"));
 		assertThat(thesaurusNoteView.getModified(), is("foo"));

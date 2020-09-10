@@ -16,7 +16,8 @@ public class DeleteEnversListenerTest {
 
 	@Test
 	public void factory() {
-		AuditConfiguration enversConfiguration = AuditConfiguration.getFor(new Configuration());
+		AuditConfiguration enversConfiguration =
+			 AuditConfiguration.getFor(new Configuration());
 		assertSame(enversConfiguration, new DeleteEnversListener(enversConfiguration).getAuditConfiguration());
 	}
 }

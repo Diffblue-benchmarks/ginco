@@ -49,35 +49,12 @@ class ThesaurusVersionHistoryViewConverterTest {
 	private ThesaurusVersionHistoryViewConverter service;
 
 	@Test
-	void convert1() {
-
-		// arrange
-		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
-		source1.setIdentifier("1.0");
-		source1.setStatus(1);
-		source1.setThesaurus(new Thesaurus());
-		source1.setThisVersion(false);
-		source1.setVersionNote("1.0");
-
-		// act
-		ThesaurusVersionHistoryView result = service.convert(source1);
-
-		// assert
-		assertThat(result.getDate(), is(nullValue()));
-		assertThat(result.getIdentifier(), is("1.0"));
-		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is(nullValue()));
-		assertThat(result.getThisVersion(), is(false));
-		assertThat(result.getVersionNote(), is("1.0"));
-	}
-
-	@Test
-	void convert2() throws java.text.ParseException {
+	void convert1() throws java.text.ParseException {
 
 		// arrange
 		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
 		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source1.setIdentifier("bar");
+		source1.setIdentifier("data");
 		source1.setStatus(1);
 		source1.setThesaurus(new Thesaurus());
 		source1.setThisVersion(false);
@@ -88,7 +65,30 @@ class ThesaurusVersionHistoryViewConverterTest {
 
 		// assert
 		assertThat(result.getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
-		assertThat(result.getIdentifier(), is("bar"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThisVersion(), is(false));
+		assertThat(result.getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convert2() {
+
+		// arrange
+		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
+		source1.setIdentifier("data");
+		source1.setStatus(1);
+		source1.setThesaurus(new Thesaurus());
+		source1.setThisVersion(false);
+		source1.setVersionNote("1.0");
+
+		// act
+		ThesaurusVersionHistoryView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurusId(), is(nullValue()));
 		assertThat(result.getThisVersion(), is(false));
@@ -101,7 +101,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 		// arrange
 		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
 		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source1.setIdentifier("1.0");
+		source1.setIdentifier("data");
 		source1.setStatus(1);
 		source1.setThisVersion(false);
 		source1.setVersionNote("1.0");
@@ -111,7 +111,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 
 		// assert
 		assertThat(result.getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
-		assertThat(result.getIdentifier(), is("1.0"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurusId(), is(nullValue()));
 		assertThat(result.getThisVersion(), is(false));
@@ -122,10 +122,12 @@ class ThesaurusVersionHistoryViewConverterTest {
 	void convertList() throws java.text.ParseException {
 
 		// arrange
-		ArrayList<ThesaurusVersionHistory> thesaurusHistoryList = new ArrayList<ThesaurusVersionHistory>();
-		ThesaurusVersionHistory thesaurusVersionHistory = new ThesaurusVersionHistory();
+		ArrayList<ThesaurusVersionHistory> thesaurusHistoryList =
+			 new ArrayList<ThesaurusVersionHistory>();
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 new ThesaurusVersionHistory();
 		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusVersionHistory.setIdentifier("1.0");
+		thesaurusVersionHistory.setIdentifier("data");
 		thesaurusVersionHistory.setStatus(1);
 		thesaurusVersionHistory.setThesaurus(new Thesaurus());
 		thesaurusVersionHistory.setThisVersion(false);
@@ -133,12 +135,13 @@ class ThesaurusVersionHistoryViewConverterTest {
 		thesaurusHistoryList.add(thesaurusVersionHistory);
 
 		// act
-		List<ThesaurusVersionHistoryView> result = service.convertList(thesaurusHistoryList);
+		List<ThesaurusVersionHistoryView> result =
+			 service.convertList(thesaurusHistoryList);
 
 		// assert
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
-		assertThat(result.get(0).getIdentifier(), is("1.0"));
+		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getStatus(), is(1));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getThisVersion(), is(false));
@@ -154,14 +157,17 @@ class ThesaurusVersionHistoryViewConverterTest {
 	void convertViewList() {
 
 		// arrange
-		ThesaurusVersionHistory thesaurusVersionHistory = new ThesaurusVersionHistory();
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 new ThesaurusVersionHistory();
 		when(thesaurusVersionHistoryService.getThesaurusVersionHistoryById(Mockito.<String>any()))
 			.thenReturn(thesaurusVersionHistory);
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
-		ArrayList<ThesaurusVersionHistoryView> versionViews = new ArrayList<ThesaurusVersionHistoryView>();
-		ThesaurusVersionHistoryView thesaurusVersionHistoryView = new ThesaurusVersionHistoryView();
-		thesaurusVersionHistoryView.setIdentifier("1.0");
+		ArrayList<ThesaurusVersionHistoryView> versionViews =
+			 new ArrayList<ThesaurusVersionHistoryView>();
+		ThesaurusVersionHistoryView thesaurusVersionHistoryView =
+			 new ThesaurusVersionHistoryView();
+		thesaurusVersionHistoryView.setIdentifier("data");
 		versionViews.add(thesaurusVersionHistoryView);
 
 		// act

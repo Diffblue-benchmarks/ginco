@@ -16,9 +16,9 @@ class ReducedThesaurusTest {
 	@Test
 	void factory() {
 		ReducedThesaurus reducedThesaurus = new FullThesaurus();
-		reducedThesaurus.setIdentifier("something");
+		reducedThesaurus.setIdentifier("data");
 		reducedThesaurus.setTitle("Mr");
-		assertThat(reducedThesaurus.getIdentifier(), is("something"));
+		assertThat(reducedThesaurus.getIdentifier(), is("data"));
 		assertThat(reducedThesaurus.getTitle(), is("Mr"));
 	}
 }

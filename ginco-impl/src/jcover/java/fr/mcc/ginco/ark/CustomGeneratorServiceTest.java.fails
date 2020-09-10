@@ -38,9 +38,9 @@ public class CustomGeneratorServiceTest {
 		ThesaurusArk thesaurusArk = new ThesaurusArk();
 		thesaurusArk.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusArk.setEntity("entity");
-		thesaurusArk.setIdentifier("foo");
+		thesaurusArk.setIdentifier("data");
 		when(thesaurusArkService.createThesaurusArk(Mockito.<ThesaurusArk>any()))
 			.thenReturn(thesaurusArk);
-		assertEquals("null/ark:/null/156f2373-31a8-4a6e-b228-6c8e183f351b", service.generate(String.class));
+		assertEquals("null/ark:/null/ac34be86-5b65-47d1-be4f-74674f585eb7", service.generate(String.class));
 	}
 }

@@ -30,24 +30,29 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 class AuthenticationFilterTest {
 
 	@Test
-	void factory() throws java.io.IOException, javax.servlet.ServletException, org.springframework.security.core.AuthenticationException, org.springframework.context.NoSuchMessageException, org.springframework.security.web.authentication.session.SessionAuthenticationException, java.net.MalformedURLException {
+	void factory() throws java.io.IOException, javax.servlet.ServletException, org.springframework.security.core.AuthenticationException, org.springframework.context.NoSuchMessageException, org.springframework.security.web.authentication.session.SessionAuthenticationException, IllegalStateException, IllegalArgumentException, java.net.MalformedURLException {
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
 		LockoutService lockoutService = new LockoutService();
 		authenticationFilter.setLockoutService(lockoutService);
-		authenticationFilter.setPasswordParameter("name");
+		authenticationFilter.setPasswordParameter("data");
 		authenticationFilter.setPostOnly(false);
-		authenticationFilter.setUsernameParameter("name");
+		authenticationFilter.setUsernameParameter("data");
 		authenticationFilter.setAllowSessionCreation(false);
-		ApplicationEventPublisher eventPublisher = mock(ApplicationEventPublisher.class);
+		ApplicationEventPublisher eventPublisher =
+			 mock(ApplicationEventPublisher.class);
 		authenticationFilter.setApplicationEventPublisher(eventPublisher);
 		@SuppressWarnings("unchecked")
-		AuthenticationDetailsSource<HttpServletRequest, Object> authenticationDetailsSource = mock(AuthenticationDetailsSource.class);
+		AuthenticationDetailsSource<HttpServletRequest, Object> authenticationDetailsSource =
+			 mock(AuthenticationDetailsSource.class);
 		authenticationFilter.setAuthenticationDetailsSource(authenticationDetailsSource);
-		AuthenticationFailureHandler failureHandler = mock(AuthenticationFailureHandler.class);
+		AuthenticationFailureHandler failureHandler =
+			 mock(AuthenticationFailureHandler.class);
 		authenticationFilter.setAuthenticationFailureHandler(failureHandler);
-		AuthenticationManager authenticationManager = mock(AuthenticationManager.class);
+		AuthenticationManager authenticationManager =
+			 mock(AuthenticationManager.class);
 		authenticationFilter.setAuthenticationManager(authenticationManager);
-		AuthenticationSuccessHandler successHandler = mock(AuthenticationSuccessHandler.class);
+		AuthenticationSuccessHandler successHandler =
+			 mock(AuthenticationSuccessHandler.class);
 		authenticationFilter.setAuthenticationSuccessHandler(successHandler);
 		authenticationFilter.setContinueChainBeforeSuccessfulAuthentication(false);
 		authenticationFilter.setFilterProcessesUrl("/bin/bash");
@@ -55,7 +60,8 @@ class AuthenticationFilterTest {
 		authenticationFilter.setMessageSource(messageSource);
 		RememberMeServices rememberMeServices = mock(RememberMeServices.class);
 		authenticationFilter.setRememberMeServices(rememberMeServices);
-		SessionAuthenticationStrategy sessionStrategy = mock(SessionAuthenticationStrategy.class);
+		SessionAuthenticationStrategy sessionStrategy =
+			 mock(SessionAuthenticationStrategy.class);
 		authenticationFilter.setSessionAuthenticationStrategy(sessionStrategy);
 		authenticationFilter.setBeanName("data.txt");
 		Environment environment = mock(Environment.class);
@@ -63,8 +69,8 @@ class AuthenticationFilterTest {
 		ServletContext servletContext = mock(ServletContext.class);
 		authenticationFilter.setServletContext(servletContext);
 		assertThat(authenticationFilter.getLockoutService(), sameInstance(lockoutService));
-		assertThat(authenticationFilter.getPasswordParameter(), is("name"));
-		assertThat(authenticationFilter.getUsernameParameter(), is("name"));
+		assertThat(authenticationFilter.getPasswordParameter(), is("data"));
+		assertThat(authenticationFilter.getUsernameParameter(), is("data"));
 		assertThat(authenticationFilter.getFilterProcessesUrl(), is("/bin/bash"));
 		assertThat(authenticationFilter.getRememberMeServices(), sameInstance(rememberMeServices));
 		assertThat(authenticationFilter.getFilterConfig(), is(nullValue()));

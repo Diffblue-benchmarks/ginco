@@ -15,7 +15,8 @@ class GenericCustomAttributeTypeViewTest {
 
 	@Test
 	void factory() {
-		GenericCustomAttributeTypeView genericCustomAttributeTypeView = new GenericCustomAttributeTypeView();
+		GenericCustomAttributeTypeView genericCustomAttributeTypeView =
+			 new GenericCustomAttributeTypeView();
 		genericCustomAttributeTypeView.setCode("DE");
 		genericCustomAttributeTypeView.setExportable(false);
 		genericCustomAttributeTypeView.setIdentifier(1);

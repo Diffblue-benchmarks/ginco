@@ -93,7 +93,8 @@ class CustomAttributeConverterTest {
 	void convertListConcept() {
 
 		// arrange
-		ArrayList<CustomConceptAttribute> sourceList = new ArrayList<CustomConceptAttribute>();
+		ArrayList<CustomConceptAttribute> sourceList =
+			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
 		customConceptAttribute.setEntity(new ThesaurusConcept());
 		customConceptAttribute.setLanguage(new Language());
@@ -102,7 +103,8 @@ class CustomAttributeConverterTest {
 		sourceList.add(customConceptAttribute);
 
 		// act
-		List<GenericCustomAttributeView> result = service.convertListConcept(sourceList);
+		List<GenericCustomAttributeView> result =
+			 service.convertListConcept(sourceList);
 
 		// assert
 		assertThat(result.size(), is(1));
@@ -121,7 +123,8 @@ class CustomAttributeConverterTest {
 	void convertListTerm() {
 
 		// arrange
-		ArrayList<CustomTermAttribute> sourceList = new ArrayList<CustomTermAttribute>();
+		ArrayList<CustomTermAttribute> sourceList =
+			 new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
 		customTermAttribute.setEntity(new ThesaurusTerm());
 		customTermAttribute.setLanguage(new Language());
@@ -130,7 +133,8 @@ class CustomAttributeConverterTest {
 		sourceList.add(customTermAttribute);
 
 		// act
-		List<GenericCustomAttributeView> result = service.convertListTerm(sourceList);
+		List<GenericCustomAttributeView> result =
+			 service.convertListTerm(sourceList);
 
 		// assert
 		assertThat(result.size(), is(1));

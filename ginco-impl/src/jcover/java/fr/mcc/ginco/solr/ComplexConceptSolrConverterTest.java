@@ -39,7 +39,7 @@ public class ComplexConceptSolrConverterTest {
 		// arrange
 		SplitNonPreferredTerm complexConcept = new SplitNonPreferredTerm();
 		complexConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		complexConcept.setIdentifier("foo");
+		complexConcept.setIdentifier("data");
 		complexConcept.setLanguage(new Language());
 		complexConcept.setLexicalValue("value");
 		complexConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -60,7 +60,7 @@ public class ComplexConceptSolrConverterTest {
 		assertEquals(10, (int) (Integer) result.get("ext_type").getValue());
 		assertEquals(1.0f, result.get("identifier").getBoost(), 0);
 		assertEquals("identifier", result.get("identifier").getName());
-		assertEquals("foo", (String) result.get("identifier").getValue());
+		assertEquals("data", (String) result.get("identifier").getValue());
 		assertEquals(1.0f, result.get("language").getBoost(), 0);
 		assertEquals("language", result.get("language").getName());
 		assertNull(result.get("language").getValue());

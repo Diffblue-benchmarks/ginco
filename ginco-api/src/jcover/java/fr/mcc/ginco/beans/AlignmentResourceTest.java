@@ -26,7 +26,7 @@ class AlignmentResourceTest {
 		alignment.setAuthor("Ernest Hemingway");
 		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
-		alignment.setIdentifier("foo");
+		alignment.setIdentifier("data");
 		alignment.setInternalTargetThesaurus(new Thesaurus());
 		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		alignment.setSourceConcept(new ThesaurusConcept());

@@ -1,21 +1,20 @@
 package fr.mcc.ginco.dao.hibernate;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.Serializable;
+import fr.mcc.ginco.dao.IGenericDAO;
 
-import org.hibernate.CacheMode;
-import org.hibernate.FlushMode;
-import org.hibernate.LobHelper;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.TypeHelper;
-import org.hibernate.stat.SessionStatistics;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -29,16 +28,117 @@ import org.mockito.Mockito;
 public class GenericHibernateDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, genericHibernateDAO.getSessionFactory());
 	}
 
 	@Test
-	public void makePersistent() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+	public void getByExternalIdReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(new ArrayList());
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria1);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria2);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertTrue((genericHibernateDAO.getByExternalId("1234")).isEmpty());
+	}
+
+	@Test
+	public void findAll() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
+		Criteria criteria = mock(Criteria.class);
+		when(criteria.list())
+			.thenReturn(new ArrayList());
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertTrue((genericHibernateDAO.findAll()).isEmpty());
+	}
+
+	@Test
+	public void findAllOrderIsAsc() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(new ArrayList());
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria2);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertTrue((genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.asc)).isEmpty());
+	}
+
+	@Test
+	public void findAllOrderIsDesc() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(new ArrayList());
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria2);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertTrue((genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.desc)).isEmpty());
+	}
+
+	@Test
+	public void countReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
+		List list = new ArrayList();
+		list.add(1L);
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
+			.thenReturn(criteria1);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria2);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertEquals(1L, (long) genericHibernateDAO.count());
+	}
+
+	@Test
+	public void makePersistent() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -49,8 +149,9 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void update() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+	public void update() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -61,8 +162,9 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void delete() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+	public void delete() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -73,10 +175,11 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void flush() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
+	public void flush() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 
 		// arrange
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
+			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -88,56 +191,5 @@ public class GenericHibernateDAOTest {
 
 		// assert
 		Mockito.verify(session).flush();
-	}
-
-	@Test
-	public void getCurrentSession() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
-
-		// arrange
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
-		LobHelper lobHelper = mock(LobHelper.class);
-		SessionFactory sessionFactory1 = mock(SessionFactory.class);
-		SessionStatistics sessionStatistics = mock(SessionStatistics.class);
-		TypeHelper typeHelper = mock(TypeHelper.class);
-		Session session = mock(Session.class);
-		when(session.getCacheMode())
-			.thenReturn(CacheMode.NORMAL);
-		when(session.getFlushMode())
-			.thenReturn(FlushMode.NEVER);
-		when(session.getLobHelper())
-			.thenReturn(lobHelper);
-		when(session.getSessionFactory())
-			.thenReturn(sessionFactory1);
-		when(session.getStatistics())
-			.thenReturn(sessionStatistics);
-		when(session.getTypeHelper())
-			.thenReturn(typeHelper);
-		when(session.isConnected())
-			.thenReturn(false);
-		when(session.isDefaultReadOnly())
-			.thenReturn(false);
-		when(session.isDirty())
-			.thenReturn(false);
-		when(session.isOpen())
-			.thenReturn(false);
-		SessionFactory sessionFactory2 = mock(SessionFactory.class);
-		when(sessionFactory2.getCurrentSession())
-			.thenReturn(session);
-		genericHibernateDAO.setSessionFactory(sessionFactory2);
-
-		// act
-		Session result = genericHibernateDAO.getCurrentSession();
-
-		// assert
-		assertTrue(CacheMode.NORMAL == result.getCacheMode());
-		assertTrue(FlushMode.NEVER == result.getFlushMode());
-		assertSame(lobHelper, result.getLobHelper());
-		assertSame(sessionFactory1, result.getSessionFactory());
-		assertSame(sessionStatistics, result.getStatistics());
-		assertSame(typeHelper, result.getTypeHelper());
-		assertFalse(result.isConnected());
-		assertFalse(result.isDefaultReadOnly());
-		assertFalse(result.isDirty());
-		assertFalse(result.isOpen());
 	}
 }

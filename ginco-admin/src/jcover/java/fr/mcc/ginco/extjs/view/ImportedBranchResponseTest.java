@@ -20,7 +20,7 @@ class ImportedBranchResponseTest {
 	void factory() {
 		ImportedBranchResponse importedBranchResponse = new ImportedBranchResponse();
 		ThesaurusConceptReducedView conceptView = new ThesaurusConceptReducedView();
-		conceptView.setIdentifier("bar");
+		conceptView.setIdentifier("data");
 		conceptView.setLabel("label");
 		conceptView.setLang("hello");
 		importedBranchResponse.setConceptView(conceptView);

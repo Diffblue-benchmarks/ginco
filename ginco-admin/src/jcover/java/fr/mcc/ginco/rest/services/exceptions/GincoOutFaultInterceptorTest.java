@@ -19,7 +19,8 @@ class GincoOutFaultInterceptorTest {
 
 	@Test
 	void factory() {
-		GincoOutFaultInterceptor gincoOutFaultInterceptor = new GincoOutFaultInterceptor();
+		GincoOutFaultInterceptor gincoOutFaultInterceptor =
+			 new GincoOutFaultInterceptor();
 		gincoOutFaultInterceptor.setAfter(new LinkedList<String>());
 		gincoOutFaultInterceptor.setBefore(new LinkedList<String>());
 		assertThat(gincoOutFaultInterceptor.getAdditionalInterceptors(), is(nullValue()));

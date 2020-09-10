@@ -18,13 +18,14 @@ class AssociativeRelationshipTest {
 
 	@Test
 	void factory() throws java.text.ParseException {
-		AssociativeRelationship associativeRelationship = new AssociativeRelationship();
+		AssociativeRelationship associativeRelationship =
+			 new AssociativeRelationship();
 		ThesaurusConcept conceptLeft = new ThesaurusConcept();
 		conceptLeft.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
 		conceptLeft.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		conceptLeft.setConceptArrays(new HashSet<ThesaurusArray>());
 		conceptLeft.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		conceptLeft.setIdentifier("hello");
+		conceptLeft.setIdentifier("data");
 		conceptLeft.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		conceptLeft.setNotation("DE");
 		conceptLeft.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -38,7 +39,7 @@ class AssociativeRelationshipTest {
 		conceptRight.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		conceptRight.setConceptArrays(new HashSet<ThesaurusArray>());
 		conceptRight.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		conceptRight.setIdentifier("hello");
+		conceptRight.setIdentifier("data");
 		conceptRight.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		conceptRight.setNotation("DE");
 		conceptRight.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -51,7 +52,8 @@ class AssociativeRelationshipTest {
 		identifier3.setConcept1("hello");
 		identifier3.setConcept2("hello");
 		associativeRelationship.setIdentifier(identifier3);
-		AssociativeRelationshipRole relationshipRole = new AssociativeRelationshipRole();
+		AssociativeRelationshipRole relationshipRole =
+			 new AssociativeRelationshipRole();
 		relationshipRole.setCode("DE");
 		relationshipRole.setDefaultRole(false);
 		relationshipRole.setLabel("label");

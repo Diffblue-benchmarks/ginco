@@ -1,16 +1,10 @@
 package fr.mcc.ginco.imports.ginco;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.dao.INodeLabelDAO;
 import fr.mcc.ginco.dao.IThesaurusArrayDAO;
 import fr.mcc.ginco.exports.result.bean.GincoExportedThesaurus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,22 +41,5 @@ public class GincoArrayImporterTest {
 	@Test
 	public void storeArraysReturnsEmpty() {
 		assertTrue((service.storeArrays(new GincoExportedThesaurus())).isEmpty());
-	}
-
-	@Test
-	public void storeArraysReturnsNull() {
-
-		// arrange
-		GincoExportedThesaurus exportedThesaurus = new GincoExportedThesaurus();
-		ArrayList<ThesaurusArray> conceptArrays = new ArrayList<ThesaurusArray>();
-		conceptArrays.add(new ThesaurusArray());
-		exportedThesaurus.setConceptArrays(conceptArrays);
-
-		// act
-		List<ThesaurusArray> result = service.storeArrays(exportedThesaurus);
-
-		// assert
-		assertEquals(1, result.size());
-		assertNull(result.get(0));
 	}
 }

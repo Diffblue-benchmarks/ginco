@@ -63,7 +63,7 @@ class TopTermGeneratorTest {
 		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
 		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setIdentifier("hello");
+		thesaurusConcept.setIdentifier("data");
 		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusConcept.setNotation("DE");
 		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
@@ -79,7 +79,7 @@ class TopTermGeneratorTest {
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
 		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("foo");
+		thesaurus.setIdentifier("data");
 		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");
@@ -105,7 +105,7 @@ class TopTermGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("35779939-be55-4938-89ab-846242c470aa"));
+		assertThat(result.get(0).getId(), is("9b3c00a8-949f-4c0a-b673-ca8dd66ec3d1"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

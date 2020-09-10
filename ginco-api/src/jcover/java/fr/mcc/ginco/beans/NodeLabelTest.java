@@ -20,7 +20,8 @@ class NodeLabelTest {
 	@Test
 	void factory() throws java.text.ParseException {
 		NodeLabel nodeLabel = new NodeLabel();
-		Date created = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel.setCreated(created);
 		nodeLabel.setIdentifier(1);
 		Language language = new Language();
@@ -31,11 +32,12 @@ class NodeLabelTest {
 		language.setTopLanguage(false);
 		nodeLabel.setLanguage(language);
 		nodeLabel.setLexicalValue("value");
-		Date modified = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel.setModified(modified);
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		thesaurusArray.setConcepts(new HashSet<ThesaurusArrayConcept>());
-		thesaurusArray.setIdentifier("foo");
+		thesaurusArray.setIdentifier("data");
 		thesaurusArray.setNotation("DE");
 		thesaurusArray.setOrdered(false);
 		thesaurusArray.setSuperOrdinateConcept(new ThesaurusConcept());

@@ -87,7 +87,8 @@ class ThesaurusConceptRestServiceTest {
 
 	@Test
 	void getAllConceptStatus() throws fr.mcc.ginco.exceptions.TechnicalException {
-		ExtJsonFormLoadData<List<GenericStatusView>> result = service.getAllConceptStatus();
+		ExtJsonFormLoadData<List<GenericStatusView>> result =
+			 service.getAllConceptStatus();
 		assertThat(result.getData().size(), is(5));
 		assertThat(result.getData().get(0).getStatus(), is(0));
 		assertThat(result.getData().get(0).getStatusLabel(), is("Candidat"));
@@ -105,7 +106,8 @@ class ThesaurusConceptRestServiceTest {
 
 	@Test
 	void getAllHierarchicalRelationRoles() throws fr.mcc.ginco.exceptions.TechnicalException {
-		ExtJsonFormLoadData<List<GenericRoleView>> result = service.getAllHierarchicalRelationRoles();
+		ExtJsonFormLoadData<List<GenericRoleView>> result =
+			 service.getAllHierarchicalRelationRoles();
 		assertThat(result.getData().size(), is(4));
 		assertThat(result.getData().get(0).getRole(), is(0));
 		assertThat(result.getData().get(0).getRoleLabel(), is("TG-TS"));
@@ -121,7 +123,8 @@ class ThesaurusConceptRestServiceTest {
 
 	@Test
 	void getSimpleConceptsAssociatedConceptsIsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
-		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result = service.getSimpleConcepts(new ArrayList<String>());
+		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
+			 service.getSimpleConcepts(new ArrayList<String>());
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));

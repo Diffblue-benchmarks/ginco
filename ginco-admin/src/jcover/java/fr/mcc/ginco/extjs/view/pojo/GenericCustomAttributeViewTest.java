@@ -15,7 +15,8 @@ class GenericCustomAttributeViewTest {
 
 	@Test
 	void factory() {
-		GenericCustomAttributeView genericCustomAttributeView = new GenericCustomAttributeView();
+		GenericCustomAttributeView genericCustomAttributeView =
+			 new GenericCustomAttributeView();
 		genericCustomAttributeView.setEntityid("entity");
 		genericCustomAttributeView.setLang("name");
 		genericCustomAttributeView.setLexicalValue("value");

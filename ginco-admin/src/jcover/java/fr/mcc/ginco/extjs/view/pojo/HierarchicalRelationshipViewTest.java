@@ -15,11 +15,12 @@ class HierarchicalRelationshipViewTest {
 
 	@Test
 	void factory() {
-		HierarchicalRelationshipView hierarchicalRelationshipView = new HierarchicalRelationshipView();
-		hierarchicalRelationshipView.setIdentifier("foo");
+		HierarchicalRelationshipView hierarchicalRelationshipView =
+			 new HierarchicalRelationshipView();
+		hierarchicalRelationshipView.setIdentifier("data");
 		hierarchicalRelationshipView.setLabel("label");
 		hierarchicalRelationshipView.setRole(1);
-		assertThat(hierarchicalRelationshipView.getIdentifier(), is("foo"));
+		assertThat(hierarchicalRelationshipView.getIdentifier(), is("data"));
 		assertThat(hierarchicalRelationshipView.getLabel(), is("label"));
 		assertThat(hierarchicalRelationshipView.getRole(), is(1));
 	}

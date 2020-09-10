@@ -69,7 +69,8 @@ class ThesaurusConceptGroupViewConverterTest {
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
 			.thenReturn("foo");
-		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel = new ThesaurusConceptGroupLabel();
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
+			 new ThesaurusConceptGroupLabel();
 		thesaurusConceptGroupLabel.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
@@ -82,7 +83,7 @@ class ThesaurusConceptGroupViewConverterTest {
 		ThesaurusConceptGroup source = new ThesaurusConceptGroup();
 		source.setConceptGroupType(new ThesaurusConceptGroupType());
 		source.setConcepts(new HashSet<ThesaurusConcept>());
-		source.setIdentifier("hello");
+		source.setIdentifier("data");
 		source.setIsDynamic(false);
 		source.setNotation("DE");
 		source.setParentConcept(new ThesaurusConcept());
@@ -95,7 +96,7 @@ class ThesaurusConceptGroupViewConverterTest {
 		assertThat(result.getConcepts(), empty());
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
 		assertThat(result.getGroupConceptLabelId(), is(1));
-		assertThat(result.getIdentifier(), is("hello"));
+		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getIsDynamic(), is(false));
 		assertThat(result.getLabel(), is("value"));
 		assertThat(result.getLanguage(), is("1234"));
@@ -116,7 +117,8 @@ class ThesaurusConceptGroupViewConverterTest {
 
 	@Test
 	void convertSourceIsNull() {
-		ThesaurusConceptGroupView result = service.convert((ThesaurusConceptGroup) null);
+		ThesaurusConceptGroupView result =
+			 service.convert((ThesaurusConceptGroup) null);
 		assertThat(result.getConcepts(), is(nullValue()));
 		assertThat(result.getCreated(), is(nullValue()));
 		assertThat(result.getGroupConceptLabelId(), is(nullValue()));

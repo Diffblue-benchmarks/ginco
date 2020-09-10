@@ -1,8 +1,14 @@
 package fr.mcc.ginco.dao.hibernate;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -16,10 +22,43 @@ import org.mockito.Mockito;
 public class ThesaurusOrganizationDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
-		ThesaurusOrganizationDAO thesaurusOrganizationDAO = new ThesaurusOrganizationDAO();
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+		ThesaurusOrganizationDAO thesaurusOrganizationDAO =
+			 new ThesaurusOrganizationDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		thesaurusOrganizationDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, thesaurusOrganizationDAO.getSessionFactory());
+	}
+
+	@Test
+	public void getFilteredOrganizationNamesReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		ThesaurusOrganizationDAO thesaurusOrganizationDAO =
+			 new ThesaurusOrganizationDAO();
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(new ArrayList());
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.setResultTransformer(Mockito.<org.hibernate.transform.ResultTransformer>any()))
+			.thenReturn(criteria2);
+		Criteria criteria4 = mock(Criteria.class);
+		when(criteria4.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
+			.thenReturn(criteria3);
+		Criteria criteria5 = mock(Criteria.class);
+		when(criteria5.createCriteria(Mockito.<String>any(), Mockito.<String>any(), Mockito.<org.hibernate.sql.JoinType>any()))
+			.thenReturn(criteria4);
+		Criteria criteria6 = mock(Criteria.class);
+		when(criteria6.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria5);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria6);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		thesaurusOrganizationDAO.setSessionFactory(sessionFactory);
+		assertTrue((thesaurusOrganizationDAO.getFilteredOrganizationNames()).isEmpty());
 	}
 }

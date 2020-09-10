@@ -1,16 +1,18 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.CustomConceptAttributeType;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.dao.ICustomConceptAttributeTypeDAO;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -32,22 +34,9 @@ public class CustomConceptAttributeTypeServiceImplTest {
 	}
 
 	@Test
-	public void deleteAttribute() {
-		service.deleteAttribute(new CustomConceptAttributeType());
-	}
-
-	@Test
-	public void getAttributeTypeByIdIdIsOneReturnsNull() {
-		assertNull(service.getAttributeTypeById(1));
-	}
-
-	@Test
 	public void getAttributeTypesByThesaurusReturnsEmpty() {
+		when(customConceptAttributeTypeDAO.getAttributesByThesaurus(Mockito.<Thesaurus>any()))
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getAttributeTypesByThesaurus(new Thesaurus())).isEmpty());
-	}
-
-	@Test
-	public void saveOrUpdateReturnsNull() {
-		assertNull(service.saveOrUpdate(new CustomConceptAttributeType()));
 	}
 }

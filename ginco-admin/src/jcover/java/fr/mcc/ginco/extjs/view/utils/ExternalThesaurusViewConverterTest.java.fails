@@ -49,7 +49,8 @@ class ExternalThesaurusViewConverterTest {
 		externalThesaurus.setIdentifier(1);
 
 		// act
-		ExternalThesaurusView result = service.convertExternalThesaurus(externalThesaurus);
+		ExternalThesaurusView result =
+			 service.convertExternalThesaurus(externalThesaurus);
 
 		// assert
 		assertThat(result.getExternalId(), is("1234"));
@@ -72,7 +73,8 @@ class ExternalThesaurusViewConverterTest {
 		externalThesaurusView.setExternalId("1234");
 
 		// act
-		ExternalThesaurus result = service.convertExternalThesaurusView(externalThesaurusView);
+		ExternalThesaurus result =
+			 service.convertExternalThesaurusView(externalThesaurusView);
 
 		// assert
 		assertThat(result.getExternalId(), is("1234"));

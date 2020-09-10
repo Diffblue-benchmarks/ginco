@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
@@ -38,30 +37,29 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 	}
 
 	@Test
-	public void getByIdIdIsOneReturnsNull() {
-		assertNull(service.getById(1));
-	}
-
-	@Test
 	public void getByThesaurusConceptGroupAndLanguageIdentifierIsBar() throws java.text.ParseException {
 
 		// arrange
-		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel = new ThesaurusConceptGroupLabel();
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
+			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConceptGroupLabel.setCreated(created);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConceptGroupLabel.setModified(modified);
 		when(thesaurusConceptGroupLabelDAO.findByThesaurusConceptGroupAndLanguage(Mockito.<String>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 
 		// act
-		ThesaurusConceptGroupLabel result = service.getByThesaurusConceptGroupAndLanguage("bar");
+		ThesaurusConceptGroupLabel result =
+			 service.getByThesaurusConceptGroupAndLanguage("bar");
 
 		// assert
 		assertSame(conceptGroup, result.getConceptGroup());
@@ -73,25 +71,29 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 	}
 
 	@Test
-	public void getByThesaurusConceptGroupThesaurusConceptGroupIdIsBar() throws java.text.ParseException {
+	public void getByThesaurusConceptGroupThesaurusConceptGroupIdIsHello() throws java.text.ParseException {
 
 		// arrange
-		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel = new ThesaurusConceptGroupLabel();
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
+			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConceptGroupLabel.setCreated(created);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConceptGroupLabel.setModified(modified);
 		when(thesaurusConceptGroupLabelDAO.findByThesaurusConceptGroup(Mockito.<String>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 
 		// act
-		ThesaurusConceptGroupLabel result = service.getByThesaurusConceptGroup("bar");
+		ThesaurusConceptGroupLabel result =
+			 service.getByThesaurusConceptGroup("hello");
 
 		// assert
 		assertSame(conceptGroup, result.getConceptGroup());
@@ -100,10 +102,5 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
 		assertSame(modified, result.getModified());
-	}
-
-	@Test
-	public void updateOrCreateReturnsNull() {
-		assertNull(service.updateOrCreate(new ThesaurusConceptGroupLabel()));
 	}
 }

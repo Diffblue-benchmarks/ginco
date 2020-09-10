@@ -23,12 +23,12 @@ public class ThesaurusConceptUtilsTest {
 	}
 
 	@Test
-	public void getIdsFromConceptListReturnsHello() {
+	public void getIdsFromConceptListReturnsData() {
 		ArrayList<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		thesaurusConcept.setIdentifier("hello");
+		thesaurusConcept.setIdentifier("data");
 		list.add(thesaurusConcept);
 		assertEquals(1, ThesaurusConceptUtils.getIdsFromConceptList(list).size());
-		assertEquals("hello", ThesaurusConceptUtils.getIdsFromConceptList(list).get(0));
+		assertEquals("data", ThesaurusConceptUtils.getIdsFromConceptList(list).get(0));
 	}
 }

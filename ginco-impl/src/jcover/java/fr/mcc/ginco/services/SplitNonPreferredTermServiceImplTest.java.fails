@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -36,14 +35,9 @@ public class SplitNonPreferredTermServiceImplTest {
 	}
 
 	@Test
-	public void destroySplitNonPreferredTermReturnsNull() {
-		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
-		splitNonPreferredTerm.setStatus(0);
-		assertNull(service.destroySplitNonPreferredTerm(splitNonPreferredTerm));
-	}
-
-	@Test
 	public void getAllSplitNonPreferredTermsReturnsEmpty() {
+		when(splitNonPreferredTermDAO.findAll())
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getAllSplitNonPreferredTerms()).isEmpty());
 	}
 

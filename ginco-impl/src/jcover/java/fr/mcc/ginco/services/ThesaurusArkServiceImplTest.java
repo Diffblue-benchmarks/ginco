@@ -39,10 +39,11 @@ public class ThesaurusArkServiceImplTest {
 
 		// arrange
 		ThesaurusArk thesaurusArk1 = new ThesaurusArk();
-		Date created1 = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusArk1.setCreated(created1);
 		thesaurusArk1.setEntity("entity");
-		thesaurusArk1.setIdentifier("foo");
+		thesaurusArk1.setIdentifier("data");
 		when(thesaurusArkDAO.update(Mockito.<ThesaurusArk>any()))
 			.thenReturn(thesaurusArk1);
 
@@ -52,6 +53,6 @@ public class ThesaurusArkServiceImplTest {
 		// assert
 		assertSame(created1, result.getCreated());
 		assertEquals("entity", result.getEntity());
-		assertEquals("foo", result.getIdentifier());
+		assertEquals("data", result.getIdentifier());
 	}
 }

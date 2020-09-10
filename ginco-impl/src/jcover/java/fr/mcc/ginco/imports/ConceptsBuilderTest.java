@@ -85,6 +85,12 @@ public class ConceptsBuilderTest {
 	}
 
 	@Test
+	public void buildConcepts() {
+		assertTrue((service.buildConcepts(new Thesaurus(), new ArrayList<Resource>())).isEmpty());
+		Mockito.verify(thesaurusTermDAO).flush();
+	}
+
+	@Test
 	public void buildConceptsAssociations() {
 		service.buildConceptsAssociations(new Thesaurus(), new ArrayList<Resource>(), new ArrayList<ObjectProperty>(), new ArrayList<ObjectProperty>());
 		Mockito.verify(thesaurusConceptDAO).flush();
@@ -93,10 +99,5 @@ public class ConceptsBuilderTest {
 	@Test
 	public void buildConceptsRootSkosConceptsIsEmpty() {
 		service.buildConceptsRoot(new Thesaurus(), new ArrayList<Resource>());
-	}
-
-	@Test
-	public void buildConceptsSkosConceptsIsEmptyReturnsEmpty() {
-		assertTrue((service.buildConcepts(new Thesaurus(), new ArrayList<Resource>())).isEmpty());
 	}
 }

@@ -1,16 +1,20 @@
 package fr.mcc.ginco.exports.ginco;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.services.ICustomConceptAttributeService;
 import fr.mcc.ginco.services.ICustomTermAttributeService;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -36,11 +40,15 @@ public class GincoAttributesExporterTest {
 
 	@Test
 	public void getExportedConceptAttributes() {
+		when(conceptAttributeService.getAttributesByEntity(Mockito.<Object>any()))
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getExportedConceptAttributes(new ThesaurusConcept()).getList()).isEmpty());
 	}
 
 	@Test
 	public void getExportedTermAttributes() {
+		when(termAttributeService.getAttributesByEntity(Mockito.<Object>any()))
+			.thenReturn(new ArrayList<Object>());
 		assertTrue((service.getExportedTermAttributes(new ThesaurusTerm()).getList()).isEmpty());
 	}
 }

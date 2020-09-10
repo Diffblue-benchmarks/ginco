@@ -1,7 +1,6 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -41,11 +40,6 @@ public class UserRoleServiceImplTest {
 		when(userRoleDAO.getUserRolesOnThesaurus(Mockito.<String>any()))
 			.thenReturn(new ArrayList<UserRole>());
 		assertTrue((service.getThesaurusUsers("root")).isEmpty());
-	}
-
-	@Test
-	public void getUserRoleIdentifierIsOneReturnsNull() {
-		assertNull(service.getUserRole(1));
 	}
 
 	@Test

@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 public class SuggestionDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException {
+	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
 		SuggestionDAO suggestionDAO = new SuggestionDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		suggestionDAO.setSessionFactory(sessionFactory);

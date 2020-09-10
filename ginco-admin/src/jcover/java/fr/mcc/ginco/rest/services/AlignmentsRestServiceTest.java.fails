@@ -71,7 +71,8 @@ class AlignmentsRestServiceTest {
 			.thenReturn(list);
 
 		// act
-		List<ExternalThesaurusView> result = service.getExternalThesauruses("foo=bar");
+		List<ExternalThesaurusView> result =
+			 service.getExternalThesauruses("foo=bar");
 
 		// assert
 		assertThat(result.size(), is(1));
