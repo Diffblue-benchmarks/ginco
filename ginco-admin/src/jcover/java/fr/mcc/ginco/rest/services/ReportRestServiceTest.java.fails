@@ -1,0 +1,75 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.services.IThesaurusReportService;
+import fr.mcc.ginco.solr.SearchResult;
+import fr.mcc.ginco.solr.SearchResultList;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.ReportRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ReportRestService.class})
+@ExtendWith(SpringExtension.class)
+class ReportRestServiceTest {
+
+	@MockBean(name = "thesaurusReportService")
+	private IThesaurusReportService thesaurusReportService;
+
+	@Autowired
+	private ReportRestService service;
+
+	@Test
+	void searchStartIndexIsOneAndTypeIsZero() {
+
+		// arrange
+		SearchResultList searchResultList = new SearchResultList();
+		searchResultList.setNumFound(1L);
+		when(thesaurusReportService.getConceptsWithoutNotes(Mockito.<String>any(), anyInt(), anyInt()))
+			.thenReturn(searchResultList);
+
+		// act
+		ExtJsonFormLoadData<List<SearchResult>> result = service.search("1234", 0, 1, 1);
+
+		// assert
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void searchStartIndexIsZeroAndTypeIsOne() {
+
+		// arrange
+		SearchResultList searchResultList = new SearchResultList();
+		searchResultList.setNumFound(1L);
+		when(thesaurusReportService.getTermsWithoutNotes(Mockito.<String>any(), anyInt(), anyInt()))
+			.thenReturn(searchResultList);
+
+		// act
+		ExtJsonFormLoadData<List<SearchResult>> result = service.search("1234", 1, 0, 1);
+
+		// assert
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+}

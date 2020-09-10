@@ -1,0 +1,82 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ExternalThesaurus;
+import fr.mcc.ginco.beans.ExternalThesaurusType;
+import fr.mcc.ginco.extjs.view.pojo.ExternalThesaurusView;
+import fr.mcc.ginco.services.IExternalThesaurusService;
+import fr.mcc.ginco.services.IExternalThesaurusTypeService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ExternalThesaurusViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ExternalThesaurusViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ExternalThesaurusViewConverterTest {
+
+	@MockBean(name = "externalThesaurusService")
+	private IExternalThesaurusService externalThesaurusService;
+
+	@MockBean(name = "externalThesaurusTypeService")
+	private IExternalThesaurusTypeService externalThesaurusTypeService;
+
+	@Autowired
+	private ExternalThesaurusViewConverter service;
+
+	@Test
+	void convertExternalThesaurus() {
+
+		// arrange
+		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
+		externalThesaurus.setExternalId("1234");
+		externalThesaurus.setExternalThesaurusType(new ExternalThesaurusType());
+		externalThesaurus.setIdentifier(1);
+
+		// act
+		ExternalThesaurusView result = service.convertExternalThesaurus(externalThesaurus);
+
+		// assert
+		assertThat(result.getExternalId(), is("1234"));
+		assertThat(result.getExternalThesaurusType(), is(nullValue()));
+		assertThat(result.getIdentifier(), is(1));
+	}
+
+	@Test
+	void convertExternalThesaurusView() {
+
+		// arrange
+		ExternalThesaurusType externalThesaurusType1 = new ExternalThesaurusType();
+		when(externalThesaurusTypeService.getExternalThesaurusTypeById(Mockito.<Integer>any()))
+			.thenReturn(externalThesaurusType1);
+		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
+		externalThesaurus.setIdentifier(1);
+		when(externalThesaurusService.getThesaurusByExternalId(Mockito.<String>any()))
+			.thenReturn(externalThesaurus);
+		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
+		externalThesaurusView.setExternalId("1234");
+
+		// act
+		ExternalThesaurus result = service.convertExternalThesaurusView(externalThesaurusView);
+
+		// assert
+		assertThat(result.getExternalId(), is("1234"));
+		assertThat(result.getExternalThesaurusType(), sameInstance(externalThesaurusType1));
+		assertThat(result.getIdentifier(), is(1));
+	}
+}

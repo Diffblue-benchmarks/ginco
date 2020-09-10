@@ -1,0 +1,192 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusTermRole;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusTermView;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IThesaurusTermRoleService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.TermViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {TermViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class TermViewConverterTest {
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "thesaurusTermRoleService")
+	private IThesaurusTermRoleService thesaurusTermRoleService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@Autowired
+	private TermViewConverter service;
+
+	@Test
+	void convert1() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusTerm source1 = new ThesaurusTerm();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setHidden(true);
+		source1.setIdentifier("foo");
+		source1.setLanguage(new Language());
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setPrefered(false);
+		source1.setRole(new ThesaurusTermRole());
+		source1.setSource("foo");
+		source1.setStatus(1);
+		source1.setThesaurus(new Thesaurus());
+
+		// act
+		ThesaurusTermView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getConceptId(), is(nullValue()));
+		assertThat(result.getConceptsPath(), is(nullValue()));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getHidden(), is(true));
+		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getPrefered(), is(false));
+		assertThat(result.getRole(), is(nullValue()));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTopistopterm(), is(nullValue()));
+	}
+
+	@Test
+	void convert2() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusTerm source1 = new ThesaurusTerm();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setHidden(false);
+		source1.setIdentifier("foo");
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setPrefered(false);
+		source1.setSource("foo");
+		source1.setStatus(1);
+		source1.setThesaurus(new Thesaurus());
+
+		// act
+		ThesaurusTermView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getConceptId(), is(nullValue()));
+		assertThat(result.getConceptsPath(), is(nullValue()));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getHidden(), is(false));
+		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getPrefered(), is(false));
+		assertThat(result.getRole(), is(nullValue()));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTopistopterm(), is(nullValue()));
+	}
+
+	@Test
+	void convert3() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusTerm source1 = new ThesaurusTerm();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setHidden(false);
+		source1.setIdentifier("foo");
+		source1.setLanguage(new Language());
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setPrefered(false);
+		source1.setSource("foo");
+		source1.setStatus(1);
+		source1.setThesaurus(new Thesaurus());
+
+		// act
+		ThesaurusTermView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getConceptId(), is(nullValue()));
+		assertThat(result.getConceptsPath(), is(nullValue()));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getHidden(), is(false));
+		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getPrefered(), is(false));
+		assertThat(result.getRole(), is(nullValue()));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTopistopterm(), is(nullValue()));
+	}
+
+	@Test
+	void convertSourceIsNull() {
+		ThesaurusTermView result = service.convert(null);
+		assertThat(result.getConceptId(), is(nullValue()));
+		assertThat(result.getConceptsPath(), is(nullValue()));
+		assertThat(result.getCreated(), is(nullValue()));
+		assertThat(result.getHidden(), is(nullValue()));
+		assertThat(result.getIdentifier(), is(nullValue()));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is(nullValue()));
+		assertThat(result.getModified(), is(nullValue()));
+		assertThat(result.getPrefered(), is(nullValue()));
+		assertThat(result.getRole(), is(nullValue()));
+		assertThat(result.getSource(), is(nullValue()));
+		assertThat(result.getStatus(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTopistopterm(), is(nullValue()));
+	}
+
+	@Test
+	void convertTermViewsInTermsFromConceptIsFalseAndTermViewsIsEmptyReturnsEmpty() {
+		assertThat(service.convertTermViewsInTerms(new ArrayList<ThesaurusTermView>(), false), empty());
+	}
+}

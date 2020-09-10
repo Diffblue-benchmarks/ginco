@@ -1,0 +1,105 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.NodeLabel;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusArrayView;
+import fr.mcc.ginco.services.INodeLabelService;
+import fr.mcc.ginco.services.IThesaurusArrayService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ThesaurusArrayViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusArrayViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusArrayViewConverterTest {
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "nodeLabelService")
+	private INodeLabelService nodeLabelService;
+
+	@MockBean(name = "thesaurusArrayService")
+	private IThesaurusArrayService thesaurusArrayService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private ThesaurusArrayViewConverter service;
+
+	@Test
+	void convert() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("foo");
+		NodeLabel nodeLabel = new NodeLabel();
+		nodeLabel.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		nodeLabel.setIdentifier(1);
+		Language language = new Language();
+		language.setId("1234");
+		nodeLabel.setLanguage(language);
+		nodeLabel.setLexicalValue("value");
+		nodeLabel.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		when(nodeLabelService.getByThesaurusArrayAndLanguage(Mockito.<String>any()))
+			.thenReturn(nodeLabel);
+		ThesaurusArray source = new ThesaurusArray();
+		source.setIdentifier("foo");
+		source.setOrdered(false);
+		source.setSuperOrdinateConcept(new ThesaurusConcept());
+		source.setThesaurus(new Thesaurus());
+
+		// act
+		ThesaurusArrayView result = service.convert(source);
+
+		// assert
+		assertThat(result.getConcepts(), empty());
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getLabel(), is("value"));
+		assertThat(result.getLanguage(), is("1234"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getNodeLabelId(), is(1));
+		assertThat(result.getOrder(), is(false));
+		assertThat(result.getParentArrayId(), is(nullValue()));
+		assertThat(result.getParentArrayLabel(), is(nullValue()));
+		assertThat(result.getSuperOrdinateId(), is(nullValue()));
+		assertThat(result.getSuperOrdinateLabel(), is("foo"));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+	}
+
+	@Test
+	void convertArraysIsEmptyReturnsEmpty() {
+		assertThat(service.convert(new ArrayList<ThesaurusArray>()), empty());
+	}
+}

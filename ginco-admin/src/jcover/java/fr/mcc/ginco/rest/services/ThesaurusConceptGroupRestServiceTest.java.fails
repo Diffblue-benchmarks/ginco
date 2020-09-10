@@ -1,0 +1,70 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.utils.ThesaurusConceptGroupLabelViewConverter;
+import fr.mcc.ginco.extjs.view.utils.ThesaurusConceptGroupViewConverter;
+import fr.mcc.ginco.services.IThesaurusConceptGroupService;
+import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.ThesaurusConceptGroupRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusConceptGroupRestService.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusConceptGroupRestServiceTest {
+
+	@MockBean(name = "thesaurusConceptGroupLabelViewConverter")
+	private ThesaurusConceptGroupLabelViewConverter thesaurusConceptGroupLabelViewConverter;
+
+	@MockBean(name = "thesaurusConceptGroupService")
+	private IThesaurusConceptGroupService thesaurusConceptGroupService;
+
+	@MockBean(name = "thesaurusConceptGroupTypeService")
+	private IThesaurusConceptGroupTypeService thesaurusConceptGroupTypeService;
+
+	@MockBean(name = "thesaurusConceptGroupViewConverter")
+	private ThesaurusConceptGroupViewConverter thesaurusConceptGroupViewConverter;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private ThesaurusConceptGroupRestService service;
+
+	@Test
+	void getConceptGroupTypes() {
+
+		// arrange
+		List<ThesaurusConceptGroupType> list = new ArrayList<ThesaurusConceptGroupType>();
+		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusConceptGroupType>> result = service.getConceptGroupTypes();
+
+		// assert
+		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getTotal(), is(0L));
+		assertThat(result.isSuccess(), is(true));
+	}
+}

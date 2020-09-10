@@ -1,0 +1,227 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusConceptGroup;
+import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
+import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
+import fr.mcc.ginco.services.ISplitNonPreferredTermService;
+import fr.mcc.ginco.services.IThesaurusArrayService;
+import fr.mcc.ginco.services.IThesaurusConceptGroupService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.FolderGenerator
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {FolderGenerator.class})
+@ExtendWith(SpringExtension.class)
+class FolderGeneratorTest {
+
+	@MockBean(name = "splitNonPreferredTermService")
+	private ISplitNonPreferredTermService splitNonPreferredTermService;
+
+	@MockBean(name = "thesaurusArrayService")
+	private IThesaurusArrayService thesaurusArrayService;
+
+	@MockBean(name = "thesaurusConceptGroupService")
+	private IThesaurusConceptGroupService thesaurusConceptGroupService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@Autowired
+	private FolderGenerator service;
+
+	@Test
+	void getArrays() {
+
+		// arrange
+		List<ThesaurusArray> list = new ArrayList<ThesaurusArray>();
+		list.add(new ThesaurusArray());
+		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		IThesaurusListNode result = service.getArrays("1234");
+
+		// assert
+		assertThat(result.getChildren(), is(nullValue()));
+		assertThat(result.getIconCls(), is("icon-table"));
+		assertThat(result.getId(), is("ARRAYS_1234"));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is("Tableaux"));
+		assertThat(result.getType(), is(ThesaurusListNodeType.FOLDER));
+		assertThat(result.isDisplayable(), is(false));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getArraysReturnsNull() {
+		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusArray>());
+		assertThat(service.getArrays("1234"), is(nullValue()));
+	}
+
+	@Test
+	void getConcepts1() {
+		when(thesaurusConceptService.getTopTermThesaurusConceptsCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		IThesaurusListNode result = service.getConcepts("1234");
+		assertThat(result.getChildren(), is(nullValue()));
+		assertThat(result.getIconCls(), is("icon-tree"));
+		assertThat(result.getId(), is("CONCEPTS_1234"));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is("Arborescence des concepts"));
+		assertThat(result.getType(), is(ThesaurusListNodeType.FOLDER));
+		assertThat(result.isDisplayable(), is(false));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getConcepts2() {
+		when(thesaurusConceptService.getTopTermThesaurusConceptsCount(Mockito.<String>any()))
+			.thenReturn(0L);
+		IThesaurusListNode result = service.getConcepts("1234");
+		assertThat(result.getChildren(), empty());
+		assertThat(result.getIconCls(), is("icon-tree"));
+		assertThat(result.getId(), is("CONCEPTS_1234"));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is("Arborescence des concepts"));
+		assertThat(result.getType(), is(ThesaurusListNodeType.FOLDER));
+		assertThat(result.isDisplayable(), is(false));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getGroups() {
+
+		// arrange
+		List<ThesaurusConceptGroup> list = new ArrayList<ThesaurusConceptGroup>();
+		list.add(new ThesaurusConceptGroup());
+		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		IThesaurusListNode result = service.getGroups("1234");
+
+		// assert
+		assertThat(result.getChildren(), is(nullValue()));
+		assertThat(result.getIconCls(), is("icon-group"));
+		assertThat(result.getId(), is("GROUPS_1234"));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is("Groupes"));
+		assertThat(result.getType(), is(ThesaurusListNodeType.FOLDER));
+		assertThat(result.isDisplayable(), is(false));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getGroupsReturnsNull() {
+		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusConceptGroup>());
+		assertThat(service.getGroups("1234"), is(nullValue()));
+	}
+
+	@Test
+	void getOrphans() {
+		when(thesaurusConceptService.getOrphanThesaurusConceptsCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		IThesaurusListNode result = service.getOrphans("1234");
+		assertThat(result.getChildren(), is(nullValue()));
+		assertThat(result.getIconCls(), is("sandbox"));
+		assertThat(result.getId(), is("ORPHANS_1234"));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is("Concepts orphelins"));
+		assertThat(result.getType(), is(ThesaurusListNodeType.FOLDER));
+		assertThat(result.isDisplayable(), is(false));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getOrphansReturnsNull() {
+		when(thesaurusConceptService.getOrphanThesaurusConceptsCount(Mockito.<String>any()))
+			.thenReturn(0L);
+		assertThat(service.getOrphans("1234"), is(nullValue()));
+	}
+
+	@Test
+	void getSandbox() {
+		when(thesaurusTermService.getSandboxedTermsCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		IThesaurusListNode result = service.getSandbox("1234");
+		assertThat(result.getChildren(), empty());
+		assertThat(result.getIconCls(), is("sandbox"));
+		assertThat(result.getId(), is("SANDBOX_1234"));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is("Termes orphelins"));
+		assertThat(result.getType(), is(ThesaurusListNodeType.FOLDER));
+		assertThat(result.isDisplayable(), is(true));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getSandboxReturnsNull() {
+		when(thesaurusTermService.getSandboxedTermsCount(Mockito.<String>any()))
+			.thenReturn(0L);
+		assertThat(service.getSandbox("1234"), is(nullValue()));
+	}
+
+	@Test
+	void getSplitNonPreferredTerms() {
+		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		IThesaurusListNode result = service.getSplitNonPreferredTerms("1234");
+		assertThat(result.getChildren(), empty());
+		assertThat(result.getIconCls(), is("icon-complex-concept"));
+		assertThat(result.getId(), is("COMPLEXCONCEPTS_1234"));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is("Concepts complexes"));
+		assertThat(result.getType(), is(ThesaurusListNodeType.FOLDER));
+		assertThat(result.isDisplayable(), is(true));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getSplitNonPreferredTermsReturnsNull() {
+		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
+			.thenReturn(0L);
+		assertThat(service.getSplitNonPreferredTerms("1234"), is(nullValue()));
+	}
+}

@@ -1,0 +1,143 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Alignment;
+import fr.mcc.ginco.beans.AlignmentType;
+import fr.mcc.ginco.beans.ExternalThesaurus;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.extjs.view.pojo.AlignmentView;
+import fr.mcc.ginco.extjs.view.pojo.ExternalThesaurusView;
+import fr.mcc.ginco.services.IAlignmentService;
+import fr.mcc.ginco.services.IAlignmentTypeService;
+
+import java.text.SimpleDateFormat;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.AlignmentViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {AlignmentViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class AlignmentViewConverterTest {
+
+	@MockBean(name = "alignmentConceptViewConverter")
+	private AlignmentConceptViewConverter alignmentConceptViewConverter;
+
+	@MockBean(name = "alignmentResourceViewConverter")
+	private AlignmentResourceViewConverter alignmentResourceViewConverter;
+
+	@MockBean(name = "alignmentService")
+	private IAlignmentService alignmentService;
+
+	@MockBean(name = "alignmentTypeService")
+	private IAlignmentTypeService alignmentTypeService;
+
+	@MockBean(name = "externalThesaurusViewConverter")
+	private ExternalThesaurusViewConverter externalThesaurusViewConverter;
+
+	@Autowired
+	private AlignmentViewConverter service;
+
+	@Test
+	void convertAlignment1() throws java.text.ParseException {
+
+		// arrange
+		Alignment alignment = new Alignment();
+		alignment.setAlignmentType(new AlignmentType());
+		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		alignment.setIdentifier("foo");
+		alignment.setInternalTargetThesaurus(new Thesaurus());
+		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+
+		// act
+		AlignmentView result = service.convertAlignment(alignment);
+
+		// assert
+		assertThat(result.getAlignmentType(), is(nullValue()));
+		assertThat(result.getAndRelation(), is(false));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getExternalThesaurus(), is(nullValue()));
+		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getInternalThesaurusId(), is(nullValue()));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getTargetConcepts(), empty());
+		assertThat(result.getTargetResources(), is(nullValue()));
+	}
+
+	@Test
+	void convertAlignment2() throws java.text.ParseException {
+
+		// arrange
+		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
+		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
+			.thenReturn(externalThesaurusView);
+		Alignment alignment = new Alignment();
+		alignment.setAlignmentType(new AlignmentType());
+		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
+		alignment.setIdentifier("foo");
+		alignment.setInternalTargetThesaurus(new Thesaurus());
+		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+
+		// act
+		AlignmentView result = service.convertAlignment(alignment);
+
+		// assert
+		assertThat(result.getAlignmentType(), is(nullValue()));
+		assertThat(result.getAndRelation(), is(false));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getExternalThesaurus().size(), is(1));
+		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
+		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getInternalThesaurusId(), is(nullValue()));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getTargetConcepts(), empty());
+		assertThat(result.getTargetResources(), is(nullValue()));
+	}
+
+	@Test
+	void convertAlignment3() throws java.text.ParseException {
+
+		// arrange
+		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
+		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
+			.thenReturn(externalThesaurusView);
+		Alignment alignment = new Alignment();
+		alignment.setAlignmentType(new AlignmentType());
+		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
+		alignment.setIdentifier("foo");
+		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+
+		// act
+		AlignmentView result = service.convertAlignment(alignment);
+
+		// assert
+		assertThat(result.getAlignmentType(), is(nullValue()));
+		assertThat(result.getAndRelation(), is(false));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getExternalThesaurus().size(), is(1));
+		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
+		assertThat(result.getIdentifier(), is("foo"));
+		assertThat(result.getInternalThesaurusId(), is(nullValue()));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getTargetConcepts(), empty());
+		assertThat(result.getTargetResources(), is(nullValue()));
+	}
+}

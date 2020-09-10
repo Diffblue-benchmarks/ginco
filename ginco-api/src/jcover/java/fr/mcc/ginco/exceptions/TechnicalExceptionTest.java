@@ -1,0 +1,26 @@
+package fr.mcc.ginco.exceptions;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * Unit tests for fr.mcc.ginco.exceptions.TechnicalException
+ *
+ * @author Diffblue Cover
+ */
+
+class TechnicalExceptionTest {
+
+	@Test
+	void factory() {
+		Exception cause = new Exception();
+		cause.setStackTrace(new StackTraceElement[] { });
+		TechnicalException technicalException = new TechnicalException("jpg", cause);
+		assertThat(technicalException.getCause().getCause(), is(nullValue()));
+		assertThat(technicalException.getCause().getMessage(), is(nullValue()));
+		assertThat(technicalException.getMessage(), is("jpg"));
+	}
+}

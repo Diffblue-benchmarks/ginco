@@ -1,0 +1,56 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.utils.GitInfo;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.InfoRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {InfoRestService.class})
+@ExtendWith(SpringExtension.class)
+class InfoRestServiceTest {
+
+	@MockBean(name = "gitInfoService")
+	private GitInfo gitInfoService;
+
+	@Autowired
+	private InfoRestService service;
+
+	@Test
+	void getGitInfo() {
+		when(gitInfoService.getCommitId())
+			.thenReturn("foo")
+			.thenReturn("foo");
+		when(gitInfoService.getGitBranch())
+			.thenReturn("foo")
+			.thenReturn("foo");
+		when(gitInfoService.getGitBuildTime())
+			.thenReturn("foo")
+			.thenReturn("foo");
+		when(gitInfoService.getGitCommitUserName())
+			.thenReturn("foo")
+			.thenReturn("foo");
+		ExtJsonFormLoadData<GitInfo> result = service.getGitInfo();
+		assertThat(result.getData().getCommitId(), is("foo"));
+		assertThat(result.getData().getGitBranch(), is("foo"));
+		assertThat(result.getData().getGitBuildTime(), is("foo"));
+		assertThat(result.getData().getGitCommitUserName(), is("foo"));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+}

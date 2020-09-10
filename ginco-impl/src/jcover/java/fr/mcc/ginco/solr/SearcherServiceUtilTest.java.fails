@@ -1,0 +1,48 @@
+package fr.mcc.ginco.solr;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.apache.solr.common.SolrDocumentList;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.solr.SearcherServiceUtil
+ *
+ * @author Diffblue Cover
+ */
+
+public class SearcherServiceUtilTest {
+
+	@InjectMocks
+	private SearcherServiceUtil service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void addAndQuery() {
+		assertEquals("+ :java.lang.Object@1edf1c96 ", service.addAndQuery(" ", new Object(), null, false));
+		assertEquals("+ :[ java.lang.Object@368102c8Z TO * ] ", service.addAndQuery(" ", new Object(), true, false));
+		assertEquals("+ :[ * TO java.lang.Object@6996db8Z ] ", service.addAndQuery(" ", new Object(), false, true));
+		assertEquals("+ :[ * TO fooZ ] ", service.addAndQuery(" ", "foo", false, false));
+		assertEquals("", service.addAndQuery(" ", null, false, false));
+	}
+
+	@Test
+	public void getExtTypeQuery() {
+		assertEquals("", service.getExtTypeQuery(-1));
+		assertEquals("", service.getExtTypeQuery(null));
+		assertEquals("+ext_type:1", service.getExtTypeQuery(1));
+		assertEquals("", service.getExtTypeQuery(0));
+	}
+
+	@Test
+	public void getSearchResultListListIsEmptyReturnsEmpty() {
+		assertTrue((service.getSearchResultList(new SolrDocumentList())).isEmpty());
+	}
+}

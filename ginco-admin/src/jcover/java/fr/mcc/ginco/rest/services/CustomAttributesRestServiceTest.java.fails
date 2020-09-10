@@ -1,0 +1,113 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.GenericCustomAttributeTypeView;
+import fr.mcc.ginco.extjs.view.pojo.GenericCustomAttributeView;
+import fr.mcc.ginco.extjs.view.utils.CustomAttributeConverter;
+import fr.mcc.ginco.extjs.view.utils.CustomAttributesTypesConverter;
+import fr.mcc.ginco.services.ICustomConceptAttributeService;
+import fr.mcc.ginco.services.ICustomConceptAttributeTypeService;
+import fr.mcc.ginco.services.ICustomTermAttributeService;
+import fr.mcc.ginco.services.ICustomTermAttributeTypeService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.CustomAttributesRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {CustomAttributesRestService.class})
+@ExtendWith(SpringExtension.class)
+class CustomAttributesRestServiceTest {
+
+	@MockBean(name = "customAttributeConverter")
+	private CustomAttributeConverter customAttributeConverter;
+
+	@MockBean(name = "customAttributesTypesConverter")
+	private CustomAttributesTypesConverter customAttributesTypesConverter;
+
+	@MockBean(name = "customConceptAttributeService")
+	private ICustomConceptAttributeService customConceptAttributeService;
+
+	@MockBean(name = "customConceptAttributeTypeService")
+	private ICustomConceptAttributeTypeService customConceptAttributeTypeService;
+
+	@MockBean(name = "customTermAttributeService")
+	private ICustomTermAttributeService customTermAttributeService;
+
+	@MockBean(name = "customTermAttributeTypeService")
+	private ICustomTermAttributeTypeService customTermAttributeTypeService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@Autowired
+	private CustomAttributesRestService service;
+
+	@Test
+	void deleteConceptAttributeTypesListIsEmpty() {
+		service.deleteConceptAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>());
+	}
+
+	@Test
+	void deleteTermAttributeTypesListIsEmpty() {
+		service.deleteTermAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>());
+	}
+
+	@Test
+	void updateConceptAttributeListIsEmpty() {
+		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result = service.updateConceptAttribute(new ArrayList<GenericCustomAttributeView>());
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void updateConceptAttributeTypesListIsEmptyReturnsEmpty() {
+		when(customAttributesTypesConverter.convertList(Mockito.<List<? extends fr.mcc.ginco.beans.generic.GenericCustomAttributeType>>any(), anyBoolean()))
+			.thenReturn(new ArrayList<GenericCustomAttributeTypeView>());
+		assertThat(service.updateConceptAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>()), empty());
+	}
+
+	@Test
+	void updateTermAttributeListIsEmpty() {
+		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result = service.updateTermAttribute(new ArrayList<GenericCustomAttributeView>());
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void updateTermAttributeTypesListIsEmptyReturnsEmpty() {
+		when(customAttributesTypesConverter.convertList(Mockito.<List<? extends fr.mcc.ginco.beans.generic.GenericCustomAttributeType>>any(), anyBoolean()))
+			.thenReturn(new ArrayList<GenericCustomAttributeTypeView>());
+		assertThat(service.updateTermAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>()), empty());
+	}
+}

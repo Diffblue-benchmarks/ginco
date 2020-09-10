@@ -1,0 +1,105 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.extjs.view.pojo.HierarchicalRelationshipView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptReducedView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptView;
+import fr.mcc.ginco.services.IAlignmentService;
+import fr.mcc.ginco.services.IAssociativeRelationshipService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ThesaurusConceptViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusConceptViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusConceptViewConverterTest {
+
+	@MockBean(name = "alignmentService")
+	private IAlignmentService alignmentService;
+
+	@MockBean(name = "alignmentViewConverter")
+	private AlignmentViewConverter alignmentViewConverter;
+
+	@MockBean(name = "associativeRelationshipService")
+	private IAssociativeRelationshipService associativeRelationshipService;
+
+	@MockBean(name = "associativeRelationshipViewConverter")
+	private AssociativeRelationshipViewConverter associativeRelationshipViewConverter;
+
+	@MockBean(name = "hierarchicalRelationshipViewConverter")
+	private HierarchicalRelationshipViewConverter hierarchicalRelationshipViewConverter;
+
+	@MockBean(name = "termViewConverter")
+	private TermViewConverter termViewConverter;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private ThesaurusConceptViewConverter service;
+
+	@Test
+	void convert() {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("foo");
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("hello");
+
+		// act
+		ThesaurusConceptReducedView result = service.convert(concept);
+
+		// assert
+		assertThat(result.getIdentifier(), is("hello"));
+		assertThat(result.getLabel(), is("foo"));
+		assertThat(result.getLang(), is(nullValue()));
+	}
+
+	@Test
+	void convertAddedChildrenReturnsEmpty() {
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		ThesaurusConceptView conceptView = new ThesaurusConceptView();
+		conceptView.setChildConcepts(new ArrayList<HierarchicalRelationshipView>());
+		assertThat(service.convertAddedChildren(conceptView), empty());
+	}
+
+	@Test
+	void convertConceptListIsEmptyReturnsEmpty() {
+		assertThat(service.convert(new ArrayList<ThesaurusConcept>()), empty());
+	}
+
+	@Test
+	void convertRemovedChildrenReturnsEmpty() {
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		ThesaurusConceptView conceptView = new ThesaurusConceptView();
+		conceptView.setChildConcepts(new ArrayList<HierarchicalRelationshipView>());
+		assertThat(service.convertRemovedChildren(conceptView), empty());
+	}
+}

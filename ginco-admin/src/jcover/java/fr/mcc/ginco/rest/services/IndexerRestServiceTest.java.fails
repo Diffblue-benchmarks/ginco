@@ -1,0 +1,58 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import fr.mcc.ginco.solr.IIndexerService;
+
+import javax.ws.rs.core.Response;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.IndexerRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {IndexerRestService.class})
+@ExtendWith(SpringExtension.class)
+class IndexerRestServiceTest {
+
+	@MockBean(name = "indexerService")
+	private IIndexerService indexerService;
+
+	@Autowired
+	private IndexerRestService service;
+
+	@Test
+	void forceIndexation() throws fr.mcc.ginco.exceptions.TechnicalException, IllegalStateException {
+		Response result = service.forceIndexation();
+		assertThat(result.getAllowedMethods(), empty());
+		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat((String) result.getEntity(), is("{success:true, message: 'Indexing started!'}"));
+		assertThat(result.getEntityTag(), is(nullValue()));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLastModified(), is(nullValue()));
+		assertThat(result.getLength(), is(-1));
+		assertThat(result.getLinks(), empty());
+		assertThat(result.getLocation(), is(nullValue()));
+		assertThat(result.getMediaType(), is(nullValue()));
+		assertThat(result.getMetadata().isEmpty(), is(true));
+		assertThat(result.getStatus(), is(200));
+		assertThat(result.getStatusInfo().getFamily(), is(Response.Family.SUCCESSFUL));
+		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
+		assertThat(result.getStatusInfo().getStatusCode(), is(200));
+		assertThat(result.getStringHeaders().isEmpty(), is(true));
+		Mockito.verify(indexerService).forceIndexing();
+	}
+}

@@ -1,0 +1,167 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.CustomConceptAttribute;
+import fr.mcc.ginco.beans.CustomConceptAttributeType;
+import fr.mcc.ginco.beans.CustomTermAttribute;
+import fr.mcc.ginco.beans.CustomTermAttributeType;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.extjs.view.pojo.GenericCustomAttributeView;
+import fr.mcc.ginco.services.ICustomConceptAttributeService;
+import fr.mcc.ginco.services.ICustomConceptAttributeTypeService;
+import fr.mcc.ginco.services.ICustomTermAttributeService;
+import fr.mcc.ginco.services.ICustomTermAttributeTypeService;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.CustomAttributeConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {CustomAttributeConverter.class})
+@ExtendWith(SpringExtension.class)
+class CustomAttributeConverterTest {
+
+	@MockBean(name = "customConceptAttributeService")
+	private ICustomConceptAttributeService customConceptAttributeService;
+
+	@MockBean(name = "customConceptAttributeTypeService")
+	private ICustomConceptAttributeTypeService customConceptAttributeTypeService;
+
+	@MockBean(name = "customTermAttributeService")
+	private ICustomTermAttributeService customTermAttributeService;
+
+	@MockBean(name = "customTermAttributeTypeService")
+	private ICustomTermAttributeTypeService customTermAttributeTypeService;
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@Autowired
+	private CustomAttributeConverter service;
+
+	@Test
+	void convertConceptAttribute() {
+
+		// arrange
+		CustomConceptAttribute source = new CustomConceptAttribute();
+		source.setEntity(new ThesaurusConcept());
+		source.setLanguage(new Language());
+		source.setLexicalValue("value");
+		source.setType(new CustomConceptAttributeType());
+
+		// act
+		GenericCustomAttributeView result = service.convertConceptAttribute(source);
+
+		// assert
+		assertThat(result.getEntityid(), is(nullValue()));
+		assertThat(result.getLang(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getTypeid(), is(0));
+	}
+
+	@Test
+	void convertListConcept() {
+
+		// arrange
+		ArrayList<CustomConceptAttribute> sourceList = new ArrayList<CustomConceptAttribute>();
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		customConceptAttribute.setEntity(new ThesaurusConcept());
+		customConceptAttribute.setLanguage(new Language());
+		customConceptAttribute.setLexicalValue("value");
+		customConceptAttribute.setType(new CustomConceptAttributeType());
+		sourceList.add(customConceptAttribute);
+
+		// act
+		List<GenericCustomAttributeView> result = service.convertListConcept(sourceList);
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getEntityid(), is(nullValue()));
+		assertThat(result.get(0).getLang(), is(nullValue()));
+		assertThat(result.get(0).getLexicalValue(), is("value"));
+		assertThat(result.get(0).getTypeid(), is(0));
+	}
+
+	@Test
+	void convertListConceptSourceListIsEmptyReturnsEmpty() {
+		assertThat(service.convertListConcept(new ArrayList<CustomConceptAttribute>()), empty());
+	}
+
+	@Test
+	void convertListTerm() {
+
+		// arrange
+		ArrayList<CustomTermAttribute> sourceList = new ArrayList<CustomTermAttribute>();
+		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
+		customTermAttribute.setEntity(new ThesaurusTerm());
+		customTermAttribute.setLanguage(new Language());
+		customTermAttribute.setLexicalValue("value");
+		customTermAttribute.setType(new CustomTermAttributeType());
+		sourceList.add(customTermAttribute);
+
+		// act
+		List<GenericCustomAttributeView> result = service.convertListTerm(sourceList);
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getEntityid(), is(nullValue()));
+		assertThat(result.get(0).getLang(), is(nullValue()));
+		assertThat(result.get(0).getLexicalValue(), is("value"));
+		assertThat(result.get(0).getTypeid(), is(0));
+	}
+
+	@Test
+	void convertListTermSourceListIsEmptyReturnsEmpty() {
+		assertThat(service.convertListTerm(new ArrayList<CustomTermAttribute>()), empty());
+	}
+
+	@Test
+	void convertTermAttribute() {
+
+		// arrange
+		CustomTermAttribute source = new CustomTermAttribute();
+		source.setEntity(new ThesaurusTerm());
+		source.setLanguage(new Language());
+		source.setLexicalValue("value");
+		source.setType(new CustomTermAttributeType());
+
+		// act
+		GenericCustomAttributeView result = service.convertTermAttribute(source);
+
+		// assert
+		assertThat(result.getEntityid(), is(nullValue()));
+		assertThat(result.getLang(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getTypeid(), is(0));
+	}
+}

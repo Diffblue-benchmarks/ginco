@@ -1,0 +1,122 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
+import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
+import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
+import fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.OrphansGenerator
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {OrphansGenerator.class})
+@ExtendWith(SpringExtension.class)
+class OrphansGeneratorTest {
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusListNodeFactory")
+	private ThesaurusListNodeFactory thesaurusListNodeFactory;
+
+	@Autowired
+	private OrphansGenerator service;
+
+	@Test
+	void generateOrphans() throws java.text.ParseException {
+
+		// arrange
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
+		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setIdentifier("hello");
+		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setNotation("DE");
+		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(true);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setCreator(new ThesaurusOrganization());
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("foo");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		thesaurus.setType(new ThesaurusType());
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConcept.setThesaurus(thesaurus);
+		thesaurusConcept.setTopConcept(false);
+		list.add(thesaurusConcept);
+		when(thesaurusConceptService.getOrphanThesaurusConcepts(Mockito.<String>any(), anyInt()))
+			.thenReturn(list);
+
+		// act
+		List<IThesaurusListNode> result = service.generateOrphans("1234");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getChildren(), empty());
+		assertThat(result.get(0).getIconCls(), is("icon-warning"));
+		assertThat(result.get(0).getId(), is("01450c4a-a585-46bb-95af-a83f0c74d883"));
+		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
+		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));
+		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.WARNING));
+		assertThat(result.get(0).isDisplayable(), is(false));
+		assertThat(result.get(0).isExpanded(), is(false));
+		assertThat(result.get(0).isLeaf(), is(true));
+	}
+
+	@Test
+	void generateOrphansReturnsEmpty() {
+		when(thesaurusConceptService.getOrphanThesaurusConcepts(Mockito.<String>any(), anyInt()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		assertThat(service.generateOrphans("1234"), empty());
+	}
+}

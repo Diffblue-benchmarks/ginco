@@ -1,0 +1,55 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusTermRole;
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.services.IThesaurusTermRoleService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.TermRoleRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {TermRoleRestService.class})
+@ExtendWith(SpringExtension.class)
+class TermRoleRestServiceTest {
+
+	@MockBean(name = "thesaurusTermRoleService")
+	private IThesaurusTermRoleService thesaurusTermRoleService;
+
+	@Autowired
+	private TermRoleRestService service;
+
+	@Test
+	void getAllRoles() {
+
+		// arrange
+		List<ThesaurusTermRole> list = new ArrayList<ThesaurusTermRole>();
+		when(thesaurusTermRoleService.getAllThesaurusTermRole())
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusTermRole>> result = service.getAllRoles();
+
+		// assert
+		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+}

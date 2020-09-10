@@ -1,0 +1,124 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.SplitNonPreferredTerm;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.extjs.view.pojo.SplitNonPreferredTermView;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.ISplitNonPreferredTermService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.text.SimpleDateFormat;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.SplitNonPreferredTermViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {SplitNonPreferredTermViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class SplitNonPreferredTermViewConverterTest {
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "splitNonPreferredTermService")
+	private ISplitNonPreferredTermService splitNonPreferredTermService;
+
+	@MockBean(name = "termViewConverter")
+	private TermViewConverter termViewConverter;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private SplitNonPreferredTermViewConverter service;
+
+	@Test
+	void convert1() throws java.text.ParseException {
+
+		// arrange
+		SplitNonPreferredTerm source1 = new SplitNonPreferredTerm();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("bar");
+		source1.setLanguage(new Language());
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setSource("foo");
+		source1.setStatus(1);
+		source1.setThesaurus(new Thesaurus());
+
+		// act
+		SplitNonPreferredTermView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getIdentifier(), is("bar"));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getPreferredTerms(), empty());
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+	}
+
+	@Test
+	void convert2() throws java.text.ParseException {
+
+		// arrange
+		SplitNonPreferredTerm source1 = new SplitNonPreferredTerm();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("bar");
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setSource("foo");
+		source1.setStatus(1);
+		source1.setThesaurus(new Thesaurus());
+
+		// act
+		SplitNonPreferredTermView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getIdentifier(), is("bar"));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getPreferredTerms(), empty());
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+	}
+
+	@Test
+	void convertSourceIsNull() {
+		SplitNonPreferredTermView result = service.convert((SplitNonPreferredTerm) null);
+		assertThat(result.getCreated(), is(nullValue()));
+		assertThat(result.getIdentifier(), is(nullValue()));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is(nullValue()));
+		assertThat(result.getModified(), is(nullValue()));
+		assertThat(result.getPreferredTerms(), is(nullValue()));
+		assertThat(result.getSource(), is(nullValue()));
+		assertThat(result.getStatus(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+	}
+}

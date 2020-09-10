@@ -1,0 +1,94 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.AlignmentType;
+import fr.mcc.ginco.beans.ExternalThesaurus;
+import fr.mcc.ginco.beans.ExternalThesaurusType;
+import fr.mcc.ginco.extjs.view.pojo.ExternalThesaurusView;
+import fr.mcc.ginco.extjs.view.utils.ExternalThesaurusViewConverter;
+import fr.mcc.ginco.services.IAlignmentTypeService;
+import fr.mcc.ginco.services.IExternalThesaurusService;
+import fr.mcc.ginco.services.IExternalThesaurusTypeService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.AlignmentsRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {AlignmentsRestService.class})
+@ExtendWith(SpringExtension.class)
+class AlignmentsRestServiceTest {
+
+	@MockBean(name = "alignmentTypeService")
+	private IAlignmentTypeService alignmentTypeService;
+
+	@MockBean(name = "externalThesaurusService")
+	private IExternalThesaurusService externalThesaurusService;
+
+	@MockBean(name = "externalThesaurusTypeService")
+	private IExternalThesaurusTypeService externalThesaurusTypeService;
+
+	@MockBean(name = "externalThesaurusViewConverter")
+	private ExternalThesaurusViewConverter externalThesaurusViewConverter;
+
+	@Autowired
+	private AlignmentsRestService service;
+
+	@Test
+	void getAlignmentTypesReturnsEmpty() {
+		when(alignmentTypeService.getAlignmentTypeList())
+			.thenReturn(new ArrayList<AlignmentType>());
+		assertThat(service.getAlignmentTypes(), empty());
+	}
+
+	@Test
+	void getExternalThesauruses() {
+
+		// arrange
+		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
+		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
+			.thenReturn(externalThesaurusView);
+		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
+		list.add(new ExternalThesaurus());
+		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ExternalThesaurusView> result = service.getExternalThesauruses("foo=bar");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(externalThesaurusView));
+	}
+
+	@Test
+	void getExternalThesaurusesQueryIsBarReturnsEmpty() {
+		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
+			.thenReturn(new ArrayList<ExternalThesaurus>());
+		assertThat(service.getExternalThesauruses("bar"), empty());
+	}
+
+	@Test
+	void getExternalThesaurusTypesReturnsEmpty() {
+		when(externalThesaurusTypeService.getExternalThesaurusTypeList())
+			.thenReturn(new ArrayList<ExternalThesaurusType>());
+		assertThat(service.getExternalThesaurusTypes(), empty());
+	}
+}

@@ -1,0 +1,46 @@
+package fr.mcc.ginco.ark;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusArk;
+import fr.mcc.ginco.services.IThesaurusArkService;
+
+import java.text.SimpleDateFormat;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.ark.CustomGeneratorService
+ *
+ * @author Diffblue Cover
+ */
+
+public class CustomGeneratorServiceTest {
+
+	@Mock(name = "thesaurusArkService")
+	private IThesaurusArkService thesaurusArkService;
+
+	@InjectMocks
+	private CustomGeneratorService service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void generateEntityIsString() throws java.text.ParseException {
+		ThesaurusArk thesaurusArk = new ThesaurusArk();
+		thesaurusArk.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusArk.setEntity("entity");
+		thesaurusArk.setIdentifier("foo");
+		when(thesaurusArkService.createThesaurusArk(Mockito.<ThesaurusArk>any()))
+			.thenReturn(thesaurusArk);
+		assertEquals("null/ark:/null/156f2373-31a8-4a6e-b228-6c8e183f351b", service.generate(String.class));
+	}
+}

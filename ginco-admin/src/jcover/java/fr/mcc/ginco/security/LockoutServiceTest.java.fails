@@ -1,0 +1,44 @@
+package fr.mcc.ginco.security;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.security.LockoutService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {LockoutService.class})
+@ExtendWith(SpringExtension.class)
+class LockoutServiceTest {
+
+	@Autowired
+	private LockoutService service;
+
+	@Test
+	void getMaxAttempsReturnsZero() {
+		assertThat(service.getMaxAttemps(), is(0));
+	}
+
+	@Test
+	void isLockedOutReturnsFalse() {
+		assertThat(service.isLockedOut("545321456"), is(false));
+	}
+
+	@Test
+	void notifyLoginFailureTimestampIsOne() {
+		service.notifyLoginFailure("545321456", 1L);
+	}
+
+	@Test
+	void notifyLoginSuccess() {
+		service.notifyLoginSuccess("545321456");
+	}
+}

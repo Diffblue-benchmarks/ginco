@@ -1,0 +1,73 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.extjs.view.utils.ArraysGenerator;
+import fr.mcc.ginco.extjs.view.utils.ChildrenGenerator;
+import fr.mcc.ginco.extjs.view.utils.FoldersGenerator;
+import fr.mcc.ginco.extjs.view.utils.GroupsGenerator;
+import fr.mcc.ginco.extjs.view.utils.OrphansGenerator;
+import fr.mcc.ginco.extjs.view.utils.TopTermGenerator;
+import fr.mcc.ginco.services.IAdminUserService;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IUserRoleService;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.BaseRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {BaseRestService.class})
+@ExtendWith(SpringExtension.class)
+class BaseRestServiceTest {
+
+	@MockBean(name = "adminUserService")
+	private IAdminUserService adminUserService;
+
+	@MockBean(name = "arraysGenerator")
+	private ArraysGenerator arraysGenerator;
+
+	@MockBean(name = "childrenGenerator")
+	private ChildrenGenerator childrenGenerator;
+
+	@MockBean(name = "foldersGenerator")
+	private FoldersGenerator foldersGenerator;
+
+	@MockBean(name = "groupsGenerator")
+	private GroupsGenerator groupsGenerator;
+
+	@MockBean(name = "orphansGenerator")
+	private OrphansGenerator orphansGenerator;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "topTermGenerator")
+	private TopTermGenerator topTermGenerator;
+
+	@MockBean(name = "userRoleService")
+	private IUserRoleService userRoleService;
+
+	@Autowired
+	private BaseRestService service;
+
+	@Test
+	void getTreeContentNodeParamIsNameReturnsEmpty() {
+		when(thesaurusService.getThesaurusList())
+			.thenReturn(new ArrayList<Thesaurus>());
+		assertThat(service.getTreeContent("name"), empty());
+	}
+}

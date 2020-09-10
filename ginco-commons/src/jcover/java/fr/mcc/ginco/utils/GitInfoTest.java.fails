@@ -1,0 +1,53 @@
+package fr.mcc.ginco.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.utils.GitInfo
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {GitInfo.class})
+@ExtendWith(SpringExtension.class)
+class GitInfoTest {
+
+	@Autowired
+	private GitInfo service;
+
+	@Test
+	void getters() {
+		assertThat(service.getCommitId(), is(nullValue()));
+		assertThat(service.getGitBranch(), is(nullValue()));
+		assertThat(service.getGitBuildTime(), is(nullValue()));
+		assertThat(service.getGitCommitUserName(), is(nullValue()));
+	}
+
+	@Test
+	void setCommitId() {
+		service.setCommitId("1234");
+	}
+
+	@Test
+	void setGitBranchToAcme() {
+		service.setGitBranch("Acme");
+	}
+
+	@Test
+	void setGitBuildTimeToGif() {
+		service.setGitBuildTime("gif");
+	}
+
+	@Test
+	void setGitCommitUserName() {
+		service.setGitCommitUserName("John Smith");
+	}
+}

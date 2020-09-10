@@ -1,0 +1,68 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import fr.mcc.ginco.beans.Suggestion;
+import fr.mcc.ginco.extjs.view.pojo.SuggestionView;
+import fr.mcc.ginco.services.ISuggestionService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+
+import java.text.SimpleDateFormat;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.SuggestionViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {SuggestionViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class SuggestionViewConverterTest {
+
+	@MockBean(name = "suggestionService")
+	private ISuggestionService suggestionService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@Autowired
+	private SuggestionViewConverter service;
+
+	@Test
+	void convert() throws java.text.ParseException {
+
+		// arrange
+		Suggestion suggestion = new Suggestion();
+		suggestion.setContent("hello");
+		suggestion.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		suggestion.setCreator("+");
+		suggestion.setIdentifier(1);
+		suggestion.setRecipient("1234");
+
+		// act
+		SuggestionView result = service.convert(suggestion);
+
+		// assert
+		assertThat(result.getConceptId(), is(nullValue()));
+		assertThat(result.getContent(), is("hello"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreator(), is("+"));
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getRecipient(), is("1234"));
+		assertThat(result.getTermId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+	}
+}

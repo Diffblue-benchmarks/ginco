@@ -1,0 +1,249 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusView;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.IThesaurusFormatService;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IThesaurusTypeService;
+import fr.mcc.ginco.services.IThesaurusVersionHistoryService;
+
+import java.text.SimpleDateFormat;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ThesaurusViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusViewConverterTest {
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "thesaurusFormatService")
+	private IThesaurusFormatService thesaurusFormatService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "thesaurusTypeService")
+	private IThesaurusTypeService thesaurusTypeService;
+
+	@MockBean(name = "thesaurusVersionHistoryService")
+	private IThesaurusVersionHistoryService thesaurusVersionHistoryService;
+
+	@Autowired
+	private ThesaurusViewConverter service;
+
+	@Test
+	void convert1() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(false);
+		Thesaurus source1 = new Thesaurus();
+		source1.setArchived(false);
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setCreator(new ThesaurusOrganization());
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("foo");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		source1.setType(new ThesaurusType());
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(true));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is(nullValue()));
+		assertThat(result.getCreatorHomepage(), is(nullValue()));
+		assertThat(result.getCreatorName(), is(nullValue()));
+		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("foo"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("foo"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(nullValue()));
+	}
+
+	@Test
+	void convert2() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(true);
+		Thesaurus source1 = new Thesaurus();
+		source1.setArchived(false);
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setCreator(new ThesaurusOrganization());
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("foo");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		source1.setType(new ThesaurusType());
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(false));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is(nullValue()));
+		assertThat(result.getCreatorHomepage(), is(nullValue()));
+		assertThat(result.getCreatorName(), is(nullValue()));
+		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("foo"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("foo"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(nullValue()));
+	}
+
+	@Test
+	void convert3() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(false);
+		Thesaurus source1 = new Thesaurus();
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setCreator(new ThesaurusOrganization());
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("foo");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		source1.setType(new ThesaurusType());
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(nullValue()));
+		assertThat(result.getCanBeDeleted(), is(true));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is(nullValue()));
+		assertThat(result.getCreatorHomepage(), is(nullValue()));
+		assertThat(result.getCreatorName(), is(nullValue()));
+		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("foo"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("foo"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(nullValue()));
+	}
+
+	@Test
+	void convertSourceIsNull() {
+		ThesaurusView result = service.convert((Thesaurus) null);
+		assertThat(result.getArchived(), is(nullValue()));
+		assertThat(result.getCanBeDeleted(), is(nullValue()));
+		assertThat(result.getContributor(), is(nullValue()));
+		assertThat(result.getCoverage(), is(nullValue()));
+		assertThat(result.getCreated(), is(nullValue()));
+		assertThat(result.getCreatorEmail(), is(nullValue()));
+		assertThat(result.getCreatorHomepage(), is(nullValue()));
+		assertThat(result.getCreatorName(), is(nullValue()));
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(result.getDefaultTopConcept(), is(nullValue()));
+		assertThat(result.getDescription(), is(nullValue()));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is(nullValue()));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(nullValue()));
+		assertThat(result.getPublisher(), is(nullValue()));
+		assertThat(result.getRelation(), is(nullValue()));
+		assertThat(result.getRights(), is(nullValue()));
+		assertThat(result.getSource(), is(nullValue()));
+		assertThat(result.getSubject(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is(nullValue()));
+		assertThat(result.getType(), is(nullValue()));
+	}
+}

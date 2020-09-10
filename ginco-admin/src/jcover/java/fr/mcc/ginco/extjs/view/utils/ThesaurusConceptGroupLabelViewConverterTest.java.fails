@@ -1,0 +1,114 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusConceptGroup;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptGroupView;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.IThesaurusConceptGroupLabelService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ThesaurusConceptGroupLabelViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusConceptGroupLabelViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusConceptGroupLabelViewConverterTest {
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "thesaurusConceptGroupLabelService")
+	private IThesaurusConceptGroupLabelService thesaurusConceptGroupLabelService;
+
+	@Autowired
+	private ThesaurusConceptGroupLabelViewConverter service;
+
+	@Test
+	void convert() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel = new ThesaurusConceptGroupLabel();
+		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
+		conceptGroup.setConceptGroupType(new ThesaurusConceptGroupType());
+		conceptGroup.setConcepts(new HashSet<ThesaurusConcept>());
+		conceptGroup.setIdentifier("hello");
+		conceptGroup.setIsDynamic(false);
+		conceptGroup.setNotation("DE");
+		conceptGroup.setParentConcept(new ThesaurusConcept());
+		conceptGroup.setThesaurus(new Thesaurus());
+		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
+		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setCreated(created1);
+		thesaurusConceptGroupLabel.setIdentifier(1);
+		Language language1 = new Language();
+		language1.setId("1234");
+		language1.setPart1("foo");
+		language1.setPrincipalLanguage(false);
+		language1.setRefname("foo");
+		language1.setTopLanguage(false);
+		thesaurusConceptGroupLabel.setLanguage(language1);
+		thesaurusConceptGroupLabel.setLexicalValue("value");
+		thesaurusConceptGroupLabel.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		when(thesaurusConceptGroupLabelService.getById(Mockito.<Integer>any()))
+			.thenReturn(thesaurusConceptGroupLabel);
+		Language language2 = new Language();
+		language2.setId("1234");
+		language2.setPart1("foo");
+		language2.setPrincipalLanguage(false);
+		language2.setRefname("foo");
+		language2.setTopLanguage(false);
+		when(languagesService.getLanguageById(Mockito.<String>any()))
+			.thenReturn(language2);
+		ThesaurusConceptGroupView thesaurusConceptGroupViewJAXBElement = new ThesaurusConceptGroupView();
+		thesaurusConceptGroupViewJAXBElement.setConcepts(new ArrayList<String>());
+		thesaurusConceptGroupViewJAXBElement.setCreated("hello");
+		thesaurusConceptGroupViewJAXBElement.setGroupConceptLabelId(1);
+		thesaurusConceptGroupViewJAXBElement.setIdentifier("hello");
+		thesaurusConceptGroupViewJAXBElement.setIsDynamic(false);
+		thesaurusConceptGroupViewJAXBElement.setLabel("label");
+		thesaurusConceptGroupViewJAXBElement.setLanguage("hello");
+		thesaurusConceptGroupViewJAXBElement.setModified("hello");
+		thesaurusConceptGroupViewJAXBElement.setNotation("DE");
+		thesaurusConceptGroupViewJAXBElement.setParentConceptId("1234");
+		thesaurusConceptGroupViewJAXBElement.setParentConceptLabel("label");
+		thesaurusConceptGroupViewJAXBElement.setParentGroupId("1234");
+		thesaurusConceptGroupViewJAXBElement.setParentGroupLabel("label");
+		thesaurusConceptGroupViewJAXBElement.setThesaurusId("1234");
+		thesaurusConceptGroupViewJAXBElement.setType("text/plain");
+
+		// act
+		ThesaurusConceptGroupLabel result = service.convert(thesaurusConceptGroupViewJAXBElement);
+
+		// assert
+		assertThat(result.getConceptGroup(), sameInstance(conceptGroup));
+		assertThat(result.getCreated(), sameInstance(created1));
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getLanguage(), sameInstance(language2));
+		assertThat(result.getLexicalValue(), is("label"));
+		assertThat(Math.abs(result.getModified().getTime()-new Date().getTime())<=10_000L, is(true));
+	}
+}

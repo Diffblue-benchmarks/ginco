@@ -1,0 +1,80 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.GenericStatusView;
+import fr.mcc.ginco.extjs.view.utils.TermViewConverter;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.INoteService;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+import fr.mcc.ginco.services.IUserRoleService;
+import fr.mcc.ginco.solr.IConceptIndexerService;
+import fr.mcc.ginco.solr.INoteIndexerService;
+import fr.mcc.ginco.solr.ITermIndexerService;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.ThesaurusTermRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusTermRestService.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusTermRestServiceTest {
+
+	@MockBean(name = "conceptIndexerService")
+	private IConceptIndexerService conceptIndexerService;
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "noteIndexerService")
+	private INoteIndexerService noteIndexerService;
+
+	@MockBean(name = "noteService")
+	private INoteService noteService;
+
+	@MockBean(name = "termIndexerService")
+	private ITermIndexerService termIndexerService;
+
+	@MockBean(name = "termViewConverter")
+	private TermViewConverter termViewConverter;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@MockBean(name = "userRoleService")
+	private IUserRoleService userRoleService;
+
+	@Autowired
+	private ThesaurusTermRestService service;
+
+	@Test
+	void getAllTermStatus() throws fr.mcc.ginco.exceptions.TechnicalException {
+		ExtJsonFormLoadData<List<GenericStatusView>> result = service.getAllTermStatus();
+		assertThat(result.getData().size(), is(3));
+		assertThat(result.getData().get(0).getStatus(), is(0));
+		assertThat(result.getData().get(0).getStatusLabel(), is("Candidat"));
+		assertThat(result.getData().get(1).getStatus(), is(1));
+		assertThat(result.getData().get(1).getStatusLabel(), is("Validé"));
+		assertThat(result.getData().get(2).getStatus(), is(2));
+		assertThat(result.getData().get(2).getStatusLabel(), is("Rejeté"));
+		assertThat(result.getTotal(), is(3L));
+		assertThat(result.isSuccess(), is(true));
+	}
+}

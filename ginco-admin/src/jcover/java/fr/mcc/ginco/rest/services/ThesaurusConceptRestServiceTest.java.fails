@@ -1,0 +1,129 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.GenericRoleView;
+import fr.mcc.ginco.extjs.view.pojo.GenericStatusView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptReducedView;
+import fr.mcc.ginco.extjs.view.utils.AlignmentViewConverter;
+import fr.mcc.ginco.extjs.view.utils.AssociativeRelationshipViewConverter;
+import fr.mcc.ginco.extjs.view.utils.HierarchicalRelationshipViewConverter;
+import fr.mcc.ginco.extjs.view.utils.TermViewConverter;
+import fr.mcc.ginco.extjs.view.utils.ThesaurusConceptViewConverter;
+import fr.mcc.ginco.services.INoteService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+import fr.mcc.ginco.services.IUserRoleService;
+import fr.mcc.ginco.solr.IConceptIndexerService;
+import fr.mcc.ginco.solr.INoteIndexerService;
+import fr.mcc.ginco.solr.ITermIndexerService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.ThesaurusConceptRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusConceptRestService.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusConceptRestServiceTest {
+
+	@MockBean(name = "alignmentViewConverter")
+	private AlignmentViewConverter alignmentViewConverter;
+
+	@MockBean(name = "associativeRelationshipViewConverter")
+	private AssociativeRelationshipViewConverter associativeRelationshipViewConverter;
+
+	@MockBean(name = "conceptIndexerService")
+	private IConceptIndexerService conceptIndexerService;
+
+	@MockBean(name = "hierarchicalRelationshipViewConverter")
+	private HierarchicalRelationshipViewConverter hierarchicalRelationshipViewConverter;
+
+	@MockBean(name = "noteIndexerService")
+	private INoteIndexerService noteIndexerService;
+
+	@MockBean(name = "noteService")
+	private INoteService noteService;
+
+	@MockBean(name = "termIndexerService")
+	private ITermIndexerService termIndexerService;
+
+	@MockBean(name = "termViewConverter")
+	private TermViewConverter termViewConverter;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusConceptViewConverter")
+	private ThesaurusConceptViewConverter thesaurusConceptViewConverter;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@MockBean(name = "userRoleService")
+	private IUserRoleService userRoleService;
+
+	@Autowired
+	private ThesaurusConceptRestService service;
+
+	@Test
+	void getAllConceptStatus() throws fr.mcc.ginco.exceptions.TechnicalException {
+		ExtJsonFormLoadData<List<GenericStatusView>> result = service.getAllConceptStatus();
+		assertThat(result.getData().size(), is(5));
+		assertThat(result.getData().get(0).getStatus(), is(0));
+		assertThat(result.getData().get(0).getStatusLabel(), is("Candidat"));
+		assertThat(result.getData().get(1).getStatus(), is(1));
+		assertThat(result.getData().get(1).getStatusLabel(), is("Validé"));
+		assertThat(result.getData().get(2).getStatus(), is(2));
+		assertThat(result.getData().get(2).getStatusLabel(), is("Rejeté"));
+		assertThat(result.getData().get(3).getStatus(), is(3));
+		assertThat(result.getData().get(3).getStatusLabel(), is("Déprécié"));
+		assertThat(result.getData().get(4).getStatus(), is(4));
+		assertThat(result.getData().get(4).getStatusLabel(), is("Prohibé"));
+		assertThat(result.getTotal(), is(5L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getAllHierarchicalRelationRoles() throws fr.mcc.ginco.exceptions.TechnicalException {
+		ExtJsonFormLoadData<List<GenericRoleView>> result = service.getAllHierarchicalRelationRoles();
+		assertThat(result.getData().size(), is(4));
+		assertThat(result.getData().get(0).getRole(), is(0));
+		assertThat(result.getData().get(0).getRoleLabel(), is("TG-TS"));
+		assertThat(result.getData().get(1).getRole(), is(1));
+		assertThat(result.getData().get(1).getRoleLabel(), is("TGG-TSG"));
+		assertThat(result.getData().get(2).getRole(), is(2));
+		assertThat(result.getData().get(2).getRoleLabel(), is("TGI-TSI"));
+		assertThat(result.getData().get(3).getRole(), is(3));
+		assertThat(result.getData().get(3).getRoleLabel(), is("TGP-TSP"));
+		assertThat(result.getTotal(), is(4L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getSimpleConceptsAssociatedConceptsIsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result = service.getSimpleConcepts(new ArrayList<String>());
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+}

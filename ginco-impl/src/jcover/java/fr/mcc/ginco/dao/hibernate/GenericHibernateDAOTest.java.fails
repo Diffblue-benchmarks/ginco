@@ -1,0 +1,143 @@
+package fr.mcc.ginco.dao.hibernate;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.io.Serializable;
+
+import org.hibernate.CacheMode;
+import org.hibernate.FlushMode;
+import org.hibernate.LobHelper;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.TypeHelper;
+import org.hibernate.stat.SessionStatistics;
+import org.junit.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
+
+/**
+ * Unit tests for fr.mcc.ginco.dao.hibernate.GenericHibernateDAO
+ *
+ * @author Diffblue Cover
+ */
+
+public class GenericHibernateDAOTest {
+
+	@Test
+	public void factory() throws org.hibernate.HibernateException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertSame(sessionFactory, genericHibernateDAO.getSessionFactory());
+	}
+
+	@Test
+	public void makePersistent() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+		Session session = mock(Session.class);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertEquals("entity", genericHibernateDAO.makePersistent("entity"));
+		Mockito.verify(session).saveOrUpdate(ArgumentMatchers.<Object>any());
+	}
+
+	@Test
+	public void update() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+		Session session = mock(Session.class);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertEquals("entity", genericHibernateDAO.update("entity"));
+		Mockito.verify(session).saveOrUpdate(ArgumentMatchers.<Object>any());
+	}
+
+	@Test
+	public void delete() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+		Session session = mock(Session.class);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+		assertEquals("entity", genericHibernateDAO.delete("entity"));
+		Mockito.verify(session).delete(ArgumentMatchers.<Object>any());
+	}
+
+	@Test
+	public void flush() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
+
+		// arrange
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+		Session session = mock(Session.class);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory);
+
+		// act
+		genericHibernateDAO.flush();
+
+		// assert
+		Mockito.verify(session).flush();
+	}
+
+	@Test
+	public void getCurrentSession() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException {
+
+		// arrange
+		GenericHibernateDAO<String, Serializable> genericHibernateDAO = new GenericHibernateDAO<String, Serializable>(String.class);
+		LobHelper lobHelper = mock(LobHelper.class);
+		SessionFactory sessionFactory1 = mock(SessionFactory.class);
+		SessionStatistics sessionStatistics = mock(SessionStatistics.class);
+		TypeHelper typeHelper = mock(TypeHelper.class);
+		Session session = mock(Session.class);
+		when(session.getCacheMode())
+			.thenReturn(CacheMode.NORMAL);
+		when(session.getFlushMode())
+			.thenReturn(FlushMode.NEVER);
+		when(session.getLobHelper())
+			.thenReturn(lobHelper);
+		when(session.getSessionFactory())
+			.thenReturn(sessionFactory1);
+		when(session.getStatistics())
+			.thenReturn(sessionStatistics);
+		when(session.getTypeHelper())
+			.thenReturn(typeHelper);
+		when(session.isConnected())
+			.thenReturn(false);
+		when(session.isDefaultReadOnly())
+			.thenReturn(false);
+		when(session.isDirty())
+			.thenReturn(false);
+		when(session.isOpen())
+			.thenReturn(false);
+		SessionFactory sessionFactory2 = mock(SessionFactory.class);
+		when(sessionFactory2.getCurrentSession())
+			.thenReturn(session);
+		genericHibernateDAO.setSessionFactory(sessionFactory2);
+
+		// act
+		Session result = genericHibernateDAO.getCurrentSession();
+
+		// assert
+		assertTrue(CacheMode.NORMAL == result.getCacheMode());
+		assertTrue(FlushMode.NEVER == result.getFlushMode());
+		assertSame(lobHelper, result.getLobHelper());
+		assertSame(sessionFactory1, result.getSessionFactory());
+		assertSame(sessionStatistics, result.getStatistics());
+		assertSame(typeHelper, result.getTypeHelper());
+		assertFalse(result.isConnected());
+		assertFalse(result.isDefaultReadOnly());
+		assertFalse(result.isDirty());
+		assertFalse(result.isOpen());
+	}
+}
