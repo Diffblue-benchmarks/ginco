@@ -44,17 +44,12 @@ public class MistralStructuresBuilderTest {
 	}
 
 	@Test
-	public void getNotPreferredTermsByTerm() {
+	public void getNotPreferredTermsByTermReturnsEmpty() {
 		ArrayList<ThesaurusTerm> currentTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setPrefered(false);
 		currentTerms.add(thesaurusTerm);
 		assertTrue(service.getNotPreferredTermsByTerm(currentTerms).isEmpty());
-	}
-
-	@Test
-	public void getNotPreferredTermsByTermCurrentTermsIsEmpty() {
-		assertTrue(service.getNotPreferredTermsByTerm(new ArrayList<ThesaurusTerm>()).isEmpty());
 	}
 
 	@Test
@@ -64,10 +59,5 @@ public class MistralStructuresBuilderTest {
 		thesaurusTerm.setLexicalValue("value");
 		currentTerms.add(thesaurusTerm);
 		assertSame(thesaurusTerm, service.getTermVersionsView(currentTerms).get("value"));
-	}
-
-	@Test
-	public void getTermVersionsViewCurrentTermsIsEmptyReturnsEmpty() {
-		assertTrue(service.getTermVersionsView(new ArrayList<ThesaurusTerm>()).isEmpty());
 	}
 }

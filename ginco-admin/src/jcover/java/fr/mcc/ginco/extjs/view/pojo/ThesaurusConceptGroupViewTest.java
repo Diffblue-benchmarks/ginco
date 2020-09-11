@@ -1,7 +1,7 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
@@ -20,7 +20,9 @@ class ThesaurusConceptGroupViewTest {
 	void factory() {
 		ThesaurusConceptGroupView thesaurusConceptGroupView =
 			 new ThesaurusConceptGroupView();
-		thesaurusConceptGroupView.setConcepts(new ArrayList<String>());
+		ArrayList<String> concepts = new ArrayList<String>();
+		concepts.add("hello");
+		thesaurusConceptGroupView.setConcepts(concepts);
 		thesaurusConceptGroupView.setCreated("hello");
 		thesaurusConceptGroupView.setGroupConceptLabelId(1);
 		thesaurusConceptGroupView.setIdentifier("data");
@@ -35,7 +37,8 @@ class ThesaurusConceptGroupViewTest {
 		thesaurusConceptGroupView.setParentGroupLabel("label");
 		thesaurusConceptGroupView.setThesaurusId("1234");
 		thesaurusConceptGroupView.setType("text/plain");
-		assertThat(thesaurusConceptGroupView.getConcepts(), empty());
+		assertThat(thesaurusConceptGroupView.getConcepts(), hasSize(1));
+		assertThat(thesaurusConceptGroupView.getConcepts().get(0), is("hello"));
 		assertThat(thesaurusConceptGroupView.getCreated(), is("hello"));
 		assertThat(thesaurusConceptGroupView.getGroupConceptLabelId(), is(1));
 		assertThat(thesaurusConceptGroupView.getIdentifier(), is("data"));

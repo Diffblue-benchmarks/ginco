@@ -37,11 +37,15 @@ public class LanguageDAOTest {
 	}
 
 	@Test
-	public void findPaginatedItemsLimitIsOneAndStartIsZeroReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findPaginatedItemsLimitIsOneAndStartIsZero() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		LanguageDAO languageDAO = new LanguageDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -61,15 +65,25 @@ public class LanguageDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		languageDAO.setSessionFactory(sessionFactory);
-		assertTrue((languageDAO.findPaginatedItems(0, 1)).isEmpty());
+
+		// act
+		List<Language> result = languageDAO.findPaginatedItems(0, 1);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
-	public void findTopLanguagesReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findTopLanguages() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		LanguageDAO languageDAO = new LanguageDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -83,7 +97,13 @@ public class LanguageDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		languageDAO.setSessionFactory(sessionFactory);
-		assertTrue((languageDAO.findTopLanguages()).isEmpty());
+
+		// act
+		List<Language> result = languageDAO.findTopLanguages();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test

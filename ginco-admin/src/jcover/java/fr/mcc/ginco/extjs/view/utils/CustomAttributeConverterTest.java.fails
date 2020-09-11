@@ -1,7 +1,6 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
@@ -80,9 +79,9 @@ class CustomAttributeConverterTest {
 		language.setId("1234");
 		source1.setLanguage(language);
 		source1.setLexicalValue("value");
-		CustomConceptAttributeType type = new CustomConceptAttributeType();
-		type.setIdentifier(1);
-		source1.setType(type);
+		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
+		type2.setIdentifier(1);
+		source1.setType(type2);
 
 		// act
 		GenericCustomAttributeView result = service.convertConceptAttribute(source1);
@@ -108,9 +107,9 @@ class CustomAttributeConverterTest {
 		language.setId("1234");
 		customConceptAttribute.setLanguage(language);
 		customConceptAttribute.setLexicalValue("value");
-		CustomConceptAttributeType type = new CustomConceptAttributeType();
-		type.setIdentifier(1);
-		customConceptAttribute.setType(type);
+		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
+		type2.setIdentifier(1);
+		customConceptAttribute.setType(type2);
 		sourceList.add(customConceptAttribute);
 
 		// act
@@ -123,11 +122,6 @@ class CustomAttributeConverterTest {
 		assertThat(result.get(0).getLang(), is("1234"));
 		assertThat(result.get(0).getLexicalValue(), is("value"));
 		assertThat(result.get(0).getTypeid(), is(1));
-	}
-
-	@Test
-	void convertListConceptSourceListIsEmptyReturnsEmpty() {
-		assertThat(service.convertListConcept(new ArrayList<CustomConceptAttribute>()), empty());
 	}
 
 	@Test
@@ -144,9 +138,9 @@ class CustomAttributeConverterTest {
 		language2.setId("1234");
 		customTermAttribute.setLanguage(language2);
 		customTermAttribute.setLexicalValue("value");
-		CustomTermAttributeType type = new CustomTermAttributeType();
-		type.setIdentifier(1);
-		customTermAttribute.setType(type);
+		CustomTermAttributeType type2 = new CustomTermAttributeType();
+		type2.setIdentifier(1);
+		customTermAttribute.setType(type2);
 		sourceList.add(customTermAttribute);
 
 		// act
@@ -162,11 +156,6 @@ class CustomAttributeConverterTest {
 	}
 
 	@Test
-	void convertListTermSourceListIsEmptyReturnsEmpty() {
-		assertThat(service.convertListTerm(new ArrayList<CustomTermAttribute>()), empty());
-	}
-
-	@Test
 	void convertTermAttribute() {
 
 		// arrange
@@ -178,9 +167,9 @@ class CustomAttributeConverterTest {
 		language2.setId("1234");
 		source1.setLanguage(language2);
 		source1.setLexicalValue("value");
-		CustomTermAttributeType type = new CustomTermAttributeType();
-		type.setIdentifier(1);
-		source1.setType(type);
+		CustomTermAttributeType type2 = new CustomTermAttributeType();
+		type2.setIdentifier(1);
+		source1.setType(type2);
 
 		// act
 		GenericCustomAttributeView result = service.convertTermAttribute(source1);

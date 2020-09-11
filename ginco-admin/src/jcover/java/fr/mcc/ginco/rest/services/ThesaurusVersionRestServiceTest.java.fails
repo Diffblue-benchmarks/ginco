@@ -1,7 +1,6 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
@@ -70,8 +69,11 @@ class ThesaurusVersionRestServiceTest {
 			 new ArrayList<ThesaurusVersionHistoryView>();
 		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
 			.thenReturn(list1);
+		List<ThesaurusVersionHistory> list2 =
+			 new ArrayList<ThesaurusVersionHistory>();
+		list2.add(new ThesaurusVersionHistory());
 		when(thesaurusVersionHistoryService.getVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusVersionHistory>());
+			.thenReturn(list2);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result =
@@ -79,28 +81,7 @@ class ThesaurusVersionRestServiceTest {
 
 		// assert
 		assertThat(result.getData(), sameInstance(list1));
-		assertThat(result.getTotal(), is(0L));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
-	void updateVersionsVersionViewsIsEmpty() {
-
-		// arrange
-		List<ThesaurusVersionHistoryView> list1 =
-			 new ArrayList<ThesaurusVersionHistoryView>();
-		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
-			.thenReturn(list1);
-		when(thesaurusVersionHistoryViewConverter.convertViewList(Mockito.<List<ThesaurusVersionHistoryView>>any()))
-			.thenReturn(new ArrayList<ThesaurusVersionHistory>());
-
-		// act
-		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result =
-			 service.updateVersions(new ArrayList<ThesaurusVersionHistoryView>());
-
-		// assert
-		assertThat(result.getData(), sameInstance(list1));
-		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
 	}
 }

@@ -3,7 +3,6 @@ package fr.mcc.ginco.dao.hibernate;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -37,13 +36,17 @@ public class ExternalThesaurusDAOTest {
 
 	@Test
 	public void findAllByExternalIdQueryQueryIsBar() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria2);
@@ -51,15 +54,26 @@ public class ExternalThesaurusDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		externalThesaurusDAO.setSessionFactory(sessionFactory);
-		assertTrue((externalThesaurusDAO.findAllByExternalIdQuery("bar")).isEmpty());
+
+		// act
+		List<ExternalThesaurus> result =
+			 externalThesaurusDAO.findAllByExternalIdQuery("bar");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
 	public void findAllByExternalIdQueryQueryIsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria = mock(Criteria.class);
 		when(criteria.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria);
@@ -67,15 +81,26 @@ public class ExternalThesaurusDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		externalThesaurusDAO.setSessionFactory(sessionFactory);
-		assertTrue((externalThesaurusDAO.findAllByExternalIdQuery("")).isEmpty());
+
+		// act
+		List<ExternalThesaurus> result =
+			 externalThesaurusDAO.findAllByExternalIdQuery("");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
 	public void findAllByExternalIdQueryQueryIsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria = mock(Criteria.class);
 		when(criteria.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria);
@@ -83,7 +108,14 @@ public class ExternalThesaurusDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		externalThesaurusDAO.setSessionFactory(sessionFactory);
-		assertTrue((externalThesaurusDAO.findAllByExternalIdQuery(null)).isEmpty());
+
+		// act
+		List<ExternalThesaurus> result =
+			 externalThesaurusDAO.findAllByExternalIdQuery(null);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test

@@ -1,14 +1,29 @@
 package fr.mcc.ginco.exports.ginco;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.CustomConceptAttribute;
+import fr.mcc.ginco.beans.CustomTermAttribute;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
 import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusTermRole;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
+import fr.mcc.ginco.exports.result.bean.JaxbList;
 import fr.mcc.ginco.services.ICustomConceptAttributeService;
 import fr.mcc.ginco.services.ICustomTermAttributeService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,16 +54,166 @@ public class GincoAttributesExporterTest {
 	}
 
 	@Test
-	public void getExportedConceptAttributes() {
+	public void getExportedConceptAttributes() throws java.text.ParseException {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
 		when(conceptAttributeService.getAttributesByEntity(Mockito.<Object>any()))
-			.thenReturn(new ArrayList<Object>());
-		assertTrue((service.getExportedConceptAttributes(new ThesaurusConcept()).getList()).isEmpty());
+			.thenReturn(list);
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
+		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setIdentifier("data");
+		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setNotation("DE");
+		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConcept.setThesaurus(thesaurus);
+		thesaurusConcept.setTopConcept(false);
+
+		// act
+		JaxbList<CustomConceptAttribute> result =
+			 service.getExportedConceptAttributes(thesaurusConcept);
+
+		// assert
+		assertEquals(1, result.getList().size());
+		// pojo Object
 	}
 
 	@Test
-	public void getExportedTermAttributes() {
+	public void getExportedTermAttributes() throws java.text.ParseException {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
 		when(termAttributeService.getAttributesByEntity(Mockito.<Object>any()))
-			.thenReturn(new ArrayList<Object>());
-		assertTrue((service.getExportedTermAttributes(new ThesaurusTerm()).getList()).isEmpty());
+			.thenReturn(list);
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		concept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		concept.setConceptArrays(new HashSet<ThesaurusArray>());
+		concept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		concept.setIdentifier("data");
+		concept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		concept.setNotation("DE");
+		concept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		concept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		concept.setStatus(1);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setCreator(new ThesaurusOrganization());
+		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setLang(new HashSet<Language>());
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		thesaurus1.setType(new ThesaurusType());
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
+		concept.setThesaurus(thesaurus1);
+		concept.setTopConcept(false);
+		thesaurusTerm.setConcept(concept);
+		thesaurusTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusTerm.setHidden(false);
+		thesaurusTerm.setIdentifier("data");
+		Language language = new Language();
+		language.setId("1234");
+		language.setPart1("foo");
+		language.setPrincipalLanguage(false);
+		language.setRefname("foo");
+		language.setTopLanguage(false);
+		thesaurusTerm.setLanguage(language);
+		thesaurusTerm.setLexicalValue("value");
+		thesaurusTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusTerm.setPrefered(false);
+		ThesaurusTermRole role = new ThesaurusTermRole();
+		role.setCode("DE");
+		role.setDefaultRole(false);
+		role.setLabel("label");
+		thesaurusTerm.setRole(role);
+		thesaurusTerm.setSource("foo");
+		thesaurusTerm.setStatus(1);
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setArchived(false);
+		thesaurus2.setContributor("foo");
+		thesaurus2.setCoverage("foo");
+		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator2 = new ThesaurusOrganization();
+		creator2.setEmail("info@diffblue.com");
+		creator2.setHomepage("foo");
+		creator2.setIdentifier(1);
+		creator2.setName("Acme");
+		thesaurus2.setCreator(creator2);
+		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus2.setDefaultTopConcept(false);
+		thesaurus2.setDescription("some text");
+		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus2.setIdentifier("data");
+		thesaurus2.setLang(new HashSet<Language>());
+		thesaurus2.setPolyHierarchical(false);
+		thesaurus2.setPublisher("foo");
+		thesaurus2.setRelation("DE");
+		thesaurus2.setRights("foo");
+		thesaurus2.setSource("foo");
+		thesaurus2.setSubject("foo");
+		thesaurus2.setTitle("Mr");
+		ThesaurusType type2 = new ThesaurusType();
+		type2.setIdentifier(1);
+		type2.setLabel("label");
+		thesaurus2.setType(type2);
+		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusTerm.setThesaurus(thesaurus2);
+
+		// act
+		JaxbList<CustomTermAttribute> result =
+			 service.getExportedTermAttributes(thesaurusTerm);
+
+		// assert
+		assertEquals(1, result.getList().size());
+		// pojo Object
 	}
 }

@@ -1,19 +1,19 @@
 package fr.mcc.ginco.services;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.beans.AlignmentConcept;
 import fr.mcc.ginco.beans.AlignmentResource;
-import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IExternalThesaurusDAO;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,30 +53,20 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
-	public void deleteExternalThesauruses() {
-		when(externalThesaurusDAO.findAll())
-			.thenReturn(new ArrayList<Object>());
-		service.deleteExternalThesauruses();
-	}
+	public void getAlignmentsBySourceConceptIdConceptIdentifierIsData() {
 
-	@Test
-	public void getAlignmentsBySourceConceptIdConceptIdentifierIsDataReturnsEmpty() {
+		// arrange
+		List<Alignment> list = new ArrayList<Alignment>();
+		Alignment alignment = new Alignment();
+		list.add(alignment);
 		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(new ArrayList<Alignment>());
-		assertTrue((service.getAlignmentsBySourceConceptId("data")).isEmpty());
-	}
+			.thenReturn(list);
 
-	@Test
-	public void saveAlignments() {
-		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(new ArrayList<Alignment>());
-		ThesaurusConcept concept = new ThesaurusConcept();
-		assertSame(concept, service.saveAlignments(concept, new ArrayList<Alignment>()));
-		Mockito.verify(alignmentDAO).flush();
-	}
+		// act
+		List<Alignment> result = service.getAlignmentsBySourceConceptId("data");
 
-	@Test
-	public void saveExternalThesaurusesAlignmentsIsEmpty() {
-		service.saveExternalThesauruses(new ArrayList<Alignment>());
+		// assert
+		assertEquals(1, result.size());
+		assertSame(alignment, result.get(0));
 	}
 }

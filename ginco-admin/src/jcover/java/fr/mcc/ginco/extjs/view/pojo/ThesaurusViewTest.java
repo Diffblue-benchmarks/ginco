@@ -1,7 +1,7 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
@@ -30,9 +30,13 @@ class ThesaurusViewTest {
 		thesaurusView.setDate("1999-12-31");
 		thesaurusView.setDefaultTopConcept(false);
 		thesaurusView.setDescription("some text");
-		thesaurusView.setFormats(new ArrayList<Integer>());
+		ArrayList<Integer> formats = new ArrayList<Integer>();
+		formats.add(1);
+		thesaurusView.setFormats(formats);
 		thesaurusView.setId("1234");
-		thesaurusView.setLanguages(new ArrayList<String>());
+		ArrayList<String> lang = new ArrayList<String>();
+		lang.add("foo");
+		thesaurusView.setLanguages(lang);
 		thesaurusView.setPolyHierarchical(false);
 		thesaurusView.setPublisher("foo");
 		thesaurusView.setRelation("DE");
@@ -52,9 +56,11 @@ class ThesaurusViewTest {
 		assertThat(thesaurusView.getDate(), is("1999-12-31"));
 		assertThat(thesaurusView.getDefaultTopConcept(), is(false));
 		assertThat(thesaurusView.getDescription(), is("some text"));
-		assertThat(thesaurusView.getFormats(), empty());
+		assertThat(thesaurusView.getFormats(), hasSize(1));
+		assertThat(thesaurusView.getFormats().get(0), is(1));
 		assertThat(thesaurusView.getId(), is("1234"));
-		assertThat(thesaurusView.getLanguages(), empty());
+		assertThat(thesaurusView.getLanguages(), hasSize(1));
+		assertThat(thesaurusView.getLanguages().get(0), is("foo"));
 		assertThat(thesaurusView.getPolyHierarchical(), is(false));
 		assertThat(thesaurusView.getPublisher(), is("foo"));
 		assertThat(thesaurusView.getRelation(), is("DE"));

@@ -1,14 +1,11 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.GenericRoleView;
 import fr.mcc.ginco.extjs.view.pojo.GenericStatusView;
-import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptReducedView;
 import fr.mcc.ginco.extjs.view.utils.AlignmentViewConverter;
 import fr.mcc.ginco.extjs.view.utils.AssociativeRelationshipViewConverter;
 import fr.mcc.ginco.extjs.view.utils.HierarchicalRelationshipViewConverter;
@@ -23,7 +20,6 @@ import fr.mcc.ginco.solr.IConceptIndexerService;
 import fr.mcc.ginco.solr.INoteIndexerService;
 import fr.mcc.ginco.solr.ITermIndexerService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -118,15 +114,6 @@ class ThesaurusConceptRestServiceTest {
 		assertThat(result.getData().get(3).getRole(), is(3));
 		assertThat(result.getData().get(3).getRoleLabel(), is("TGP-TSP"));
 		assertThat(result.getTotal(), is(4L));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
-	void getSimpleConceptsAssociatedConceptsIsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
-		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
-			 service.getSimpleConcepts(new ArrayList<String>());
-		assertThat(result.getData(), empty());
-		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}
 }

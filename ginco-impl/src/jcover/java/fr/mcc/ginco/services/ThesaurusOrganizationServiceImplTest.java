@@ -1,12 +1,14 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusOrganization;
 import fr.mcc.ginco.dao.hibernate.ThesaurusOrganizationDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,9 +35,20 @@ public class ThesaurusOrganizationServiceImplTest {
 	}
 
 	@Test
-	public void getOrganizationsWithDataReturnsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+	public void getOrganizationsWithData() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		List<ThesaurusOrganization> list = new ArrayList<ThesaurusOrganization>();
+		ThesaurusOrganization thesaurusOrganization = new ThesaurusOrganization();
+		list.add(thesaurusOrganization);
 		when(thesaurusOrganizationDAO.getFilteredOrganizationNames())
-			.thenReturn(new ArrayList<ThesaurusOrganization>());
-		assertTrue((service.getOrganizationsWithData()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusOrganization> result = service.getOrganizationsWithData();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusOrganization, result.get(0));
 	}
 }

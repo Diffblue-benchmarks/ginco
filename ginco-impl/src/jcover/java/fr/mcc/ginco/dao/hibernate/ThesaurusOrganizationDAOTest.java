@@ -1,11 +1,14 @@
 package fr.mcc.ginco.dao.hibernate;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -31,12 +34,16 @@ public class ThesaurusOrganizationDAOTest {
 	}
 
 	@Test
-	public void getFilteredOrganizationNamesReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getFilteredOrganizationNames() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusOrganizationDAO thesaurusOrganizationDAO =
 			 new ThesaurusOrganizationDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -59,6 +66,13 @@ public class ThesaurusOrganizationDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusOrganizationDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusOrganizationDAO.getFilteredOrganizationNames()).isEmpty());
+
+		// act
+		List<ThesaurusOrganization> result =
+			 thesaurusOrganizationDAO.getFilteredOrganizationNames();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 }

@@ -1,7 +1,6 @@
 package fr.mcc.ginco.utils;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import fr.mcc.ginco.beans.ThesaurusConcept;
 
@@ -16,11 +15,6 @@ import org.junit.Test;
  */
 
 public class ThesaurusConceptUtilsTest {
-
-	@Test
-	public void getIdsFromConceptListListIsEmptyReturnsEmpty() {
-		assertTrue((ThesaurusConceptUtils.getIdsFromConceptList(new ArrayList<ThesaurusConcept>())).isEmpty());
-	}
 
 	@Test
 	public void getIdsFromConceptListReturnsData() {

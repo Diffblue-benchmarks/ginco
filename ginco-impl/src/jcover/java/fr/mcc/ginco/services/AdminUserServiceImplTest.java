@@ -1,5 +1,7 @@
 package fr.mcc.ginco.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -7,6 +9,7 @@ import fr.mcc.ginco.beans.AdminUser;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,10 +37,21 @@ public class AdminUserServiceImplTest {
 	}
 
 	@Test
-	public void getAllAdminReturnsEmpty() {
+	public void getAllAdmin() {
+
+		// arrange
+		List<AdminUser> list = new ArrayList<AdminUser>();
+		AdminUser adminUser = new AdminUser();
+		list.add(adminUser);
 		when(adminUserDAO.findAll())
-			.thenReturn(new ArrayList<AdminUser>());
-		assertTrue((service.getAllAdmin()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<AdminUser> result = service.getAllAdmin();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(adminUser, result.get(0));
 	}
 
 	@Test

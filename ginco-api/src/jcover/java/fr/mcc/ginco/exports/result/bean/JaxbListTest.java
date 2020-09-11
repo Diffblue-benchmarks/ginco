@@ -1,7 +1,7 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
@@ -18,13 +18,10 @@ class JaxbListTest {
 
 	@Test
 	void factory() {
-		assertThat(new JaxbList<String>().getList(), empty());
-	}
-
-	@Test
-	void isEmpty() {
-		assertThat(new JaxbList<String>().isEmpty(), is(true));
-		assertThat(new JaxbList<String>(new ArrayList<String>()).isEmpty(), is(true));
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("foo");
+		assertThat(new JaxbList<String>(list).getList(), hasSize(1));
+		assertThat(new JaxbList<String>(list).getList().get(0), is("foo"));
 	}
 
 	@Test
@@ -32,5 +29,10 @@ class JaxbListTest {
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("foo");
 		assertThat(new JaxbList<String>(list).isEmpty(), is(false));
+	}
+
+	@Test
+	void isEmptyReturnsTrue() {
+		assertThat(new JaxbList<String>().isEmpty(), is(true));
 	}
 }

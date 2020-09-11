@@ -81,17 +81,6 @@ class UserRoleRestServiceTest {
 	}
 
 	@Test
-	void getThesaurusUsersIdThesaurusIsRoot() {
-		when(userRoleService.getThesaurusUsers(Mockito.<String>any()))
-			.thenReturn(new ArrayList<UserRole>());
-		ExtJsonFormLoadData<List<UserRoleView>> result =
-			 service.getThesaurusUsers("root");
-		assertThat(result.getData(), empty());
-		assertThat(result.getTotal(), is(0L));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
 	void updateThesaurusUsersUserRoleViewsIsEmpty() {
 		ExtJsonFormLoadData<List<UserRoleView>> result =
 			 service.updateThesaurusUsers(new ArrayList<UserRoleView>());

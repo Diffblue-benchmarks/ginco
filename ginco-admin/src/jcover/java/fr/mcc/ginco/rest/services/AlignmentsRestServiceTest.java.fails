@@ -52,10 +52,21 @@ class AlignmentsRestServiceTest {
 	private AlignmentsRestService service;
 
 	@Test
-	void getAlignmentTypesReturnsEmpty() {
+	void getAlignmentTypes() {
+
+		// arrange
+		List<AlignmentType> list = new ArrayList<AlignmentType>();
+		AlignmentType alignmentType = new AlignmentType();
+		list.add(alignmentType);
 		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(new ArrayList<AlignmentType>());
-		assertThat(service.getAlignmentTypes(), empty());
+			.thenReturn(list);
+
+		// act
+		List<AlignmentType> result = service.getAlignmentTypes();
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(alignmentType));
 	}
 
 	@Test
@@ -80,16 +91,27 @@ class AlignmentsRestServiceTest {
 	}
 
 	@Test
-	void getExternalThesaurusesQueryIsBarReturnsEmpty() {
+	void getExternalThesaurusesReturnsEmpty() {
 		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ExternalThesaurus>());
-		assertThat(service.getExternalThesauruses("bar"), empty());
+		assertThat(service.getExternalThesauruses("foo=bar"), empty());
 	}
 
 	@Test
-	void getExternalThesaurusTypesReturnsEmpty() {
+	void getExternalThesaurusTypes() {
+
+		// arrange
+		List<ExternalThesaurusType> list = new ArrayList<ExternalThesaurusType>();
+		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
+		list.add(externalThesaurusType);
 		when(externalThesaurusTypeService.getExternalThesaurusTypeList())
-			.thenReturn(new ArrayList<ExternalThesaurusType>());
-		assertThat(service.getExternalThesaurusTypes(), empty());
+			.thenReturn(list);
+
+		// act
+		List<ExternalThesaurusType> result = service.getExternalThesaurusTypes();
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(externalThesaurusType));
 	}
 }

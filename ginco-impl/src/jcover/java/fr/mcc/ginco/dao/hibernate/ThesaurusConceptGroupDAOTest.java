@@ -2,9 +2,10 @@ package fr.mcc.ginco.dao.hibernate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusConceptGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,13 @@ public class ThesaurusConceptGroupDAOTest {
 	}
 
 	@Test
-	public void findThesaurusConceptGroupsByThesaurusIdReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findThesaurusConceptGroupsByThesaurusId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusConceptGroupDAO thesaurusConceptGroupDAO =
 			 new ThesaurusConceptGroupDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -43,7 +48,7 @@ public class ThesaurusConceptGroupDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);
@@ -51,7 +56,14 @@ public class ThesaurusConceptGroupDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusConceptGroupDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusConceptGroupDAO.findThesaurusConceptGroupsByThesaurusId("1234", "1234")).isEmpty());
+
+		// act
+		List<ThesaurusConceptGroup> result =
+			 thesaurusConceptGroupDAO.findThesaurusConceptGroupsByThesaurusId("1234", "1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
@@ -80,15 +92,19 @@ public class ThesaurusConceptGroupDAOTest {
 	}
 
 	@Test
-	public void getChildGroupsReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getChildGroups() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusConceptGroupDAO thesaurusConceptGroupDAO =
 			 new ThesaurusConceptGroupDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria2);
@@ -96,6 +112,13 @@ public class ThesaurusConceptGroupDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusConceptGroupDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusConceptGroupDAO.getChildGroups("1234")).isEmpty());
+
+		// act
+		List<ThesaurusConceptGroup> result =
+			 thesaurusConceptGroupDAO.getChildGroups("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 }

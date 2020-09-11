@@ -64,12 +64,7 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void getBranchCustomTermAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
-		assertTrue(service.getBranchCustomTermAttributeTypes(new ArrayList<CustomTermAttributeType>(), new Thesaurus()).isEmpty());
-	}
-
-	@Test
-	public void storeCustomConceptAttribute() {
+	public void storeCustomConceptAttributeSavedTypesIsEmpty() {
 		ArrayList<CustomConceptAttribute> customAttributeToImport =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
@@ -79,22 +74,12 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void storeCustomConceptAttributeCustomAttributeToImportIsEmpty() {
-		service.storeCustomConceptAttribute(new ArrayList<CustomConceptAttribute>(), new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
-	}
-
-	@Test
-	public void storeCustomConceptAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
-		assertTrue(service.storeCustomConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>(), new Thesaurus()).isEmpty());
-	}
-
-	@Test
-	public void storeCustomTermAttributeCustomAttributeToImportIsEmptyAndSavedTypesIsEmpty() {
-		service.storeCustomTermAttribute(new ArrayList<CustomTermAttribute>(), new ThesaurusTerm(), new HashMap<String, CustomTermAttributeType>());
-	}
-
-	@Test
-	public void storeCustomTermAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
-		assertTrue(service.storeCustomTermAttributeTypes(new ArrayList<CustomTermAttributeType>(), new Thesaurus()).isEmpty());
+	public void storeCustomTermAttributeSavedTypesIsEmpty() {
+		ArrayList<CustomTermAttribute> customAttributeToImport =
+			 new ArrayList<CustomTermAttribute>();
+		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
+		customTermAttribute.setType(new CustomTermAttributeType());
+		customAttributeToImport.add(customTermAttribute);
+		service.storeCustomTermAttribute(customAttributeToImport, new ThesaurusTerm(), new HashMap<String, CustomTermAttributeType>());
 	}
 }

@@ -1,8 +1,8 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,15 @@ class ThesaurusArrayViewTest {
 	@Test
 	void factory() {
 		ThesaurusArrayView thesaurusArrayView = new ThesaurusArrayView();
-		thesaurusArrayView.setConcepts(new ArrayList<ThesaurusArrayConceptView>());
+		ArrayList<ThesaurusArrayConceptView> concepts =
+			 new ArrayList<ThesaurusArrayConceptView>();
+		ThesaurusArrayConceptView thesaurusArrayConceptView =
+			 new ThesaurusArrayConceptView();
+		thesaurusArrayConceptView.setIdentifier("data");
+		thesaurusArrayConceptView.setLabel("label");
+		thesaurusArrayConceptView.setOrder(1);
+		concepts.add(thesaurusArrayConceptView);
+		thesaurusArrayView.setConcepts(concepts);
 		thesaurusArrayView.setCreated("foo");
 		thesaurusArrayView.setIdentifier("data");
 		thesaurusArrayView.setLabel("label");
@@ -32,7 +40,8 @@ class ThesaurusArrayViewTest {
 		thesaurusArrayView.setSuperOrdinateId("1234");
 		thesaurusArrayView.setSuperOrdinateLabel("label");
 		thesaurusArrayView.setThesaurusId("1234");
-		assertThat(thesaurusArrayView.getConcepts(), empty());
+		assertThat(thesaurusArrayView.getConcepts().size(), is(1));
+		assertThat(thesaurusArrayView.getConcepts().get(0), sameInstance(thesaurusArrayConceptView));
 		assertThat(thesaurusArrayView.getCreated(), is("foo"));
 		assertThat(thesaurusArrayView.getIdentifier(), is("data"));
 		assertThat(thesaurusArrayView.getLabel(), is("label"));

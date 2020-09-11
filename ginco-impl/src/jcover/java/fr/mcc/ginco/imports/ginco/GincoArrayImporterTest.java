@@ -37,9 +37,4 @@ public class GincoArrayImporterTest {
 	public void storeArrayLabelsReturnsEmpty() {
 		assertTrue((service.storeArrayLabels(new GincoExportedThesaurus())).isEmpty());
 	}
-
-	@Test
-	public void storeArraysReturnsEmpty() {
-		assertTrue((service.storeArrays(new GincoExportedThesaurus())).isEmpty());
-	}
 }

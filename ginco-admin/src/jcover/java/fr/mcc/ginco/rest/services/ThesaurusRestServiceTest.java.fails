@@ -1,20 +1,17 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
-import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusFormat;
 import fr.mcc.ginco.beans.ThesaurusOrganization;
 import fr.mcc.ginco.beans.ThesaurusStatistics;
 import fr.mcc.ginco.beans.ThesaurusType;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
-import fr.mcc.ginco.extjs.view.pojo.ThesaurusView;
 import fr.mcc.ginco.extjs.view.utils.ThesaurusViewConverter;
 import fr.mcc.ginco.services.ILanguagesService;
 import fr.mcc.ginco.services.IThesaurusFormatService;
@@ -77,24 +74,57 @@ class ThesaurusRestServiceTest {
 	private ThesaurusRestService service;
 
 	@Test
-	void getAllAuthorsReturnsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void getAllAuthors() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		List<ThesaurusOrganization> list = new ArrayList<ThesaurusOrganization>();
+		ThesaurusOrganization thesaurusOrganization = new ThesaurusOrganization();
+		list.add(thesaurusOrganization);
 		when(thesaurusOrganizationService.getOrganizationsWithData())
-			.thenReturn(new ArrayList<ThesaurusOrganization>());
-		assertThat(service.getAllAuthors(), empty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusOrganization> result = service.getAllAuthors();
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(thesaurusOrganization));
 	}
 
 	@Test
-	void getAllThesaurusFormatsReturnsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void getAllThesaurusFormats() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		List<ThesaurusFormat> list = new ArrayList<ThesaurusFormat>();
+		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
+		list.add(thesaurusFormat);
 		when(thesaurusFormatService.getThesaurusFormatList())
-			.thenReturn(new ArrayList<ThesaurusFormat>());
-		assertThat(service.getAllThesaurusFormats(), empty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusFormat> result = service.getAllThesaurusFormats();
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(thesaurusFormat));
 	}
 
 	@Test
-	void getAllThesaurusTypesReturnsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void getAllThesaurusTypes() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		List<ThesaurusType> list = new ArrayList<ThesaurusType>();
+		ThesaurusType thesaurusType = new ThesaurusType();
+		list.add(thesaurusType);
 		when(thesaurusTypeService.getThesaurusTypeList())
-			.thenReturn(new ArrayList<ThesaurusType>());
-		assertThat(service.getAllThesaurusTypes(), empty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusType> result = service.getAllThesaurusTypes();
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(thesaurusType));
 	}
 
 	@Test
@@ -140,16 +170,6 @@ class ThesaurusRestServiceTest {
 		// assert
 		assertThat(result.getData(), sameInstance(list));
 		assertThat(result.getTotal(), is(nullValue()));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
-	void getVocabularies() throws fr.mcc.ginco.exceptions.TechnicalException {
-		when(thesaurusService.getThesaurusList())
-			.thenReturn(new ArrayList<Thesaurus>());
-		ExtJsonFormLoadData<List<ThesaurusView>> result = service.getVocabularies();
-		assertThat(result.getData(), empty());
-		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
 	}
 }

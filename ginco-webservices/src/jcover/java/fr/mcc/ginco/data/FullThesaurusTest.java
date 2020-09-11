@@ -1,7 +1,7 @@
 package fr.mcc.ginco.data;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
@@ -26,8 +26,12 @@ class FullThesaurusTest {
 		fullThesaurus.setCreatorHomepage("+");
 		fullThesaurus.setCreatorName("Acme");
 		fullThesaurus.setDescription("some text");
-		fullThesaurus.setFormats(new ArrayList<String>());
-		fullThesaurus.setLanguages(new ArrayList<String>());
+		ArrayList<String> formats = new ArrayList<String>();
+		formats.add("yyyy-MM-dd");
+		fullThesaurus.setFormats(formats);
+		ArrayList<String> languages = new ArrayList<String>();
+		languages.add("foo");
+		fullThesaurus.setLanguages(languages);
 		fullThesaurus.setModified("something");
 		fullThesaurus.setPublisher("something");
 		fullThesaurus.setRelation("DE");
@@ -44,8 +48,10 @@ class FullThesaurusTest {
 		assertThat(fullThesaurus.getCreatorHomepage(), is("+"));
 		assertThat(fullThesaurus.getCreatorName(), is("Acme"));
 		assertThat(fullThesaurus.getDescription(), is("some text"));
-		assertThat(fullThesaurus.getFormats(), empty());
-		assertThat(fullThesaurus.getLanguages(), empty());
+		assertThat(fullThesaurus.getFormats(), hasSize(1));
+		assertThat(fullThesaurus.getFormats().get(0), is("yyyy-MM-dd"));
+		assertThat(fullThesaurus.getLanguages(), hasSize(1));
+		assertThat(fullThesaurus.getLanguages().get(0), is("foo"));
 		assertThat(fullThesaurus.getModified(), is("something"));
 		assertThat(fullThesaurus.getPublisher(), is("something"));
 		assertThat(fullThesaurus.getRelation(), is("DE"));

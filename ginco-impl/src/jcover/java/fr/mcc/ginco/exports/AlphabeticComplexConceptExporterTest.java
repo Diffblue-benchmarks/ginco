@@ -51,10 +51,11 @@ public class AlphabeticComplexConceptExporterTest {
 	}
 
 	@Test
-	public void addComplexConceptTitleBaseIsOneAndResultIsEmpty() {
+	public void addComplexConceptTitleBaseIsOne() {
 
 		// arrange
 		ArrayList<FormattedLine> result = new ArrayList<FormattedLine>();
+		result.add(new FormattedLine(1, "hello"));
 		SplitNonPreferredTerm complexConcept = new SplitNonPreferredTerm();
 		complexConcept.setLexicalValue("value");
 
@@ -62,8 +63,8 @@ public class AlphabeticComplexConceptExporterTest {
 		service.addComplexConceptTitle(1, result, complexConcept);
 
 		// assert
-		assertEquals(1, result.size());
-		assertEquals(1, (int) result.get(0).getTabs());
-		assertEquals("value", result.get(0).getText());
+		assertEquals(2, result.size());
+		assertEquals(1, (int) result.get(1).getTabs());
+		assertEquals("value", result.get(1).getText());
 	}
 }

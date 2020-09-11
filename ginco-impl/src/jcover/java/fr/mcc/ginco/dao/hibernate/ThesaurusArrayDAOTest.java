@@ -2,9 +2,10 @@ package fr.mcc.ginco.dao.hibernate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +34,17 @@ public class ThesaurusArrayDAOTest {
 
 	@Test
 	public void getConceptSuperOrdinateArrays1() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria2);
@@ -47,12 +52,23 @@ public class ThesaurusArrayDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusArrayDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusArrayDAO.getConceptSuperOrdinateArrays("1234")).isEmpty());
+
+		// act
+		List<ThesaurusArray> result =
+			 thesaurusArrayDAO.getConceptSuperOrdinateArrays("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
 	public void getConceptSuperOrdinateArrays2() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -60,7 +76,7 @@ public class ThesaurusArrayDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);
@@ -68,12 +84,23 @@ public class ThesaurusArrayDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusArrayDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusArrayDAO.getConceptSuperOrdinateArrays("1234", "1234")).isEmpty());
+
+		// act
+		List<ThesaurusArray> result =
+			 thesaurusArrayDAO.getConceptSuperOrdinateArrays("1234", "1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
-	public void getArraysWithoutSuperordinatedConceptReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getArraysWithoutSuperordinatedConcept() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -81,7 +108,7 @@ public class ThesaurusArrayDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);
@@ -89,12 +116,23 @@ public class ThesaurusArrayDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusArrayDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusArrayDAO.getArraysWithoutSuperordinatedConcept("1234")).isEmpty());
+
+		// act
+		List<ThesaurusArray> result =
+			 thesaurusArrayDAO.getArraysWithoutSuperordinatedConcept("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
-	public void getArraysWithoutParentArrayReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getArraysWithoutParentArray() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -102,7 +140,7 @@ public class ThesaurusArrayDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);
@@ -110,18 +148,29 @@ public class ThesaurusArrayDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusArrayDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusArrayDAO.getArraysWithoutParentArray("1234")).isEmpty());
+
+		// act
+		List<ThesaurusArray> result =
+			 thesaurusArrayDAO.getArraysWithoutParentArray("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
-	public void getChildrenArraysReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getChildrenArrays() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria2);
@@ -129,7 +178,13 @@ public class ThesaurusArrayDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		thesaurusArrayDAO.setSessionFactory(sessionFactory);
-		assertTrue((thesaurusArrayDAO.getChildrenArrays("1234")).isEmpty());
+
+		// act
+		List<ThesaurusArray> result = thesaurusArrayDAO.getChildrenArrays("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test

@@ -30,7 +30,7 @@ class BasePermissionEvaluatorTest {
 	void hasPermission2() throws IllegalArgumentException {
 		Authentication authentication = mock(Authentication.class);
 		List list = new ArrayList();
-		list.add(new Object());
+		list.add("foo");
 		assertThat(new BasePermissionEvaluator().hasPermission(authentication, list, new Object()), is(false));
 	}
 

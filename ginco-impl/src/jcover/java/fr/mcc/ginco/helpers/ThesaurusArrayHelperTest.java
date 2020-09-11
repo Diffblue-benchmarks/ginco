@@ -1,7 +1,7 @@
 package fr.mcc.ginco.helpers;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusArray;
@@ -10,6 +10,7 @@ import fr.mcc.ginco.dao.IThesaurusArrayConceptDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,30 +41,35 @@ public class ThesaurusArrayHelperTest {
 	}
 
 	@Test
-	public void getArrayConceptRelationsReturnsEmpty() {
+	public void getArrayConceptRelations() {
+
+		// arrange
+		List<ThesaurusArrayConcept> list = new ArrayList<ThesaurusArrayConcept>();
+		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
+		list.add(thesaurusArrayConcept);
 		when(thesaurusArrayConceptDAO.getThesaurusArrayConceptsByArray(Mockito.<ThesaurusArray>any()))
-			.thenReturn(new ArrayList<ThesaurusArrayConcept>());
-		assertTrue((service.getArrayConceptRelations(new ThesaurusArray())).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusArrayConcept> result =
+			 service.getArrayConceptRelations(new ThesaurusArray());
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusArrayConcept, result.get(0));
 	}
 
 	@Test
-	public void getArrayConceptsReturnsEmpty() {
+	public void saveArrayConcepts() {
 		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
 			.thenReturn(new ArrayList<String>());
-		assertTrue((service.getArrayConcepts("1234")).isEmpty());
-	}
-
-	@Test
-	public void saveArrayConcepts1() {
 		ThesaurusArray array = new ThesaurusArray();
-		array.setConcepts(null);
-		assertSame(array, service.saveArrayConcepts(array, new ArrayList<ThesaurusArrayConcept>()));
-		assertTrue((array.getConcepts()).isEmpty());
-	}
-
-	@Test
-	public void saveArrayConcepts2() {
-		ThesaurusArray array = new ThesaurusArray();
-		assertSame(array, service.saveArrayConcepts(array, new ArrayList<ThesaurusArrayConcept>()));
+		ArrayList<ThesaurusArrayConcept> concepts2 =
+			 new ArrayList<ThesaurusArrayConcept>();
+		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
+		thesaurusArrayConcept.setIdentifier(new ThesaurusArrayConcept.Id());
+		concepts2.add(thesaurusArrayConcept);
+		assertSame(array, service.saveArrayConcepts(array, concepts2));
+		assertEquals(1, array.getConcepts().size());
 	}
 }

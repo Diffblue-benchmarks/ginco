@@ -41,7 +41,34 @@ public class SKOSComplexConceptExporterTest {
 	}
 
 	@Test
-	public void exportComplexConcept1() throws java.text.ParseException {
+	public void exportComplexConcept1() {
+		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<SplitNonPreferredTerm>());
+		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		assertSame(model, service.exportComplexConcept(new Thesaurus(), model));
+	}
+
+	@Test
+	public void exportComplexConcept2() throws java.text.ParseException {
+		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
+		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
+		splitNonPreferredTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		splitNonPreferredTerm.setIdentifier("data");
+		splitNonPreferredTerm.setLanguage(new Language());
+		splitNonPreferredTerm.setLexicalValue("value");
+		splitNonPreferredTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		splitNonPreferredTerm.setStatus(1);
+		splitNonPreferredTerm.setThesaurus(new Thesaurus());
+		list.add(splitNonPreferredTerm);
+		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
+			.thenReturn(list);
+		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		assertSame(model, service.exportComplexConcept(new Thesaurus(), model));
+		assertFalse(model.isEmpty());
+	}
+
+	@Test
+	public void exportComplexConcept3() throws java.text.ParseException {
 		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		splitNonPreferredTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -58,13 +85,5 @@ public class SKOSComplexConceptExporterTest {
 		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
 		assertSame(model, service.exportComplexConcept(new Thesaurus(), model));
 		assertFalse(model.isEmpty());
-	}
-
-	@Test
-	public void exportComplexConcept2() {
-		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<SplitNonPreferredTerm>());
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
-		assertSame(model, service.exportComplexConcept(new Thesaurus(), model));
 	}
 }

@@ -2,9 +2,15 @@ package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
+import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
 import fr.mcc.ginco.extjs.view.utils.ArraysGenerator;
 import fr.mcc.ginco.extjs.view.utils.ChildrenGenerator;
 import fr.mcc.ginco.extjs.view.utils.FoldersGenerator;
@@ -16,9 +22,11 @@ import fr.mcc.ginco.services.IThesaurusService;
 import fr.mcc.ginco.services.IUserRoleService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -65,7 +73,43 @@ class BaseRestServiceTest {
 	private BaseRestService service;
 
 	@Test
-	void getTreeContentNodeParamIsDataReturnsEmpty() {
+	void getTreeContent() {
+
+		// arrange
+		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setIdentifier("data");
+		thesaurus.setTitle("Mr");
+		list1.add(thesaurus);
+		when(thesaurusService.getThesaurusList())
+			.thenReturn(list1);
+		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+		when(foldersGenerator.generateFolders(Mockito.<String>any()))
+			.thenReturn(list2);
+
+		// act
+		List<IThesaurusListNode> result = service.getTreeContent("data");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getIconCls(), is(nullValue()));
+		assertThat(result.get(0).getId(), is("data"));
+		assertThat(result.get(0).getOrganizationName(), is("Acme"));
+		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getTitle(), is("Mr"));
+		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.THESAURUS));
+		assertThat(result.get(0).isDisplayable(), is(true));
+		assertThat(result.get(0).isExpanded(), is(false));
+		assertThat(result.get(0).isLeaf(), is(false));
+	}
+
+	@Test
+	void getTreeContentReturnsEmpty() {
 		when(thesaurusService.getThesaurusList())
 			.thenReturn(new ArrayList<Thesaurus>());
 		assertThat(service.getTreeContent("data"), empty());

@@ -1,12 +1,21 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.CustomConceptAttributeType;
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.dao.ICustomConceptAttributeTypeDAO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +43,49 @@ public class CustomConceptAttributeTypeServiceImplTest {
 	}
 
 	@Test
-	public void getAttributeTypesByThesaurusReturnsEmpty() {
+	public void getAttributeTypesByThesaurus() throws java.text.ParseException {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
 		when(customConceptAttributeTypeDAO.getAttributesByThesaurus(Mockito.<Thesaurus>any()))
-			.thenReturn(new ArrayList<Object>());
-		assertTrue((service.getAttributeTypesByThesaurus(new Thesaurus())).isEmpty());
+			.thenReturn(list);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+
+		// act
+		List<CustomConceptAttributeType> result =
+			 service.getAttributeTypesByThesaurus(thesaurus);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 }

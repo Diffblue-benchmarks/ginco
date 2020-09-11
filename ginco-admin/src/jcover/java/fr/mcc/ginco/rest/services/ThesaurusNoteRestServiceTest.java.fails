@@ -1,7 +1,6 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
@@ -11,7 +10,6 @@ import fr.mcc.ginco.beans.NoteType;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
-import fr.mcc.ginco.extjs.view.pojo.ThesaurusNoteView;
 import fr.mcc.ginco.extjs.view.utils.ThesaurusNoteViewConverter;
 import fr.mcc.ginco.rest.services.utils.ThesaurusNoteRestServiceUtils;
 import fr.mcc.ginco.services.INoteService;
@@ -66,30 +64,11 @@ class ThesaurusNoteRestServiceTest {
 	private ThesaurusNoteRestService service;
 
 	@Test
-	void createNotesNoteViewsIsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
-
-		// arrange
-		List<ThesaurusNoteView> list1 = new ArrayList<ThesaurusNoteView>();
-		when(thesaurusNoteViewConverter.convert(Mockito.<List<Note>>any()))
-			.thenReturn(list1);
-		when(thesaurusNoteViewConverter.convertToNote(Mockito.<List<ThesaurusNoteView>>any()))
-			.thenReturn(new ArrayList<Note>());
-
-		// act
-		ExtJsonFormLoadData<List<ThesaurusNoteView>> result =
-			 service.createNotes(new ArrayList<ThesaurusNoteView>(), "1234", "1234");
-
-		// assert
-		assertThat(result.getData(), sameInstance(list1));
-		assertThat(result.getTotal(), is(nullValue()));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
 	void getConceptNoteTypes() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
 		List<NoteType> list = new ArrayList<NoteType>();
+		list.add(new NoteType());
 		when(noteTypeService.getConceptNoteTypeList())
 			.thenReturn(list);
 
@@ -98,7 +77,7 @@ class ThesaurusNoteRestServiceTest {
 
 		// assert
 		assertThat(result.getData(), sameInstance(list));
-		assertThat(result.getTotal(), is(0L));
+		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
 	}
 
@@ -112,22 +91,5 @@ class ThesaurusNoteRestServiceTest {
 		when(noteService.getNoteById(Mockito.<String>any()))
 			.thenReturn(note);
 		assertThat(service.getNoteParentEntity("1234"), is("{\"success\":true,\"data\":{\"parentEntityId\":\"data\",\"isConcept\":true},\"total\":null}"));
-	}
-
-	@Test
-	void getTermNoteTypes() throws fr.mcc.ginco.exceptions.TechnicalException {
-
-		// arrange
-		List<NoteType> list = new ArrayList<NoteType>();
-		when(noteTypeService.getTermNoteTypeList())
-			.thenReturn(list);
-
-		// act
-		ExtJsonFormLoadData<List<NoteType>> result = service.getTermNoteTypes();
-
-		// assert
-		assertThat(result.getData(), sameInstance(list));
-		assertThat(result.getTotal(), is(0L));
-		assertThat(result.isSuccess(), is(true));
 	}
 }

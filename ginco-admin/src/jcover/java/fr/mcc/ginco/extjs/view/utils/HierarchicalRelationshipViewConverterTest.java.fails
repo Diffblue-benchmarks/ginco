@@ -2,17 +2,13 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.services.IConceptHierarchicalRelationshipService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -38,14 +34,7 @@ class HierarchicalRelationshipViewConverterTest {
 	private HierarchicalRelationshipViewConverter service;
 
 	@Test
-	void getChildrenViews() {
-		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		assertThat(service.getChildrenViews(new ThesaurusConcept()), empty());
-	}
-
-	@Test
-	void getChildrenViewsConceptIsNull() {
+	void getChildrenViewsConceptIsNullReturnsEmpty() {
 		assertThat(service.getChildrenViews(null), empty());
 	}
 

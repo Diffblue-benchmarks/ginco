@@ -1,13 +1,14 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusFormat;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,9 +54,20 @@ public class ThesaurusFormatServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusFormatListReturnsEmpty() {
+	public void getThesaurusFormatList() {
+
+		// arrange
+		List<ThesaurusFormat> list = new ArrayList<ThesaurusFormat>();
+		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
+		list.add(thesaurusFormat);
 		when(thesaurusFormatDAO.findAll())
-			.thenReturn(new ArrayList<ThesaurusFormat>());
-		assertTrue((service.getThesaurusFormatList()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusFormat> result = service.getThesaurusFormatList();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusFormat, result.get(0));
 	}
 }

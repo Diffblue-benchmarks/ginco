@@ -57,6 +57,7 @@ class ThesaurusConceptGroupRestServiceTest {
 		// arrange
 		List<ThesaurusConceptGroupType> list =
 			 new ArrayList<ThesaurusConceptGroupType>();
+		list.add(new ThesaurusConceptGroupType());
 		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
 			.thenReturn(list);
 
@@ -66,7 +67,7 @@ class ThesaurusConceptGroupRestServiceTest {
 
 		// assert
 		assertThat(result.getData(), sameInstance(list));
-		assertThat(result.getTotal(), is(0L));
+		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
 	}
 }

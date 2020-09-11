@@ -54,16 +54,6 @@ class SOAPThesaurusServiceImplTest {
 	}
 
 	@Test
-	void getAllThesaurusReturnsEmpty() {
-		SOAPThesaurusServiceImpl obj = new SOAPThesaurusServiceImpl();
-		IThesaurusService thesaurusService = mock(IThesaurusService.class);
-		when(thesaurusService.getThesaurusList())
-			.thenReturn(new ArrayList<Thesaurus>());
-		obj.setThesaurusService(thesaurusService);
-		assertThat(obj.getAllThesaurus(), empty());
-	}
-
-	@Test
 	void getThesaurusById1() throws java.text.ParseException {
 
 		// arrange

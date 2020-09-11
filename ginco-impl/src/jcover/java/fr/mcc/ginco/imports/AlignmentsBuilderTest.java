@@ -40,17 +40,17 @@ public class AlignmentsBuilderTest {
 
 	@Test
 	public void buildAlignments1() {
-		List<AlignmentType> list = new ArrayList<AlignmentType>();
-		list.add(new AlignmentType());
 		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(list);
+			.thenReturn(new ArrayList<AlignmentType>());
 		assertTrue((service.buildAlignments(GINCO.getResource("BASIC"), new ThesaurusConcept())).isEmpty());
 	}
 
 	@Test
 	public void buildAlignments2() {
+		List<AlignmentType> list = new ArrayList<AlignmentType>();
+		list.add(new AlignmentType());
 		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(new ArrayList<AlignmentType>());
+			.thenReturn(list);
 		assertTrue((service.buildAlignments(GINCO.getResource("BASIC"), new ThesaurusConcept())).isEmpty());
 	}
 }

@@ -2,13 +2,14 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.dao.ILanguageDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,16 +66,38 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguagesListLimitIsOneAndStartIndexIsZeroReturnsEmpty() {
+	public void getLanguagesListLimitIsOneAndStartIndexIsZero() {
+
+		// arrange
+		List<Language> list = new ArrayList<Language>();
+		Language language = new Language();
+		list.add(language);
 		when(languagesDAO.findPaginatedItems(Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(new ArrayList<Language>());
-		assertTrue((service.getLanguagesList(0, 1)).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<Language> result = service.getLanguagesList(0, 1);
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(language, result.get(0));
 	}
 
 	@Test
-	public void getTopLanguagesListReturnsEmpty() {
+	public void getTopLanguagesList() {
+
+		// arrange
+		List<Language> list = new ArrayList<Language>();
+		Language language = new Language();
+		list.add(language);
 		when(languagesDAO.findTopLanguages())
-			.thenReturn(new ArrayList<Language>());
-		assertTrue((service.getTopLanguagesList()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<Language> result = service.getTopLanguagesList();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(language, result.get(0));
 	}
 }

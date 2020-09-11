@@ -1,13 +1,14 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ExternalThesaurusType;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,9 +54,20 @@ public class ExternalThesaurusTypeServiceImplTest {
 	}
 
 	@Test
-	public void getExternalThesaurusTypeListReturnsEmpty() {
+	public void getExternalThesaurusTypeList() {
+
+		// arrange
+		List<ExternalThesaurusType> list = new ArrayList<ExternalThesaurusType>();
+		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
+		list.add(externalThesaurusType);
 		when(externalThesaurusTypeDAO.findAll())
-			.thenReturn(new ArrayList<ExternalThesaurusType>());
-		assertTrue((service.getExternalThesaurusTypeList()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<ExternalThesaurusType> result = service.getExternalThesaurusTypeList();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(externalThesaurusType, result.get(0));
 	}
 }

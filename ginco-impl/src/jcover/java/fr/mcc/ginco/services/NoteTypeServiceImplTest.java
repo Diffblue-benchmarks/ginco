@@ -1,12 +1,14 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.NoteType;
 import fr.mcc.ginco.dao.INoteTypeDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,16 +35,38 @@ public class NoteTypeServiceImplTest {
 	}
 
 	@Test
-	public void getConceptNoteTypeListReturnsEmpty() {
+	public void getConceptNoteTypeList() {
+
+		// arrange
+		List<NoteType> list = new ArrayList<NoteType>();
+		NoteType noteType = new NoteType();
+		list.add(noteType);
 		when(noteTypeDAO.findConceptNoteTypes())
-			.thenReturn(new ArrayList<NoteType>());
-		assertTrue((service.getConceptNoteTypeList()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<NoteType> result = service.getConceptNoteTypeList();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(noteType, result.get(0));
 	}
 
 	@Test
-	public void getTermNoteTypeListReturnsEmpty() {
+	public void getTermNoteTypeList() {
+
+		// arrange
+		List<NoteType> list = new ArrayList<NoteType>();
+		NoteType noteType = new NoteType();
+		list.add(noteType);
 		when(noteTypeDAO.findTermNoteTypes())
-			.thenReturn(new ArrayList<NoteType>());
-		assertTrue((service.getTermNoteTypeList()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<NoteType> result = service.getTermNoteTypeList();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(noteType, result.get(0));
 	}
 }

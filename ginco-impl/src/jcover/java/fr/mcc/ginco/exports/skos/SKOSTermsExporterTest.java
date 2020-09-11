@@ -43,14 +43,6 @@ public class SKOSTermsExporterTest {
 	}
 
 	@Test
-	public void exportConceptNotPreferredTermsModelIsEmpty() {
-		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusTerm>());
-		Model model = ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, GINCO.getResource("BASIC")));
-	}
-
-	@Test
 	public void exportConceptPreferredTerms() {
 		when(skosModelTermsExporter.exportConceptPreferredTerm(Mockito.<ThesaurusTerm>any(), Mockito.<Model>any()))
 			.thenReturn(ModelFactory.createDefaultModel());

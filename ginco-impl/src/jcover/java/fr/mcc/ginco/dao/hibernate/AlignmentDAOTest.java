@@ -1,11 +1,14 @@
 package fr.mcc.ginco.dao.hibernate;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Alignment;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -30,14 +33,18 @@ public class AlignmentDAOTest {
 	}
 
 	@Test
-	public void findBySourceConceptIdReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findBySourceConceptId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		AlignmentDAO alignmentDAO = new AlignmentDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria2);
@@ -45,12 +52,22 @@ public class AlignmentDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		alignmentDAO.setSessionFactory(sessionFactory);
-		assertTrue((alignmentDAO.findBySourceConceptId("1234")).isEmpty());
+
+		// act
+		List<Alignment> result = alignmentDAO.findBySourceConceptId("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
-	public void findByTargetConceptIdReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findByTargetConceptId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		AlignmentDAO alignmentDAO = new AlignmentDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -59,7 +76,7 @@ public class AlignmentDAOTest {
 		when(criteria3.createAlias(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(criteria2);
 		when(criteria3.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria3);
@@ -67,18 +84,28 @@ public class AlignmentDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		alignmentDAO.setSessionFactory(sessionFactory);
-		assertTrue((alignmentDAO.findByTargetConceptId("1234")).isEmpty());
+
+		// act
+		List<Alignment> result = alignmentDAO.findByTargetConceptId("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
-	public void findByExternalThesaurusExternalThesaurusIdIsOneReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findByExternalThesaurusExternalThesaurusIdIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		AlignmentDAO alignmentDAO = new AlignmentDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria2);
@@ -86,6 +113,12 @@ public class AlignmentDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		alignmentDAO.setSessionFactory(sessionFactory);
-		assertTrue((alignmentDAO.findByExternalThesaurus(1)).isEmpty());
+
+		// act
+		List<Alignment> result = alignmentDAO.findByExternalThesaurus(1);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 }

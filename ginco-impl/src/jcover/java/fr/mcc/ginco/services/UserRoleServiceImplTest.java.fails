@@ -1,5 +1,7 @@
 package fr.mcc.ginco.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -8,6 +10,7 @@ import fr.mcc.ginco.beans.UserRole;
 import fr.mcc.ginco.dao.IUserRoleDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,17 +38,39 @@ public class UserRoleServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusUsersThesaurusIdIsRootReturnsEmpty() {
+	public void getThesaurusUsersThesaurusIdIsRoot() {
+
+		// arrange
+		List<UserRole> list = new ArrayList<UserRole>();
+		UserRole userRole = new UserRole();
+		list.add(userRole);
 		when(userRoleDAO.getUserRolesOnThesaurus(Mockito.<String>any()))
-			.thenReturn(new ArrayList<UserRole>());
-		assertTrue((service.getThesaurusUsers("root")).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<UserRole> result = service.getThesaurusUsers("root");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(userRole, result.get(0));
 	}
 
 	@Test
-	public void getUserRolesReturnsEmpty() {
+	public void getUserRoles() {
+
+		// arrange
+		List<UserRole> list = new ArrayList<UserRole>();
+		UserRole userRole = new UserRole();
+		list.add(userRole);
 		when(userRoleDAO.getUserRoles(Mockito.<String>any()))
-			.thenReturn(new ArrayList<UserRole>());
-		assertTrue((service.getUserRoles("John Smith")).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<UserRole> result = service.getUserRoles("John Smith");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(userRole, result.get(0));
 	}
 
 	@Test

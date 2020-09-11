@@ -1,7 +1,6 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
@@ -12,8 +11,6 @@ import fr.mcc.ginco.services.IAlignmentService;
 import fr.mcc.ginco.services.IAssociativeRelationshipService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusService;
-
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -76,10 +73,5 @@ class ThesaurusConceptViewConverterTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("foo"));
 		assertThat(result.getLang(), is(nullValue()));
-	}
-
-	@Test
-	void convertConceptListIsEmptyReturnsEmpty() {
-		assertThat(service.convert(new ArrayList<ThesaurusConcept>()), empty());
 	}
 }

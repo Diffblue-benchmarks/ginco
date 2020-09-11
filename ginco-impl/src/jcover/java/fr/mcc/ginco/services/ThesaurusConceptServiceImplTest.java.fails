@@ -1,7 +1,5 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertTrue;
-
 import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IAssociativeRelationshipDAO;
@@ -12,8 +10,6 @@ import fr.mcc.ginco.dao.IThesaurusConceptGroupDAO;
 import fr.mcc.ginco.dao.IThesaurusDAO;
 import fr.mcc.ginco.dao.IThesaurusTermDAO;
 import fr.mcc.ginco.utils.ThesaurusTermUtils;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -78,10 +74,5 @@ public class ThesaurusConceptServiceImplTest {
 	public void calculateChildrenRoot() {
 		service.calculateChildrenRoot("1234");
 		Mockito.verify(conceptHierarchicalRelationshipServiceUtil).calculateChildrenRoots(ArgumentMatchers.eq("1234"), ArgumentMatchers.eq("1234"));
-	}
-
-	@Test
-	public void getThesaurusConceptListIdsIsEmptyReturnsEmpty() {
-		assertTrue((service.getThesaurusConceptList(new ArrayList<String>())).isEmpty());
 	}
 }

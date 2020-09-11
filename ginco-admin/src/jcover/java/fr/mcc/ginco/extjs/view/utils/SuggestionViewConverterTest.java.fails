@@ -56,9 +56,9 @@ class SuggestionViewConverterTest {
 		suggestion.setRecipient("1234");
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setIdentifier("data");
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setIdentifier("data");
-		term.setThesaurus(thesaurus);
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setIdentifier("data");
+		term.setThesaurus(thesaurus2);
 		suggestion.setTerm(term);
 
 		// act

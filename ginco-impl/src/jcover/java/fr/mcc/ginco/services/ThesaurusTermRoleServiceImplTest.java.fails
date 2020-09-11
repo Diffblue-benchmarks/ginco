@@ -2,13 +2,13 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusTermRole;
 import fr.mcc.ginco.dao.IThesaurusTermRoleDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,10 +35,20 @@ public class ThesaurusTermRoleServiceImplTest {
 	}
 
 	@Test
-	public void getAllThesaurusTermRoleReturnsEmpty() {
+	public void getAllThesaurusTermRole() {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
 		when(thesaurusTermRoleDAO.findAll())
-			.thenReturn(new ArrayList<Object>());
-		assertTrue((service.getAllThesaurusTermRole()).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTermRole> result = service.getAllThesaurusTermRole();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test

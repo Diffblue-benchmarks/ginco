@@ -1,8 +1,10 @@
 package fr.mcc.ginco.data;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+
+import fr.mcc.ginco.enums.TermStatusEnum;
 
 import java.util.ArrayList;
 
@@ -21,11 +23,21 @@ class ReducedThesaurusArrayTest {
 		ReducedThesaurusArray reducedThesaurusArray = new ReducedThesaurusArray();
 		reducedThesaurusArray.setIdentifier("data");
 		reducedThesaurusArray.setOrdered(false);
-		reducedThesaurusArray.setTerms(new ArrayList<ReducedThesaurusTerm>());
+		ArrayList<ReducedThesaurusTerm> terms =
+			 new ArrayList<ReducedThesaurusTerm>();
+		ReducedThesaurusTerm reducedThesaurusTerm = new ReducedThesaurusTerm();
+		reducedThesaurusTerm.setConceptId("1234");
+		reducedThesaurusTerm.setIdentifier("data");
+		reducedThesaurusTerm.setLanguageId("1234");
+		reducedThesaurusTerm.setLexicalValue("value");
+		reducedThesaurusTerm.setStatus(TermStatusEnum.CANDIDATE);
+		terms.add(reducedThesaurusTerm);
+		reducedThesaurusArray.setTerms(terms);
 		reducedThesaurusArray.setTitle("Mr");
 		assertThat(reducedThesaurusArray.getIdentifier(), is("data"));
 		assertThat(reducedThesaurusArray.getOrdered(), is(false));
-		assertThat(reducedThesaurusArray.getTerms(), empty());
+		assertThat(reducedThesaurusArray.getTerms().size(), is(1));
+		assertThat(reducedThesaurusArray.getTerms().get(0), sameInstance(reducedThesaurusTerm));
 		assertThat(reducedThesaurusArray.getTitle(), is("Mr"));
 	}
 }

@@ -1,7 +1,7 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
@@ -20,7 +20,9 @@ class ThesaurusTermViewTest {
 	void factory() {
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
 		thesaurusTermView.setConceptId("1234");
-		thesaurusTermView.setConceptsPath(new ArrayList<String>());
+		ArrayList<String> conceptsPath = new ArrayList<String>();
+		conceptsPath.add("/bin/bash");
+		thesaurusTermView.setConceptsPath(conceptsPath);
 		thesaurusTermView.setCreated("foo");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");
@@ -34,7 +36,8 @@ class ThesaurusTermViewTest {
 		thesaurusTermView.setThesaurusId("1234");
 		thesaurusTermView.setTopistopterm(false);
 		assertThat(thesaurusTermView.getConceptId(), is("1234"));
-		assertThat(thesaurusTermView.getConceptsPath(), empty());
+		assertThat(thesaurusTermView.getConceptsPath(), hasSize(1));
+		assertThat(thesaurusTermView.getConceptsPath().get(0), is("/bin/bash"));
 		assertThat(thesaurusTermView.getCreated(), is("foo"));
 		assertThat(thesaurusTermView.getHidden(), is(false));
 		assertThat(thesaurusTermView.getIdentifier(), is("data"));

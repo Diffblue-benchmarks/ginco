@@ -4,8 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.anyBoolean;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.GenericCustomAttributeTypeView;
@@ -25,7 +23,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -91,25 +88,11 @@ class CustomAttributesRestServiceTest {
 	}
 
 	@Test
-	void updateConceptAttributeTypesListIsEmptyReturnsEmpty() {
-		when(customAttributesTypesConverter.convertList(Mockito.<List<? extends fr.mcc.ginco.beans.generic.GenericCustomAttributeType>>any(), anyBoolean()))
-			.thenReturn(new ArrayList<GenericCustomAttributeTypeView>());
-		assertThat(service.updateConceptAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>()), empty());
-	}
-
-	@Test
 	void updateTermAttributeListIsEmpty() {
 		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result =
 			 service.updateTermAttribute(new ArrayList<GenericCustomAttributeView>());
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
-	void updateTermAttributeTypesListIsEmptyReturnsEmpty() {
-		when(customAttributesTypesConverter.convertList(Mockito.<List<? extends fr.mcc.ginco.beans.generic.GenericCustomAttributeType>>any(), anyBoolean()))
-			.thenReturn(new ArrayList<GenericCustomAttributeTypeView>());
-		assertThat(service.updateTermAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>()), empty());
 	}
 }

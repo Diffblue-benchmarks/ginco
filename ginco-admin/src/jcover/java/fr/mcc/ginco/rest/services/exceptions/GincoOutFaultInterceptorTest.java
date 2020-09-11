@@ -1,8 +1,9 @@
 package fr.mcc.ginco.rest.services.exceptions;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.LinkedList;
@@ -21,11 +22,17 @@ class GincoOutFaultInterceptorTest {
 	void factory() {
 		GincoOutFaultInterceptor gincoOutFaultInterceptor =
 			 new GincoOutFaultInterceptor();
-		gincoOutFaultInterceptor.setAfter(new LinkedList<String>());
-		gincoOutFaultInterceptor.setBefore(new LinkedList<String>());
+		LinkedList<String> i1 = new LinkedList<String>();
+		i1.add("foo=bar");
+		gincoOutFaultInterceptor.setAfter(i1);
+		LinkedList<String> i2 = new LinkedList<String>();
+		i2.add("foo=bar");
+		gincoOutFaultInterceptor.setBefore(i2);
 		assertThat(gincoOutFaultInterceptor.getAdditionalInterceptors(), is(nullValue()));
-		assertThat(gincoOutFaultInterceptor.getAfter(), empty());
-		assertThat(gincoOutFaultInterceptor.getBefore(), empty());
+		assertThat(gincoOutFaultInterceptor.getAfter(), hasSize(1));
+		assertThat(gincoOutFaultInterceptor.getAfter(), hasItem("foo=bar"));
+		assertThat(gincoOutFaultInterceptor.getBefore(), hasSize(1));
+		assertThat(gincoOutFaultInterceptor.getBefore(), hasItem("foo=bar"));
 		assertThat(gincoOutFaultInterceptor.getId(), is("fr.mcc.ginco.rest.services.exceptions.GincoOutFaultInterceptor"));
 		assertThat(gincoOutFaultInterceptor.getPhase(), is("marshal"));
 	}

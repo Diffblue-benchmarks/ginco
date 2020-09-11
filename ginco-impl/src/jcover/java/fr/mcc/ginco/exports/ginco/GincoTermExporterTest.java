@@ -10,6 +10,8 @@ import fr.mcc.ginco.exports.result.bean.GincoExportedEntity;
 import fr.mcc.ginco.exports.result.bean.JaxbList;
 import fr.mcc.ginco.services.INoteService;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -43,9 +45,12 @@ public class GincoTermExporterTest {
 		when(gincoAttributesExporter.getExportedTermAttributes(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(new JaxbList<CustomTermAttribute>());
 		GincoExportedEntity thesaurusToExport = new GincoExportedEntity();
+		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
+		terms.add(new ThesaurusTerm());
+		thesaurusToExport.setTerms(terms);
 		ThesaurusTerm term = new ThesaurusTerm();
 		assertSame(thesaurusToExport, service.addExportedTerms(thesaurusToExport, term));
-		assertEquals(1, thesaurusToExport.getTerms().size());
-		assertSame(term, thesaurusToExport.getTerms().get(0));
+		assertEquals(2, thesaurusToExport.getTerms().size());
+		assertSame(term, thesaurusToExport.getTerms().get(1));
 	}
 }

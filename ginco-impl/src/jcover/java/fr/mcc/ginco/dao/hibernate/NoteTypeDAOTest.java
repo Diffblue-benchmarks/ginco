@@ -1,11 +1,14 @@
 package fr.mcc.ginco.dao.hibernate;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.NoteType;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -30,11 +33,15 @@ public class NoteTypeDAOTest {
 	}
 
 	@Test
-	public void findConceptNoteTypesReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findConceptNoteTypes() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		NoteTypeDAO noteTypeDAO = new NoteTypeDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -45,15 +52,25 @@ public class NoteTypeDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		noteTypeDAO.setSessionFactory(sessionFactory);
-		assertTrue((noteTypeDAO.findConceptNoteTypes()).isEmpty());
+
+		// act
+		List<NoteType> result = noteTypeDAO.findConceptNoteTypes();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
-	public void findTermNoteTypesReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findTermNoteTypes() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
 		NoteTypeDAO noteTypeDAO = new NoteTypeDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -64,6 +81,12 @@ public class NoteTypeDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		noteTypeDAO.setSessionFactory(sessionFactory);
-		assertTrue((noteTypeDAO.findTermNoteTypes()).isEmpty());
+
+		// act
+		List<NoteType> result = noteTypeDAO.findTermNoteTypes();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 }
