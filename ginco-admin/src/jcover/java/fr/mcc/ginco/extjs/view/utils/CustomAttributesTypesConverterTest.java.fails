@@ -4,9 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.generic.GenericCustomAttributeType;
@@ -20,7 +17,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -49,46 +45,25 @@ class CustomAttributesTypesConverterTest {
 	private CustomAttributesTypesConverter service;
 
 	@Test
-	void convert1() {
+	void convertIsConceptIsFalse() {
 
 		// arrange
-		GenericCustomAttributeType source = new GenericCustomAttributeType();
-		source.setCode("DE");
-		source.setIdentifier(1);
-		source.setThesaurus(new Thesaurus());
-		source.setValue("value");
+		GenericCustomAttributeType source1 = new GenericCustomAttributeType();
+		source1.setCode("DE");
+		source1.setIdentifier(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		source1.setThesaurus(thesaurus);
+		source1.setValue("value");
 
 		// act
-		GenericCustomAttributeTypeView result = service.convert(source, false);
+		GenericCustomAttributeTypeView result = service.convert(source1, false);
 
 		// assert
 		assertThat(result.getCode(), is("DE"));
 		assertThat(result.getExportable(), is(nullValue()));
 		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getThesaurusId(), is(nullValue()));
-		assertThat(result.getValue(), is("value"));
-	}
-
-	@Test
-	void convert2() {
-
-		// arrange
-		Thesaurus thesaurus = new Thesaurus();
-		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(thesaurus);
-		when(customTermAttributeTypeService.getAttributeTypeById(anyInt()))
-			.thenReturn(new Object());
-		GenericCustomAttributeTypeView view = new GenericCustomAttributeTypeView();
-		view.setCode("DE");
-		view.setValue("value");
-
-		// act
-		GenericCustomAttributeType result = service.convert(view, false);
-
-		// assert
-		assertThat(result.getCode(), is("de"));
-		assertThat(result.getIdentifier(), is(0));
-		assertThat(result.getThesaurus(), sameInstance(thesaurus));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getValue(), is("value"));
 	}
 
@@ -102,7 +77,9 @@ class CustomAttributesTypesConverterTest {
 			 new GenericCustomAttributeType();
 		genericCustomAttributeType.setCode("DE");
 		genericCustomAttributeType.setIdentifier(1);
-		genericCustomAttributeType.setThesaurus(new Thesaurus());
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		genericCustomAttributeType.setThesaurus(thesaurus);
 		genericCustomAttributeType.setValue("value");
 		sourceList.add(genericCustomAttributeType);
 
@@ -115,7 +92,7 @@ class CustomAttributesTypesConverterTest {
 		assertThat(result.get(0).getCode(), is("DE"));
 		assertThat(result.get(0).getExportable(), is(nullValue()));
 		assertThat(result.get(0).getIdentifier(), is(1));
-		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getThesaurusId(), is("data"));
 		assertThat(result.get(0).getValue(), is("value"));
 	}
 

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class ServiceCRUDResultsTest {
 
 	@Test
-	void valuesReturnsSUCCESSFAILURE() {
+	void valuesReturnsSuccessFailure() {
 		ServiceCRUDResults[] result = ServiceCRUDResults.values();
 		assertThat(result[0], is(ServiceCRUDResults.SUCCESS));
 		assertThat(result[1], is(ServiceCRUDResults.FAILURE));

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class ThesaurusVersionStatusEnumTest {
 
 	@Test
-	void valuesReturnsPROJECTVALIDATEDPUBLISHEDDEPRECATEDPROHIBITED() {
+	void valuesReturnsProjectValidatedPublishedDeprecatedProhibited() {
 		ThesaurusVersionStatusEnum[] result = ThesaurusVersionStatusEnum.values();
 		assertThat(result[0], is(ThesaurusVersionStatusEnum.PROJECT));
 		assertThat(result[1], is(ThesaurusVersionStatusEnum.VALIDATED));

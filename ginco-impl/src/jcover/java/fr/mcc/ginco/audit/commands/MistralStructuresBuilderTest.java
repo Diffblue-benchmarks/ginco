@@ -2,7 +2,6 @@ package fr.mcc.ginco.audit.commands;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.audit.utils.AuditHelper;
 import fr.mcc.ginco.beans.ThesaurusConcept;
@@ -14,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -36,21 +34,7 @@ public class MistralStructuresBuilderTest {
 	}
 
 	@Test
-	public void buildHierarchyStructure() {
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setLexicalValue("value");
-		when(auditHelper.getConceptChildrenAtRevision(Mockito.<Number>any(), Mockito.<ThesaurusConcept>any(), Mockito.<java.util.List<ThesaurusConcept>>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		when(auditHelper.getPreferredTermAtRevision(Mockito.<Number>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(thesaurusTerm);
-		ArrayList<ThesaurusConcept> conceptsAtRevision =
-			 new ArrayList<ThesaurusConcept>();
-		conceptsAtRevision.add(new ThesaurusConcept());
-		assertTrue((service.buildHierarchyStructure(conceptsAtRevision, 1, "mpeg").get("value")).isEmpty());
-	}
-
-	@Test
-	public void buildHierarchyStructureConceptsAtRevisionIsEmpty() {
+	public void buildHierarchyStructureConceptsAtRevisionIsEmptyAndLangIsMpegAndRevisionIsOneReturnsEmpty() {
 		assertTrue(service.buildHierarchyStructure(new ArrayList<ThesaurusConcept>(), 1, "mpeg").isEmpty());
 	}
 

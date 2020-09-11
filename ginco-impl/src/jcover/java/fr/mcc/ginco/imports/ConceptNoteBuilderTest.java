@@ -13,7 +13,6 @@ import fr.mcc.ginco.services.INoteTypeService;
 import fr.mcc.ginco.skos.namespaces.GINCO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,16 +45,7 @@ public class ConceptNoteBuilderTest {
 	}
 
 	@Test
-	public void buildConceptNotes1() {
-		List<NoteType> list = new ArrayList<NoteType>();
-		list.add(new NoteType());
-		when(noteTypeService.getConceptNoteTypeList())
-			.thenReturn(list);
-		assertTrue((service.buildConceptNotes(GINCO.getResource("BASIC"), new ThesaurusConcept(), new ThesaurusTerm(), new Thesaurus())).isEmpty());
-	}
-
-	@Test
-	public void buildConceptNotes2() {
+	public void buildConceptNotesReturnsEmpty() {
 		when(noteTypeService.getConceptNoteTypeList())
 			.thenReturn(new ArrayList<NoteType>());
 		assertTrue((service.buildConceptNotes(GINCO.getResource("BASIC"), new ThesaurusConcept(), new ThesaurusTerm(), new Thesaurus())).isEmpty());

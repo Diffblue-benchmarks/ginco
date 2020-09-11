@@ -39,7 +39,12 @@ class ThesaurusConceptTest {
 		thesaurus.setContributor("foo");
 		thesaurus.setCoverage("foo");
 		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus.setCreator(new ThesaurusOrganization());
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
@@ -53,7 +58,10 @@ class ThesaurusConceptTest {
 		thesaurus.setSource("foo");
 		thesaurus.setSubject("foo");
 		thesaurus.setTitle("Mr");
-		thesaurus.setType(new ThesaurusType());
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusConcept.setThesaurus(thesaurus);
 		thesaurusConcept.setTopConcept(false);

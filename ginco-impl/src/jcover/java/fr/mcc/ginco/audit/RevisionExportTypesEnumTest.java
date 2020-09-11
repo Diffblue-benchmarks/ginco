@@ -13,7 +13,7 @@ import org.junit.Test;
 public class RevisionExportTypesEnumTest {
 
 	@Test
-	public void valuesReturnsCSVCOMMANDS() {
+	public void valuesReturnsCsvCommands() {
 		RevisionExportTypesEnum[] result = RevisionExportTypesEnum.values();
 		assertTrue(RevisionExportTypesEnum.CSV == result[0]);
 		assertTrue(RevisionExportTypesEnum.COMMANDS == result[1]);

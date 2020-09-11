@@ -58,12 +58,13 @@ class SplitNonPreferredTermViewConverterTest {
 		SplitNonPreferredTerm source1 = new SplitNonPreferredTerm();
 		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setIdentifier("data");
-		source1.setLanguage(new Language());
 		source1.setLexicalValue("value");
 		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setSource("foo");
 		source1.setStatus(1);
-		source1.setThesaurus(new Thesaurus());
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		source1.setThesaurus(thesaurus);
 
 		// act
 		SplitNonPreferredTermView result = service.convert(source1);
@@ -77,7 +78,7 @@ class SplitNonPreferredTermViewConverterTest {
 		assertThat(result.getPreferredTerms(), empty());
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
 	}
 
 	@Test
@@ -87,11 +88,16 @@ class SplitNonPreferredTermViewConverterTest {
 		SplitNonPreferredTerm source1 = new SplitNonPreferredTerm();
 		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setIdentifier("data");
+		Language language = new Language();
+		language.setId("1234");
+		source1.setLanguage(language);
 		source1.setLexicalValue("value");
 		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setSource("foo");
 		source1.setStatus(1);
-		source1.setThesaurus(new Thesaurus());
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		source1.setThesaurus(thesaurus);
 
 		// act
 		SplitNonPreferredTermView result = service.convert(source1);
@@ -99,13 +105,13 @@ class SplitNonPreferredTermViewConverterTest {
 		// assert
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getPreferredTerms(), empty());
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
 	}
 
 	@Test

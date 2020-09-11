@@ -1,6 +1,5 @@
 package fr.mcc.ginco.services;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -50,16 +49,7 @@ public class UserRoleServiceImplTest {
 	}
 
 	@Test
-	public void hasRoleReturnsFalse() {
-		UserRole userRole = new UserRole();
-		userRole.setRole(Role.EXPERT);
-		when(userRoleDAO.getUserRoleOnThesaurus(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(userRole);
-		assertFalse(service.hasRole("admin", "root", Role.MANAGER));
-	}
-
-	@Test
-	public void hasRoleReturnsTrue() {
+	public void hasRoleRoleIsManagerAndThesaurusIdIsRootAndUsernameIsAdminReturnsTrue() {
 		UserRole userRole = new UserRole();
 		userRole.setRole(Role.MANAGER);
 		when(userRoleDAO.getUserRoleOnThesaurus(Mockito.<String>any(), Mockito.<String>any()))

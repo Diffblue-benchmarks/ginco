@@ -49,9 +49,4 @@ public class GincoRelationshipImporterTest {
 	public void storeAssociativeRelationshipReturnsEmpty() {
 		assertTrue((service.storeAssociativeRelationship(new GincoExportedThesaurus())).isEmpty());
 	}
-
-	@Test
-	public void storeHierarchicalRelationshipRelationsToImportIsNullReturnsEmpty() {
-		assertTrue((service.storeHierarchicalRelationship(null)).isEmpty());
-	}
 }

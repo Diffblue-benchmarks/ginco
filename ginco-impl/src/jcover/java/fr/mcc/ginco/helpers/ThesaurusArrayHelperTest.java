@@ -56,14 +56,14 @@ public class ThesaurusArrayHelperTest {
 	@Test
 	public void saveArrayConcepts1() {
 		ThesaurusArray array = new ThesaurusArray();
+		array.setConcepts(null);
 		assertSame(array, service.saveArrayConcepts(array, new ArrayList<ThesaurusArrayConcept>()));
+		assertTrue((array.getConcepts()).isEmpty());
 	}
 
 	@Test
 	public void saveArrayConcepts2() {
 		ThesaurusArray array = new ThesaurusArray();
-		array.setConcepts(null);
 		assertSame(array, service.saveArrayConcepts(array, new ArrayList<ThesaurusArrayConcept>()));
-		assertTrue((array.getConcepts()).isEmpty());
 	}
 }

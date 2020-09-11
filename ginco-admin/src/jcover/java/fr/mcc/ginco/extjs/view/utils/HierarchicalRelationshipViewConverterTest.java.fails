@@ -2,13 +2,9 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.ConceptHierarchicalRelationship;
 import fr.mcc.ginco.beans.ThesaurusConcept;
-import fr.mcc.ginco.extjs.view.pojo.HierarchicalRelationshipView;
 import fr.mcc.ginco.services.IConceptHierarchicalRelationshipService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 
@@ -42,31 +38,6 @@ class HierarchicalRelationshipViewConverterTest {
 	private HierarchicalRelationshipViewConverter service;
 
 	@Test
-	void convertRelationFromChildToParent() {
-
-		// arrange
-		ConceptHierarchicalRelationship conceptHierarchicalRelationship1 =
-			 new ConceptHierarchicalRelationship();
-		ConceptHierarchicalRelationship.Id identifier1 =
-			 new ConceptHierarchicalRelationship.Id();
-		conceptHierarchicalRelationship1.setIdentifier(identifier1);
-		when(conceptHierarchicalRelationshipService.getByChildAndParentIds(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ConceptHierarchicalRelationship())
-			.thenReturn(conceptHierarchicalRelationship1);
-		HierarchicalRelationshipView hierarchicalRelationView =
-			 new HierarchicalRelationshipView();
-		hierarchicalRelationView.setRole(1);
-
-		// act
-		ConceptHierarchicalRelationship result =
-			 service.convertRelationFromChildToParent(hierarchicalRelationView, new ThesaurusConcept());
-
-		// assert
-		assertThat(result.getIdentifier(), sameInstance(identifier1));
-		assertThat(result.getRole(), is(1));
-	}
-
-	@Test
 	void getChildrenViews() {
 		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
@@ -79,17 +50,7 @@ class HierarchicalRelationshipViewConverterTest {
 	}
 
 	@Test
-	void getParentViews1() {
+	void getParentViewsReturnsEmpty() {
 		assertThat(service.getParentViews(new ThesaurusConcept()), empty());
-	}
-
-	@Test
-	void getParentViews2() {
-		assertThat(service.getParentViews(new ThesaurusConcept()), empty());
-	}
-
-	@Test
-	void getParentViewsConceptIsNull() {
-		assertThat(service.getParentViews(null), empty());
 	}
 }

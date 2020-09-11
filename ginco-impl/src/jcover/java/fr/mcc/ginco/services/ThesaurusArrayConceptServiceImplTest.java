@@ -41,8 +41,8 @@ public class ThesaurusArrayConceptServiceImplTest {
 		thesaurusArrayConcept.setArrayOrder(1);
 		ThesaurusConcept concept = new ThesaurusConcept();
 		thesaurusArrayConcept.setConcepts(concept);
-		ThesaurusArrayConcept.Id identifier2 = new ThesaurusArrayConcept.Id();
-		thesaurusArrayConcept.setIdentifier(identifier2);
+		ThesaurusArrayConcept.Id identifier6 = new ThesaurusArrayConcept.Id();
+		thesaurusArrayConcept.setIdentifier(identifier6);
 		when(thesaurusArrayConceptDAO.getById(Mockito.<ThesaurusArrayConcept.Id>any()))
 			.thenReturn(thesaurusArrayConcept);
 
@@ -53,6 +53,6 @@ public class ThesaurusArrayConceptServiceImplTest {
 		// assert
 		assertEquals(1, (int) result.getArrayOrder());
 		assertSame(concept, result.getConcepts());
-		assertSame(identifier2, result.getIdentifier());
+		assertSame(identifier6, result.getIdentifier());
 	}
 }

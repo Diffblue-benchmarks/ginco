@@ -37,19 +37,7 @@ public class SKOSHierarchicalRelationshipExporterTest {
 	}
 
 	@Test
-	public void exportHierarchicalRelationships1() {
-		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
-			 new ConceptHierarchicalRelationship();
-		conceptHierarchicalRelationship.setRole(0);
-		when(conceptHierarchicalRelationshipService.getByChildAndParentIds(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(conceptHierarchicalRelationship);
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
-		assertSame(model, service.exportHierarchicalRelationships(model, new ThesaurusConcept(), new ThesaurusConcept()));
-		assertFalse(model.isEmpty());
-	}
-
-	@Test
-	public void exportHierarchicalRelationships2() {
+	public void exportHierarchicalRelationships() {
 		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
 			 new ConceptHierarchicalRelationship();
 		conceptHierarchicalRelationship.setRole(1);

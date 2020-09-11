@@ -32,7 +32,7 @@ public class SKOSModelTermsExporterTest {
 	}
 
 	@Test
-	public void exportConceptNotPreferredTerm1() throws java.text.ParseException {
+	public void exportConceptNotPreferredTermHiddenIsFalseAndModelIsEmpty() throws java.text.ParseException {
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		term.setLanguage(new Language());
@@ -46,53 +46,13 @@ public class SKOSModelTermsExporterTest {
 	}
 
 	@Test
-	public void exportConceptNotPreferredTerm2() throws java.text.ParseException {
-		ThesaurusTerm term = new ThesaurusTerm();
-		term.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		term.setLanguage(new Language());
-		term.setLexicalValue("value");
-		term.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		term.setStatus(1);
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptNotPreferredTerm(term, model, GINCO.getResource("BASIC"), false));
-		assertFalse(model.isEmpty());
-	}
-
-	@Test
-	public void exportConceptNotPreferredTermHiddenIsTrue() throws java.text.ParseException {
+	public void exportConceptPreferredTermModelIsEmpty() throws java.text.ParseException {
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		term.setLanguage(new Language());
 		term.setLexicalValue("value");
 		term.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		term.setSource("foo");
-		term.setStatus(1);
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptNotPreferredTerm(term, model, GINCO.getResource("BASIC"), true));
-		assertFalse(model.isEmpty());
-	}
-
-	@Test
-	public void exportConceptPreferredTerm1() throws java.text.ParseException {
-		ThesaurusTerm term = new ThesaurusTerm();
-		term.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		term.setLanguage(new Language());
-		term.setLexicalValue("value");
-		term.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		term.setSource("foo");
-		term.setStatus(1);
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptPreferredTerm(term, model));
-		assertFalse(model.isEmpty());
-	}
-
-	@Test
-	public void exportConceptPreferredTerm2() throws java.text.ParseException {
-		ThesaurusTerm term = new ThesaurusTerm();
-		term.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		term.setLanguage(new Language());
-		term.setLexicalValue("value");
-		term.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		term.setStatus(1);
 		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
 		assertSame(model, service.exportConceptPreferredTerm(term, model));

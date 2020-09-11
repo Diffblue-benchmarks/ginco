@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class ThesaurusListNodeTypeTest {
 
 	@Test
-	void valuesReturnsTHESAURUSFOLDERCONCEPTARRAYSGROUPSWARNING() {
+	void valuesReturnsThesaurusFolderConceptArraysGroupsWarning() {
 		ThesaurusListNodeType[] result = ThesaurusListNodeType.values();
 		assertThat(result[0], is(ThesaurusListNodeType.THESAURUS));
 		assertThat(result[1], is(ThesaurusListNodeType.FOLDER));

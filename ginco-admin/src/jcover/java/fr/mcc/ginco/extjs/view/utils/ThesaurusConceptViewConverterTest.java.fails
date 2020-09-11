@@ -7,9 +7,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConcept;
-import fr.mcc.ginco.extjs.view.pojo.HierarchicalRelationshipView;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptReducedView;
-import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptView;
 import fr.mcc.ginco.services.IAlignmentService;
 import fr.mcc.ginco.services.IAssociativeRelationshipService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
@@ -81,25 +79,7 @@ class ThesaurusConceptViewConverterTest {
 	}
 
 	@Test
-	void convertAddedChildrenReturnsEmpty() {
-		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		ThesaurusConceptView conceptView = new ThesaurusConceptView();
-		conceptView.setChildConcepts(new ArrayList<HierarchicalRelationshipView>());
-		assertThat(service.convertAddedChildren(conceptView), empty());
-	}
-
-	@Test
 	void convertConceptListIsEmptyReturnsEmpty() {
 		assertThat(service.convert(new ArrayList<ThesaurusConcept>()), empty());
-	}
-
-	@Test
-	void convertRemovedChildrenReturnsEmpty() {
-		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		ThesaurusConceptView conceptView = new ThesaurusConceptView();
-		conceptView.setChildConcepts(new ArrayList<HierarchicalRelationshipView>());
-		assertThat(service.convertRemovedChildren(conceptView), empty());
 	}
 }

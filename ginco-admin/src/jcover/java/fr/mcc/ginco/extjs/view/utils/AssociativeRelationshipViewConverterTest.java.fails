@@ -1,0 +1,75 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.AssociativeRelationshipRole;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.extjs.view.pojo.AssociativeRelationshipView;
+import fr.mcc.ginco.services.IAssociativeRelationshipRoleService;
+import fr.mcc.ginco.services.IAssociativeRelationshipService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.AssociativeRelationshipViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {AssociativeRelationshipViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class AssociativeRelationshipViewConverterTest {
+
+	@MockBean(name = "associativeRelationshipRoleService")
+	private IAssociativeRelationshipRoleService associativeRelationshipRoleService;
+
+	@MockBean(name = "associativeRelationshipService")
+	private IAssociativeRelationshipService associativeRelationshipService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@Autowired
+	private AssociativeRelationshipViewConverter service;
+
+	@Test
+	void convert() {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("foo");
+		AssociativeRelationship associativeRelationship =
+			 new AssociativeRelationship();
+		ThesaurusConcept conceptLeft = new ThesaurusConcept();
+		conceptLeft.setIdentifier("data");
+		associativeRelationship.setConceptLeft(conceptLeft);
+		ThesaurusConcept conceptRight = new ThesaurusConcept();
+		conceptRight.setIdentifier("data");
+		associativeRelationship.setConceptRight(conceptRight);
+		AssociativeRelationshipRole relationshipRole =
+			 new AssociativeRelationshipRole();
+		relationshipRole.setCode("DE");
+		associativeRelationship.setRelationshipRole(relationshipRole);
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+
+		// act
+		AssociativeRelationshipView result =
+			 service.convert(associativeRelationship, concept);
+
+		// assert
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLabel(), is("foo"));
+		assertThat(result.getRoleCode(), is("DE"));
+	}
+}

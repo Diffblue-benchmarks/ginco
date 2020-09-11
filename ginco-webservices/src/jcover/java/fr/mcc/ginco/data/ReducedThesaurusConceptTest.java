@@ -23,18 +23,18 @@ class ReducedThesaurusConceptTest {
 
 	@Test
 	void factory() {
-		ReducedThesaurusConcept reducedThesaurusConcept =
+		ReducedThesaurusConcept reducedThesaurusConcept1 =
 			 new ReducedThesaurusConcept();
-		reducedThesaurusConcept.setAssociates(new ArrayList<ReducedThesaurusConcept>());
-		reducedThesaurusConcept.setIdentifier("data");
-		reducedThesaurusConcept.setNotes(new ArrayList<Note>());
-		reducedThesaurusConcept.setParents(new ArrayList<ReducedThesaurusConcept>());
-		reducedThesaurusConcept.setStatus(ConceptStatusEnum.CANDIDATE);
-		assertThat(reducedThesaurusConcept.getAssociates(), empty());
-		assertThat(reducedThesaurusConcept.getIdentifier(), is("data"));
-		assertThat(reducedThesaurusConcept.getNotes(), empty());
-		assertThat(reducedThesaurusConcept.getParents(), empty());
-		assertThat(reducedThesaurusConcept.getStatus(), is(ConceptStatusEnum.CANDIDATE));
+		reducedThesaurusConcept1.setAssociates(new ArrayList<ReducedThesaurusConcept>());
+		reducedThesaurusConcept1.setIdentifier("data");
+		reducedThesaurusConcept1.setNotes(new ArrayList<Note>());
+		reducedThesaurusConcept1.setParents(new ArrayList<ReducedThesaurusConcept>());
+		reducedThesaurusConcept1.setStatus(ConceptStatusEnum.CANDIDATE);
+		assertThat(reducedThesaurusConcept1.getAssociates(), empty());
+		assertThat(reducedThesaurusConcept1.getIdentifier(), is("data"));
+		assertThat(reducedThesaurusConcept1.getNotes(), empty());
+		assertThat(reducedThesaurusConcept1.getParents(), empty());
+		assertThat(reducedThesaurusConcept1.getStatus(), is(ConceptStatusEnum.CANDIDATE));
 	}
 
 	@Test

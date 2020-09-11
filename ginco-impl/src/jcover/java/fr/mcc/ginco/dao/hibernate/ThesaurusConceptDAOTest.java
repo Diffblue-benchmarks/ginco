@@ -79,6 +79,30 @@ public class ThesaurusConceptDAOTest {
 	}
 
 	@Test
+	public void countConceptsAlignedToIntThesReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
+		List list = new ArrayList();
+		list.add(1L);
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria2);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria3);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		thesaurusConceptDAO.setSessionFactory(sessionFactory);
+		assertEquals(1L, (long) thesaurusConceptDAO.countConceptsAlignedToIntThes("1234"));
+	}
+
+	@Test
 	public void countConceptsAlignedToExtThesIdThesaurusIsHelloReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList();
@@ -100,5 +124,29 @@ public class ThesaurusConceptDAOTest {
 			.thenReturn(session);
 		thesaurusConceptDAO.setSessionFactory(sessionFactory);
 		assertEquals(1L, (long) thesaurusConceptDAO.countConceptsAlignedToExtThes("hello"));
+	}
+
+	@Test
+	public void countConceptsAlignedToMyThesReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
+		List list = new ArrayList();
+		list.add(1L);
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria2);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria3);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		thesaurusConceptDAO.setSessionFactory(sessionFactory);
+		assertEquals(1L, (long) thesaurusConceptDAO.countConceptsAlignedToMyThes("1234"));
 	}
 }

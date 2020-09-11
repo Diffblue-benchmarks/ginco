@@ -3,7 +3,6 @@ package fr.mcc.ginco.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.dao.IThesaurusDAO;
@@ -12,13 +11,10 @@ import fr.mcc.ginco.exports.IGincoThesaurusExportService;
 import fr.mcc.ginco.exports.ISKOSExportService;
 import fr.mcc.ginco.helpers.ThesaurusHelper;
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -78,12 +74,5 @@ public class ThesaurusServiceImplTest {
 		assertNull(result.isArchived());
 		assertNull(result.isDefaultTopConcept());
 		assertNull(result.isPolyHierarchical());
-	}
-
-	@Test
-	public void getThesaurusListReturnsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
-		when(thesaurusDAO.findAll(Mockito.<String>any(), Mockito.<fr.mcc.ginco.dao.IGenericDAO.SortingTypes>any()))
-			.thenReturn(new ArrayList<Object>());
-		assertTrue((service.getThesaurusList()).isEmpty());
 	}
 }

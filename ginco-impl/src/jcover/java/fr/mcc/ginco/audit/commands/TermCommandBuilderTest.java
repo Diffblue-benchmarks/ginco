@@ -44,15 +44,6 @@ public class TermCommandBuilderTest {
 	}
 
 	@Test
-	public void buildChangedTermsLinesCurrentTermsIsEmptyAndPreviousTermsIsEmptyReturnsEmpty() {
-		when(mistralStructuresBuilder.getNotPreferredTermsByTerm(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(new HashMap<String, List<ThesaurusTerm>>());
-		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(new HashMap<String, ThesaurusTerm>());
-		assertTrue((service.buildChangedTermsLines(new ArrayList<ThesaurusTerm>(), new ArrayList<ThesaurusTerm>())).isEmpty());
-	}
-
-	@Test
 	public void buildDeletedTermsLinesCurrentTermsIsEmptyAndPreviousTermsIsEmptyReturnsEmpty() {
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, ThesaurusTerm>());

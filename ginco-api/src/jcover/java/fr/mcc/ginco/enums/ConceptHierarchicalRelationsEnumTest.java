@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class ConceptHierarchicalRelationsEnumTest {
 
 	@Test
-	void valuesReturnsNORELATIONSPARENTCHILD() {
+	void valuesReturnsNorelationsParentChild() {
 		ConceptHierarchicalRelationsEnum[] result =
 			 ConceptHierarchicalRelationsEnum.values();
 		assertThat(result[0], is(ConceptHierarchicalRelationsEnum.NORELATIONS));

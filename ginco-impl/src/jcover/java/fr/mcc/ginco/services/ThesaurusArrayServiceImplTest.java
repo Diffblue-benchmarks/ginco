@@ -50,32 +50,4 @@ public class ThesaurusArrayServiceImplTest {
 			.thenReturn(new ArrayList<ThesaurusArray>());
 		assertTrue((service.getAllThesaurusArrayByThesaurusId("1234", "1234")).isEmpty());
 	}
-
-	@Test
-	public void getArraysWithoutParentArrayReturnsEmpty() {
-		when(thesaurusArrayDAO.getArraysWithoutParentArray(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusArray>());
-		assertTrue((service.getArraysWithoutParentArray("1234")).isEmpty());
-	}
-
-	@Test
-	public void getArraysWithoutParentConceptReturnsEmpty() {
-		when(thesaurusArrayDAO.getArraysWithoutSuperordinatedConcept(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusArray>());
-		assertTrue((service.getArraysWithoutParentConcept("1234")).isEmpty());
-	}
-
-	@Test
-	public void getChildrenArraysReturnsEmpty() {
-		when(thesaurusArrayDAO.getChildrenArrays(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusArray>());
-		assertTrue((service.getChildrenArrays("1234")).isEmpty());
-	}
-
-	@Test
-	public void getSubOrdinatedArraysReturnsEmpty() {
-		when(thesaurusArrayDAO.getConceptSuperOrdinateArrays(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusArray>());
-		assertTrue((service.getSubOrdinatedArrays("1234")).isEmpty());
-	}
 }

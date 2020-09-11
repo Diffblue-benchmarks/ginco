@@ -45,8 +45,12 @@ class ReducedThesaurusTermTest {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
-		term.setConcept(new ThesaurusConcept());
-		term.setLanguage(new Language());
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		term.setConcept(concept);
+		Language language = new Language();
+		language.setId("1234");
+		term.setLanguage(language);
 		term.setLexicalValue("value");
 		term.setStatus(1);
 
@@ -55,9 +59,9 @@ class ReducedThesaurusTermTest {
 			 ReducedThesaurusTerm.getReducedThesaurusTerm(term);
 
 		// assert
-		assertThat(result.getConceptId(), is(nullValue()));
+		assertThat(result.getConceptId(), is("data"));
 		assertThat(result.getIdentifier(), is(nullValue()));
-		assertThat(result.getLanguageId(), is(nullValue()));
+		assertThat(result.getLanguageId(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getNotes(), is(nullValue()));
 		assertThat(result.getStatus(), is(TermStatusEnum.VALIDATED));

@@ -13,7 +13,6 @@ import fr.mcc.ginco.services.IThesaurusTermService;
 import fr.mcc.ginco.skos.namespaces.GINCO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,21 +43,9 @@ public class SKOSTermsExporterTest {
 	}
 
 	@Test
-	public void exportConceptNotPreferredTerms1() {
+	public void exportConceptNotPreferredTermsModelIsEmpty() {
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusTerm>());
-		Model model = ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, GINCO.getResource("BASIC")));
-	}
-
-	@Test
-	public void exportConceptNotPreferredTerms2() {
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setPrefered(true);
-		list.add(thesaurusTerm);
-		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(list);
 		Model model = ModelFactory.createDefaultModel();
 		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, GINCO.getResource("BASIC")));
 	}

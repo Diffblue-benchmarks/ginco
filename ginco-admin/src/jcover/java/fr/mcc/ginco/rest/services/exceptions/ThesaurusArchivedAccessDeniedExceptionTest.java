@@ -17,8 +17,8 @@ class ThesaurusArchivedAccessDeniedExceptionTest {
 	@Test
 	void factory() {
 		ThesaurusArchivedAccessDeniedException thesaurusArchivedAccessDeniedException =
-			 new ThesaurusArchivedAccessDeniedException("jpg");
+			 new ThesaurusArchivedAccessDeniedException("foo");
 		assertThat(thesaurusArchivedAccessDeniedException.getCause(), is(nullValue()));
-		assertThat(thesaurusArchivedAccessDeniedException.getMessage(), is("jpg"));
+		assertThat(thesaurusArchivedAccessDeniedException.getMessage(), is("foo"));
 	}
 }

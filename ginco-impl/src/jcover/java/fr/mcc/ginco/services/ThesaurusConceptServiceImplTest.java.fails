@@ -1,11 +1,8 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
-import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IAssociativeRelationshipDAO;
 import fr.mcc.ginco.dao.IAssociativeRelationshipRoleDAO;
@@ -81,27 +78,6 @@ public class ThesaurusConceptServiceImplTest {
 	public void calculateChildrenRoot() {
 		service.calculateChildrenRoot("1234");
 		Mockito.verify(conceptHierarchicalRelationshipServiceUtil).calculateChildrenRoots(ArgumentMatchers.eq("1234"), ArgumentMatchers.eq("1234"));
-	}
-
-	@Test
-	public void getAllConceptsReturnsEmpty() {
-		when(thesaurusConceptDAO.findAll())
-			.thenReturn(new ArrayList<Object>());
-		assertTrue((service.getAllConcepts()).isEmpty());
-	}
-
-	@Test
-	public void getAvailableConceptsOfGroupLikeIsHelloReturnsEmpty() {
-		when(thesaurusConceptDAO.getPaginatedAvailableConceptsOfGroup(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		assertTrue((service.getAvailableConceptsOfGroup("1234", "1234", "hello")).isEmpty());
-	}
-
-	@Test
-	public void getChildrenByConceptIdMaxResultsIsOneReturnsEmpty() {
-		when(thesaurusConceptDAO.getChildrenConcepts(Mockito.<String>any(), anyInt(), Mockito.<String>any(), Mockito.<fr.mcc.ginco.enums.ConceptStatusEnum>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		assertTrue((service.getChildrenByConceptId("1234", 1, "1234")).isEmpty());
 	}
 
 	@Test

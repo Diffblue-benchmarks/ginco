@@ -26,27 +26,27 @@ class GincoExportedEntityTest {
 
 	@Test
 	void factory() {
-		GincoExportedEntity gincoExportedEntity = new GincoExportedBranch();
+		GincoExportedEntity gincoExportedEntity = new GincoExportedEntity();
 		gincoExportedEntity.setConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>());
 		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x11 =
+		JaxbList<CustomConceptAttribute> x289 =
 			 new JaxbList<CustomConceptAttribute>();
-		conceptAttributes.put("foo", x11);
+		conceptAttributes.put("foo", x289);
 		gincoExportedEntity.setConceptAttributes(conceptAttributes);
 		gincoExportedEntity.setConcepts(new ArrayList<ThesaurusConcept>());
 		gincoExportedEntity.setTermAttributeTypes(new ArrayList<CustomTermAttributeType>());
 		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		JaxbList<CustomTermAttribute> x52 = new JaxbList<CustomTermAttribute>();
-		termAttributes.put("foo", x52);
+		JaxbList<CustomTermAttribute> x390 = new JaxbList<CustomTermAttribute>();
+		termAttributes.put("foo", x390);
 		gincoExportedEntity.setTermAttributes(termAttributes);
 		gincoExportedEntity.setTerms(new ArrayList<ThesaurusTerm>());
 		assertThat(gincoExportedEntity.getConceptAttributeTypes(), empty());
-		assertThat(gincoExportedEntity.getConceptAttributes().get("foo"), sameInstance(x11));
+		assertThat(gincoExportedEntity.getConceptAttributes().get("foo"), sameInstance(x289));
 		assertThat(gincoExportedEntity.getConcepts(), empty());
 		assertThat(gincoExportedEntity.getTermAttributeTypes(), empty());
-		assertThat(gincoExportedEntity.getTermAttributes().get("foo"), sameInstance(x52));
+		assertThat(gincoExportedEntity.getTermAttributes().get("foo"), sameInstance(x390));
 		assertThat(gincoExportedEntity.getTerms(), empty());
 	}
 }

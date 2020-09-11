@@ -47,16 +47,16 @@ public class ThesaurusConceptGroupLabelDAOTest {
 			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created =
+		Date created4 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setCreated(created);
+		thesaurusConceptGroupLabel.setCreated(created4);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified =
+		Date modified2 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setModified(modified);
+		thesaurusConceptGroupLabel.setModified(modified2);
 		list.add(thesaurusConceptGroupLabel);
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
@@ -78,11 +78,11 @@ public class ThesaurusConceptGroupLabelDAOTest {
 
 		// assert
 		assertSame(conceptGroup, result.getConceptGroup());
-		assertSame(created, result.getCreated());
+		assertSame(created4, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified, result.getModified());
+		assertSame(modified2, result.getModified());
 	}
 
 	@Test
@@ -95,16 +95,16 @@ public class ThesaurusConceptGroupLabelDAOTest {
 			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created =
+		Date created4 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setCreated(created);
+		thesaurusConceptGroupLabel.setCreated(created4);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified =
+		Date modified2 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setModified(modified);
+		thesaurusConceptGroupLabel.setModified(modified2);
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -125,10 +125,10 @@ public class ThesaurusConceptGroupLabelDAOTest {
 
 		// assert
 		assertSame(conceptGroup, result.getConceptGroup());
-		assertSame(created, result.getCreated());
+		assertSame(created4, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified, result.getModified());
+		assertSame(modified2, result.getModified());
 	}
 }

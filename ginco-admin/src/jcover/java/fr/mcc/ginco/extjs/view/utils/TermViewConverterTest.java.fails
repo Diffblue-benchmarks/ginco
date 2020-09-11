@@ -64,16 +64,22 @@ class TermViewConverterTest {
 		// arrange
 		ThesaurusTerm source1 = new ThesaurusTerm();
 		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source1.setHidden(true);
+		source1.setHidden(false);
 		source1.setIdentifier("data");
-		source1.setLanguage(new Language());
+		Language language = new Language();
+		language.setId("1234");
+		source1.setLanguage(language);
 		source1.setLexicalValue("value");
 		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setPrefered(false);
-		source1.setRole(new ThesaurusTermRole());
+		ThesaurusTermRole role = new ThesaurusTermRole();
+		role.setCode("DE");
+		source1.setRole(role);
 		source1.setSource("foo");
 		source1.setStatus(1);
-		source1.setThesaurus(new Thesaurus());
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setIdentifier("data");
+		source1.setThesaurus(thesaurus2);
 
 		// act
 		ThesaurusTermView result = service.convert(source1);
@@ -82,16 +88,16 @@ class TermViewConverterTest {
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getConceptsPath(), is(nullValue()));
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getHidden(), is(true));
+		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getPrefered(), is(false));
-		assertThat(result.getRole(), is(nullValue()));
+		assertThat(result.getRole(), is("DE"));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getTopistopterm(), is(nullValue()));
 	}
 
@@ -108,7 +114,9 @@ class TermViewConverterTest {
 		source1.setPrefered(false);
 		source1.setSource("foo");
 		source1.setStatus(1);
-		source1.setThesaurus(new Thesaurus());
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setIdentifier("data");
+		source1.setThesaurus(thesaurus2);
 
 		// act
 		ThesaurusTermView result = service.convert(source1);
@@ -126,7 +134,7 @@ class TermViewConverterTest {
 		assertThat(result.getRole(), is(nullValue()));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getTopistopterm(), is(nullValue()));
 	}
 
@@ -138,13 +146,17 @@ class TermViewConverterTest {
 		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setHidden(false);
 		source1.setIdentifier("data");
-		source1.setLanguage(new Language());
+		Language language = new Language();
+		language.setId("1234");
+		source1.setLanguage(language);
 		source1.setLexicalValue("value");
 		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setPrefered(false);
 		source1.setSource("foo");
 		source1.setStatus(1);
-		source1.setThesaurus(new Thesaurus());
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setIdentifier("data");
+		source1.setThesaurus(thesaurus2);
 
 		// act
 		ThesaurusTermView result = service.convert(source1);
@@ -155,14 +167,14 @@ class TermViewConverterTest {
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
 		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getPrefered(), is(false));
 		assertThat(result.getRole(), is(nullValue()));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getTopistopterm(), is(nullValue()));
 	}
 

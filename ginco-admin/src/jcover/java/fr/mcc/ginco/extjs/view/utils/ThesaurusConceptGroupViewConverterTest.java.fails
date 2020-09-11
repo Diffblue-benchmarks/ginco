@@ -4,15 +4,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
-import fr.mcc.ginco.beans.Language;
-import fr.mcc.ginco.beans.Thesaurus;
-import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusConceptGroup;
-import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
-import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptGroupView;
 import fr.mcc.ginco.services.IThesaurusConceptGroupLabelService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupService;
@@ -20,13 +14,10 @@ import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusService;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -62,53 +53,6 @@ class ThesaurusConceptGroupViewConverterTest {
 
 	@Autowired
 	private ThesaurusConceptGroupViewConverter service;
-
-	@Test
-	void convert() throws java.text.ParseException {
-
-		// arrange
-		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
-			.thenReturn("foo");
-		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
-			 new ThesaurusConceptGroupLabel();
-		thesaurusConceptGroupLabel.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConceptGroupLabel.setIdentifier(1);
-		Language language = new Language();
-		language.setId("1234");
-		thesaurusConceptGroupLabel.setLanguage(language);
-		thesaurusConceptGroupLabel.setLexicalValue("value");
-		thesaurusConceptGroupLabel.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		when(thesaurusConceptGroupLabelService.getByThesaurusConceptGroupAndLanguage(Mockito.<String>any()))
-			.thenReturn(thesaurusConceptGroupLabel);
-		ThesaurusConceptGroup source = new ThesaurusConceptGroup();
-		source.setConceptGroupType(new ThesaurusConceptGroupType());
-		source.setConcepts(new HashSet<ThesaurusConcept>());
-		source.setIdentifier("data");
-		source.setIsDynamic(false);
-		source.setNotation("DE");
-		source.setParentConcept(new ThesaurusConcept());
-		source.setThesaurus(new Thesaurus());
-
-		// act
-		ThesaurusConceptGroupView result = service.convert(source);
-
-		// assert
-		assertThat(result.getConcepts(), empty());
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getGroupConceptLabelId(), is(1));
-		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getIsDynamic(), is(false));
-		assertThat(result.getLabel(), is("value"));
-		assertThat(result.getLanguage(), is("1234"));
-		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
-		assertThat(result.getNotation(), is("DE"));
-		assertThat(result.getParentConceptId(), is(nullValue()));
-		assertThat(result.getParentConceptLabel(), is("foo"));
-		assertThat(result.getParentGroupId(), is(nullValue()));
-		assertThat(result.getParentGroupLabel(), is(nullValue()));
-		assertThat(result.getThesaurusId(), is(nullValue()));
-		assertThat(result.getType(), is(nullValue()));
-	}
 
 	@Test
 	void convertGroupsIsEmptyReturnsEmpty() {

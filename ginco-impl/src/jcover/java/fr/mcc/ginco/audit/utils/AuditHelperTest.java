@@ -34,10 +34,10 @@ public class AuditHelperTest {
 	}
 
 	@Test
-	public void getConceptChildrenAtRevisionRevisionNumberIsZeroReturnsEmpty() {
+	public void getConceptChildrenAtRevisionRevisionNumberIsOneReturnsEmpty() {
 		ArrayList<ThesaurusConcept> allThesaurusConcepts =
 			 new ArrayList<ThesaurusConcept>();
 		allThesaurusConcepts.add(new ThesaurusConcept());
-		assertTrue((service.getConceptChildrenAtRevision(0, new ThesaurusConcept(), allThesaurusConcepts)).isEmpty());
+		assertTrue((service.getConceptChildrenAtRevision(1, new ThesaurusConcept(), allThesaurusConcepts)).isEmpty());
 	}
 }

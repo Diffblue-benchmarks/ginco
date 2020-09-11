@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -41,14 +40,5 @@ public class ConceptIndexerServiceImplTest {
 		when(solrServer.commit())
 			.thenReturn(new UpdateResponse());
 		service.addConcepts(new ArrayList<ThesaurusConcept>());
-	}
-
-	@Test
-	public void removeConcept() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
-		when(solrServer.commit())
-			.thenReturn(new UpdateResponse());
-		when(solrServer.deleteById(Mockito.<String>any()))
-			.thenReturn(new UpdateResponse());
-		service.removeConcept(new ThesaurusConcept());
 	}
 }

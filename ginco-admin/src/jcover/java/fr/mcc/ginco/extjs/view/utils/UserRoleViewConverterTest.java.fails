@@ -1,7 +1,6 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 
 import fr.mcc.ginco.beans.Role;
@@ -44,7 +43,9 @@ class UserRoleViewConverterTest {
 		UserRole userRole = new UserRole();
 		userRole.setIdentifier(1);
 		userRole.setRole(Role.MANAGER);
-		userRole.setThesaurus(new Thesaurus());
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		userRole.setThesaurus(thesaurus);
 		userRole.setUsername("John Smith");
 
 		// act
@@ -53,7 +54,7 @@ class UserRoleViewConverterTest {
 		// assert
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRole(), is(0));
-		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getUsername(), is("John Smith"));
 	}
 }

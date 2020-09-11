@@ -1,12 +1,8 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
-import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.beans.AlignmentConcept;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.pojo.AlignmentConceptView;
@@ -14,7 +10,6 @@ import fr.mcc.ginco.services.IThesaurusConceptService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -37,13 +32,15 @@ class AlignmentConceptViewConverterTest {
 	private AlignmentConceptViewConverter service;
 
 	@Test
-	void convertAlignmentConcept1() {
+	void convertAlignmentConcept() {
 
 		// arrange
 		AlignmentConcept alignmentConcept = new AlignmentConcept();
 		alignmentConcept.setExternalTargetConcept("hello");
 		alignmentConcept.setIdentifier(1);
-		alignmentConcept.setInternalTargetConcept(new ThesaurusConcept());
+		ThesaurusConcept internalTargetConcept = new ThesaurusConcept();
+		internalTargetConcept.setIdentifier("data");
+		alignmentConcept.setInternalTargetConcept(internalTargetConcept);
 
 		// act
 		AlignmentConceptView result =
@@ -52,68 +49,6 @@ class AlignmentConceptViewConverterTest {
 		// assert
 		assertThat(result.getExternalTargetConcept(), is("hello"));
 		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getInternalTargetConcept(), is(nullValue()));
-	}
-
-	@Test
-	void convertAlignmentConcept2() {
-
-		// arrange
-		AlignmentConcept alignmentConcept = new AlignmentConcept();
-		alignmentConcept.setExternalTargetConcept("hello");
-		alignmentConcept.setIdentifier(1);
-
-		// act
-		AlignmentConceptView result =
-			 service.convertAlignmentConcept(alignmentConcept);
-
-		// assert
-		assertThat(result.getExternalTargetConcept(), is("hello"));
-		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getInternalTargetConcept(), is(nullValue()));
-	}
-
-	@Test
-	void convertAlignmentConceptView1() {
-
-		// arrange
-		AlignmentConceptView alignmentConceptView = new AlignmentConceptView();
-		alignmentConceptView.setExternalTargetConcept("hello");
-		alignmentConceptView.setIdentifier(1);
-		Alignment alignment = new Alignment();
-
-		// act
-		AlignmentConcept result =
-			 service.convertAlignmentConceptView(alignmentConceptView, alignment);
-
-		// assert
-		assertThat(result.getAlignment(), sameInstance(alignment));
-		assertThat(result.getExternalTargetConcept(), is("hello"));
-		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getInternalTargetConcept(), is(nullValue()));
-	}
-
-	@Test
-	void convertAlignmentConceptView2() {
-
-		// arrange
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
-			.thenReturn(thesaurusConcept);
-		AlignmentConceptView alignmentConceptView = new AlignmentConceptView();
-		alignmentConceptView.setExternalTargetConcept("hello");
-		alignmentConceptView.setIdentifier(1);
-		alignmentConceptView.setInternalTargetConcept("hello");
-		Alignment alignment = new Alignment();
-
-		// act
-		AlignmentConcept result =
-			 service.convertAlignmentConceptView(alignmentConceptView, alignment);
-
-		// assert
-		assertThat(result.getAlignment(), sameInstance(alignment));
-		assertThat(result.getExternalTargetConcept(), is("hello"));
-		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getInternalTargetConcept(), sameInstance(thesaurusConcept));
+		assertThat(result.getInternalTargetConcept(), is("data"));
 	}
 }

@@ -58,23 +58,32 @@ class AlignmentViewConverterTest {
 	void convertAlignment1() throws java.text.ParseException {
 
 		// arrange
+		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
+		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
+			.thenReturn(externalThesaurusView);
 		Alignment alignment = new Alignment();
-		alignment.setAlignmentType(new AlignmentType());
+		AlignmentType alignmentType = new AlignmentType();
+		alignmentType.setIdentifier(1);
+		alignment.setAlignmentType(alignmentType);
 		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
 		alignment.setIdentifier("data");
-		alignment.setInternalTargetThesaurus(new Thesaurus());
+		Thesaurus internalTargetThesaurus = new Thesaurus();
+		internalTargetThesaurus.setIdentifier("data");
+		alignment.setInternalTargetThesaurus(internalTargetThesaurus);
 		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 
 		// act
 		AlignmentView result = service.convertAlignment(alignment);
 
 		// assert
-		assertThat(result.getAlignmentType(), is(nullValue()));
+		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getExternalThesaurus(), is(nullValue()));
+		assertThat(result.getExternalThesaurus().size(), is(1));
+		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getInternalThesaurusId(), is(nullValue()));
+		assertThat(result.getInternalThesaurusId(), is("data"));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));
@@ -84,58 +93,27 @@ class AlignmentViewConverterTest {
 	void convertAlignment2() throws java.text.ParseException {
 
 		// arrange
-		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
-		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
-			.thenReturn(externalThesaurusView);
 		Alignment alignment = new Alignment();
-		alignment.setAlignmentType(new AlignmentType());
+		AlignmentType alignmentType = new AlignmentType();
+		alignmentType.setIdentifier(1);
+		alignment.setAlignmentType(alignmentType);
 		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
 		alignment.setIdentifier("data");
-		alignment.setInternalTargetThesaurus(new Thesaurus());
+		Thesaurus internalTargetThesaurus = new Thesaurus();
+		internalTargetThesaurus.setIdentifier("data");
+		alignment.setInternalTargetThesaurus(internalTargetThesaurus);
 		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 
 		// act
 		AlignmentView result = service.convertAlignment(alignment);
 
 		// assert
-		assertThat(result.getAlignmentType(), is(nullValue()));
+		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getExternalThesaurus().size(), is(1));
-		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
+		assertThat(result.getExternalThesaurus(), is(nullValue()));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getInternalThesaurusId(), is(nullValue()));
-		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
-		assertThat(result.getTargetConcepts(), empty());
-		assertThat(result.getTargetResources(), is(nullValue()));
-	}
-
-	@Test
-	void convertAlignment3() throws java.text.ParseException {
-
-		// arrange
-		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
-		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
-			.thenReturn(externalThesaurusView);
-		Alignment alignment = new Alignment();
-		alignment.setAlignmentType(new AlignmentType());
-		alignment.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
-		alignment.setIdentifier("data");
-		alignment.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-
-		// act
-		AlignmentView result = service.convertAlignment(alignment);
-
-		// assert
-		assertThat(result.getAlignmentType(), is(nullValue()));
-		assertThat(result.getAndRelation(), is(false));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getExternalThesaurus().size(), is(1));
-		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
-		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getInternalThesaurusId(), is(nullValue()));
+		assertThat(result.getInternalThesaurusId(), is("data"));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));

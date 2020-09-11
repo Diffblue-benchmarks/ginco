@@ -4,29 +4,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.NodeLabel;
-import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
-import fr.mcc.ginco.beans.ThesaurusArrayConcept;
-import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.pojo.NodeLabelView;
-import fr.mcc.ginco.extjs.view.pojo.ThesaurusArrayConceptView;
-import fr.mcc.ginco.extjs.view.pojo.ThesaurusArrayView;
 import fr.mcc.ginco.services.ILanguagesService;
 import fr.mcc.ginco.services.INodeLabelService;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,89 +42,30 @@ class NodeLabelViewConverterTest {
 	private NodeLabelViewConverter service;
 
 	@Test
-	void convert1() throws java.text.ParseException {
+	void convert() throws java.text.ParseException {
 
 		// arrange
-		NodeLabel source = new NodeLabel();
-		source.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source.setIdentifier(1);
-		source.setLanguage(new Language());
-		source.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source.setThesaurusArray(new ThesaurusArray());
+		NodeLabel source1 = new NodeLabel();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier(1);
+		Language language = new Language();
+		language.setId("1234");
+		source1.setLanguage(language);
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusArray thesaurusArray = new ThesaurusArray();
+		thesaurusArray.setIdentifier("data");
+		source1.setThesaurusArray(thesaurusArray);
 
 		// act
-		NodeLabelView result = service.convert(source);
+		NodeLabelView result = service.convert(source1);
 
 		// assert
 		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
 		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is(nullValue()));
 		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
-		assertThat(result.getThesaurusArrayId(), is(nullValue()));
-	}
-
-	@Test
-	void convert2() throws java.text.ParseException {
-
-		// arrange
-		NodeLabel nodeLabel = new NodeLabel();
-		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		nodeLabel.setCreated(created1);
-		nodeLabel.setIdentifier(1);
-		Language language1 = new Language();
-		language1.setId("1234");
-		language1.setPart1("foo");
-		language1.setPrincipalLanguage(false);
-		language1.setRefname("foo");
-		language1.setTopLanguage(false);
-		nodeLabel.setLanguage(language1);
-		nodeLabel.setLexicalValue("value");
-		nodeLabel.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		thesaurusArray.setConcepts(new HashSet<ThesaurusArrayConcept>());
-		thesaurusArray.setIdentifier("data");
-		thesaurusArray.setNotation("DE");
-		thesaurusArray.setOrdered(false);
-		thesaurusArray.setSuperOrdinateConcept(new ThesaurusConcept());
-		thesaurusArray.setThesaurus(new Thesaurus());
-		nodeLabel.setThesaurusArray(thesaurusArray);
-		when(nodeLabelService.getById(Mockito.<Integer>any()))
-			.thenReturn(nodeLabel);
-		Language language2 = new Language();
-		language2.setId("1234");
-		language2.setPart1("foo");
-		language2.setPrincipalLanguage(false);
-		language2.setRefname("foo");
-		language2.setTopLanguage(false);
-		when(languagesService.getLanguageById(Mockito.<String>any()))
-			.thenReturn(language2);
-		ThesaurusArrayView thesaurusConceptViewJAXBElement =
-			 new ThesaurusArrayView();
-		thesaurusConceptViewJAXBElement.setConcepts(new ArrayList<ThesaurusArrayConceptView>());
-		thesaurusConceptViewJAXBElement.setCreated("foo");
-		thesaurusConceptViewJAXBElement.setIdentifier("data");
-		thesaurusConceptViewJAXBElement.setLabel("label");
-		thesaurusConceptViewJAXBElement.setLanguage("foo");
-		thesaurusConceptViewJAXBElement.setModified("foo");
-		thesaurusConceptViewJAXBElement.setNodeLabelId(1);
-		thesaurusConceptViewJAXBElement.setOrder(false);
-		thesaurusConceptViewJAXBElement.setParentArrayId("1234");
-		thesaurusConceptViewJAXBElement.setParentArrayLabel("label");
-		thesaurusConceptViewJAXBElement.setSuperOrdinateId("1234");
-		thesaurusConceptViewJAXBElement.setSuperOrdinateLabel("label");
-		thesaurusConceptViewJAXBElement.setThesaurusId("1234");
-
-		// act
-		NodeLabel result = service.convert(thesaurusConceptViewJAXBElement);
-
-		// assert
-		assertThat(result.getCreated(), sameInstance(created1));
-		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getLanguage(), sameInstance(language2));
-		assertThat(result.getLexicalValue(), is("label"));
-		assertThat(Math.abs(result.getModified().getTime()-new Date().getTime())<=10_000L, is(true));
-		assertThat(result.getThesaurusArray(), sameInstance(thesaurusArray));
+		assertThat(result.getThesaurusArrayId(), is("data"));
 	}
 
 	@Test

@@ -13,7 +13,7 @@ import org.junit.Test;
 public class JournalEventsEnumTest {
 
 	@Test
-	public void valuesReturnsTHESAURUS_CREATEDTHESAURUSTERM_CREATEDTHESAURUSTERM_DELETEDTHESAURUSCONCEPT_CREATEDTHESAURUSTERM_ROLE_UPDATETHESAURUSTERM_LEXICAL_VALUE_UPDATETHESAURUSTERM_LINKED_TO_CONCEPTTHESAURUSCONCEPT_HIERARCHY_UPDATETHESAURUSCONCEPT_STATUS_UPDATE() {
+	public void valuesReturnsThesaurus_createdThesaurusterm_createdThesaurusterm_deletedThesaurusconcept_createdThesaurusterm_role_updateThesaurusterm_lexical_value_updateThesaurusterm_linked_to_conceptThesaurusconcept_hierarchy_updateThesaurusconcept_status_update() {
 		JournalEventsEnum[] result = JournalEventsEnum.values();
 		assertTrue(JournalEventsEnum.THESAURUS_CREATED == result[0]);
 		assertTrue(JournalEventsEnum.THESAURUSTERM_CREATED == result[1]);

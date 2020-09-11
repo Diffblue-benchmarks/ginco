@@ -1,14 +1,11 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomConceptAttributeType;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.ICustomConceptAttributeDAO;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,12 +37,5 @@ public class CustomConceptAttributeServiceImplTest {
 		when(customConceptAttributeDAO.getAttributeByType(Mockito.<Object>any(), Mockito.<fr.mcc.ginco.beans.generic.GenericCustomAttributeType>any()))
 			.thenReturn(new Object());
 		assertNull(service.getAttributeByType(new ThesaurusConcept(), new CustomConceptAttributeType()));
-	}
-
-	@Test
-	public void getAttributesByEntityReturnsEmpty() {
-		when(customConceptAttributeDAO.getAttributesByEntity(Mockito.<Object>any()))
-			.thenReturn(new ArrayList<Object>());
-		assertTrue((service.getAttributesByEntity(new ThesaurusConcept())).isEmpty());
 	}
 }

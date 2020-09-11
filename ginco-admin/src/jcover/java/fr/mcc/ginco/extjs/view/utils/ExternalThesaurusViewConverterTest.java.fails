@@ -1,7 +1,6 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
@@ -45,7 +44,9 @@ class ExternalThesaurusViewConverterTest {
 		// arrange
 		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
 		externalThesaurus.setExternalId("1234");
-		externalThesaurus.setExternalThesaurusType(new ExternalThesaurusType());
+		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
+		externalThesaurusType.setIdentifier(1);
+		externalThesaurus.setExternalThesaurusType(externalThesaurusType);
 		externalThesaurus.setIdentifier(1);
 
 		// act
@@ -54,7 +55,7 @@ class ExternalThesaurusViewConverterTest {
 
 		// assert
 		assertThat(result.getExternalId(), is("1234"));
-		assertThat(result.getExternalThesaurusType(), is(nullValue()));
+		assertThat(result.getExternalThesaurusType(), is(1));
 		assertThat(result.getIdentifier(), is(1));
 	}
 

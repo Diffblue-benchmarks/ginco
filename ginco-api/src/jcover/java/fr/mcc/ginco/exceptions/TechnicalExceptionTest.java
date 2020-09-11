@@ -18,9 +18,10 @@ class TechnicalExceptionTest {
 	void factory() {
 		Exception cause = new Exception();
 		cause.setStackTrace(new StackTraceElement[] { });
-		TechnicalException technicalException = new TechnicalException("jpg", cause);
+		TechnicalException technicalException =
+			 new TechnicalException("an error has happened", cause);
 		assertThat(technicalException.getCause().getCause(), is(nullValue()));
 		assertThat(technicalException.getCause().getMessage(), is(nullValue()));
-		assertThat(technicalException.getMessage(), is("jpg"));
+		assertThat(technicalException.getMessage(), is("an error has happened"));
 	}
 }

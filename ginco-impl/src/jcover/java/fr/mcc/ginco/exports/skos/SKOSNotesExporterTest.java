@@ -42,14 +42,6 @@ public class SKOSNotesExporterTest {
 
 	@Test
 	public void exportNotes1() {
-		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(new ArrayList<Note>());
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
-		assertSame(model, service.exportNotes(model, new ArrayList<ThesaurusTerm>(), new ThesaurusConcept()));
-	}
-
-	@Test
-	public void exportNotes2() {
 		List<Note> list = new ArrayList<Note>();
 		Note note = new Note();
 		note.setLanguage(new Language());
@@ -57,6 +49,14 @@ public class SKOSNotesExporterTest {
 		list.add(note);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(list);
+		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		assertSame(model, service.exportNotes(model, new ArrayList<ThesaurusTerm>(), new ThesaurusConcept()));
+	}
+
+	@Test
+	public void exportNotes2() {
+		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(new ArrayList<Note>());
 		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
 		assertSame(model, service.exportNotes(model, new ArrayList<ThesaurusTerm>(), new ThesaurusConcept()));
 	}

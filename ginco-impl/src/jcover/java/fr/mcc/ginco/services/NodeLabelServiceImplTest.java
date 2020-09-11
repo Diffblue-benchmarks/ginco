@@ -41,16 +41,16 @@ public class NodeLabelServiceImplTest {
 
 		// arrange
 		NodeLabel nodeLabel = new NodeLabel();
-		Date created =
+		Date created1 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		nodeLabel.setCreated(created);
+		nodeLabel.setCreated(created1);
 		nodeLabel.setIdentifier(1);
 		Language language = new Language();
 		nodeLabel.setLanguage(language);
 		nodeLabel.setLexicalValue("value");
-		Date modified =
+		Date modified1 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		nodeLabel.setModified(modified);
+		nodeLabel.setModified(modified1);
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		nodeLabel.setThesaurusArray(thesaurusArray);
 		when(nodeLabelDAO.getByThesaurusArray(Mockito.<String>any()))
@@ -60,11 +60,11 @@ public class NodeLabelServiceImplTest {
 		NodeLabel result = service.getByThesaurusArrayAndLanguage("bar");
 
 		// assert
-		assertSame(created, result.getCreated());
+		assertSame(created1, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified, result.getModified());
+		assertSame(modified1, result.getModified());
 		assertSame(thesaurusArray, result.getThesaurusArray());
 	}
 
@@ -73,16 +73,16 @@ public class NodeLabelServiceImplTest {
 
 		// arrange
 		NodeLabel nodeLabel = new NodeLabel();
-		Date created =
+		Date created1 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		nodeLabel.setCreated(created);
+		nodeLabel.setCreated(created1);
 		nodeLabel.setIdentifier(1);
 		Language language = new Language();
 		nodeLabel.setLanguage(language);
 		nodeLabel.setLexicalValue("value");
-		Date modified =
+		Date modified1 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		nodeLabel.setModified(modified);
+		nodeLabel.setModified(modified1);
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		nodeLabel.setThesaurusArray(thesaurusArray);
 		when(nodeLabelDAO.getByThesaurusArray(Mockito.<String>any()))
@@ -92,11 +92,11 @@ public class NodeLabelServiceImplTest {
 		NodeLabel result = service.getByThesaurusArray("bar");
 
 		// assert
-		assertSame(created, result.getCreated());
+		assertSame(created1, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified, result.getModified());
+		assertSame(modified1, result.getModified());
 		assertSame(thesaurusArray, result.getThesaurusArray());
 	}
 }

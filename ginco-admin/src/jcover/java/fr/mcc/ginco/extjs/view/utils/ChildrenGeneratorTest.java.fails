@@ -74,7 +74,12 @@ class ChildrenGeneratorTest {
 		thesaurus.setContributor("foo");
 		thesaurus.setCoverage("foo");
 		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus.setCreator(new ThesaurusOrganization());
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
@@ -88,7 +93,10 @@ class ChildrenGeneratorTest {
 		thesaurus.setSource("foo");
 		thesaurus.setSubject("foo");
 		thesaurus.setTitle("Mr");
-		thesaurus.setType(new ThesaurusType());
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusConcept.setThesaurus(thesaurus);
 		thesaurusConcept.setTopConcept(false);
@@ -103,7 +111,7 @@ class ChildrenGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("cddb283d-b48a-4981-827b-9596bb81d91b"));
+		assertThat(result.get(0).getId(), is("100695d7-eb45-41bb-be6f-2ad5316b05e1"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

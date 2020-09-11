@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class RoleTest {
 
 	@Test
-	void valuesReturnsMANAGEREXPERT() {
+	void valuesReturnsManagerExpert() {
 		Role[] result = Role.values();
 		assertThat(result[0], is(Role.MANAGER));
 		assertThat(result[1], is(Role.EXPERT));

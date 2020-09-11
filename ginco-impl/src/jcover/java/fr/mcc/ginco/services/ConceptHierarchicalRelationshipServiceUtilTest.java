@@ -47,10 +47,10 @@ public class ConceptHierarchicalRelationshipServiceUtilTest {
 	}
 
 	@Test
-	public void calculateChildrenRootsParentIdIsBar() {
+	public void calculateChildrenRoots() {
 		when(thesaurusConceptDAO.getChildrenConcepts(Mockito.<String>any(), anyInt(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
-		service.calculateChildrenRoots("bar", "1234");
+		service.calculateChildrenRoots("1234", "1234");
 	}
 
 	@Test

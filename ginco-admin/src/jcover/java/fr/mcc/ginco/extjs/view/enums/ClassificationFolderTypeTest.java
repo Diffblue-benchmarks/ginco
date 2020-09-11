@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class ClassificationFolderTypeTest {
 
 	@Test
-	void valuesReturnsROOTCONCEPTSSANDBOXCOMPLEXCONCEPTSORPHANSGROUPSARRAYS() {
+	void valuesReturnsRootConceptsSandboxComplexconceptsOrphansGroupsArrays() {
 		ClassificationFolderType[] result = ClassificationFolderType.values();
 		assertThat(result[0], is(ClassificationFolderType.ROOT));
 		assertThat(result[1], is(ClassificationFolderType.CONCEPTS));

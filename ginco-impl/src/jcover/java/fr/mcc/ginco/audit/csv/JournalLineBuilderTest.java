@@ -65,7 +65,7 @@ public class JournalLineBuilderTest {
 	}
 
 	@Test
-	public void buildLineBaseEventIsTHESAURUS_CREATED() {
+	public void buildLineBaseEventIsThesaurus_created() {
 
 		// arrange
 		GincoRevEntity gincoRevEntity = new GincoRevEntity();
@@ -125,7 +125,9 @@ public class JournalLineBuilderTest {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
-		term.setConcept(new ThesaurusConcept());
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		term.setConcept(concept);
 		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
@@ -137,7 +139,7 @@ public class JournalLineBuilderTest {
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
-		assertNull(result.getConceptId());
+		assertEquals("data", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSTERM_CREATED == result.getEventType());
 		assertNull(result.getNewGenericTerm());
@@ -155,7 +157,9 @@ public class JournalLineBuilderTest {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
-		term.setConcept(new ThesaurusConcept());
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		concept1.setIdentifier("data");
+		term.setConcept(concept1);
 		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
@@ -168,7 +172,7 @@ public class JournalLineBuilderTest {
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
-		assertNull(result.getConceptId());
+		assertEquals("data", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSTERM_LINKED_TO_CONCEPT == result.getEventType());
 		assertNull(result.getNewGenericTerm());
@@ -182,10 +186,13 @@ public class JournalLineBuilderTest {
 	}
 
 	@Test
-	public void buildTermLexicalValueChangedLine1() {
+	public void buildTermLexicalValueChangedLineOldLexicalValueIsValue() {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		term.setConcept(concept);
 		term.setIdentifier("data");
 		term.setLexicalValue("value");
 		GincoRevEntity revision = new GincoRevEntity();
@@ -198,38 +205,7 @@ public class JournalLineBuilderTest {
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
-		assertNull(result.getConceptId());
-		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
-		assertTrue(JournalEventsEnum.THESAURUSTERM_LEXICAL_VALUE_UPDATE == result.getEventType());
-		assertNull(result.getNewGenericTerm());
-		assertEquals("value", result.getNewLexicalValue());
-		assertNull(result.getOldGenericTerm());
-		assertEquals("value", result.getOldLexicalValue());
-		assertEquals(1, (int) result.getRevisionNumber());
-		assertNull(result.getStatus());
-		assertEquals("data", result.getTermId());
-		assertNull(result.getTermRole());
-	}
-
-	@Test
-	public void buildTermLexicalValueChangedLine2() {
-
-		// arrange
-		ThesaurusTerm term = new ThesaurusTerm();
-		term.setConcept(new ThesaurusConcept());
-		term.setIdentifier("data");
-		term.setLexicalValue("value");
-		GincoRevEntity revision = new GincoRevEntity();
-		revision.setUsername("entity");
-		revision.setId(1);
-
-		// act
-		JournalLine result =
-			 service.buildTermLexicalValueChangedLine(term, revision, "value");
-
-		// assert
-		assertEquals("entity", result.getAuthorId());
-		assertNull(result.getConceptId());
+		assertEquals("data", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSTERM_LEXICAL_VALUE_UPDATE == result.getEventType());
 		assertNull(result.getNewGenericTerm());
@@ -247,7 +223,9 @@ public class JournalLineBuilderTest {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
-		term.setConcept(new ThesaurusConcept());
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		term.setConcept(concept);
 		term.setIdentifier("data");
 		term.setPrefered(false);
 		GincoRevEntity revision = new GincoRevEntity();
@@ -259,7 +237,7 @@ public class JournalLineBuilderTest {
 
 		// assert
 		assertEquals("entity", result.getAuthorId());
-		assertNull(result.getConceptId());
+		assertEquals("data", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSTERM_ROLE_UPDATE == result.getEventType());
 		assertNull(result.getNewGenericTerm());
