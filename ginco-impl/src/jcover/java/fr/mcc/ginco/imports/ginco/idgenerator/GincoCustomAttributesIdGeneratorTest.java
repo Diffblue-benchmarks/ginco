@@ -44,7 +44,7 @@ public class GincoCustomAttributesIdGeneratorTest {
 		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
 		JaxbList<CustomConceptAttribute> x5 = new JaxbList<CustomConceptAttribute>();
-		customConceptAttributes.put("foo", x5);
+		customConceptAttributes.put("HmacMD5", x5);
 		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("bar"));
 	}
 
@@ -62,7 +62,7 @@ public class GincoCustomAttributesIdGeneratorTest {
 		list1.add(customConceptAttribute1);
 		JaxbList<CustomConceptAttribute> x5 =
 			 new JaxbList<CustomConceptAttribute>(list1);
-		customConceptAttributes.put("foo", x5);
+		customConceptAttributes.put("HmacMD5", x5);
 		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("foo"));
 	}
 
@@ -73,7 +73,7 @@ public class GincoCustomAttributesIdGeneratorTest {
 		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
 		JaxbList<CustomTermAttribute> x30 = new JaxbList<CustomTermAttribute>();
-		customTermAttributes.put("foo", x30);
+		customTermAttributes.put("HmacMD5", x30);
 		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("bar"));
 	}
 
@@ -88,7 +88,7 @@ public class GincoCustomAttributesIdGeneratorTest {
 		customTermAttribute1.setEntity(new ThesaurusTerm());
 		list1.add(customTermAttribute1);
 		JaxbList<CustomTermAttribute> x30 = new JaxbList<CustomTermAttribute>(list1);
-		customTermAttributes.put("foo", x30);
+		customTermAttributes.put("HmacMD5", x30);
 		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("foo"));
 	}
 }

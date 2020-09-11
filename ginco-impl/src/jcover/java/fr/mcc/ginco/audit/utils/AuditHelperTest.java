@@ -1,6 +1,7 @@
 package fr.mcc.ginco.audit.utils;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import fr.mcc.ginco.beans.ThesaurusConcept;
 
@@ -35,9 +36,10 @@ public class AuditHelperTest {
 
 	@Test
 	public void getConceptChildrenAtRevisionRevisionNumberIsOneReturnsEmpty() {
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
 		ArrayList<ThesaurusConcept> allThesaurusConcepts =
 			 new ArrayList<ThesaurusConcept>();
 		allThesaurusConcepts.add(new ThesaurusConcept());
-		assertTrue((service.getConceptChildrenAtRevision(1, new ThesaurusConcept(), allThesaurusConcepts)).isEmpty());
+		assertTrue((service.getConceptChildrenAtRevision(1, concept, allThesaurusConcepts)).isEmpty());
 	}
 }

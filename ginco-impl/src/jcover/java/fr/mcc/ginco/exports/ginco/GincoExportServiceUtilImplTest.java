@@ -57,11 +57,11 @@ public class GincoExportServiceUtilImplTest {
 		GincoExportedThesaurus thesaurusToExport = new GincoExportedThesaurus();
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
-		alignments.put("foo", new JaxbList<Alignment>());
+		alignments.put("HmacMD5", new JaxbList<Alignment>());
 		thesaurusToExport.setAlignments(alignments);
 		HashMap<String, JaxbList<AssociativeRelationship>> associativeRelationship1 =
 			 new HashMap<String, JaxbList<AssociativeRelationship>>();
-		associativeRelationship1.put("foo", new JaxbList<AssociativeRelationship>());
+		associativeRelationship1.put("HmacMD5", new JaxbList<AssociativeRelationship>());
 		thesaurusToExport.setAssociativeRelationship(associativeRelationship1);
 		ArrayList<SplitNonPreferredTerm> complexConcepts =
 			 new ArrayList<SplitNonPreferredTerm>();
@@ -81,7 +81,7 @@ public class GincoExportServiceUtilImplTest {
 		thesaurusToExport.setComplexConcepts(complexConcepts);
 		HashMap<String, JaxbList<NodeLabel>> conceptArrayLabels =
 			 new HashMap<String, JaxbList<NodeLabel>>();
-		conceptArrayLabels.put("foo", new JaxbList<NodeLabel>());
+		conceptArrayLabels.put("HmacMD5", new JaxbList<NodeLabel>());
 		thesaurusToExport.setConceptArrayLabels(conceptArrayLabels);
 		ArrayList<ThesaurusArray> conceptArrays1 = new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
@@ -107,7 +107,7 @@ public class GincoExportServiceUtilImplTest {
 		thesaurusToExport.setConceptArrays(conceptArrays1);
 		HashMap<String, JaxbList<ThesaurusConceptGroupLabel>> conceptGroupLabels =
 			 new HashMap<String, JaxbList<ThesaurusConceptGroupLabel>>();
-		conceptGroupLabels.put("foo", new JaxbList<ThesaurusConceptGroupLabel>());
+		conceptGroupLabels.put("HmacMD5", new JaxbList<ThesaurusConceptGroupLabel>());
 		thesaurusToExport.setConceptGroupLabels(conceptGroupLabels);
 		ArrayList<ThesaurusConceptGroup> conceptGroups =
 			 new ArrayList<ThesaurusConceptGroup>();
@@ -133,15 +133,15 @@ public class GincoExportServiceUtilImplTest {
 		thesaurusToExport.setConceptGroups(conceptGroups);
 		HashMap<String, JaxbList<Note>> conceptNotes =
 			 new HashMap<String, JaxbList<Note>>();
-		conceptNotes.put("foo", new JaxbList<Note>());
+		conceptNotes.put("HmacMD5", new JaxbList<Note>());
 		thesaurusToExport.setConceptNotes(conceptNotes);
 		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> parentConceptRelationship =
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		parentConceptRelationship.put("foo", new JaxbList<ConceptHierarchicalRelationship>());
+		parentConceptRelationship.put("HmacMD5", new JaxbList<ConceptHierarchicalRelationship>());
 		thesaurusToExport.setHierarchicalRelationship(parentConceptRelationship);
 		HashMap<String, JaxbList<Note>> termNotes =
 			 new HashMap<String, JaxbList<Note>>();
-		termNotes.put("foo", new JaxbList<Note>());
+		termNotes.put("HmacMD5", new JaxbList<Note>());
 		thesaurusToExport.setTermNotes(termNotes);
 		Thesaurus thesaurus8 = new Thesaurus();
 		thesaurus8.setArchived(false);
@@ -192,7 +192,7 @@ public class GincoExportServiceUtilImplTest {
 		thesaurusToExport.setConceptAttributeTypes(conceptAttributeTypes);
 		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		conceptAttributes.put("foo", new JaxbList<CustomConceptAttribute>());
+		conceptAttributes.put("HmacMD5", new JaxbList<CustomConceptAttribute>());
 		thesaurusToExport.setConceptAttributes(conceptAttributes);
 		ArrayList<ThesaurusConcept> concepts5 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
@@ -214,7 +214,7 @@ public class GincoExportServiceUtilImplTest {
 		thesaurusToExport.setTermAttributeTypes(termAttributeTypes);
 		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		termAttributes.put("foo", new JaxbList<CustomTermAttribute>());
+		termAttributes.put("HmacMD5", new JaxbList<CustomTermAttribute>());
 		thesaurusToExport.setTermAttributes(termAttributes);
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
@@ -245,7 +245,7 @@ public class GincoExportServiceUtilImplTest {
 		thesaurusTerm.setStatus(1);
 		terms.add(thesaurusTerm);
 		thesaurusToExport.setTerms(terms);
-		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<gincoExportedThesaurus>\n    <conceptAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n        <exportable>false</exportable>\n    </conceptAttributeTypes>\n    <conceptAttributes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </conceptAttributes>\n    <concepts>\n        <identifier>data</identifier>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <status>1</status>\n        <notation>DE</notation>\n        <topConcept>false</topConcept>\n    </concepts>\n    <termAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n    </termAttributeTypes>\n    <termAttributes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </termAttributes>\n    <terms>\n        <identifier>data</identifier>\n        <lexicalValue>value</lexicalValue>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <source>foo</source>\n        <prefered>false</prefered>\n        <hidden>false</hidden>\n        <status>1</status>\n        <role>\n            <code>DE</code>\n            <defaultRole>false</defaultRole>\n            <label>label</label>\n        </role>\n        <concept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </concept>\n        <language>\n            <id>1234</id>\n            <part1>foo</part1>\n            <principalLanguage>false</principalLanguage>\n            <refname>root</refname>\n            <topLanguage>false</topLanguage>\n        </language>\n    </terms>\n    <alignments>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </alignments>\n    <associativeRelationship>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </associativeRelationship>\n    <complexConcepts>\n        <identifier>data</identifier>\n        <lexicalValue>value</lexicalValue>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <source>foo</source>\n        <status>1</status>\n        <language>\n            <id>1234</id>\n            <part1>foo</part1>\n            <principalLanguage>false</principalLanguage>\n            <refname>root</refname>\n            <topLanguage>false</topLanguage>\n        </language>\n    </complexConcepts>\n    <conceptArrayLabels>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </conceptArrayLabels>\n    <conceptArrays>\n        <identifier>data</identifier>\n        <ordered>false</ordered>\n        <notation>DE</notation>\n        <superOrdinateConcept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </superOrdinateConcept>\n        <parent>\n            <identifier>data</identifier>\n            <ordered>false</ordered>\n            <notation>DE</notation>\n            <superOrdinateConcept/>\n            <parent/>\n        </parent>\n    </conceptArrays>\n    <conceptGroupLabels>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </conceptGroupLabels>\n    <conceptGroups>\n        <identifier>data</identifier>\n        <conceptGroupType>\n            <code>DE</code>\n            <label>label</label>\n            <skosLabel>label</skosLabel>\n        </conceptGroupType>\n        <notation>DE</notation>\n        <isDynamic>false</isDynamic>\n        <parentConcept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </parentConcept>\n    </conceptGroups>\n    <conceptNotes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </conceptNotes>\n    <hierarchicalRelationship>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </hierarchicalRelationship>\n    <termNotes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </termNotes>\n    <thesaurus>\n        <archived>false</archived>\n        <contributor>foo</contributor>\n        <coverage>foo</coverage>\n        <created>2010-12-31T00:00:00Z</created>\n        <creator>\n            <name>Acme</name>\n            <homepage>foo</homepage>\n            <email>info@diffblue.com</email>\n        </creator>\n        <date>2010-12-31T00:00:00Z</date>\n        <defaultTopConcept>false</defaultTopConcept>\n        <description>some text</description>\n        <identifier>data</identifier>\n        <polyHierarchical>false</polyHierarchical>\n        <publisher>foo</publisher>\n        <relation>DE</relation>\n        <rights>foo</rights>\n        <source>foo</source>\n        <subject>foo</subject>\n        <title>Mr</title>\n        <type>\n            <identifier>1</identifier>\n            <label>label</label>\n        </type>\n    </thesaurus>\n    <thesaurusVersions>\n        <identifier>data</identifier>\n        <date>2010-12-31T00:00:00Z</date>\n        <versionNote>1.0</versionNote>\n        <status>1</status>\n        <thisVersion>false</thisVersion>\n        <userId>root</userId>\n    </thesaurusVersions>\n</gincoExportedThesaurus>\n", service.serializeThesaurusToXmlWithJaxb(thesaurusToExport));
+		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<gincoExportedThesaurus>\n    <conceptAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n        <exportable>false</exportable>\n    </conceptAttributeTypes>\n    <conceptAttributes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </conceptAttributes>\n    <concepts>\n        <identifier>data</identifier>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <status>1</status>\n        <notation>DE</notation>\n        <topConcept>false</topConcept>\n    </concepts>\n    <termAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n    </termAttributeTypes>\n    <termAttributes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </termAttributes>\n    <terms>\n        <identifier>data</identifier>\n        <lexicalValue>value</lexicalValue>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <source>foo</source>\n        <prefered>false</prefered>\n        <hidden>false</hidden>\n        <status>1</status>\n        <role>\n            <code>DE</code>\n            <defaultRole>false</defaultRole>\n            <label>label</label>\n        </role>\n        <concept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </concept>\n        <language>\n            <id>1234</id>\n            <part1>foo</part1>\n            <principalLanguage>false</principalLanguage>\n            <refname>root</refname>\n            <topLanguage>false</topLanguage>\n        </language>\n    </terms>\n    <alignments>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </alignments>\n    <associativeRelationship>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </associativeRelationship>\n    <complexConcepts>\n        <identifier>data</identifier>\n        <lexicalValue>value</lexicalValue>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <source>foo</source>\n        <status>1</status>\n        <language>\n            <id>1234</id>\n            <part1>foo</part1>\n            <principalLanguage>false</principalLanguage>\n            <refname>root</refname>\n            <topLanguage>false</topLanguage>\n        </language>\n    </complexConcepts>\n    <conceptArrayLabels>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </conceptArrayLabels>\n    <conceptArrays>\n        <identifier>data</identifier>\n        <ordered>false</ordered>\n        <notation>DE</notation>\n        <superOrdinateConcept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </superOrdinateConcept>\n        <parent>\n            <identifier>data</identifier>\n            <ordered>false</ordered>\n            <notation>DE</notation>\n            <superOrdinateConcept/>\n            <parent/>\n        </parent>\n    </conceptArrays>\n    <conceptGroupLabels>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </conceptGroupLabels>\n    <conceptGroups>\n        <identifier>data</identifier>\n        <conceptGroupType>\n            <code>DE</code>\n            <label>label</label>\n            <skosLabel>label</skosLabel>\n        </conceptGroupType>\n        <notation>DE</notation>\n        <isDynamic>false</isDynamic>\n        <parentConcept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </parentConcept>\n    </conceptGroups>\n    <conceptNotes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </conceptNotes>\n    <hierarchicalRelationship>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </hierarchicalRelationship>\n    <termNotes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </termNotes>\n    <thesaurus>\n        <archived>false</archived>\n        <contributor>foo</contributor>\n        <coverage>foo</coverage>\n        <created>2010-12-31T00:00:00Z</created>\n        <creator>\n            <name>Acme</name>\n            <homepage>foo</homepage>\n            <email>info@diffblue.com</email>\n        </creator>\n        <date>2010-12-31T00:00:00Z</date>\n        <defaultTopConcept>false</defaultTopConcept>\n        <description>some text</description>\n        <identifier>data</identifier>\n        <polyHierarchical>false</polyHierarchical>\n        <publisher>foo</publisher>\n        <relation>DE</relation>\n        <rights>foo</rights>\n        <source>foo</source>\n        <subject>foo</subject>\n        <title>Mr</title>\n        <type>\n            <identifier>1</identifier>\n            <label>label</label>\n        </type>\n    </thesaurus>\n    <thesaurusVersions>\n        <identifier>data</identifier>\n        <date>2010-12-31T00:00:00Z</date>\n        <versionNote>1.0</versionNote>\n        <status>1</status>\n        <thisVersion>false</thisVersion>\n        <userId>root</userId>\n    </thesaurusVersions>\n</gincoExportedThesaurus>\n", service.serializeThesaurusToXmlWithJaxb(thesaurusToExport));
 	}
 
 	@Test
@@ -253,15 +253,15 @@ public class GincoExportServiceUtilImplTest {
 		GincoExportedBranch branchToExport = new GincoExportedBranch();
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
-		alignments.put("foo", new JaxbList<Alignment>());
+		alignments.put("HmacMD5", new JaxbList<Alignment>());
 		branchToExport.setAlignments(alignments);
 		HashMap<String, JaxbList<Note>> conceptNotes =
 			 new HashMap<String, JaxbList<Note>>();
-		conceptNotes.put("foo", new JaxbList<Note>());
+		conceptNotes.put("HmacMD5", new JaxbList<Note>());
 		branchToExport.setConceptNotes(conceptNotes);
 		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> parentConceptRelationship =
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		parentConceptRelationship.put("foo", new JaxbList<ConceptHierarchicalRelationship>());
+		parentConceptRelationship.put("HmacMD5", new JaxbList<ConceptHierarchicalRelationship>());
 		branchToExport.setHierarchicalRelationship(parentConceptRelationship);
 		ThesaurusConcept rootConcept = new ThesaurusConcept();
 		rootConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -273,7 +273,7 @@ public class GincoExportServiceUtilImplTest {
 		branchToExport.setRootConcept(rootConcept);
 		HashMap<String, JaxbList<Note>> termNotes =
 			 new HashMap<String, JaxbList<Note>>();
-		termNotes.put("foo", new JaxbList<Note>());
+		termNotes.put("HmacMD5", new JaxbList<Note>());
 		branchToExport.setTermNotes(termNotes);
 		ArrayList<CustomConceptAttributeType> conceptAttributeTypes =
 			 new ArrayList<CustomConceptAttributeType>();
@@ -286,7 +286,7 @@ public class GincoExportServiceUtilImplTest {
 		branchToExport.setConceptAttributeTypes(conceptAttributeTypes);
 		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		conceptAttributes.put("foo", new JaxbList<CustomConceptAttribute>());
+		conceptAttributes.put("HmacMD5", new JaxbList<CustomConceptAttribute>());
 		branchToExport.setConceptAttributes(conceptAttributes);
 		ArrayList<ThesaurusConcept> concepts = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
@@ -308,7 +308,7 @@ public class GincoExportServiceUtilImplTest {
 		branchToExport.setTermAttributeTypes(termAttributeTypes);
 		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		termAttributes.put("foo", new JaxbList<CustomTermAttribute>());
+		termAttributes.put("HmacMD5", new JaxbList<CustomTermAttribute>());
 		branchToExport.setTermAttributes(termAttributes);
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
@@ -339,6 +339,6 @@ public class GincoExportServiceUtilImplTest {
 		thesaurusTerm.setStatus(1);
 		terms.add(thesaurusTerm);
 		branchToExport.setTerms(terms);
-		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<gincoExportedBranch>\n    <conceptAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n        <exportable>false</exportable>\n    </conceptAttributeTypes>\n    <conceptAttributes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </conceptAttributes>\n    <concepts>\n        <identifier>data</identifier>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <status>1</status>\n        <notation>DE</notation>\n        <topConcept>false</topConcept>\n    </concepts>\n    <termAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n    </termAttributeTypes>\n    <termAttributes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </termAttributes>\n    <terms>\n        <identifier>data</identifier>\n        <lexicalValue>value</lexicalValue>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <source>foo</source>\n        <prefered>false</prefered>\n        <hidden>false</hidden>\n        <status>1</status>\n        <role>\n            <code>DE</code>\n            <defaultRole>false</defaultRole>\n            <label>label</label>\n        </role>\n        <concept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </concept>\n        <language>\n            <id>1234</id>\n            <part1>foo</part1>\n            <principalLanguage>false</principalLanguage>\n            <refname>root</refname>\n            <topLanguage>false</topLanguage>\n        </language>\n    </terms>\n    <alignments>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </alignments>\n    <conceptNotes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </conceptNotes>\n    <hierarchicalRelationship>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </hierarchicalRelationship>\n    <rootConcept>\n        <identifier>data</identifier>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <status>1</status>\n        <notation>DE</notation>\n        <topConcept>false</topConcept>\n    </rootConcept>\n    <termNotes>\n        <entry>\n            <key>foo</key>\n            <value/>\n        </entry>\n    </termNotes>\n</gincoExportedBranch>\n", service.serializeBranchToXmlWithJaxb(branchToExport));
+		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<gincoExportedBranch>\n    <conceptAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n        <exportable>false</exportable>\n    </conceptAttributeTypes>\n    <conceptAttributes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </conceptAttributes>\n    <concepts>\n        <identifier>data</identifier>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <status>1</status>\n        <notation>DE</notation>\n        <topConcept>false</topConcept>\n    </concepts>\n    <termAttributeTypes>\n        <code>DE</code>\n        <value>value</value>\n    </termAttributeTypes>\n    <termAttributes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </termAttributes>\n    <terms>\n        <identifier>data</identifier>\n        <lexicalValue>value</lexicalValue>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <source>foo</source>\n        <prefered>false</prefered>\n        <hidden>false</hidden>\n        <status>1</status>\n        <role>\n            <code>DE</code>\n            <defaultRole>false</defaultRole>\n            <label>label</label>\n        </role>\n        <concept>\n            <identifier>data</identifier>\n            <created>2010-12-31T00:00:00Z</created>\n            <modified>2010-12-31T00:00:00Z</modified>\n            <status>1</status>\n            <notation>DE</notation>\n            <topConcept>false</topConcept>\n        </concept>\n        <language>\n            <id>1234</id>\n            <part1>foo</part1>\n            <principalLanguage>false</principalLanguage>\n            <refname>root</refname>\n            <topLanguage>false</topLanguage>\n        </language>\n    </terms>\n    <alignments>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </alignments>\n    <conceptNotes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </conceptNotes>\n    <hierarchicalRelationship>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </hierarchicalRelationship>\n    <rootConcept>\n        <identifier>data</identifier>\n        <created>2010-12-31T00:00:00Z</created>\n        <modified>2010-12-31T00:00:00Z</modified>\n        <status>1</status>\n        <notation>DE</notation>\n        <topConcept>false</topConcept>\n    </rootConcept>\n    <termNotes>\n        <entry>\n            <key>HmacMD5</key>\n            <value/>\n        </entry>\n    </termNotes>\n</gincoExportedBranch>\n", service.serializeBranchToXmlWithJaxb(branchToExport));
 	}
 }

@@ -1,0 +1,141 @@
+package fr.mcc.ginco.extjs.view.node;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
+
+import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
+
+import java.text.Collator;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.node.ThesaurusListBasicNode
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusListBasicNode.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusListBasicNodeTest {
+
+	@MockBean(name = "collator")
+	private Collator collator;
+
+	@Autowired
+	private ThesaurusListBasicNode service;
+
+	@Test
+	void isExpandedReturnsFalse() {
+		assertThat(service.isExpanded(), is(false));
+	}
+
+	@Test
+	void setExpandedToFalse() {
+		service.setExpanded(false);
+	}
+
+	@Test
+	void getChildrenReturnsNull() {
+		assertThat(service.getChildren(), is(nullValue()));
+	}
+
+	@Test
+	void setChildrenToEmpty() {
+		service.setChildren(new ArrayList<IThesaurusListNode>());
+	}
+
+	@Test
+	void getTitleReturnsNull() {
+		assertThat(service.getTitle(), is(nullValue()));
+	}
+
+	@Test
+	void setTitleToMr() {
+		service.setTitle("Mr");
+	}
+
+	@Test
+	void getTypeReturnsNull() {
+		assertThat(service.getType(), is(nullValue()));
+	}
+
+	@Test
+	void setTypeToThesaurus() {
+		service.setType(ThesaurusListNodeType.THESAURUS);
+	}
+
+	@Test
+	void getIdReturnsNull() {
+		assertThat(service.getId(), is(nullValue()));
+	}
+
+	@Test
+	void setId() {
+		service.setId("1234");
+	}
+
+	@Test
+	void isLeafReturnsFalse() {
+		assertThat(service.isLeaf(), is(false));
+	}
+
+	@Test
+	void setLeafToFalse() {
+		service.setLeaf(false);
+	}
+
+	@Test
+	void getIconClsReturnsNull() {
+		assertThat(service.getIconCls(), is(nullValue()));
+	}
+
+	@Test
+	void setIconClsToDE() {
+		service.setIconCls("DE");
+	}
+
+	@Test
+	void getThesaurusIdReturnsNull() {
+		assertThat(service.getThesaurusId(), is(nullValue()));
+	}
+
+	@Test
+	void setThesaurusId() {
+		service.setThesaurusId("1234");
+	}
+
+	@Test
+	void compareToReturnsMinusOne() {
+		IThesaurusListNode o = mock(IThesaurusListNode.class);
+		assertThat(service.compareTo(o), is(-1));
+	}
+
+	@Test
+	void isDisplayableReturnsFalse() {
+		assertThat(service.isDisplayable(), is(false));
+	}
+
+	@Test
+	void setDisplayableToFalse() {
+		service.setDisplayable(false);
+	}
+
+	@Test
+	void getOrganizationNameReturnsNull() {
+		assertThat(service.getOrganizationName(), is(nullValue()));
+	}
+
+	@Test
+	void setOrganizationNameToSmith() {
+		service.setOrganizationName("Smith");
+	}
+}

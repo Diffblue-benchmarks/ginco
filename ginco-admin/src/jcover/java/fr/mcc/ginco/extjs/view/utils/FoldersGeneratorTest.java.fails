@@ -1,0 +1,66 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.FoldersGenerator
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {FoldersGenerator.class})
+@ExtendWith(SpringExtension.class)
+class FoldersGeneratorTest {
+
+	@MockBean(name = "folderGenerator")
+	private FolderGenerator folderGenerator;
+
+	@Autowired
+	private FoldersGenerator service;
+
+	@Test
+	void generateFolders() {
+		IThesaurusListNode obj1 = mock(IThesaurusListNode.class);
+		IThesaurusListNode obj2 = mock(IThesaurusListNode.class);
+		IThesaurusListNode obj3 = mock(IThesaurusListNode.class);
+		IThesaurusListNode obj4 = mock(IThesaurusListNode.class);
+		IThesaurusListNode obj5 = mock(IThesaurusListNode.class);
+		IThesaurusListNode obj6 = mock(IThesaurusListNode.class);
+		when(folderGenerator.getArrays(Mockito.<String>any()))
+			.thenReturn(obj3);
+		when(folderGenerator.getConcepts(Mockito.<String>any()))
+			.thenReturn(obj6);
+		when(folderGenerator.getGroups(Mockito.<String>any()))
+			.thenReturn(obj4);
+		when(folderGenerator.getOrphans(Mockito.<String>any()))
+			.thenReturn(obj2);
+		when(folderGenerator.getSandbox(Mockito.<String>any()))
+			.thenReturn(obj1);
+		when(folderGenerator.getSplitNonPreferredTerms(Mockito.<String>any()))
+			.thenReturn(obj5);
+		List<IThesaurusListNode> result = service.generateFolders("1234");
+		assertThat(result.size(), is(6));
+		assertThat(result.get(0), sameInstance(obj6));
+		assertThat(result.get(1), sameInstance(obj5));
+		assertThat(result.get(2), sameInstance(obj4));
+		assertThat(result.get(3), sameInstance(obj3));
+		assertThat(result.get(4), sameInstance(obj2));
+		assertThat(result.get(5), sameInstance(obj1));
+	}
+}

@@ -16,13 +16,6 @@ import org.junit.jupiter.api.Test;
 class LabelUtilTest {
 
 	@Test
-	void getLocalizedLabelDefaultLangIsEmptyAndLexicalValueIsLabelReturnsLabel() {
-		Language language = new Language();
-		language.setId("");
-		assertThat(LabelUtil.getLocalizedLabel("label", language, ""), is("label"));
-	}
-
-	@Test
 	void getLocalizedLabelDefaultLangIsLabelAndLexicalValueIsBar() {
 		Language language = new Language();
 		language.setId("1234");

@@ -1,10 +1,6 @@
 package fr.mcc.ginco.imports.ginco;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomConceptAttribute;
 import fr.mcc.ginco.beans.CustomConceptAttributeType;
@@ -22,13 +18,11 @@ import fr.mcc.ginco.services.ICustomTermAttributeTypeService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -65,61 +59,18 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void getBranchCustomTermAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
-		assertTrue(service.getBranchCustomTermAttributeTypes(new ArrayList<CustomTermAttributeType>(), new Thesaurus()).isEmpty());
-	}
-
-	@Test
-	public void getBranchCustomConceptAttributeTypes() {
-
-		// arrange
-		CustomConceptAttributeType customConceptAttributeType1 =
-			 new CustomConceptAttributeType();
-		customConceptAttributeType1.setExportable(false);
-		customConceptAttributeType1.setCode("DE");
-		customConceptAttributeType1.setIdentifier(1);
-		Thesaurus thesaurus1 = new Thesaurus();
-		customConceptAttributeType1.setThesaurus(thesaurus1);
-		customConceptAttributeType1.setValue("value");
-		when(customConceptAttributeTypeDAO.getAttributeByCode(Mockito.<Thesaurus>any(), Mockito.<String>any()))
-			.thenReturn(customConceptAttributeType1);
-		ArrayList<CustomConceptAttributeType> customAttributeTypesToImport =
-			 new ArrayList<CustomConceptAttributeType>();
-		CustomConceptAttributeType customConceptAttributeType2 =
-			 new CustomConceptAttributeType();
-		customConceptAttributeType2.setValue("value");
-		customAttributeTypesToImport.add(customConceptAttributeType2);
-
-		// act
-		Map<String, CustomConceptAttributeType> result =
-			 service.getBranchCustomConceptAttributeTypes(customAttributeTypesToImport, new Thesaurus());
-
-		// assert
-		assertFalse(result.get("DE").getExportable());
-		assertEquals("DE", result.get("DE").getCode());
-		assertEquals(1, result.get("DE").getIdentifier());
-		assertSame(thesaurus1, result.get("DE").getThesaurus());
-		assertEquals("value", result.get("DE").getValue());
-	}
-
-	@Test
 	public void getBranchCustomConceptAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
 		assertTrue(service.getBranchCustomConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>(), new Thesaurus()).isEmpty());
 	}
 
 	@Test
-	public void storeCustomConceptAttribute() {
+	public void storeCustomConceptAttributeSavedTypesIsEmpty() {
 		ArrayList<CustomConceptAttribute> customAttributeToImport =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
 		customConceptAttribute.setType(new CustomConceptAttributeType());
 		customAttributeToImport.add(customConceptAttribute);
 		service.storeCustomConceptAttribute(customAttributeToImport, new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
-	}
-
-	@Test
-	public void storeCustomConceptAttributeCustomAttributeToImportIsEmpty() {
-		service.storeCustomConceptAttribute(new ArrayList<CustomConceptAttribute>(), new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
 	}
 
 	@Test

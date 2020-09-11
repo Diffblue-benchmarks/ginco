@@ -82,7 +82,7 @@ class GincoExportedEntityTest {
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
 		JaxbList<CustomConceptAttribute> x289 =
 			 new JaxbList<CustomConceptAttribute>();
-		conceptAttributes.put("foo", x289);
+		conceptAttributes.put("HmacMD5", x289);
 		gincoExportedEntity.setConceptAttributes(conceptAttributes);
 		ArrayList<ThesaurusConcept> concepts = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
@@ -171,7 +171,7 @@ class GincoExportedEntityTest {
 		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
 		JaxbList<CustomTermAttribute> x390 = new JaxbList<CustomTermAttribute>();
-		termAttributes.put("foo", x390);
+		termAttributes.put("HmacMD5", x390);
 		gincoExportedEntity.setTermAttributes(termAttributes);
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
@@ -264,12 +264,12 @@ class GincoExportedEntityTest {
 		gincoExportedEntity.setTerms(terms);
 		assertThat(gincoExportedEntity.getConceptAttributeTypes().size(), is(1));
 		assertThat(gincoExportedEntity.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedEntity.getConceptAttributes().get("foo"), sameInstance(x289));
+		assertThat(gincoExportedEntity.getConceptAttributes().get("HmacMD5"), sameInstance(x289));
 		assertThat(gincoExportedEntity.getConcepts().size(), is(1));
 		assertThat(gincoExportedEntity.getConcepts().get(0), sameInstance(thesaurusConcept));
 		assertThat(gincoExportedEntity.getTermAttributeTypes().size(), is(1));
 		assertThat(gincoExportedEntity.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedEntity.getTermAttributes().get("foo"), sameInstance(x390));
+		assertThat(gincoExportedEntity.getTermAttributes().get("HmacMD5"), sameInstance(x390));
 		assertThat(gincoExportedEntity.getTerms().size(), is(1));
 		assertThat(gincoExportedEntity.getTerms().get(0), sameInstance(thesaurusTerm));
 	}

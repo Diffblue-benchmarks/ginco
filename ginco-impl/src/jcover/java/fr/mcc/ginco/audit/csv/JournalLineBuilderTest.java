@@ -3,6 +3,8 @@ package fr.mcc.ginco.audit.csv;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.GincoRevEntity;
 import fr.mcc.ginco.beans.ThesaurusConcept;
@@ -225,8 +227,9 @@ public class JournalLineBuilderTest {
 	public void buildConceptHierarchyChangedCurrentGenericConceptIsEmptyAndOldGenericConceptIsEmpty() {
 
 		// arrange
-		ThesaurusConcept conceptAtRevision = new ThesaurusConcept();
-		conceptAtRevision.setIdentifier("data");
+		ThesaurusConcept conceptAtRevision = mock(ThesaurusConcept.class);
+		when(conceptAtRevision.getIdentifier())
+			.thenReturn("foo");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("root");
 		revision.setId(1);
@@ -237,7 +240,7 @@ public class JournalLineBuilderTest {
 
 		// assert
 		assertEquals("root", result.getAuthorId());
-		assertEquals("data", result.getConceptId());
+		assertEquals("foo", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSCONCEPT_HIERARCHY_UPDATE == result.getEventType());
 		assertTrue((result.getNewGenericTerm()).isEmpty());

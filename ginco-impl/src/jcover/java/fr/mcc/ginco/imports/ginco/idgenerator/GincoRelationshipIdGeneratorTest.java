@@ -41,7 +41,7 @@ public class GincoRelationshipIdGeneratorTest {
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
 		JaxbList<ConceptHierarchicalRelationship> x5 =
 			 new JaxbList<ConceptHierarchicalRelationship>();
-		relations.put("foo", x5);
+		relations.put("HmacMD5", x5);
 		assertSame(x5, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("bar"));
 	}
 }

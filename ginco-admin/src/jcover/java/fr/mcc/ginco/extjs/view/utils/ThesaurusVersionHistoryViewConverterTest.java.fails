@@ -4,8 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.Thesaurus;
@@ -20,7 +18,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -157,31 +154,6 @@ class ThesaurusVersionHistoryViewConverterTest {
 	@Test
 	void convertListThesaurusHistoryListIsEmptyReturnsEmpty() {
 		assertThat(service.convertList(new ArrayList<ThesaurusVersionHistory>()), empty());
-	}
-
-	@Test
-	void convertViewList() {
-
-		// arrange
-		ThesaurusVersionHistory thesaurusVersionHistory =
-			 new ThesaurusVersionHistory();
-		when(thesaurusVersionHistoryService.getThesaurusVersionHistoryById(Mockito.<String>any()))
-			.thenReturn(thesaurusVersionHistory);
-		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(new Thesaurus());
-		ArrayList<ThesaurusVersionHistoryView> versionViews =
-			 new ArrayList<ThesaurusVersionHistoryView>();
-		ThesaurusVersionHistoryView thesaurusVersionHistoryView =
-			 new ThesaurusVersionHistoryView();
-		thesaurusVersionHistoryView.setIdentifier("data");
-		versionViews.add(thesaurusVersionHistoryView);
-
-		// act
-		List<ThesaurusVersionHistory> result = service.convertViewList(versionViews);
-
-		// assert
-		assertThat(result.size(), is(1));
-		assertThat(result.get(0), sameInstance(thesaurusVersionHistory));
 	}
 
 	@Test

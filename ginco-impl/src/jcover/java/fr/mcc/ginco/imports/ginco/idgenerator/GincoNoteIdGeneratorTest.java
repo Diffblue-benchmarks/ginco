@@ -40,7 +40,7 @@ public class GincoNoteIdGeneratorTest {
 		HashMap<String, JaxbList<Note>> notes =
 			 new HashMap<String, JaxbList<Note>>();
 		JaxbList<Note> x5 = new JaxbList<Note>();
-		notes.put("bar", x5);
+		notes.put("HmacMD5", x5);
 		assertSame(x5, service.getNotesWithNewIds(notes, new HashMap<String, String>()).get("foo"));
 	}
 }

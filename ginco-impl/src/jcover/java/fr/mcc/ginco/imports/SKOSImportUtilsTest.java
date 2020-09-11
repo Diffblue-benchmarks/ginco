@@ -1,6 +1,7 @@
 package fr.mcc.ginco.imports;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.mock;
@@ -99,7 +100,7 @@ public class SKOSImportUtilsTest {
 			.thenReturn(extendedIterator);
 		List<ObjectProperty> result = service.getRelatedTypeProperty(model);
 		assertEquals(1, result.size());
-		// pojo ObjectProperty.367716309
+		assertNotNull(result.get(0));
 	}
 
 	@Test

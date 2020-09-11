@@ -2,6 +2,7 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationship;
@@ -83,8 +84,9 @@ public class AssociativeRelationshipServiceImplTest {
 		list.add("foo");
 		when(associativeRelationshipDAO.getAssociatedConcepts(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(list);
-		assertEquals(1, service.getAssociatedConceptsId(new ThesaurusConcept()).size());
-		assertEquals("foo", service.getAssociatedConceptsId(new ThesaurusConcept()).get(0));
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
+		assertEquals(1, service.getAssociatedConceptsId(concept).size());
+		assertEquals("foo", service.getAssociatedConceptsId(concept).get(0));
 	}
 
 	@Test

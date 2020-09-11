@@ -54,17 +54,18 @@ public class AlphabeticComplexConceptExporterTest {
 	}
 
 	@Test
-	public void addComplexConceptInfoBaseIsOneAndResultIsEmpty() {
+	public void addComplexConceptInfoBaseIsOne() {
 
 		// arrange
 		ArrayList<FormattedLine> result = new ArrayList<FormattedLine>();
+		result.add(new FormattedLine(1, "hello"));
 
 		// act
 		service.addComplexConceptInfo(1, result, new SplitNonPreferredTerm());
 
 		// assert
-		assertEquals(1, result.size());
-		assertEquals(1, (int) result.get(0).getTabs());
-		assertEquals("E", result.get(0).getText());
+		assertEquals(2, result.size());
+		assertEquals(1, (int) result.get(1).getTabs());
+		assertEquals("E", result.get(1).getText());
 	}
 }

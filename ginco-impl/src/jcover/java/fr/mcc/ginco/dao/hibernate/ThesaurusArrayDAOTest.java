@@ -67,6 +67,8 @@ public class ThesaurusArrayDAOTest {
 
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -74,7 +76,7 @@ public class ThesaurusArrayDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);

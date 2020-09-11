@@ -2,9 +2,9 @@ package fr.mcc.ginco.security;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
 
-import fr.mcc.ginco.extjs.view.pojo.GenericRoleView;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +23,17 @@ class BasePermissionEvaluatorTest {
 	void hasPermission1() {
 		List list = new ArrayList();
 		list.add(new Object());
-		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("admin", "admin"), list, new Object()), is(false));
+		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), list, new Object()), is(false));
 	}
 
 	@Test
 	void hasPermission2() {
-		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), new Object(), new Object()), is(false));
-		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "foo"), new GenericRoleView(), "BASIC", new Object()), is(false));
+		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), new Object(), "foo"), is(false));
+	}
+
+	@Test
+	void hasPermissionTargetTypeIsBASIC() {
+		Serializable targetId = mock(Serializable.class);
+		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), targetId, "BASIC", "foo"), is(false));
 	}
 }

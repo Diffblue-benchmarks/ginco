@@ -4,6 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.generic.GenericCustomAttributeType;
@@ -48,22 +50,23 @@ class CustomAttributesTypesConverterTest {
 	void convertIsConceptIsFalse() {
 
 		// arrange
-		GenericCustomAttributeType source1 = new GenericCustomAttributeType();
-		source1.setCode("DE");
-		source1.setIdentifier(1);
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setIdentifier("data");
-		source1.setThesaurus(thesaurus);
-		source1.setValue("value");
+		GenericCustomAttributeType source = new GenericCustomAttributeType();
+		source.setCode("DE");
+		source.setIdentifier(1);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		when(thesaurus.getIdentifier())
+			.thenReturn("foo");
+		source.setThesaurus(thesaurus);
+		source.setValue("value");
 
 		// act
-		GenericCustomAttributeTypeView result = service.convert(source1, false);
+		GenericCustomAttributeTypeView result = service.convert(source, false);
 
 		// assert
 		assertThat(result.getCode(), is("DE"));
 		assertThat(result.getExportable(), is(nullValue()));
 		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getThesaurusId(), is("foo"));
 		assertThat(result.getValue(), is("value"));
 	}
 

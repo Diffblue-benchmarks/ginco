@@ -18,9 +18,9 @@ class BusinessExceptionTest {
 	@Test
 	void factory1() {
 		BusinessException businessException =
-			 new BusinessException("an error has happened", "John Smith");
+			 new BusinessException("an error has happened", "an error has happened");
 		assertThat(businessException.getToFormat(), is(nullValue()));
-		assertThat(businessException.getUserMessageKey(), is("John Smith"));
+		assertThat(businessException.getUserMessageKey(), is("an error has happened"));
 		assertThat(businessException.getCause(), is(nullValue()));
 		assertThat(businessException.getMessage(), is("an error has happened"));
 	}
@@ -30,9 +30,9 @@ class BusinessExceptionTest {
 		Exception cause = new Exception();
 		cause.setStackTrace(new StackTraceElement[] { });
 		BusinessException businessException =
-			 new BusinessException("an error has happened", "John Smith", cause);
+			 new BusinessException("an error has happened", "an error has happened", cause);
 		assertThat(businessException.getToFormat(), is(nullValue()));
-		assertThat(businessException.getUserMessageKey(), is("John Smith"));
+		assertThat(businessException.getUserMessageKey(), is("an error has happened"));
 		assertThat(businessException.getCause().getCause(), is(nullValue()));
 		assertThat(businessException.getCause().getMessage(), is(nullValue()));
 		assertThat(businessException.getMessage(), is("an error has happened"));
@@ -43,9 +43,9 @@ class BusinessExceptionTest {
 		Object element = new Object();
 		Object[] toFormat = new Object[] { element };
 		BusinessException businessException =
-			 new BusinessException("an error has happened", "John Smith", toFormat);
+			 new BusinessException("an error has happened", "an error has happened", toFormat);
 		assertThat(businessException.getToFormat()[0], sameInstance(element));
-		assertThat(businessException.getUserMessageKey(), is("John Smith"));
+		assertThat(businessException.getUserMessageKey(), is("an error has happened"));
 		assertThat(businessException.getCause(), is(nullValue()));
 		assertThat(businessException.getMessage(), is("an error has happened"));
 	}

@@ -12,7 +12,6 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 import fr.mcc.ginco.beans.ThesaurusOrganization;
-import fr.mcc.ginco.skos.namespaces.GINCO;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -77,9 +76,10 @@ public class ThesaurusOrganizationBuilderTest {
 
 	@Test
 	public void getCreator3() throws java.util.NoSuchElementException {
+		Resource resource = mock(Resource.class);
 		RDFNode obj = mock(RDFNode.class);
 		when(obj.asResource())
-			.thenReturn(GINCO.getResource("BASIC"));
+			.thenReturn(resource);
 		when(obj.isResource())
 			.thenReturn(true);
 		Statement statement = mock(Statement.class);

@@ -1,6 +1,7 @@
 package fr.mcc.ginco.exports.ginco;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationship;
@@ -54,55 +55,14 @@ public class GincoAttributesExporterTest {
 	}
 
 	@Test
-	public void getExportedConceptAttributes() throws java.text.ParseException {
+	public void getExportedConceptAttributes() {
 
 		// arrange
 		List<Object> list = new ArrayList<Object>();
 		list.add(new Object());
 		when(conceptAttributeService.getAttributesByEntity(Mockito.<Object>any()))
 			.thenReturn(list);
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
-		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setIdentifier("data");
-		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setNotation("DE");
-		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setStatus(1);
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setArchived(false);
-		thesaurus.setContributor("foo");
-		thesaurus.setCoverage("foo");
-		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator = new ThesaurusOrganization();
-		creator.setEmail("info@diffblue.com");
-		creator.setHomepage("foo");
-		creator.setIdentifier(1);
-		creator.setName("Acme");
-		thesaurus.setCreator(creator);
-		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus.setDefaultTopConcept(false);
-		thesaurus.setDescription("some text");
-		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("data");
-		thesaurus.setLang(new HashSet<Language>());
-		thesaurus.setPolyHierarchical(false);
-		thesaurus.setPublisher("foo");
-		thesaurus.setRelation("DE");
-		thesaurus.setRights("foo");
-		thesaurus.setSource("foo");
-		thesaurus.setSubject("foo");
-		thesaurus.setTitle("Mr");
-		ThesaurusType type = new ThesaurusType();
-		type.setIdentifier(1);
-		type.setLabel("label");
-		thesaurus.setType(type);
-		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
-		thesaurusConcept.setThesaurus(thesaurus);
-		thesaurusConcept.setTopConcept(false);
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 
 		// act
 		JaxbList<CustomConceptAttribute> result =

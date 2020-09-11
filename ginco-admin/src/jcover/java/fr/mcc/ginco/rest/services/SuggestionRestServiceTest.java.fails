@@ -52,9 +52,9 @@ class SuggestionRestServiceTest {
 	}
 
 	@Test
-	void createSuggestionsConceptIdIsBarAndSuggestionViewsIsEmpty() {
+	void createSuggestionsSuggestionViewsIsEmpty() {
 		ExtJsonFormLoadData<List<SuggestionView>> result =
-			 service.createSuggestions(new ArrayList<SuggestionView>(), "bar", "1234");
+			 service.createSuggestions(new ArrayList<SuggestionView>(), "1234", "1234");
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));

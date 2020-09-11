@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
-import fr.mcc.ginco.beans.CustomConceptAttributeType;
 import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusFormat;
@@ -27,8 +26,8 @@ class GenericCustomAttributeTest {
 
 	@Test
 	void factory() throws java.text.ParseException {
-		GenericCustomAttribute<CustomConceptAttributeType, String> genericCustomAttribute =
-			 new GenericCustomAttribute<CustomConceptAttributeType, String>();
+		GenericCustomAttribute<GenericCustomAttributeType, String> genericCustomAttribute =
+			 new GenericCustomAttribute<GenericCustomAttributeType, String>();
 		genericCustomAttribute.setEntity("entity");
 		genericCustomAttribute.setIdentifier("data");
 		Language language = new Language();
@@ -39,8 +38,7 @@ class GenericCustomAttributeTest {
 		language.setTopLanguage(false);
 		genericCustomAttribute.setLanguage(language);
 		genericCustomAttribute.setLexicalValue("value");
-		CustomConceptAttributeType type1 = new CustomConceptAttributeType();
-		type1.setExportable(false);
+		GenericCustomAttributeType type1 = new GenericCustomAttributeType();
 		type1.setCode("DE");
 		type1.setIdentifier(1);
 		Thesaurus thesaurus = new Thesaurus();

@@ -5,10 +5,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.services.IAlignmentService;
-import fr.mcc.ginco.skos.namespaces.GINCO;
 
 import java.util.ArrayList;
 
@@ -41,9 +41,10 @@ public class SKOSAlignmentExporterTest {
 	public void exportAlignments() {
 		when(alignmentService.getAlignmentsBySourceConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<Alignment>());
+		Resource resource = mock(Resource.class);
 		Model defaultModel = mock(Model.class);
-		when(defaultModel.createResource(Mockito.<String>any(), Mockito.<com.hp.hpl.jena.rdf.model.Resource>any()))
-			.thenReturn(GINCO.getResource("BASIC"));
+		when(defaultModel.createResource(Mockito.<String>any(), Mockito.<Resource>any()))
+			.thenReturn(resource);
 		assertSame(defaultModel, service.exportAlignments("1234", defaultModel));
 	}
 }
