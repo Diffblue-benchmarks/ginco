@@ -21,9 +21,9 @@ class UserInfoTest {
 		UserInfo userInfo = new UserInfo();
 		userInfo.setAdmin(false);
 		userInfo.setUserThesaurusRoles(new ArrayList<UserThesaurusRole>());
-		userInfo.setUsername("John Smith");
+		userInfo.setUsername("root");
 		assertThat(userInfo.getUserThesaurusRoles(), empty());
-		assertThat(userInfo.getUsername(), is("John Smith"));
+		assertThat(userInfo.getUsername(), is("root"));
 		assertThat(userInfo.isAdmin(), is(false));
 	}
 }

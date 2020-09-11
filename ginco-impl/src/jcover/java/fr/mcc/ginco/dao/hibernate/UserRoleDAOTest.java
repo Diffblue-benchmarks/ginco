@@ -62,7 +62,7 @@ public class UserRoleDAOTest {
 	}
 
 	@Test
-	public void getUserRoles() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getUserRolesUsernameIsRoot() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
@@ -83,7 +83,7 @@ public class UserRoleDAOTest {
 		userRoleDAO.setSessionFactory(sessionFactory);
 
 		// act
-		List<UserRole> result = userRoleDAO.getUserRoles("John Smith");
+		List<UserRole> result = userRoleDAO.getUserRoles("root");
 
 		// assert
 		assertEquals(1, result.size());

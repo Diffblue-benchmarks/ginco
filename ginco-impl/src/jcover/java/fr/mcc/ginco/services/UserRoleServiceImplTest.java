@@ -38,6 +38,15 @@ public class UserRoleServiceImplTest {
 	}
 
 	@Test
+	public void hasRoleRoleIsManagerAndThesaurusIdIsRootAndUsernameIsRootReturnsTrue() {
+		UserRole userRole = new UserRole();
+		userRole.setRole(Role.MANAGER);
+		when(userRoleDAO.getUserRoleOnThesaurus(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(userRole);
+		assertTrue(service.hasRole("root", "root", Role.MANAGER));
+	}
+
+	@Test
 	public void getThesaurusUsersThesaurusIdIsRoot() {
 
 		// arrange
@@ -56,7 +65,7 @@ public class UserRoleServiceImplTest {
 	}
 
 	@Test
-	public void getUserRoles() {
+	public void getUserRolesUsernameIsRoot() {
 
 		// arrange
 		List<UserRole> list = new ArrayList<UserRole>();
@@ -66,19 +75,10 @@ public class UserRoleServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<UserRole> result = service.getUserRoles("John Smith");
+		List<UserRole> result = service.getUserRoles("root");
 
 		// assert
 		assertEquals(1, result.size());
 		assertSame(userRole, result.get(0));
-	}
-
-	@Test
-	public void hasRoleRoleIsManagerAndThesaurusIdIsRootAndUsernameIsAdminReturnsTrue() {
-		UserRole userRole = new UserRole();
-		userRole.setRole(Role.MANAGER);
-		when(userRoleDAO.getUserRoleOnThesaurus(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(userRole);
-		assertTrue(service.hasRole("admin", "root", Role.MANAGER));
 	}
 }

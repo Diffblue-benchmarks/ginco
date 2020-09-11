@@ -68,6 +68,32 @@ class CustomAttributeConverterTest {
 	private CustomAttributeConverter service;
 
 	@Test
+	void convertTermAttribute() {
+
+		// arrange
+		CustomTermAttribute source1 = new CustomTermAttribute();
+		ThesaurusTerm entity = new ThesaurusTerm();
+		entity.setIdentifier("data");
+		source1.setEntity(entity);
+		Language language2 = new Language();
+		language2.setId("1234");
+		source1.setLanguage(language2);
+		source1.setLexicalValue("value");
+		CustomTermAttributeType type2 = new CustomTermAttributeType();
+		type2.setIdentifier(1);
+		source1.setType(type2);
+
+		// act
+		GenericCustomAttributeView result = service.convertTermAttribute(source1);
+
+		// assert
+		assertThat(result.getEntityid(), is("data"));
+		assertThat(result.getLang(), is("1234"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getTypeid(), is(1));
+	}
+
+	@Test
 	void convertConceptAttribute() {
 
 		// arrange
@@ -91,37 +117,6 @@ class CustomAttributeConverterTest {
 		assertThat(result.getLang(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getTypeid(), is(1));
-	}
-
-	@Test
-	void convertListConcept() {
-
-		// arrange
-		ArrayList<CustomConceptAttribute> sourceList =
-			 new ArrayList<CustomConceptAttribute>();
-		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
-		ThesaurusConcept entity = new ThesaurusConcept();
-		entity.setIdentifier("data");
-		customConceptAttribute.setEntity(entity);
-		Language language = new Language();
-		language.setId("1234");
-		customConceptAttribute.setLanguage(language);
-		customConceptAttribute.setLexicalValue("value");
-		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
-		type2.setIdentifier(1);
-		customConceptAttribute.setType(type2);
-		sourceList.add(customConceptAttribute);
-
-		// act
-		List<GenericCustomAttributeView> result =
-			 service.convertListConcept(sourceList);
-
-		// assert
-		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getEntityid(), is("data"));
-		assertThat(result.get(0).getLang(), is("1234"));
-		assertThat(result.get(0).getLexicalValue(), is("value"));
-		assertThat(result.get(0).getTypeid(), is(1));
 	}
 
 	@Test
@@ -156,28 +151,33 @@ class CustomAttributeConverterTest {
 	}
 
 	@Test
-	void convertTermAttribute() {
+	void convertListConcept() {
 
 		// arrange
-		CustomTermAttribute source1 = new CustomTermAttribute();
-		ThesaurusTerm entity = new ThesaurusTerm();
+		ArrayList<CustomConceptAttribute> sourceList =
+			 new ArrayList<CustomConceptAttribute>();
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		ThesaurusConcept entity = new ThesaurusConcept();
 		entity.setIdentifier("data");
-		source1.setEntity(entity);
-		Language language2 = new Language();
-		language2.setId("1234");
-		source1.setLanguage(language2);
-		source1.setLexicalValue("value");
-		CustomTermAttributeType type2 = new CustomTermAttributeType();
+		customConceptAttribute.setEntity(entity);
+		Language language = new Language();
+		language.setId("1234");
+		customConceptAttribute.setLanguage(language);
+		customConceptAttribute.setLexicalValue("value");
+		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
 		type2.setIdentifier(1);
-		source1.setType(type2);
+		customConceptAttribute.setType(type2);
+		sourceList.add(customConceptAttribute);
 
 		// act
-		GenericCustomAttributeView result = service.convertTermAttribute(source1);
+		List<GenericCustomAttributeView> result =
+			 service.convertListConcept(sourceList);
 
 		// assert
-		assertThat(result.getEntityid(), is("data"));
-		assertThat(result.getLang(), is("1234"));
-		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getTypeid(), is(1));
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getEntityid(), is("data"));
+		assertThat(result.get(0).getLang(), is("1234"));
+		assertThat(result.get(0).getLexicalValue(), is("value"));
+		assertThat(result.get(0).getTypeid(), is(1));
 	}
 }

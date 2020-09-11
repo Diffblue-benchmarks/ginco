@@ -284,7 +284,7 @@ class GincoExportedBranchTest {
 		language5.setId("1234");
 		language5.setPart1("foo");
 		language5.setPrincipalLanguage(false);
-		language5.setRefname("foo");
+		language5.setRefname("root");
 		language5.setTopLanguage(false);
 		thesaurusTerm.setLanguage(language5);
 		thesaurusTerm.setLexicalValue("value");

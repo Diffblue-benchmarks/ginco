@@ -37,10 +37,10 @@ class LanguageComparatorTest {
 	void compareReturnsZero() {
 		Language o1 = new Language();
 		o1.setId("1234");
-		o1.setRefname("foo");
+		o1.setRefname("root");
 		Language o2 = new Language();
 		o2.setId("1234");
-		o2.setRefname("foo");
+		o2.setRefname("root");
 		assertThat(new LanguageComparator("bar").compare(o1, o2), is(0));
 	}
 }

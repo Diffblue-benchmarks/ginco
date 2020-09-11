@@ -24,6 +24,21 @@ class GitInfoTest {
 	private GitInfo service;
 
 	@Test
+	void setGitBuildTimeToGif() {
+		service.setGitBuildTime("gif");
+	}
+
+	@Test
+	void setGitCommitUserName() {
+		service.setGitCommitUserName("John Smith");
+	}
+
+	@Test
+	void setGitBranchToAcme() {
+		service.setGitBranch("Acme");
+	}
+
+	@Test
 	void getters() {
 		assertThat(service.getCommitId(), is(nullValue()));
 		assertThat(service.getGitBranch(), is(nullValue()));
@@ -34,20 +49,5 @@ class GitInfoTest {
 	@Test
 	void setCommitId() {
 		service.setCommitId("1234");
-	}
-
-	@Test
-	void setGitBranchToAcme() {
-		service.setGitBranch("Acme");
-	}
-
-	@Test
-	void setGitBuildTimeToGif() {
-		service.setGitBuildTime("gif");
-	}
-
-	@Test
-	void setGitCommitUserName() {
-		service.setGitCommitUserName("John Smith");
 	}
 }

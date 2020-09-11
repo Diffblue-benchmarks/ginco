@@ -36,24 +36,6 @@ public class ExternalThesaurusTypeServiceImplTest {
 	}
 
 	@Test
-	public void getExternalThesaurusTypeByIdIdentifierIsZero() {
-
-		// arrange
-		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
-		externalThesaurusType.setIdentifier(1);
-		externalThesaurusType.setLabel("label");
-		when(externalThesaurusTypeDAO.getById(Mockito.<Integer>any()))
-			.thenReturn(externalThesaurusType);
-
-		// act
-		ExternalThesaurusType result = service.getExternalThesaurusTypeById(0);
-
-		// assert
-		assertEquals(1, (int) result.getIdentifier());
-		assertEquals("label", result.getLabel());
-	}
-
-	@Test
 	public void getExternalThesaurusTypeList() {
 
 		// arrange
@@ -69,5 +51,23 @@ public class ExternalThesaurusTypeServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(externalThesaurusType, result.get(0));
+	}
+
+	@Test
+	public void getExternalThesaurusTypeByIdIdentifierIsZero() {
+
+		// arrange
+		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
+		externalThesaurusType.setIdentifier(1);
+		externalThesaurusType.setLabel("label");
+		when(externalThesaurusTypeDAO.getById(Mockito.<Integer>any()))
+			.thenReturn(externalThesaurusType);
+
+		// act
+		ExternalThesaurusType result = service.getExternalThesaurusTypeById(0);
+
+		// assert
+		assertEquals(1, (int) result.getIdentifier());
+		assertEquals("label", result.getLabel());
 	}
 }

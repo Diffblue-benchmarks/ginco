@@ -43,6 +43,15 @@ class SuggestionRestServiceTest {
 	private SuggestionRestService service;
 
 	@Test
+	void updateSuggestionsSuggestionViewsIsEmpty() {
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.updateSuggestions(new ArrayList<SuggestionView>());
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(0L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
 	void createSuggestionsConceptIdIsBarAndSuggestionViewsIsEmpty() {
 		ExtJsonFormLoadData<List<SuggestionView>> result =
 			 service.createSuggestions(new ArrayList<SuggestionView>(), "bar", "1234");
@@ -54,14 +63,5 @@ class SuggestionRestServiceTest {
 	@Test
 	void destroySuggestionsSuggestionViewsIsEmpty() {
 		service.destroySuggestions(new ArrayList<SuggestionView>());
-	}
-
-	@Test
-	void updateSuggestionsSuggestionViewsIsEmpty() {
-		ExtJsonFormLoadData<List<SuggestionView>> result =
-			 service.updateSuggestions(new ArrayList<SuggestionView>());
-		assertThat(result.getData(), empty());
-		assertThat(result.getTotal(), is(0L));
-		assertThat(result.isSuccess(), is(true));
 	}
 }

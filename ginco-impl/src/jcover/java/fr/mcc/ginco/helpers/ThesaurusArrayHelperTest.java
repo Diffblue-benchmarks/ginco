@@ -58,18 +58,4 @@ public class ThesaurusArrayHelperTest {
 		assertEquals(1, result.size());
 		assertSame(thesaurusArrayConcept, result.get(0));
 	}
-
-	@Test
-	public void saveArrayConcepts() {
-		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
-			.thenReturn(new ArrayList<String>());
-		ThesaurusArray array = new ThesaurusArray();
-		ArrayList<ThesaurusArrayConcept> concepts2 =
-			 new ArrayList<ThesaurusArrayConcept>();
-		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
-		thesaurusArrayConcept.setIdentifier(new ThesaurusArrayConcept.Id());
-		concepts2.add(thesaurusArrayConcept);
-		assertSame(array, service.saveArrayConcepts(array, concepts2));
-		assertEquals(1, array.getConcepts().size());
-	}
 }

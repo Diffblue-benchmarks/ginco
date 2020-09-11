@@ -71,7 +71,7 @@ class NoteTest {
 		lang2.setId("1234");
 		lang2.setPart1("foo");
 		lang2.setPrincipalLanguage(false);
-		lang2.setRefname("foo");
+		lang2.setRefname("root");
 		lang2.setTopLanguage(false);
 		note.setLanguage(lang2);
 		note.setLexicalValue("value");
@@ -127,7 +127,7 @@ class NoteTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setPrincipalLanguage(false);
-		language.setRefname("foo");
+		language.setRefname("root");
 		language.setTopLanguage(false);
 		termId.setLanguage(language);
 		termId.setLexicalValue("value");

@@ -22,12 +22,12 @@ class GincoRevEntityTest {
 		GincoRevEntity gincoRevEntity = new GincoRevEntity();
 		gincoRevEntity.setModifiedEntityTypes(new HashSet<GincoRevModifiedEntityType>());
 		gincoRevEntity.setThesaurusId("1234");
-		gincoRevEntity.setUsername("entity");
+		gincoRevEntity.setUsername("root");
 		gincoRevEntity.setId(1);
 		gincoRevEntity.setTimestamp(1L);
 		assertThat(gincoRevEntity.getModifiedEntityTypes(), empty());
 		assertThat(gincoRevEntity.getThesaurusId(), is("1234"));
-		assertThat(gincoRevEntity.getUsername(), is("entity"));
+		assertThat(gincoRevEntity.getUsername(), is("root"));
 		assertThat(gincoRevEntity.getTimestamp(), is(1L));
 	}
 

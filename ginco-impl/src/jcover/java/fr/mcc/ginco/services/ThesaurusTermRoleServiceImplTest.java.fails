@@ -35,23 +35,6 @@ public class ThesaurusTermRoleServiceImplTest {
 	}
 
 	@Test
-	public void getAllThesaurusTermRole() {
-
-		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
-		when(thesaurusTermRoleDAO.findAll())
-			.thenReturn(list);
-
-		// act
-		List<ThesaurusTermRole> result = service.getAllThesaurusTermRole();
-
-		// assert
-		assertEquals(1, result.size());
-		// pojo Object
-	}
-
-	@Test
 	public void getDefaultThesaurusTermRole() {
 
 		// arrange
@@ -68,5 +51,22 @@ public class ThesaurusTermRoleServiceImplTest {
 		assertEquals("DE", result.getCode());
 		assertFalse(result.getDefaultRole());
 		assertEquals("label", result.getLabel());
+	}
+
+	@Test
+	public void getAllThesaurusTermRole() {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
+		when(thesaurusTermRoleDAO.findAll())
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTermRole> result = service.getAllThesaurusTermRole();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 }

@@ -17,13 +17,13 @@ class LanguageTest {
 	void factory() {
 		Language language = new Language();
 		language.setId("1234");
-		language.setPart1("bar");
+		language.setPart1("foo");
 		language.setPrincipalLanguage(true);
-		language.setRefname("foo");
+		language.setRefname("root");
 		language.setTopLanguage(false);
 		assertThat(language.getId(), is("1234"));
-		assertThat(language.getPart1(), is("bar"));
-		assertThat(language.getRefname(), is("foo"));
+		assertThat(language.getPart1(), is("foo"));
+		assertThat(language.getRefname(), is("root"));
 		assertThat(language.isPrincipalLanguage(), is(true));
 		assertThat(language.isTopLanguage(), is(false));
 	}

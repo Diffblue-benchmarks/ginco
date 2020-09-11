@@ -35,7 +35,7 @@ class GenericCustomAttributeTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setPrincipalLanguage(false);
-		language.setRefname("foo");
+		language.setRefname("root");
 		language.setTopLanguage(false);
 		genericCustomAttribute.setLanguage(language);
 		genericCustomAttribute.setLexicalValue("value");

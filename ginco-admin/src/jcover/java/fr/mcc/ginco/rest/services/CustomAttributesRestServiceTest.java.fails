@@ -79,18 +79,18 @@ class CustomAttributesRestServiceTest {
 	}
 
 	@Test
-	void updateConceptAttributeListIsEmpty() {
+	void updateTermAttributeListIsEmpty() {
 		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result =
-			 service.updateConceptAttribute(new ArrayList<GenericCustomAttributeView>());
+			 service.updateTermAttribute(new ArrayList<GenericCustomAttributeView>());
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}
 
 	@Test
-	void updateTermAttributeListIsEmpty() {
+	void updateConceptAttributeListIsEmpty() {
 		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result =
-			 service.updateTermAttribute(new ArrayList<GenericCustomAttributeView>());
+			 service.updateConceptAttribute(new ArrayList<GenericCustomAttributeView>());
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));

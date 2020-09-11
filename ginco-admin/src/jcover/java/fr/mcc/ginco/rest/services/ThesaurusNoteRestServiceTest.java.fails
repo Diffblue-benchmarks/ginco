@@ -82,6 +82,24 @@ class ThesaurusNoteRestServiceTest {
 	}
 
 	@Test
+	void getTermNoteTypes() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		List<NoteType> list = new ArrayList<NoteType>();
+		list.add(new NoteType());
+		when(noteTypeService.getTermNoteTypeList())
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<NoteType>> result = service.getTermNoteTypes();
+
+		// assert
+		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
 	void getNoteParentEntity() throws fr.mcc.ginco.exceptions.TechnicalException, java.io.IOException {
 		Note note = new Note();
 		ThesaurusConcept concept1 = new ThesaurusConcept();

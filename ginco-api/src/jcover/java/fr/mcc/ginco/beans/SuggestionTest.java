@@ -113,7 +113,7 @@ class SuggestionTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setPrincipalLanguage(false);
-		language.setRefname("foo");
+		language.setRefname("root");
 		language.setTopLanguage(false);
 		term.setLanguage(language);
 		term.setLexicalValue("value");

@@ -116,7 +116,7 @@ public class LanguageDAOTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setPrincipalLanguage(true);
-		language.setRefname("foo");
+		language.setRefname("root");
 		list.add(language);
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
@@ -141,7 +141,7 @@ public class LanguageDAOTest {
 		// assert
 		assertEquals("1234", result.getId());
 		assertEquals("foo", result.getPart1());
-		assertEquals("foo", result.getRefname());
+		assertEquals("root", result.getRefname());
 		assertTrue(result.isPrincipalLanguage());
 		assertFalse(result.isTopLanguage());
 	}

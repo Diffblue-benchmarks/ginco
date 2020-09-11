@@ -26,6 +26,10 @@ public class GincoRevListenerTest {
 	}
 
 	@Test
+	public void entityChanged() {
+	}
+
+	@Test
 	public void newRevision() {
 		service.newRevision(new GincoRevEntity());
 	}

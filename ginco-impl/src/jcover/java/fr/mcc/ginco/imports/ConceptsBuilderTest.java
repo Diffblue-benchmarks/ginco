@@ -2,6 +2,7 @@ package fr.mcc.ginco.imports;
 
 import static org.junit.Assert.assertTrue;
 
+import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 import fr.mcc.ginco.beans.AlignmentConcept;
@@ -81,6 +82,17 @@ public class ConceptsBuilderTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void buildConceptsRootSkosConceptsIsEmpty() {
+		service.buildConceptsRoot(new Thesaurus(), new ArrayList<Resource>());
+	}
+
+	@Test
+	public void buildConceptsAssociations() {
+		service.buildConceptsAssociations(new Thesaurus(), new ArrayList<Resource>(), new ArrayList<ObjectProperty>(), new ArrayList<ObjectProperty>());
+		Mockito.verify(thesaurusConceptDAO).flush();
 	}
 
 	@Test

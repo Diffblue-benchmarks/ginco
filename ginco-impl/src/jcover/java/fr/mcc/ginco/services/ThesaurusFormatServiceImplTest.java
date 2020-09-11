@@ -36,24 +36,6 @@ public class ThesaurusFormatServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusFormatByIdIdIsZero() {
-
-		// arrange
-		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
-		thesaurusFormat.setIdentifier(1);
-		thesaurusFormat.setLabel("label");
-		when(thesaurusFormatDAO.getById(Mockito.<Integer>any()))
-			.thenReturn(thesaurusFormat);
-
-		// act
-		ThesaurusFormat result = service.getThesaurusFormatById(0);
-
-		// assert
-		assertEquals(1, (int) result.getIdentifier());
-		assertEquals("label", result.getLabel());
-	}
-
-	@Test
 	public void getThesaurusFormatList() {
 
 		// arrange
@@ -69,5 +51,23 @@ public class ThesaurusFormatServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusFormat, result.get(0));
+	}
+
+	@Test
+	public void getThesaurusFormatByIdIdIsZero() {
+
+		// arrange
+		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
+		thesaurusFormat.setIdentifier(1);
+		thesaurusFormat.setLabel("label");
+		when(thesaurusFormatDAO.getById(Mockito.<Integer>any()))
+			.thenReturn(thesaurusFormat);
+
+		// act
+		ThesaurusFormat result = service.getThesaurusFormatById(0);
+
+		// assert
+		assertEquals(1, (int) result.getIdentifier());
+		assertEquals("label", result.getLabel());
 	}
 }

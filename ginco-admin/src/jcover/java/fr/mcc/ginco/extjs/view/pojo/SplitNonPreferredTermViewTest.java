@@ -29,6 +29,9 @@ class SplitNonPreferredTermViewTest {
 			 new ArrayList<ThesaurusTermView>();
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
 		thesaurusTermView.setConceptId("1234");
+		ArrayList<String> conceptsPath = new ArrayList<String>();
+		conceptsPath.add("/bin/bash");
+		thesaurusTermView.setConceptsPath(conceptsPath);
 		thesaurusTermView.setCreated("foo");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");

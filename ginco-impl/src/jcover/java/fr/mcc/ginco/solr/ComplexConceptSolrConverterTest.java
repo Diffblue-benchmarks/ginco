@@ -47,7 +47,7 @@ public class ComplexConceptSolrConverterTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setPrincipalLanguage(false);
-		language.setRefname("foo");
+		language.setRefname("root");
 		language.setTopLanguage(false);
 		complexConcept.setLanguage(language);
 		complexConcept.setLexicalValue("value");

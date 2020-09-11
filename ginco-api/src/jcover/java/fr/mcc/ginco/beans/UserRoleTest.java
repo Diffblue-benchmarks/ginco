@@ -52,10 +52,10 @@ class UserRoleTest {
 		thesaurus.setType(type);
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		userRole.setThesaurus(thesaurus);
-		userRole.setUsername("John Smith");
+		userRole.setUsername("root");
 		assertThat(userRole.getIdentifier(), is(1));
 		assertThat(userRole.getRole(), is(Role.MANAGER));
 		assertThat(userRole.getThesaurus(), sameInstance(thesaurus));
-		assertThat(userRole.getUsername(), is("John Smith"));
+		assertThat(userRole.getUsername(), is("root"));
 	}
 }

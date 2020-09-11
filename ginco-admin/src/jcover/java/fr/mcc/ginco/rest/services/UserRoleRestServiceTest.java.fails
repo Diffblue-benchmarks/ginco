@@ -3,6 +3,7 @@ package fr.mcc.ginco.rest.services;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.UserRole;
@@ -48,24 +49,37 @@ class UserRoleRestServiceTest {
 	private UserRoleRestService service;
 
 	@Test
-	void deleteThesaurusUsers() {
+	void getThesaurusUsers1() {
 
 		// arrange
-		when(userRoleViewConverter.convert(Mockito.<UserRoleView>any()))
-			.thenReturn(new UserRole());
-		ArrayList<UserRoleView> userRoleViews = new ArrayList<UserRoleView>();
-		userRoleViews.add(new UserRoleView());
+		UserRoleView userRoleView = new UserRoleView();
+		when(userRoleViewConverter.convert(Mockito.<UserRole>any()))
+			.thenReturn(userRoleView);
+		List<UserRole> list = new ArrayList<UserRole>();
+		list.add(new UserRole());
+		when(userRoleService.getThesaurusUsers(Mockito.<String>any()))
+			.thenReturn(list);
 
 		// act
-		service.deleteThesaurusUsers(userRoleViews);
+		ExtJsonFormLoadData<List<UserRoleView>> result =
+			 service.getThesaurusUsers("root");
 
 		// assert
-		Mockito.verify(userRoleService).deleteUserRole(ArgumentMatchers.<UserRole>any());
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(userRoleView));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
 	}
 
 	@Test
-	void deleteThesaurusUsersUserRoleViewsIsEmpty() {
-		service.deleteThesaurusUsers(new ArrayList<UserRoleView>());
+	void getThesaurusUsers2() {
+		when(userRoleService.getThesaurusUsers(Mockito.<String>any()))
+			.thenReturn(new ArrayList<UserRole>());
+		ExtJsonFormLoadData<List<UserRoleView>> result =
+			 service.getThesaurusUsers("root");
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(0L));
+		assertThat(result.isSuccess(), is(true));
 	}
 
 	@Test
@@ -87,5 +101,26 @@ class UserRoleRestServiceTest {
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void deleteThesaurusUsers() {
+
+		// arrange
+		when(userRoleViewConverter.convert(Mockito.<UserRoleView>any()))
+			.thenReturn(new UserRole());
+		ArrayList<UserRoleView> userRoleViews = new ArrayList<UserRoleView>();
+		userRoleViews.add(new UserRoleView());
+
+		// act
+		service.deleteThesaurusUsers(userRoleViews);
+
+		// assert
+		Mockito.verify(userRoleService).deleteUserRole(ArgumentMatchers.<UserRole>any());
+	}
+
+	@Test
+	void deleteThesaurusUsersUserRoleViewsIsEmpty() {
+		service.deleteThesaurusUsers(new ArrayList<UserRoleView>());
 	}
 }

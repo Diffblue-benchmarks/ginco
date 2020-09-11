@@ -105,7 +105,7 @@ public class TermSolrConverterTest {
 		lang2.setId("1234");
 		lang2.setPart1("foo");
 		lang2.setPrincipalLanguage(false);
-		lang2.setRefname("foo");
+		lang2.setRefname("root");
 		lang2.setTopLanguage(false);
 		note.setLanguage(lang2);
 		note.setLexicalValue("value");
@@ -160,7 +160,7 @@ public class TermSolrConverterTest {
 		language1.setId("1234");
 		language1.setPart1("foo");
 		language1.setPrincipalLanguage(false);
-		language1.setRefname("foo");
+		language1.setRefname("root");
 		language1.setTopLanguage(false);
 		termId.setLanguage(language1);
 		termId.setLexicalValue("value");
@@ -250,7 +250,7 @@ public class TermSolrConverterTest {
 		language2.setId("1234");
 		language2.setPart1("foo");
 		language2.setPrincipalLanguage(false);
-		language2.setRefname("foo");
+		language2.setRefname("root");
 		language2.setTopLanguage(false);
 		thesaurusTerm.setLanguage(language2);
 		thesaurusTerm.setLexicalValue("value");

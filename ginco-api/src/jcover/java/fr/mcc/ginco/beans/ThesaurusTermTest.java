@@ -72,7 +72,7 @@ class ThesaurusTermTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setPrincipalLanguage(false);
-		language.setRefname("foo");
+		language.setRefname("root");
 		language.setTopLanguage(false);
 		thesaurusTerm.setLanguage(language);
 		thesaurusTerm.setLexicalValue("value");

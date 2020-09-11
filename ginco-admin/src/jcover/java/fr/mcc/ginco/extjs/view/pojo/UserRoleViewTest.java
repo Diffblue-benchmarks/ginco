@@ -19,10 +19,10 @@ class UserRoleViewTest {
 		userRoleView.setIdentifier(1);
 		userRoleView.setRole(1);
 		userRoleView.setThesaurusId("root");
-		userRoleView.setUsername("John Smith");
+		userRoleView.setUsername("root");
 		assertThat(userRoleView.getIdentifier(), is(1));
 		assertThat(userRoleView.getRole(), is(1));
 		assertThat(userRoleView.getThesaurusId(), is("root"));
-		assertThat(userRoleView.getUsername(), is("John Smith"));
+		assertThat(userRoleView.getUsername(), is("root"));
 	}
 }

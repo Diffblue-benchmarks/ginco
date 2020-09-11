@@ -37,6 +37,13 @@ public class AdminUserServiceImplTest {
 	}
 
 	@Test
+	public void isUserAdminUserIdIsRootReturnsTrue() {
+		when(adminUserDAO.getById(Mockito.<String>any()))
+			.thenReturn(new AdminUser());
+		assertTrue(service.isUserAdmin("root"));
+	}
+
+	@Test
 	public void getAllAdmin() {
 
 		// arrange
@@ -52,12 +59,5 @@ public class AdminUserServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(adminUser, result.get(0));
-	}
-
-	@Test
-	public void isUserAdminUserIdIsRootReturnsTrue() {
-		when(adminUserDAO.getById(Mockito.<String>any()))
-			.thenReturn(new AdminUser());
-		assertTrue(service.isUserAdmin("root"));
 	}
 }

@@ -37,35 +37,6 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguageByPart1Part1IsBar() {
-
-		// arrange
-		Language language = new Language();
-		language.setId("1234");
-		language.setPart1("foo");
-		language.setRefname("foo");
-		when(languagesDAO.getByPart1(Mockito.<String>any()))
-			.thenReturn(language);
-
-		// act
-		Language result = service.getLanguageByPart1("bar");
-
-		// assert
-		assertEquals("1234", result.getId());
-		assertEquals("foo", result.getPart1());
-		assertEquals("foo", result.getRefname());
-		assertFalse(result.isPrincipalLanguage());
-		assertFalse(result.isTopLanguage());
-	}
-
-	@Test
-	public void getLanguageCountReturnsOne() {
-		when(languagesDAO.count())
-			.thenReturn(1L);
-		assertEquals(1L, (long) service.getLanguageCount());
-	}
-
-	@Test
 	public void getLanguagesListLimitIsOneAndStartIndexIsZero() {
 
 		// arrange
@@ -99,5 +70,34 @@ public class LanguagesServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(language, result.get(0));
+	}
+
+	@Test
+	public void getLanguageCountReturnsOne() {
+		when(languagesDAO.count())
+			.thenReturn(1L);
+		assertEquals(1L, (long) service.getLanguageCount());
+	}
+
+	@Test
+	public void getLanguageByPart1Part1IsBar() {
+
+		// arrange
+		Language language = new Language();
+		language.setId("1234");
+		language.setPart1("foo");
+		language.setRefname("root");
+		when(languagesDAO.getByPart1(Mockito.<String>any()))
+			.thenReturn(language);
+
+		// act
+		Language result = service.getLanguageByPart1("bar");
+
+		// assert
+		assertEquals("1234", result.getId());
+		assertEquals("foo", result.getPart1());
+		assertEquals("root", result.getRefname());
+		assertFalse(result.isPrincipalLanguage());
+		assertFalse(result.isTopLanguage());
 	}
 }

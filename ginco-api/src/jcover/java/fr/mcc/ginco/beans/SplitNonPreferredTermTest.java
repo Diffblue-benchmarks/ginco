@@ -29,7 +29,7 @@ class SplitNonPreferredTermTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setPrincipalLanguage(false);
-		language.setRefname("foo");
+		language.setRefname("root");
 		language.setTopLanguage(false);
 		splitNonPreferredTerm.setLanguage(language);
 		splitNonPreferredTerm.setLexicalValue("value");

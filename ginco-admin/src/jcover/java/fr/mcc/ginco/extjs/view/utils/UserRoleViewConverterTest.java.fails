@@ -46,7 +46,7 @@ class UserRoleViewConverterTest {
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setIdentifier("data");
 		userRole.setThesaurus(thesaurus);
-		userRole.setUsername("John Smith");
+		userRole.setUsername("root");
 
 		// act
 		UserRoleView result = service.convert(userRole);
@@ -55,6 +55,6 @@ class UserRoleViewConverterTest {
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRole(), is(0));
 		assertThat(result.getThesaurusId(), is("data"));
-		assertThat(result.getUsername(), is("John Smith"));
+		assertThat(result.getUsername(), is("root"));
 	}
 }

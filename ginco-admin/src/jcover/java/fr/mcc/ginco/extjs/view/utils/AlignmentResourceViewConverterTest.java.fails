@@ -34,6 +34,23 @@ class AlignmentResourceViewConverterTest {
 	private AlignmentResourceViewConverter service;
 
 	@Test
+	void convertResourceConcept() {
+
+		// arrange
+		AlignmentResource alignmentResource = new AlignmentResource();
+		alignmentResource.setExternalTargetResource("foo");
+		alignmentResource.setIdentifier(1);
+
+		// act
+		AlignmentResourceView result =
+			 service.convertResourceConcept(alignmentResource);
+
+		// assert
+		assertThat(result.getExternalTargetResource(), is("foo"));
+		assertThat(result.getIdentifier(), is(1));
+	}
+
+	@Test
 	void convertAlignmentResourceView1() {
 
 		// arrange
@@ -66,23 +83,6 @@ class AlignmentResourceViewConverterTest {
 
 		// assert
 		assertThat(result.getAlignment(), sameInstance(alignment));
-		assertThat(result.getExternalTargetResource(), is("foo"));
-		assertThat(result.getIdentifier(), is(1));
-	}
-
-	@Test
-	void convertResourceConcept() {
-
-		// arrange
-		AlignmentResource alignmentResource = new AlignmentResource();
-		alignmentResource.setExternalTargetResource("foo");
-		alignmentResource.setIdentifier(1);
-
-		// act
-		AlignmentResourceView result =
-			 service.convertResourceConcept(alignmentResource);
-
-		// assert
 		assertThat(result.getExternalTargetResource(), is("foo"));
 		assertThat(result.getIdentifier(), is(1));
 	}

@@ -37,6 +37,24 @@ public class AlignmentTypeServiceImplTest {
 	}
 
 	@Test
+	public void getAlignmentTypeList() {
+
+		// arrange
+		List<AlignmentType> list = new ArrayList<AlignmentType>();
+		AlignmentType alignmentType = new AlignmentType();
+		list.add(alignmentType);
+		when(alignmentTypeDAO.findAll())
+			.thenReturn(list);
+
+		// act
+		List<AlignmentType> result = service.getAlignmentTypeList();
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(alignmentType, result.get(0));
+	}
+
+	@Test
 	public void getAlignmentTypeByIdIdentifierIsZero() {
 
 		// arrange
@@ -57,23 +75,5 @@ public class AlignmentTypeServiceImplTest {
 		assertFalse(result.isDefaultType());
 		assertFalse(result.isMultiConcept());
 		assertFalse(result.isResource());
-	}
-
-	@Test
-	public void getAlignmentTypeList() {
-
-		// arrange
-		List<AlignmentType> list = new ArrayList<AlignmentType>();
-		AlignmentType alignmentType = new AlignmentType();
-		list.add(alignmentType);
-		when(alignmentTypeDAO.findAll())
-			.thenReturn(list);
-
-		// act
-		List<AlignmentType> result = service.getAlignmentTypeList();
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(alignmentType, result.get(0));
 	}
 }

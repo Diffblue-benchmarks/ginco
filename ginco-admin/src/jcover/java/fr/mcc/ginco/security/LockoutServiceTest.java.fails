@@ -28,17 +28,17 @@ class LockoutServiceTest {
 	}
 
 	@Test
-	void isLockedOutReturnsFalse() {
-		assertThat(service.isLockedOut("545321456"), is(false));
+	void isLockedOutUsernameIsRootReturnsFalse() {
+		assertThat(service.isLockedOut("root"), is(false));
 	}
 
 	@Test
-	void notifyLoginFailureTimestampIsOne() {
-		service.notifyLoginFailure("545321456", 1L);
+	void notifyLoginFailureTimestampIsOneAndUsernameIsRoot() {
+		service.notifyLoginFailure("root", 1L);
 	}
 
 	@Test
-	void notifyLoginSuccess() {
-		service.notifyLoginSuccess("545321456");
+	void notifyLoginSuccessUsernameIsRoot() {
+		service.notifyLoginSuccess("root");
 	}
 }

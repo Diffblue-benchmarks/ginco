@@ -37,24 +37,6 @@ public class ExternalThesaurusServiceImplTest {
 	}
 
 	@Test
-	public void getExternalThesaurusListExternalIdQueryIsBar() {
-
-		// arrange
-		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
-		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
-		list.add(externalThesaurus);
-		when(externalThesaurusDAO.findAllByExternalIdQuery(Mockito.<String>any()))
-			.thenReturn(list);
-
-		// act
-		List<ExternalThesaurus> result = service.getExternalThesaurusList("bar");
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(externalThesaurus, result.get(0));
-	}
-
-	@Test
 	public void getThesaurusByExternalIdExternalIdIsBar() {
 
 		// arrange
@@ -73,5 +55,23 @@ public class ExternalThesaurusServiceImplTest {
 		assertEquals("1234", result.getExternalId());
 		assertSame(externalThesaurusType, result.getExternalThesaurusType());
 		assertEquals(1, (int) result.getIdentifier());
+	}
+
+	@Test
+	public void getExternalThesaurusListExternalIdQueryIsBar() {
+
+		// arrange
+		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
+		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
+		list.add(externalThesaurus);
+		when(externalThesaurusDAO.findAllByExternalIdQuery(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ExternalThesaurus> result = service.getExternalThesaurusList("bar");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(externalThesaurus, result.get(0));
 	}
 }

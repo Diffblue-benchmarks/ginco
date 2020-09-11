@@ -59,7 +59,300 @@ class ThesaurusViewConverterTest {
 	private ThesaurusViewConverter service;
 
 	@Test
-	void convert() throws java.text.ParseException {
+	void convert1() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(true);
+		Thesaurus source1 = new Thesaurus();
+		source1.setArchived(false);
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setName("Acme");
+		source1.setCreator(creator);
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("data");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		source1.setType(type);
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(false));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
+		assertThat(result.getCreatorHomepage(), is("foo"));
+		assertThat(result.getCreatorName(), is("Acme"));
+		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("data"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+	}
+
+	@Test
+	void convert2() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(false);
+		Thesaurus source1 = new Thesaurus();
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setName("Acme");
+		source1.setCreator(creator);
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("data");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		source1.setType(type);
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(nullValue()));
+		assertThat(result.getCanBeDeleted(), is(true));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
+		assertThat(result.getCreatorHomepage(), is("foo"));
+		assertThat(result.getCreatorName(), is("Acme"));
+		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("data"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+	}
+
+	@Test
+	void convert3() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(false);
+		Thesaurus source1 = new Thesaurus();
+		source1.setArchived(true);
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setName("Acme");
+		source1.setCreator(creator);
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("data");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		source1.setType(type);
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(true));
+		assertThat(result.getCanBeDeleted(), is(true));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
+		assertThat(result.getCreatorHomepage(), is("foo"));
+		assertThat(result.getCreatorName(), is("Acme"));
+		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("data"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+	}
+
+	@Test
+	void convert4() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(false);
+		Thesaurus source1 = new Thesaurus();
+		source1.setArchived(false);
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("data");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		source1.setType(type);
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(true));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is(nullValue()));
+		assertThat(result.getCreatorHomepage(), is(nullValue()));
+		assertThat(result.getCreatorName(), is(nullValue()));
+		assertThat(result.getDate(), is("2010-12-31 00:00:00"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("data"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+	}
+
+	@Test
+	void convert5() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
+			.thenReturn(false);
+		Thesaurus source1 = new Thesaurus();
+		source1.setArchived(false);
+		source1.setContributor("foo");
+		source1.setCoverage("foo");
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setName("Acme");
+		source1.setCreator(creator);
+		source1.setDefaultTopConcept(false);
+		source1.setDescription("some text");
+		source1.setIdentifier("data");
+		source1.setPolyHierarchical(false);
+		source1.setPublisher("foo");
+		source1.setRelation("DE");
+		source1.setRights("foo");
+		source1.setSource("foo");
+		source1.setSubject("foo");
+		source1.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		source1.setType(type);
+
+		// act
+		ThesaurusView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(true));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
+		assertThat(result.getCreatorHomepage(), is("foo"));
+		assertThat(result.getCreatorName(), is("Acme"));
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getId(), is("data"));
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+	}
+
+	@Test
+	void convert6() throws java.text.ParseException {
 
 		// arrange
 		when(thesaurusVersionHistoryService.hasPublishedVersion(Mockito.<Thesaurus>any()))
@@ -75,7 +368,6 @@ class ThesaurusViewConverterTest {
 		creator.setName("Acme");
 		source1.setCreator(creator);
 		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source1.setDefaultTopConcept(false);
 		source1.setDescription("some text");
 		source1.setIdentifier("data");
 		source1.setPolyHierarchical(false);

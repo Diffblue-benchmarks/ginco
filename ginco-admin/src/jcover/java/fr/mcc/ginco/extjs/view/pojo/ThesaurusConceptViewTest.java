@@ -25,9 +25,32 @@ class ThesaurusConceptViewTest {
 		alignmentView.setAlignmentType(1);
 		alignmentView.setAndRelation(false);
 		alignmentView.setCreated("foo");
+		ArrayList<ExternalThesaurusView> externalThesaurus =
+			 new ArrayList<ExternalThesaurusView>();
+		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
+		externalThesaurusView.setExternalId("1234");
+		externalThesaurusView.setExternalThesaurusType(1);
+		externalThesaurusView.setIdentifier(1);
+		externalThesaurus.add(externalThesaurusView);
+		alignmentView.setExternalThesaurus(externalThesaurus);
 		alignmentView.setIdentifier("data");
 		alignmentView.setInternalThesaurusId("1234");
 		alignmentView.setModified("foo");
+		ArrayList<AlignmentConceptView> targetConcepts =
+			 new ArrayList<AlignmentConceptView>();
+		AlignmentConceptView alignmentConceptView = new AlignmentConceptView();
+		alignmentConceptView.setExternalTargetConcept("hello");
+		alignmentConceptView.setIdentifier(1);
+		alignmentConceptView.setInternalTargetConcept("hello");
+		targetConcepts.add(alignmentConceptView);
+		alignmentView.setTargetConcepts(targetConcepts);
+		ArrayList<AlignmentResourceView> targetResources =
+			 new ArrayList<AlignmentResourceView>();
+		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
+		alignmentResourceView.setExternalTargetResource("foo");
+		alignmentResourceView.setIdentifier(1);
+		targetResources.add(alignmentResourceView);
+		alignmentView.setTargetResources(targetResources);
 		alignments.add(alignmentView);
 		thesaurusConceptView.setAlignments(alignments);
 		ArrayList<AssociativeRelationshipView> associatedConcepts =
@@ -48,9 +71,9 @@ class ThesaurusConceptViewTest {
 		hierarchicalRelationshipView1.setRole(1);
 		childConcepts.add(hierarchicalRelationshipView1);
 		thesaurusConceptView.setChildConcepts(childConcepts);
-		ArrayList<String> conceptsPath = new ArrayList<String>();
-		conceptsPath.add("/bin/bash");
-		thesaurusConceptView.setConceptsPath(conceptsPath);
+		ArrayList<String> conceptsPath1 = new ArrayList<String>();
+		conceptsPath1.add("/bin/bash");
+		thesaurusConceptView.setConceptsPath(conceptsPath1);
 		thesaurusConceptView.setCreated("hello");
 		thesaurusConceptView.setIdentifier("data");
 		thesaurusConceptView.setModified("hello");
@@ -71,6 +94,9 @@ class ThesaurusConceptViewTest {
 		ArrayList<ThesaurusTermView> terms = new ArrayList<ThesaurusTermView>();
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
 		thesaurusTermView.setConceptId("1234");
+		ArrayList<String> conceptsPath2 = new ArrayList<String>();
+		conceptsPath2.add("/bin/bash");
+		thesaurusTermView.setConceptsPath(conceptsPath2);
 		thesaurusTermView.setCreated("foo");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");

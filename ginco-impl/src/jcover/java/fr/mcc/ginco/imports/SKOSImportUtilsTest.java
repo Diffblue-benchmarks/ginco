@@ -30,12 +30,12 @@ public class SKOSImportUtilsTest {
 	}
 
 	@Test
-	public void getSkosDateSkosDateIsEmpty() {
-		assertEquals(true, Math.abs(service.getSkosDate("").getTime()-new Date().getTime())<=10_000L);
+	public void getSKOSRessourcesModelIsEmptyReturnsEmpty() {
+		assertTrue((service.getSKOSRessources(ModelFactory.createDefaultModel(), GINCO.getResource("BASIC"))).isEmpty());
 	}
 
 	@Test
-	public void getSKOSRessourcesModelIsEmptyReturnsEmpty() {
-		assertTrue((service.getSKOSRessources(ModelFactory.createDefaultModel(), GINCO.getResource("BASIC"))).isEmpty());
+	public void getSkosDateSkosDateIsEmpty() {
+		assertEquals(true, Math.abs(service.getSkosDate("").getTime()-new Date().getTime())<=10_000L);
 	}
 }

@@ -74,21 +74,38 @@ class ThesaurusRestServiceTest {
 	private ThesaurusRestService service;
 
 	@Test
-	void getAllAuthors() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void getAllThesaurusTypes() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
-		List<ThesaurusOrganization> list = new ArrayList<ThesaurusOrganization>();
-		ThesaurusOrganization thesaurusOrganization = new ThesaurusOrganization();
-		list.add(thesaurusOrganization);
-		when(thesaurusOrganizationService.getOrganizationsWithData())
+		List<ThesaurusType> list = new ArrayList<ThesaurusType>();
+		ThesaurusType thesaurusType = new ThesaurusType();
+		list.add(thesaurusType);
+		when(thesaurusTypeService.getThesaurusTypeList())
 			.thenReturn(list);
 
 		// act
-		List<ThesaurusOrganization> result = service.getAllAuthors();
+		List<ThesaurusType> result = service.getAllThesaurusTypes();
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0), sameInstance(thesaurusOrganization));
+		assertThat(result.get(0), sameInstance(thesaurusType));
+	}
+
+	@Test
+	void getTopLanguages() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		List<Language> list = new ArrayList<Language>();
+		when(thesaurusService.getThesaurusLanguages(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<Language>> result = service.getTopLanguages("1234");
+
+		// assert
+		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
 	}
 
 	@Test
@@ -110,21 +127,21 @@ class ThesaurusRestServiceTest {
 	}
 
 	@Test
-	void getAllThesaurusTypes() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void getAllAuthors() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
-		List<ThesaurusType> list = new ArrayList<ThesaurusType>();
-		ThesaurusType thesaurusType = new ThesaurusType();
-		list.add(thesaurusType);
-		when(thesaurusTypeService.getThesaurusTypeList())
+		List<ThesaurusOrganization> list = new ArrayList<ThesaurusOrganization>();
+		ThesaurusOrganization thesaurusOrganization = new ThesaurusOrganization();
+		list.add(thesaurusOrganization);
+		when(thesaurusOrganizationService.getOrganizationsWithData())
 			.thenReturn(list);
 
 		// act
-		List<ThesaurusType> result = service.getAllThesaurusTypes();
+		List<ThesaurusOrganization> result = service.getAllAuthors();
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0), sameInstance(thesaurusType));
+		assertThat(result.get(0), sameInstance(thesaurusOrganization));
 	}
 
 	@Test
@@ -152,23 +169,6 @@ class ThesaurusRestServiceTest {
 
 		// assert
 		assertThat((ThesaurusStatistics) result.getData(), sameInstance(thesaurusStatistics));
-		assertThat(result.getTotal(), is(nullValue()));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
-	void getTopLanguages() throws fr.mcc.ginco.exceptions.TechnicalException {
-
-		// arrange
-		List<Language> list = new ArrayList<Language>();
-		when(thesaurusService.getThesaurusLanguages(Mockito.<String>any()))
-			.thenReturn(list);
-
-		// act
-		ExtJsonFormLoadData<List<Language>> result = service.getTopLanguages("1234");
-
-		// assert
-		assertThat(result.getData(), sameInstance(list));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}

@@ -8,6 +8,7 @@ import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.beans.AlignmentConcept;
 import fr.mcc.ginco.beans.AlignmentResource;
+import fr.mcc.ginco.beans.ExternalThesaurus;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IExternalThesaurusDAO;
 import fr.mcc.ginco.dao.IGenericDAO;
@@ -53,7 +54,7 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
-	public void getAlignmentsBySourceConceptIdConceptIdentifierIsData() {
+	public void getAlignmentsBySourceConceptIdConceptIdentifierIsBar() {
 
 		// arrange
 		List<Alignment> list = new ArrayList<Alignment>();
@@ -63,10 +64,30 @@ public class AlignmentServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<Alignment> result = service.getAlignmentsBySourceConceptId("data");
+		List<Alignment> result = service.getAlignmentsBySourceConceptId("bar");
 
 		// assert
 		assertEquals(1, result.size());
 		assertSame(alignment, result.get(0));
+	}
+
+	@Test
+	public void deleteExternalThesauruses1() {
+		when(externalThesaurusDAO.findAll())
+			.thenReturn(new ArrayList<Object>());
+		service.deleteExternalThesauruses();
+	}
+
+	@Test
+	public void deleteExternalThesauruses2() {
+		List<Object> list1 = new ArrayList<Object>();
+		list1.add(new ExternalThesaurus());
+		when(externalThesaurusDAO.findAll())
+			.thenReturn(list1);
+		List<Alignment> list2 = new ArrayList<Alignment>();
+		list2.add(new Alignment());
+		when(alignmentDAO.findByExternalThesaurus(Mockito.<Integer>any()))
+			.thenReturn(list2);
+		service.deleteExternalThesauruses();
 	}
 }

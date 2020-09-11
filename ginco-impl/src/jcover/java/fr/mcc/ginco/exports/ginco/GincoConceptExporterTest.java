@@ -50,11 +50,8 @@ public class GincoConceptExporterTest {
 	}
 
 	@Test
-	public void getExportAlignments() {
-		List<Alignment> list = new ArrayList<Alignment>();
-		when(alignmentService.getAlignmentsBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(list);
-		assertSame(list, service.getExportAlignments(new ThesaurusConcept()).getList());
+	public void getExportHierarchicalConcepts() {
+		assertTrue((service.getExportHierarchicalConcepts(new ThesaurusConcept()).getList()).isEmpty());
 	}
 
 	@Test
@@ -67,7 +64,10 @@ public class GincoConceptExporterTest {
 	}
 
 	@Test
-	public void getExportHierarchicalConcepts() {
-		assertTrue((service.getExportHierarchicalConcepts(new ThesaurusConcept()).getList()).isEmpty());
+	public void getExportAlignments() {
+		List<Alignment> list = new ArrayList<Alignment>();
+		when(alignmentService.getAlignmentsBySourceConceptId(Mockito.<String>any()))
+			.thenReturn(list);
+		assertSame(list, service.getExportAlignments(new ThesaurusConcept()).getList());
 	}
 }

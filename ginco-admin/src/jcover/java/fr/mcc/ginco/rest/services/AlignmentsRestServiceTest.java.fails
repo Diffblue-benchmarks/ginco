@@ -70,34 +70,6 @@ class AlignmentsRestServiceTest {
 	}
 
 	@Test
-	void getExternalThesauruses() {
-
-		// arrange
-		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
-		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
-			.thenReturn(externalThesaurusView);
-		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
-		list.add(new ExternalThesaurus());
-		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
-			.thenReturn(list);
-
-		// act
-		List<ExternalThesaurusView> result =
-			 service.getExternalThesauruses("foo=bar");
-
-		// assert
-		assertThat(result.size(), is(1));
-		assertThat(result.get(0), sameInstance(externalThesaurusView));
-	}
-
-	@Test
-	void getExternalThesaurusesReturnsEmpty() {
-		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ExternalThesaurus>());
-		assertThat(service.getExternalThesauruses("foo=bar"), empty());
-	}
-
-	@Test
 	void getExternalThesaurusTypes() {
 
 		// arrange
@@ -113,5 +85,32 @@ class AlignmentsRestServiceTest {
 		// assert
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0), sameInstance(externalThesaurusType));
+	}
+
+	@Test
+	void getExternalThesauruses() {
+
+		// arrange
+		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
+		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
+			.thenReturn(externalThesaurusView);
+		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
+		list.add(new ExternalThesaurus());
+		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ExternalThesaurusView> result = service.getExternalThesauruses("bar");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(externalThesaurusView));
+	}
+
+	@Test
+	void getExternalThesaurusesReturnsEmpty() {
+		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
+			.thenReturn(new ArrayList<ExternalThesaurus>());
+		assertThat(service.getExternalThesauruses("bar"), empty());
 	}
 }

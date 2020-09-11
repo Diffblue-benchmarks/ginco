@@ -1,6 +1,8 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IConceptHierarchicalRelationshipDAO;
@@ -8,10 +10,14 @@ import fr.mcc.ginco.dao.IThesaurusArrayConceptDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 import fr.mcc.ginco.dao.IThesaurusTermDAO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -39,6 +45,23 @@ public class ConceptHierarchicalRelationshipServiceUtilTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void calculateChildrenRoots1() {
+		when(thesaurusConceptDAO.getChildrenConcepts(Mockito.<String>any(), anyInt(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		service.calculateChildrenRoots("1234", "1234");
+	}
+
+	@Test
+	public void calculateChildrenRoots2() {
+		List<ThesaurusConcept> list2 = new ArrayList<ThesaurusConcept>();
+		list2.add(new ThesaurusConcept());
+		when(thesaurusConceptDAO.getChildrenConcepts(Mockito.<String>any(), anyInt(), Mockito.<String>any()))
+			.thenReturn(list2)
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		service.calculateChildrenRoots("1234", "1234");
 	}
 
 	@Test
