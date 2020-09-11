@@ -1,8 +1,9 @@
 package fr.mcc.ginco.imports;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 import fr.mcc.ginco.beans.Thesaurus;
@@ -51,9 +52,10 @@ public class ThesaurusArraysBuilderTest {
 	}
 
 	@Test
-	public void buildArraysBuiltArraysIsEmptyAndModelIsEmpty() {
-		when(skosImportUtils.getSKOSRessources(Mockito.<com.hp.hpl.jena.rdf.model.Model>any(), Mockito.<Resource>any()))
+	public void buildArraysBuiltArraysIsEmpty() {
+		when(skosImportUtils.getSKOSRessources(Mockito.<Model>any(), Mockito.<Resource>any()))
 			.thenReturn(new ArrayList<Resource>());
-		service.buildArrays(new Thesaurus(), ModelFactory.createDefaultModel(), new HashMap<String, ThesaurusArray>());
+		Model model = mock(Model.class);
+		service.buildArrays(new Thesaurus(), model, new HashMap<String, ThesaurusArray>());
 	}
 }

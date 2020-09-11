@@ -1,16 +1,14 @@
 package fr.mcc.ginco.exports.skos;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
 
-import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.services.IThesaurusTermService;
-import fr.mcc.ginco.skos.namespaces.GINCO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,31 +42,19 @@ public class SKOSTermsExporterTest {
 	}
 
 	@Test
-	public void exportConceptPreferredTerms() {
-		when(skosModelTermsExporter.exportConceptPreferredTerm(Mockito.<ThesaurusTerm>any(), Mockito.<Model>any()))
-			.thenReturn(ModelFactory.createDefaultModel());
-		ArrayList<ThesaurusTerm> prefTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setLanguage(new Language());
-		thesaurusTerm.setLexicalValue("value");
-		prefTerms.add(thesaurusTerm);
-		Model model2 = ModelFactory.createDefaultModel();
-		assertSame(model2, service.exportConceptPreferredTerms(prefTerms, model2, GINCO.getResource("BASIC")));
-		assertFalse(model2.isEmpty());
-	}
-
-	@Test
 	public void exportConceptPreferredTermsPrefTermsIsEmpty() {
-		Model model = ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptPreferredTerms(new ArrayList<ThesaurusTerm>(), model, GINCO.getResource("BASIC")));
+		Model model = mock(Model.class);
+		Resource conceptResource = mock(Resource.class);
+		assertSame(model, service.exportConceptPreferredTerms(new ArrayList<ThesaurusTerm>(), model, conceptResource));
 	}
 
 	@Test
 	public void exportConceptNotPreferredTerms1() {
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusTerm>());
-		Model model = ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, GINCO.getResource("BASIC")));
+		Model model = mock(Model.class);
+		Resource conceptResource = mock(Resource.class);
+		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, conceptResource));
 	}
 
 	@Test
@@ -79,7 +65,8 @@ public class SKOSTermsExporterTest {
 		list.add(thesaurusTerm);
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
 			.thenReturn(list);
-		Model model = ModelFactory.createDefaultModel();
-		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, GINCO.getResource("BASIC")));
+		Model model = mock(Model.class);
+		Resource conceptResource = mock(Resource.class);
+		assertSame(model, service.exportConceptNotPreferredTerms("1234", model, conceptResource));
 	}
 }

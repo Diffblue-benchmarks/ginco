@@ -2,11 +2,17 @@ package fr.mcc.ginco.audit.utils;
 
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.io.Serializable;
 
 import org.hibernate.SessionFactoryObserver;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.envers.configuration.AuditConfiguration;
+import org.hibernate.event.spi.EventSource;
+import org.hibernate.event.spi.PostInsertEvent;
+import org.hibernate.persister.entity.EntityPersister;
 import org.hibernate.proxy.EntityNotFoundDelegate;
 import org.junit.Test;
 import org.xml.sax.EntityResolver;
@@ -36,5 +42,16 @@ public class InsertEnversListenerTest {
 		cfg1.setSessionFactoryObserver(sessionFactoryObserver1);
 		AuditConfiguration enversConfiguration = new AuditConfiguration(cfg1);
 		assertSame(enversConfiguration, new InsertEnversListener(enversConfiguration).getAuditConfiguration());
+	}
+
+	@Test
+	public void onPostInsert() throws org.hibernate.HibernateException, org.hibernate.MappingException, org.hibernate.UnknownProfileException {
+		Serializable id = mock(Serializable.class);
+		Object[] state = new Object[] { new Object() };
+		EntityPersister persister = mock(EntityPersister.class);
+		when(persister.getEntityName())
+			.thenReturn("foo");
+		EventSource source = mock(EventSource.class);
+		new InsertEnversListener(new AuditConfiguration(new Configuration())).onPostInsert(new PostInsertEvent(new Object(), id, state, persister, source));
 	}
 }

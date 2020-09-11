@@ -1,13 +1,14 @@
 package fr.mcc.ginco.exports.skos;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.services.IAlignmentService;
+import fr.mcc.ginco.skos.namespaces.GINCO;
 
 import java.util.ArrayList;
 
@@ -37,12 +38,12 @@ public class SKOSAlignmentExporterTest {
 	}
 
 	@Test
-	public void exportAlignmentsDefaultModelIsEmpty() {
+	public void exportAlignments() {
 		when(alignmentService.getAlignmentsBySourceConceptId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<Alignment>());
-		Model defaultModel =
-			 com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model defaultModel = mock(Model.class);
+		when(defaultModel.createResource(Mockito.<String>any(), Mockito.<com.hp.hpl.jena.rdf.model.Resource>any()))
+			.thenReturn(GINCO.getResource("BASIC"));
 		assertSame(defaultModel, service.exportAlignments("1234", defaultModel));
-		assertFalse(defaultModel.isEmpty());
 	}
 }

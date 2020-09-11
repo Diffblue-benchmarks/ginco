@@ -1,6 +1,7 @@
 package fr.mcc.ginco.exports.skos;
 
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -41,10 +42,10 @@ public class SKOSArrayExporterTest {
 	}
 
 	@Test
-	public void exportCollectionsModelIsEmpty() {
+	public void exportCollections() {
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
-		Model model = com.hp.hpl.jena.rdf.model.ModelFactory.createDefaultModel();
+		Model model = mock(Model.class);
 		assertSame(model, service.exportCollections(new Thesaurus(), model));
 	}
 }

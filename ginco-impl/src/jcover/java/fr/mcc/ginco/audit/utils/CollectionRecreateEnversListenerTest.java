@@ -9,6 +9,7 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.envers.configuration.AuditConfiguration;
 import org.hibernate.proxy.EntityNotFoundDelegate;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.xml.sax.EntityResolver;
 
 /**

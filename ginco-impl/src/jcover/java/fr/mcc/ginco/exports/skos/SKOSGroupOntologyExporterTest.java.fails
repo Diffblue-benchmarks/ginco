@@ -1,0 +1,86 @@
+package fr.mcc.ginco.exports.skos;
+
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import com.hp.hpl.jena.ontology.ObjectProperty;
+import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.Resource;
+
+import fr.mcc.ginco.skos.namespaces.GINCO;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.exports.skos.SKOSGroupOntologyExporter
+ *
+ * @author Diffblue Cover
+ */
+
+public class SKOSGroupOntologyExporterTest {
+
+	@InjectMocks
+	private SKOSGroupOntologyExporter service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void buildGroupOntologyModel() {
+		Literal literal1 = mock(Literal.class);
+		ObjectProperty objectProperty1 = mock(ObjectProperty.class);
+		Literal literal2 = mock(Literal.class);
+		ObjectProperty objectProperty2 = mock(ObjectProperty.class);
+		Literal literal3 = mock(Literal.class);
+		OntClass ontClass = mock(OntClass.class);
+		when(ontClass.asResource())
+			.thenReturn(GINCO.getResource("bar"))
+			.thenReturn(GINCO.getResource("BASIC"));
+		OntModel ontModel = mock(OntModel.class);
+		when(ontModel.createClass(Mockito.<String>any()))
+			.thenReturn(ontClass);
+		when(ontModel.createObjectProperty(Mockito.<String>any()))
+			.thenReturn(objectProperty2)
+			.thenReturn(objectProperty1);
+		when(ontModel.createLiteral(Mockito.<String>any()))
+			.thenReturn(literal3)
+			.thenReturn(literal2)
+			.thenReturn(literal1);
+		assertSame(ontModel, service.buildGroupOntologyModel(ontModel));
+		Mockito.verify(objectProperty1).addDomain(ArgumentMatchers.<Resource>any());
+		Mockito.verify(objectProperty1).addRange(ArgumentMatchers.<Resource>any());
+		Mockito.verify(objectProperty1).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(objectProperty2).addDomain(ArgumentMatchers.<Resource>any());
+		Mockito.verify(objectProperty2).addRange(ArgumentMatchers.<Resource>any());
+		Mockito.verify(objectProperty2).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(ontClass).addSuperClass(ArgumentMatchers.<Resource>any());
+		Mockito.verify(ontClass).addLabel(ArgumentMatchers.<Literal>any());
+	}
+
+	@Test
+	public void addGroupTypeToOntModel() {
+		Literal literal = mock(Literal.class);
+		OntClass ontClass = mock(OntClass.class);
+		OntModel ontmodel = mock(OntModel.class);
+		when(ontmodel.createClass(Mockito.<String>any()))
+			.thenReturn(ontClass);
+		when(ontmodel.getResource(Mockito.<String>any()))
+			.thenReturn(GINCO.getResource("BASIC"));
+		when(ontmodel.createLiteral(Mockito.<String>any()))
+			.thenReturn(literal);
+		assertTrue(service.addGroupTypeToOntModel(ontmodel, "bar") instanceof OntClass.1634749396);
+		// pojo OntClass.1634749396
+		Mockito.verify(ontClass).addSuperClass(ArgumentMatchers.<Resource>any());
+		Mockito.verify(ontClass).addLabel(ArgumentMatchers.<Literal>any());
+	}
+}

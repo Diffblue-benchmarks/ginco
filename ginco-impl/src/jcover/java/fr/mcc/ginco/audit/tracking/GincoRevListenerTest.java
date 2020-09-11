@@ -1,9 +1,15 @@
 package fr.mcc.ginco.audit.tracking;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import fr.mcc.ginco.beans.GincoRevEntity;
+import fr.mcc.ginco.beans.GincoRevModifiedEntityType;
 
+import java.io.Serializable;
+import java.util.HashSet;
+
+import org.hibernate.envers.RevisionType;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -26,7 +32,23 @@ public class GincoRevListenerTest {
 	}
 
 	@Test
-	public void entityChanged() {
+	public void entityChangedEntityClassIsStringAndEntityNameIsEntityAndRevisionTypeIsAdd() {
+
+		// arrange
+		Serializable entityId = mock(Serializable.class);
+		GincoRevEntity gincoRevEntity = new GincoRevEntity();
+		gincoRevEntity.setModifiedEntityTypes(new HashSet<GincoRevModifiedEntityType>());
+		gincoRevEntity.setThesaurusId("1234");
+		gincoRevEntity.setUsername("root");
+		gincoRevEntity.setId(1);
+		gincoRevEntity.setTimestamp(1L);
+		Object revisionEntity = gincoRevEntity;
+
+		// act
+		service.entityChanged(String.class, "entity", entityId, RevisionType.ADD, revisionEntity);
+
+		// assert
+		assertEquals(1, ((GincoRevEntity) revisionEntity).getModifiedEntityTypes().size());
 	}
 
 	@Test

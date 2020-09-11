@@ -1,12 +1,14 @@
 package fr.mcc.ginco.imports;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import com.hp.hpl.jena.rdf.model.Resource;
 
 import fr.mcc.ginco.beans.AlignmentType;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.services.IAlignmentTypeService;
-import fr.mcc.ginco.skos.namespaces.GINCO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,18 +41,14 @@ public class AlignmentsBuilderTest {
 	}
 
 	@Test
-	public void buildAlignments1() {
-		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(new ArrayList<AlignmentType>());
-		assertTrue((service.buildAlignments(GINCO.getResource("BASIC"), new ThesaurusConcept())).isEmpty());
-	}
-
-	@Test
-	public void buildAlignments2() {
+	public void buildAlignmentsReturnsEmpty() {
 		List<AlignmentType> list = new ArrayList<AlignmentType>();
 		list.add(new AlignmentType());
 		when(alignmentTypeService.getAlignmentTypeList())
 			.thenReturn(list);
-		assertTrue((service.buildAlignments(GINCO.getResource("BASIC"), new ThesaurusConcept())).isEmpty());
+		Resource skosConcept = mock(Resource.class);
+		when(skosConcept.getURI())
+			.thenReturn("foo");
+		assertTrue((service.buildAlignments(skosConcept, new ThesaurusConcept())).isEmpty());
 	}
 }
