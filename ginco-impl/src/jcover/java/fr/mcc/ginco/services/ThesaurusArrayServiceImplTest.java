@@ -64,7 +64,7 @@ public class ThesaurusArrayServiceImplTest {
 		thesaurusArray.setSuperOrdinateConcept(superOrdinateConcept4);
 		Thesaurus thesaurus7 = new Thesaurus();
 		thesaurusArray.setThesaurus(thesaurus7);
-		when(thesaurusArrayDAO.getById(Mockito.<Object>any()))
+		when(thesaurusArrayDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusArray);
 
 		// act
@@ -113,7 +113,7 @@ public class ThesaurusArrayServiceImplTest {
 		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept4);
 		Thesaurus thesaurus7 = new Thesaurus();
 		thesaurusArray1.setThesaurus(thesaurus7);
-		when(thesaurusArrayDAO.update(Mockito.<Object>any()))
+		when(thesaurusArrayDAO.update(Mockito.<ThesaurusArray>any()))
 			.thenReturn(thesaurusArray1);
 
 		// act
@@ -144,7 +144,7 @@ public class ThesaurusArrayServiceImplTest {
 		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept4);
 		Thesaurus thesaurus7 = new Thesaurus();
 		thesaurusArray1.setThesaurus(thesaurus7);
-		when(thesaurusArrayDAO.delete(Mockito.<Object>any()))
+		when(thesaurusArrayDAO.delete(Mockito.<ThesaurusArray>any()))
 			.thenReturn(thesaurusArray1);
 
 		// act
@@ -179,21 +179,10 @@ public class ThesaurusArrayServiceImplTest {
 	}
 
 	@Test
-	public void getArraysWithoutParentConcept() {
-
-		// arrange
-		List<ThesaurusArray> list = new ArrayList<ThesaurusArray>();
-		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		list.add(thesaurusArray);
+	public void getArraysWithoutParentConceptThesaurusIdIsFooReturnsEmpty() {
 		when(thesaurusArrayDAO.getArraysWithoutSuperordinatedConcept(Mockito.<String>any()))
-			.thenReturn(list);
-
-		// act
-		List<ThesaurusArray> result = service.getArraysWithoutParentConcept("1234");
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(thesaurusArray, result.get(0));
+			.thenReturn(new ArrayList<ThesaurusArray>());
+		assertTrue((service.getArraysWithoutParentConcept("foo")).isEmpty());
 	}
 
 	@Test

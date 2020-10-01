@@ -45,7 +45,7 @@ public class GincoAttributesExporterTest {
 	@Test
 	public void getExportedConceptAttributes() {
 		List<CustomConceptAttribute> list = new ArrayList<CustomConceptAttribute>();
-		when(conceptAttributeService.getAttributesByEntity(Mockito.<Object>any()))
+		when(conceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(list);
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		assertSame(list, service.getExportedConceptAttributes(thesaurusConcept).getList());
@@ -54,7 +54,7 @@ public class GincoAttributesExporterTest {
 	@Test
 	public void getExportedTermAttributes() {
 		List<CustomTermAttribute> list = new ArrayList<CustomTermAttribute>();
-		when(termAttributeService.getAttributesByEntity(Mockito.<Object>any()))
+		when(termAttributeService.getAttributesByEntity(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(list);
 		assertSame(list, service.getExportedTermAttributes(new ThesaurusTerm()).getList());
 	}

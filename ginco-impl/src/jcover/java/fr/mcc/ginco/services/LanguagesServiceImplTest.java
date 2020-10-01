@@ -87,7 +87,7 @@ public class LanguagesServiceImplTest {
 		language.setId("1234");
 		language.setPart1("foo");
 		language.setRefname("root");
-		when(languagesDAO.getById(Mockito.<Object>any()))
+		when(languagesDAO.getById(Mockito.<String>any()))
 			.thenReturn(language);
 
 		// act

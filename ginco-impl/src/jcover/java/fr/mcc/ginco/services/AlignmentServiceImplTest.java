@@ -80,7 +80,7 @@ public class AlignmentServiceImplTest {
 		alignment.setModified(modified1);
 		ThesaurusConcept sourceConcept = new ThesaurusConcept();
 		alignment.setSourceConcept(sourceConcept);
-		when(alignmentDAO.getById(Mockito.<Object>any()))
+		when(alignmentDAO.getById(Mockito.<String>any()))
 			.thenReturn(alignment);
 
 		// act
@@ -120,7 +120,7 @@ public class AlignmentServiceImplTest {
 
 	@Test
 	public void saveExternalThesauruses1() {
-		when(externalThesaurusDAO.update(Mockito.<Object>any()))
+		when(externalThesaurusDAO.update(Mockito.<ExternalThesaurus>any()))
 			.thenReturn(new ExternalThesaurus());
 		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
 		Alignment alignment = new Alignment();

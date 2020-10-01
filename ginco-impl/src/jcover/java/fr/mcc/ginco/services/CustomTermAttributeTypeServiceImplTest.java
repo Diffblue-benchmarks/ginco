@@ -60,7 +60,7 @@ public class CustomTermAttributeTypeServiceImplTest {
 
 	@Test
 	public void deleteAttribute() {
-		when(customTermAttributeTypeDAO.delete(Mockito.<Object>any()))
+		when(customTermAttributeTypeDAO.delete(Mockito.<CustomTermAttributeType>any()))
 			.thenReturn(new CustomTermAttributeType());
 		CustomTermAttributeType attribute = mock(CustomTermAttributeType.class);
 		service.deleteAttribute(attribute);
@@ -77,7 +77,7 @@ public class CustomTermAttributeTypeServiceImplTest {
 		Thesaurus thesaurus = new Thesaurus();
 		customTermAttributeType.setThesaurus(thesaurus);
 		customTermAttributeType.setValue("value");
-		when(customTermAttributeTypeDAO.getById(Mockito.<Object>any()))
+		when(customTermAttributeTypeDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(customTermAttributeType);
 
 		// act
@@ -101,7 +101,7 @@ public class CustomTermAttributeTypeServiceImplTest {
 		Thesaurus thesaurus1 = new Thesaurus();
 		customTermAttributeType.setThesaurus(thesaurus1);
 		customTermAttributeType.setValue("value");
-		when(customTermAttributeTypeDAO.update(Mockito.<Object>any()))
+		when(customTermAttributeTypeDAO.update(Mockito.<CustomTermAttributeType>any()))
 			.thenReturn(customTermAttributeType);
 
 		// act

@@ -54,7 +54,7 @@ public class GincoTermImporterTest {
 
 		// arrange
 		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
-		when(thesaurusTermDAO.update(Mockito.<Object>any()))
+		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(thesaurusTerm1);
 		GincoExportedEntity exportedThesaurus = new GincoExportedEntity();
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
@@ -81,10 +81,10 @@ public class GincoTermImporterTest {
 	public void storeTermNotes() {
 
 		// arrange
-		when(thesaurusTermDAO.getById(Mockito.<Object>any()))
+		when(thesaurusTermDAO.getById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusTerm());
 		Note note1 = new Note();
-		when(noteDAO.update(Mockito.<Object>any()))
+		when(noteDAO.update(Mockito.<Note>any()))
 			.thenReturn(note1);
 		HashMap<String, JaxbList<Note>> termNotesToImport =
 			 new HashMap<String, JaxbList<Note>>();

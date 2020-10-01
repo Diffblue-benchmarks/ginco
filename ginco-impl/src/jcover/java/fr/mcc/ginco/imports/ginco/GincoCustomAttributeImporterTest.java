@@ -88,7 +88,7 @@ public class GincoCustomAttributeImporterTest {
 	public void storeCustomConceptAttributeTypes() {
 		CustomConceptAttributeType customConceptAttributeType1 =
 			 new CustomConceptAttributeType();
-		when(customConceptAttributeTypeDAO.update(Mockito.<Object>any()))
+		when(customConceptAttributeTypeDAO.update(Mockito.<CustomConceptAttributeType>any()))
 			.thenReturn(customConceptAttributeType1);
 		ArrayList<CustomConceptAttributeType> customAttributeTypesToImport =
 			 new ArrayList<CustomConceptAttributeType>();

@@ -98,7 +98,7 @@ public class NoteServiceImplTest {
 		note.setSource("foo");
 		ThesaurusTerm termId = new ThesaurusTerm();
 		note.setTerm(termId);
-		when(noteDAO.getById(Mockito.<Object>any()))
+		when(noteDAO.getById(Mockito.<String>any()))
 			.thenReturn(note);
 
 		// act
@@ -138,7 +138,7 @@ public class NoteServiceImplTest {
 		note1.setSource("foo");
 		ThesaurusTerm termId1 = new ThesaurusTerm();
 		note1.setTerm(termId1);
-		when(noteDAO.update(Mockito.<Object>any()))
+		when(noteDAO.update(Mockito.<Note>any()))
 			.thenReturn(note1);
 
 		// act
@@ -178,7 +178,7 @@ public class NoteServiceImplTest {
 		note1.setSource("foo");
 		ThesaurusTerm termId1 = new ThesaurusTerm();
 		note1.setTerm(termId1);
-		when(noteDAO.delete(Mockito.<Object>any()))
+		when(noteDAO.delete(Mockito.<Note>any()))
 			.thenReturn(note1);
 
 		// act

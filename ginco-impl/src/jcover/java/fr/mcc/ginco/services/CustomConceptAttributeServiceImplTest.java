@@ -46,12 +46,12 @@ public class CustomConceptAttributeServiceImplTest {
 		List<CustomConceptAttribute> list = new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
 		list.add(customConceptAttribute);
-		when(customConceptAttributeDAO.getAttributesByEntity(Mockito.<Object>any()))
+		when(customConceptAttributeDAO.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(list);
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
 
 		// act
-		List<CustomConceptAttribute> result =
-			 service.getAttributesByEntity(new ThesaurusConcept());
+		List<CustomConceptAttribute> result = service.getAttributesByEntity(concept);
 
 		// assert
 		assertEquals(1, result.size());
@@ -60,10 +60,9 @@ public class CustomConceptAttributeServiceImplTest {
 
 	@Test
 	public void deleteAttribute() {
-		when(customConceptAttributeDAO.delete(Mockito.<Object>any()))
+		when(customConceptAttributeDAO.delete(Mockito.<CustomConceptAttribute>any()))
 			.thenReturn(new CustomConceptAttribute());
-		CustomConceptAttribute attribute = mock(CustomConceptAttribute.class);
-		service.deleteAttribute(attribute);
+		service.deleteAttribute(new CustomConceptAttribute());
 	}
 
 	@Test
@@ -79,7 +78,7 @@ public class CustomConceptAttributeServiceImplTest {
 		customConceptAttribute.setLexicalValue("value");
 		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
 		customConceptAttribute.setType(type2);
-		when(customConceptAttributeDAO.update(Mockito.<Object>any()))
+		when(customConceptAttributeDAO.update(Mockito.<CustomConceptAttribute>any()))
 			.thenReturn(customConceptAttribute);
 
 		// act
@@ -107,7 +106,7 @@ public class CustomConceptAttributeServiceImplTest {
 		customConceptAttribute.setLexicalValue("value");
 		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
 		customConceptAttribute.setType(type2);
-		when(customConceptAttributeDAO.getAttributeByType(Mockito.<Object>any(), Mockito.<fr.mcc.ginco.beans.generic.GenericCustomAttributeType>any()))
+		when(customConceptAttributeDAO.getAttributeByType(Mockito.<ThesaurusConcept>any(), Mockito.<fr.mcc.ginco.beans.generic.GenericCustomAttributeType>any()))
 			.thenReturn(customConceptAttribute);
 
 		// act

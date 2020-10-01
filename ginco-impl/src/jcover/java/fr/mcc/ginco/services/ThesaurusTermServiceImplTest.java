@@ -77,7 +77,7 @@ public class ThesaurusTermServiceImplTest {
 		thesaurusTerm.setStatus(1);
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurusTerm.setThesaurus(thesaurus);
-		when(thesaurusTermDAO.getById(Mockito.<Object>any()))
+		when(thesaurusTermDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusTerm);
 
 		// act
@@ -174,10 +174,9 @@ public class ThesaurusTermServiceImplTest {
 		thesaurusTerm.setStatus(1);
 		Thesaurus thesaurus2 = new Thesaurus();
 		thesaurusTerm.setThesaurus(thesaurus2);
-		when(thesaurusTermDAO.update(Mockito.<Object>any()))
+		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(thesaurusTerm);
 		ThesaurusTerm object = new ThesaurusTerm();
-		object.setHidden(false);
 		object.setStatus(1);
 
 		// act

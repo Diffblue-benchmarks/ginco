@@ -39,7 +39,7 @@ public class GincoTermIdGeneratorTest {
 
 	@Test
 	public void getIdForTermIdMappingIsEmptyReturnsFoo() {
-		when(thesaurusTermDAO.getById(Mockito.<Object>any()))
+		when(thesaurusTermDAO.getById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusTerm());
 		when(generatorService.generate(Mockito.<Class>any()))
 			.thenReturn("foo");

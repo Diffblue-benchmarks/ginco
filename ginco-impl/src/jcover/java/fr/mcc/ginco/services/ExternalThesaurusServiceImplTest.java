@@ -45,7 +45,7 @@ public class ExternalThesaurusServiceImplTest {
 		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
 		externalThesaurus.setExternalThesaurusType(externalThesaurusType);
 		externalThesaurus.setIdentifier(1);
-		when(externalThesaurusDAO.getById(Mockito.<Object>any()))
+		when(externalThesaurusDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(externalThesaurus);
 
 		// act

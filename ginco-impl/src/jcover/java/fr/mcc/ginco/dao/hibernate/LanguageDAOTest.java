@@ -37,7 +37,7 @@ public class LanguageDAOTest {
 	}
 
 	@Test
-	public void findPaginatedItemsLimitIsOneAndStartIsZero() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findPaginatedItemsLimitIsOneAndStartIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 
 		// arrange
 		LanguageDAO languageDAO = new LanguageDAO();
@@ -67,7 +67,7 @@ public class LanguageDAOTest {
 		languageDAO.setSessionFactory(sessionFactory);
 
 		// act
-		List<Language> result = languageDAO.findPaginatedItems(0, 1);
+		List<Language> result = languageDAO.findPaginatedItems(1, 1);
 
 		// assert
 		assertEquals(1, result.size());

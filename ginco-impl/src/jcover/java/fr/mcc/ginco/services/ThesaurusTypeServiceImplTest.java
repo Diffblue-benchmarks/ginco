@@ -60,7 +60,7 @@ public class ThesaurusTypeServiceImplTest {
 		ThesaurusType thesaurusType = new ThesaurusType();
 		thesaurusType.setIdentifier(1);
 		thesaurusType.setLabel("label");
-		when(thesaurusTypeDAO.getById(Mockito.<Object>any()))
+		when(thesaurusTypeDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(thesaurusType);
 
 		// act

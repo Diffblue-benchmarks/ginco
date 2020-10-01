@@ -92,7 +92,7 @@ public class SuggestionServiceImplTest {
 		suggestion.setRecipient("1234");
 		ThesaurusTerm term = new ThesaurusTerm();
 		suggestion.setTerm(term);
-		when(suggestionDAO.getById(Mockito.<Object>any()))
+		when(suggestionDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(suggestion);
 
 		// act
@@ -124,7 +124,7 @@ public class SuggestionServiceImplTest {
 		suggestion1.setRecipient("1234");
 		ThesaurusTerm term1 = new ThesaurusTerm();
 		suggestion1.setTerm(term1);
-		when(suggestionDAO.update(Mockito.<Object>any()))
+		when(suggestionDAO.update(Mockito.<Suggestion>any()))
 			.thenReturn(suggestion1);
 
 		// act
@@ -156,7 +156,7 @@ public class SuggestionServiceImplTest {
 		suggestion1.setRecipient("1234");
 		ThesaurusTerm term1 = new ThesaurusTerm();
 		suggestion1.setTerm(term1);
-		when(suggestionDAO.delete(Mockito.<Object>any()))
+		when(suggestionDAO.delete(Mockito.<Suggestion>any()))
 			.thenReturn(suggestion1);
 
 		// act

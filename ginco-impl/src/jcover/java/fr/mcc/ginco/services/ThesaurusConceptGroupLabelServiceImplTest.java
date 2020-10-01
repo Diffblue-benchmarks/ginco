@@ -123,7 +123,7 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 		Date modified3 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConceptGroupLabel.setModified(modified3);
-		when(thesaurusConceptGroupLabelDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptGroupLabelDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 
 		// act
@@ -156,7 +156,7 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 		Date modified3 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusConceptGroupLabel.setModified(modified3);
-		when(thesaurusConceptGroupLabelDAO.update(Mockito.<Object>any()))
+		when(thesaurusConceptGroupLabelDAO.update(Mockito.<ThesaurusConceptGroupLabel>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 		ThesaurusConceptGroupLabel conceptGroupLabel =
 			 mock(ThesaurusConceptGroupLabel.class);

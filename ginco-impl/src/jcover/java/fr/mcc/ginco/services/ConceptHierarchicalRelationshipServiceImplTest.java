@@ -42,7 +42,7 @@ public class ConceptHierarchicalRelationshipServiceImplTest {
 			 new ConceptHierarchicalRelationship.Id();
 		conceptHierarchicalRelationship.setIdentifier(identifier);
 		conceptHierarchicalRelationship.setRole(1);
-		when(conceptHierarchicalRelationshipDAO.getById(Mockito.<Object>any()))
+		when(conceptHierarchicalRelationshipDAO.getById(Mockito.<ConceptHierarchicalRelationship.Id>any()))
 			.thenReturn(conceptHierarchicalRelationship);
 
 		// act

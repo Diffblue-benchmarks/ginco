@@ -64,7 +64,7 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 		thesaurusConceptGroupType.setCode("DE");
 		thesaurusConceptGroupType.setLabel("label");
 		thesaurusConceptGroupType.setSkosLabel("label");
-		when(thesaurusConceptGroupTypeDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptGroupTypeDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConceptGroupType);
 
 		// act

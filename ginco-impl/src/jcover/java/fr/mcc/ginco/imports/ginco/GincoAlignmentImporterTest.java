@@ -65,7 +65,7 @@ public class GincoAlignmentImporterTest {
 
 	@Test
 	public void storeAlignments2() {
-		when(alignmentDAO.update(Mockito.<Object>any()))
+		when(alignmentDAO.update(Mockito.<Alignment>any()))
 			.thenReturn(new Alignment());
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();

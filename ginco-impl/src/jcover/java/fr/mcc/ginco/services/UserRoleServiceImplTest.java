@@ -75,7 +75,7 @@ public class UserRoleServiceImplTest {
 		Thesaurus thesaurus = new Thesaurus();
 		userRole.setThesaurus(thesaurus);
 		userRole.setUsername("root");
-		when(userRoleDAO.getById(Mockito.<Object>any()))
+		when(userRoleDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(userRole);
 
 		// act

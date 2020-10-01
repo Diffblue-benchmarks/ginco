@@ -110,7 +110,7 @@ public class ThesaurusConceptServiceImplTest {
 	@Test
 	public void getThesaurusConceptList2() {
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		ArrayList<String> ids = new ArrayList<String>();
 		ids.add("foo=bar");
@@ -142,7 +142,7 @@ public class ThesaurusConceptServiceImplTest {
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurusConcept.setThesaurus(thesaurus);
 		thesaurusConcept.setTopConcept(false);
-		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 
 		// act
@@ -423,7 +423,7 @@ public class ThesaurusConceptServiceImplTest {
 	public void getStatusByConceptIdReturnsOne() {
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setStatus(1);
-		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		assertEquals(1, service.getStatusByConceptId("1234"));
 	}
@@ -448,7 +448,7 @@ public class ThesaurusConceptServiceImplTest {
 
 	@Test
 	public void getRecursiveParentsByConceptIdReturnsEmpty() {
-		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusConcept());
 		assertTrue((service.getRecursiveParentsByConceptId("1234")).isEmpty());
 	}

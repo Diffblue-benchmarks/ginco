@@ -66,7 +66,7 @@ public class AssociativeRelationshipRoleServiceImplTest {
 		associativeRelationshipRole.setCode("DE");
 		associativeRelationshipRole.setLabel("label");
 		associativeRelationshipRole.setSkosLabel("label");
-		when(associativeRelationshipRoleDAO.getById(Mockito.<Object>any()))
+		when(associativeRelationshipRoleDAO.getById(Mockito.<String>any()))
 			.thenReturn(associativeRelationshipRole);
 
 		// act

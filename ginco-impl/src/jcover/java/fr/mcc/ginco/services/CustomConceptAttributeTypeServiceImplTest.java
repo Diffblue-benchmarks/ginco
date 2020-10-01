@@ -71,7 +71,7 @@ public class CustomConceptAttributeTypeServiceImplTest {
 		Thesaurus thesaurus1 = new Thesaurus();
 		customConceptAttributeType.setThesaurus(thesaurus1);
 		customConceptAttributeType.setValue("value");
-		when(customConceptAttributeTypeDAO.update(Mockito.<Object>any()))
+		when(customConceptAttributeTypeDAO.update(Mockito.<CustomConceptAttributeType>any()))
 			.thenReturn(customConceptAttributeType);
 
 		// act
@@ -88,7 +88,7 @@ public class CustomConceptAttributeTypeServiceImplTest {
 
 	@Test
 	public void deleteAttribute() {
-		when(customConceptAttributeTypeDAO.delete(Mockito.<Object>any()))
+		when(customConceptAttributeTypeDAO.delete(Mockito.<CustomConceptAttributeType>any()))
 			.thenReturn(new CustomConceptAttributeType());
 		CustomConceptAttributeType attribute =
 			 mock(CustomConceptAttributeType.class);
@@ -107,7 +107,7 @@ public class CustomConceptAttributeTypeServiceImplTest {
 		Thesaurus thesaurus = new Thesaurus();
 		customConceptAttributeType.setThesaurus(thesaurus);
 		customConceptAttributeType.setValue("value");
-		when(customConceptAttributeTypeDAO.getById(Mockito.<Object>any()))
+		when(customConceptAttributeTypeDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(customConceptAttributeType);
 
 		// act

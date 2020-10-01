@@ -54,7 +54,7 @@ public class NodeLabelServiceImplTest {
 		nodeLabel.setModified(modified1);
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		nodeLabel.setThesaurusArray(thesaurusArray);
-		when(nodeLabelDAO.getById(Mockito.<Object>any()))
+		when(nodeLabelDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(nodeLabel);
 
 		// act
@@ -150,7 +150,7 @@ public class NodeLabelServiceImplTest {
 		nodeLabel1.setModified(modified1);
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
 		nodeLabel1.setThesaurusArray(thesaurusArray);
-		when(nodeLabelDAO.update(Mockito.<Object>any()))
+		when(nodeLabelDAO.update(Mockito.<NodeLabel>any()))
 			.thenReturn(nodeLabel1);
 		NodeLabel nodeLabel2 = mock(NodeLabel.class);
 

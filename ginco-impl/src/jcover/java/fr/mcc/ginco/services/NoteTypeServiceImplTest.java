@@ -79,7 +79,7 @@ public class NoteTypeServiceImplTest {
 		NoteType noteType = new NoteType();
 		noteType.setCode("DE");
 		noteType.setLabel("label");
-		when(noteTypeDAO.getById(Mockito.<Object>any()))
+		when(noteTypeDAO.getById(Mockito.<String>any()))
 			.thenReturn(noteType);
 
 		// act

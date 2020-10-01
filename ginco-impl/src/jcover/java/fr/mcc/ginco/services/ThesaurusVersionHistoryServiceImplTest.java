@@ -79,7 +79,7 @@ public class ThesaurusVersionHistoryServiceImplTest {
 		thesaurusVersionHistory.setThisVersion(false);
 		thesaurusVersionHistory.setUserId("root");
 		thesaurusVersionHistory.setVersionNote("1.0");
-		when(thesaurusVersionHistoryDAO.getById(Mockito.<Object>any()))
+		when(thesaurusVersionHistoryDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusVersionHistory);
 
 		// act
@@ -127,7 +127,7 @@ public class ThesaurusVersionHistoryServiceImplTest {
 		thesaurusVersionHistory1.setVersionNote("1.0");
 		when(thesaurusVersionHistoryDAO.findThisVersionByThesaurusId(Mockito.<String>any()))
 			.thenReturn(new ThesaurusVersionHistory());
-		when(thesaurusVersionHistoryDAO.update(Mockito.<Object>any()))
+		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
 			.thenReturn(thesaurusVersionHistory1);
 		ThesaurusVersionHistory version = new ThesaurusVersionHistory();
 		version.setThesaurus(new Thesaurus());

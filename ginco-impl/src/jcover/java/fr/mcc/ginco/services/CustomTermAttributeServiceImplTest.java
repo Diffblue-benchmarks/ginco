@@ -45,7 +45,7 @@ public class CustomTermAttributeServiceImplTest {
 		List<CustomTermAttribute> list = new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
 		list.add(customTermAttribute);
-		when(customTermAttributeDAO.getAttributesByEntity(Mockito.<Object>any()))
+		when(customTermAttributeDAO.getAttributesByEntity(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(list);
 
 		// act
@@ -59,7 +59,7 @@ public class CustomTermAttributeServiceImplTest {
 
 	@Test
 	public void deleteAttribute() {
-		when(customTermAttributeDAO.delete(Mockito.<Object>any()))
+		when(customTermAttributeDAO.delete(Mockito.<CustomTermAttribute>any()))
 			.thenReturn(new CustomTermAttribute());
 		service.deleteAttribute(new CustomTermAttribute());
 	}
@@ -77,7 +77,7 @@ public class CustomTermAttributeServiceImplTest {
 		customTermAttribute.setLexicalValue("value");
 		CustomTermAttributeType type3 = new CustomTermAttributeType();
 		customTermAttribute.setType(type3);
-		when(customTermAttributeDAO.update(Mockito.<Object>any()))
+		when(customTermAttributeDAO.update(Mockito.<CustomTermAttribute>any()))
 			.thenReturn(customTermAttribute);
 
 		// act
@@ -104,7 +104,7 @@ public class CustomTermAttributeServiceImplTest {
 		customTermAttribute.setLexicalValue("value");
 		CustomTermAttributeType type3 = new CustomTermAttributeType();
 		customTermAttribute.setType(type3);
-		when(customTermAttributeDAO.getAttributeByType(Mockito.<Object>any(), Mockito.<fr.mcc.ginco.beans.generic.GenericCustomAttributeType>any()))
+		when(customTermAttributeDAO.getAttributeByType(Mockito.<ThesaurusTerm>any(), Mockito.<fr.mcc.ginco.beans.generic.GenericCustomAttributeType>any()))
 			.thenReturn(customTermAttribute);
 
 		// act

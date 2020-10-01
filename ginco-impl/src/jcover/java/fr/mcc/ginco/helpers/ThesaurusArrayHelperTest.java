@@ -67,7 +67,7 @@ public class ThesaurusArrayHelperTest {
 
 		// arrange
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		List<String> list = new ArrayList<String>();
 		list.add("bar");

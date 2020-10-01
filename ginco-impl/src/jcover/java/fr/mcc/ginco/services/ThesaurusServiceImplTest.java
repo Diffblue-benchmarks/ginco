@@ -87,7 +87,7 @@ public class ThesaurusServiceImplTest {
 		ThesaurusType type = new ThesaurusType();
 		thesaurus.setType(type);
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
-		when(thesaurusDAO.getById(Mockito.<Object>any()))
+		when(thesaurusDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurus);
 
 		// act
@@ -166,7 +166,7 @@ public class ThesaurusServiceImplTest {
 
 	@Test
 	public void getThesaurusLanguagesReturnsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
-		when(thesaurusDAO.getById(Mockito.<Object>any()))
+		when(thesaurusDAO.getById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
 		assertTrue((service.getThesaurusLanguages("1234")).isEmpty());
 	}
@@ -200,7 +200,7 @@ public class ThesaurusServiceImplTest {
 		ThesaurusType type1 = new ThesaurusType();
 		thesaurus.setType(type1);
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
-		when(thesaurusDAO.delete(Mockito.<Object>any()))
+		when(thesaurusDAO.delete(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurus);
 
 		// act

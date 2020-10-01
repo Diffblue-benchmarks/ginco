@@ -80,7 +80,7 @@ public class ThesaurusTermRoleServiceImplTest {
 		ThesaurusTermRole thesaurusTermRole = new ThesaurusTermRole();
 		thesaurusTermRole.setCode("DE");
 		thesaurusTermRole.setLabel("label");
-		when(thesaurusTermRoleDAO.getById(Mockito.<Object>any()))
+		when(thesaurusTermRoleDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusTermRole);
 
 		// act

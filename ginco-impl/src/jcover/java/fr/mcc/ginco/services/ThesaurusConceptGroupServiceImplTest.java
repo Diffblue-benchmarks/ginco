@@ -65,7 +65,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 		thesaurusConceptGroup.setParentConcept(parentConcept4);
 		Thesaurus thesaurus7 = new Thesaurus();
 		thesaurusConceptGroup.setThesaurus(thesaurus7);
-		when(thesaurusConceptGroupDAO.getById(Mockito.<Object>any()))
+		when(thesaurusConceptGroupDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConceptGroup);
 
 		// act
@@ -147,7 +147,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 		thesaurusConceptGroup.setParentConcept(parentConcept4);
 		Thesaurus thesaurus7 = new Thesaurus();
 		thesaurusConceptGroup.setThesaurus(thesaurus7);
-		when(thesaurusConceptGroupDAO.delete(Mockito.<Object>any()))
+		when(thesaurusConceptGroupDAO.delete(Mockito.<ThesaurusConceptGroup>any()))
 			.thenReturn(thesaurusConceptGroup);
 
 		// act

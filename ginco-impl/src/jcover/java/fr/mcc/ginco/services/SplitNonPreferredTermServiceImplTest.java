@@ -59,7 +59,7 @@ public class SplitNonPreferredTermServiceImplTest {
 		splitNonPreferredTerm.setStatus(1);
 		Thesaurus thesaurus = mock(Thesaurus.class);
 		splitNonPreferredTerm.setThesaurus(thesaurus);
-		when(splitNonPreferredTermDAO.getById(Mockito.<Object>any()))
+		when(splitNonPreferredTermDAO.getById(Mockito.<String>any()))
 			.thenReturn(splitNonPreferredTerm);
 
 		// act

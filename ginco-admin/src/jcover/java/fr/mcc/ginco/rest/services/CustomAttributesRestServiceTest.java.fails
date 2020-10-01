@@ -109,7 +109,7 @@ class CustomAttributesRestServiceTest {
 	void updateTermAttribute() {
 
 		// arrange
-		when(customTermAttributeService.saveOrUpdate(Mockito.<Object>any()))
+		when(customTermAttributeService.saveOrUpdate(Mockito.<CustomTermAttribute>any()))
 			.thenReturn(new CustomTermAttribute());
 		when(customAttributeConverter.convertTermAttribute(Mockito.<GenericCustomAttributeView>any()))
 			.thenReturn(new CustomTermAttribute());
@@ -143,7 +143,7 @@ class CustomAttributesRestServiceTest {
 	void updateConceptAttribute() {
 
 		// arrange
-		when(customConceptAttributeService.saveOrUpdate(Mockito.<Object>any()))
+		when(customConceptAttributeService.saveOrUpdate(Mockito.<CustomConceptAttribute>any()))
 			.thenReturn(new CustomConceptAttribute());
 		when(customAttributeConverter.convertConceptAttribute(Mockito.<GenericCustomAttributeView>any()))
 			.thenReturn(new CustomConceptAttribute());
