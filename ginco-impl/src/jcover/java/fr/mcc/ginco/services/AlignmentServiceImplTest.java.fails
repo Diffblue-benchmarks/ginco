@@ -72,6 +72,18 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
+	public void saveExternalThesauruses() {
+		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
+		alignments.add(new Alignment());
+		service.saveExternalThesauruses(alignments);
+	}
+
+	@Test
+	public void saveExternalThesaurusesAlignmentsIsEmpty() {
+		service.saveExternalThesauruses(new ArrayList<Alignment>());
+	}
+
+	@Test
 	public void deleteExternalThesauruses1() {
 		when(externalThesaurusDAO.findAll())
 			.thenReturn(new ArrayList<Object>());

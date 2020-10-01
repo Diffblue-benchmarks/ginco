@@ -73,7 +73,78 @@ class BaseRestServiceTest {
 	private BaseRestService service;
 
 	@Test
-	void getTreeContent() {
+	void getTreeContent1() {
+
+		// arrange
+		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		Thesaurus thesaurus = new Thesaurus();
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setIdentifier("data");
+		thesaurus.setTitle("Mr");
+		list1.add(thesaurus);
+		when(thesaurusService.getThesaurusList())
+			.thenReturn(list1);
+		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+		when(foldersGenerator.generateFolders(Mockito.<String>any()))
+			.thenReturn(list2);
+
+		// act
+		List<IThesaurusListNode> result = service.getTreeContent("data");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getIconCls(), is(nullValue()));
+		assertThat(result.get(0).getId(), is("data"));
+		assertThat(result.get(0).getOrganizationName(), is("Acme"));
+		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getTitle(), is("Mr"));
+		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.THESAURUS));
+		assertThat(result.get(0).isDisplayable(), is(true));
+		assertThat(result.get(0).isExpanded(), is(false));
+		assertThat(result.get(0).isLeaf(), is(false));
+	}
+
+	@Test
+	void getTreeContent2() {
+
+		// arrange
+		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(true);
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setIdentifier("data");
+		thesaurus.setTitle("Mr");
+		list1.add(thesaurus);
+		when(thesaurusService.getThesaurusList())
+			.thenReturn(list1);
+		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+		when(foldersGenerator.generateFolders(Mockito.<String>any()))
+			.thenReturn(list2);
+
+		// act
+		List<IThesaurusListNode> result = service.getTreeContent("data");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getIconCls(), is("archived"));
+		assertThat(result.get(0).getId(), is("data"));
+		assertThat(result.get(0).getOrganizationName(), is("Acme"));
+		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getTitle(), is("Mr"));
+		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.THESAURUS));
+		assertThat(result.get(0).isDisplayable(), is(true));
+		assertThat(result.get(0).isExpanded(), is(false));
+		assertThat(result.get(0).isLeaf(), is(false));
+	}
+
+	@Test
+	void getTreeContent3() {
 
 		// arrange
 		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
@@ -100,6 +171,39 @@ class BaseRestServiceTest {
 		assertThat(result.get(0).getIconCls(), is(nullValue()));
 		assertThat(result.get(0).getId(), is("data"));
 		assertThat(result.get(0).getOrganizationName(), is("Acme"));
+		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getTitle(), is("Mr"));
+		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.THESAURUS));
+		assertThat(result.get(0).isDisplayable(), is(true));
+		assertThat(result.get(0).isExpanded(), is(false));
+		assertThat(result.get(0).isLeaf(), is(false));
+	}
+
+	@Test
+	void getTreeContent4() {
+
+		// arrange
+		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setIdentifier("data");
+		thesaurus.setTitle("Mr");
+		list1.add(thesaurus);
+		when(thesaurusService.getThesaurusList())
+			.thenReturn(list1);
+		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+		when(foldersGenerator.generateFolders(Mockito.<String>any()))
+			.thenReturn(list2);
+
+		// act
+		List<IThesaurusListNode> result = service.getTreeContent("data");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getIconCls(), is(nullValue()));
+		assertThat(result.get(0).getId(), is("data"));
+		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Mr"));
 		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.THESAURUS));

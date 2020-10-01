@@ -2,6 +2,7 @@ package fr.mcc.ginco.helpers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusArray;
@@ -38,6 +39,33 @@ public class ThesaurusArrayHelperTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void saveArrayConcepts() {
+		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
+			.thenReturn(new ArrayList<String>());
+		ThesaurusArray array = new ThesaurusArray();
+		ArrayList<ThesaurusArrayConcept> concepts4 =
+			 new ArrayList<ThesaurusArrayConcept>();
+		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
+		thesaurusArrayConcept.setIdentifier(new ThesaurusArrayConcept.Id());
+		concepts4.add(thesaurusArrayConcept);
+		assertSame(array, service.saveArrayConcepts(array, concepts4));
+		assertEquals(1, array.getConcepts().size());
+	}
+
+	@Test
+	public void saveArrayConceptsConceptsIsEmpty() {
+		ThesaurusArray array = new ThesaurusArray();
+		assertSame(array, service.saveArrayConcepts(array, new ArrayList<ThesaurusArrayConcept>()));
+	}
+
+	@Test
+	public void getArrayConceptsReturnsEmpty() {
+		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
+			.thenReturn(new ArrayList<String>());
+		assertTrue((service.getArrayConcepts("1234")).isEmpty());
 	}
 
 	@Test

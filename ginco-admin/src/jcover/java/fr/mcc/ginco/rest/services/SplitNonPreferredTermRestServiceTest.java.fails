@@ -1,0 +1,51 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.SplitNonPreferredTerm;
+import fr.mcc.ginco.extjs.view.pojo.SplitNonPreferredTermView;
+import fr.mcc.ginco.extjs.view.utils.SplitNonPreferredTermViewConverter;
+import fr.mcc.ginco.services.ISplitNonPreferredTermService;
+import fr.mcc.ginco.solr.IComplexConceptIndexerService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.SplitNonPreferredTermRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {SplitNonPreferredTermRestService.class})
+@ExtendWith(SpringExtension.class)
+class SplitNonPreferredTermRestServiceTest {
+
+	@MockBean(name = "complexConceptIndexerService")
+	private IComplexConceptIndexerService complexConceptIndexerService;
+
+	@MockBean(name = "splitNonPreferredTermService")
+	private ISplitNonPreferredTermService splitNonPreferredTermService;
+
+	@MockBean(name = "splitNonPreferredTermViewConverter")
+	private SplitNonPreferredTermViewConverter splitNonPreferredTermViewConverter;
+
+	@Autowired
+	private SplitNonPreferredTermRestService service;
+
+	@Test
+	void destroyTerm() throws fr.mcc.ginco.exceptions.TechnicalException {
+		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTermView>any()))
+			.thenReturn(new SplitNonPreferredTerm());
+		when(splitNonPreferredTermService.destroySplitNonPreferredTerm(Mockito.<SplitNonPreferredTerm>any()))
+			.thenReturn(new SplitNonPreferredTerm());
+		service.destroyTerm(new SplitNonPreferredTermView());
+		Mockito.verify(complexConceptIndexerService).removeComplexConcept(ArgumentMatchers.<SplitNonPreferredTerm>any());
+	}
+}

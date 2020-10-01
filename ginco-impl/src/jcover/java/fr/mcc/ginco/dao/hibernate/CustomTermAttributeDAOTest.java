@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 
 import org.hibernate.SessionFactory;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Unit tests for fr.mcc.ginco.dao.hibernate.CustomTermAttributeDAO

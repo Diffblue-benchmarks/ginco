@@ -126,7 +126,68 @@ public class JournalLineBuilderTest {
 	}
 
 	@Test
-	public void buildTermRoleChangedLine() {
+	public void buildTermRoleChangedLine1() {
+
+		// arrange
+		ThesaurusTerm term = new ThesaurusTerm();
+		term.setIdentifier("data");
+		term.setPrefered(false);
+		GincoRevEntity revision = new GincoRevEntity();
+		revision.setUsername("root");
+		revision.setId(1);
+
+		// act
+		JournalLine result = service.buildTermRoleChangedLine(term, revision);
+
+		// assert
+		assertEquals("root", result.getAuthorId());
+		assertNull(result.getConceptId());
+		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
+		assertTrue(JournalEventsEnum.THESAURUSTERM_ROLE_UPDATE == result.getEventType());
+		assertNull(result.getNewGenericTerm());
+		assertNull(result.getNewLexicalValue());
+		assertNull(result.getOldGenericTerm());
+		assertNull(result.getOldLexicalValue());
+		assertEquals(1, (int) result.getRevisionNumber());
+		assertNull(result.getStatus());
+		assertEquals("data", result.getTermId());
+		assertEquals("TNP", result.getTermRole());
+	}
+
+	@Test
+	public void buildTermRoleChangedLine2() {
+
+		// arrange
+		ThesaurusTerm term = new ThesaurusTerm();
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		term.setConcept(concept);
+		term.setIdentifier("data");
+		term.setPrefered(true);
+		GincoRevEntity revision = new GincoRevEntity();
+		revision.setUsername("root");
+		revision.setId(1);
+
+		// act
+		JournalLine result = service.buildTermRoleChangedLine(term, revision);
+
+		// assert
+		assertEquals("root", result.getAuthorId());
+		assertEquals("data", result.getConceptId());
+		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
+		assertTrue(JournalEventsEnum.THESAURUSTERM_ROLE_UPDATE == result.getEventType());
+		assertNull(result.getNewGenericTerm());
+		assertNull(result.getNewLexicalValue());
+		assertNull(result.getOldGenericTerm());
+		assertNull(result.getOldLexicalValue());
+		assertEquals(1, (int) result.getRevisionNumber());
+		assertNull(result.getStatus());
+		assertEquals("data", result.getTermId());
+		assertEquals("TP", result.getTermRole());
+	}
+
+	@Test
+	public void buildTermRoleChangedLine3() {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();
@@ -158,7 +219,37 @@ public class JournalLineBuilderTest {
 	}
 
 	@Test
-	public void buildTermLexicalValueChangedLineOldLexicalValueIsValue() {
+	public void buildTermLexicalValueChangedLine1() {
+
+		// arrange
+		ThesaurusTerm term = new ThesaurusTerm();
+		term.setIdentifier("data");
+		term.setLexicalValue("value");
+		GincoRevEntity revision = new GincoRevEntity();
+		revision.setUsername("root");
+		revision.setId(1);
+
+		// act
+		JournalLine result =
+			 service.buildTermLexicalValueChangedLine(term, revision, "value");
+
+		// assert
+		assertEquals("root", result.getAuthorId());
+		assertNull(result.getConceptId());
+		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
+		assertTrue(JournalEventsEnum.THESAURUSTERM_LEXICAL_VALUE_UPDATE == result.getEventType());
+		assertNull(result.getNewGenericTerm());
+		assertEquals("value", result.getNewLexicalValue());
+		assertNull(result.getOldGenericTerm());
+		assertEquals("value", result.getOldLexicalValue());
+		assertEquals(1, (int) result.getRevisionNumber());
+		assertNull(result.getStatus());
+		assertEquals("data", result.getTermId());
+		assertNull(result.getTermRole());
+	}
+
+	@Test
+	public void buildTermLexicalValueChangedLine2() {
 
 		// arrange
 		ThesaurusTerm term = new ThesaurusTerm();

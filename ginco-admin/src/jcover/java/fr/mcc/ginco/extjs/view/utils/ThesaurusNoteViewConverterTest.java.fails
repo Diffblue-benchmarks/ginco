@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 
@@ -61,7 +62,7 @@ class ThesaurusNoteViewConverterTest {
 	private ThesaurusNoteViewConverter service;
 
 	@Test
-	void convert2() throws java.text.ParseException {
+	void convert1() throws java.text.ParseException {
 
 		// arrange
 		Note source1 = new Note();
@@ -100,46 +101,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert3() throws java.text.ParseException {
-
-		// arrange
-		Note source1 = new Note();
-		ThesaurusConcept concept1 = new ThesaurusConcept();
-		concept1.setIdentifier("data");
-		Thesaurus thesaurus1 = new Thesaurus();
-		thesaurus1.setIdentifier("data");
-		concept1.setThesaurus(thesaurus1);
-		source1.setConcept(concept1);
-		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		source1.setIdentifier("data");
-		Language lang2 = new Language();
-		lang2.setId("1234");
-		source1.setLanguage(lang2);
-		source1.setLexicalValue("value");
-		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		NoteType noteType = new NoteType();
-		noteType.setCode("DE");
-		source1.setNoteType(noteType);
-		source1.setSource("foo");
-
-		// act
-		ThesaurusNoteView result = service.convert(source1);
-
-		// assert
-		assertThat(result.getConceptId(), is("data"));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getLanguage(), is("1234"));
-		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
-		assertThat(result.getSource(), is("foo"));
-		assertThat(result.getTermId(), is(nullValue()));
-		assertThat(result.getThesaurusId(), is("data"));
-		assertThat(result.getType(), is("DE"));
-	}
-
-	@Test
-	void convert4() throws java.text.ParseException {
+	void convert2() throws java.text.ParseException {
 
 		// arrange
 		Note source1 = new Note();
@@ -177,7 +139,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert5() throws java.text.ParseException {
+	void convert3() throws java.text.ParseException {
 
 		// arrange
 		Note source1 = new Note();
@@ -208,6 +170,83 @@ class ThesaurusNoteViewConverterTest {
 		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getModified(), is(nullValue()));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getTermId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getType(), is("DE"));
+	}
+
+	@Test
+	void convert4() throws java.text.ParseException {
+
+		// arrange
+		Note source1 = new Note();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		concept1.setIdentifier("data");
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setIdentifier("data");
+		concept1.setThesaurus(thesaurus1);
+		source1.setConcept(concept1);
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		Language lang2 = new Language();
+		lang2.setId("1234");
+		source1.setLanguage(lang2);
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		NoteType noteType = new NoteType();
+		noteType.setCode("DE");
+		source1.setNoteType(noteType);
+
+		// act
+		ThesaurusNoteView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getConceptId(), is("data"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is("1234"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getSource(), is(nullValue()));
+		assertThat(result.getTermId(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getType(), is("DE"));
+	}
+
+	@Test
+	void convert5() throws java.text.ParseException {
+
+		// arrange
+		Note source1 = new Note();
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		concept.setThesaurus(thesaurus);
+		source1.setConcept(concept);
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		Language lang2 = new Language();
+		lang2.setId("1234");
+		source1.setLanguage(lang2);
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		NoteType noteType = new NoteType();
+		noteType.setCode("DE");
+		source1.setNoteType(noteType);
+		source1.setSource("foo");
+
+		// act
+		ThesaurusNoteView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getConceptId(), is("data"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is("1234"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getTermId(), is(nullValue()));
 		assertThat(result.getThesaurusId(), is("data"));
@@ -230,17 +269,17 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert1() throws java.text.ParseException {
+	void convert6() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
 		Note note = new Note();
-		ThesaurusConcept concept1 = new ThesaurusConcept();
-		concept1.setIdentifier("data");
-		Thesaurus thesaurus1 = new Thesaurus();
-		thesaurus1.setIdentifier("data");
-		concept1.setThesaurus(thesaurus1);
-		note.setConcept(concept1);
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		concept.setThesaurus(thesaurus);
+		note.setConcept(concept);
 		note.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		note.setIdentifier("data");
 		Language lang2 = new Language();
@@ -269,5 +308,15 @@ class ThesaurusNoteViewConverterTest {
 		assertThat(result.get(0).getTermId(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is("data"));
 		assertThat(result.get(0).getType(), is("DE"));
+	}
+
+	@Test
+	void convertSourceIsEmptyReturnsEmpty() {
+		assertThat(service.convert(new ArrayList<Note>()), empty());
+	}
+
+	@Test
+	void convertToNoteSourceIsEmptyReturnsEmpty() {
+		assertThat(service.convertToNote(new ArrayList<ThesaurusNoteView>()), empty());
 	}
 }

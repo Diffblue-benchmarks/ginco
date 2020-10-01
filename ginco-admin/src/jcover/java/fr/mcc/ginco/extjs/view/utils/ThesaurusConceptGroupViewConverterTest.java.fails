@@ -1,16 +1,20 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.ThesaurusConceptGroup;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptGroupView;
 import fr.mcc.ginco.services.IThesaurusConceptGroupLabelService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusService;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -53,7 +57,7 @@ class ThesaurusConceptGroupViewConverterTest {
 	@Test
 	void convertSourceIsNull() {
 		ThesaurusConceptGroupView result =
-			 service.convert((fr.mcc.ginco.beans.ThesaurusConceptGroup) null);
+			 service.convert((ThesaurusConceptGroup) null);
 		assertThat(result.getConcepts(), is(nullValue()));
 		assertThat(result.getCreated(), is(nullValue()));
 		assertThat(result.getGroupConceptLabelId(), is(nullValue()));
@@ -69,5 +73,10 @@ class ThesaurusConceptGroupViewConverterTest {
 		assertThat(result.getParentGroupLabel(), is(nullValue()));
 		assertThat(result.getThesaurusId(), is(nullValue()));
 		assertThat(result.getType(), is(nullValue()));
+	}
+
+	@Test
+	void convertGroupsIsEmptyReturnsEmpty() {
+		assertThat(service.convert(new ArrayList<ThesaurusConceptGroup>()), empty());
 	}
 }

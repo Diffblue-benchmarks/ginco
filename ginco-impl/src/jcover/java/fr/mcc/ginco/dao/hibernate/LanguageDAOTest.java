@@ -114,7 +114,7 @@ public class LanguageDAOTest {
 		List list = new ArrayList();
 		Language language = new Language();
 		language.setId("1234");
-		language.setPart1("foo");
+		language.setPart1("bar");
 		language.setPrincipalLanguage(true);
 		language.setRefname("root");
 		list.add(language);
@@ -140,7 +140,7 @@ public class LanguageDAOTest {
 
 		// assert
 		assertEquals("1234", result.getId());
-		assertEquals("foo", result.getPart1());
+		assertEquals("bar", result.getPart1());
 		assertEquals("root", result.getRefname());
 		assertTrue(result.isPrincipalLanguage());
 		assertFalse(result.isTopLanguage());

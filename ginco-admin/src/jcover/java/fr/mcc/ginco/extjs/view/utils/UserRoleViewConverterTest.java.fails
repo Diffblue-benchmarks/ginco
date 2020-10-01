@@ -1,7 +1,10 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Role;
 import fr.mcc.ginco.beans.Thesaurus;
@@ -12,6 +15,7 @@ import fr.mcc.ginco.services.IUserRoleService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -37,7 +41,7 @@ class UserRoleViewConverterTest {
 	private UserRoleViewConverter service;
 
 	@Test
-	void convert() {
+	void convert1() {
 
 		// arrange
 		UserRole userRole = new UserRole();
@@ -55,6 +59,75 @@ class UserRoleViewConverterTest {
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRole(), is(0));
 		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getUsername(), is("root"));
+	}
+
+	@Test
+	void convert2() {
+
+		// arrange
+		UserRole userRole = new UserRole();
+		userRole.setIdentifier(1);
+		when(userRoleService.getUserRole(Mockito.<Integer>any()))
+			.thenReturn(userRole);
+		Thesaurus thesaurus2 = new Thesaurus();
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus2);
+		UserRoleView userRoleView = new UserRoleView();
+		userRoleView.setIdentifier(1);
+		userRoleView.setRole(1);
+		userRoleView.setUsername("root");
+
+		// act
+		UserRole result = service.convert(userRoleView);
+
+		// assert
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getRole(), is(Role.EXPERT));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus2));
+		assertThat(result.getUsername(), is("root"));
+	}
+
+	@Test
+	void convert3() {
+
+		// arrange
+		Thesaurus thesaurus = new Thesaurus();
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus);
+		UserRoleView userRoleView = new UserRoleView();
+		userRoleView.setRole(1);
+		userRoleView.setUsername("root");
+
+		// act
+		UserRole result = service.convert(userRoleView);
+
+		// assert
+		assertThat(result.getIdentifier(), is(nullValue()));
+		assertThat(result.getRole(), is(Role.EXPERT));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus));
+		assertThat(result.getUsername(), is("root"));
+	}
+
+	@Test
+	void convert4() {
+
+		// arrange
+		Thesaurus thesaurus = new Thesaurus();
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus);
+		UserRoleView userRoleView = new UserRoleView();
+		userRoleView.setIdentifier(0);
+		userRoleView.setRole(1);
+		userRoleView.setUsername("root");
+
+		// act
+		UserRole result = service.convert(userRoleView);
+
+		// assert
+		assertThat(result.getIdentifier(), is(nullValue()));
+		assertThat(result.getRole(), is(Role.EXPERT));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus));
 		assertThat(result.getUsername(), is("root"));
 	}
 }

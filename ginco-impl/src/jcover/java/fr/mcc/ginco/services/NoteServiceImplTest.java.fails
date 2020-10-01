@@ -1,0 +1,122 @@
+package fr.mcc.ginco.services;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Note;
+import fr.mcc.ginco.dao.INoteDAO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.services.NoteServiceImpl
+ *
+ * @author Diffblue Cover
+ */
+
+public class NoteServiceImplTest {
+
+	@Mock(name = "noteDAO")
+	private INoteDAO noteDAO;
+
+	@InjectMocks
+	private NoteServiceImpl service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getConceptNotePaginatedListConceptIdIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+
+		// arrange
+		List<Note> list = new ArrayList<Note>();
+		Note note = new Note();
+		list.add(note);
+		when(noteDAO.findConceptPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(list);
+
+		// act
+		List<Note> result = service.getConceptNotePaginatedList("bar", -1, 0);
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(note, result.get(0));
+	}
+
+	@Test
+	public void getTermNotePaginatedListLimitIsZeroAndStartIndexIsMinusOneAndTermIdIsBar() {
+
+		// arrange
+		List<Note> list = new ArrayList<Note>();
+		Note note = new Note();
+		list.add(note);
+		when(noteDAO.findTermPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(list);
+
+		// act
+		List<Note> result = service.getTermNotePaginatedList("bar", -1, 0);
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(note, result.get(0));
+	}
+
+	@Test
+	public void getConceptNoteCountReturnsOne() {
+		when(noteDAO.getConceptNoteCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		assertEquals(1L, (long) service.getConceptNoteCount("1234"));
+	}
+
+	@Test
+	public void getTermNoteCountReturnsOne() {
+		when(noteDAO.getTermNoteCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		assertEquals(1L, (long) service.getTermNoteCount("1234"));
+	}
+
+	@Test
+	public void getAllNotes() {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
+		when(noteDAO.findAll())
+			.thenReturn(list);
+
+		// act
+		List<Note> result = service.getAllNotes();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+
+	@Test
+	public void getNotesByThesaurusIdThesaurusIdIsBar() {
+
+		// arrange
+		List<Note> list = new ArrayList<Note>();
+		Note note = new Note();
+		list.add(note);
+		when(noteDAO.findNotesByThesaurusId(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<Note> result = service.getNotesByThesaurusId("bar");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(note, result.get(0));
+	}
+}

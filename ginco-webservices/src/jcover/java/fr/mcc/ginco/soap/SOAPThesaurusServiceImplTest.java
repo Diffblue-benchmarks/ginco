@@ -62,61 +62,6 @@ class SOAPThesaurusServiceImplTest {
 		thesaurus.setContributor("foo");
 		thesaurus.setCoverage("foo");
 		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator = new ThesaurusOrganization();
-		creator.setEmail("info@diffblue.com");
-		creator.setHomepage("foo");
-		creator.setName("Acme");
-		thesaurus.setCreator(creator);
-		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus.setDescription("some text");
-		thesaurus.setIdentifier("data");
-		thesaurus.setPublisher("foo");
-		thesaurus.setRelation("DE");
-		thesaurus.setRights("foo");
-		thesaurus.setSource("foo");
-		thesaurus.setSubject("foo");
-		thesaurus.setTitle("Mr");
-		ThesaurusType type = new ThesaurusType();
-		type.setLabel("label");
-		thesaurus.setType(type);
-		IThesaurusService thesaurusService = mock(IThesaurusService.class);
-		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(thesaurus);
-		obj.setThesaurusService(thesaurusService);
-
-		// act
-		FullThesaurus result = obj.getThesaurusById("1234");
-
-		// assert
-		assertThat(result.getContributor(), is("foo"));
-		assertThat(result.getCoverage(), is("foo"));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
-		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
-		assertThat(result.getCreatorHomepage(), is("foo"));
-		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(result.getDescription(), is("some text"));
-		assertThat(result.getFormats(), empty());
-		assertThat(result.getLanguages(), empty());
-		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
-		assertThat(result.getPublisher(), is("foo"));
-		assertThat(result.getRelation(), is("DE"));
-		assertThat(result.getRights(), is("foo"));
-		assertThat(result.getSource(), is("foo"));
-		assertThat(result.getSubject(), is("foo"));
-		assertThat(result.getType(), is("label"));
-		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getTitle(), is("Mr"));
-	}
-
-	@Test
-	void getThesaurusById2() throws java.text.ParseException {
-
-		// arrange
-		SOAPThesaurusServiceImpl obj = new SOAPThesaurusServiceImpl();
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setContributor("foo");
-		thesaurus.setCoverage("foo");
-		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDescription("some text");
 		thesaurus.setIdentifier("data");
@@ -144,6 +89,61 @@ class SOAPThesaurusServiceImplTest {
 		assertThat(result.getCreatorEmail(), is(nullValue()));
 		assertThat(result.getCreatorHomepage(), is(nullValue()));
 		assertThat(result.getCreatorName(), is(nullValue()));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), empty());
+		assertThat(result.getLanguages(), empty());
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getType(), is("label"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getTitle(), is("Mr"));
+	}
+
+	@Test
+	void getThesaurusById2() throws java.text.ParseException {
+
+		// arrange
+		SOAPThesaurusServiceImpl obj = new SOAPThesaurusServiceImpl();
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("bar");
+		creator.setHomepage("foo");
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDescription("some text");
+		thesaurus.setIdentifier("data");
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setLabel("label");
+		thesaurus.setType(type);
+		IThesaurusService thesaurusService = mock(IThesaurusService.class);
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus);
+		obj.setThesaurusService(thesaurusService);
+
+		// act
+		FullThesaurus result = obj.getThesaurusById("1234");
+
+		// assert
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getCreatorEmail(), is("bar"));
+		assertThat(result.getCreatorHomepage(), is("foo"));
+		assertThat(result.getCreatorName(), is("Acme"));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), empty());
 		assertThat(result.getLanguages(), empty());

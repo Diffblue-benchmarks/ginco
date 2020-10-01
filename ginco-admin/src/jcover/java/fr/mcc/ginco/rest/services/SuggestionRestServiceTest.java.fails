@@ -3,7 +3,9 @@ package fr.mcc.ginco.rest.services;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Suggestion;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.SuggestionView;
 import fr.mcc.ginco.extjs.view.utils.SuggestionViewConverter;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,12 +55,23 @@ class SuggestionRestServiceTest {
 	}
 
 	@Test
-	void createSuggestionsSuggestionViewsIsEmpty() {
+	void createSuggestionsConceptIdIsBarAndSuggestionViewsIsEmpty() {
 		ExtJsonFormLoadData<List<SuggestionView>> result =
-			 service.createSuggestions(new ArrayList<SuggestionView>(), "1234", "1234");
+			 service.createSuggestions(new ArrayList<SuggestionView>(), "bar", "1234");
 		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void destroySuggestions() {
+		when(suggestionViewConverter.convert(Mockito.<SuggestionView>any()))
+			.thenReturn(new Suggestion());
+		when(suggestionService.deleteSuggestion(Mockito.<Suggestion>any()))
+			.thenReturn(new Suggestion());
+		ArrayList<SuggestionView> suggestionViews = new ArrayList<SuggestionView>();
+		suggestionViews.add(new SuggestionView());
+		service.destroySuggestions(suggestionViews);
 	}
 
 	@Test

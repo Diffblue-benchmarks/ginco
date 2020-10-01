@@ -1,10 +1,14 @@
 package fr.mcc.ginco.utils;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.ThesaurusTerm;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,12 +31,17 @@ public class ThesaurusTermUtilsTest {
 	}
 
 	@Test
-	public void getPreferedTermsReturnsEmpty() {
+	public void getPreferedTerms() {
 		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setPrefered(false);
 		listOfTerms.add(thesaurusTerm);
 		assertTrue((service.getPreferedTerms(listOfTerms)).isEmpty());
+	}
+
+	@Test
+	public void getPreferedTermsListOfTermsIsEmpty() {
+		assertTrue((service.getPreferedTerms(new ArrayList<ThesaurusTerm>())).isEmpty());
 	}
 
 	@Test
@@ -45,11 +54,37 @@ public class ThesaurusTermUtilsTest {
 	}
 
 	@Test
-	public void getPreferedTermsByLangReturnsEmpty() {
+	public void getPreferedTermsByLang1() {
 		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setPrefered(false);
 		listOfTerms.add(thesaurusTerm);
 		assertTrue((service.getPreferedTermsByLang(listOfTerms, "1234")).isEmpty());
+	}
+
+	@Test
+	public void getPreferedTermsByLang2() {
+
+		// arrange
+		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		Language language = new Language();
+		language.setId("1234");
+		thesaurusTerm.setLanguage(language);
+		thesaurusTerm.setPrefered(true);
+		listOfTerms.add(thesaurusTerm);
+
+		// act
+		List<ThesaurusTerm> result =
+			 service.getPreferedTermsByLang(listOfTerms, "1234");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void getPreferedTermsByLangListOfTermsIsEmpty() {
+		assertTrue((service.getPreferedTermsByLang(new ArrayList<ThesaurusTerm>(), "1234")).isEmpty());
 	}
 }

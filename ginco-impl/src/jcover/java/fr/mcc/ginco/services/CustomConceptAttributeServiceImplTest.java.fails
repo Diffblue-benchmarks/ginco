@@ -1,0 +1,106 @@
+package fr.mcc.ginco.services;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.CustomConceptAttribute;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
+import fr.mcc.ginco.dao.ICustomConceptAttributeDAO;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.services.CustomConceptAttributeServiceImpl
+ *
+ * @author Diffblue Cover
+ */
+
+public class CustomConceptAttributeServiceImplTest {
+
+	@Mock(name = "customConceptAttributeDAO")
+	private ICustomConceptAttributeDAO customConceptAttributeDAO;
+
+	@InjectMocks
+	private CustomConceptAttributeServiceImpl service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getAttributesByEntity() throws java.text.ParseException {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
+		when(customConceptAttributeDAO.getAttributesByEntity(Mockito.<Object>any()))
+			.thenReturn(list);
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		concept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		concept.setConceptArrays(new HashSet<ThesaurusArray>());
+		concept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		concept.setIdentifier("data");
+		concept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		concept.setNotation("DE");
+		concept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		concept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		concept.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		concept.setThesaurus(thesaurus);
+		concept.setTopConcept(false);
+
+		// act
+		List<CustomConceptAttribute> result = service.getAttributesByEntity(concept);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+}

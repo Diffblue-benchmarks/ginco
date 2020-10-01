@@ -1,6 +1,7 @@
 package fr.mcc.ginco.imports.ginco;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import fr.mcc.ginco.beans.CustomConceptAttribute;
 import fr.mcc.ginco.beans.CustomConceptAttributeType;
@@ -59,27 +60,49 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
+	public void getBranchCustomTermAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
+		assertTrue(service.getBranchCustomTermAttributeTypes(new ArrayList<CustomTermAttributeType>(), new Thesaurus()).isEmpty());
+	}
+
+	@Test
+	public void storeCustomConceptAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
+		assertTrue(service.storeCustomConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>(), new Thesaurus()).isEmpty());
+	}
+
+	@Test
 	public void getBranchCustomConceptAttributeTypesCustomAttributeTypesToImportIsEmptyReturnsEmpty() {
 		assertTrue(service.getBranchCustomConceptAttributeTypes(new ArrayList<CustomConceptAttributeType>(), new Thesaurus()).isEmpty());
 	}
 
 	@Test
-	public void storeCustomConceptAttributeSavedTypesIsEmpty() {
+	public void storeCustomConceptAttribute() {
 		ArrayList<CustomConceptAttribute> customAttributeToImport =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
 		customConceptAttribute.setType(new CustomConceptAttributeType());
 		customAttributeToImport.add(customConceptAttribute);
-		service.storeCustomConceptAttribute(customAttributeToImport, new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
+		service.storeCustomConceptAttribute(customAttributeToImport, concept, new HashMap<String, CustomConceptAttributeType>());
 	}
 
 	@Test
-	public void storeCustomTermAttributeSavedTypesIsEmpty() {
+	public void storeCustomConceptAttributeCustomAttributeToImportIsEmpty() {
+		service.storeCustomConceptAttribute(new ArrayList<CustomConceptAttribute>(), new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
+	}
+
+	@Test
+	public void storeCustomTermAttribute() {
 		ArrayList<CustomTermAttribute> customAttributeToImport =
 			 new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
 		customTermAttribute.setType(new CustomTermAttributeType());
 		customAttributeToImport.add(customTermAttribute);
-		service.storeCustomTermAttribute(customAttributeToImport, new ThesaurusTerm(), new HashMap<String, CustomTermAttributeType>());
+		ThesaurusTerm term = mock(ThesaurusTerm.class);
+		service.storeCustomTermAttribute(customAttributeToImport, term, new HashMap<String, CustomTermAttributeType>());
+	}
+
+	@Test
+	public void storeCustomTermAttributeCustomAttributeToImportIsEmpty() {
+		service.storeCustomTermAttribute(new ArrayList<CustomTermAttribute>(), new ThesaurusTerm(), new HashMap<String, CustomTermAttributeType>());
 	}
 }

@@ -67,6 +67,37 @@ public class ThesaurusConceptGroupDAOTest {
 	}
 
 	@Test
+	public void findThesaurusConceptGroupsByThesaurusIdExcludedConceptGroupIdIsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		ThesaurusConceptGroupDAO thesaurusConceptGroupDAO =
+			 new ThesaurusConceptGroupDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria1);
+		when(criteria2.list())
+			.thenReturn(list);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria2);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		thesaurusConceptGroupDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<ThesaurusConceptGroup> result =
+			 thesaurusConceptGroupDAO.findThesaurusConceptGroupsByThesaurusId(null, "1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+
+	@Test
 	public void countItemsReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 		ThesaurusConceptGroupDAO thesaurusConceptGroupDAO =
 			 new ThesaurusConceptGroupDAO();

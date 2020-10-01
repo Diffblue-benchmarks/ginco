@@ -100,8 +100,7 @@ class AlignmentsRestServiceTest {
 			.thenReturn(list);
 
 		// act
-		List<ExternalThesaurusView> result =
-			 service.getExternalThesauruses("foo=bar");
+		List<ExternalThesaurusView> result = service.getExternalThesauruses("bar");
 
 		// assert
 		assertThat(result.size(), is(1));
@@ -112,6 +111,6 @@ class AlignmentsRestServiceTest {
 	void getExternalThesaurusesReturnsEmpty() {
 		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ExternalThesaurus>());
-		assertThat(service.getExternalThesauruses("foo=bar"), empty());
+		assertThat(service.getExternalThesauruses("bar"), empty());
 	}
 }

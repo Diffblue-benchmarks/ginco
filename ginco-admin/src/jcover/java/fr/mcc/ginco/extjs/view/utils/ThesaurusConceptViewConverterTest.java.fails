@@ -1,16 +1,22 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.extjs.view.pojo.HierarchicalRelationshipView;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptReducedView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptView;
 import fr.mcc.ginco.services.IAlignmentService;
 import fr.mcc.ginco.services.IAssociativeRelationshipService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,7 +64,33 @@ class ThesaurusConceptViewConverterTest {
 	private ThesaurusConceptViewConverter service;
 
 	@Test
-	void convert() {
+	void convert1() {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("foo");
+		ArrayList<ThesaurusConcept> conceptList = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setIdentifier("data");
+		conceptList.add(thesaurusConcept);
+
+		// act
+		List<ThesaurusConceptReducedView> result = service.convert(conceptList);
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getIdentifier(), is("data"));
+		assertThat(result.get(0).getLabel(), is("foo"));
+		assertThat(result.get(0).getLang(), is(nullValue()));
+	}
+
+	@Test
+	void convertConceptListIsEmptyReturnsEmpty() {
+		assertThat(service.convert(new ArrayList<ThesaurusConcept>()), empty());
+	}
+
+	@Test
+	void convert2() {
 
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
@@ -73,5 +105,43 @@ class ThesaurusConceptViewConverterTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("foo"));
 		assertThat(result.getLang(), is(nullValue()));
+	}
+
+	@Test
+	void convertAddedChildrenReturnsEmpty() {
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setIdentifier("data");
+		list.add(thesaurusConcept);
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list);
+		ThesaurusConceptView conceptView = new ThesaurusConceptView();
+		ArrayList<HierarchicalRelationshipView> childConcepts =
+			 new ArrayList<HierarchicalRelationshipView>();
+		HierarchicalRelationshipView hierarchicalRelationshipView1 =
+			 new HierarchicalRelationshipView();
+		hierarchicalRelationshipView1.setIdentifier("data");
+		childConcepts.add(hierarchicalRelationshipView1);
+		conceptView.setChildConcepts(childConcepts);
+		assertThat(service.convertAddedChildren(conceptView), empty());
+	}
+
+	@Test
+	void convertRemovedChildrenReturnsEmpty() {
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setIdentifier("data");
+		list.add(thesaurusConcept);
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list);
+		ThesaurusConceptView conceptView = new ThesaurusConceptView();
+		ArrayList<HierarchicalRelationshipView> childConcepts =
+			 new ArrayList<HierarchicalRelationshipView>();
+		HierarchicalRelationshipView hierarchicalRelationshipView1 =
+			 new HierarchicalRelationshipView();
+		hierarchicalRelationshipView1.setIdentifier("data");
+		childConcepts.add(hierarchicalRelationshipView1);
+		conceptView.setChildConcepts(childConcepts);
+		assertThat(service.convertRemovedChildren(conceptView), empty());
 	}
 }

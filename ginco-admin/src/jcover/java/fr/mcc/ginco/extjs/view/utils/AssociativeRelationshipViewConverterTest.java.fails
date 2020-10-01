@@ -2,6 +2,7 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationship;
@@ -43,7 +44,7 @@ class AssociativeRelationshipViewConverterTest {
 	private AssociativeRelationshipViewConverter service;
 
 	@Test
-	void convert() {
+	void convert1() {
 
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
@@ -71,5 +72,38 @@ class AssociativeRelationshipViewConverterTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("foo"));
 		assertThat(result.getRoleCode(), is("DE"));
+	}
+
+	@Test
+	void convert2() {
+
+		// arrange
+		AssociativeRelationship associativeRelationship =
+			 new AssociativeRelationship();
+		ThesaurusConcept conceptLeft = new ThesaurusConcept();
+		associativeRelationship.setConceptLeft(conceptLeft);
+		ThesaurusConcept conceptRight = new ThesaurusConcept();
+		associativeRelationship.setConceptRight(conceptRight);
+		AssociativeRelationship.Id identifier11 = new AssociativeRelationship.Id();
+		associativeRelationship.setIdentifier(identifier11);
+		when(associativeRelationshipService.getAssociativeRelationshipById(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(associativeRelationship);
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
+		when(associativeRelationshipRoleService.getRoleById(Mockito.<String>any()))
+			.thenReturn(associativeRelationshipRole);
+		AssociativeRelationshipView associativeRelationshipView =
+			 new AssociativeRelationshipView();
+		associativeRelationshipView.setRoleCode("DE");
+
+		// act
+		AssociativeRelationship result =
+			 service.convert(associativeRelationshipView, new ThesaurusConcept());
+
+		// assert
+		assertThat(result.getConceptLeft(), sameInstance(conceptLeft));
+		assertThat(result.getConceptRight(), sameInstance(conceptRight));
+		assertThat(result.getIdentifier(), sameInstance(identifier11));
+		assertThat(result.getRelationshipRole(), sameInstance(associativeRelationshipRole));
 	}
 }

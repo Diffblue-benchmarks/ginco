@@ -26,11 +26,13 @@ public class SearcherServiceUtilTest {
 
 	@Test
 	public void addAndQuery() {
-		assertEquals("+data:java.lang.Object@53f65459 ", service.addAndQuery("data", new Object(), null, false));
-		assertEquals("+data:[ java.lang.Object@3b088d51Z TO * ] ", service.addAndQuery("data", new Object(), true, false));
-		assertEquals("+data:[ * TO java.lang.Object@1786dec2Z ] ", service.addAndQuery("data", new Object(), false, true));
-		assertEquals("+ :[ * TO fooZ ] ", service.addAndQuery(" ", "foo", false, false));
-		assertEquals("", service.addAndQuery("data", null, false, false));
+		assertEquals("+data:\"[ * TO fooZ ]\" ", service.addAndQuery("data", "foo", false, true));
+		assertEquals("", service.addAndQuery("data", "", false, false));
+		assertEquals("", service.addAndQuery("data", "-1", false, false));
+		assertEquals("+data:foo ", service.addAndQuery("data", "foo", null, false));
+		assertEquals("+data:[ java.lang.Object@74650e52Z TO * ] ", service.addAndQuery("data", new Object(), true, false));
+		assertEquals("+data:[ fooZ TO * ] ", service.addAndQuery("data", "foo", true, false));
+		assertEquals("", service.addAndQuery("data", null, true, false));
 	}
 
 	@Test

@@ -1,11 +1,17 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.GenericRoleView;
 import fr.mcc.ginco.extjs.view.pojo.GenericStatusView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptReducedView;
 import fr.mcc.ginco.extjs.view.utils.AlignmentViewConverter;
 import fr.mcc.ginco.extjs.view.utils.AssociativeRelationshipViewConverter;
 import fr.mcc.ginco.extjs.view.utils.HierarchicalRelationshipViewConverter;
@@ -20,10 +26,12 @@ import fr.mcc.ginco.solr.IConceptIndexerService;
 import fr.mcc.ginco.solr.INoteIndexerService;
 import fr.mcc.ginco.solr.ITermIndexerService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -82,6 +90,15 @@ class ThesaurusConceptRestServiceTest {
 	private ThesaurusConceptRestService service;
 
 	@Test
+	void getSimpleConceptsAssociatedConceptsIsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
+			 service.getSimpleConcepts(new ArrayList<String>());
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
 	void getAllConceptStatus() throws fr.mcc.ginco.exceptions.TechnicalException {
 		ExtJsonFormLoadData<List<GenericStatusView>> result =
 			 service.getAllConceptStatus();
@@ -114,6 +131,26 @@ class ThesaurusConceptRestServiceTest {
 		assertThat(result.getData().get(3).getRole(), is(3));
 		assertThat(result.getData().get(3).getRoleLabel(), is("TGP-TSP"));
 		assertThat(result.getTotal(), is(4L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getConceptThesaurusId() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		thesaurusConcept.setThesaurus(thesaurus);
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(thesaurusConcept);
+
+		// act
+		ExtJsonFormLoadData<String> result = service.getConceptThesaurusId("1234");
+
+		// assert
+		assertThat(result.getData(), is("data"));
+		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}
 }

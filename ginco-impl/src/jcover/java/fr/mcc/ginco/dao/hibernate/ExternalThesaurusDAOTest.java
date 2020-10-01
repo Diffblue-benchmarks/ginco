@@ -125,7 +125,7 @@ public class ExternalThesaurusDAOTest {
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
 		List list = new ArrayList();
 		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
-		externalThesaurus.setExternalId("1234");
+		externalThesaurus.setExternalId("bar");
 		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
 		externalThesaurus.setExternalThesaurusType(externalThesaurusType);
 		externalThesaurus.setIdentifier(1);
@@ -149,7 +149,7 @@ public class ExternalThesaurusDAOTest {
 			 externalThesaurusDAO.findBySourceExternalId("1234");
 
 		// assert
-		assertEquals("1234", result.getExternalId());
+		assertEquals("bar", result.getExternalId());
 		assertSame(externalThesaurusType, result.getExternalThesaurusType());
 		assertEquals(1, (int) result.getIdentifier());
 	}

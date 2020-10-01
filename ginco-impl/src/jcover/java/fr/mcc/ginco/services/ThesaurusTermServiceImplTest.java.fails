@@ -1,0 +1,287 @@
+package fr.mcc.ginco.services;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusTermRole;
+import fr.mcc.ginco.dao.IThesaurusDAO;
+import fr.mcc.ginco.dao.IThesaurusTermDAO;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.services.ThesaurusTermServiceImpl
+ *
+ * @author Diffblue Cover
+ */
+
+public class ThesaurusTermServiceImplTest {
+
+	@Mock(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@Mock(name = "thesaurusDAO")
+	private IThesaurusDAO thesaurusDAO;
+
+	@Mock(name = "thesaurusTermDAO")
+	private IThesaurusTermDAO thesaurusTermDAO;
+
+	@InjectMocks
+	private ThesaurusTermServiceImpl service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getPaginatedThesaurusSandoxedTermsListIdThesaurusIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+
+		// arrange
+		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		list.add(thesaurusTerm);
+		when(thesaurusTermDAO.findPaginatedSandboxedItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTerm> result =
+			 service.getPaginatedThesaurusSandoxedTermsList(-1, 0, "bar");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void getTermsByConceptIdIdConceptIsBar() {
+
+		// arrange
+		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		list.add(thesaurusTerm);
+		when(thesaurusTermDAO.findTermsByConceptId(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTerm> result = service.getTermsByConceptId("bar");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void getSandboxedTermsCountReturnsOne() {
+		when(thesaurusTermDAO.countSandboxedTerms(Mockito.<String>any()))
+			.thenReturn(1L);
+		assertEquals(1L, (long) service.getSandboxedTermsCount("1234"));
+	}
+
+	@Test
+	public void getSandboxedValidatedTermsCountReturnsOne() {
+		when(thesaurusTermDAO.countSandboxedValidatedTerms(Mockito.<String>any()))
+			.thenReturn(1L);
+		assertEquals(1L, (long) service.getSandboxedValidatedTermsCount("1234"));
+	}
+
+	@Test
+	public void getAllTerms() {
+
+		// arrange
+		List<Object> list = new ArrayList<Object>();
+		list.add(new Object());
+		when(thesaurusTermDAO.findAll())
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTerm> result = service.getAllTerms();
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+
+	@Test
+	public void getPaginatedThesaurusSandoxedValidatedTermsListIdThesaurusIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+
+		// arrange
+		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		list.add(thesaurusTerm);
+		when(thesaurusTermDAO.findPaginatedSandboxedValidatedItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTerm> result =
+			 service.getPaginatedThesaurusSandoxedValidatedTermsList(-1, 0, "bar");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void getPreferredTermsCountReturnsOne() {
+		when(thesaurusTermDAO.countPreferredTerms(Mockito.<String>any()))
+			.thenReturn(1L);
+		assertEquals(1L, (long) service.getPreferredTermsCount("1234"));
+	}
+
+	@Test
+	public void getConceptIdByTermLexicalValueIsValueReturnsData() {
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setIdentifier("data");
+		thesaurusTerm.setConcept(concept);
+		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(thesaurusTerm);
+		assertEquals("data", service.getConceptIdByTerm("value", "1234", "1234"));
+	}
+
+	@Test
+	public void getPreferredTermByTerm() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusConcept concept = new ThesaurusConcept();
+		thesaurusTerm.setConcept(concept);
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusTerm.setCreated(created3);
+		thesaurusTerm.setHidden(false);
+		thesaurusTerm.setIdentifier("data");
+		Language language = new Language();
+		thesaurusTerm.setLanguage(language);
+		thesaurusTerm.setLexicalValue("value");
+		Date modified2 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusTerm.setModified(modified2);
+		thesaurusTerm.setPrefered(true);
+		ThesaurusTermRole role = new ThesaurusTermRole();
+		thesaurusTerm.setRole(role);
+		thesaurusTerm.setSource("foo");
+		thesaurusTerm.setStatus(1);
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurusTerm.setThesaurus(thesaurus2);
+		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(thesaurusTerm);
+
+		// act
+		ThesaurusTerm result =
+			 service.getPreferredTermByTerm("value", "1234", "1234");
+
+		// assert
+		assertSame(concept, result.getConcept());
+		assertSame(created3, result.getCreated());
+		assertFalse(result.getHidden());
+		assertEquals("data", result.getIdentifier());
+		assertSame(language, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified2, result.getModified());
+		assertTrue(result.getPrefered());
+		assertSame(role, result.getRole());
+		assertEquals("foo", result.getSource());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus2, result.getThesaurus());
+	}
+
+	@Test
+	public void getPreferredTermByTermReturnsNull() {
+		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
+		thesaurusTerm1.setLanguage(new Language());
+		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
+		thesaurusTerm2.setConcept(new ThesaurusConcept());
+		Language language2 = new Language();
+		language2.setId("1234");
+		thesaurusTerm2.setLanguage(language2);
+		thesaurusTerm2.setPrefered(false);
+		when(thesaurusTermDAO.getConceptPreferredTerm(Mockito.<String>any()))
+			.thenReturn(thesaurusTerm1);
+		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(thesaurusTerm2);
+		assertNull(service.getPreferredTermByTerm("value", "1234", "1234"));
+	}
+
+	@Test
+	public void isTermExistReturnsTrue() {
+		when(thesaurusTermDAO.countSimilarTermsByLexicalValueAndLanguage(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(1L);
+		assertTrue(service.isTermExist(new ThesaurusTerm()));
+	}
+
+	@Test
+	public void isPreferredLexicalValueIsValueReturnsFalse() {
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		thesaurusTerm.setPrefered(false);
+		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(thesaurusTerm);
+		assertFalse(service.isPreferred("value", "1234", "1234"));
+	}
+
+	@Test
+	public void getAllTermsThesaurusIdIsBar() {
+
+		// arrange
+		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		list.add(thesaurusTerm);
+		when(thesaurusTermDAO.findTermsByThesaurusId(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTerm> result = service.getAllTerms("bar");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void getPaginatedThesaurusPreferredTermsListLimitIsZeroAndOnlyNotOrphanConceptsIsTrueAndStartIndexIsMinusOne() {
+
+		// arrange
+		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		list.add(thesaurusTerm);
+		when(thesaurusTermDAO.findPaginatedPreferredItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<Boolean>any()))
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusTerm> result =
+			 service.getPaginatedThesaurusPreferredTermsList(-1, 0, "1234", true);
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void isTermAlreadyUsedInConceptReturnsTrue() {
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		thesaurusTerm.setConcept(new ThesaurusConcept());
+		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(thesaurusTerm);
+		ThesaurusTerm term = new ThesaurusTerm();
+		term.setLanguage(new Language());
+		term.setThesaurus(new Thesaurus());
+		assertTrue(service.isTermAlreadyUsedInConcept(term));
+	}
+}

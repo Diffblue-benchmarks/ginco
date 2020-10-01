@@ -1,0 +1,269 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
+import fr.mcc.ginco.exports.IExportService;
+import fr.mcc.ginco.exports.IGincoBranchExportService;
+import fr.mcc.ginco.exports.IGincoThesaurusExportService;
+import fr.mcc.ginco.exports.ISKOSExportService;
+import fr.mcc.ginco.exports.result.bean.FormattedLine;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.ws.rs.core.Response;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.ExportRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ExportRestService.class})
+@ExtendWith(SpringExtension.class)
+class ExportRestServiceTest {
+
+	@MockBean(name = "exportService")
+	private IExportService exportService;
+
+	@MockBean(name = "gincoBranchExportService")
+	private IGincoBranchExportService gincoBranchExportService;
+
+	@MockBean(name = "gincoThesaurusExportService")
+	private IGincoThesaurusExportService gincoThesaurusExportService;
+
+	@MockBean(name = "skosExportService")
+	private ISKOSExportService skosExportService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private ExportRestService service;
+
+	@Test
+	void getHierarchical() throws java.text.ParseException, fr.mcc.ginco.exceptions.TechnicalException, IllegalStateException {
+
+		// arrange
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus);
+		List<FormattedLine> list = new ArrayList<FormattedLine>();
+		FormattedLine formattedLine = new FormattedLine(1, "hello");
+		formattedLine.setTabs(1);
+		formattedLine.setText("hello");
+		list.add(formattedLine);
+		when(exportService.getHierarchicalText(Mockito.<Thesaurus>any()))
+			.thenReturn(list);
+
+		// act
+		Response result = service.getHierarchical("1234");
+
+		// assert
+		assertThat(result.getAllowedMethods(), empty());
+		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(((File) result.getEntity()).getPath().startsWith(System.getProperty("java.io.tmpdir")), is(true));
+		assertThat(result.getEntityTag(), is(nullValue()));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLastModified(), is(nullValue()));
+		assertThat(result.getLength(), is(-1));
+		assertThat(result.getLinks(), empty());
+		assertThat(result.getLocation(), is(nullValue()));
+		assertThat(result.getMediaType(), is(nullValue()));
+		assertThat(result.getMetadata().get("Content-Disposition").size(), is(1));
+		// pojo String
+		assertThat(result.getStatus(), is(200));
+		assertThat(result.getStatusInfo().getFamily(), is(Response.Family.SUCCESSFUL));
+		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
+		assertThat(result.getStatusInfo().getStatusCode(), is(200));
+		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"HIER_Mr_2020-10-01_20:44:14.txt\""));
+	}
+
+	@Test
+	void getAlphabetical() throws java.text.ParseException, fr.mcc.ginco.exceptions.TechnicalException, IllegalStateException {
+
+		// arrange
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus);
+		List<FormattedLine> list = new ArrayList<FormattedLine>();
+		FormattedLine formattedLine = new FormattedLine(1, "hello");
+		formattedLine.setTabs(1);
+		formattedLine.setText("hello");
+		list.add(formattedLine);
+		when(exportService.getAlphabeticalText(Mockito.<Thesaurus>any()))
+			.thenReturn(list);
+
+		// act
+		Response result = service.getAlphabetical("1234");
+
+		// assert
+		assertThat(result.getAllowedMethods(), empty());
+		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(((File) result.getEntity()).getPath().startsWith(System.getProperty("java.io.tmpdir")), is(true));
+		assertThat(result.getEntityTag(), is(nullValue()));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLastModified(), is(nullValue()));
+		assertThat(result.getLength(), is(-1));
+		assertThat(result.getLinks(), empty());
+		assertThat(result.getLocation(), is(nullValue()));
+		assertThat(result.getMediaType(), is(nullValue()));
+		assertThat(result.getMetadata().get("Content-Disposition").size(), is(1));
+		// pojo String
+		assertThat(result.getStatus(), is(200));
+		assertThat(result.getStatusInfo().getFamily(), is(Response.Family.SUCCESSFUL));
+		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
+		assertThat(result.getStatusInfo().getStatusCode(), is(200));
+		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"ALPH_Mr_2020-10-01_20:44:13.txt\""));
+	}
+
+	@Test
+	void getGincoThesaurusExport() throws java.text.ParseException, fr.mcc.ginco.exceptions.TechnicalException, IllegalStateException {
+
+		// arrange
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus);
+		when(gincoThesaurusExportService.getThesaurusExport(Mockito.<Thesaurus>any()))
+			.thenReturn("foo");
+
+		// act
+		Response result = service.getGincoThesaurusExport("1234");
+
+		// assert
+		assertThat(result.getAllowedMethods(), empty());
+		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(((File) result.getEntity()).getPath().startsWith(System.getProperty("java.io.tmpdir")), is(true));
+		assertThat(result.getEntityTag(), is(nullValue()));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLastModified(), is(nullValue()));
+		assertThat(result.getLength(), is(-1));
+		assertThat(result.getLinks(), empty());
+		assertThat(result.getLocation(), is(nullValue()));
+		assertThat(result.getMediaType(), is(nullValue()));
+		assertThat(result.getMetadata().get("Content-Disposition").size(), is(1));
+		// pojo String
+		assertThat(result.getStatus(), is(200));
+		assertThat(result.getStatusInfo().getFamily(), is(Response.Family.SUCCESSFUL));
+		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
+		assertThat(result.getStatusInfo().getStatusCode(), is(200));
+		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Mr_2020-10-01_20:44:14.xml\""));
+	}
+}

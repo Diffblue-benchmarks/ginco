@@ -17,8 +17,8 @@ class GenericStatusViewTest {
 	void factory() {
 		GenericStatusView genericStatusView = new GenericStatusView();
 		genericStatusView.setStatus(1);
-		genericStatusView.setStatusLabel("label");
+		genericStatusView.setStatusLabel("on time");
 		assertThat(genericStatusView.getStatus(), is(1));
-		assertThat(genericStatusView.getStatusLabel(), is("label"));
+		assertThat(genericStatusView.getStatusLabel(), is("on time"));
 	}
 }

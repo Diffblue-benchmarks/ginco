@@ -1,6 +1,7 @@
 package fr.mcc.ginco.imports;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -97,7 +98,8 @@ public class ConceptsBuilderTest {
 
 	@Test
 	public void buildConcepts() {
-		assertTrue((service.buildConcepts(new Thesaurus(), new ArrayList<Resource>())).isEmpty());
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		assertTrue((service.buildConcepts(thesaurus, new ArrayList<Resource>())).isEmpty());
 		Mockito.verify(thesaurusTermDAO).flush();
 	}
 }

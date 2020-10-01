@@ -33,6 +33,68 @@ public class ThesaurusArrayDAOTest {
 	}
 
 	@Test
+	public void getThesaurusArrayListByThesaurusId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria2)
+			.thenReturn(criteria1);
+		when(criteria3.list())
+			.thenReturn(list);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria3);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		thesaurusArrayDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<ThesaurusArray> result =
+			 thesaurusArrayDAO.getThesaurusArrayListByThesaurusId("1234", "1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+
+	@Test
+	public void getThesaurusArrayListByThesaurusIdExcludedConceptArrayIdIsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria1);
+		when(criteria2.list())
+			.thenReturn(list);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria2);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		thesaurusArrayDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<ThesaurusArray> result =
+			 thesaurusArrayDAO.getThesaurusArrayListByThesaurusId(null, "1234");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+
+	@Test
 	public void getConceptSuperOrdinateArrays1() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 
 		// arrange

@@ -3,20 +3,32 @@ package fr.mcc.ginco.extjs.view.utils;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Suggestion;
 import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
 import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.extjs.view.pojo.SuggestionView;
 import fr.mcc.ginco.services.ISuggestionService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusTermService;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -134,5 +146,111 @@ class SuggestionViewConverterTest {
 		assertThat(result.getRecipient(), is("1234"));
 		assertThat(result.getTermId(), is(nullValue()));
 		assertThat(result.getThesaurusId(), is("data"));
+	}
+
+	@Test
+	void convert4() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(thesaurusConcept);
+		Suggestion suggestion = new Suggestion();
+		Date created5 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		suggestion.setCreated(created5);
+		suggestion.setIdentifier(1);
+		ThesaurusTerm term = new ThesaurusTerm();
+		suggestion.setTerm(term);
+		when(suggestionService.getSuggestionById(Mockito.<Integer>any()))
+			.thenReturn(suggestion);
+		SuggestionView source6 = new SuggestionView();
+		source6.setConceptId("1234");
+		source6.setContent("hello");
+		source6.setCreator("+");
+		source6.setIdentifier(1);
+		source6.setRecipient("1234");
+
+		// act
+		Suggestion result = service.convert(source6);
+
+		// assert
+		assertThat(result.getConcept(), sameInstance(thesaurusConcept));
+		assertThat(result.getContent(), is("hello"));
+		assertThat(result.getCreated(), sameInstance(created5));
+		assertThat(result.getCreator(), is("+"));
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getRecipient(), is("1234"));
+		assertThat(result.getTerm(), sameInstance(term));
+	}
+
+	@Test
+	void convert5() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
+		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setIdentifier("data");
+		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setNotation("DE");
+		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		creator1.setEmail("info@diffblue.com");
+		creator1.setHomepage("foo");
+		creator1.setIdentifier(1);
+		creator1.setName("Acme");
+		thesaurus.setCreator(creator1);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConcept.setThesaurus(thesaurus);
+		thesaurusConcept.setTopConcept(false);
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(thesaurusConcept);
+		SuggestionView source2 = new SuggestionView();
+		source2.setConceptId("1234");
+		source2.setContent("hello");
+		source2.setCreated("1234");
+		source2.setCreator("+");
+		source2.setIdentifier(null);
+		source2.setRecipient("1234");
+		source2.setTermId("1234");
+		source2.setThesaurusId("1234");
+
+		// act
+		Suggestion result = service.convert(source2);
+
+		// assert
+		assertThat(result.getConcept(), sameInstance(thesaurusConcept));
+		assertThat(result.getContent(), is("hello"));
+		assertThat(Math.abs(result.getCreated().getTime()-new Date().getTime())<=10_000L, is(true));
+		assertThat(result.getCreator(), is("+"));
+		assertThat(result.getIdentifier(), is(nullValue()));
+		assertThat(result.getRecipient(), is("1234"));
+		assertThat(result.getTerm(), is(nullValue()));
 	}
 }

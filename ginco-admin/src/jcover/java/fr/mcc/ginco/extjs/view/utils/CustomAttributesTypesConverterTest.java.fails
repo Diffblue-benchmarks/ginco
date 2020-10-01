@@ -80,8 +80,9 @@ class CustomAttributesTypesConverterTest {
 			 new GenericCustomAttributeType();
 		genericCustomAttributeType.setCode("DE");
 		genericCustomAttributeType.setIdentifier(1);
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setIdentifier("data");
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		when(thesaurus.getIdentifier())
+			.thenReturn("foo");
 		genericCustomAttributeType.setThesaurus(thesaurus);
 		genericCustomAttributeType.setValue("value");
 		sourceList.add(genericCustomAttributeType);
@@ -95,7 +96,7 @@ class CustomAttributesTypesConverterTest {
 		assertThat(result.get(0).getCode(), is("DE"));
 		assertThat(result.get(0).getExportable(), is(nullValue()));
 		assertThat(result.get(0).getIdentifier(), is(1));
-		assertThat(result.get(0).getThesaurusId(), is("data"));
+		assertThat(result.get(0).getThesaurusId(), is("foo"));
 		assertThat(result.get(0).getValue(), is("value"));
 	}
 
