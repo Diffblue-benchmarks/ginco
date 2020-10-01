@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusArrayConcept;
+import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IThesaurusArrayConceptDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 
@@ -59,6 +60,26 @@ public class ThesaurusArrayHelperTest {
 	public void saveArrayConceptsConceptsIsEmpty() {
 		ThesaurusArray array = new ThesaurusArray();
 		assertSame(array, service.saveArrayConcepts(array, new ArrayList<ThesaurusArrayConcept>()));
+	}
+
+	@Test
+	public void getArrayConcepts() {
+
+		// arrange
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusConcept);
+		List<String> list = new ArrayList<String>();
+		list.add("bar");
+		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusConcept> result = service.getArrayConcepts("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusConcept, result.get(0));
 	}
 
 	@Test

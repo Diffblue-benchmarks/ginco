@@ -2,12 +2,17 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.SplitNonPreferredTerm;
+import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.dao.ISplitNonPreferredTermDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -33,6 +38,43 @@ public class SplitNonPreferredTermServiceImplTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getSplitNonPreferredTermById() throws java.text.ParseException {
+
+		// arrange
+		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
+		Date created =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		splitNonPreferredTerm.setCreated(created);
+		splitNonPreferredTerm.setIdentifier("data");
+		Language language = new Language();
+		splitNonPreferredTerm.setLanguage(language);
+		splitNonPreferredTerm.setLexicalValue("value");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		splitNonPreferredTerm.setModified(modified);
+		splitNonPreferredTerm.setSource("foo");
+		splitNonPreferredTerm.setStatus(1);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		splitNonPreferredTerm.setThesaurus(thesaurus);
+		when(splitNonPreferredTermDAO.getById(Mockito.<Object>any()))
+			.thenReturn(splitNonPreferredTerm);
+
+		// act
+		SplitNonPreferredTerm result = service.getSplitNonPreferredTermById("1234");
+
+		// assert
+		assertSame(created, result.getCreated());
+		assertEquals("data", result.getIdentifier());
+		assertSame(language, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified, result.getModified());
+		assertTrue((result.getPreferredTerms()).isEmpty());
+		assertEquals("foo", result.getSource());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus, result.getThesaurus());
 	}
 
 	@Test
@@ -65,8 +107,9 @@ public class SplitNonPreferredTermServiceImplTest {
 	public void getAllSplitNonPreferredTerms() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
+		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
+		list.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermDAO.findAll())
 			.thenReturn(list);
 
@@ -75,6 +118,6 @@ public class SplitNonPreferredTermServiceImplTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(splitNonPreferredTerm, result.get(0));
 	}
 }

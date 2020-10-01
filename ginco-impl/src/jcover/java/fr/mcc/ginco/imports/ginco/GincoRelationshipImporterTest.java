@@ -1,20 +1,13 @@
 package fr.mcc.ginco.imports.ginco;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.ConceptHierarchicalRelationship;
 import fr.mcc.ginco.dao.IAssociativeRelationshipDAO;
 import fr.mcc.ginco.dao.IAssociativeRelationshipRoleDAO;
 import fr.mcc.ginco.dao.IConceptHierarchicalRelationshipDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 import fr.mcc.ginco.exports.result.bean.GincoExportedThesaurus;
-import fr.mcc.ginco.exports.result.bean.JaxbList;
 import fr.mcc.ginco.services.IConceptHierarchicalRelationshipServiceUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,21 +46,7 @@ public class GincoRelationshipImporterTest {
 	}
 
 	@Test
-	public void storeHierarchicalRelationship() {
-		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relationsToImport =
-			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		@SuppressWarnings("unchecked")
-		JaxbList<ConceptHierarchicalRelationship> x488 = mock(JaxbList.class);
-		when(x488.getList())
-			.thenReturn(new ArrayList<ConceptHierarchicalRelationship>());
-		when(x488.isEmpty())
-			.thenReturn(false);
-		relationsToImport.put("HmacMD5", x488);
-		assertTrue((service.storeHierarchicalRelationship(relationsToImport)).isEmpty());
-	}
-
-	@Test
-	public void storeHierarchicalRelationshipRelationsToImportIsNull() {
+	public void storeHierarchicalRelationshipRelationsToImportIsNullReturnsEmpty() {
 		assertTrue((service.storeHierarchicalRelationship(null)).isEmpty());
 	}
 

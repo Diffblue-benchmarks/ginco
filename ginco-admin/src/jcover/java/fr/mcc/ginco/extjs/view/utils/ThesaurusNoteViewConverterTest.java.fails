@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.Language;
@@ -12,6 +13,8 @@ import fr.mcc.ginco.beans.NoteType;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusNoteView;
 import fr.mcc.ginco.services.ILanguagesService;
 import fr.mcc.ginco.services.INoteService;
@@ -21,6 +24,7 @@ import fr.mcc.ginco.services.IThesaurusTermService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -222,20 +226,39 @@ class ThesaurusNoteViewConverterTest {
 		ThesaurusConcept concept = new ThesaurusConcept();
 		concept.setIdentifier("data");
 		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		thesaurus.setType(new ThesaurusType());
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		concept.setThesaurus(thesaurus);
+		concept.setTopConcept(false);
 		source1.setConcept(concept);
 		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		source1.setIdentifier("data");
 		Language lang2 = new Language();
 		lang2.setId("1234");
+		lang2.setPart1("foo");
+		lang2.setPrincipalLanguage(false);
+		lang2.setRefname("root");
+		lang2.setTopLanguage(false);
 		source1.setLanguage(lang2);
 		source1.setLexicalValue("value");
 		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		NoteType noteType = new NoteType();
 		noteType.setCode("DE");
+		noteType.setIsConcept(false);
+		noteType.setIsTerm(false);
+		noteType.setLabel("label");
 		source1.setNoteType(noteType);
 		source1.setSource("foo");
+		ThesaurusTerm termId = mock(ThesaurusTerm.class);
+		source1.setTerm(termId);
 
 		// act
 		ThesaurusNoteView result = service.convert(source1);

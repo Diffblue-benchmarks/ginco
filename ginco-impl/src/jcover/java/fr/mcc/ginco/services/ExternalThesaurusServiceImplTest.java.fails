@@ -37,6 +37,27 @@ public class ExternalThesaurusServiceImplTest {
 	}
 
 	@Test
+	public void getExternalThesaurusByIdIdentifierIsZero() {
+
+		// arrange
+		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
+		externalThesaurus.setExternalId("1234");
+		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
+		externalThesaurus.setExternalThesaurusType(externalThesaurusType);
+		externalThesaurus.setIdentifier(1);
+		when(externalThesaurusDAO.getById(Mockito.<Object>any()))
+			.thenReturn(externalThesaurus);
+
+		// act
+		ExternalThesaurus result = service.getExternalThesaurusById(0);
+
+		// assert
+		assertEquals("1234", result.getExternalId());
+		assertSame(externalThesaurusType, result.getExternalThesaurusType());
+		assertEquals(1, (int) result.getIdentifier());
+	}
+
+	@Test
 	public void getThesaurusByExternalIdExternalIdIsBar() {
 
 		// arrange

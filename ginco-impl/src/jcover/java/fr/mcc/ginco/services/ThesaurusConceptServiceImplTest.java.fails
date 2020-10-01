@@ -8,8 +8,10 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.AssociativeRelationship;
 import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.beans.ThesaurusTermRole;
@@ -25,6 +27,7 @@ import fr.mcc.ginco.utils.ThesaurusTermUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -87,11 +90,12 @@ public class ThesaurusConceptServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusConceptList() {
+	public void getThesaurusConceptList1() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		list.add(thesaurusConcept);
 		when(thesaurusConceptDAO.findAll())
 			.thenReturn(list);
 
@@ -100,12 +104,63 @@ public class ThesaurusConceptServiceImplTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(thesaurusConcept, result.get(0));
+	}
+
+	@Test
+	public void getThesaurusConceptList2() {
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusConcept);
+		ArrayList<String> ids = new ArrayList<String>();
+		ids.add("foo=bar");
+		assertEquals(1, service.getThesaurusConceptList(ids).size());
 	}
 
 	@Test
 	public void getThesaurusConceptListIdsIsEmptyReturnsEmpty() {
 		assertTrue((service.getThesaurusConceptList(new ArrayList<String>())).isEmpty());
+	}
+
+	@Test
+	public void getThesaurusConceptById() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
+		Date created1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConcept.setCreated(created1);
+		thesaurusConcept.setIdentifier("data");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConcept.setModified(modified);
+		thesaurusConcept.setNotation("DE");
+		thesaurusConcept.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurusConcept.setThesaurus(thesaurus);
+		thesaurusConcept.setTopConcept(false);
+		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusConcept);
+
+		// act
+		ThesaurusConcept result = service.getThesaurusConceptById("1234");
+
+		// assert
+		assertTrue((result.getAssociativeRelationshipLeft()).isEmpty());
+		assertTrue((result.getAssociativeRelationshipRight()).isEmpty());
+		assertTrue((result.getConceptArrays()).isEmpty());
+		assertSame(created1, result.getCreated());
+		assertEquals("data", result.getIdentifier());
+		assertSame(modified, result.getModified());
+		assertEquals("DE", result.getNotation());
+		assertTrue((result.getParentConcepts()).isEmpty());
+		assertTrue((result.getRootConcepts()).isEmpty());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus, result.getThesaurus());
+		assertFalse(result.getTopConcept());
 	}
 
 	@Test
@@ -293,8 +348,9 @@ public class ThesaurusConceptServiceImplTest {
 	public void getAllConcepts() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		list.add(thesaurusConcept);
 		when(thesaurusConceptDAO.findAll())
 			.thenReturn(list);
 
@@ -303,7 +359,7 @@ public class ThesaurusConceptServiceImplTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(thesaurusConcept, result.get(0));
 	}
 
 	@Test
@@ -364,6 +420,15 @@ public class ThesaurusConceptServiceImplTest {
 	}
 
 	@Test
+	public void getStatusByConceptIdReturnsOne() {
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setStatus(1);
+		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusConcept);
+		assertEquals(1, service.getStatusByConceptId("1234"));
+	}
+
+	@Test
 	public void getConceptPreferredTermsConceptIdIsHello() {
 
 		// arrange
@@ -379,5 +444,12 @@ public class ThesaurusConceptServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void getRecursiveParentsByConceptIdReturnsEmpty() {
+		when(thesaurusConceptDAO.getById(Mockito.<Object>any()))
+			.thenReturn(new ThesaurusConcept());
+		assertTrue((service.getRecursiveParentsByConceptId("1234")).isEmpty());
 	}
 }

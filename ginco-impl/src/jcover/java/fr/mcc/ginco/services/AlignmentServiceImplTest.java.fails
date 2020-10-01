@@ -1,19 +1,25 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.beans.AlignmentConcept;
 import fr.mcc.ginco.beans.AlignmentResource;
+import fr.mcc.ginco.beans.AlignmentType;
 import fr.mcc.ginco.beans.ExternalThesaurus;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IExternalThesaurusDAO;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -54,6 +60,47 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
+	public void getAlignmentByIdIdentifierIsBar() throws java.text.ParseException {
+
+		// arrange
+		Alignment alignment = new Alignment();
+		AlignmentType alignmentType = new AlignmentType();
+		alignment.setAlignmentType(alignmentType);
+		alignment.setAuthor("Ernest Hemingway");
+		Date created1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		alignment.setCreated(created1);
+		ExternalThesaurus externalTargetThesaurus = new ExternalThesaurus();
+		alignment.setExternalTargetThesaurus(externalTargetThesaurus);
+		alignment.setIdentifier("data");
+		Thesaurus internalTargetThesaurus = new Thesaurus();
+		alignment.setInternalTargetThesaurus(internalTargetThesaurus);
+		Date modified1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		alignment.setModified(modified1);
+		ThesaurusConcept sourceConcept = new ThesaurusConcept();
+		alignment.setSourceConcept(sourceConcept);
+		when(alignmentDAO.getById(Mockito.<Object>any()))
+			.thenReturn(alignment);
+
+		// act
+		Alignment result = service.getAlignmentById("bar");
+
+		// assert
+		assertSame(alignmentType, result.getAlignmentType());
+		assertEquals("Ernest Hemingway", result.getAuthor());
+		assertSame(created1, result.getCreated());
+		assertSame(externalTargetThesaurus, result.getExternalTargetThesaurus());
+		assertEquals("data", result.getIdentifier());
+		assertSame(internalTargetThesaurus, result.getInternalTargetThesaurus());
+		assertSame(modified1, result.getModified());
+		assertSame(sourceConcept, result.getSourceConcept());
+		assertTrue((result.getTargetConcepts()).isEmpty());
+		assertTrue((result.getTargetResources()).isEmpty());
+		assertFalse(result.isAndRelation());
+	}
+
+	@Test
 	public void getAlignmentsBySourceConceptIdConceptIdentifierIsBar() {
 
 		// arrange
@@ -72,7 +119,18 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
-	public void saveExternalThesauruses() {
+	public void saveExternalThesauruses1() {
+		when(externalThesaurusDAO.update(Mockito.<Object>any()))
+			.thenReturn(new ExternalThesaurus());
+		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
+		Alignment alignment = new Alignment();
+		alignment.setExternalTargetThesaurus(new ExternalThesaurus());
+		alignments.add(alignment);
+		service.saveExternalThesauruses(alignments);
+	}
+
+	@Test
+	public void saveExternalThesauruses2() {
 		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
 		alignments.add(new Alignment());
 		service.saveExternalThesauruses(alignments);
@@ -86,13 +144,13 @@ public class AlignmentServiceImplTest {
 	@Test
 	public void deleteExternalThesauruses1() {
 		when(externalThesaurusDAO.findAll())
-			.thenReturn(new ArrayList<Object>());
+			.thenReturn(new ArrayList<ExternalThesaurus>());
 		service.deleteExternalThesauruses();
 	}
 
 	@Test
 	public void deleteExternalThesauruses2() {
-		List<Object> list1 = new ArrayList<Object>();
+		List<ExternalThesaurus> list1 = new ArrayList<ExternalThesaurus>();
 		list1.add(new ExternalThesaurus());
 		when(externalThesaurusDAO.findAll())
 			.thenReturn(list1);

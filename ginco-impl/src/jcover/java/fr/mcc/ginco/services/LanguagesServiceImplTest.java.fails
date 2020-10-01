@@ -80,6 +80,28 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
+	public void getLanguageByIdIdIsBar() {
+
+		// arrange
+		Language language = new Language();
+		language.setId("1234");
+		language.setPart1("foo");
+		language.setRefname("root");
+		when(languagesDAO.getById(Mockito.<Object>any()))
+			.thenReturn(language);
+
+		// act
+		Language result = service.getLanguageById("bar");
+
+		// assert
+		assertEquals("1234", result.getId());
+		assertEquals("foo", result.getPart1());
+		assertEquals("root", result.getRefname());
+		assertFalse(result.isPrincipalLanguage());
+		assertFalse(result.isTopLanguage());
+	}
+
+	@Test
 	public void getLanguageByPart1Part1IsBar() {
 
 		// arrange

@@ -1,23 +1,17 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.AssociativeRelationship;
 import fr.mcc.ginco.beans.CustomConceptAttribute;
+import fr.mcc.ginco.beans.CustomConceptAttributeType;
 import fr.mcc.ginco.beans.Language;
-import fr.mcc.ginco.beans.Thesaurus;
-import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
-import fr.mcc.ginco.beans.ThesaurusFormat;
-import fr.mcc.ginco.beans.ThesaurusOrganization;
-import fr.mcc.ginco.beans.ThesaurusType;
-import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.dao.ICustomConceptAttributeDAO;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -46,61 +40,85 @@ public class CustomConceptAttributeServiceImplTest {
 	}
 
 	@Test
-	public void getAttributesByEntity() throws java.text.ParseException {
+	public void getAttributesByEntity() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<CustomConceptAttribute> list = new ArrayList<CustomConceptAttribute>();
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		list.add(customConceptAttribute);
 		when(customConceptAttributeDAO.getAttributesByEntity(Mockito.<Object>any()))
 			.thenReturn(list);
-		ThesaurusConcept concept = new ThesaurusConcept();
-		concept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
-		concept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
-		concept.setConceptArrays(new HashSet<ThesaurusArray>());
-		concept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept.setIdentifier("data");
-		concept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept.setNotation("DE");
-		concept.setParentConcepts(new HashSet<ThesaurusConcept>());
-		concept.setRootConcepts(new HashSet<ThesaurusConcept>());
-		concept.setStatus(1);
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setArchived(false);
-		thesaurus.setContributor("foo");
-		thesaurus.setCoverage("foo");
-		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator = new ThesaurusOrganization();
-		creator.setEmail("info@diffblue.com");
-		creator.setHomepage("foo");
-		creator.setIdentifier(1);
-		creator.setName("Acme");
-		thesaurus.setCreator(creator);
-		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus.setDefaultTopConcept(false);
-		thesaurus.setDescription("some text");
-		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("data");
-		thesaurus.setLang(new HashSet<Language>());
-		thesaurus.setPolyHierarchical(false);
-		thesaurus.setPublisher("foo");
-		thesaurus.setRelation("DE");
-		thesaurus.setRights("foo");
-		thesaurus.setSource("foo");
-		thesaurus.setSubject("foo");
-		thesaurus.setTitle("Mr");
-		ThesaurusType type = new ThesaurusType();
-		type.setIdentifier(1);
-		type.setLabel("label");
-		thesaurus.setType(type);
-		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
-		concept.setThesaurus(thesaurus);
-		concept.setTopConcept(false);
 
 		// act
-		List<CustomConceptAttribute> result = service.getAttributesByEntity(concept);
+		List<CustomConceptAttribute> result =
+			 service.getAttributesByEntity(new ThesaurusConcept());
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(customConceptAttribute, result.get(0));
+	}
+
+	@Test
+	public void deleteAttribute() {
+		when(customConceptAttributeDAO.delete(Mockito.<Object>any()))
+			.thenReturn(new CustomConceptAttribute());
+		CustomConceptAttribute attribute = mock(CustomConceptAttribute.class);
+		service.deleteAttribute(attribute);
+	}
+
+	@Test
+	public void saveOrUpdate() {
+
+		// arrange
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		ThesaurusConcept entity1 = new ThesaurusConcept();
+		customConceptAttribute.setEntity(entity1);
+		customConceptAttribute.setIdentifier("data");
+		Language language1 = new Language();
+		customConceptAttribute.setLanguage(language1);
+		customConceptAttribute.setLexicalValue("value");
+		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
+		customConceptAttribute.setType(type2);
+		when(customConceptAttributeDAO.update(Mockito.<Object>any()))
+			.thenReturn(customConceptAttribute);
+
+		// act
+		CustomConceptAttribute result =
+			 service.saveOrUpdate(new CustomConceptAttribute());
+
+		// assert
+		assertSame(entity1, result.getEntity());
+		assertEquals("data", result.getIdentifier());
+		assertSame(language1, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(type2, result.getType());
+	}
+
+	@Test
+	public void getAttributeByType() {
+
+		// arrange
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		ThesaurusConcept entity1 = new ThesaurusConcept();
+		customConceptAttribute.setEntity(entity1);
+		customConceptAttribute.setIdentifier("data");
+		Language language = new Language();
+		customConceptAttribute.setLanguage(language);
+		customConceptAttribute.setLexicalValue("value");
+		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
+		customConceptAttribute.setType(type2);
+		when(customConceptAttributeDAO.getAttributeByType(Mockito.<Object>any(), Mockito.<fr.mcc.ginco.beans.generic.GenericCustomAttributeType>any()))
+			.thenReturn(customConceptAttribute);
+
+		// act
+		CustomConceptAttribute result =
+			 service.getAttributeByType(new ThesaurusConcept(), new CustomConceptAttributeType());
+
+		// assert
+		assertSame(entity1, result.getEntity());
+		assertEquals("data", result.getIdentifier());
+		assertSame(language, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(type2, result.getType());
 	}
 }

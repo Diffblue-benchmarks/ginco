@@ -133,7 +133,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"HIER_Mr_2020-10-01_20:44:14.txt\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"HIER_Mr_2020-10-01_21:42:40.txt\""));
 	}
 
 	@Test
@@ -201,7 +201,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"ALPH_Mr_2020-10-01_20:44:13.txt\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"ALPH_Mr_2020-10-01_21:42:39.txt\""));
 	}
 
 	@Test
@@ -264,6 +264,6 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Mr_2020-10-01_20:44:14.xml\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Mr_2020-10-01_21:42:40.xml\""));
 	}
 }

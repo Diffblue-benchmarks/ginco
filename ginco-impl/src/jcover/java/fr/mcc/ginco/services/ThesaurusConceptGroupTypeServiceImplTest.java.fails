@@ -1,6 +1,7 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
@@ -13,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -37,8 +39,11 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 	public void getConceptGroupTypeList() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<ThesaurusConceptGroupType> list =
+			 new ArrayList<ThesaurusConceptGroupType>();
+		ThesaurusConceptGroupType thesaurusConceptGroupType =
+			 new ThesaurusConceptGroupType();
+		list.add(thesaurusConceptGroupType);
 		when(thesaurusConceptGroupTypeDAO.findAll())
 			.thenReturn(list);
 
@@ -47,6 +52,27 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(thesaurusConceptGroupType, result.get(0));
+	}
+
+	@Test
+	public void getTypeByIdTypeIsBar() {
+
+		// arrange
+		ThesaurusConceptGroupType thesaurusConceptGroupType =
+			 new ThesaurusConceptGroupType();
+		thesaurusConceptGroupType.setCode("DE");
+		thesaurusConceptGroupType.setLabel("label");
+		thesaurusConceptGroupType.setSkosLabel("label");
+		when(thesaurusConceptGroupTypeDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusConceptGroupType);
+
+		// act
+		ThesaurusConceptGroupType result = service.getTypeById("bar");
+
+		// assert
+		assertEquals("DE", result.getCode());
+		assertEquals("label", result.getLabel());
+		assertEquals("label", result.getSkosLabel());
 	}
 }

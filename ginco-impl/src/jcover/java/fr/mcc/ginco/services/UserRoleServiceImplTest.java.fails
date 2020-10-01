@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Role;
+import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.UserRole;
 import fr.mcc.ginco.dao.IUserRoleDAO;
 
@@ -62,6 +63,29 @@ public class UserRoleServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(userRole, result.get(0));
+	}
+
+	@Test
+	public void getUserRoleIdentifierIsOne() {
+
+		// arrange
+		UserRole userRole = new UserRole();
+		userRole.setIdentifier(1);
+		userRole.setRole(Role.MANAGER);
+		Thesaurus thesaurus = new Thesaurus();
+		userRole.setThesaurus(thesaurus);
+		userRole.setUsername("root");
+		when(userRoleDAO.getById(Mockito.<Object>any()))
+			.thenReturn(userRole);
+
+		// act
+		UserRole result = service.getUserRole(1);
+
+		// assert
+		assertEquals(1, (int) result.getIdentifier());
+		assertTrue(Role.MANAGER == result.getRole());
+		assertSame(thesaurus, result.getThesaurus());
+		assertEquals("root", result.getUsername());
 	}
 
 	@Test

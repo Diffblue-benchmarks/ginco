@@ -1,10 +1,14 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IThesaurusArrayDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 import fr.mcc.ginco.helpers.ThesaurusArrayHelper;
@@ -47,6 +51,36 @@ public class ThesaurusArrayServiceImplTest {
 	}
 
 	@Test
+	public void getThesaurusArrayById() {
+
+		// arrange
+		ThesaurusArray thesaurusArray = new ThesaurusArray();
+		thesaurusArray.setIdentifier("data");
+		thesaurusArray.setNotation("DE");
+		thesaurusArray.setOrdered(false);
+		ThesaurusArray parent1 = new ThesaurusArray();
+		thesaurusArray.setParent(parent1);
+		ThesaurusConcept superOrdinateConcept4 = new ThesaurusConcept();
+		thesaurusArray.setSuperOrdinateConcept(superOrdinateConcept4);
+		Thesaurus thesaurus7 = new Thesaurus();
+		thesaurusArray.setThesaurus(thesaurus7);
+		when(thesaurusArrayDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusArray);
+
+		// act
+		ThesaurusArray result = service.getThesaurusArrayById("1234");
+
+		// assert
+		assertTrue((result.getConcepts()).isEmpty());
+		assertEquals("data", result.getIdentifier());
+		assertEquals("DE", result.getNotation());
+		assertFalse(result.getOrdered());
+		assertSame(parent1, result.getParent());
+		assertSame(superOrdinateConcept4, result.getSuperOrdinateConcept());
+		assertSame(thesaurus7, result.getThesaurus());
+	}
+
+	@Test
 	public void getAllThesaurusArrayByThesaurusIdExcludedConceptArrayIdIsBar() {
 
 		// arrange
@@ -63,6 +97,67 @@ public class ThesaurusArrayServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusArray, result.get(0));
+	}
+
+	@Test
+	public void updateOnlyThesaurusArray() {
+
+		// arrange
+		ThesaurusArray thesaurusArray1 = new ThesaurusArray();
+		thesaurusArray1.setIdentifier("data");
+		thesaurusArray1.setNotation("DE");
+		thesaurusArray1.setOrdered(false);
+		ThesaurusArray parent1 = new ThesaurusArray();
+		thesaurusArray1.setParent(parent1);
+		ThesaurusConcept superOrdinateConcept4 = new ThesaurusConcept();
+		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept4);
+		Thesaurus thesaurus7 = new Thesaurus();
+		thesaurusArray1.setThesaurus(thesaurus7);
+		when(thesaurusArrayDAO.update(Mockito.<Object>any()))
+			.thenReturn(thesaurusArray1);
+
+		// act
+		ThesaurusArray result =
+			 service.updateOnlyThesaurusArray(new ThesaurusArray());
+
+		// assert
+		assertTrue((result.getConcepts()).isEmpty());
+		assertEquals("data", result.getIdentifier());
+		assertEquals("DE", result.getNotation());
+		assertFalse(result.getOrdered());
+		assertSame(parent1, result.getParent());
+		assertSame(superOrdinateConcept4, result.getSuperOrdinateConcept());
+		assertSame(thesaurus7, result.getThesaurus());
+	}
+
+	@Test
+	public void destroyThesaurusArray() {
+
+		// arrange
+		ThesaurusArray thesaurusArray1 = new ThesaurusArray();
+		thesaurusArray1.setIdentifier("data");
+		thesaurusArray1.setNotation("DE");
+		thesaurusArray1.setOrdered(false);
+		ThesaurusArray parent1 = new ThesaurusArray();
+		thesaurusArray1.setParent(parent1);
+		ThesaurusConcept superOrdinateConcept4 = new ThesaurusConcept();
+		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept4);
+		Thesaurus thesaurus7 = new Thesaurus();
+		thesaurusArray1.setThesaurus(thesaurus7);
+		when(thesaurusArrayDAO.delete(Mockito.<Object>any()))
+			.thenReturn(thesaurusArray1);
+
+		// act
+		ThesaurusArray result = service.destroyThesaurusArray(new ThesaurusArray());
+
+		// assert
+		assertTrue((result.getConcepts()).isEmpty());
+		assertEquals("data", result.getIdentifier());
+		assertEquals("DE", result.getNotation());
+		assertFalse(result.getOrdered());
+		assertSame(parent1, result.getParent());
+		assertSame(superOrdinateConcept4, result.getSuperOrdinateConcept());
+		assertSame(thesaurus7, result.getThesaurus());
 	}
 
 	@Test

@@ -4,10 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Note;
+import fr.mcc.ginco.beans.NoteType;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.dao.INoteDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -72,6 +77,126 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
+	public void getNoteByIdIdIsBar() throws java.text.ParseException {
+
+		// arrange
+		Note note = new Note();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		note.setConcept(concept1);
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		note.setCreated(created3);
+		note.setIdentifier("data");
+		Language lang2 = new Language();
+		note.setLanguage(lang2);
+		note.setLexicalValue("value");
+		Date modified2 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		note.setModified(modified2);
+		NoteType noteType = new NoteType();
+		note.setNoteType(noteType);
+		note.setSource("foo");
+		ThesaurusTerm termId = new ThesaurusTerm();
+		note.setTerm(termId);
+		when(noteDAO.getById(Mockito.<Object>any()))
+			.thenReturn(note);
+
+		// act
+		Note result = service.getNoteById("bar");
+
+		// assert
+		assertSame(concept1, result.getConcept());
+		assertSame(created3, result.getCreated());
+		assertEquals("data", result.getIdentifier());
+		assertSame(lang2, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified2, result.getModified());
+		assertSame(noteType, result.getNoteType());
+		assertEquals("foo", result.getSource());
+		assertSame(termId, result.getTerm());
+	}
+
+	@Test
+	public void createOrUpdateNote() throws java.text.ParseException {
+
+		// arrange
+		Note note1 = new Note();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		note1.setConcept(concept1);
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		note1.setCreated(created3);
+		note1.setIdentifier("data");
+		Language lang2 = new Language();
+		note1.setLanguage(lang2);
+		note1.setLexicalValue("value");
+		Date modified2 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		note1.setModified(modified2);
+		NoteType noteType1 = new NoteType();
+		note1.setNoteType(noteType1);
+		note1.setSource("foo");
+		ThesaurusTerm termId1 = new ThesaurusTerm();
+		note1.setTerm(termId1);
+		when(noteDAO.update(Mockito.<Object>any()))
+			.thenReturn(note1);
+
+		// act
+		Note result = service.createOrUpdateNote(new Note());
+
+		// assert
+		assertSame(concept1, result.getConcept());
+		assertSame(created3, result.getCreated());
+		assertEquals("data", result.getIdentifier());
+		assertSame(lang2, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified2, result.getModified());
+		assertSame(noteType1, result.getNoteType());
+		assertEquals("foo", result.getSource());
+		assertSame(termId1, result.getTerm());
+	}
+
+	@Test
+	public void deleteNote() throws java.text.ParseException {
+
+		// arrange
+		Note note1 = new Note();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		note1.setConcept(concept1);
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		note1.setCreated(created3);
+		note1.setIdentifier("data");
+		Language lang2 = new Language();
+		note1.setLanguage(lang2);
+		note1.setLexicalValue("value");
+		Date modified2 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		note1.setModified(modified2);
+		NoteType noteType1 = new NoteType();
+		note1.setNoteType(noteType1);
+		note1.setSource("foo");
+		ThesaurusTerm termId1 = new ThesaurusTerm();
+		note1.setTerm(termId1);
+		when(noteDAO.delete(Mockito.<Object>any()))
+			.thenReturn(note1);
+
+		// act
+		Note result = service.deleteNote(new Note());
+
+		// assert
+		assertSame(concept1, result.getConcept());
+		assertSame(created3, result.getCreated());
+		assertEquals("data", result.getIdentifier());
+		assertSame(lang2, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified2, result.getModified());
+		assertSame(noteType1, result.getNoteType());
+		assertEquals("foo", result.getSource());
+		assertSame(termId1, result.getTerm());
+	}
+
+	@Test
 	public void getConceptNoteCountReturnsOne() {
 		when(noteDAO.getConceptNoteCount(Mockito.<String>any()))
 			.thenReturn(1L);
@@ -89,8 +214,9 @@ public class NoteServiceImplTest {
 	public void getAllNotes() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<Note> list = new ArrayList<Note>();
+		Note note = new Note();
+		list.add(note);
 		when(noteDAO.findAll())
 			.thenReturn(list);
 
@@ -99,7 +225,7 @@ public class NoteServiceImplTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(note, result.get(0));
 	}
 
 	@Test

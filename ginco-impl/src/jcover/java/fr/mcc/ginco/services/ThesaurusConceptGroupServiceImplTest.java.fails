@@ -1,16 +1,22 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusConceptGroup;
 import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
 import fr.mcc.ginco.dao.IThesaurusConceptGroupDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptGroupLabelDAO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -39,6 +45,41 @@ public class ThesaurusConceptGroupServiceImplTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getConceptGroupById() {
+
+		// arrange
+		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType1 =
+			 new ThesaurusConceptGroupType();
+		thesaurusConceptGroup.setConceptGroupType(conceptGroupType1);
+		thesaurusConceptGroup.setConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConceptGroup.setIdentifier("data");
+		thesaurusConceptGroup.setIsDynamic(false);
+		thesaurusConceptGroup.setNotation("DE");
+		ThesaurusConceptGroup parent1 = new ThesaurusConceptGroup();
+		thesaurusConceptGroup.setParent(parent1);
+		ThesaurusConcept parentConcept4 = new ThesaurusConcept();
+		thesaurusConceptGroup.setParentConcept(parentConcept4);
+		Thesaurus thesaurus7 = new Thesaurus();
+		thesaurusConceptGroup.setThesaurus(thesaurus7);
+		when(thesaurusConceptGroupDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusConceptGroup);
+
+		// act
+		ThesaurusConceptGroup result = service.getConceptGroupById("1234");
+
+		// assert
+		assertSame(conceptGroupType1, result.getConceptGroupType());
+		assertTrue((result.getConcepts()).isEmpty());
+		assertEquals("data", result.getIdentifier());
+		assertFalse(result.getIsDynamic());
+		assertEquals("DE", result.getNotation());
+		assertSame(parent1, result.getParent());
+		assertSame(parentConcept4, result.getParentConcept());
+		assertSame(thesaurus7, result.getThesaurus());
 	}
 
 	@Test
@@ -86,6 +127,42 @@ public class ThesaurusConceptGroupServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusConceptGroup, result.get(0));
+	}
+
+	@Test
+	public void destroyThesaurusConceptGroup() {
+
+		// arrange
+		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType1 =
+			 new ThesaurusConceptGroupType();
+		thesaurusConceptGroup.setConceptGroupType(conceptGroupType1);
+		thesaurusConceptGroup.setConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConceptGroup.setIdentifier("data");
+		thesaurusConceptGroup.setIsDynamic(false);
+		thesaurusConceptGroup.setNotation("DE");
+		ThesaurusConceptGroup parent1 = new ThesaurusConceptGroup();
+		thesaurusConceptGroup.setParent(parent1);
+		ThesaurusConcept parentConcept4 = new ThesaurusConcept();
+		thesaurusConceptGroup.setParentConcept(parentConcept4);
+		Thesaurus thesaurus7 = new Thesaurus();
+		thesaurusConceptGroup.setThesaurus(thesaurus7);
+		when(thesaurusConceptGroupDAO.delete(Mockito.<Object>any()))
+			.thenReturn(thesaurusConceptGroup);
+
+		// act
+		ThesaurusConceptGroup result =
+			 service.destroyThesaurusConceptGroup(new ThesaurusConceptGroup());
+
+		// assert
+		assertSame(conceptGroupType1, result.getConceptGroupType());
+		assertTrue((result.getConcepts()).isEmpty());
+		assertEquals("data", result.getIdentifier());
+		assertFalse(result.getIsDynamic());
+		assertEquals("DE", result.getNotation());
+		assertSame(parent1, result.getParent());
+		assertSame(parentConcept4, result.getParentConcept());
+		assertSame(thesaurus7, result.getThesaurus());
 	}
 
 	@Test

@@ -5,9 +5,12 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Suggestion;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.dao.ISuggestionDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -71,6 +74,102 @@ public class SuggestionServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(suggestion, result.get(0));
+	}
+
+	@Test
+	public void getSuggestionByIdIdIsZero() throws java.text.ParseException {
+
+		// arrange
+		Suggestion suggestion = new Suggestion();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		suggestion.setConcept(concept1);
+		suggestion.setContent("hello");
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		suggestion.setCreated(created3);
+		suggestion.setCreator("+");
+		suggestion.setIdentifier(1);
+		suggestion.setRecipient("1234");
+		ThesaurusTerm term = new ThesaurusTerm();
+		suggestion.setTerm(term);
+		when(suggestionDAO.getById(Mockito.<Object>any()))
+			.thenReturn(suggestion);
+
+		// act
+		Suggestion result = service.getSuggestionById(0);
+
+		// assert
+		assertSame(concept1, result.getConcept());
+		assertEquals("hello", result.getContent());
+		assertSame(created3, result.getCreated());
+		assertEquals("+", result.getCreator());
+		assertEquals(1, (int) result.getIdentifier());
+		assertEquals("1234", result.getRecipient());
+		assertSame(term, result.getTerm());
+	}
+
+	@Test
+	public void createOrUpdateSuggestion() throws java.text.ParseException {
+
+		// arrange
+		Suggestion suggestion1 = new Suggestion();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		suggestion1.setConcept(concept1);
+		suggestion1.setContent("hello");
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		suggestion1.setCreated(created3);
+		suggestion1.setCreator("+");
+		suggestion1.setIdentifier(1);
+		suggestion1.setRecipient("1234");
+		ThesaurusTerm term1 = new ThesaurusTerm();
+		suggestion1.setTerm(term1);
+		when(suggestionDAO.update(Mockito.<Object>any()))
+			.thenReturn(suggestion1);
+
+		// act
+		Suggestion result = service.createOrUpdateSuggestion(new Suggestion());
+
+		// assert
+		assertSame(concept1, result.getConcept());
+		assertEquals("hello", result.getContent());
+		assertSame(created3, result.getCreated());
+		assertEquals("+", result.getCreator());
+		assertEquals(1, (int) result.getIdentifier());
+		assertEquals("1234", result.getRecipient());
+		assertSame(term1, result.getTerm());
+	}
+
+	@Test
+	public void deleteSuggestion() throws java.text.ParseException {
+
+		// arrange
+		Suggestion suggestion1 = new Suggestion();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		suggestion1.setConcept(concept1);
+		suggestion1.setContent("hello");
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		suggestion1.setCreated(created3);
+		suggestion1.setCreator("+");
+		suggestion1.setIdentifier(1);
+		suggestion1.setRecipient("1234");
+		ThesaurusTerm term1 = new ThesaurusTerm();
+		suggestion1.setTerm(term1);
+		when(suggestionDAO.delete(Mockito.<Object>any()))
+			.thenReturn(suggestion1);
+
+		// act
+		Suggestion result = service.deleteSuggestion(new Suggestion());
+
+		// assert
+		assertSame(concept1, result.getConcept());
+		assertEquals("hello", result.getContent());
+		assertSame(created3, result.getCreated());
+		assertEquals("+", result.getCreator());
+		assertEquals(1, (int) result.getIdentifier());
+		assertEquals("1234", result.getRecipient());
+		assertSame(term1, result.getTerm());
 	}
 
 	@Test

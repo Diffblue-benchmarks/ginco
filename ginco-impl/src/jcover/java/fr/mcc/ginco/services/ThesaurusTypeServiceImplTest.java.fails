@@ -1,6 +1,7 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusType;
@@ -38,8 +39,9 @@ public class ThesaurusTypeServiceImplTest {
 	public void getThesaurusTypeList() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<ThesaurusType> list = new ArrayList<ThesaurusType>();
+		ThesaurusType thesaurusType = new ThesaurusType();
+		list.add(thesaurusType);
 		when(thesaurusTypeDAO.findAll(Mockito.<String>any(), Mockito.<fr.mcc.ginco.dao.IGenericDAO.SortingTypes>any()))
 			.thenReturn(list);
 
@@ -48,6 +50,24 @@ public class ThesaurusTypeServiceImplTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(thesaurusType, result.get(0));
+	}
+
+	@Test
+	public void getThesaurusTypeByIdIdIsZero() {
+
+		// arrange
+		ThesaurusType thesaurusType = new ThesaurusType();
+		thesaurusType.setIdentifier(1);
+		thesaurusType.setLabel("label");
+		when(thesaurusTypeDAO.getById(Mockito.<Object>any()))
+			.thenReturn(thesaurusType);
+
+		// act
+		ThesaurusType result = service.getThesaurusTypeById(0);
+
+		// assert
+		assertEquals(1, (int) result.getIdentifier());
+		assertEquals("label", result.getLabel());
 	}
 }

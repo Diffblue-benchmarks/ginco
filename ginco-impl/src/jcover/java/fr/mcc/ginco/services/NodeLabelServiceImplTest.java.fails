@@ -2,6 +2,7 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
@@ -34,6 +35,38 @@ public class NodeLabelServiceImplTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getByIdIdIsZero() throws java.text.ParseException {
+
+		// arrange
+		NodeLabel nodeLabel = new NodeLabel();
+		Date created1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		nodeLabel.setCreated(created1);
+		nodeLabel.setIdentifier(1);
+		Language language = new Language();
+		nodeLabel.setLanguage(language);
+		nodeLabel.setLexicalValue("value");
+		Date modified1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		nodeLabel.setModified(modified1);
+		ThesaurusArray thesaurusArray = new ThesaurusArray();
+		nodeLabel.setThesaurusArray(thesaurusArray);
+		when(nodeLabelDAO.getById(Mockito.<Object>any()))
+			.thenReturn(nodeLabel);
+
+		// act
+		NodeLabel result = service.getById(0);
+
+		// assert
+		assertSame(created1, result.getCreated());
+		assertEquals(1, (int) result.getIdentifier());
+		assertSame(language, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified1, result.getModified());
+		assertSame(thesaurusArray, result.getThesaurusArray());
 	}
 
 	@Test
@@ -90,6 +123,39 @@ public class NodeLabelServiceImplTest {
 
 		// act
 		NodeLabel result = service.getByThesaurusArray("bar");
+
+		// assert
+		assertSame(created1, result.getCreated());
+		assertEquals(1, (int) result.getIdentifier());
+		assertSame(language, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified1, result.getModified());
+		assertSame(thesaurusArray, result.getThesaurusArray());
+	}
+
+	@Test
+	public void updateOrCreate() throws java.text.ParseException {
+
+		// arrange
+		NodeLabel nodeLabel1 = new NodeLabel();
+		Date created1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		nodeLabel1.setCreated(created1);
+		nodeLabel1.setIdentifier(1);
+		Language language = new Language();
+		nodeLabel1.setLanguage(language);
+		nodeLabel1.setLexicalValue("value");
+		Date modified1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		nodeLabel1.setModified(modified1);
+		ThesaurusArray thesaurusArray = new ThesaurusArray();
+		nodeLabel1.setThesaurusArray(thesaurusArray);
+		when(nodeLabelDAO.update(Mockito.<Object>any()))
+			.thenReturn(nodeLabel1);
+		NodeLabel nodeLabel2 = mock(NodeLabel.class);
+
+		// act
+		NodeLabel result = service.updateOrCreate(nodeLabel2);
 
 		// assert
 		assertSame(created1, result.getCreated());

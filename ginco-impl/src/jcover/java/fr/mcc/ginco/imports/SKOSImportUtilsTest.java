@@ -1,7 +1,7 @@
 package fr.mcc.ginco.imports;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.mock;
@@ -11,6 +11,7 @@ import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
@@ -36,6 +37,30 @@ public class SKOSImportUtilsTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getSKOSRessources() throws java.util.NoSuchElementException {
+		Resource resource1 = mock(Resource.class);
+		Resource resource2 = mock(Resource.class);
+		when(resource2.asResource())
+			.thenReturn(resource1);
+		Statement statement = mock(Statement.class);
+		when(statement.getSubject())
+			.thenReturn(resource2);
+		StmtIterator stmtIterator = mock(StmtIterator.class);
+		when(stmtIterator.hasNext())
+			.thenReturn(true)
+			.thenReturn(false);
+		when(stmtIterator.next())
+			.thenReturn(statement);
+		Model model = mock(Model.class);
+		when(model.listStatements(Mockito.<com.hp.hpl.jena.rdf.model.Selector>any()))
+			.thenReturn(stmtIterator);
+		Resource resource3 = mock(Resource.class);
+		List<Resource> result = service.getSKOSRessources(model, resource3);
+		assertEquals(1, result.size());
+		assertSame(resource1, result.get(0));
 	}
 
 	@Test
@@ -100,7 +125,7 @@ public class SKOSImportUtilsTest {
 			.thenReturn(extendedIterator);
 		List<ObjectProperty> result = service.getRelatedTypeProperty(model);
 		assertEquals(1, result.size());
-		assertNotNull(result.get(0));
+		assertSame(objectProperty, result.get(0));
 	}
 
 	@Test

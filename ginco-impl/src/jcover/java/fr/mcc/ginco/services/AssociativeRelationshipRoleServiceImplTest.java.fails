@@ -2,6 +2,7 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationshipRole;
@@ -39,8 +40,11 @@ public class AssociativeRelationshipRoleServiceImplTest {
 	public void getAllAssociationTermRole() {
 
 		// arrange
-		List<Object> list = new ArrayList<Object>();
-		list.add(new Object());
+		List<AssociativeRelationshipRole> list =
+			 new ArrayList<AssociativeRelationshipRole>();
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
+		list.add(associativeRelationshipRole);
 		when(associativeRelationshipRoleDAO.findAll())
 			.thenReturn(list);
 
@@ -50,7 +54,29 @@ public class AssociativeRelationshipRoleServiceImplTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		assertSame(associativeRelationshipRole, result.get(0));
+	}
+
+	@Test
+	public void getRoleById() {
+
+		// arrange
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
+		associativeRelationshipRole.setCode("DE");
+		associativeRelationshipRole.setLabel("label");
+		associativeRelationshipRole.setSkosLabel("label");
+		when(associativeRelationshipRoleDAO.getById(Mockito.<Object>any()))
+			.thenReturn(associativeRelationshipRole);
+
+		// act
+		AssociativeRelationshipRole result = service.getRoleById("1234");
+
+		// assert
+		assertEquals("DE", result.getCode());
+		assertFalse(result.getDefaultRole());
+		assertEquals("label", result.getLabel());
+		assertEquals("label", result.getSkosLabel());
 	}
 
 	@Test
