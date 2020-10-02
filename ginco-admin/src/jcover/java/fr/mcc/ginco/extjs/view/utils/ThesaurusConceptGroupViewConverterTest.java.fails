@@ -66,7 +66,7 @@ class ThesaurusConceptGroupViewConverterTest {
 	private ThesaurusConceptGroupViewConverter service;
 
 	@Test
-	void convert2() {
+	void convert2() throws java.text.ParseException {
 
 		// arrange
 		Thesaurus thesaurus1 = new Thesaurus();
@@ -74,6 +74,7 @@ class ThesaurusConceptGroupViewConverterTest {
 			.thenReturn(thesaurus1);
 		ThesaurusConcept thesaurusConcept1 = new ThesaurusConcept();
 		ThesaurusConcept thesaurusConcept2 = new ThesaurusConcept();
+		thesaurusConcept2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept2)
 			.thenReturn(thesaurusConcept1);

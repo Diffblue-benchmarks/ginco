@@ -179,9 +179,9 @@ public class GincoCustomAttributeImporterTest {
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute2 =
 			 new CustomConceptAttribute();
-		CustomConceptAttributeType type4 = new CustomConceptAttributeType();
-		type4.setCode("DE");
-		customConceptAttribute2.setType(type4);
+		CustomConceptAttributeType type5 = new CustomConceptAttributeType();
+		type5.setCode("DE");
+		customConceptAttribute2.setType(type5);
 		customAttributeToImport.add(customConceptAttribute2);
 		HashMap<String, CustomConceptAttributeType> savedTypes =
 			 new HashMap<String, CustomConceptAttributeType>();
@@ -206,9 +206,9 @@ public class GincoCustomAttributeImporterTest {
 		ArrayList<CustomTermAttribute> customAttributeToImport =
 			 new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute2 = new CustomTermAttribute();
-		CustomTermAttributeType type4 = new CustomTermAttributeType();
-		type4.setCode("DE");
-		customTermAttribute2.setType(type4);
+		CustomTermAttributeType type6 = new CustomTermAttributeType();
+		type6.setCode("DE");
+		customTermAttribute2.setType(type6);
 		customAttributeToImport.add(customTermAttribute2);
 		HashMap<String, CustomTermAttributeType> savedTypes =
 			 new HashMap<String, CustomTermAttributeType>();

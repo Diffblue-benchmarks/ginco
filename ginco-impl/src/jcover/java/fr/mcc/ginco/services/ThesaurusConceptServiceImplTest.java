@@ -5,13 +5,17 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusTermRole;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IAssociativeRelationshipDAO;
 import fr.mcc.ginco.dao.IAssociativeRelationshipRoleDAO;
@@ -290,5 +294,107 @@ public class ThesaurusConceptServiceImplTest {
 		when(thesaurusConceptDAO.getChildrenConcepts(Mockito.<String>any(), anyInt(), Mockito.<String>any()))
 			.thenReturn(list);
 		assertTrue(service.hasChildren("1234"));
+	}
+
+	@Test
+	public void getConceptWithChildrenIdentifersReturnsHello() {
+		List<String> list = new ArrayList<String>();
+		list.add("hello");
+		when(thesaurusConceptDAO.getIdentifiersOfConceptsWithChildren(Mockito.<String>any()))
+			.thenReturn(list);
+		assertEquals(1, service.getConceptWithChildrenIdentifers("1234").size());
+		assertTrue(service.getConceptWithChildrenIdentifers("1234").contains("hello"));
+	}
+
+	@Test
+	public void getConceptPreferredTerm1() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
+		thesaurusTerm.setConcept(concept);
+		Date created1 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusTerm.setCreated(created1);
+		thesaurusTerm.setHidden(false);
+		thesaurusTerm.setIdentifier("data");
+		Language language = new Language();
+		thesaurusTerm.setLanguage(language);
+		thesaurusTerm.setLexicalValue("value");
+		Date modified =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusTerm.setModified(modified);
+		thesaurusTerm.setPrefered(false);
+		ThesaurusTermRole role = new ThesaurusTermRole();
+		thesaurusTerm.setRole(role);
+		thesaurusTerm.setSource("foo");
+		thesaurusTerm.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurusTerm.setThesaurus(thesaurus);
+		when(thesaurusTermDAO.getConceptPreferredTerm(Mockito.<String>any()))
+			.thenReturn(thesaurusTerm);
+
+		// act
+		ThesaurusTerm result = service.getConceptPreferredTerm("hello");
+
+		// assert
+		assertSame(concept, result.getConcept());
+		assertSame(created1, result.getCreated());
+		assertFalse(result.getHidden());
+		assertEquals("data", result.getIdentifier());
+		assertSame(language, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified, result.getModified());
+		assertFalse(result.getPrefered());
+		assertSame(role, result.getRole());
+		assertEquals("foo", result.getSource());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus, result.getThesaurus());
+	}
+
+	@Test
+	public void getConceptPreferredTerm2() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusConcept concept = new ThesaurusConcept();
+		thesaurusTerm.setConcept(concept);
+		Date created3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusTerm.setCreated(created3);
+		thesaurusTerm.setHidden(false);
+		thesaurusTerm.setIdentifier("data");
+		Language language = new Language();
+		thesaurusTerm.setLanguage(language);
+		thesaurusTerm.setLexicalValue("value");
+		Date modified2 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusTerm.setModified(modified2);
+		thesaurusTerm.setPrefered(false);
+		ThesaurusTermRole role = new ThesaurusTermRole();
+		thesaurusTerm.setRole(role);
+		thesaurusTerm.setSource("foo");
+		thesaurusTerm.setStatus(1);
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurusTerm.setThesaurus(thesaurus2);
+		when(thesaurusTermDAO.getConceptPreferredTerm(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(thesaurusTerm);
+
+		// act
+		ThesaurusTerm result = service.getConceptPreferredTerm("hello", "1234");
+
+		// assert
+		assertSame(concept, result.getConcept());
+		assertSame(created3, result.getCreated());
+		assertFalse(result.getHidden());
+		assertEquals("data", result.getIdentifier());
+		assertSame(language, result.getLanguage());
+		assertEquals("value", result.getLexicalValue());
+		assertSame(modified2, result.getModified());
+		assertFalse(result.getPrefered());
+		assertSame(role, result.getRole());
+		assertEquals("foo", result.getSource());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus2, result.getThesaurus());
 	}
 }
