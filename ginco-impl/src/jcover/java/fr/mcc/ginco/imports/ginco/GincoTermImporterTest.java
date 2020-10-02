@@ -85,7 +85,7 @@ public class GincoTermImporterTest {
 			 new HashMap<String, JaxbList<Note>>();
 		ArrayList<Note> list1 = new ArrayList<Note>();
 		list1.add(new Note());
-		termNotesToImport.put("HmacMD5", new JaxbList<Note>(list1));
+		termNotesToImport.put("foo", new JaxbList<Note>(list1));
 
 		// act
 		List<Note> result = service.storeTermNotes(termNotesToImport);

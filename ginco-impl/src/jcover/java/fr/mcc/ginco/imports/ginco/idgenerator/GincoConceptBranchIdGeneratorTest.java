@@ -65,29 +65,30 @@ public class GincoConceptBranchIdGeneratorTest {
 			.thenReturn("1234");
 		Map<String, JaxbList<ConceptHierarchicalRelationship>> map1 =
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		JaxbList<ConceptHierarchicalRelationship> x505 =
+		JaxbList<ConceptHierarchicalRelationship> jaxbList1 =
 			 new JaxbList<ConceptHierarchicalRelationship>();
-		map1.put("HmacMD5", x505);
+		map1.put("foo", jaxbList1);
 		when(gincoRelationshipIdGenerator.getIdsForHierarchicalRelations(Mockito.<Map<String, JaxbList<ConceptHierarchicalRelationship>>>any(), Mockito.<Map<String, String>>any()))
 			.thenReturn(map1);
 		Map<String, JaxbList<Note>> map2 = new HashMap<String, JaxbList<Note>>();
-		JaxbList<Note> x391 = new JaxbList<Note>();
-		map2.put("HmacMD5", x391);
+		JaxbList<Note> jaxbList3 = new JaxbList<Note>();
+		map2.put("foo", jaxbList3);
 		Map<String, JaxbList<Note>> map3 = new HashMap<String, JaxbList<Note>>();
-		JaxbList<Note> x264 = new JaxbList<Note>();
-		map3.put("HmacMD5", x264);
+		JaxbList<Note> jaxbList5 = new JaxbList<Note>();
+		map3.put("foo", jaxbList5);
 		when(gincoNoteIdGenerator.getNotesWithNewIds(Mockito.<Map<String, JaxbList<Note>>>any(), Mockito.<Map<String, String>>any()))
 			.thenReturn(map3)
 			.thenReturn(map2);
 		Map<String, JaxbList<CustomTermAttribute>> map4 =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		JaxbList<CustomTermAttribute> x753 = new JaxbList<CustomTermAttribute>();
-		map4.put("HmacMD5", x753);
+		JaxbList<CustomTermAttribute> jaxbList7 =
+			 new JaxbList<CustomTermAttribute>();
+		map4.put("foo", jaxbList7);
 		Map<String, JaxbList<CustomConceptAttribute>> map5 =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x671 =
+		JaxbList<CustomConceptAttribute> jaxbList9 =
 			 new JaxbList<CustomConceptAttribute>();
-		map5.put("HmacMD5", x671);
+		map5.put("foo", jaxbList9);
 		when(gincoCustomAttrIdGenerator.getIdsForCustomConceptAttributes(Mockito.<Map<String, JaxbList<CustomConceptAttribute>>>any(), Mockito.<Map<String, String>>any()))
 			.thenReturn(map5);
 		when(gincoCustomAttrIdGenerator.getIdsForCustomTermAttributes(Mockito.<Map<String, JaxbList<CustomTermAttribute>>>any(), Mockito.<Map<String, String>>any()))
@@ -98,8 +99,8 @@ public class GincoConceptBranchIdGeneratorTest {
 			.thenReturn("1234");
 		Map<String, JaxbList<Alignment>> map6 =
 			 new HashMap<String, JaxbList<Alignment>>();
-		JaxbList<Alignment> x533 = new JaxbList<Alignment>();
-		map6.put("HmacMD5", x533);
+		JaxbList<Alignment> jaxbList11 = new JaxbList<Alignment>();
+		map6.put("foo", jaxbList11);
 		when(gincoAlignmentIdGenerator.getIdsForAlignments(Mockito.<Map<String, JaxbList<Alignment>>>any(), Mockito.<Map<String, String>>any()))
 			.thenReturn(map6);
 		GincoExportedBranch branchToUpdate = new GincoExportedBranch();
@@ -116,11 +117,11 @@ public class GincoConceptBranchIdGeneratorTest {
 		service.resetIdsForExportedBranch(branchToUpdate);
 
 		// assert
-		assertSame(x533, branchToUpdate.getAlignments().get("HmacMD5"));
-		assertSame(x264, branchToUpdate.getConceptNotes().get("HmacMD5"));
-		assertSame(x505, branchToUpdate.getHierarchicalRelationship().get("HmacMD5"));
-		assertSame(x391, branchToUpdate.getTermNotes().get("HmacMD5"));
-		assertSame(x671, branchToUpdate.getConceptAttributes().get("HmacMD5"));
-		assertSame(x753, branchToUpdate.getTermAttributes().get("HmacMD5"));
+		assertSame(jaxbList11, branchToUpdate.getAlignments().get("foo"));
+		assertSame(jaxbList5, branchToUpdate.getConceptNotes().get("foo"));
+		assertSame(jaxbList1, branchToUpdate.getHierarchicalRelationship().get("foo"));
+		assertSame(jaxbList3, branchToUpdate.getTermNotes().get("foo"));
+		assertSame(jaxbList9, branchToUpdate.getConceptAttributes().get("foo"));
+		assertSame(jaxbList7, branchToUpdate.getTermAttributes().get("foo"));
 	}
 }

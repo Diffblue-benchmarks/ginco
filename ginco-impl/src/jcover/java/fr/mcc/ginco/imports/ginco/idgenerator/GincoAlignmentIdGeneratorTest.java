@@ -41,13 +41,9 @@ public class GincoAlignmentIdGeneratorTest {
 			.thenReturn("1234");
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
-		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
-		Alignment alignment1 = new Alignment();
-		alignment1.setSourceConcept(new ThesaurusConcept());
-		list1.add(alignment1);
-		JaxbList<Alignment> x5 = new JaxbList<Alignment>(list1);
-		alignments.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("1234"));
+		JaxbList<Alignment> jaxbList1 = new JaxbList<Alignment>();
+		alignments.put("bar", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("1234"));
 	}
 
 	@Test
@@ -56,8 +52,12 @@ public class GincoAlignmentIdGeneratorTest {
 			.thenReturn("1234");
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
-		JaxbList<Alignment> x5 = new JaxbList<Alignment>();
-		alignments.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("1234"));
+		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
+		Alignment alignment1 = new Alignment();
+		alignment1.setSourceConcept(new ThesaurusConcept());
+		list1.add(alignment1);
+		JaxbList<Alignment> jaxbList1 = new JaxbList<Alignment>(list1);
+		alignments.put("foo", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("1234"));
 	}
 }

@@ -2,6 +2,7 @@ package fr.mcc.ginco.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.Locale;
@@ -22,7 +23,9 @@ class EncodedControlTest {
 	}
 
 	@Test
-	void toResourceName() {
-		assertThat(new EncodedControl("foo").toResourceName("Acme", "Acme"), is("Acme.Acme"));
+	void getFormats() {
+		assertThat(new EncodedControl("foo").getFormats("foo"), hasSize(2));
+		assertThat(new EncodedControl("foo").getFormats("foo").get(0), is("java.class"));
+		assertThat(new EncodedControl("foo").getFormats("foo").get(1), is("java.properties"));
 	}
 }

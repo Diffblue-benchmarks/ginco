@@ -41,13 +41,13 @@ public class HierarchyCommandBuilderTest {
 
 		// arrange
 		Map<String, List<String>> map1 = new HashMap<String, List<String>>();
-		ArrayList<String> x110 = new ArrayList<String>();
-		x110.add("foo");
-		map1.put("bar", x110);
+		ArrayList<String> list1 = new ArrayList<String>();
+		list1.add("foo");
+		map1.put("bar", list1);
 		Map<String, List<String>> map2 = new HashMap<String, List<String>>();
-		ArrayList<String> x101 = new ArrayList<String>();
-		x101.add("foo");
-		map2.put("foo", x101);
+		ArrayList<String> list3 = new ArrayList<String>();
+		list3.add("foo");
+		map2.put("foo", list3);
 		when(mistralStructuresBuilder.buildHierarchyStructure(Mockito.<List<ThesaurusConcept>>any(), Mockito.<Number>any(), Mockito.<String>any()))
 			.thenReturn(map2)
 			.thenReturn(map1);
@@ -69,9 +69,9 @@ public class HierarchyCommandBuilderTest {
 		Map<String, List<String>> map1 = new HashMap<String, List<String>>();
 		map1.put("foo", new ArrayList<String>());
 		Map<String, List<String>> map2 = new HashMap<String, List<String>>();
-		ArrayList<String> x101 = new ArrayList<String>();
-		x101.add("foo");
-		map2.put("foo", x101);
+		ArrayList<String> list3 = new ArrayList<String>();
+		list3.add("foo");
+		map2.put("foo", list3);
 		when(mistralStructuresBuilder.buildHierarchyStructure(Mockito.<List<ThesaurusConcept>>any(), Mockito.<Number>any(), Mockito.<String>any()))
 			.thenReturn(map2)
 			.thenReturn(map1);
@@ -90,9 +90,9 @@ public class HierarchyCommandBuilderTest {
 
 		// arrange
 		Map<String, List<String>> map1 = new HashMap<String, List<String>>();
-		ArrayList<String> x110 = new ArrayList<String>();
-		x110.add("foo");
-		map1.put("foo", x110);
+		ArrayList<String> list1 = new ArrayList<String>();
+		list1.add("foo");
+		map1.put("foo", list1);
 		Map<String, List<String>> map2 = new HashMap<String, List<String>>();
 		map2.put("foo", new ArrayList<String>());
 		when(mistralStructuresBuilder.buildHierarchyStructure(Mockito.<List<ThesaurusConcept>>any(), Mockito.<Number>any(), Mockito.<String>any()))
@@ -111,13 +111,13 @@ public class HierarchyCommandBuilderTest {
 	@Test
 	public void buildHierarchyChangesReturnsEmpty() {
 		Map<String, List<String>> map1 = new HashMap<String, List<String>>();
-		ArrayList<String> x110 = new ArrayList<String>();
-		x110.add("foo");
-		map1.put("foo", x110);
+		ArrayList<String> list1 = new ArrayList<String>();
+		list1.add("foo");
+		map1.put("foo", list1);
 		Map<String, List<String>> map2 = new HashMap<String, List<String>>();
-		ArrayList<String> x101 = new ArrayList<String>();
-		x101.add("foo");
-		map2.put("foo", x101);
+		ArrayList<String> list3 = new ArrayList<String>();
+		list3.add("foo");
+		map2.put("foo", list3);
 		when(mistralStructuresBuilder.buildHierarchyStructure(Mockito.<List<ThesaurusConcept>>any(), Mockito.<Number>any(), Mockito.<String>any()))
 			.thenReturn(map2)
 			.thenReturn(map1);

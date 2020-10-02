@@ -43,16 +43,10 @@ public class GincoCustomAttributesIdGeneratorTest {
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		ArrayList<CustomConceptAttribute> list1 =
-			 new ArrayList<CustomConceptAttribute>();
-		CustomConceptAttribute customConceptAttribute1 =
-			 new CustomConceptAttribute();
-		customConceptAttribute1.setEntity(new ThesaurusConcept());
-		list1.add(customConceptAttribute1);
-		JaxbList<CustomConceptAttribute> x5 =
-			 new JaxbList<CustomConceptAttribute>(list1);
-		customConceptAttributes.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("1234"));
+		JaxbList<CustomConceptAttribute> jaxbList1 =
+			 new JaxbList<CustomConceptAttribute>();
+		customConceptAttributes.put("bar", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("1234"));
 	}
 
 	@Test
@@ -61,9 +55,16 @@ public class GincoCustomAttributesIdGeneratorTest {
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x5 = new JaxbList<CustomConceptAttribute>();
-		customConceptAttributes.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("1234"));
+		ArrayList<CustomConceptAttribute> list1 =
+			 new ArrayList<CustomConceptAttribute>();
+		CustomConceptAttribute customConceptAttribute1 =
+			 new CustomConceptAttribute();
+		customConceptAttribute1.setEntity(new ThesaurusConcept());
+		list1.add(customConceptAttribute1);
+		JaxbList<CustomConceptAttribute> jaxbList1 =
+			 new JaxbList<CustomConceptAttribute>(list1);
+		customConceptAttributes.put("foo", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("1234"));
 	}
 
 	@Test
@@ -72,13 +73,10 @@ public class GincoCustomAttributesIdGeneratorTest {
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		ArrayList<CustomTermAttribute> list1 = new ArrayList<CustomTermAttribute>();
-		CustomTermAttribute customTermAttribute1 = new CustomTermAttribute();
-		customTermAttribute1.setEntity(new ThesaurusTerm());
-		list1.add(customTermAttribute1);
-		JaxbList<CustomTermAttribute> x30 = new JaxbList<CustomTermAttribute>(list1);
-		customTermAttributes.put("HmacMD5", x30);
-		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("1234"));
+		JaxbList<CustomTermAttribute> jaxbList1 =
+			 new JaxbList<CustomTermAttribute>();
+		customTermAttributes.put("bar", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("1234"));
 	}
 
 	@Test
@@ -87,8 +85,13 @@ public class GincoCustomAttributesIdGeneratorTest {
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		JaxbList<CustomTermAttribute> x30 = new JaxbList<CustomTermAttribute>();
-		customTermAttributes.put("HmacMD5", x30);
-		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("1234"));
+		ArrayList<CustomTermAttribute> list1 = new ArrayList<CustomTermAttribute>();
+		CustomTermAttribute customTermAttribute1 = new CustomTermAttribute();
+		customTermAttribute1.setEntity(new ThesaurusTerm());
+		list1.add(customTermAttribute1);
+		JaxbList<CustomTermAttribute> jaxbList1 =
+			 new JaxbList<CustomTermAttribute>(list1);
+		customTermAttributes.put("foo", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("1234"));
 	}
 }

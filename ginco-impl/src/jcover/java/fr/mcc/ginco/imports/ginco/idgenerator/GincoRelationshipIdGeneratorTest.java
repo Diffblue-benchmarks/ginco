@@ -40,10 +40,10 @@ public class GincoRelationshipIdGeneratorTest {
 			.thenReturn("1234");
 		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relations =
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		JaxbList<ConceptHierarchicalRelationship> x5 =
+		JaxbList<ConceptHierarchicalRelationship> jaxbList1 =
 			 new JaxbList<ConceptHierarchicalRelationship>();
-		relations.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("1234"));
+		relations.put("bar", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("1234"));
 	}
 
 	@Test
@@ -60,9 +60,9 @@ public class GincoRelationshipIdGeneratorTest {
 			 new ConceptHierarchicalRelationship();
 		conceptHierarchicalRelationship1.setIdentifier(new ConceptHierarchicalRelationship.Id());
 		list1.add(conceptHierarchicalRelationship1);
-		JaxbList<ConceptHierarchicalRelationship> x5 =
+		JaxbList<ConceptHierarchicalRelationship> jaxbList1 =
 			 new JaxbList<ConceptHierarchicalRelationship>(list1);
-		relations.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("1234"));
+		relations.put("foo", jaxbList1);
+		assertSame(jaxbList1, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("1234"));
 	}
 }

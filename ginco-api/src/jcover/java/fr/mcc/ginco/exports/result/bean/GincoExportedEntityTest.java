@@ -80,9 +80,9 @@ class GincoExportedEntityTest {
 		gincoExportedEntity.setConceptAttributeTypes(conceptAttributeTypes);
 		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x289 =
+		JaxbList<CustomConceptAttribute> jaxbList1 =
 			 new JaxbList<CustomConceptAttribute>();
-		conceptAttributes.put("HmacMD5", x289);
+		conceptAttributes.put("foo", jaxbList1);
 		gincoExportedEntity.setConceptAttributes(conceptAttributes);
 		ArrayList<ThesaurusConcept> concepts = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
@@ -170,8 +170,9 @@ class GincoExportedEntityTest {
 		gincoExportedEntity.setTermAttributeTypes(termAttributeTypes);
 		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		JaxbList<CustomTermAttribute> x390 = new JaxbList<CustomTermAttribute>();
-		termAttributes.put("HmacMD5", x390);
+		JaxbList<CustomTermAttribute> jaxbList3 =
+			 new JaxbList<CustomTermAttribute>();
+		termAttributes.put("foo", jaxbList3);
 		gincoExportedEntity.setTermAttributes(termAttributes);
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
@@ -264,12 +265,12 @@ class GincoExportedEntityTest {
 		gincoExportedEntity.setTerms(terms);
 		assertThat(gincoExportedEntity.getConceptAttributeTypes().size(), is(1));
 		assertThat(gincoExportedEntity.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedEntity.getConceptAttributes().get("HmacMD5"), sameInstance(x289));
+		assertThat(gincoExportedEntity.getConceptAttributes().get("foo"), sameInstance(jaxbList1));
 		assertThat(gincoExportedEntity.getConcepts().size(), is(1));
 		assertThat(gincoExportedEntity.getConcepts().get(0), sameInstance(thesaurusConcept));
 		assertThat(gincoExportedEntity.getTermAttributeTypes().size(), is(1));
 		assertThat(gincoExportedEntity.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedEntity.getTermAttributes().get("HmacMD5"), sameInstance(x390));
+		assertThat(gincoExportedEntity.getTermAttributes().get("foo"), sameInstance(jaxbList3));
 		assertThat(gincoExportedEntity.getTerms().size(), is(1));
 		assertThat(gincoExportedEntity.getTerms().get(0), sameInstance(thesaurusTerm));
 	}

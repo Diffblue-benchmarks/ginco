@@ -395,12 +395,6 @@ class AlignmentViewConverterTest {
 		thesaurus3.setContributor("foo");
 		thesaurus3.setCoverage("foo");
 		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator5 = new ThesaurusOrganization();
-		creator5.setEmail("info@diffblue.com");
-		creator5.setHomepage("foo");
-		creator5.setIdentifier(1);
-		creator5.setName("Acme");
-		thesaurus3.setCreator(creator5);
 		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus3.setDefaultTopConcept(false);
 		thesaurus3.setDescription("some text");

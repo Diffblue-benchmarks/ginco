@@ -49,14 +49,14 @@ class GincoExportedThesaurusTest {
 		GincoExportedThesaurus gincoExportedThesaurus = new GincoExportedThesaurus();
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
-		JaxbList<Alignment> x844 = new JaxbList<Alignment>();
-		alignments.put("HmacMD5", x844);
+		JaxbList<Alignment> jaxbList1 = new JaxbList<Alignment>();
+		alignments.put("foo", jaxbList1);
 		gincoExportedThesaurus.setAlignments(alignments);
 		HashMap<String, JaxbList<AssociativeRelationship>> associativeRelationship1 =
 			 new HashMap<String, JaxbList<AssociativeRelationship>>();
-		JaxbList<AssociativeRelationship> x879 =
+		JaxbList<AssociativeRelationship> jaxbList3 =
 			 new JaxbList<AssociativeRelationship>();
-		associativeRelationship1.put("HmacMD5", x879);
+		associativeRelationship1.put("foo", jaxbList3);
 		gincoExportedThesaurus.setAssociativeRelationship(associativeRelationship1);
 		ArrayList<SplitNonPreferredTerm> complexConcepts =
 			 new ArrayList<SplitNonPreferredTerm>();
@@ -109,8 +109,8 @@ class GincoExportedThesaurusTest {
 		gincoExportedThesaurus.setComplexConcepts(complexConcepts);
 		HashMap<String, JaxbList<NodeLabel>> conceptArrayLabels =
 			 new HashMap<String, JaxbList<NodeLabel>>();
-		JaxbList<NodeLabel> x944 = new JaxbList<NodeLabel>();
-		conceptArrayLabels.put("HmacMD5", x944);
+		JaxbList<NodeLabel> jaxbList5 = new JaxbList<NodeLabel>();
+		conceptArrayLabels.put("foo", jaxbList5);
 		gincoExportedThesaurus.setConceptArrayLabels(conceptArrayLabels);
 		ArrayList<ThesaurusArray> conceptArrays1 = new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray3 = new ThesaurusArray();
@@ -238,9 +238,9 @@ class GincoExportedThesaurusTest {
 		gincoExportedThesaurus.setConceptArrays(conceptArrays1);
 		HashMap<String, JaxbList<ThesaurusConceptGroupLabel>> conceptGroupLabels =
 			 new HashMap<String, JaxbList<ThesaurusConceptGroupLabel>>();
-		JaxbList<ThesaurusConceptGroupLabel> x1094 =
+		JaxbList<ThesaurusConceptGroupLabel> jaxbList7 =
 			 new JaxbList<ThesaurusConceptGroupLabel>();
-		conceptGroupLabels.put("HmacMD5", x1094);
+		conceptGroupLabels.put("foo", jaxbList7);
 		gincoExportedThesaurus.setConceptGroupLabels(conceptGroupLabels);
 		ArrayList<ThesaurusConceptGroup> conceptGroups =
 			 new ArrayList<ThesaurusConceptGroup>();
@@ -382,19 +382,19 @@ class GincoExportedThesaurusTest {
 		gincoExportedThesaurus.setConceptGroups(conceptGroups);
 		HashMap<String, JaxbList<Note>> conceptNotes =
 			 new HashMap<String, JaxbList<Note>>();
-		JaxbList<Note> x1253 = new JaxbList<Note>();
-		conceptNotes.put("HmacMD5", x1253);
+		JaxbList<Note> jaxbList9 = new JaxbList<Note>();
+		conceptNotes.put("foo", jaxbList9);
 		gincoExportedThesaurus.setConceptNotes(conceptNotes);
 		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> parentConceptRelationship =
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		JaxbList<ConceptHierarchicalRelationship> x1284 =
+		JaxbList<ConceptHierarchicalRelationship> jaxbList11 =
 			 new JaxbList<ConceptHierarchicalRelationship>();
-		parentConceptRelationship.put("HmacMD5", x1284);
+		parentConceptRelationship.put("foo", jaxbList11);
 		gincoExportedThesaurus.setHierarchicalRelationship(parentConceptRelationship);
 		HashMap<String, JaxbList<Note>> termNotes =
 			 new HashMap<String, JaxbList<Note>>();
-		JaxbList<Note> x1297 = new JaxbList<Note>();
-		termNotes.put("HmacMD5", x1297);
+		JaxbList<Note> jaxbList13 = new JaxbList<Note>();
+		termNotes.put("foo", jaxbList13);
 		gincoExportedThesaurus.setTermNotes(termNotes);
 		Thesaurus thesaurus12 = new Thesaurus();
 		thesaurus12.setArchived(false);
@@ -510,9 +510,9 @@ class GincoExportedThesaurusTest {
 		gincoExportedThesaurus.setConceptAttributeTypes(conceptAttributeTypes);
 		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x1473 =
+		JaxbList<CustomConceptAttribute> jaxbList15 =
 			 new JaxbList<CustomConceptAttribute>();
-		conceptAttributes.put("HmacMD5", x1473);
+		conceptAttributes.put("foo", jaxbList15);
 		gincoExportedThesaurus.setConceptAttributes(conceptAttributes);
 		ArrayList<ThesaurusConcept> concepts7 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
@@ -600,8 +600,9 @@ class GincoExportedThesaurusTest {
 		gincoExportedThesaurus.setTermAttributeTypes(termAttributeTypes);
 		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		JaxbList<CustomTermAttribute> x1574 = new JaxbList<CustomTermAttribute>();
-		termAttributes.put("HmacMD5", x1574);
+		JaxbList<CustomTermAttribute> jaxbList17 =
+			 new JaxbList<CustomTermAttribute>();
+		termAttributes.put("foo", jaxbList17);
 		gincoExportedThesaurus.setTermAttributes(termAttributes);
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
@@ -692,30 +693,30 @@ class GincoExportedThesaurusTest {
 		thesaurusTerm.setThesaurus(thesaurus18);
 		terms.add(thesaurusTerm);
 		gincoExportedThesaurus.setTerms(terms);
-		assertThat(gincoExportedThesaurus.getAlignments().get("HmacMD5"), sameInstance(x844));
-		assertThat(gincoExportedThesaurus.getAssociativeRelationship().get("HmacMD5"), sameInstance(x879));
+		assertThat(gincoExportedThesaurus.getAlignments().get("foo"), sameInstance(jaxbList1));
+		assertThat(gincoExportedThesaurus.getAssociativeRelationship().get("foo"), sameInstance(jaxbList3));
 		assertThat(gincoExportedThesaurus.getComplexConcepts().size(), is(1));
 		assertThat(gincoExportedThesaurus.getComplexConcepts().get(0), sameInstance(splitNonPreferredTerm));
-		assertThat(gincoExportedThesaurus.getConceptArrayLabels().get("HmacMD5"), sameInstance(x944));
+		assertThat(gincoExportedThesaurus.getConceptArrayLabels().get("foo"), sameInstance(jaxbList5));
 		assertThat(gincoExportedThesaurus.getConceptArrays().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConceptArrays().get(0), sameInstance(thesaurusArray3));
-		assertThat(gincoExportedThesaurus.getConceptGroupLabels().get("HmacMD5"), sameInstance(x1094));
+		assertThat(gincoExportedThesaurus.getConceptGroupLabels().get("foo"), sameInstance(jaxbList7));
 		assertThat(gincoExportedThesaurus.getConceptGroups().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConceptGroups().get(0), sameInstance(thesaurusConceptGroup));
-		assertThat(gincoExportedThesaurus.getConceptNotes().get("HmacMD5"), sameInstance(x1253));
-		assertThat(gincoExportedThesaurus.getHierarchicalRelationship().get("HmacMD5"), sameInstance(x1284));
-		assertThat(gincoExportedThesaurus.getTermNotes().get("HmacMD5"), sameInstance(x1297));
+		assertThat(gincoExportedThesaurus.getConceptNotes().get("foo"), sameInstance(jaxbList9));
+		assertThat(gincoExportedThesaurus.getHierarchicalRelationship().get("foo"), sameInstance(jaxbList11));
+		assertThat(gincoExportedThesaurus.getTermNotes().get("foo"), sameInstance(jaxbList13));
 		assertThat(gincoExportedThesaurus.getThesaurus(), sameInstance(thesaurus12));
 		assertThat(gincoExportedThesaurus.getThesaurusVersions().size(), is(1));
 		assertThat(gincoExportedThesaurus.getThesaurusVersions().get(0), sameInstance(thesaurusVersionHistory));
 		assertThat(gincoExportedThesaurus.getConceptAttributeTypes().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedThesaurus.getConceptAttributes().get("HmacMD5"), sameInstance(x1473));
+		assertThat(gincoExportedThesaurus.getConceptAttributes().get("foo"), sameInstance(jaxbList15));
 		assertThat(gincoExportedThesaurus.getConcepts().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConcepts().get(0), sameInstance(thesaurusConcept));
 		assertThat(gincoExportedThesaurus.getTermAttributeTypes().size(), is(1));
 		assertThat(gincoExportedThesaurus.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedThesaurus.getTermAttributes().get("HmacMD5"), sameInstance(x1574));
+		assertThat(gincoExportedThesaurus.getTermAttributes().get("foo"), sameInstance(jaxbList17));
 		assertThat(gincoExportedThesaurus.getTerms().size(), is(1));
 		assertThat(gincoExportedThesaurus.getTerms().get(0), sameInstance(thesaurusTerm));
 	}

@@ -56,10 +56,10 @@ public class GincoTermExporterTest {
 	public void addExportedTerms1() {
 		ArrayList<CustomTermAttribute> list1 = new ArrayList<CustomTermAttribute>();
 		list1.add(new CustomTermAttribute());
-		JaxbList<CustomTermAttribute> jaxbList =
+		JaxbList<CustomTermAttribute> jaxbList1 =
 			 new JaxbList<CustomTermAttribute>(list1);
 		when(gincoAttributesExporter.getExportedTermAttributes(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(jaxbList);
+			.thenReturn(jaxbList1);
 		GincoExportedEntity thesaurusToExport = new GincoExportedEntity();
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		terms.add(new ThesaurusTerm());
@@ -67,7 +67,7 @@ public class GincoTermExporterTest {
 		ThesaurusTerm term = new ThesaurusTerm();
 		term.setIdentifier("data");
 		assertSame(thesaurusToExport, service.addExportedTerms(thesaurusToExport, term));
-		assertSame(jaxbList, thesaurusToExport.getTermAttributes().get("data"));
+		assertSame(jaxbList1, thesaurusToExport.getTermAttributes().get("data"));
 		assertEquals(2, thesaurusToExport.getTerms().size());
 		assertSame(term, thesaurusToExport.getTerms().get(1));
 	}

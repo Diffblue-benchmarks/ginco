@@ -390,7 +390,6 @@ class ThesaurusNoteRestServiceTest {
 	@Test
 	void getNoteParentEntity1() throws fr.mcc.ginco.exceptions.TechnicalException, java.io.IOException {
 		Note note = new Note();
-		note.setConcept(null);
 		ThesaurusTerm termId = new ThesaurusTerm();
 		termId.setIdentifier("data");
 		note.setTerm(termId);

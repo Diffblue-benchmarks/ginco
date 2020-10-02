@@ -344,7 +344,7 @@ public class ThesaurusTermServiceImplTest {
 			.thenReturn("foo");
 		HashMap<String, Language> termLexicalValues =
 			 new HashMap<String, Language>();
-		termLexicalValues.put("HmacMD5", new Language());
+		termLexicalValues.put("foo", new Language());
 
 		// act
 		List<ThesaurusTerm> result =

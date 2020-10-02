@@ -42,9 +42,9 @@ public class TermCommandBuilderTest {
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, ThesaurusTerm>());
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
-		thesaurusTerm1.setLexicalValue("value");
-		previousTerms.add(thesaurusTerm1);
+		ThesaurusTerm thesaurusTerm3 = new ThesaurusTerm();
+		thesaurusTerm3.setLexicalValue("value");
+		previousTerms.add(thesaurusTerm3);
 
 		// act
 		List<CommandLine> result =
@@ -73,9 +73,9 @@ public class TermCommandBuilderTest {
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, ThesaurusTerm>());
 		ArrayList<ThesaurusTerm> currentTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm3 = new ThesaurusTerm();
-		thesaurusTerm3.setPrefered(false);
-		currentTerms.add(thesaurusTerm3);
+		ThesaurusTerm thesaurusTerm5 = new ThesaurusTerm();
+		thesaurusTerm5.setPrefered(false);
+		currentTerms.add(thesaurusTerm5);
 		assertTrue((service.buildAddedPrefTermsLines(new ArrayList<ThesaurusTerm>(), currentTerms)).isEmpty());
 	}
 }

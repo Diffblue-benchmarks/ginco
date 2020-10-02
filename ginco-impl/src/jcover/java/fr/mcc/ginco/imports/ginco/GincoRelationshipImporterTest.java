@@ -77,7 +77,7 @@ public class GincoRelationshipImporterTest {
 			 new ConceptHierarchicalRelationship();
 		conceptHierarchicalRelationship2.setIdentifier(new ConceptHierarchicalRelationship.Id());
 		list2.add(conceptHierarchicalRelationship2);
-		relationsToImport.put("HmacMD5", new JaxbList<ConceptHierarchicalRelationship>(list2));
+		relationsToImport.put("foo", new JaxbList<ConceptHierarchicalRelationship>(list2));
 
 		// act
 		List<ThesaurusConcept> result =
