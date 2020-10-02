@@ -1,10 +1,8 @@
 package fr.mcc.ginco.solr;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Note;
-import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
 
 import java.util.ArrayList;
@@ -41,7 +39,7 @@ public class NoteIndexerServiceImplTest {
 	}
 
 	@Test
-	public void addNote1() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
+	public void addNote() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
 		when(solrServer.add(Mockito.<SolrInputDocument>any()))
 			.thenReturn(new UpdateResponse());
 		when(solrServer.commit())
@@ -49,21 +47,7 @@ public class NoteIndexerServiceImplTest {
 		when(noteSolrConverter.convertSolrNote(Mockito.<Note>any()))
 			.thenReturn(new SolrInputDocument());
 		Note note = new Note();
-		note.setConcept(new ThesaurusConcept());
-		service.addNote(note);
-	}
-
-	@Test
-	public void addNote2() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
-		when(solrServer.add(Mockito.<SolrInputDocument>any()))
-			.thenReturn(new UpdateResponse());
-		when(solrServer.commit())
-			.thenReturn(new UpdateResponse());
-		when(noteSolrConverter.convertSolrNote(Mockito.<Note>any()))
-			.thenReturn(new SolrInputDocument());
-		Note note = new Note();
-		ThesaurusTerm termId = mock(ThesaurusTerm.class);
-		note.setTerm(termId);
+		note.setTerm(new ThesaurusTerm());
 		service.addNote(note);
 	}
 

@@ -48,13 +48,10 @@ public class SKOSAssociativeRelationshipExporterTest {
 			.thenReturn(new HashSet<ThesaurusConcept>());
 		when(associativeRelationshipService.getAssociatedConceptsId(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(new ArrayList<String>());
-		ThesaurusConcept concept = mock(ThesaurusConcept.class);
-		when(concept.getIdentifier())
-			.thenReturn("data");
 		Resource resource = mock(Resource.class);
 		Model defaultModel = mock(Model.class);
 		when(defaultModel.createResource(Mockito.<String>any(), Mockito.<Resource>any()))
 			.thenReturn(resource);
-		assertSame(defaultModel, service.exportAssociativeRelationships(concept, defaultModel));
+		assertSame(defaultModel, service.exportAssociativeRelationships(new ThesaurusConcept(), defaultModel));
 	}
 }

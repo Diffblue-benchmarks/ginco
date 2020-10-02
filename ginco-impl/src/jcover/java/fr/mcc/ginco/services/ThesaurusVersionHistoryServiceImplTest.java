@@ -195,40 +195,6 @@ public class ThesaurusVersionHistoryServiceImplTest {
 	}
 
 	@Test
-	public void publishThesaurusThesaurusIsNull() throws java.text.ParseException {
-
-		// arrange
-		ThesaurusVersionHistory thesaurusVersionHistory1 =
-			 new ThesaurusVersionHistory();
-		Date date3 =
-			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusVersionHistory1.setDate(date3);
-		thesaurusVersionHistory1.setIdentifier("data");
-		thesaurusVersionHistory1.setStatus(1);
-		Thesaurus thesaurus1 = new Thesaurus();
-		thesaurusVersionHistory1.setThesaurus(thesaurus1);
-		thesaurusVersionHistory1.setThisVersion(false);
-		thesaurusVersionHistory1.setUserId("root");
-		thesaurusVersionHistory1.setVersionNote("1.0");
-		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
-			.thenReturn(thesaurusVersionHistory1);
-		when(generatorService.generate(Mockito.<Class>any()))
-			.thenReturn("foo");
-
-		// act
-		ThesaurusVersionHistory result = service.publishThesaurus(null, "root");
-
-		// assert
-		assertSame(date3, result.getDate());
-		assertEquals("data", result.getIdentifier());
-		assertEquals(1, (int) result.getStatus());
-		assertSame(thesaurus1, result.getThesaurus());
-		assertFalse(result.getThisVersion());
-		assertEquals("root", result.getUserId());
-		assertEquals("1.0", result.getVersionNote());
-	}
-
-	@Test
 	public void createOrUpdateVersion() throws java.text.ParseException {
 
 		// arrange

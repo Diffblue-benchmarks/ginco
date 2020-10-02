@@ -5,9 +5,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusFormat;
 import fr.mcc.ginco.beans.ThesaurusOrganization;
 import fr.mcc.ginco.beans.ThesaurusType;
 import fr.mcc.ginco.beans.ThesaurusVersionHistory;
@@ -17,6 +20,7 @@ import fr.mcc.ginco.exports.IGincoThesaurusExportService;
 import fr.mcc.ginco.exports.ISKOSExportService;
 import fr.mcc.ginco.helpers.ThesaurusHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -67,12 +71,11 @@ public class ThesaurusServiceImplTest {
 		thesaurus.setArchived(false);
 		thesaurus.setContributor("foo");
 		thesaurus.setCoverage("foo");
-		Date created =
-			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurus.setCreated(created);
 		ThesaurusOrganization creator = new ThesaurusOrganization();
 		thesaurus.setCreator(creator);
-		Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurus.setDate(date);
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
@@ -165,6 +168,100 @@ public class ThesaurusServiceImplTest {
 	}
 
 	@Test
+	public void updateThesaurus() throws fr.mcc.ginco.exceptions.TechnicalException {
+		List<ThesaurusVersionHistory> list =
+			 new ArrayList<ThesaurusVersionHistory>();
+		list.add(new ThesaurusVersionHistory());
+		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
+			.thenReturn(list);
+		when(thesaurusDAO.update(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+		Thesaurus object = new Thesaurus();
+		assertSame(object, service.updateThesaurus(object));
+	}
+
+	@Test
+	public void updateThesaurusDate() throws java.text.ParseException, fr.mcc.ginco.exceptions.TechnicalException {
+		List<ThesaurusVersionHistory> list =
+			 new ArrayList<ThesaurusVersionHistory>();
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 new ThesaurusVersionHistory();
+		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusVersionHistory.setIdentifier("data");
+		thesaurusVersionHistory.setStatus(1);
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
+		thesaurusVersionHistory.setThesaurus(thesaurus1);
+		thesaurusVersionHistory.setThisVersion(false);
+		thesaurusVersionHistory.setUserId("root");
+		thesaurusVersionHistory.setVersionNote("1.0");
+		list.add(thesaurusVersionHistory);
+		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
+			.thenReturn(list);
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setArchived(false);
+		thesaurus2.setContributor("foo");
+		thesaurus2.setCoverage("foo");
+		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator2 = new ThesaurusOrganization();
+		creator2.setEmail("info@diffblue.com");
+		creator2.setHomepage("foo");
+		creator2.setIdentifier(1);
+		creator2.setName("Acme");
+		thesaurus2.setCreator(creator2);
+		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus2.setDefaultTopConcept(false);
+		thesaurus2.setDescription("some text");
+		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus2.setIdentifier("data");
+		thesaurus2.setLang(new HashSet<Language>());
+		thesaurus2.setPolyHierarchical(false);
+		thesaurus2.setPublisher("foo");
+		thesaurus2.setRelation("DE");
+		thesaurus2.setRights("foo");
+		thesaurus2.setSource("foo");
+		thesaurus2.setSubject("foo");
+		thesaurus2.setTitle("Mr");
+		ThesaurusType type2 = new ThesaurusType();
+		type2.setIdentifier(1);
+		type2.setLabel("label");
+		thesaurus2.setType(type2);
+		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
+		when(thesaurusDAO.update(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurus2);
+		Thesaurus object = new Thesaurus();
+		object.setArchived(false);
+		object.setContributor("foo");
+		object.setCoverage("foo");
+		object.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator3 = new ThesaurusOrganization();
+		creator3.setEmail("info@diffblue.com");
+		creator3.setHomepage("foo");
+		creator3.setIdentifier(1);
+		creator3.setName("Acme");
+		object.setCreator(creator3);
+		object.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		object.setDefaultTopConcept(false);
+		object.setDescription("some text");
+		object.setFormat(new HashSet<ThesaurusFormat>());
+		object.setIdentifier("data");
+		object.setLang(new HashSet<Language>());
+		object.setPolyHierarchical(false);
+		object.setPublisher("foo");
+		object.setRelation("DE");
+		object.setRights("foo");
+		object.setSource("foo");
+		object.setSubject("foo");
+		object.setTitle("Mr");
+		ThesaurusType type3 = new ThesaurusType();
+		type3.setIdentifier(1);
+		type3.setLabel("label");
+		object.setType(type3);
+		object.setVersions(new HashSet<ThesaurusVersionHistory>());
+		assertSame(object, service.updateThesaurusDate(object));
+		assertEquals(true, Math.abs(object.getDate().getTime()-new Date().getTime())<=10_000L);
+	}
+
+	@Test
 	public void getThesaurusLanguagesReturnsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
 		when(thesaurusDAO.getById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
@@ -179,13 +276,11 @@ public class ThesaurusServiceImplTest {
 		thesaurus.setArchived(false);
 		thesaurus.setContributor("foo");
 		thesaurus.setCoverage("foo");
-		Date created1 =
-			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurus.setCreated(created1);
 		ThesaurusOrganization creator1 = new ThesaurusOrganization();
 		thesaurus.setCreator(creator1);
-		Date date1 =
-			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurus.setDate(date1);
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");

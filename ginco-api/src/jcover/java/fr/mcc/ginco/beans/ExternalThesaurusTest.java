@@ -30,7 +30,7 @@ class ExternalThesaurusTest {
 
 	@Test
 	void testEquals() {
-		assertThat(new ExternalThesaurus().equals("foo"), is(false));
+		assertThat(new ExternalThesaurus().equals(new Object()), is(false));
 		assertThat(new ExternalThesaurus().equals(null), is(false));
 	}
 }

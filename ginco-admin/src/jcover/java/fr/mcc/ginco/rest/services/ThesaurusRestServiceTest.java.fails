@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
@@ -240,7 +239,7 @@ class ThesaurusRestServiceTest {
 	}
 
 	@Test
-	void updateVocabulary1() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void updateVocabulary() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
 		ThesaurusView thesaurusView = new ThesaurusView();
@@ -313,80 +312,6 @@ class ThesaurusRestServiceTest {
 	}
 
 	@Test
-	void updateVocabulary2() throws fr.mcc.ginco.exceptions.TechnicalException {
-
-		// arrange
-		ThesaurusView thesaurusView = new ThesaurusView();
-		thesaurusView.setArchived(false);
-		thesaurusView.setCanBeDeleted(false);
-		thesaurusView.setContributor("foo");
-		thesaurusView.setCoverage("foo");
-		thesaurusView.setCreated("foo");
-		thesaurusView.setCreatorEmail("info@diffblue.com");
-		thesaurusView.setCreatorHomepage("+");
-		thesaurusView.setCreatorName("Acme");
-		thesaurusView.setDate("1999-12-31");
-		thesaurusView.setDefaultTopConcept(false);
-		thesaurusView.setDescription("some text");
-		ArrayList<Integer> formats1 = new ArrayList<Integer>();
-		formats1.add(1);
-		thesaurusView.setFormats(formats1);
-		thesaurusView.setId("1234");
-		ArrayList<String> lang1 = new ArrayList<String>();
-		lang1.add("foo");
-		thesaurusView.setLanguages(lang1);
-		thesaurusView.setPolyHierarchical(false);
-		thesaurusView.setPublisher("foo");
-		thesaurusView.setRelation("DE");
-		thesaurusView.setRights("foo");
-		thesaurusView.setSource("foo");
-		thesaurusView.setSubject("foo");
-		thesaurusView.setTitle("Mr");
-		thesaurusView.setType(1);
-		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
-			.thenReturn(thesaurusView);
-		when(thesaurusViewConverter.convert(Mockito.<ThesaurusView>any()))
-			.thenReturn(new Thesaurus());
-		Thesaurus thesaurus3 = new Thesaurus();
-		thesaurus3.setTitle("bar");
-		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(thesaurus3);
-		when(thesaurusService.updateThesaurus(Mockito.<Thesaurus>any()))
-			.thenReturn(new Thesaurus());
-
-		// act
-		ThesaurusView result = service.updateVocabulary(new ThesaurusView());
-
-		// assert
-		assertThat(result.getArchived(), is(false));
-		assertThat(result.getCanBeDeleted(), is(false));
-		assertThat(result.getContributor(), is("foo"));
-		assertThat(result.getCoverage(), is("foo"));
-		assertThat(result.getCreated(), is("foo"));
-		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
-		assertThat(result.getCreatorHomepage(), is("+"));
-		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(result.getDate(), is("1999-12-31"));
-		assertThat(result.getDefaultTopConcept(), is(false));
-		assertThat(result.getDescription(), is("some text"));
-		assertThat(result.getFormats(), hasSize(1));
-		assertThat(result.getFormats().get(0), is(1));
-		assertThat(result.getId(), is("1234"));
-		assertThat(result.getLanguages(), hasSize(1));
-		assertThat(result.getLanguages().get(0), is("foo"));
-		assertThat(result.getPolyHierarchical(), is(false));
-		assertThat(result.getPublisher(), is("foo"));
-		assertThat(result.getRelation(), is("DE"));
-		assertThat(result.getRights(), is("foo"));
-		assertThat(result.getSource(), is("foo"));
-		assertThat(result.getSubject(), is("foo"));
-		assertThat(result.getThesaurusId(), is("1234"));
-		assertThat(result.getTitle(), is("Mr"));
-		assertThat(result.getType(), is(1));
-		Mockito.verify(thesaurusIndexerService).indexThesaurus(ArgumentMatchers.<Thesaurus>any());
-	}
-
-	@Test
 	void destroyVocabulary() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
@@ -396,10 +321,9 @@ class ThesaurusRestServiceTest {
 			.thenReturn(thesaurus1);
 		when(thesaurusService.destroyThesaurus(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
-		ThesaurusView thesaurusViewJAXBElement = mock(ThesaurusView.class);
 
 		// act
-		service.destroyVocabulary(thesaurusViewJAXBElement);
+		service.destroyVocabulary(new ThesaurusView());
 
 		// assert
 		Mockito.verify(thesaurusIndexerService).removeThesaurusIndex(ArgumentMatchers.eq("data"));

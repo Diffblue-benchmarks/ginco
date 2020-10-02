@@ -135,31 +135,6 @@ class SuggestionRestServiceTest {
 	}
 
 	@Test
-	void createSuggestionsConceptIdIsEmpty() {
-
-		// arrange
-		SuggestionView suggestionView1 = new SuggestionView();
-		when(suggestionViewConverter.convert(Mockito.<Suggestion>any()))
-			.thenReturn(suggestionView1);
-		when(suggestionViewConverter.convert(Mockito.<SuggestionView>any()))
-			.thenReturn(new Suggestion());
-		when(suggestionService.createOrUpdateSuggestion(Mockito.<Suggestion>any()))
-			.thenReturn(new Suggestion());
-		ArrayList<SuggestionView> suggestionViews = new ArrayList<SuggestionView>();
-		suggestionViews.add(new SuggestionView());
-
-		// act
-		ExtJsonFormLoadData<List<SuggestionView>> result =
-			 service.createSuggestions(suggestionViews, "", "1234");
-
-		// assert
-		assertThat(result.getData().size(), is(1));
-		assertThat(result.getData().get(0), sameInstance(suggestionView1));
-		assertThat(result.getTotal(), is(1L));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
 	void destroySuggestions() {
 		when(suggestionViewConverter.convert(Mockito.<SuggestionView>any()))
 			.thenReturn(new Suggestion());

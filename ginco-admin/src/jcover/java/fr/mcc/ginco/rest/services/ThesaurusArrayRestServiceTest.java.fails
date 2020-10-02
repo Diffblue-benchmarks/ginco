@@ -5,8 +5,10 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.NodeLabel;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusArrayConcept;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusArrayConceptView;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusArrayView;
@@ -124,25 +126,65 @@ class ThesaurusArrayRestServiceTest {
 	}
 
 	@Test
-	void getAllConceptArraysByThesaurusIdExcludedConceptArrayIdIsEmpty() {
+	void updateThesaurusArray() {
 
 		// arrange
-		List<ThesaurusArrayView> list1 = new ArrayList<ThesaurusArrayView>();
-		when(thesaurusArrayViewConverter.convert(Mockito.<List<ThesaurusArray>>any()))
-			.thenReturn(list1);
-		List<ThesaurusArray> list2 = new ArrayList<ThesaurusArray>();
-		list2.add(new ThesaurusArray());
-		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+		ThesaurusArrayView thesaurusArrayView = new ThesaurusArrayView();
+		ArrayList<ThesaurusArrayConceptView> concepts1 =
+			 new ArrayList<ThesaurusArrayConceptView>();
+		ThesaurusArrayConceptView thesaurusArrayConceptView1 =
+			 new ThesaurusArrayConceptView();
+		concepts1.add(thesaurusArrayConceptView1);
+		thesaurusArrayView.setConcepts(concepts1);
+		thesaurusArrayView.setCreated("foo");
+		thesaurusArrayView.setIdentifier("data");
+		thesaurusArrayView.setLabel("label");
+		thesaurusArrayView.setLanguage("foo");
+		thesaurusArrayView.setModified("foo");
+		thesaurusArrayView.setNodeLabelId(1);
+		thesaurusArrayView.setOrder(false);
+		thesaurusArrayView.setParentArrayId("1234");
+		thesaurusArrayView.setParentArrayLabel("label");
+		thesaurusArrayView.setSuperOrdinateId("1234");
+		thesaurusArrayView.setSuperOrdinateLabel("label");
+		thesaurusArrayView.setThesaurusId("1234");
+		when(thesaurusArrayViewConverter.convert(Mockito.<ThesaurusArray>any()))
+			.thenReturn(thesaurusArrayView);
+		when(thesaurusArrayViewConverter.convert(Mockito.<ThesaurusArrayView>any()))
+			.thenReturn(new ThesaurusArray());
+		when(thesaurusArrayService.updateThesaurusArray(Mockito.<ThesaurusArray>any(), Mockito.<NodeLabel>any(), Mockito.<List<ThesaurusArrayConcept>>any()))
+			.thenReturn(new ThesaurusArray());
+		when(thesaurusArrayConceptViewConverter.convert(Mockito.<ThesaurusArrayConceptView>any(), Mockito.<ThesaurusArray>any()))
+			.thenReturn(new ThesaurusArrayConcept());
+		when(nodeLabelViewConverter.convert(Mockito.<ThesaurusArrayView>any()))
+			.thenReturn(new NodeLabel());
+		ThesaurusArrayView thesaurusArrayViewJAXBElement = new ThesaurusArrayView();
+		ArrayList<ThesaurusArrayConceptView> concepts13 =
+			 new ArrayList<ThesaurusArrayConceptView>();
+		concepts13.add(new ThesaurusArrayConceptView());
+		thesaurusArrayViewJAXBElement.setConcepts(concepts13);
 
 		// act
-		ExtJsonFormLoadData<List<ThesaurusArrayView>> result =
-			 service.getAllConceptArraysByThesaurusId("", "1234");
+		ThesaurusArrayView result =
+			 service.updateThesaurusArray(thesaurusArrayViewJAXBElement);
 
 		// assert
-		assertThat(result.getData(), sameInstance(list1));
-		assertThat(result.getTotal(), is(1L));
-		assertThat(result.isSuccess(), is(true));
+		assertThat(result.getConcepts().size(), is(1));
+		assertThat(result.getConcepts().get(0), sameInstance(thesaurusArrayConceptView1));
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLabel(), is("label"));
+		assertThat(result.getLanguage(), is("foo"));
+		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getNodeLabelId(), is(1));
+		assertThat(result.getOrder(), is(false));
+		assertThat(result.getParentArrayId(), is("1234"));
+		assertThat(result.getParentArrayLabel(), is("label"));
+		assertThat(result.getSuperOrdinateId(), is("1234"));
+		assertThat(result.getSuperOrdinateLabel(), is("label"));
+		assertThat(result.getThesaurusId(), is("1234"));
 	}
 
 	@Test

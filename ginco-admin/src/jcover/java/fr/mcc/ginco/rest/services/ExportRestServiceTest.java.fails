@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationship;
@@ -80,11 +81,7 @@ class ExportRestServiceTest {
 		thesaurus.setContributor("foo");
 		thesaurus.setCoverage("foo");
 		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator = new ThesaurusOrganization();
-		creator.setEmail("info@diffblue.com");
-		creator.setHomepage("foo");
-		creator.setIdentifier(1);
-		creator.setName("Acme");
+		ThesaurusOrganization creator = mock(ThesaurusOrganization.class);
 		thesaurus.setCreator(creator);
 		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus.setDefaultTopConcept(false);
@@ -136,7 +133,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"HIER_Mr_2020-10-02_01:37:33.txt\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"HIER_Mr_2020-10-02_03:13:40.txt\""));
 	}
 
 	@Test
@@ -204,7 +201,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"ALPH_Mr_2020-10-02_01:37:33.txt\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"ALPH_Mr_2020-10-02_03:13:42.txt\""));
 	}
 
 	@Test
@@ -267,7 +264,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Mr_2020-10-02_01:37:33.xml\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Mr_2020-10-02_03:13:43.xml\""));
 	}
 
 	@Test
@@ -345,6 +342,6 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Branch_foo_bar_2020-10-02_01:37:35.xml\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Branch_foo_bar_2020-10-02_03:13:43.xml\""));
 	}
 }

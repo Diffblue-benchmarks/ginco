@@ -107,6 +107,13 @@ class FolderGeneratorTest {
 	}
 
 	@Test
+	void getSandboxReturnsNull() {
+		when(thesaurusTermService.getSandboxedTermsCount(Mockito.<String>any()))
+			.thenReturn(0L);
+		assertThat(service.getSandbox("1234"), is(nullValue()));
+	}
+
+	@Test
 	void getSplitNonPreferredTerms() {
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
@@ -121,6 +128,13 @@ class FolderGeneratorTest {
 		assertThat(result.isDisplayable(), is(true));
 		assertThat(result.isExpanded(), is(false));
 		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getSplitNonPreferredTermsReturnsNull() {
+		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
+			.thenReturn(0L);
+		assertThat(service.getSplitNonPreferredTerms("1234"), is(nullValue()));
 	}
 
 	@Test
@@ -170,6 +184,13 @@ class FolderGeneratorTest {
 		assertThat(result.isDisplayable(), is(false));
 		assertThat(result.isExpanded(), is(false));
 		assertThat(result.isLeaf(), is(false));
+	}
+
+	@Test
+	void getOrphansReturnsNull() {
+		when(thesaurusConceptService.getOrphanThesaurusConceptsCount(Mockito.<String>any()))
+			.thenReturn(0L);
+		assertThat(service.getOrphans("1234"), is(nullValue()));
 	}
 
 	@Test

@@ -118,8 +118,7 @@ class AlignmentResourceTest {
 	}
 
 	@Test
-	void testEquals() {
+	void equalsReturnsFalse() {
 		assertThat(new AlignmentResource().equals(new Object()), is(false));
-		assertThat(new AlignmentResource().equals(null), is(false));
 	}
 }

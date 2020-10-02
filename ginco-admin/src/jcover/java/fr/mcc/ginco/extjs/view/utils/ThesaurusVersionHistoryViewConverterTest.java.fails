@@ -1,7 +1,6 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -135,9 +134,8 @@ class ThesaurusVersionHistoryViewConverterTest {
 		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusVersionHistory.setIdentifier("data");
 		thesaurusVersionHistory.setStatus(1);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		when(thesaurus.getIdentifier())
-			.thenReturn("data");
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
 		thesaurusVersionHistory.setThesaurus(thesaurus);
 		thesaurusVersionHistory.setThisVersion(false);
 		thesaurusVersionHistory.setVersionNote("1.0");
@@ -155,11 +153,6 @@ class ThesaurusVersionHistoryViewConverterTest {
 		assertThat(result.get(0).getThesaurusId(), is("data"));
 		assertThat(result.get(0).getThisVersion(), is(false));
 		assertThat(result.get(0).getVersionNote(), is("1.0"));
-	}
-
-	@Test
-	void convertListThesaurusHistoryListIsEmptyReturnsEmpty() {
-		assertThat(service.convertList(new ArrayList<ThesaurusVersionHistory>()), empty());
 	}
 
 	@Test

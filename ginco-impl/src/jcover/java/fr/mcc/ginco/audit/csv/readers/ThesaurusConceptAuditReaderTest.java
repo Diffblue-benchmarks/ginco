@@ -51,8 +51,7 @@ public class ThesaurusConceptAuditReaderTest {
 			.thenReturn(new ArrayList());
 		when(auditQueryBuilder.getEntityAddedQuery(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any()))
 			.thenReturn(auditQuery);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		assertTrue((service.getConceptAdded(thesaurus, new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue((service.getConceptAdded(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
 	}
 
 	@Test

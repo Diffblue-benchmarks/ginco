@@ -2,7 +2,6 @@ package fr.mcc.ginco.imports.ginco;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConceptGroup;
@@ -60,10 +59,5 @@ public class GincoGroupImporterTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusConceptGroup1, result.get(0));
-	}
-
-	@Test
-	public void storeGroupLabelsReturnsEmpty() {
-		assertTrue((service.storeGroupLabels(new GincoExportedThesaurus())).isEmpty());
 	}
 }

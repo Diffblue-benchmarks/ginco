@@ -38,7 +38,7 @@ class ReportRestServiceTest {
 	private ReportRestService service;
 
 	@Test
-	void searchLimitIsOneAndStartIndexIsOneAndTypeIsZero() {
+	void searchStartIndexIsOneAndTypeIsZero() {
 
 		// arrange
 		SearchResultList searchResultList1 = new SearchResultList();
@@ -57,7 +57,7 @@ class ReportRestServiceTest {
 	}
 
 	@Test
-	void searchLimitIsZeroAndStartIndexIsMinusOneAndTypeIsOne() {
+	void searchStartIndexIsZeroAndTypeIsOne() {
 
 		// arrange
 		SearchResultList searchResultList = new SearchResultList();
@@ -67,7 +67,7 @@ class ReportRestServiceTest {
 
 		// act
 		ExtJsonFormLoadData<List<SearchResult>> result =
-			 service.search("1234", 1, -1, 0);
+			 service.search("1234", 1, 0, 1);
 
 		// assert
 		assertThat(result.getData(), empty());

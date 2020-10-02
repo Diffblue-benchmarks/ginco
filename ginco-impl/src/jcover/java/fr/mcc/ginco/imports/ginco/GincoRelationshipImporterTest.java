@@ -11,7 +11,6 @@ import fr.mcc.ginco.dao.IAssociativeRelationshipDAO;
 import fr.mcc.ginco.dao.IAssociativeRelationshipRoleDAO;
 import fr.mcc.ginco.dao.IConceptHierarchicalRelationshipDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
-import fr.mcc.ginco.exports.result.bean.GincoExportedThesaurus;
 import fr.mcc.ginco.exports.result.bean.JaxbList;
 import fr.mcc.ginco.services.IConceptHierarchicalRelationshipServiceUtil;
 
@@ -92,10 +91,5 @@ public class GincoRelationshipImporterTest {
 	@Test
 	public void storeHierarchicalRelationshipRelationsToImportIsNullReturnsEmpty() {
 		assertTrue((service.storeHierarchicalRelationship(null)).isEmpty());
-	}
-
-	@Test
-	public void storeAssociativeRelationshipReturnsEmpty() {
-		assertTrue((service.storeAssociativeRelationship(new GincoExportedThesaurus())).isEmpty());
 	}
 }

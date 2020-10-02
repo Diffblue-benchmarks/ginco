@@ -119,7 +119,7 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
-	public void saveAlignments1() {
+	public void saveAlignments() {
 		List<Alignment> list = new ArrayList<Alignment>();
 		Alignment alignment2 = new Alignment();
 		alignment2.setIdentifier("data");
@@ -133,21 +133,6 @@ public class AlignmentServiceImplTest {
 		Alignment alignment3 = new Alignment();
 		alignment3.setIdentifier("data");
 		alignments.add(alignment3);
-		assertSame(concept, service.saveAlignments(concept, alignments));
-		Mockito.verify(alignmentDAO).flush();
-	}
-
-	@Test
-	public void saveAlignments2() {
-		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(new ArrayList<Alignment>());
-		when(alignmentDAO.update(Mockito.<Alignment>any()))
-			.thenReturn(new Alignment());
-		ThesaurusConcept concept = new ThesaurusConcept();
-		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
-		Alignment alignment2 = new Alignment();
-		alignment2.setIdentifier("data");
-		alignments.add(alignment2);
 		assertSame(concept, service.saveAlignments(concept, alignments));
 		Mockito.verify(alignmentDAO).flush();
 	}

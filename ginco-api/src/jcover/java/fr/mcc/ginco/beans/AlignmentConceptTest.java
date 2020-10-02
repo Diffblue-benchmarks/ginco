@@ -162,8 +162,7 @@ class AlignmentConceptTest {
 	}
 
 	@Test
-	void testEquals() {
+	void equalsReturnsFalse() {
 		assertThat(new AlignmentConcept().equals(new Object()), is(false));
-		assertThat(new AlignmentConcept().equals(null), is(false));
 	}
 }

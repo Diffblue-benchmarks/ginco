@@ -36,31 +36,7 @@ class ThesaurusArrayConceptViewConverterTest {
 	private ThesaurusArrayConceptViewConverter service;
 
 	@Test
-	void convert1() {
-
-		// arrange
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
-			.thenReturn(thesaurusConcept);
-		ThesaurusArrayConceptView thesaurusArrayConceptView =
-			 new ThesaurusArrayConceptView();
-		thesaurusArrayConceptView.setIdentifier("data");
-		ThesaurusArray array = new ThesaurusArray();
-		array.setIdentifier("data");
-
-		// act
-		ThesaurusArrayConcept result =
-			 service.convert(thesaurusArrayConceptView, array);
-
-		// assert
-		assertThat(result.getArrayOrder(), is(0));
-		assertThat(result.getConcepts(), sameInstance(thesaurusConcept));
-		assertThat(result.getIdentifier().getConceptId(), is("data"));
-		assertThat(result.getIdentifier().getThesaurusArrayId(), is("data"));
-	}
-
-	@Test
-	void convert2() {
+	void convert() {
 
 		// arrange
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();

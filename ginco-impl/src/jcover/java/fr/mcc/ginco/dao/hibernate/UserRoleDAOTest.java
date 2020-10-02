@@ -37,28 +37,7 @@ public class UserRoleDAOTest {
 	}
 
 	@Test
-	public void getUserRoleOnThesaurusUsernameIsBarReturnsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
-		UserRoleDAO userRoleDAO = new UserRoleDAO();
-		Criteria criteria1 = mock(Criteria.class);
-		Criteria criteria2 = mock(Criteria.class);
-		Criteria criteria3 = mock(Criteria.class);
-		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
-			.thenReturn(criteria2)
-			.thenReturn(criteria1);
-		when(criteria3.list())
-			.thenReturn(new ArrayList());
-		Session session = mock(Session.class);
-		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria3);
-		SessionFactory sessionFactory = mock(SessionFactory.class);
-		when(sessionFactory.getCurrentSession())
-			.thenReturn(session);
-		userRoleDAO.setSessionFactory(sessionFactory);
-		assertNull(userRoleDAO.getUserRoleOnThesaurus("bar", "root"));
-	}
-
-	@Test
-	public void getUserRoleOnThesaurusUsernameIsRoot() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getUserRoleOnThesaurusUsernameIsAdmin() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
@@ -87,13 +66,34 @@ public class UserRoleDAOTest {
 		userRoleDAO.setSessionFactory(sessionFactory);
 
 		// act
-		UserRole result = userRoleDAO.getUserRoleOnThesaurus("root", "root");
+		UserRole result = userRoleDAO.getUserRoleOnThesaurus("admin", "admin");
 
 		// assert
 		assertEquals(1, (int) result.getIdentifier());
 		assertTrue(Role.MANAGER == result.getRole());
 		assertSame(thesaurus, result.getThesaurus());
 		assertEquals("root", result.getUsername());
+	}
+
+	@Test
+	public void getUserRoleOnThesaurusUsernameIsBarReturnsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		UserRoleDAO userRoleDAO = new UserRoleDAO();
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria2)
+			.thenReturn(criteria1);
+		when(criteria3.list())
+			.thenReturn(new ArrayList());
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria3);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		userRoleDAO.setSessionFactory(sessionFactory);
+		assertNull(userRoleDAO.getUserRoleOnThesaurus("bar", "admin"));
 	}
 
 	@Test

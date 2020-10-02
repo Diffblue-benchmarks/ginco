@@ -90,7 +90,7 @@ class AuthenticationFilterTest {
 		authenticationFilter.setPasswordParameter("data");
 		authenticationFilter.setPostOnly(false);
 		authenticationFilter.setUsernameParameter("data");
-		authenticationFilter.setAllowSessionCreation(true);
+		authenticationFilter.setAllowSessionCreation(false);
 		ApplicationEventPublisher eventPublisher =
 			 mock(ApplicationEventPublisher.class);
 		authenticationFilter.setApplicationEventPublisher(eventPublisher);

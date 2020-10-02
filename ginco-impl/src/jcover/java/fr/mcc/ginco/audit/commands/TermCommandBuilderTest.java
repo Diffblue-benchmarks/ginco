@@ -42,9 +42,9 @@ public class TermCommandBuilderTest {
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, ThesaurusTerm>());
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setLexicalValue("value");
-		previousTerms.add(thesaurusTerm);
+		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
+		thesaurusTerm1.setLexicalValue("value");
+		previousTerms.add(thesaurusTerm1);
 
 		// act
 		List<CommandLine> result =

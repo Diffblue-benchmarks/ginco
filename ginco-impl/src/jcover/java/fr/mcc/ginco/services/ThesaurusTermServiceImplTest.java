@@ -155,26 +155,26 @@ public class ThesaurusTermServiceImplTest {
 
 		// arrange
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		ThesaurusConcept concept1 = new ThesaurusConcept();
+		ThesaurusConcept concept1 = mock(ThesaurusConcept.class);
 		thesaurusTerm.setConcept(concept1);
-		Date created3 =
+		Date created1 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setCreated(created3);
+		thesaurusTerm.setCreated(created1);
 		thesaurusTerm.setHidden(false);
 		thesaurusTerm.setIdentifier("data");
 		Language language1 = new Language();
 		thesaurusTerm.setLanguage(language1);
 		thesaurusTerm.setLexicalValue("value");
-		Date modified2 =
+		Date modified1 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setModified(modified2);
+		thesaurusTerm.setModified(modified1);
 		thesaurusTerm.setPrefered(false);
 		ThesaurusTermRole role1 = new ThesaurusTermRole();
 		thesaurusTerm.setRole(role1);
 		thesaurusTerm.setSource("foo");
 		thesaurusTerm.setStatus(1);
-		Thesaurus thesaurus2 = new Thesaurus();
-		thesaurusTerm.setThesaurus(thesaurus2);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurusTerm.setThesaurus(thesaurus1);
 		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(thesaurusTerm);
 		ThesaurusTerm object = new ThesaurusTerm();
@@ -185,21 +185,21 @@ public class ThesaurusTermServiceImplTest {
 
 		// assert
 		assertSame(concept1, result.getConcept());
-		assertSame(created3, result.getCreated());
+		assertSame(created1, result.getCreated());
 		assertFalse(result.getHidden());
 		assertEquals("data", result.getIdentifier());
 		assertSame(language1, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified2, result.getModified());
+		assertSame(modified1, result.getModified());
 		assertFalse(result.getPrefered());
 		assertSame(role1, result.getRole());
 		assertEquals("foo", result.getSource());
 		assertEquals(1, (int) result.getStatus());
-		assertSame(thesaurus2, result.getThesaurus());
+		assertSame(thesaurus1, result.getThesaurus());
 	}
 
 	@Test
-	public void getAllTerms1() {
+	public void getAllTerms2() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
@@ -254,54 +254,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getPreferredTermByTerm() throws java.text.ParseException {
-
-		// arrange
-		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
-		ThesaurusConcept concept2 = new ThesaurusConcept();
-		thesaurusTerm2.setConcept(concept2);
-		Date created7 =
-			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm2.setCreated(created7);
-		thesaurusTerm2.setHidden(false);
-		thesaurusTerm2.setIdentifier("data");
-		Language language2 = new Language();
-		thesaurusTerm2.setLanguage(language2);
-		thesaurusTerm2.setLexicalValue("value");
-		Date modified4 =
-			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm2.setModified(modified4);
-		thesaurusTerm2.setPrefered(true);
-		ThesaurusTermRole role2 = new ThesaurusTermRole();
-		thesaurusTerm2.setRole(role2);
-		thesaurusTerm2.setSource("foo");
-		thesaurusTerm2.setStatus(1);
-		Thesaurus thesaurus4 = new Thesaurus();
-		thesaurusTerm2.setThesaurus(thesaurus4);
-		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(thesaurusTerm2);
-
-		// act
-		ThesaurusTerm result =
-			 service.getPreferredTermByTerm("value", "1234", "1234");
-
-		// assert
-		assertSame(concept2, result.getConcept());
-		assertSame(created7, result.getCreated());
-		assertFalse(result.getHidden());
-		assertEquals("data", result.getIdentifier());
-		assertSame(language2, result.getLanguage());
-		assertEquals("value", result.getLexicalValue());
-		assertSame(modified4, result.getModified());
-		assertTrue(result.getPrefered());
-		assertSame(role2, result.getRole());
-		assertEquals("foo", result.getSource());
-		assertEquals(1, (int) result.getStatus());
-		assertSame(thesaurus4, result.getThesaurus());
-	}
-
-	@Test
-	public void getPreferredTermByTermReturnsNull() {
+	public void getPreferredTermByTermLexicalValueIsValueReturnsNull() {
 		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
 		thesaurusTerm1.setLanguage(new Language());
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
@@ -318,10 +271,18 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
+	public void isTermExistReturnsFalse() {
+		when(thesaurusTermDAO.countSimilarTermsByLexicalValueAndLanguage(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(0L);
+		assertFalse(service.isTermExist(new ThesaurusTerm()));
+	}
+
+	@Test
 	public void isTermExistReturnsTrue() {
 		when(thesaurusTermDAO.countSimilarTermsByLexicalValueAndLanguage(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(1L);
-		assertTrue(service.isTermExist(new ThesaurusTerm()));
+		ThesaurusTerm term = mock(ThesaurusTerm.class);
+		assertTrue(service.isTermExist(term));
 	}
 
 	@Test
@@ -334,7 +295,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getAllTerms2() {
+	public void getAllTerms1() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();

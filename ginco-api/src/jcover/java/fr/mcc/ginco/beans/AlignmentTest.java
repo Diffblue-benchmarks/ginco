@@ -94,8 +94,7 @@ class AlignmentTest {
 	}
 
 	@Test
-	void testEquals() {
+	void equalsReturnsFalse() {
 		assertThat(new Alignment().equals(new Object()), is(false));
-		assertThat(new Alignment().equals(null), is(false));
 	}
 }

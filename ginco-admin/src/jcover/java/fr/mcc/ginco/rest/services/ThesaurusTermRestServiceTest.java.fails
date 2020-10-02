@@ -188,7 +188,7 @@ class ThesaurusTermRestServiceTest {
 	}
 
 	@Test
-	void destroyTerm1() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void destroyTerm() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
 		when(thesaurusTermService.destroyThesaurusTerm(Mockito.<ThesaurusTerm>any()))
@@ -240,58 +240,6 @@ class ThesaurusTermRestServiceTest {
 		assertThat(result.getTopistopterm(), is(false));
 		Mockito.verify(termIndexerService).removeTerm(ArgumentMatchers.<ThesaurusTerm>any());
 		Mockito.verify(noteIndexerService).removeNote(ArgumentMatchers.<Note>any());
-	}
-
-	@Test
-	void destroyTerm2() throws fr.mcc.ginco.exceptions.TechnicalException {
-
-		// arrange
-		when(thesaurusTermService.destroyThesaurusTerm(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(new ThesaurusTerm());
-		when(thesaurusTermService.getThesaurusTermById(Mockito.<String>any()))
-			.thenReturn(new ThesaurusTerm());
-		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
-		thesaurusTermView.setConceptId("1234");
-		ArrayList<String> conceptsPath1 = new ArrayList<String>();
-		conceptsPath1.add("/bin/bash");
-		thesaurusTermView.setConceptsPath(conceptsPath1);
-		thesaurusTermView.setCreated("foo");
-		thesaurusTermView.setHidden(false);
-		thesaurusTermView.setIdentifier("data");
-		thesaurusTermView.setLanguage("foo");
-		thesaurusTermView.setLexicalValue("value");
-		thesaurusTermView.setModified("foo");
-		thesaurusTermView.setPrefered(false);
-		thesaurusTermView.setRole("admin");
-		thesaurusTermView.setSource("foo");
-		thesaurusTermView.setStatus(1);
-		thesaurusTermView.setThesaurusId("1234");
-		thesaurusTermView.setTopistopterm(false);
-		when(termViewConverter.convert(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(thesaurusTermView);
-		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(new ArrayList<Note>());
-
-		// act
-		ThesaurusTermView result = service.destroyTerm(new ThesaurusTermView());
-
-		// assert
-		assertThat(result.getConceptId(), is("1234"));
-		assertThat(result.getConceptsPath(), hasSize(1));
-		assertThat(result.getConceptsPath().get(0), is("/bin/bash"));
-		assertThat(result.getCreated(), is("foo"));
-		assertThat(result.getHidden(), is(false));
-		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getLanguage(), is("foo"));
-		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getModified(), is("foo"));
-		assertThat(result.getPrefered(), is(false));
-		assertThat(result.getRole(), is("admin"));
-		assertThat(result.getSource(), is("foo"));
-		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is("1234"));
-		assertThat(result.getTopistopterm(), is(false));
-		Mockito.verify(termIndexerService).removeTerm(ArgumentMatchers.<ThesaurusTerm>any());
 	}
 
 	@Test

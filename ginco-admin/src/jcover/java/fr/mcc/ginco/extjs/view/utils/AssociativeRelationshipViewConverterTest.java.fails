@@ -52,32 +52,6 @@ class AssociativeRelationshipViewConverterTest {
 			.thenReturn("foo=bar");
 		AssociativeRelationship associativeRelationship =
 			 new AssociativeRelationship();
-		ThesaurusConcept conceptRight = new ThesaurusConcept();
-		conceptRight.setIdentifier("bar");
-		associativeRelationship.setConceptRight(conceptRight);
-		AssociativeRelationshipRole relationshipRole =
-			 new AssociativeRelationshipRole();
-		relationshipRole.setCode("DE");
-		associativeRelationship.setRelationshipRole(relationshipRole);
-
-		// act
-		AssociativeRelationshipView result =
-			 service.convert(associativeRelationship, new ThesaurusConcept());
-
-		// assert
-		assertThat(result.getIdentifier(), is("bar"));
-		assertThat(result.getLabel(), is("foo=bar"));
-		assertThat(result.getRoleCode(), is("DE"));
-	}
-
-	@Test
-	void convert2() {
-
-		// arrange
-		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
-			.thenReturn("foo=bar");
-		AssociativeRelationship associativeRelationship =
-			 new AssociativeRelationship();
 		ThesaurusConcept conceptLeft = new ThesaurusConcept();
 		conceptLeft.setIdentifier("data");
 		associativeRelationship.setConceptLeft(conceptLeft);
@@ -97,6 +71,32 @@ class AssociativeRelationshipViewConverterTest {
 
 		// assert
 		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLabel(), is("foo=bar"));
+		assertThat(result.getRoleCode(), is("DE"));
+	}
+
+	@Test
+	void convert2() {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("foo=bar");
+		AssociativeRelationship associativeRelationship =
+			 new AssociativeRelationship();
+		ThesaurusConcept conceptRight = new ThesaurusConcept();
+		conceptRight.setIdentifier("bar");
+		associativeRelationship.setConceptRight(conceptRight);
+		AssociativeRelationshipRole relationshipRole =
+			 new AssociativeRelationshipRole();
+		relationshipRole.setCode("DE");
+		associativeRelationship.setRelationshipRole(relationshipRole);
+
+		// act
+		AssociativeRelationshipView result =
+			 service.convert(associativeRelationship, new ThesaurusConcept());
+
+		// assert
+		assertThat(result.getIdentifier(), is("bar"));
 		assertThat(result.getLabel(), is("foo=bar"));
 		assertThat(result.getRoleCode(), is("DE"));
 	}

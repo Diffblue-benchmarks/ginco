@@ -63,7 +63,7 @@ public class ConceptNoteBuilderTest {
 			.thenReturn("/some/path.html");
 		when(skosConcept.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
-		ThesaurusTerm preferredTerm = mock(ThesaurusTerm.class);
-		assertTrue((service.buildConceptNotes(skosConcept, new ThesaurusConcept(), preferredTerm, new Thesaurus())).isEmpty());
+		ThesaurusConcept concept1 = mock(ThesaurusConcept.class);
+		assertTrue((service.buildConceptNotes(skosConcept, concept1, new ThesaurusTerm(), new Thesaurus())).isEmpty());
 	}
 }

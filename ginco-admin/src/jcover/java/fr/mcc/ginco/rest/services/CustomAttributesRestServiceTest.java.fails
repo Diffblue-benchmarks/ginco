@@ -4,10 +4,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomConceptAttribute;
+import fr.mcc.ginco.beans.CustomConceptAttributeType;
 import fr.mcc.ginco.beans.CustomTermAttribute;
+import fr.mcc.ginco.beans.CustomTermAttributeType;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.beans.generic.GenericCustomAttributeType;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.GenericCustomAttributeTypeView;
@@ -74,8 +80,54 @@ class CustomAttributesRestServiceTest {
 	private CustomAttributesRestService service;
 
 	@Test
+	void getAllConceptAttributeTypes() {
+
+		// arrange
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		when(customConceptAttributeTypeService.getAttributeTypesByThesaurus(Mockito.<Thesaurus>any()))
+			.thenReturn(new ArrayList<CustomConceptAttributeType>());
+		List<GenericCustomAttributeTypeView> list2 =
+			 new ArrayList<GenericCustomAttributeTypeView>();
+		when(customAttributesTypesConverter.convertList(Mockito.<List<? extends GenericCustomAttributeType>>any(), anyBoolean()))
+			.thenReturn(list2);
+
+		// act
+		ExtJsonFormLoadData<List<GenericCustomAttributeTypeView>> result =
+			 service.getAllConceptAttributeTypes("1234");
+
+		// assert
+		assertThat(result.getData(), sameInstance(list2));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
 	void deleteConceptAttributeTypesListIsEmpty() {
 		service.deleteConceptAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>());
+	}
+
+	@Test
+	void getAllTermAttributeTypes() {
+
+		// arrange
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		when(customTermAttributeTypeService.getAttributeTypesByThesaurus(Mockito.<Thesaurus>any()))
+			.thenReturn(new ArrayList<CustomTermAttributeType>());
+		List<GenericCustomAttributeTypeView> list2 =
+			 new ArrayList<GenericCustomAttributeTypeView>();
+		when(customAttributesTypesConverter.convertList(Mockito.<List<? extends GenericCustomAttributeType>>any(), anyBoolean()))
+			.thenReturn(list2);
+
+		// act
+		ExtJsonFormLoadData<List<GenericCustomAttributeTypeView>> result =
+			 service.getAllTermAttributeTypes("1234");
+
+		// assert
+		assertThat(result.getData(), sameInstance(list2));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
 	}
 
 	@Test
@@ -104,6 +156,52 @@ class CustomAttributesRestServiceTest {
 		// assert
 		assertThat(result.getData().size(), is(1));
 		assertThat(result.getData().get(0), sameInstance(genericCustomAttributeView));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getTermAttribute() {
+
+		// arrange
+		when(thesaurusTermService.getThesaurusTermById(Mockito.<String>any()))
+			.thenReturn(new ThesaurusTerm());
+		when(customTermAttributeService.getAttributesByEntity(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(new ArrayList<CustomTermAttribute>());
+		List<GenericCustomAttributeView> list2 =
+			 new ArrayList<GenericCustomAttributeView>();
+		when(customAttributeConverter.convertListTerm(Mockito.<List<CustomTermAttribute>>any()))
+			.thenReturn(list2);
+
+		// act
+		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result =
+			 service.getTermAttribute("1234");
+
+		// assert
+		assertThat(result.getData(), sameInstance(list2));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getConceptAttribute() {
+
+		// arrange
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(new ThesaurusConcept());
+		when(customConceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(new ArrayList<CustomConceptAttribute>());
+		List<GenericCustomAttributeView> list2 =
+			 new ArrayList<GenericCustomAttributeView>();
+		when(customAttributeConverter.convertListConcept(Mockito.<List<CustomConceptAttribute>>any()))
+			.thenReturn(list2);
+
+		// act
+		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result =
+			 service.getConceptAttribute("1234");
+
+		// assert
+		assertThat(result.getData(), sameInstance(list2));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}

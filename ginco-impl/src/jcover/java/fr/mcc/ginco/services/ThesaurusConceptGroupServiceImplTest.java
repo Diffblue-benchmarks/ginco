@@ -97,20 +97,6 @@ public class ThesaurusConceptGroupServiceImplTest {
 	}
 
 	@Test
-	public void updateThesaurusConceptGroupConceptGroupLabelIsNull() {
-		ThesaurusConceptGroup result =
-			 service.updateThesaurusConceptGroup(new ThesaurusConceptGroup(), null);
-		assertNull(result.getConceptGroupType());
-		assertNull(result.getConcepts());
-		assertNull(result.getIdentifier());
-		assertNull(result.getIsDynamic());
-		assertNull(result.getNotation());
-		assertNull(result.getParent());
-		assertNull(result.getParentConcept());
-		assertNull(result.getThesaurus());
-	}
-
-	@Test
 	public void getAllThesaurusConceptGroupsByThesaurusId() {
 
 		// arrange

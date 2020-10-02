@@ -148,10 +148,14 @@ public class ExportServiceImplTest {
 			.thenReturn("foo=bar");
 		when(thesaurusConceptService.getConceptsByThesaurusId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any()))
 			.thenReturn(list1);
+		List<SplitNonPreferredTerm> list2 = new ArrayList<SplitNonPreferredTerm>();
+		list2.add(new SplitNonPreferredTerm());
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<SplitNonPreferredTerm>());
+			.thenReturn(list2);
+		when(alphabeticalExportedItemComparator.compare(Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any(), Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any()))
+			.thenReturn(1);
 
 		// act
 		List<FormattedLine> result = service.getAlphabeticalText(new Thesaurus());
@@ -161,5 +165,7 @@ public class ExportServiceImplTest {
 		assertEquals(0, (int) result.get(0).getTabs());
 		assertEquals("foo=bar", result.get(0).getText());
 		Mockito.verify(alphabeticConceptExporter).addConceptInfo(ArgumentMatchers.eq((Integer) 1), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<ThesaurusConcept>any());
+		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(ArgumentMatchers.eq((Integer) 1), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<SplitNonPreferredTerm>any());
+		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(ArgumentMatchers.eq((Integer) 0), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<SplitNonPreferredTerm>any());
 	}
 }

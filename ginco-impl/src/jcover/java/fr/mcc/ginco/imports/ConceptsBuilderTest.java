@@ -118,14 +118,14 @@ public class ConceptsBuilderTest {
 		// arrange
 		Map<ThesaurusConcept, List<ConceptHierarchicalRelationship>> map =
 			 new HashMap<ThesaurusConcept, List<ConceptHierarchicalRelationship>>();
-		ThesaurusConcept x166 = mock(ThesaurusConcept.class);
-		ArrayList<ConceptHierarchicalRelationship> x211 =
+		ThesaurusConcept x217 = mock(ThesaurusConcept.class);
+		ArrayList<ConceptHierarchicalRelationship> x262 =
 			 new ArrayList<ConceptHierarchicalRelationship>();
 		ConceptHierarchicalRelationship conceptHierarchicalRelationship1 =
 			 new ConceptHierarchicalRelationship();
 		conceptHierarchicalRelationship1.setIdentifier(new ConceptHierarchicalRelationship.Id());
-		x211.add(conceptHierarchicalRelationship1);
-		map.put(x166, x211);
+		x262.add(conceptHierarchicalRelationship1);
+		map.put(x217, x262);
 		when(skosConceptBuilder.buildConceptAssociativerelationship(Mockito.<Resource>any(), Mockito.<Thesaurus>any(), Mockito.<List<ObjectProperty>>any()))
 			.thenReturn(new HashSet<AssociativeRelationship>());
 		when(skosConceptBuilder.buildConceptHierarchicalRelationships(Mockito.<Resource>any(), Mockito.<Thesaurus>any(), Mockito.<List<ObjectProperty>>any()))

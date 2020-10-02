@@ -118,20 +118,4 @@ public class SKOSArrayExporterTest {
 			.thenReturn(resource4);
 		assertSame(model5, service.exportCollections(new Thesaurus(), model5));
 	}
-
-	@Test
-	public void exportCollections3() {
-		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusArray>());
-		Model model1 = mock(Model.class);
-		Model model2 = mock(Model.class);
-		Model model3 = mock(Model.class);
-		Resource resource1 = mock(Resource.class);
-		Model model4 = mock(Model.class);
-		Resource resource2 = mock(Resource.class);
-		Resource resource3 = mock(Resource.class);
-		Resource resource4 = mock(Resource.class);
-		Model model5 = mock(Model.class);
-		assertSame(model5, service.exportCollections(new Thesaurus(), model5));
-	}
 }

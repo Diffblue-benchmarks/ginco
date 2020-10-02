@@ -2,7 +2,6 @@ package fr.mcc.ginco.exports.ginco;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomTermAttribute;
@@ -81,7 +80,7 @@ public class GincoTermExporterTest {
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		terms.add(new ThesaurusTerm());
 		thesaurusToExport.setTerms(terms);
-		ThesaurusTerm term = mock(ThesaurusTerm.class);
+		ThesaurusTerm term = new ThesaurusTerm();
 		assertSame(thesaurusToExport, service.addExportedTerms(thesaurusToExport, term));
 		assertEquals(2, thesaurusToExport.getTerms().size());
 		assertSame(term, thesaurusToExport.getTerms().get(1));

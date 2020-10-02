@@ -50,7 +50,7 @@ public class GincoTermImporterTest {
 	}
 
 	@Test
-	public void storeTerms1() {
+	public void storeTermsSavedTypesIsEmpty() {
 
 		// arrange
 		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
@@ -70,34 +70,6 @@ public class GincoTermImporterTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusTerm1, result.get(0));
-	}
-
-	@Test
-	public void storeTerms2() {
-
-		// arrange
-		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
-		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(thesaurusTerm1);
-		GincoExportedEntity exportedThesaurus = new GincoExportedEntity();
-		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
-		thesaurusTerm2.setIdentifier("data");
-		terms.add(thesaurusTerm2);
-		exportedThesaurus.setTerms(terms);
-
-		// act
-		List<ThesaurusTerm> result =
-			 service.storeTerms(exportedThesaurus, new Thesaurus(), new HashMap<String, CustomTermAttributeType>());
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(thesaurusTerm1, result.get(0));
-	}
-
-	@Test
-	public void storeTermsReturnsEmpty() {
-		assertTrue((service.storeTerms(new GincoExportedEntity(), new Thesaurus(), new HashMap<String, CustomTermAttributeType>())).isEmpty());
 	}
 
 	@Test

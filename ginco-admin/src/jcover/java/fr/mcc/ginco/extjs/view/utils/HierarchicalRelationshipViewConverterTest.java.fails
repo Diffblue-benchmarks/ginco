@@ -46,15 +46,15 @@ class HierarchicalRelationshipViewConverterTest {
 
 	@Test
 	void getParentViews1() {
-		ThesaurusConcept concept = mock(ThesaurusConcept.class);
-		when(concept.getParentConcepts())
-			.thenReturn(new HashSet<ThesaurusConcept>());
-		assertThat(service.getParentViews(concept), empty());
+		assertThat(service.getParentViews(new ThesaurusConcept()), empty());
 	}
 
 	@Test
 	void getParentViews2() {
-		assertThat(service.getParentViews(new ThesaurusConcept()), empty());
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
+		when(concept.getParentConcepts())
+			.thenReturn(new HashSet<ThesaurusConcept>());
+		assertThat(service.getParentViews(concept), empty());
 	}
 
 	@Test
@@ -63,14 +63,7 @@ class HierarchicalRelationshipViewConverterTest {
 	}
 
 	@Test
-	void getChildrenViews1() {
-		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		assertThat(service.getChildrenViews(new ThesaurusConcept()), empty());
-	}
-
-	@Test
-	void getChildrenViews2() {
+	void getChildrenViews() {
 
 		// arrange
 		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
@@ -99,8 +92,10 @@ class HierarchicalRelationshipViewConverterTest {
 	}
 
 	@Test
-	void getChildrenViewsConceptIsNull() {
-		assertThat(service.getChildrenViews(null), empty());
+	void getChildrenViewsReturnsEmpty() {
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		assertThat(service.getChildrenViews(new ThesaurusConcept()), empty());
 	}
 
 	@Test

@@ -38,21 +38,7 @@ public class MistralStructuresBuilderTest {
 	}
 
 	@Test
-	public void buildHierarchyStructureReturnsEmpty() {
-		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
-		thesaurusTerm2.setLexicalValue("value");
-		when(auditHelper.getConceptChildrenAtRevision(Mockito.<Number>any(), Mockito.<ThesaurusConcept>any(), Mockito.<List<ThesaurusConcept>>any()))
-			.thenReturn(new ArrayList<ThesaurusConcept>());
-		when(auditHelper.getPreferredTermAtRevision(Mockito.<Number>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(thesaurusTerm2);
-		ArrayList<ThesaurusConcept> conceptsAtRevision =
-			 new ArrayList<ThesaurusConcept>();
-		conceptsAtRevision.add(new ThesaurusConcept());
-		assertTrue((service.buildHierarchyStructure(conceptsAtRevision, 1, "mpeg").get("value")).isEmpty());
-	}
-
-	@Test
-	public void buildHierarchyStructureReturnsValue() {
+	public void buildHierarchyStructureLangIsMpegAndRevisionIsOneReturnsValue() {
 		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
 		thesaurusTerm1.setLexicalValue("value");
 		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
@@ -101,25 +87,6 @@ public class MistralStructuresBuilderTest {
 			 new ArrayList<ThesaurusConcept>();
 		conceptsAtRevision.add(new ThesaurusConcept());
 		assertTrue((service.buildSynonymsStructure(conceptsAtRevision, 1, "mpeg").get("value")).isEmpty());
-	}
-
-	@Test
-	public void buildSynonymsStructureReturnsBar() {
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
-		thesaurusTerm1.setLexicalValue("bar");
-		list.add(thesaurusTerm1);
-		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
-		thesaurusTerm2.setLexicalValue("value");
-		when(auditHelper.getConceptTermsAtRevision(Mockito.<ThesaurusConcept>any(), Mockito.<Number>any(), Mockito.<String>any()))
-			.thenReturn(list);
-		when(auditHelper.getPreferredTermAtRevision(Mockito.<Number>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(thesaurusTerm2);
-		ArrayList<ThesaurusConcept> conceptsAtRevision =
-			 new ArrayList<ThesaurusConcept>();
-		conceptsAtRevision.add(new ThesaurusConcept());
-		assertEquals(1, service.buildSynonymsStructure(conceptsAtRevision, 1, "mpeg").get("value").size());
-		assertEquals("bar", service.buildSynonymsStructure(conceptsAtRevision, 1, "mpeg").get("value").get(0));
 	}
 
 	@Test

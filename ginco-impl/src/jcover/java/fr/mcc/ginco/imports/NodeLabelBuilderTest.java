@@ -83,11 +83,11 @@ public class NodeLabelBuilderTest {
 			.thenReturn(statement3)
 			.thenReturn(statement2)
 			.thenReturn(statement1);
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
 		ThesaurusArray array = new ThesaurusArray();
 
 		// act
-		NodeLabel result =
-			 service.buildNodeLabel(skosCollection, new Thesaurus(), array);
+		NodeLabel result = service.buildNodeLabel(skosCollection, thesaurus1, array);
 
 		// assert
 		assertSame(date2, result.getCreated());
