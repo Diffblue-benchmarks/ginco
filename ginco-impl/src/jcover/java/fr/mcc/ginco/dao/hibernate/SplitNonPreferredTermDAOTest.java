@@ -26,7 +26,7 @@ import org.mockito.Mockito;
 public class SplitNonPreferredTermDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		SplitNonPreferredTermDAO splitNonPreferredTermDAO =
 			 new SplitNonPreferredTermDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
@@ -35,13 +35,13 @@ public class SplitNonPreferredTermDAOTest {
 	}
 
 	@Test
-	public void findItemsLimitIsOneAndStartIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findItemsLimitIsOneAndStartIsOne() throws org.hibernate.HibernateException {
 
 		// arrange
 		SplitNonPreferredTermDAO splitNonPreferredTermDAO =
 			 new SplitNonPreferredTermDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
@@ -71,31 +71,6 @@ public class SplitNonPreferredTermDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
-	}
-
-	@Test
-	public void countItemsReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
-		SplitNonPreferredTermDAO splitNonPreferredTermDAO =
-			 new SplitNonPreferredTermDAO();
-		List list = new ArrayList();
-		list.add(1L);
-		Criteria criteria1 = mock(Criteria.class);
-		Criteria criteria2 = mock(Criteria.class);
-		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
-			.thenReturn(criteria1);
-		Criteria criteria3 = mock(Criteria.class);
-		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
-			.thenReturn(criteria2);
-		when(criteria3.list())
-			.thenReturn(list);
-		Session session = mock(Session.class);
-		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria3);
-		SessionFactory sessionFactory = mock(SessionFactory.class);
-		when(sessionFactory.getCurrentSession())
-			.thenReturn(session);
-		splitNonPreferredTermDAO.setSessionFactory(sessionFactory);
-		assertEquals(1L, (long) splitNonPreferredTermDAO.countItems("1234"));
+		// pojo String (String) result.get(0)
 	}
 }

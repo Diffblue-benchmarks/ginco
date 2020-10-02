@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 public class ThesaurusConceptGroupTypeDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		ThesaurusConceptGroupTypeDAO thesaurusConceptGroupTypeDAO =
 			 new ThesaurusConceptGroupTypeDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);

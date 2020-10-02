@@ -28,7 +28,7 @@ public class UpdateEnversListernerTest {
 	}
 
 	@Test
-	public void onPostUpdate() throws org.hibernate.HibernateException, org.hibernate.MappingException, org.hibernate.UnknownProfileException {
+	public void onPostUpdate() {
 		Serializable id = mock(Serializable.class);
 		Object[] state = new Object[] { new Object() };
 		Object[] oldState = new Object[] { new Object() };

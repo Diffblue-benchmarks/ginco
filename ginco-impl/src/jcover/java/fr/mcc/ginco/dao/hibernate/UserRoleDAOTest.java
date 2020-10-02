@@ -3,12 +3,9 @@ package fr.mcc.ginco.dao.hibernate;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.Role;
-import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.UserRole;
 
 import java.util.ArrayList;
@@ -29,7 +26,7 @@ import org.mockito.Mockito;
 public class UserRoleDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		userRoleDAO.setSessionFactory(sessionFactory);
@@ -37,46 +34,7 @@ public class UserRoleDAOTest {
 	}
 
 	@Test
-	public void getUserRoleOnThesaurusUsernameIsAdmin() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
-
-		// arrange
-		UserRoleDAO userRoleDAO = new UserRoleDAO();
-		List list = new ArrayList();
-		UserRole userRole = new UserRole();
-		userRole.setIdentifier(1);
-		userRole.setRole(Role.MANAGER);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		userRole.setThesaurus(thesaurus);
-		userRole.setUsername("root");
-		list.add(userRole);
-		Criteria criteria1 = mock(Criteria.class);
-		Criteria criteria2 = mock(Criteria.class);
-		Criteria criteria3 = mock(Criteria.class);
-		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
-			.thenReturn(criteria2)
-			.thenReturn(criteria1);
-		when(criteria3.list())
-			.thenReturn(list);
-		Session session = mock(Session.class);
-		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria3);
-		SessionFactory sessionFactory = mock(SessionFactory.class);
-		when(sessionFactory.getCurrentSession())
-			.thenReturn(session);
-		userRoleDAO.setSessionFactory(sessionFactory);
-
-		// act
-		UserRole result = userRoleDAO.getUserRoleOnThesaurus("admin", "admin");
-
-		// assert
-		assertEquals(1, (int) result.getIdentifier());
-		assertTrue(Role.MANAGER == result.getRole());
-		assertSame(thesaurus, result.getThesaurus());
-		assertEquals("root", result.getUsername());
-	}
-
-	@Test
-	public void getUserRoleOnThesaurusUsernameIsBarReturnsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getUserRoleOnThesaurusThesaurusIdIsAdminAndUsernameIsBarReturnsNull() throws org.hibernate.HibernateException {
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
@@ -85,7 +43,7 @@ public class UserRoleDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(new ArrayList<String>());
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria3);
@@ -97,12 +55,12 @@ public class UserRoleDAOTest {
 	}
 
 	@Test
-	public void getUserRolesOnThesaurusThesaurusIdIsRoot() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getUserRolesOnThesaurusThesaurusIdIsRoot() throws org.hibernate.HibernateException {
 
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -122,16 +80,16 @@ public class UserRoleDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 
 	@Test
-	public void getUserRolesUsernameIsRoot() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getUserRolesUsernameIsRoot() throws org.hibernate.HibernateException {
 
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -151,6 +109,6 @@ public class UserRoleDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 }

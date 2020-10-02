@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 public class ConceptHierarchicalRelationshipDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		ConceptHierarchicalRelationshipDAO conceptHierarchicalRelationshipDAO =
 			 new ConceptHierarchicalRelationshipDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);

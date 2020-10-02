@@ -32,7 +32,7 @@ public class GincoNoteIdGeneratorTest {
 	}
 
 	@Test
-	public void getNotesWithNewIdsReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+	public void getNotesWithNewIdsReturnsEmpty() {
 		assertTrue(service.getNotesWithNewIds(new HashMap<String, JaxbList<Note>>(), new HashMap<String, String>()).isEmpty());
 	}
 }

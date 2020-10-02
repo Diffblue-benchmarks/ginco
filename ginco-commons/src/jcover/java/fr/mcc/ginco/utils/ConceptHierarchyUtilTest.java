@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 class ConceptHierarchyUtilTest {
 
 	@Test
-	void getSuperOrdinateMembersConceptsIsEmptyReturnsNull() {
+	void getSuperOrdinateReturnsNull() {
 		assertThat(ConceptHierarchyUtil.getSuperOrdinate(new HashSet<ThesaurusConcept>()), is(nullValue()));
 	}
 }

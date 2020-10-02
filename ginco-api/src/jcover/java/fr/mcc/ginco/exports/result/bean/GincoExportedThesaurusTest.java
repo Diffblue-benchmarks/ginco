@@ -46,7 +46,7 @@ import org.junit.jupiter.api.Test;
 class GincoExportedThesaurusTest {
 
 	@Test
-	void factory() throws java.io.IOException, CloneNotSupportedException, java.text.ParseException {
+	void factory() throws java.text.ParseException {
 		GincoExportedThesaurus gincoExportedThesaurus = new GincoExportedThesaurus();
 		gincoExportedThesaurus.setAlignments(new HashMap<String, JaxbList<Alignment>>());
 		gincoExportedThesaurus.setAssociativeRelationship(new HashMap<String, JaxbList<AssociativeRelationship>>());

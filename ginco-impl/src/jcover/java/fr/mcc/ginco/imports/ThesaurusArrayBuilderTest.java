@@ -43,7 +43,7 @@ public class ThesaurusArrayBuilderTest {
 	}
 
 	@Test
-	public void buildArray() throws java.util.NoSuchElementException, java.io.IOException, CloneNotSupportedException {
+	public void buildArray() {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
@@ -67,7 +67,7 @@ public class ThesaurusArrayBuilderTest {
 	}
 
 	@Test
-	public void getChildrenArraysReturnsEmpty() throws java.util.NoSuchElementException, java.io.IOException, CloneNotSupportedException {
+	public void getChildrenArraysReturnsEmpty() {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);

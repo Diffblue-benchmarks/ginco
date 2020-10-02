@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 public class ThesaurusDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		ThesaurusDAO thesaurusDAO = new ThesaurusDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		thesaurusDAO.setSessionFactory(sessionFactory);

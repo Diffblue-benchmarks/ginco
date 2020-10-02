@@ -32,7 +32,7 @@ public class GincoRelationshipIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForHierarchicalRelationsReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+	public void getIdsForHierarchicalRelationsReturnsEmpty() {
 		assertTrue(service.getIdsForHierarchicalRelations(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>(), new HashMap<String, String>()).isEmpty());
 	}
 }

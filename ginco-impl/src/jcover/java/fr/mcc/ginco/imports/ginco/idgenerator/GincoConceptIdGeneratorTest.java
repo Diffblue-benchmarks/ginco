@@ -36,7 +36,7 @@ public class GincoConceptIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdForConcept1() throws java.io.IOException, CloneNotSupportedException {
+	public void getIdForConcept1() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234");
 		when(generatorService.generate(Mockito.<Class>any()))
@@ -45,7 +45,7 @@ public class GincoConceptIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdForConcept2() throws java.io.IOException, CloneNotSupportedException {
+	public void getIdForConcept2() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("");
 		when(generatorService.generate(Mockito.<Class>any()))
@@ -54,7 +54,7 @@ public class GincoConceptIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdForConcept3() throws java.io.IOException, CloneNotSupportedException {
+	public void getIdForConcept3() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn(" with new id ");
 		assertEquals(" with new id ", service.getIdForConcept("1234", new HashMap<String, String>()));

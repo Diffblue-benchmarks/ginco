@@ -51,12 +51,12 @@ public class GincoAlignmentImporterTest {
 	}
 
 	@Test
-	public void storeAlignmentsReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+	public void storeAlignmentsReturnsEmpty() {
 		assertTrue((service.storeAlignments(new HashMap<String, JaxbList<Alignment>>())).isEmpty());
 	}
 
 	@Test
-	public void storeExternalThesaurusesBannedAlignmentsIsEmpty() throws java.io.IOException, CloneNotSupportedException {
+	public void storeExternalThesauruses() {
 		service.storeExternalThesauruses(new HashMap<String, JaxbList<Alignment>>(), new HashSet<Alignment>());
 	}
 }

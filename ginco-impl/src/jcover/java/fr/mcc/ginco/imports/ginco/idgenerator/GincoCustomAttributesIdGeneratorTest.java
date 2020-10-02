@@ -33,12 +33,12 @@ public class GincoCustomAttributesIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForCustomConceptAttributesReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+	public void getIdsForCustomConceptAttributesReturnsEmpty() {
 		assertTrue(service.getIdsForCustomConceptAttributes(new HashMap<String, JaxbList<CustomConceptAttribute>>(), new HashMap<String, String>()).isEmpty());
 	}
 
 	@Test
-	public void getIdsForCustomTermAttributesReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+	public void getIdsForCustomTermAttributesReturnsEmpty() {
 		assertTrue(service.getIdsForCustomTermAttributes(new HashMap<String, JaxbList<CustomTermAttribute>>(), new HashMap<String, String>()).isEmpty());
 	}
 }

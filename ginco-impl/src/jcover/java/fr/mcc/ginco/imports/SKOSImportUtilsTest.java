@@ -39,7 +39,7 @@ public class SKOSImportUtilsTest {
 	}
 
 	@Test
-	public void getSKOSRessourcesReturnsEmpty() throws java.util.NoSuchElementException {
+	public void getSKOSRessourcesReturnsEmpty() {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);

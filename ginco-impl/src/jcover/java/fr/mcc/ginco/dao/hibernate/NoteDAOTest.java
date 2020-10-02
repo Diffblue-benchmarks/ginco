@@ -26,7 +26,7 @@ import org.mockito.Mockito;
 public class NoteDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		NoteDAO noteDAO = new NoteDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		noteDAO.setSessionFactory(sessionFactory);
@@ -34,12 +34,12 @@ public class NoteDAOTest {
 	}
 
 	@Test
-	public void findConceptPaginatedNotesLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findConceptPaginatedNotesLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException {
 
 		// arrange
 		NoteDAO noteDAO = new NoteDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -68,16 +68,16 @@ public class NoteDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 
 	@Test
-	public void findTermPaginatedNotesLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findTermPaginatedNotesLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException {
 
 		// arrange
 		NoteDAO noteDAO = new NoteDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -106,64 +106,16 @@ public class NoteDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 
 	@Test
-	public void getConceptNoteCountReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
-		NoteDAO noteDAO = new NoteDAO();
-		List list = new ArrayList();
-		list.add(1L);
-		Criteria criteria1 = mock(Criteria.class);
-		when(criteria1.list())
-			.thenReturn(list);
-		Criteria criteria2 = mock(Criteria.class);
-		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
-			.thenReturn(criteria1);
-		Criteria criteria3 = mock(Criteria.class);
-		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
-			.thenReturn(criteria2);
-		Session session = mock(Session.class);
-		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria3);
-		SessionFactory sessionFactory = mock(SessionFactory.class);
-		when(sessionFactory.getCurrentSession())
-			.thenReturn(session);
-		noteDAO.setSessionFactory(sessionFactory);
-		assertEquals(1L, (long) noteDAO.getConceptNoteCount("1234"));
-	}
-
-	@Test
-	public void getTermNoteCountReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
-		NoteDAO noteDAO = new NoteDAO();
-		List list = new ArrayList();
-		list.add(1L);
-		Criteria criteria1 = mock(Criteria.class);
-		when(criteria1.list())
-			.thenReturn(list);
-		Criteria criteria2 = mock(Criteria.class);
-		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
-			.thenReturn(criteria1);
-		Criteria criteria3 = mock(Criteria.class);
-		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
-			.thenReturn(criteria2);
-		Session session = mock(Session.class);
-		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria3);
-		SessionFactory sessionFactory = mock(SessionFactory.class);
-		when(sessionFactory.getCurrentSession())
-			.thenReturn(session);
-		noteDAO.setSessionFactory(sessionFactory);
-		assertEquals(1L, (long) noteDAO.getTermNoteCount("1234"));
-	}
-
-	@Test
-	public void findNotesByThesaurusId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findNotesByThesaurusId() throws org.hibernate.HibernateException {
 
 		// arrange
 		NoteDAO noteDAO = new NoteDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -183,6 +135,6 @@ public class NoteDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 }

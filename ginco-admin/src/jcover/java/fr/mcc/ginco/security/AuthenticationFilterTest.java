@@ -35,7 +35,7 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 class AuthenticationFilterTest {
 
 	@Test
-	void factory() throws java.io.IOException, javax.servlet.ServletException, org.springframework.security.core.AuthenticationException, org.springframework.context.NoSuchMessageException, org.springframework.security.web.authentication.session.SessionAuthenticationException, IllegalStateException, IllegalArgumentException, java.net.MalformedURLException {
+	void factory() {
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
 		LockoutService lockoutService = new LockoutService();
 		authenticationFilter.setLockoutService(lockoutService);
@@ -47,7 +47,7 @@ class AuthenticationFilterTest {
 			 mock(ApplicationEventPublisher.class);
 		authenticationFilter.setApplicationEventPublisher(eventPublisher);
 		@SuppressWarnings("unchecked")
-		AuthenticationDetailsSource<HttpServletRequest, Object> authenticationDetailsSource =
+		AuthenticationDetailsSource<HttpServletRequest, String> authenticationDetailsSource =
 			 mock(AuthenticationDetailsSource.class);
 		authenticationFilter.setAuthenticationDetailsSource(authenticationDetailsSource);
 		AuthenticationFailureHandler failureHandler =
@@ -82,7 +82,7 @@ class AuthenticationFilterTest {
 	}
 
 	@Test
-	void attemptAuthentication() throws java.io.IOException, javax.servlet.ServletException, org.springframework.security.core.AuthenticationException, org.springframework.context.NoSuchMessageException, org.springframework.security.web.authentication.session.SessionAuthenticationException, IllegalStateException, IllegalArgumentException, java.net.MalformedURLException, java.io.UnsupportedEncodingException {
+	void attemptAuthentication() throws org.springframework.security.core.AuthenticationException, java.io.UnsupportedEncodingException {
 
 		// arrange
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
@@ -95,10 +95,10 @@ class AuthenticationFilterTest {
 			 mock(ApplicationEventPublisher.class);
 		authenticationFilter.setApplicationEventPublisher(eventPublisher);
 		@SuppressWarnings("unchecked")
-		AuthenticationDetailsSource<HttpServletRequest, Object> authenticationDetailsSource =
+		AuthenticationDetailsSource<HttpServletRequest, String> authenticationDetailsSource =
 			 mock(AuthenticationDetailsSource.class);
 		when(authenticationDetailsSource.buildDetails(Mockito.<HttpServletRequest>any()))
-			.thenReturn(new Object());
+			.thenReturn("foo=bar");
 		authenticationFilter.setAuthenticationDetailsSource(authenticationDetailsSource);
 		AuthenticationFailureHandler failureHandler =
 			 mock(AuthenticationFailureHandler.class);

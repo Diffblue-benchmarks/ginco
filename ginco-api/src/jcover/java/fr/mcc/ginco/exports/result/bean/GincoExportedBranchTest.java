@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
 class GincoExportedBranchTest {
 
 	@Test
-	void factory() throws java.io.IOException, CloneNotSupportedException, java.text.ParseException {
+	void factory() throws java.text.ParseException {
 		GincoExportedBranch gincoExportedBranch = new GincoExportedBranch();
 		gincoExportedBranch.setAlignments(new HashMap<String, JaxbList<Alignment>>());
 		gincoExportedBranch.setConceptNotes(new HashMap<String, JaxbList<Note>>());

@@ -25,7 +25,7 @@ import org.mockito.Mockito;
 public class NoteTypeDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		NoteTypeDAO noteTypeDAO = new NoteTypeDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		noteTypeDAO.setSessionFactory(sessionFactory);
@@ -33,12 +33,12 @@ public class NoteTypeDAOTest {
 	}
 
 	@Test
-	public void findConceptNoteTypes() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findConceptNoteTypes() throws org.hibernate.HibernateException {
 
 		// arrange
 		NoteTypeDAO noteTypeDAO = new NoteTypeDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -58,16 +58,16 @@ public class NoteTypeDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 
 	@Test
-	public void findTermNoteTypes() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findTermNoteTypes() throws org.hibernate.HibernateException {
 
 		// arrange
 		NoteTypeDAO noteTypeDAO = new NoteTypeDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -87,6 +87,6 @@ public class NoteTypeDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 }

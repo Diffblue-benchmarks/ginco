@@ -75,7 +75,7 @@ public class ThesaurusOrganizationBuilderTest {
 	}
 
 	@Test
-	public void getCreator3() throws java.util.NoSuchElementException {
+	public void getCreator3() {
 		Resource resource = mock(Resource.class);
 		RDFNode obj = mock(RDFNode.class);
 		when(obj.asResource())

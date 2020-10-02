@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 class GincoExportedEntityTest {
 
 	@Test
-	void factory() throws java.text.ParseException, java.io.IOException, CloneNotSupportedException {
+	void factory() throws java.text.ParseException {
 		GincoExportedEntity gincoExportedEntity = new GincoExportedEntity();
 		ArrayList<CustomConceptAttributeType> conceptAttributeTypes =
 			 new ArrayList<CustomConceptAttributeType>();

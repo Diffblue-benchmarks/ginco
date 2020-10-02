@@ -25,7 +25,7 @@ import org.mockito.Mockito;
 public class ThesaurusOrganizationDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		ThesaurusOrganizationDAO thesaurusOrganizationDAO =
 			 new ThesaurusOrganizationDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
@@ -34,13 +34,13 @@ public class ThesaurusOrganizationDAOTest {
 	}
 
 	@Test
-	public void getFilteredOrganizationNames() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getFilteredOrganizationNames() throws org.hibernate.HibernateException {
 
 		// arrange
 		ThesaurusOrganizationDAO thesaurusOrganizationDAO =
 			 new ThesaurusOrganizationDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -73,6 +73,6 @@ public class ThesaurusOrganizationDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 }

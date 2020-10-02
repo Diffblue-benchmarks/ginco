@@ -32,7 +32,7 @@ public class GincoAlignmentIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForAlignmentsReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+	public void getIdsForAlignmentsReturnsEmpty() {
 		assertTrue(service.getIdsForAlignments(new HashMap<String, JaxbList<Alignment>>(), new HashMap<String, String>()).isEmpty());
 	}
 }

@@ -29,7 +29,7 @@ import org.mockito.Mockito;
 public class GenericHibernateDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
@@ -38,7 +38,7 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void loadById() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void loadById() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
@@ -50,11 +50,11 @@ public class GenericHibernateDAOTest {
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		Serializable id = mock(Serializable.class);
 		assertTrue(genericHibernateDAO.loadById(id) instanceof Object);
-		// pojo Object
+		// pojo Object (Object) genericHibernateDAO.loadById(id)
 	}
 
 	@Test
-	public void getById() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getById() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
@@ -66,15 +66,15 @@ public class GenericHibernateDAOTest {
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		Serializable id = mock(Serializable.class);
 		assertTrue(genericHibernateDAO.getById(id) instanceof Object);
-		// pojo Object
+		// pojo Object (Object) genericHibernateDAO.getById(id)
 	}
 
 	@Test
-	public void getByExternalId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getByExternalIdReturnsFoo() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -89,16 +89,15 @@ public class GenericHibernateDAOTest {
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertEquals(1, genericHibernateDAO.getByExternalId("1234").size());
-		assertTrue(genericHibernateDAO.getByExternalId("1234").get(0) instanceof Object);
-		// pojo Object
+		assertEquals("foo", genericHibernateDAO.getByExternalId("1234").get(0));
 	}
 
 	@Test
-	public void findAll() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findAll() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria = mock(Criteria.class);
 		when(criteria.list())
 			.thenReturn(list);
@@ -110,17 +109,16 @@ public class GenericHibernateDAOTest {
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertEquals(1, genericHibernateDAO.findAll().size());
-		assertTrue(genericHibernateDAO.findAll().get(0) instanceof Object);
-		// pojo Object
+		assertEquals("foo", genericHibernateDAO.findAll().get(0));
 	}
 
 	@Test
-	public void findAllOrderIsAscReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findAllOrderIsAscReturnsEmpty() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(new ArrayList());
+			.thenReturn(new ArrayList<String>());
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -135,11 +133,11 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void findAllOrderIsDesc() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findAllOrderIsDesc() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -154,34 +152,11 @@ public class GenericHibernateDAOTest {
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertEquals(1, genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.desc).size());
-		assertTrue(genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.desc).get(0) instanceof Object);
-		// pojo Object
+		assertEquals("foo", genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.desc).get(0));
 	}
 
 	@Test
-	public void countReturnsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
-		List list = new ArrayList();
-		list.add(1L);
-		Criteria criteria1 = mock(Criteria.class);
-		when(criteria1.list())
-			.thenReturn(list);
-		Criteria criteria2 = mock(Criteria.class);
-		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
-			.thenReturn(criteria1);
-		Session session = mock(Session.class);
-		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria2);
-		SessionFactory sessionFactory = mock(SessionFactory.class);
-		when(sessionFactory.getCurrentSession())
-			.thenReturn(session);
-		genericHibernateDAO.setSessionFactory(sessionFactory);
-		assertEquals(1L, (long) genericHibernateDAO.count());
-	}
-
-	@Test
-	public void makePersistent() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void makePersistent() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
@@ -194,7 +169,7 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void update() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void update() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
@@ -207,7 +182,7 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void delete() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void delete() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);
@@ -220,7 +195,7 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void flush() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void flush() throws org.hibernate.HibernateException {
 
 		// arrange
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
@@ -239,7 +214,7 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void getCurrentSession() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getCurrentSession() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
 		Session session = mock(Session.class);

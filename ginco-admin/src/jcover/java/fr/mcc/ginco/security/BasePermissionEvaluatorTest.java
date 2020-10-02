@@ -20,15 +20,15 @@ import org.springframework.security.authentication.TestingAuthenticationToken;
 class BasePermissionEvaluatorTest {
 
 	@Test
-	void hasPermission1() {
-		List list = new ArrayList();
-		list.add(new Object());
-		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), list, new Object()), is(false));
+	void hasPermission() {
+		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), new Object(), "foo"), is(false));
 	}
 
 	@Test
-	void hasPermission2() {
-		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), new Object(), "foo"), is(false));
+	void hasPermissionTargetDomainObjectIsFoo() {
+		List list = new ArrayList<String>();
+		list.add("foo");
+		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), list, new Object()), is(false));
 	}
 
 	@Test

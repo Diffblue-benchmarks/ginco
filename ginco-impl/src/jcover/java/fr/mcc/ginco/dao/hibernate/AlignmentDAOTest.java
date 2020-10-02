@@ -25,7 +25,7 @@ import org.mockito.Mockito;
 public class AlignmentDAOTest {
 
 	@Test
-	public void factory() throws org.hibernate.HibernateException, javax.naming.NamingException {
+	public void factory() {
 		AlignmentDAO alignmentDAO = new AlignmentDAO();
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		alignmentDAO.setSessionFactory(sessionFactory);
@@ -33,12 +33,12 @@ public class AlignmentDAOTest {
 	}
 
 	@Test
-	public void findBySourceConceptId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findBySourceConceptId() throws org.hibernate.HibernateException {
 
 		// arrange
 		AlignmentDAO alignmentDAO = new AlignmentDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -58,16 +58,16 @@ public class AlignmentDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 
 	@Test
-	public void findByTargetConceptId() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findByTargetConceptId() throws org.hibernate.HibernateException {
 
 		// arrange
 		AlignmentDAO alignmentDAO = new AlignmentDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -90,16 +90,16 @@ public class AlignmentDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 
 	@Test
-	public void findByExternalThesaurusExternalThesaurusIdIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findByExternalThesaurusExternalThesaurusIdIsOne() throws org.hibernate.HibernateException {
 
 		// arrange
 		AlignmentDAO alignmentDAO = new AlignmentDAO();
-		List list = new ArrayList();
-		list.add(new Object());
+		List list = new ArrayList<String>();
+		list.add("foo");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -119,6 +119,6 @@ public class AlignmentDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo Object
+		// pojo String (String) result.get(0)
 	}
 }

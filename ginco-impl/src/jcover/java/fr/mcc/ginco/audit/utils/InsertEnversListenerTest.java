@@ -28,7 +28,7 @@ public class InsertEnversListenerTest {
 	}
 
 	@Test
-	public void onPostInsert() throws org.hibernate.HibernateException, org.hibernate.MappingException, org.hibernate.UnknownProfileException {
+	public void onPostInsert() {
 		Serializable id = mock(Serializable.class);
 		Object[] state = new Object[] { new Object() };
 		EntityPersister persister = mock(EntityPersister.class);
