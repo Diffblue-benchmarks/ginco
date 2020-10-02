@@ -39,7 +39,7 @@ public class SuggestionServiceImplTest {
 	}
 
 	@Test
-	public void getConceptSuggestionPaginatedListConceptIdIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+	public void getConceptSuggestionPaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<Suggestion> list = new ArrayList<Suggestion>();
@@ -50,7 +50,7 @@ public class SuggestionServiceImplTest {
 
 		// act
 		List<Suggestion> result =
-			 service.getConceptSuggestionPaginatedList("bar", -1, 0);
+			 service.getConceptSuggestionPaginatedList("1234", 1, 1);
 
 		// assert
 		assertEquals(1, result.size());
@@ -58,7 +58,7 @@ public class SuggestionServiceImplTest {
 	}
 
 	@Test
-	public void getTermSuggestionPaginatedListLimitIsZeroAndStartIndexIsMinusOneAndTermIdIsBar() {
+	public void getTermSuggestionPaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<Suggestion> list = new ArrayList<Suggestion>();
@@ -69,7 +69,7 @@ public class SuggestionServiceImplTest {
 
 		// act
 		List<Suggestion> result =
-			 service.getTermSuggestionPaginatedList("bar", -1, 0);
+			 service.getTermSuggestionPaginatedList("1234", 1, 1);
 
 		// assert
 		assertEquals(1, result.size());
@@ -77,7 +77,7 @@ public class SuggestionServiceImplTest {
 	}
 
 	@Test
-	public void getSuggestionByIdIdIsZero() throws java.text.ParseException {
+	public void getSuggestionByIdIdIsOne() throws java.text.ParseException {
 
 		// arrange
 		Suggestion suggestion = new Suggestion();
@@ -96,7 +96,7 @@ public class SuggestionServiceImplTest {
 			.thenReturn(suggestion);
 
 		// act
-		Suggestion result = service.getSuggestionById(0);
+		Suggestion result = service.getSuggestionById(1);
 
 		// assert
 		assertSame(concept1, result.getConcept());
@@ -187,7 +187,7 @@ public class SuggestionServiceImplTest {
 	}
 
 	@Test
-	public void getSuggestionPaginatedListByRecipientLimitIsZeroAndRecipientIsBarAndStartIndexIsMinusOne() {
+	public void getSuggestionPaginatedListByRecipientLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<Suggestion> list = new ArrayList<Suggestion>();
@@ -198,7 +198,7 @@ public class SuggestionServiceImplTest {
 
 		// act
 		List<Suggestion> result =
-			 service.getSuggestionPaginatedListByRecipient("bar", -1, 0);
+			 service.getSuggestionPaginatedListByRecipient("1234", 1, 1);
 
 		// assert
 		assertEquals(1, result.size());

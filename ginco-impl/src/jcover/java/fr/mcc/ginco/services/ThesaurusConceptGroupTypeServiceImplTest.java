@@ -56,7 +56,7 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 	}
 
 	@Test
-	public void getTypeByIdTypeIsBar() {
+	public void getTypeById() {
 
 		// arrange
 		ThesaurusConceptGroupType thesaurusConceptGroupType =
@@ -68,7 +68,7 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 			.thenReturn(thesaurusConceptGroupType);
 
 		// act
-		ThesaurusConceptGroupType result = service.getTypeById("bar");
+		ThesaurusConceptGroupType result = service.getTypeById("text/plain");
 
 		// assert
 		assertEquals("DE", result.getCode());

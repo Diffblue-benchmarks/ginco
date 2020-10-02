@@ -38,17 +38,17 @@ class ReportRestServiceTest {
 	private ReportRestService service;
 
 	@Test
-	void searchLimitIsOneAndTypeIsZero() {
+	void searchLimitIsOneAndStartIndexIsOneAndTypeIsZero() {
 
 		// arrange
-		SearchResultList searchResultList = new SearchResultList();
-		searchResultList.setNumFound(1L);
+		SearchResultList searchResultList1 = new SearchResultList();
+		searchResultList1.setNumFound(1L);
 		when(thesaurusReportService.getConceptsWithoutNotes(Mockito.<String>any(), anyInt(), anyInt()))
-			.thenReturn(searchResultList);
+			.thenReturn(searchResultList1);
 
 		// act
 		ExtJsonFormLoadData<List<SearchResult>> result =
-			 service.search("1234", 0, -1, 1);
+			 service.search("1234", 0, 1, 1);
 
 		// assert
 		assertThat(result.getData(), empty());
@@ -57,7 +57,7 @@ class ReportRestServiceTest {
 	}
 
 	@Test
-	void searchLimitIsZeroAndTypeIsOne() {
+	void searchLimitIsZeroAndStartIndexIsMinusOneAndTypeIsOne() {
 
 		// arrange
 		SearchResultList searchResultList = new SearchResultList();

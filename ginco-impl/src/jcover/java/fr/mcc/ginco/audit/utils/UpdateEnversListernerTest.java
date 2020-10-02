@@ -34,8 +34,8 @@ public class UpdateEnversListernerTest {
 		int[] dirtyProperties = new int[] { 1 };
 		EntityPersister persister = mock(EntityPersister.class);
 		when(persister.getEntityName())
-			.thenReturn("foo");
+			.thenReturn("entity");
 		EventSource source = mock(EventSource.class);
-		new UpdateEnversListerner(new AuditConfiguration(new org.hibernate.cfg.Configuration())).onPostUpdate(new PostUpdateEvent(new Object(), id, state, oldState, dirtyProperties, persister, source));
+		new UpdateEnversListerner(new AuditConfiguration(new org.hibernate.cfg.Configuration())).onPostUpdate(new PostUpdateEvent("foo", id, state, oldState, dirtyProperties, persister, source));
 	}
 }

@@ -54,7 +54,7 @@ public class ThesaurusFormatServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusFormatByIdIdIsZero() {
+	public void getThesaurusFormatByIdIdIsOne() {
 
 		// arrange
 		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
@@ -64,7 +64,7 @@ public class ThesaurusFormatServiceImplTest {
 			.thenReturn(thesaurusFormat);
 
 		// act
-		ThesaurusFormat result = service.getThesaurusFormatById(0);
+		ThesaurusFormat result = service.getThesaurusFormatById(1);
 
 		// assert
 		assertEquals(1, (int) result.getIdentifier());

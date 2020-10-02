@@ -40,10 +40,10 @@ public class GincoConceptIdGeneratorTest {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("");
 		when(generatorService.generate(Mockito.<Class>any()))
-			.thenReturn("foo");
+			.thenReturn(" with new id ");
 		HashMap<String, String> idMapping = new HashMap<String, String>();
-		assertEquals("foo", service.getIdForConcept("1234", idMapping));
-		assertEquals("foo", idMapping.get("1234"));
+		assertEquals(" with new id ", service.getIdForConcept("1234", idMapping));
+		assertEquals(" with new id ", idMapping.get("1234"));
 	}
 
 	@Test
@@ -54,11 +54,13 @@ public class GincoConceptIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdForConceptOldIdIsFoo() {
+	public void getIdForConcept3() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("foo");
+			.thenReturn("1234");
 		when(generatorService.generate(Mockito.<Class>any()))
-			.thenReturn("foo");
-		assertEquals("foo", service.getIdForConcept("foo", new HashMap<String, String>()));
+			.thenReturn(" with new id ");
+		HashMap<String, String> idMapping = new HashMap<String, String>();
+		assertEquals(" with new id ", service.getIdForConcept("1234", idMapping));
+		assertEquals(" with new id ", idMapping.get("1234"));
 	}
 }

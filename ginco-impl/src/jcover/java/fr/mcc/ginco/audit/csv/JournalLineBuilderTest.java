@@ -320,7 +320,7 @@ public class JournalLineBuilderTest {
 		// arrange
 		ThesaurusConcept conceptAtRevision = mock(ThesaurusConcept.class);
 		when(conceptAtRevision.getIdentifier())
-			.thenReturn("foo");
+			.thenReturn("data");
 		GincoRevEntity revision = new GincoRevEntity();
 		revision.setUsername("root");
 		revision.setId(1);
@@ -331,7 +331,7 @@ public class JournalLineBuilderTest {
 
 		// assert
 		assertEquals("root", result.getAuthorId());
-		assertEquals("foo", result.getConceptId());
+		assertEquals("data", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSCONCEPT_HIERARCHY_UPDATE == result.getEventType());
 		assertTrue((result.getNewGenericTerm()).isEmpty());

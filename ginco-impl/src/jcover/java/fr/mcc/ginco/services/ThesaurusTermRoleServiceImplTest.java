@@ -74,7 +74,7 @@ public class ThesaurusTermRoleServiceImplTest {
 	}
 
 	@Test
-	public void getTermRoleCodeIsBar() {
+	public void getTermRoleCodeIsDE() {
 
 		// arrange
 		ThesaurusTermRole thesaurusTermRole = new ThesaurusTermRole();
@@ -84,7 +84,7 @@ public class ThesaurusTermRoleServiceImplTest {
 			.thenReturn(thesaurusTermRole);
 
 		// act
-		ThesaurusTermRole result = service.getTermRole("bar");
+		ThesaurusTermRole result = service.getTermRole("DE");
 
 		// assert
 		assertEquals("DE", result.getCode());

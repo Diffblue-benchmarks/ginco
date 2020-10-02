@@ -55,7 +55,7 @@ public class AlignmentTypeServiceImplTest {
 	}
 
 	@Test
-	public void getAlignmentTypeByIdIdentifierIsZero() {
+	public void getAlignmentTypeByIdIdentifierIsOne() {
 
 		// arrange
 		AlignmentType alignmentType = new AlignmentType();
@@ -66,7 +66,7 @@ public class AlignmentTypeServiceImplTest {
 			.thenReturn(alignmentType);
 
 		// act
-		AlignmentType result = service.getAlignmentTypeById(0);
+		AlignmentType result = service.getAlignmentTypeById(1);
 
 		// assert
 		assertEquals(1, (int) result.getIdentifier());

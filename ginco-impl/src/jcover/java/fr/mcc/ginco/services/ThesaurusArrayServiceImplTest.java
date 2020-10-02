@@ -81,7 +81,7 @@ public class ThesaurusArrayServiceImplTest {
 	}
 
 	@Test
-	public void getAllThesaurusArrayByThesaurusIdExcludedConceptArrayIdIsBar() {
+	public void getAllThesaurusArrayByThesaurusId() {
 
 		// arrange
 		List<ThesaurusArray> list = new ArrayList<ThesaurusArray>();
@@ -92,7 +92,7 @@ public class ThesaurusArrayServiceImplTest {
 
 		// act
 		List<ThesaurusArray> result =
-			 service.getAllThesaurusArrayByThesaurusId("bar", "1234");
+			 service.getAllThesaurusArrayByThesaurusId("1234", "1234");
 
 		// assert
 		assertEquals(1, result.size());
@@ -179,10 +179,21 @@ public class ThesaurusArrayServiceImplTest {
 	}
 
 	@Test
-	public void getArraysWithoutParentConceptThesaurusIdIsFooReturnsEmpty() {
+	public void getArraysWithoutParentConcept() {
+
+		// arrange
+		List<ThesaurusArray> list = new ArrayList<ThesaurusArray>();
+		ThesaurusArray thesaurusArray = new ThesaurusArray();
+		list.add(thesaurusArray);
 		when(thesaurusArrayDAO.getArraysWithoutSuperordinatedConcept(Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusArray>());
-		assertTrue((service.getArraysWithoutParentConcept("foo")).isEmpty());
+			.thenReturn(list);
+
+		// act
+		List<ThesaurusArray> result = service.getArraysWithoutParentConcept("1234");
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusArray, result.get(0));
 	}
 
 	@Test

@@ -3,6 +3,7 @@ package fr.mcc.ginco.extjs.view.utils;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationship;
@@ -48,7 +49,33 @@ class AssociativeRelationshipViewConverterTest {
 
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
-			.thenReturn("foo");
+			.thenReturn("foo=bar");
+		AssociativeRelationship associativeRelationship =
+			 new AssociativeRelationship();
+		ThesaurusConcept conceptRight = new ThesaurusConcept();
+		conceptRight.setIdentifier("bar");
+		associativeRelationship.setConceptRight(conceptRight);
+		AssociativeRelationshipRole relationshipRole =
+			 new AssociativeRelationshipRole();
+		relationshipRole.setCode("DE");
+		associativeRelationship.setRelationshipRole(relationshipRole);
+
+		// act
+		AssociativeRelationshipView result =
+			 service.convert(associativeRelationship, new ThesaurusConcept());
+
+		// assert
+		assertThat(result.getIdentifier(), is("bar"));
+		assertThat(result.getLabel(), is("foo=bar"));
+		assertThat(result.getRoleCode(), is("DE"));
+	}
+
+	@Test
+	void convert2() {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("foo=bar");
 		AssociativeRelationship associativeRelationship =
 			 new AssociativeRelationship();
 		ThesaurusConcept conceptLeft = new ThesaurusConcept();
@@ -70,22 +97,22 @@ class AssociativeRelationshipViewConverterTest {
 
 		// assert
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getLabel(), is("foo"));
+		assertThat(result.getLabel(), is("foo=bar"));
 		assertThat(result.getRoleCode(), is("DE"));
 	}
 
 	@Test
-	void convert2() {
+	void convert3() {
 
 		// arrange
 		AssociativeRelationship associativeRelationship =
 			 new AssociativeRelationship();
-		ThesaurusConcept conceptLeft = new ThesaurusConcept();
+		ThesaurusConcept conceptLeft = mock(ThesaurusConcept.class);
 		associativeRelationship.setConceptLeft(conceptLeft);
 		ThesaurusConcept conceptRight = new ThesaurusConcept();
 		associativeRelationship.setConceptRight(conceptRight);
-		AssociativeRelationship.Id identifier11 = new AssociativeRelationship.Id();
-		associativeRelationship.setIdentifier(identifier11);
+		AssociativeRelationship.Id identifier6 = new AssociativeRelationship.Id();
+		associativeRelationship.setIdentifier(identifier6);
 		when(associativeRelationshipService.getAssociativeRelationshipById(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(associativeRelationship);
 		AssociativeRelationshipRole associativeRelationshipRole =
@@ -103,7 +130,7 @@ class AssociativeRelationshipViewConverterTest {
 		// assert
 		assertThat(result.getConceptLeft(), sameInstance(conceptLeft));
 		assertThat(result.getConceptRight(), sameInstance(conceptRight));
-		assertThat(result.getIdentifier(), sameInstance(identifier11));
+		assertThat(result.getIdentifier(), sameInstance(identifier6));
 		assertThat(result.getRelationshipRole(), sameInstance(associativeRelationshipRole));
 	}
 }

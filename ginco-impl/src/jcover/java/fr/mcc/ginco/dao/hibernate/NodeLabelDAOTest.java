@@ -37,7 +37,26 @@ public class NodeLabelDAOTest {
 	}
 
 	@Test
-	public void getByThesaurusArray() throws java.text.ParseException, org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void getByThesaurusArrayReturnsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+		NodeLabelDAO nodeLabelDAO = new NodeLabelDAO();
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria1);
+		when(criteria2.list())
+			.thenReturn(new ArrayList());
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria2);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		nodeLabelDAO.setSessionFactory(sessionFactory);
+		assertNull(nodeLabelDAO.getByThesaurusArray("1234"));
+	}
+
+	@Test
+	public void getByThesaurusArrayThesaurusArrayIdIsBar() throws java.text.ParseException, org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 
 		// arrange
 		NodeLabelDAO nodeLabelDAO = new NodeLabelDAO();
@@ -74,7 +93,7 @@ public class NodeLabelDAOTest {
 		nodeLabelDAO.setSessionFactory(sessionFactory);
 
 		// act
-		NodeLabel result = nodeLabelDAO.getByThesaurusArray("1234");
+		NodeLabel result = nodeLabelDAO.getByThesaurusArray("bar");
 
 		// assert
 		assertSame(created1, result.getCreated());
@@ -83,24 +102,5 @@ public class NodeLabelDAOTest {
 		assertEquals("value", result.getLexicalValue());
 		assertSame(modified1, result.getModified());
 		assertSame(thesaurusArray, result.getThesaurusArray());
-	}
-
-	@Test
-	public void getByThesaurusArrayReturnsNull() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
-		NodeLabelDAO nodeLabelDAO = new NodeLabelDAO();
-		Criteria criteria1 = mock(Criteria.class);
-		Criteria criteria2 = mock(Criteria.class);
-		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
-			.thenReturn(criteria1);
-		when(criteria2.list())
-			.thenReturn(new ArrayList());
-		Session session = mock(Session.class);
-		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria2);
-		SessionFactory sessionFactory = mock(SessionFactory.class);
-		when(sessionFactory.getCurrentSession())
-			.thenReturn(session);
-		nodeLabelDAO.setSessionFactory(sessionFactory);
-		assertNull(nodeLabelDAO.getByThesaurusArray("1234"));
 	}
 }

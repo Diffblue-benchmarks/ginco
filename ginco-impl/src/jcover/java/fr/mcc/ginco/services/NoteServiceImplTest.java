@@ -41,7 +41,7 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
-	public void getConceptNotePaginatedListConceptIdIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+	public void getConceptNotePaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<Note> list = new ArrayList<Note>();
@@ -51,7 +51,7 @@ public class NoteServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<Note> result = service.getConceptNotePaginatedList("bar", -1, 0);
+		List<Note> result = service.getConceptNotePaginatedList("1234", 1, 1);
 
 		// assert
 		assertEquals(1, result.size());
@@ -59,7 +59,7 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
-	public void getTermNotePaginatedListLimitIsZeroAndStartIndexIsMinusOneAndTermIdIsBar() {
+	public void getTermNotePaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<Note> list = new ArrayList<Note>();
@@ -69,7 +69,7 @@ public class NoteServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<Note> result = service.getTermNotePaginatedList("bar", -1, 0);
+		List<Note> result = service.getTermNotePaginatedList("1234", 1, 1);
 
 		// assert
 		assertEquals(1, result.size());
@@ -77,7 +77,7 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
-	public void getNoteByIdIdIsBar() throws java.text.ParseException {
+	public void getNoteById() throws java.text.ParseException {
 
 		// arrange
 		Note note = new Note();
@@ -102,7 +102,7 @@ public class NoteServiceImplTest {
 			.thenReturn(note);
 
 		// act
-		Note result = service.getNoteById("bar");
+		Note result = service.getNoteById("1234");
 
 		// assert
 		assertSame(concept1, result.getConcept());
@@ -229,7 +229,7 @@ public class NoteServiceImplTest {
 	}
 
 	@Test
-	public void getNotesByThesaurusIdThesaurusIdIsBar() {
+	public void getNotesByThesaurusId() {
 
 		// arrange
 		List<Note> list = new ArrayList<Note>();
@@ -239,7 +239,7 @@ public class NoteServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<Note> result = service.getNotesByThesaurusId("bar");
+		List<Note> result = service.getNotesByThesaurusId("1234");
 
 		// assert
 		assertEquals(1, result.size());

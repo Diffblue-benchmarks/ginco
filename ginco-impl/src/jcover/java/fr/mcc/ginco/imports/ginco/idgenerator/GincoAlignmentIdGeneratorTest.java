@@ -38,18 +38,7 @@ public class GincoAlignmentIdGeneratorTest {
 	@Test
 	public void getIdsForAlignments1() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("bar");
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		JaxbList<Alignment> x5 = new JaxbList<Alignment>();
-		alignments.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("bar"));
-	}
-
-	@Test
-	public void getIdsForAlignments2() {
-		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("foo");
+			.thenReturn("1234");
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
 		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
@@ -58,6 +47,17 @@ public class GincoAlignmentIdGeneratorTest {
 		list1.add(alignment1);
 		JaxbList<Alignment> x5 = new JaxbList<Alignment>(list1);
 		alignments.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("foo"));
+		assertSame(x5, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("1234"));
+	}
+
+	@Test
+	public void getIdsForAlignments2() {
+		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
+			.thenReturn("1234");
+		HashMap<String, JaxbList<Alignment>> alignments =
+			 new HashMap<String, JaxbList<Alignment>>();
+		JaxbList<Alignment> x5 = new JaxbList<Alignment>();
+		alignments.put("HmacMD5", x5);
+		assertSame(x5, service.getIdsForAlignments(alignments, new HashMap<String, String>()).get("1234"));
 	}
 }

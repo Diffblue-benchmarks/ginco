@@ -33,7 +33,7 @@ public class ConceptHierarchicalRelationshipServiceImplTest {
 	}
 
 	@Test
-	public void getByChildAndParentIdsChildIdIsBarAndParentIdIsFoo() {
+	public void getByChildAndParentIds() {
 
 		// arrange
 		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
@@ -47,7 +47,7 @@ public class ConceptHierarchicalRelationshipServiceImplTest {
 
 		// act
 		ConceptHierarchicalRelationship result =
-			 service.getByChildAndParentIds("bar", "foo");
+			 service.getByChildAndParentIds("1234", "1234");
 
 		// assert
 		assertSame(identifier, result.getIdentifier());

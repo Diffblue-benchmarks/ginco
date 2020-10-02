@@ -3,6 +3,8 @@ package fr.mcc.ginco.services;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 import fr.mcc.ginco.dao.IThesaurusTermDAO;
@@ -40,6 +42,38 @@ public class ThesaurusReportServiceImplTest {
 
 	@Before public void initMocks() {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void getConceptsWithoutNotesLimitIsOneAndStartIndexIsOne() {
+		when(thesaurusConceptService.getConceptPreferredTerm(Mockito.<String>any()))
+			.thenReturn(new ThesaurusTerm());
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setThesaurus(new Thesaurus());
+		list.add(thesaurusConcept);
+		when(conceptDAO.countConceptsWoNotes(Mockito.<String>any()))
+			.thenReturn(1L);
+		when(conceptDAO.getConceptsWoNotes(Mockito.<String>any(), anyInt(), anyInt()))
+			.thenReturn(list);
+		SearchResultList result =
+			 service.getConceptsWithoutNotes("/some/path.html", 1, 1);
+	}
+
+	@Test
+	public void getConceptsAlignedToMyThesLimitIsOneAndStartIndexIsOne() {
+		when(thesaurusConceptService.getConceptPreferredTerm(Mockito.<String>any()))
+			.thenReturn(new ThesaurusTerm());
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setThesaurus(new Thesaurus());
+		list.add(thesaurusConcept);
+		when(conceptDAO.countConceptsAlignedToMyThes(Mockito.<String>any()))
+			.thenReturn(1L);
+		when(conceptDAO.getConceptsAlignedToMyThes(Mockito.<String>any(), anyInt(), anyInt()))
+			.thenReturn(list);
+		SearchResultList result =
+			 service.getConceptsAlignedToMyThes("/some/path.html", 1, 1);
 	}
 
 	@Test

@@ -54,7 +54,7 @@ public class ThesaurusTypeServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusTypeByIdIdIsZero() {
+	public void getThesaurusTypeByIdIdIsOne() {
 
 		// arrange
 		ThesaurusType thesaurusType = new ThesaurusType();
@@ -64,7 +64,7 @@ public class ThesaurusTypeServiceImplTest {
 			.thenReturn(thesaurusType);
 
 		// act
-		ThesaurusType result = service.getThesaurusTypeById(0);
+		ThesaurusType result = service.getThesaurusTypeById(1);
 
 		// assert
 		assertEquals(1, (int) result.getIdentifier());

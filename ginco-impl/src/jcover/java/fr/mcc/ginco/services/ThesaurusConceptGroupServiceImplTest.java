@@ -111,7 +111,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 	}
 
 	@Test
-	public void getAllThesaurusConceptGroupsByThesaurusIdExcludedConceptGroupIdIsBar() {
+	public void getAllThesaurusConceptGroupsByThesaurusId() {
 
 		// arrange
 		List<ThesaurusConceptGroup> list = new ArrayList<ThesaurusConceptGroup>();
@@ -122,7 +122,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 
 		// act
 		List<ThesaurusConceptGroup> result =
-			 service.getAllThesaurusConceptGroupsByThesaurusId("bar", "1234");
+			 service.getAllThesaurusConceptGroupsByThesaurusId("1234", "1234");
 
 		// assert
 		assertEquals(1, result.size());

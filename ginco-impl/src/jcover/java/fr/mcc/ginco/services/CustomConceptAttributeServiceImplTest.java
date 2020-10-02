@@ -2,7 +2,6 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomConceptAttribute;
@@ -48,10 +47,10 @@ public class CustomConceptAttributeServiceImplTest {
 		list.add(customConceptAttribute);
 		when(customConceptAttributeDAO.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(list);
-		ThesaurusConcept concept = mock(ThesaurusConcept.class);
 
 		// act
-		List<CustomConceptAttribute> result = service.getAttributesByEntity(concept);
+		List<CustomConceptAttribute> result =
+			 service.getAttributesByEntity(new ThesaurusConcept());
 
 		// assert
 		assertEquals(1, result.size());

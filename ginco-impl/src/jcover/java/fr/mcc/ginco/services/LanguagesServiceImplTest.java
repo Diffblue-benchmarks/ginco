@@ -37,7 +37,7 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguagesListLimitIsOneAndStartIndexIsZero() {
+	public void getLanguagesListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<Language> list = new ArrayList<Language>();
@@ -47,7 +47,7 @@ public class LanguagesServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<Language> result = service.getLanguagesList(0, 1);
+		List<Language> result = service.getLanguagesList(1, 1);
 
 		// assert
 		assertEquals(1, result.size());
@@ -80,7 +80,7 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguageByIdIdIsBar() {
+	public void getLanguageById() {
 
 		// arrange
 		Language language = new Language();
@@ -91,7 +91,7 @@ public class LanguagesServiceImplTest {
 			.thenReturn(language);
 
 		// act
-		Language result = service.getLanguageById("bar");
+		Language result = service.getLanguageById("1234");
 
 		// assert
 		assertEquals("1234", result.getId());
@@ -102,7 +102,7 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguageByPart1Part1IsBar() {
+	public void getLanguageByPart1() {
 
 		// arrange
 		Language language = new Language();
@@ -113,7 +113,7 @@ public class LanguagesServiceImplTest {
 			.thenReturn(language);
 
 		// act
-		Language result = service.getLanguageByPart1("bar");
+		Language result = service.getLanguageByPart1("/some/path.html");
 
 		// assert
 		assertEquals("1234", result.getId());

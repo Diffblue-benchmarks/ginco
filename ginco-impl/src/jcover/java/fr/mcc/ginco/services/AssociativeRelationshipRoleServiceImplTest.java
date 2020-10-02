@@ -103,7 +103,7 @@ public class AssociativeRelationshipRoleServiceImplTest {
 	}
 
 	@Test
-	public void getRoleBySkosLabelSkosLabelIsBar() {
+	public void getRoleBySkosLabelSkosLabelIsLabel() {
 
 		// arrange
 		AssociativeRelationshipRole associativeRelationshipRole =
@@ -115,7 +115,7 @@ public class AssociativeRelationshipRoleServiceImplTest {
 			.thenReturn(associativeRelationshipRole);
 
 		// act
-		AssociativeRelationshipRole result = service.getRoleBySkosLabel("bar");
+		AssociativeRelationshipRole result = service.getRoleBySkosLabel("label");
 
 		// assert
 		assertEquals("DE", result.getCode());

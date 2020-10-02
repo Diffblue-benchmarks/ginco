@@ -2,8 +2,10 @@ package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
@@ -12,6 +14,7 @@ import fr.mcc.ginco.beans.ThesaurusFormat;
 import fr.mcc.ginco.beans.ThesaurusOrganization;
 import fr.mcc.ginco.beans.ThesaurusStatistics;
 import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusView;
 import fr.mcc.ginco.extjs.view.utils.ThesaurusViewConverter;
@@ -24,6 +27,7 @@ import fr.mcc.ginco.services.IThesaurusTypeService;
 import fr.mcc.ginco.services.IThesaurusVersionHistoryService;
 import fr.mcc.ginco.solr.IThesaurusIndexerService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,6 +116,23 @@ class ThesaurusRestServiceTest {
 	}
 
 	@Test
+	void getTopLanguagesThesaurusIdIsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		List<Language> list2 = new ArrayList<Language>();
+		when(languagesService.getTopLanguagesList())
+			.thenReturn(list2);
+
+		// act
+		ExtJsonFormLoadData<List<Language>> result = service.getTopLanguages("");
+
+		// assert
+		assertThat(result.getData(), sameInstance(list2));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
 	void getAllThesaurusFormats() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
@@ -130,6 +151,242 @@ class ThesaurusRestServiceTest {
 	}
 
 	@Test
+	void getVocabularyById() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		ThesaurusView thesaurusView = new ThesaurusView();
+		thesaurusView.setArchived(false);
+		thesaurusView.setCanBeDeleted(false);
+		thesaurusView.setContributor("foo");
+		thesaurusView.setCoverage("foo");
+		thesaurusView.setCreated("foo");
+		thesaurusView.setCreatorEmail("info@diffblue.com");
+		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorName("Acme");
+		thesaurusView.setDate("1999-12-31");
+		thesaurusView.setDefaultTopConcept(false);
+		thesaurusView.setDescription("some text");
+		ArrayList<Integer> formats = new ArrayList<Integer>();
+		formats.add(1);
+		thesaurusView.setFormats(formats);
+		thesaurusView.setId("1234");
+		ArrayList<String> lang1 = new ArrayList<String>();
+		lang1.add("foo");
+		thesaurusView.setLanguages(lang1);
+		thesaurusView.setPolyHierarchical(false);
+		thesaurusView.setPublisher("foo");
+		thesaurusView.setRelation("DE");
+		thesaurusView.setRights("foo");
+		thesaurusView.setSource("foo");
+		thesaurusView.setSubject("foo");
+		thesaurusView.setTitle("Mr");
+		thesaurusView.setType(1);
+		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurusView);
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+
+		// act
+		ThesaurusView result = service.getVocabularyById("1234");
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(false));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
+		assertThat(result.getCreatorHomepage(), is("+"));
+		assertThat(result.getCreatorName(), is("Acme"));
+		assertThat(result.getDate(), is("1999-12-31"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), hasSize(1));
+		assertThat(result.getFormats().get(0), is(1));
+		assertThat(result.getId(), is("1234"));
+		assertThat(result.getLanguages(), hasSize(1));
+		assertThat(result.getLanguages().get(0), is("foo"));
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("1234"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+	}
+
+	@Test
+	void getVocabularies() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		ThesaurusView thesaurusView = new ThesaurusView();
+		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurusView);
+		List<Thesaurus> list = new ArrayList<Thesaurus>();
+		list.add(new Thesaurus());
+		when(thesaurusService.getThesaurusList())
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusView>> result = service.getVocabularies();
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusView));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void updateVocabulary1() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		ThesaurusView thesaurusView = new ThesaurusView();
+		thesaurusView.setArchived(false);
+		thesaurusView.setCanBeDeleted(false);
+		thesaurusView.setContributor("foo");
+		thesaurusView.setCoverage("foo");
+		thesaurusView.setCreated("foo");
+		thesaurusView.setCreatorEmail("info@diffblue.com");
+		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorName("Acme");
+		thesaurusView.setDate("1999-12-31");
+		thesaurusView.setDefaultTopConcept(false);
+		thesaurusView.setDescription("some text");
+		ArrayList<Integer> formats1 = new ArrayList<Integer>();
+		formats1.add(1);
+		thesaurusView.setFormats(formats1);
+		thesaurusView.setId("1234");
+		ArrayList<String> lang1 = new ArrayList<String>();
+		lang1.add("foo");
+		thesaurusView.setLanguages(lang1);
+		thesaurusView.setPolyHierarchical(false);
+		thesaurusView.setPublisher("foo");
+		thesaurusView.setRelation("DE");
+		thesaurusView.setRights("foo");
+		thesaurusView.setSource("foo");
+		thesaurusView.setSubject("foo");
+		thesaurusView.setTitle("Mr");
+		thesaurusView.setType(1);
+		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurusView);
+		when(thesaurusViewConverter.convert(Mockito.<ThesaurusView>any()))
+			.thenReturn(new Thesaurus());
+		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setTitle("Mr");
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus3);
+		when(thesaurusService.updateThesaurus(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+
+		// act
+		ThesaurusView result = service.updateVocabulary(new ThesaurusView());
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(false));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
+		assertThat(result.getCreatorHomepage(), is("+"));
+		assertThat(result.getCreatorName(), is("Acme"));
+		assertThat(result.getDate(), is("1999-12-31"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), hasSize(1));
+		assertThat(result.getFormats().get(0), is(1));
+		assertThat(result.getId(), is("1234"));
+		assertThat(result.getLanguages(), hasSize(1));
+		assertThat(result.getLanguages().get(0), is("foo"));
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("1234"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+	}
+
+	@Test
+	void updateVocabulary2() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		ThesaurusView thesaurusView = new ThesaurusView();
+		thesaurusView.setArchived(false);
+		thesaurusView.setCanBeDeleted(false);
+		thesaurusView.setContributor("foo");
+		thesaurusView.setCoverage("foo");
+		thesaurusView.setCreated("foo");
+		thesaurusView.setCreatorEmail("info@diffblue.com");
+		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorName("Acme");
+		thesaurusView.setDate("1999-12-31");
+		thesaurusView.setDefaultTopConcept(false);
+		thesaurusView.setDescription("some text");
+		ArrayList<Integer> formats1 = new ArrayList<Integer>();
+		formats1.add(1);
+		thesaurusView.setFormats(formats1);
+		thesaurusView.setId("1234");
+		ArrayList<String> lang1 = new ArrayList<String>();
+		lang1.add("foo");
+		thesaurusView.setLanguages(lang1);
+		thesaurusView.setPolyHierarchical(false);
+		thesaurusView.setPublisher("foo");
+		thesaurusView.setRelation("DE");
+		thesaurusView.setRights("foo");
+		thesaurusView.setSource("foo");
+		thesaurusView.setSubject("foo");
+		thesaurusView.setTitle("Mr");
+		thesaurusView.setType(1);
+		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurusView);
+		when(thesaurusViewConverter.convert(Mockito.<ThesaurusView>any()))
+			.thenReturn(new Thesaurus());
+		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setTitle("bar");
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus3);
+		when(thesaurusService.updateThesaurus(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+
+		// act
+		ThesaurusView result = service.updateVocabulary(new ThesaurusView());
+
+		// assert
+		assertThat(result.getArchived(), is(false));
+		assertThat(result.getCanBeDeleted(), is(false));
+		assertThat(result.getContributor(), is("foo"));
+		assertThat(result.getCoverage(), is("foo"));
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
+		assertThat(result.getCreatorHomepage(), is("+"));
+		assertThat(result.getCreatorName(), is("Acme"));
+		assertThat(result.getDate(), is("1999-12-31"));
+		assertThat(result.getDefaultTopConcept(), is(false));
+		assertThat(result.getDescription(), is("some text"));
+		assertThat(result.getFormats(), hasSize(1));
+		assertThat(result.getFormats().get(0), is(1));
+		assertThat(result.getId(), is("1234"));
+		assertThat(result.getLanguages(), hasSize(1));
+		assertThat(result.getLanguages().get(0), is("foo"));
+		assertThat(result.getPolyHierarchical(), is(false));
+		assertThat(result.getPublisher(), is("foo"));
+		assertThat(result.getRelation(), is("DE"));
+		assertThat(result.getRights(), is("foo"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getSubject(), is("foo"));
+		assertThat(result.getThesaurusId(), is("1234"));
+		assertThat(result.getTitle(), is("Mr"));
+		assertThat(result.getType(), is(1));
+		Mockito.verify(thesaurusIndexerService).indexThesaurus(ArgumentMatchers.<Thesaurus>any());
+	}
+
+	@Test
 	void destroyVocabulary() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
@@ -139,12 +396,91 @@ class ThesaurusRestServiceTest {
 			.thenReturn(thesaurus1);
 		when(thesaurusService.destroyThesaurus(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
+		ThesaurusView thesaurusViewJAXBElement = mock(ThesaurusView.class);
 
 		// act
-		service.destroyVocabulary(new ThesaurusView());
+		service.destroyVocabulary(thesaurusViewJAXBElement);
 
 		// assert
 		Mockito.verify(thesaurusIndexerService).removeThesaurusIndex(ArgumentMatchers.eq("data"));
+	}
+
+	@Test
+	void publishVocabulary() throws java.text.ParseException, fr.mcc.ginco.exceptions.TechnicalException, java.io.IOException {
+		when(thesaurusVersionHistoryService.publishThesaurus(Mockito.<Thesaurus>any(), Mockito.<String>any()))
+			.thenReturn(new ThesaurusVersionHistory());
+		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setArchived(false);
+		thesaurus3.setContributor("foo");
+		thesaurus3.setCoverage("foo");
+		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator3 = new ThesaurusOrganization();
+		creator3.setEmail("info@diffblue.com");
+		creator3.setHomepage("foo");
+		creator3.setIdentifier(1);
+		creator3.setName("Acme");
+		thesaurus3.setCreator(creator3);
+		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus3.setDefaultTopConcept(false);
+		thesaurus3.setDescription("some text");
+		thesaurus3.setIdentifier("data");
+		thesaurus3.setPolyHierarchical(false);
+		thesaurus3.setPublisher("foo");
+		thesaurus3.setRelation("DE");
+		thesaurus3.setRights("foo");
+		thesaurus3.setSource("foo");
+		thesaurus3.setSubject("foo");
+		thesaurus3.setTitle("Mr");
+		ThesaurusType type3 = new ThesaurusType();
+		type3.setIdentifier(1);
+		type3.setLabel("label");
+		thesaurus3.setType(type3);
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus3);
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+		assertThat(service.publishVocabulary("1234", "root"), is("{\"success\":true,\"data\":{\"identifier\":\"data\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":1293753600000,\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":1293753600000,\"defaultTopConcept\":false,\"archived\":false,\"type\":{\"identifier\":1,\"label\":\"label\"},\"creator\":{\"identifier\":1,\"name\":\"Acme\",\"homepage\":\"foo\",\"email\":\"info@diffblue.com\"},\"polyHierarchical\":false,\"format\":[],\"thesaurusId\":\"data\"},\"total\":null}"));
+		Mockito.verify(thesaurusService).publishThesaurus(ArgumentMatchers.<Thesaurus>any());
+	}
+
+	@Test
+	void archiveVocabulary() throws fr.mcc.ginco.exceptions.TechnicalException, java.io.IOException {
+		ThesaurusView thesaurusView = new ThesaurusView();
+		thesaurusView.setArchived(false);
+		thesaurusView.setCanBeDeleted(false);
+		thesaurusView.setContributor("foo");
+		thesaurusView.setCoverage("foo");
+		thesaurusView.setCreated("foo");
+		thesaurusView.setCreatorEmail("info@diffblue.com");
+		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorName("Acme");
+		thesaurusView.setDate("1999-12-31");
+		thesaurusView.setDefaultTopConcept(false);
+		thesaurusView.setDescription("some text");
+		ArrayList<Integer> formats = new ArrayList<Integer>();
+		formats.add(1);
+		thesaurusView.setFormats(formats);
+		thesaurusView.setId("1234");
+		ArrayList<String> lang1 = new ArrayList<String>();
+		lang1.add("foo");
+		thesaurusView.setLanguages(lang1);
+		thesaurusView.setPolyHierarchical(false);
+		thesaurusView.setPublisher("foo");
+		thesaurusView.setRelation("DE");
+		thesaurusView.setRights("foo");
+		thesaurusView.setSource("foo");
+		thesaurusView.setSubject("foo");
+		thesaurusView.setTitle("Mr");
+		thesaurusView.setType(1);
+		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurusView);
+		when(thesaurusService.archiveThesaurus(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+		assertThat(service.archiveVocabulary("1234"), is("{\"success\":true,\"data\":{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"1999-12-31\",\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"foo\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"+\",\"creatorEmail\":\"info@diffblue.com\",\"polyHierarchical\":false,\"languages\":[\"foo\"],\"formats\":[1],\"thesaurusId\":\"1234\"},\"total\":null}"));
 	}
 
 	@Test

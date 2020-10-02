@@ -19,6 +19,7 @@ import fr.mcc.ginco.dao.IThesaurusTermDAO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -99,7 +100,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getPaginatedThesaurusSandoxedTermsListIdThesaurusIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+	public void getPaginatedThesaurusSandoxedTermsListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
@@ -110,7 +111,7 @@ public class ThesaurusTermServiceImplTest {
 
 		// act
 		List<ThesaurusTerm> result =
-			 service.getPaginatedThesaurusSandoxedTermsList(-1, 0, "bar");
+			 service.getPaginatedThesaurusSandoxedTermsList(1, 1, "1234");
 
 		// assert
 		assertEquals(1, result.size());
@@ -118,7 +119,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getTermsByConceptIdIdConceptIsBar() {
+	public void getTermsByConceptId() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
@@ -128,7 +129,7 @@ public class ThesaurusTermServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<ThesaurusTerm> result = service.getTermsByConceptId("bar");
+		List<ThesaurusTerm> result = service.getTermsByConceptId("1234");
 
 		// assert
 		assertEquals(1, result.size());
@@ -198,7 +199,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getAllTerms() {
+	public void getAllTerms1() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
@@ -216,7 +217,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getPaginatedThesaurusSandoxedValidatedTermsListIdThesaurusIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+	public void getPaginatedThesaurusSandoxedValidatedTermsListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
@@ -227,7 +228,7 @@ public class ThesaurusTermServiceImplTest {
 
 		// act
 		List<ThesaurusTerm> result =
-			 service.getPaginatedThesaurusSandoxedValidatedTermsList(-1, 0, "bar");
+			 service.getPaginatedThesaurusSandoxedValidatedTermsList(1, 1, "1234");
 
 		// assert
 		assertEquals(1, result.size());
@@ -256,47 +257,47 @@ public class ThesaurusTermServiceImplTest {
 	public void getPreferredTermByTerm() throws java.text.ParseException {
 
 		// arrange
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		ThesaurusConcept concept = new ThesaurusConcept();
-		thesaurusTerm.setConcept(concept);
-		Date created3 =
+		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
+		ThesaurusConcept concept2 = new ThesaurusConcept();
+		thesaurusTerm2.setConcept(concept2);
+		Date created7 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setCreated(created3);
-		thesaurusTerm.setHidden(false);
-		thesaurusTerm.setIdentifier("data");
-		Language language = new Language();
-		thesaurusTerm.setLanguage(language);
-		thesaurusTerm.setLexicalValue("value");
-		Date modified2 =
+		thesaurusTerm2.setCreated(created7);
+		thesaurusTerm2.setHidden(false);
+		thesaurusTerm2.setIdentifier("data");
+		Language language2 = new Language();
+		thesaurusTerm2.setLanguage(language2);
+		thesaurusTerm2.setLexicalValue("value");
+		Date modified4 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setModified(modified2);
-		thesaurusTerm.setPrefered(true);
-		ThesaurusTermRole role = new ThesaurusTermRole();
-		thesaurusTerm.setRole(role);
-		thesaurusTerm.setSource("foo");
-		thesaurusTerm.setStatus(1);
-		Thesaurus thesaurus2 = new Thesaurus();
-		thesaurusTerm.setThesaurus(thesaurus2);
+		thesaurusTerm2.setModified(modified4);
+		thesaurusTerm2.setPrefered(true);
+		ThesaurusTermRole role2 = new ThesaurusTermRole();
+		thesaurusTerm2.setRole(role2);
+		thesaurusTerm2.setSource("foo");
+		thesaurusTerm2.setStatus(1);
+		Thesaurus thesaurus4 = new Thesaurus();
+		thesaurusTerm2.setThesaurus(thesaurus4);
 		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(thesaurusTerm);
+			.thenReturn(thesaurusTerm2);
 
 		// act
 		ThesaurusTerm result =
 			 service.getPreferredTermByTerm("value", "1234", "1234");
 
 		// assert
-		assertSame(concept, result.getConcept());
-		assertSame(created3, result.getCreated());
+		assertSame(concept2, result.getConcept());
+		assertSame(created7, result.getCreated());
 		assertFalse(result.getHidden());
 		assertEquals("data", result.getIdentifier());
-		assertSame(language, result.getLanguage());
+		assertSame(language2, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified2, result.getModified());
+		assertSame(modified4, result.getModified());
 		assertTrue(result.getPrefered());
-		assertSame(role, result.getRole());
+		assertSame(role2, result.getRole());
 		assertEquals("foo", result.getSource());
 		assertEquals(1, (int) result.getStatus());
-		assertSame(thesaurus2, result.getThesaurus());
+		assertSame(thesaurus4, result.getThesaurus());
 	}
 
 	@Test
@@ -333,7 +334,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getAllTermsThesaurusIdIsBar() {
+	public void getAllTerms2() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
@@ -343,7 +344,7 @@ public class ThesaurusTermServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<ThesaurusTerm> result = service.getAllTerms("bar");
+		List<ThesaurusTerm> result = service.getAllTerms("1234");
 
 		// assert
 		assertEquals(1, result.size());
@@ -351,7 +352,7 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getPaginatedThesaurusPreferredTermsListLimitIsZeroAndOnlyNotOrphanConceptsIsTrueAndStartIndexIsMinusOne() {
+	public void getPaginatedThesaurusPreferredTermsListLimitIsOneAndOnlyNotOrphanConceptsIsFalseAndStartIndexIsOne() {
 
 		// arrange
 		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
@@ -362,7 +363,7 @@ public class ThesaurusTermServiceImplTest {
 
 		// act
 		List<ThesaurusTerm> result =
-			 service.getPaginatedThesaurusPreferredTermsList(-1, 0, "1234", true);
+			 service.getPaginatedThesaurusPreferredTermsList(1, 1, "1234", false);
 
 		// assert
 		assertEquals(1, result.size());
@@ -370,9 +371,44 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
+	public void importSandBoxTermsDefaultStatusIsOne() {
+
+		// arrange
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(thesaurusTerm);
+		when(thesaurusDAO.getById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		when(generatorService.generate(Mockito.<Class>any()))
+			.thenReturn("foo");
+		HashMap<String, Language> termLexicalValues =
+			 new HashMap<String, Language>();
+		termLexicalValues.put("HmacMD5", new Language());
+
+		// act
+		List<ThesaurusTerm> result =
+			 service.importSandBoxTerms(termLexicalValues, "1234", 1);
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void isTermAlreadyUsedInConceptReturnsFalse() {
+		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ThesaurusTerm());
+		ThesaurusTerm term = new ThesaurusTerm();
+		term.setLanguage(new Language());
+		term.setThesaurus(new Thesaurus());
+		assertFalse(service.isTermAlreadyUsedInConcept(term));
+	}
+
+	@Test
 	public void isTermAlreadyUsedInConceptReturnsTrue() {
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setConcept(new ThesaurusConcept());
+		ThesaurusConcept concept1 = mock(ThesaurusConcept.class);
+		thesaurusTerm.setConcept(concept1);
 		when(thesaurusTermDAO.getTermByLexicalValueThesaurusIdLanguageId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(thesaurusTerm);
 		ThesaurusTerm term = new ThesaurusTerm();

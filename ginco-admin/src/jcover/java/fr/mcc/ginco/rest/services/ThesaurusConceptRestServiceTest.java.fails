@@ -1,17 +1,19 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Note;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.GenericRoleView;
 import fr.mcc.ginco.extjs.view.pojo.GenericStatusView;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptReducedView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptView;
 import fr.mcc.ginco.extjs.view.utils.AlignmentViewConverter;
 import fr.mcc.ginco.extjs.view.utils.AssociativeRelationshipViewConverter;
 import fr.mcc.ginco.extjs.view.utils.HierarchicalRelationshipViewConverter;
@@ -31,6 +33,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -90,12 +93,88 @@ class ThesaurusConceptRestServiceTest {
 	private ThesaurusConceptRestService service;
 
 	@Test
-	void getSimpleConceptsAssociatedConceptsIsEmpty() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void getSimpleConceptsAssociatedConceptsIsHello() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		ThesaurusConceptReducedView thesaurusConceptReducedView =
+			 new ThesaurusConceptReducedView();
+		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(thesaurusConceptReducedView);
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(new ThesaurusConcept());
+		ArrayList<String> associatedConcepts = new ArrayList<String>();
+		associatedConcepts.add("hello");
+
+		// act
 		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
-			 service.getSimpleConcepts(new ArrayList<String>());
-		assertThat(result.getData(), empty());
+			 service.getSimpleConcepts(associatedConcepts);
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getSimpleChildrenConceptsConceptIdIsHelloAndLikeIsHello() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		ThesaurusConceptReducedView thesaurusConceptReducedView =
+			 new ThesaurusConceptReducedView();
+		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(thesaurusConceptReducedView);
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		list.add(new ThesaurusConcept());
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
+			 service.getSimpleChildrenConcepts("hello", "hello");
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void destroyConcept1() throws fr.mcc.ginco.exceptions.TechnicalException {
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+		when(thesaurusConceptService.destroyThesaurusConcept(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(new ThesaurusConcept());
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(new ThesaurusConcept());
+		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(new ArrayList<Note>());
+		service.destroyConcept(new ThesaurusConceptView());
+		Mockito.verify(conceptIndexerService).removeConcept(ArgumentMatchers.<ThesaurusConcept>any());
+	}
+
+	@Test
+	void destroyConcept2() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(new Thesaurus());
+		when(thesaurusConceptService.destroyThesaurusConcept(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(new ThesaurusConcept());
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(new ThesaurusConcept());
+		List<Note> list = new ArrayList<Note>();
+		list.add(new Note());
+		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(list);
+
+		// act
+		service.destroyConcept(new ThesaurusConceptView());
+
+		// assert
+		Mockito.verify(noteIndexerService).removeNote(ArgumentMatchers.<Note>any());
+		Mockito.verify(conceptIndexerService).removeConcept(ArgumentMatchers.<ThesaurusConcept>any());
 	}
 
 	@Test

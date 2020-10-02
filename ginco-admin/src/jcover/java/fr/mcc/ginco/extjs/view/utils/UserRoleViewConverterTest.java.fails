@@ -92,9 +92,9 @@ class UserRoleViewConverterTest {
 	void convert3() {
 
 		// arrange
-		Thesaurus thesaurus = new Thesaurus();
+		Thesaurus thesaurus2 = new Thesaurus();
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(thesaurus);
+			.thenReturn(thesaurus2);
 		UserRoleView userRoleView = new UserRoleView();
 		userRoleView.setRole(1);
 		userRoleView.setUsername("root");
@@ -105,7 +105,7 @@ class UserRoleViewConverterTest {
 		// assert
 		assertThat(result.getIdentifier(), is(nullValue()));
 		assertThat(result.getRole(), is(Role.EXPERT));
-		assertThat(result.getThesaurus(), sameInstance(thesaurus));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus2));
 		assertThat(result.getUsername(), is("root"));
 	}
 
@@ -113,9 +113,9 @@ class UserRoleViewConverterTest {
 	void convert4() {
 
 		// arrange
-		Thesaurus thesaurus = new Thesaurus();
+		Thesaurus thesaurus2 = new Thesaurus();
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(thesaurus);
+			.thenReturn(thesaurus2);
 		UserRoleView userRoleView = new UserRoleView();
 		userRoleView.setIdentifier(0);
 		userRoleView.setRole(1);
@@ -127,7 +127,33 @@ class UserRoleViewConverterTest {
 		// assert
 		assertThat(result.getIdentifier(), is(nullValue()));
 		assertThat(result.getRole(), is(Role.EXPERT));
-		assertThat(result.getThesaurus(), sameInstance(thesaurus));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus2));
+		assertThat(result.getUsername(), is("root"));
+	}
+
+	@Test
+	void convert5() {
+
+		// arrange
+		UserRole userRole = new UserRole();
+		userRole.setIdentifier(1);
+		userRole.setRole(Role.MANAGER);
+		when(userRoleService.getUserRole(Mockito.<Integer>any()))
+			.thenReturn(userRole);
+		Thesaurus thesaurus2 = new Thesaurus();
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus2);
+		UserRoleView userRoleView = new UserRoleView();
+		userRoleView.setIdentifier(1);
+		userRoleView.setUsername("root");
+
+		// act
+		UserRole result = service.convert(userRoleView);
+
+		// assert
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getRole(), is(Role.MANAGER));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus2));
 		assertThat(result.getUsername(), is("root"));
 	}
 }

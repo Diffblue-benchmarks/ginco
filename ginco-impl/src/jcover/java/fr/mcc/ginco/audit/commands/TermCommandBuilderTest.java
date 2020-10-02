@@ -1,6 +1,7 @@
 package fr.mcc.ginco.audit.commands;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusTerm;
@@ -41,9 +42,9 @@ public class TermCommandBuilderTest {
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, ThesaurusTerm>());
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
-		thesaurusTerm1.setLexicalValue("value");
-		previousTerms.add(thesaurusTerm1);
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		thesaurusTerm.setLexicalValue("value");
+		previousTerms.add(thesaurusTerm);
 
 		// act
 		List<CommandLine> result =
@@ -52,5 +53,29 @@ public class TermCommandBuilderTest {
 		// assert
 		assertEquals(1, result.size());
 		assertEquals("R, value", result.get(0).getValue());
+	}
+
+	@Test
+	public void buildChangedTermsLinesCurrentTermsIsEmptyReturnsEmpty() {
+		when(mistralStructuresBuilder.getNotPreferredTermsByTerm(Mockito.<List<ThesaurusTerm>>any()))
+			.thenReturn(new HashMap<String, List<ThesaurusTerm>>());
+		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
+			.thenReturn(new HashMap<String, ThesaurusTerm>());
+		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
+		previousTerms.add(new ThesaurusTerm());
+		assertTrue((service.buildChangedTermsLines(previousTerms, new ArrayList<ThesaurusTerm>())).isEmpty());
+	}
+
+	@Test
+	public void buildAddedPrefTermsLinesPreviousTermsIsEmptyReturnsEmpty() {
+		when(mistralStructuresBuilder.getNotPreferredTermsByTerm(Mockito.<List<ThesaurusTerm>>any()))
+			.thenReturn(new HashMap<String, List<ThesaurusTerm>>());
+		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
+			.thenReturn(new HashMap<String, ThesaurusTerm>());
+		ArrayList<ThesaurusTerm> currentTerms = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm3 = new ThesaurusTerm();
+		thesaurusTerm3.setPrefered(false);
+		currentTerms.add(thesaurusTerm3);
+		assertTrue((service.buildAddedPrefTermsLines(new ArrayList<ThesaurusTerm>(), currentTerms)).isEmpty());
 	}
 }

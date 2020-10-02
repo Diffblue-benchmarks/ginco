@@ -2,6 +2,7 @@ package fr.mcc.ginco.dao.hibernate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +31,82 @@ public class NoteDAOTest {
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		noteDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, noteDAO.getSessionFactory());
+	}
+
+	@Test
+	public void findConceptPaginatedNotesLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		NoteDAO noteDAO = new NoteDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.setFirstResult(anyInt()))
+			.thenReturn(criteria2);
+		Criteria criteria4 = mock(Criteria.class);
+		when(criteria4.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria3);
+		Criteria criteria5 = mock(Criteria.class);
+		when(criteria5.setMaxResults(anyInt()))
+			.thenReturn(criteria4);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria5);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		noteDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<Note> result = noteDAO.findConceptPaginatedNotes("1234", 1, 1);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+
+	@Test
+	public void findTermPaginatedNotesLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		NoteDAO noteDAO = new NoteDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.setFirstResult(anyInt()))
+			.thenReturn(criteria2);
+		Criteria criteria4 = mock(Criteria.class);
+		when(criteria4.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria3);
+		Criteria criteria5 = mock(Criteria.class);
+		when(criteria5.setMaxResults(anyInt()))
+			.thenReturn(criteria4);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria5);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		noteDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<Note> result = noteDAO.findTermPaginatedNotes("1234", 1, 1);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test

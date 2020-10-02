@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import fr.mcc.ginco.beans.ConceptHierarchicalRelationship;
 import fr.mcc.ginco.exports.result.bean.JaxbList;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -34,14 +35,34 @@ public class GincoRelationshipIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForHierarchicalRelationsIdMappingIsEmpty() {
+	public void getIdsForHierarchicalRelations1() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("bar");
+			.thenReturn("1234");
 		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relations =
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
 		JaxbList<ConceptHierarchicalRelationship> x5 =
 			 new JaxbList<ConceptHierarchicalRelationship>();
 		relations.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("bar"));
+		assertSame(x5, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("1234"));
+	}
+
+	@Test
+	public void getIdsForHierarchicalRelations2() {
+		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
+			.thenReturn("1234")
+			.thenReturn("1234")
+			.thenReturn("1234");
+		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relations =
+			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
+		ArrayList<ConceptHierarchicalRelationship> list1 =
+			 new ArrayList<ConceptHierarchicalRelationship>();
+		ConceptHierarchicalRelationship conceptHierarchicalRelationship1 =
+			 new ConceptHierarchicalRelationship();
+		conceptHierarchicalRelationship1.setIdentifier(new ConceptHierarchicalRelationship.Id());
+		list1.add(conceptHierarchicalRelationship1);
+		JaxbList<ConceptHierarchicalRelationship> x5 =
+			 new JaxbList<ConceptHierarchicalRelationship>(list1);
+		relations.put("HmacMD5", x5);
+		assertSame(x5, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("1234"));
 	}
 }

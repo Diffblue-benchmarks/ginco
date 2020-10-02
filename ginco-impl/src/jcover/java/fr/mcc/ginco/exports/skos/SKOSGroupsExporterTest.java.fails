@@ -4,18 +4,22 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusConceptGroup;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
 import fr.mcc.ginco.services.IThesaurusConceptGroupService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -49,11 +53,36 @@ public class SKOSGroupsExporterTest {
 	}
 
 	@Test
-	public void exportGroups() {
+	public void exportGroups1() {
 		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConceptGroup>());
+		OntClass ontClass = mock(OntClass.class);
+		OntModel ontModel1 = mock(OntModel.class);
 		Model model = mock(Model.class);
-		OntModel ontModel = mock(OntModel.class);
-		assertSame(model, service.exportGroups(new Thesaurus(), model, ontModel));
+		OntModel ontModel2 = mock(OntModel.class);
+		assertSame(model, service.exportGroups(new Thesaurus(), model, ontModel2));
+	}
+
+	@Test
+	public void exportGroups2() {
+		List<ThesaurusConceptGroupType> list1 =
+			 new ArrayList<ThesaurusConceptGroupType>();
+		list1.add(new ThesaurusConceptGroupType());
+		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
+			.thenReturn(list1);
+		List<ThesaurusConceptGroup> list2 = new ArrayList<ThesaurusConceptGroup>();
+		list2.add(new ThesaurusConceptGroup());
+		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list2);
+		OntClass ontClass = mock(OntClass.class);
+		OntModel ontModel1 = mock(OntModel.class);
+		when(skosGroupOntologyExporter.addGroupTypeToOntModel(Mockito.<OntModel>any(), Mockito.<String>any()))
+			.thenReturn(ontClass);
+		when(skosGroupOntologyExporter.buildGroupOntologyModel(Mockito.<OntModel>any()))
+			.thenReturn(ontModel1);
+		Model model = mock(Model.class);
+		OntModel ontModel2 = mock(OntModel.class);
+		assertSame(model, service.exportGroups(new Thesaurus(), model, ontModel2));
+		Mockito.verify(skosGroupExporter).exportGroup(ArgumentMatchers.<Thesaurus>any(), ArgumentMatchers.<ThesaurusConceptGroup>any(), ArgumentMatchers.<Model>any());
 	}
 }

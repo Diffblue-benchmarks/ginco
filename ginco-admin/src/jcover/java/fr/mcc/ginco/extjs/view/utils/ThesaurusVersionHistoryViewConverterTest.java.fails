@@ -107,7 +107,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 		source1.setStatus(1);
 		Thesaurus thesaurus = mock(Thesaurus.class);
 		when(thesaurus.getIdentifier())
-			.thenReturn("foo");
+			.thenReturn("data");
 		source1.setThesaurus(thesaurus);
 		source1.setThisVersion(false);
 		source1.setVersionNote("1.0");
@@ -119,7 +119,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 		assertThat(result.getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getStatus(), is(1));
-		assertThat(result.getThesaurusId(), is("foo"));
+		assertThat(result.getThesaurusId(), is("data"));
 		assertThat(result.getThisVersion(), is(false));
 		assertThat(result.getVersionNote(), is("1.0"));
 	}
@@ -137,7 +137,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 		thesaurusVersionHistory.setStatus(1);
 		Thesaurus thesaurus = mock(Thesaurus.class);
 		when(thesaurus.getIdentifier())
-			.thenReturn("foo");
+			.thenReturn("data");
 		thesaurusVersionHistory.setThesaurus(thesaurus);
 		thesaurusVersionHistory.setThisVersion(false);
 		thesaurusVersionHistory.setVersionNote("1.0");
@@ -152,7 +152,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 		assertThat(result.get(0).getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getStatus(), is(1));
-		assertThat(result.get(0).getThesaurusId(), is("foo"));
+		assertThat(result.get(0).getThesaurusId(), is("data"));
 		assertThat(result.get(0).getThisVersion(), is(false));
 		assertThat(result.get(0).getVersionNote(), is("1.0"));
 	}
@@ -185,10 +185,5 @@ class ThesaurusVersionHistoryViewConverterTest {
 		// assert
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0), sameInstance(thesaurusVersionHistory));
-	}
-
-	@Test
-	void convertViewListVersionViewsIsEmptyReturnsEmpty() {
-		assertThat(service.convertViewList(new ArrayList<ThesaurusVersionHistoryView>()), empty());
 	}
 }

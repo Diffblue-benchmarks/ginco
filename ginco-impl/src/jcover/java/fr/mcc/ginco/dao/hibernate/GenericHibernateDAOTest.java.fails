@@ -115,14 +115,12 @@ public class GenericHibernateDAOTest {
 	}
 
 	@Test
-	public void findAllOrderIsAsc() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+	public void findAllOrderIsAscReturnsEmpty() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
 		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
 			 new GenericHibernateDAO<String, Serializable>(String.class);
-		List list = new ArrayList();
-		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(new ArrayList());
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -133,9 +131,7 @@ public class GenericHibernateDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
-		assertEquals(1, genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.asc).size());
-		assertTrue(genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.asc).get(0) instanceof Object);
-		// pojo Object
+		assertTrue((genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.asc)).isEmpty());
 	}
 
 	@Test

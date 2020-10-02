@@ -75,6 +75,24 @@ class AlignmentResourceViewConverterTest {
 		// arrange
 		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
 		alignmentResourceView.setExternalTargetResource("foo");
+		Alignment alignment = new Alignment();
+
+		// act
+		AlignmentResource result =
+			 service.convertAlignmentResourceView(alignmentResourceView, alignment);
+
+		// assert
+		assertThat(result.getAlignment(), sameInstance(alignment));
+		assertThat(result.getExternalTargetResource(), is("foo"));
+		assertThat(result.getIdentifier(), is(nullValue()));
+	}
+
+	@Test
+	void convertAlignmentResourceView3() {
+
+		// arrange
+		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
+		alignmentResourceView.setExternalTargetResource("foo");
 		alignmentResourceView.setIdentifier(1);
 		Alignment alignment = mock(Alignment.class);
 

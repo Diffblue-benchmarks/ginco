@@ -40,18 +40,7 @@ public class GincoCustomAttributesIdGeneratorTest {
 	@Test
 	public void getIdsForCustomConceptAttributes1() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("bar");
-		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
-			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> x5 = new JaxbList<CustomConceptAttribute>();
-		customConceptAttributes.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("bar"));
-	}
-
-	@Test
-	public void getIdsForCustomConceptAttributes2() {
-		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("foo");
+			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
 			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
 		ArrayList<CustomConceptAttribute> list1 =
@@ -63,24 +52,24 @@ public class GincoCustomAttributesIdGeneratorTest {
 		JaxbList<CustomConceptAttribute> x5 =
 			 new JaxbList<CustomConceptAttribute>(list1);
 		customConceptAttributes.put("HmacMD5", x5);
-		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("foo"));
+		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("1234"));
+	}
+
+	@Test
+	public void getIdsForCustomConceptAttributes2() {
+		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
+			.thenReturn("1234");
+		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
+			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
+		JaxbList<CustomConceptAttribute> x5 = new JaxbList<CustomConceptAttribute>();
+		customConceptAttributes.put("HmacMD5", x5);
+		assertSame(x5, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("1234"));
 	}
 
 	@Test
 	public void getIdsForCustomTermAttributes1() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("bar");
-		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
-			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		JaxbList<CustomTermAttribute> x30 = new JaxbList<CustomTermAttribute>();
-		customTermAttributes.put("HmacMD5", x30);
-		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("bar"));
-	}
-
-	@Test
-	public void getIdsForCustomTermAttributes2() {
-		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("foo");
+			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
 			 new HashMap<String, JaxbList<CustomTermAttribute>>();
 		ArrayList<CustomTermAttribute> list1 = new ArrayList<CustomTermAttribute>();
@@ -89,6 +78,17 @@ public class GincoCustomAttributesIdGeneratorTest {
 		list1.add(customTermAttribute1);
 		JaxbList<CustomTermAttribute> x30 = new JaxbList<CustomTermAttribute>(list1);
 		customTermAttributes.put("HmacMD5", x30);
-		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("foo"));
+		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("1234"));
+	}
+
+	@Test
+	public void getIdsForCustomTermAttributes2() {
+		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
+			.thenReturn("1234");
+		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
+			 new HashMap<String, JaxbList<CustomTermAttribute>>();
+		JaxbList<CustomTermAttribute> x30 = new JaxbList<CustomTermAttribute>();
+		customTermAttributes.put("HmacMD5", x30);
+		assertSame(x30, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("1234"));
 	}
 }

@@ -5,17 +5,13 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.AssociativeRelationship;
-import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
-import fr.mcc.ginco.beans.ThesaurusFormat;
-import fr.mcc.ginco.beans.ThesaurusOrganization;
-import fr.mcc.ginco.beans.ThesaurusType;
-import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
 import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
 import fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory;
@@ -69,35 +65,7 @@ class TopTermGeneratorTest {
 		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
 		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
 		thesaurusConcept.setStatus(1);
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setArchived(false);
-		thesaurus.setContributor("foo");
-		thesaurus.setCoverage("foo");
-		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator = new ThesaurusOrganization();
-		creator.setEmail("info@diffblue.com");
-		creator.setHomepage("foo");
-		creator.setIdentifier(1);
-		creator.setName("Acme");
-		thesaurus.setCreator(creator);
-		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus.setDefaultTopConcept(false);
-		thesaurus.setDescription("some text");
-		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("data");
-		thesaurus.setLang(new HashSet<Language>());
-		thesaurus.setPolyHierarchical(false);
-		thesaurus.setPublisher("foo");
-		thesaurus.setRelation("DE");
-		thesaurus.setRights("foo");
-		thesaurus.setSource("foo");
-		thesaurus.setSubject("foo");
-		thesaurus.setTitle("Mr");
-		ThesaurusType type = new ThesaurusType();
-		type.setIdentifier(1);
-		type.setLabel("label");
-		thesaurus.setType(type);
-		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		Thesaurus thesaurus = mock(Thesaurus.class);
 		thesaurusConcept.setThesaurus(thesaurus);
 		thesaurusConcept.setTopConcept(false);
 		list.add(thesaurusConcept);
@@ -113,7 +81,7 @@ class TopTermGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("24089af4-2292-47e9-b065-798910e87cc0"));
+		assertThat(result.get(0).getId(), is("3499f411-99d2-4bb6-8426-ea3ead9c10c5"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));
@@ -121,5 +89,14 @@ class TopTermGeneratorTest {
 		assertThat(result.get(0).isDisplayable(), is(false));
 		assertThat(result.get(0).isExpanded(), is(false));
 		assertThat(result.get(0).isLeaf(), is(true));
+	}
+
+	@Test
+	void generateTopTermReturnsEmpty() {
+		when(thesaurusConceptService.getConceptWithChildrenIdentifers(Mockito.<String>any()))
+			.thenReturn(new HashSet<String>());
+		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any(), anyInt()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		assertThat(service.generateTopTerm("1234"), empty());
 	}
 }

@@ -78,7 +78,7 @@ public class SplitNonPreferredTermServiceImplTest {
 	}
 
 	@Test
-	public void getSplitNonPreferredTermListIdThesaurusIsBarAndLimitIsZeroAndStartIndexIsMinusOne() {
+	public void getSplitNonPreferredTermListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
 		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
@@ -89,7 +89,7 @@ public class SplitNonPreferredTermServiceImplTest {
 
 		// act
 		List<SplitNonPreferredTerm> result =
-			 service.getSplitNonPreferredTermList(-1, 0, "bar");
+			 service.getSplitNonPreferredTermList(1, 1, "1234");
 
 		// assert
 		assertEquals(1, result.size());

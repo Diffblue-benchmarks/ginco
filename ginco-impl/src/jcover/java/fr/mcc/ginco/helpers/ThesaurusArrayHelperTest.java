@@ -2,7 +2,6 @@ package fr.mcc.ginco.helpers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusArray;
@@ -43,10 +42,11 @@ public class ThesaurusArrayHelperTest {
 	}
 
 	@Test
-	public void saveArrayConcepts() {
+	public void saveArrayConcepts1() {
 		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
 			.thenReturn(new ArrayList<String>());
 		ThesaurusArray array = new ThesaurusArray();
+		array.setConcepts(null);
 		ArrayList<ThesaurusArrayConcept> concepts4 =
 			 new ArrayList<ThesaurusArrayConcept>();
 		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
@@ -57,9 +57,17 @@ public class ThesaurusArrayHelperTest {
 	}
 
 	@Test
-	public void saveArrayConceptsConceptsIsEmpty() {
+	public void saveArrayConcepts2() {
+		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
+			.thenReturn(new ArrayList<String>());
 		ThesaurusArray array = new ThesaurusArray();
-		assertSame(array, service.saveArrayConcepts(array, new ArrayList<ThesaurusArrayConcept>()));
+		ArrayList<ThesaurusArrayConcept> concepts2 =
+			 new ArrayList<ThesaurusArrayConcept>();
+		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
+		thesaurusArrayConcept.setIdentifier(new ThesaurusArrayConcept.Id());
+		concepts2.add(thesaurusArrayConcept);
+		assertSame(array, service.saveArrayConcepts(array, concepts2));
+		assertEquals(1, array.getConcepts().size());
 	}
 
 	@Test
@@ -70,7 +78,7 @@ public class ThesaurusArrayHelperTest {
 		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		List<String> list = new ArrayList<String>();
-		list.add("bar");
+		list.add("hello");
 		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
 			.thenReturn(list);
 
@@ -80,13 +88,6 @@ public class ThesaurusArrayHelperTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusConcept, result.get(0));
-	}
-
-	@Test
-	public void getArrayConceptsReturnsEmpty() {
-		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
-			.thenReturn(new ArrayList<String>());
-		assertTrue((service.getArrayConcepts("1234")).isEmpty());
 	}
 
 	@Test

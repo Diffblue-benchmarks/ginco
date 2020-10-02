@@ -87,16 +87,6 @@ public class GincoAlignmentImporterTest {
 
 	@Test
 	public void storeExternalThesauruses2() {
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
-		list1.add(new Alignment());
-		alignments.put("HmacMD5", new JaxbList<Alignment>(list1));
-		service.storeExternalThesauruses(alignments, new HashSet<Alignment>());
-	}
-
-	@Test
-	public void storeExternalThesauruses3() {
 		when(externalThesaurusDAO.findBySourceExternalId(Mockito.<String>any()))
 			.thenReturn(new ExternalThesaurus());
 		HashMap<String, JaxbList<Alignment>> alignments =
@@ -105,6 +95,16 @@ public class GincoAlignmentImporterTest {
 		Alignment alignment1 = new Alignment();
 		alignment1.setExternalTargetThesaurus(new ExternalThesaurus());
 		list1.add(alignment1);
+		alignments.put("HmacMD5", new JaxbList<Alignment>(list1));
+		service.storeExternalThesauruses(alignments, new HashSet<Alignment>());
+	}
+
+	@Test
+	public void storeExternalThesauruses3() {
+		HashMap<String, JaxbList<Alignment>> alignments =
+			 new HashMap<String, JaxbList<Alignment>>();
+		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
+		list1.add(new Alignment());
 		alignments.put("HmacMD5", new JaxbList<Alignment>(list1));
 		service.storeExternalThesauruses(alignments, new HashSet<Alignment>());
 	}

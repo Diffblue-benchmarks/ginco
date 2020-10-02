@@ -2,10 +2,12 @@ package fr.mcc.ginco.exports.ginco;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.Note;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IConceptHierarchicalRelationshipDAO;
 import fr.mcc.ginco.services.IAlignmentService;
@@ -13,6 +15,7 @@ import fr.mcc.ginco.services.IAssociativeRelationshipService;
 import fr.mcc.ginco.services.INoteService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -50,8 +53,21 @@ public class GincoConceptExporterTest {
 	}
 
 	@Test
+	public void getExportConceptNotes() {
+		List<Note> list = new ArrayList<Note>();
+		when(noteService.getConceptNoteCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(list);
+		assertSame(list, service.getExportConceptNotes(new ThesaurusConcept()).getList());
+	}
+
+	@Test
 	public void getExportHierarchicalConcepts() {
-		assertTrue((service.getExportHierarchicalConcepts(new ThesaurusConcept()).getList()).isEmpty());
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
+		when(thesaurusConcept.getParentConcepts())
+			.thenReturn(new HashSet<ThesaurusConcept>());
+		assertTrue((service.getExportHierarchicalConcepts(thesaurusConcept).getList()).isEmpty());
 	}
 
 	@Test

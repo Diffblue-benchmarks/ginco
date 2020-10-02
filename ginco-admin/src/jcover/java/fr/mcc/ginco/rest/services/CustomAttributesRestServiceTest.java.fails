@@ -1,15 +1,14 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
-import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomConceptAttribute;
 import fr.mcc.ginco.beans.CustomTermAttribute;
+import fr.mcc.ginco.beans.generic.GenericCustomAttributeType;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
 import fr.mcc.ginco.extjs.view.pojo.GenericCustomAttributeTypeView;
 import fr.mcc.ginco.extjs.view.pojo.GenericCustomAttributeView;
@@ -75,27 +74,6 @@ class CustomAttributesRestServiceTest {
 	private CustomAttributesRestService service;
 
 	@Test
-	void updateConceptAttributeTypesListIsEmpty() {
-
-		// arrange
-		List<GenericCustomAttributeTypeView> list1 =
-			 new ArrayList<GenericCustomAttributeTypeView>();
-		GenericCustomAttributeTypeView genericCustomAttributeTypeView =
-			 new GenericCustomAttributeTypeView();
-		list1.add(genericCustomAttributeTypeView);
-		when(customAttributesTypesConverter.convertList(Mockito.<List<? extends fr.mcc.ginco.beans.generic.GenericCustomAttributeType>>any(), anyBoolean()))
-			.thenReturn(list1);
-
-		// act
-		List<GenericCustomAttributeTypeView> result =
-			 service.updateConceptAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>());
-
-		// assert
-		assertThat(result.size(), is(1));
-		assertThat(result.get(0), sameInstance(genericCustomAttributeTypeView));
-	}
-
-	@Test
 	void deleteConceptAttributeTypesListIsEmpty() {
 		service.deleteConceptAttributeTypes(new ArrayList<GenericCustomAttributeTypeView>());
 	}
@@ -131,15 +109,6 @@ class CustomAttributesRestServiceTest {
 	}
 
 	@Test
-	void updateTermAttributeListIsEmpty() {
-		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result =
-			 service.updateTermAttribute(new ArrayList<GenericCustomAttributeView>());
-		assertThat(result.getData(), empty());
-		assertThat(result.getTotal(), is(nullValue()));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
 	void updateConceptAttribute() {
 
 		// arrange
@@ -160,15 +129,6 @@ class CustomAttributesRestServiceTest {
 		// assert
 		assertThat(result.getData().size(), is(1));
 		assertThat(result.getData().get(0), sameInstance(genericCustomAttributeView));
-		assertThat(result.getTotal(), is(nullValue()));
-		assertThat(result.isSuccess(), is(true));
-	}
-
-	@Test
-	void updateConceptAttributeListIsEmpty() {
-		ExtJsonFormLoadData<List<GenericCustomAttributeView>> result =
-			 service.updateConceptAttribute(new ArrayList<GenericCustomAttributeView>());
-		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}

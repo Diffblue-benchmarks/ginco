@@ -43,16 +43,7 @@ public class SKOSAssociativeRelationshipRolesExporterTest {
 	}
 
 	@Test
-	public void exportAssociativeRelationshipRoles1() {
-		when(associativeRelationshipRoleService.getAllAssociationTermRole())
-			.thenReturn(new ArrayList<AssociativeRelationshipRole>());
-		Model model = mock(Model.class);
-		OntModel ontModel = mock(OntModel.class);
-		assertSame(model, service.exportAssociativeRelationshipRoles(model, ontModel));
-	}
-
-	@Test
-	public void exportAssociativeRelationshipRoles2() {
+	public void exportAssociativeRelationshipRoles() {
 		List<AssociativeRelationshipRole> list =
 			 new ArrayList<AssociativeRelationshipRole>();
 		list.add(new AssociativeRelationshipRole());

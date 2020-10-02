@@ -3,7 +3,6 @@ package fr.mcc.ginco.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomConceptAttributeType;
@@ -90,9 +89,7 @@ public class CustomConceptAttributeTypeServiceImplTest {
 	public void deleteAttribute() {
 		when(customConceptAttributeTypeDAO.delete(Mockito.<CustomConceptAttributeType>any()))
 			.thenReturn(new CustomConceptAttributeType());
-		CustomConceptAttributeType attribute =
-			 mock(CustomConceptAttributeType.class);
-		service.deleteAttribute(attribute);
+		service.deleteAttribute(new CustomConceptAttributeType());
 	}
 
 	@Test

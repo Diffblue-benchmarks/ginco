@@ -54,7 +54,7 @@ public class ExternalThesaurusTypeServiceImplTest {
 	}
 
 	@Test
-	public void getExternalThesaurusTypeByIdIdentifierIsZero() {
+	public void getExternalThesaurusTypeByIdIdentifierIsOne() {
 
 		// arrange
 		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
@@ -64,7 +64,7 @@ public class ExternalThesaurusTypeServiceImplTest {
 			.thenReturn(externalThesaurusType);
 
 		// act
-		ExternalThesaurusType result = service.getExternalThesaurusTypeById(0);
+		ExternalThesaurusType result = service.getExternalThesaurusTypeById(1);
 
 		// assert
 		assertEquals(1, (int) result.getIdentifier());

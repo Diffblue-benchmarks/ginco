@@ -2,8 +2,11 @@ package fr.mcc.ginco.dao.hibernate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Suggestion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,84 @@ public class SuggestionDAOTest {
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		suggestionDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, suggestionDAO.getSessionFactory());
+	}
+
+	@Test
+	public void findConceptPaginatedSuggestionsLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		SuggestionDAO suggestionDAO = new SuggestionDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.setFirstResult(anyInt()))
+			.thenReturn(criteria2);
+		Criteria criteria4 = mock(Criteria.class);
+		when(criteria4.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria3);
+		Criteria criteria5 = mock(Criteria.class);
+		when(criteria5.setMaxResults(anyInt()))
+			.thenReturn(criteria4);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria5);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		suggestionDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<Suggestion> result =
+			 suggestionDAO.findConceptPaginatedSuggestions("1234", 1, 1);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
+
+	@Test
+	public void findTermPaginatedSuggestionsLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		SuggestionDAO suggestionDAO = new SuggestionDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.setFirstResult(anyInt()))
+			.thenReturn(criteria2);
+		Criteria criteria4 = mock(Criteria.class);
+		when(criteria4.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria3);
+		Criteria criteria5 = mock(Criteria.class);
+		when(criteria5.setMaxResults(anyInt()))
+			.thenReturn(criteria4);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria5);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		suggestionDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<Suggestion> result =
+			 suggestionDAO.findTermPaginatedSuggestions("1234", 1, 1);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test
@@ -76,6 +157,45 @@ public class SuggestionDAOTest {
 			.thenReturn(session);
 		suggestionDAO.setSessionFactory(sessionFactory);
 		assertEquals(1L, (long) suggestionDAO.getTermSuggestionCount("1234"));
+	}
+
+	@Test
+	public void findPaginatedSuggestionsByRecipientLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		SuggestionDAO suggestionDAO = new SuggestionDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		when(criteria1.list())
+			.thenReturn(list);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria1);
+		Criteria criteria3 = mock(Criteria.class);
+		when(criteria3.setFirstResult(anyInt()))
+			.thenReturn(criteria2);
+		Criteria criteria4 = mock(Criteria.class);
+		when(criteria4.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria3);
+		Criteria criteria5 = mock(Criteria.class);
+		when(criteria5.setMaxResults(anyInt()))
+			.thenReturn(criteria4);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any()))
+			.thenReturn(criteria5);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		suggestionDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<Suggestion> result =
+			 suggestionDAO.findPaginatedSuggestionsByRecipient("1234", 1, 1);
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
 	}
 
 	@Test

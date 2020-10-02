@@ -3,6 +3,7 @@ package fr.mcc.ginco.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
@@ -97,7 +98,14 @@ public class ThesaurusVersionHistoryServiceImplTest {
 	}
 
 	@Test
-	public void hasPublishedVersionReturnsFalse() {
+	public void hasPublishedVersion1() {
+		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusVersionHistory>());
+		assertFalse(service.hasPublishedVersion(new Thesaurus()));
+	}
+
+	@Test
+	public void hasPublishedVersion2() {
 		List<ThesaurusVersionHistory> list =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
@@ -107,6 +115,117 @@ public class ThesaurusVersionHistoryServiceImplTest {
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
 			.thenReturn(list);
 		assertFalse(service.hasPublishedVersion(new Thesaurus()));
+	}
+
+	@Test
+	public void publishThesaurus1() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusVersionHistory thesaurusVersionHistory1 =
+			 new ThesaurusVersionHistory();
+		Date date3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusVersionHistory1.setDate(date3);
+		thesaurusVersionHistory1.setIdentifier("data");
+		thesaurusVersionHistory1.setStatus(1);
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
+		thesaurusVersionHistory1.setThesaurus(thesaurus1);
+		thesaurusVersionHistory1.setThisVersion(false);
+		thesaurusVersionHistory1.setUserId("root");
+		thesaurusVersionHistory1.setVersionNote("1.0");
+		List<ThesaurusVersionHistory> list =
+			 new ArrayList<ThesaurusVersionHistory>();
+		list.add(new ThesaurusVersionHistory());
+		when(thesaurusVersionHistoryDAO.findAllOtherThisVersionTrueByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list);
+		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
+			.thenReturn(thesaurusVersionHistory1);
+		when(generatorService.generate(Mockito.<Class>any()))
+			.thenReturn("foo");
+
+		// act
+		ThesaurusVersionHistory result =
+			 service.publishThesaurus(new Thesaurus(), "root");
+
+		// assert
+		assertSame(date3, result.getDate());
+		assertEquals("data", result.getIdentifier());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus1, result.getThesaurus());
+		assertFalse(result.getThisVersion());
+		assertEquals("root", result.getUserId());
+		assertEquals("1.0", result.getVersionNote());
+	}
+
+	@Test
+	public void publishThesaurus2() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 new ThesaurusVersionHistory();
+		Date date3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusVersionHistory.setDate(date3);
+		thesaurusVersionHistory.setIdentifier("data");
+		thesaurusVersionHistory.setStatus(1);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurusVersionHistory.setThesaurus(thesaurus1);
+		thesaurusVersionHistory.setThisVersion(false);
+		thesaurusVersionHistory.setUserId("root");
+		thesaurusVersionHistory.setVersionNote("1.0");
+		when(thesaurusVersionHistoryDAO.findAllOtherThisVersionTrueByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusVersionHistory>());
+		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
+			.thenReturn(thesaurusVersionHistory);
+		when(generatorService.generate(Mockito.<Class>any()))
+			.thenReturn("foo");
+
+		// act
+		ThesaurusVersionHistory result =
+			 service.publishThesaurus(new Thesaurus(), "root");
+
+		// assert
+		assertSame(date3, result.getDate());
+		assertEquals("data", result.getIdentifier());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus1, result.getThesaurus());
+		assertFalse(result.getThisVersion());
+		assertEquals("root", result.getUserId());
+		assertEquals("1.0", result.getVersionNote());
+	}
+
+	@Test
+	public void publishThesaurusThesaurusIsNull() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusVersionHistory thesaurusVersionHistory1 =
+			 new ThesaurusVersionHistory();
+		Date date3 =
+			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusVersionHistory1.setDate(date3);
+		thesaurusVersionHistory1.setIdentifier("data");
+		thesaurusVersionHistory1.setStatus(1);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurusVersionHistory1.setThesaurus(thesaurus1);
+		thesaurusVersionHistory1.setThisVersion(false);
+		thesaurusVersionHistory1.setUserId("root");
+		thesaurusVersionHistory1.setVersionNote("1.0");
+		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
+			.thenReturn(thesaurusVersionHistory1);
+		when(generatorService.generate(Mockito.<Class>any()))
+			.thenReturn("foo");
+
+		// act
+		ThesaurusVersionHistory result = service.publishThesaurus(null, "root");
+
+		// assert
+		assertSame(date3, result.getDate());
+		assertEquals("data", result.getIdentifier());
+		assertEquals(1, (int) result.getStatus());
+		assertSame(thesaurus1, result.getThesaurus());
+		assertFalse(result.getThisVersion());
+		assertEquals("root", result.getUserId());
+		assertEquals("1.0", result.getVersionNote());
 	}
 
 	@Test
@@ -120,7 +239,7 @@ public class ThesaurusVersionHistoryServiceImplTest {
 		thesaurusVersionHistory1.setDate(date3);
 		thesaurusVersionHistory1.setIdentifier("data");
 		thesaurusVersionHistory1.setStatus(1);
-		Thesaurus thesaurus1 = new Thesaurus();
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
 		thesaurusVersionHistory1.setThesaurus(thesaurus1);
 		thesaurusVersionHistory1.setThisVersion(false);
 		thesaurusVersionHistory1.setUserId("root");

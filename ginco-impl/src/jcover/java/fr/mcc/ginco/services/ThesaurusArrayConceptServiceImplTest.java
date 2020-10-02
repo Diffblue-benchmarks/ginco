@@ -34,7 +34,7 @@ public class ThesaurusArrayConceptServiceImplTest {
 	}
 
 	@Test
-	public void geThesaurusArrayConceptConceptIdIsHelloAndThesaurusArrayIdIsBar() {
+	public void geThesaurusArrayConceptConceptIdIsHello() {
 
 		// arrange
 		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
@@ -48,7 +48,7 @@ public class ThesaurusArrayConceptServiceImplTest {
 
 		// act
 		ThesaurusArrayConcept result =
-			 service.geThesaurusArrayConcept("bar", "hello");
+			 service.geThesaurusArrayConcept("1234", "hello");
 
 		// assert
 		assertEquals(1, (int) result.getArrayOrder());

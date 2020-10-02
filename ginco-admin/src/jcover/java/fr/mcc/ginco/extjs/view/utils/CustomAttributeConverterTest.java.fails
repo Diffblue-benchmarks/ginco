@@ -2,6 +2,9 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
 import fr.mcc.ginco.beans.CustomConceptAttribute;
@@ -25,6 +28,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -68,7 +72,7 @@ class CustomAttributeConverterTest {
 	private CustomAttributeConverter service;
 
 	@Test
-	void convertTermAttribute() {
+	void convertTermAttribute1() {
 
 		// arrange
 		CustomTermAttribute source1 = new CustomTermAttribute();
@@ -94,7 +98,7 @@ class CustomAttributeConverterTest {
 	}
 
 	@Test
-	void convertConceptAttribute() {
+	void convertConceptAttribute1() {
 
 		// arrange
 		CustomConceptAttribute source1 = new CustomConceptAttribute();
@@ -117,6 +121,70 @@ class CustomAttributeConverterTest {
 		assertThat(result.getLang(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getTypeid(), is(1));
+	}
+
+	@Test
+	void convertConceptAttribute2() {
+
+		// arrange
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(thesaurusConcept);
+		Language language1 = new Language();
+		when(languagesService.getLanguageById(Mockito.<String>any()))
+			.thenReturn(language1);
+		CustomConceptAttributeType customConceptAttributeType =
+			 new CustomConceptAttributeType();
+		when(customConceptAttributeTypeService.getAttributeTypeById(anyInt()))
+			.thenReturn(customConceptAttributeType);
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		customConceptAttribute.setIdentifier("data");
+		when(customConceptAttributeService.getAttributeByType(Mockito.<ThesaurusConcept>any(), Mockito.<CustomConceptAttributeType>any()))
+			.thenReturn(customConceptAttribute);
+		GenericCustomAttributeView view = new GenericCustomAttributeView();
+		view.setLexicalValue("value");
+
+		// act
+		CustomConceptAttribute result = service.convertConceptAttribute(view);
+
+		// assert
+		assertThat(result.getEntity(), sameInstance(thesaurusConcept));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), sameInstance(language1));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getType(), sameInstance(customConceptAttributeType));
+	}
+
+	@Test
+	void convertTermAttribute2() {
+
+		// arrange
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		when(thesaurusTermService.getThesaurusTermById(Mockito.<String>any()))
+			.thenReturn(thesaurusTerm);
+		Language language2 = new Language();
+		when(languagesService.getLanguageById(Mockito.<String>any()))
+			.thenReturn(language2);
+		CustomTermAttributeType customTermAttributeType =
+			 new CustomTermAttributeType();
+		when(customTermAttributeTypeService.getAttributeTypeById(anyInt()))
+			.thenReturn(customTermAttributeType);
+		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
+		customTermAttribute.setIdentifier("data");
+		when(customTermAttributeService.getAttributeByType(Mockito.<ThesaurusTerm>any(), Mockito.<CustomTermAttributeType>any()))
+			.thenReturn(customTermAttribute);
+		GenericCustomAttributeView view = new GenericCustomAttributeView();
+		view.setLexicalValue("value");
+
+		// act
+		CustomTermAttribute result = service.convertTermAttribute(view);
+
+		// assert
+		assertThat(result.getEntity(), sameInstance(thesaurusTerm));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), sameInstance(language2));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getType(), sameInstance(customTermAttributeType));
 	}
 
 	@Test

@@ -71,12 +71,13 @@ public class ExternalThesaurusDAOTest {
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
 		List list = new ArrayList();
 		list.add(new Object());
-		Criteria criteria = mock(Criteria.class);
-		when(criteria.list())
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.list())
 			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria);
+			.thenReturn(criteria2);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
@@ -98,12 +99,13 @@ public class ExternalThesaurusDAOTest {
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
 		List list = new ArrayList();
 		list.add(new Object());
-		Criteria criteria = mock(Criteria.class);
-		when(criteria.list())
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		when(criteria2.list())
 			.thenReturn(list);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
-			.thenReturn(criteria);
+			.thenReturn(criteria2);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);

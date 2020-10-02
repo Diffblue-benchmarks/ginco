@@ -2,7 +2,6 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomTermAttributeType;
@@ -62,8 +61,7 @@ public class CustomTermAttributeTypeServiceImplTest {
 	public void deleteAttribute() {
 		when(customTermAttributeTypeDAO.delete(Mockito.<CustomTermAttributeType>any()))
 			.thenReturn(new CustomTermAttributeType());
-		CustomTermAttributeType attribute = mock(CustomTermAttributeType.class);
-		service.deleteAttribute(attribute);
+		service.deleteAttribute(new CustomTermAttributeType());
 	}
 
 	@Test

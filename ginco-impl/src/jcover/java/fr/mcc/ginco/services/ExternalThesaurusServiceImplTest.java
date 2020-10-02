@@ -37,7 +37,7 @@ public class ExternalThesaurusServiceImplTest {
 	}
 
 	@Test
-	public void getExternalThesaurusByIdIdentifierIsZero() {
+	public void getExternalThesaurusByIdIdentifierIsOne() {
 
 		// arrange
 		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
@@ -49,7 +49,7 @@ public class ExternalThesaurusServiceImplTest {
 			.thenReturn(externalThesaurus);
 
 		// act
-		ExternalThesaurus result = service.getExternalThesaurusById(0);
+		ExternalThesaurus result = service.getExternalThesaurusById(1);
 
 		// assert
 		assertEquals("1234", result.getExternalId());
@@ -58,7 +58,7 @@ public class ExternalThesaurusServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusByExternalIdExternalIdIsBar() {
+	public void getThesaurusByExternalId() {
 
 		// arrange
 		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
@@ -70,7 +70,7 @@ public class ExternalThesaurusServiceImplTest {
 			.thenReturn(externalThesaurus);
 
 		// act
-		ExternalThesaurus result = service.getThesaurusByExternalId("bar");
+		ExternalThesaurus result = service.getThesaurusByExternalId("1234");
 
 		// assert
 		assertEquals("1234", result.getExternalId());
@@ -79,7 +79,7 @@ public class ExternalThesaurusServiceImplTest {
 	}
 
 	@Test
-	public void getExternalThesaurusListExternalIdQueryIsBar() {
+	public void getExternalThesaurusList() {
 
 		// arrange
 		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
@@ -89,7 +89,7 @@ public class ExternalThesaurusServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<ExternalThesaurus> result = service.getExternalThesaurusList("bar");
+		List<ExternalThesaurus> result = service.getExternalThesaurusList("1234");
 
 		// assert
 		assertEquals(1, result.size());

@@ -60,7 +60,7 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
-	public void getAlignmentByIdIdentifierIsBar() throws java.text.ParseException {
+	public void getAlignmentByIdIdentifierIsData() throws java.text.ParseException {
 
 		// arrange
 		Alignment alignment = new Alignment();
@@ -84,7 +84,7 @@ public class AlignmentServiceImplTest {
 			.thenReturn(alignment);
 
 		// act
-		Alignment result = service.getAlignmentById("bar");
+		Alignment result = service.getAlignmentById("data");
 
 		// assert
 		assertSame(alignmentType, result.getAlignmentType());
@@ -101,7 +101,7 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
-	public void getAlignmentsBySourceConceptIdConceptIdentifierIsBar() {
+	public void getAlignmentsBySourceConceptIdConceptIdentifierIsData() {
 
 		// arrange
 		List<Alignment> list = new ArrayList<Alignment>();
@@ -111,7 +111,7 @@ public class AlignmentServiceImplTest {
 			.thenReturn(list);
 
 		// act
-		List<Alignment> result = service.getAlignmentsBySourceConceptId("bar");
+		List<Alignment> result = service.getAlignmentsBySourceConceptId("data");
 
 		// assert
 		assertEquals(1, result.size());
@@ -119,7 +119,48 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
+	public void saveAlignments1() {
+		List<Alignment> list = new ArrayList<Alignment>();
+		Alignment alignment2 = new Alignment();
+		alignment2.setIdentifier("data");
+		list.add(alignment2);
+		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
+			.thenReturn(list);
+		when(alignmentDAO.update(Mockito.<Alignment>any()))
+			.thenReturn(new Alignment());
+		ThesaurusConcept concept = new ThesaurusConcept();
+		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
+		Alignment alignment3 = new Alignment();
+		alignment3.setIdentifier("data");
+		alignments.add(alignment3);
+		assertSame(concept, service.saveAlignments(concept, alignments));
+		Mockito.verify(alignmentDAO).flush();
+	}
+
+	@Test
+	public void saveAlignments2() {
+		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
+			.thenReturn(new ArrayList<Alignment>());
+		when(alignmentDAO.update(Mockito.<Alignment>any()))
+			.thenReturn(new Alignment());
+		ThesaurusConcept concept = new ThesaurusConcept();
+		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
+		Alignment alignment2 = new Alignment();
+		alignment2.setIdentifier("data");
+		alignments.add(alignment2);
+		assertSame(concept, service.saveAlignments(concept, alignments));
+		Mockito.verify(alignmentDAO).flush();
+	}
+
+	@Test
 	public void saveExternalThesauruses1() {
+		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
+		alignments.add(new Alignment());
+		service.saveExternalThesauruses(alignments);
+	}
+
+	@Test
+	public void saveExternalThesauruses2() {
 		when(externalThesaurusDAO.update(Mockito.<ExternalThesaurus>any()))
 			.thenReturn(new ExternalThesaurus());
 		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
@@ -130,26 +171,12 @@ public class AlignmentServiceImplTest {
 	}
 
 	@Test
-	public void saveExternalThesauruses2() {
-		ArrayList<Alignment> alignments = new ArrayList<Alignment>();
-		alignments.add(new Alignment());
-		service.saveExternalThesauruses(alignments);
-	}
-
-	@Test
 	public void saveExternalThesaurusesAlignmentsIsEmpty() {
 		service.saveExternalThesauruses(new ArrayList<Alignment>());
 	}
 
 	@Test
-	public void deleteExternalThesauruses1() {
-		when(externalThesaurusDAO.findAll())
-			.thenReturn(new ArrayList<ExternalThesaurus>());
-		service.deleteExternalThesauruses();
-	}
-
-	@Test
-	public void deleteExternalThesauruses2() {
+	public void deleteExternalThesauruses() {
 		List<ExternalThesaurus> list1 = new ArrayList<ExternalThesaurus>();
 		list1.add(new ExternalThesaurus());
 		when(externalThesaurusDAO.findAll())

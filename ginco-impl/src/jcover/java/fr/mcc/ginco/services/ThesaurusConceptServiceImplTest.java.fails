@@ -118,11 +118,6 @@ public class ThesaurusConceptServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusConceptListIdsIsEmptyReturnsEmpty() {
-		assertTrue((service.getThesaurusConceptList(new ArrayList<String>())).isEmpty());
-	}
-
-	@Test
 	public void getThesaurusConceptById() throws java.text.ParseException {
 
 		// arrange
@@ -237,13 +232,13 @@ public class ThesaurusConceptServiceImplTest {
 	}
 
 	@Test
-	public void getConceptWithChildrenIdentifersReturnsFoo() {
+	public void getConceptWithChildrenIdentifersReturnsHello() {
 		List<String> list = new ArrayList<String>();
-		list.add("foo");
+		list.add("hello");
 		when(thesaurusConceptDAO.getIdentifiersOfConceptsWithChildren(Mockito.<String>any()))
 			.thenReturn(list);
 		assertEquals(1, service.getConceptWithChildrenIdentifers("1234").size());
-		assertTrue(service.getConceptWithChildrenIdentifers("1234").contains("foo"));
+		assertTrue(service.getConceptWithChildrenIdentifers("1234").contains("hello"));
 	}
 
 	@Test

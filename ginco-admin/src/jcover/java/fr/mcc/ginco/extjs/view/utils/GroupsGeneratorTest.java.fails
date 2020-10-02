@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.empty;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusConceptGroup;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
+import fr.mcc.ginco.extjs.view.node.ThesaurusListBasicNode;
 import fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory;
 import fr.mcc.ginco.services.IThesaurusConceptGroupLabelService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupService;

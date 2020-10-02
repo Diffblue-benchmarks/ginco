@@ -2,7 +2,6 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
@@ -38,7 +37,7 @@ public class NodeLabelServiceImplTest {
 	}
 
 	@Test
-	public void getByIdIdIsZero() throws java.text.ParseException {
+	public void getByIdIdIsOne() throws java.text.ParseException {
 
 		// arrange
 		NodeLabel nodeLabel = new NodeLabel();
@@ -58,7 +57,7 @@ public class NodeLabelServiceImplTest {
 			.thenReturn(nodeLabel);
 
 		// act
-		NodeLabel result = service.getById(0);
+		NodeLabel result = service.getById(1);
 
 		// assert
 		assertSame(created1, result.getCreated());
@@ -70,7 +69,7 @@ public class NodeLabelServiceImplTest {
 	}
 
 	@Test
-	public void getByThesaurusArrayAndLanguageThesaurusArrayIdIsBar() throws java.text.ParseException {
+	public void getByThesaurusArrayAndLanguage() throws java.text.ParseException {
 
 		// arrange
 		NodeLabel nodeLabel = new NodeLabel();
@@ -90,7 +89,7 @@ public class NodeLabelServiceImplTest {
 			.thenReturn(nodeLabel);
 
 		// act
-		NodeLabel result = service.getByThesaurusArrayAndLanguage("bar");
+		NodeLabel result = service.getByThesaurusArrayAndLanguage("1234");
 
 		// assert
 		assertSame(created1, result.getCreated());
@@ -102,7 +101,7 @@ public class NodeLabelServiceImplTest {
 	}
 
 	@Test
-	public void getByThesaurusArrayThesaurusArrayIdIsBar() throws java.text.ParseException {
+	public void getByThesaurusArray() throws java.text.ParseException {
 
 		// arrange
 		NodeLabel nodeLabel = new NodeLabel();
@@ -122,7 +121,7 @@ public class NodeLabelServiceImplTest {
 			.thenReturn(nodeLabel);
 
 		// act
-		NodeLabel result = service.getByThesaurusArray("bar");
+		NodeLabel result = service.getByThesaurusArray("1234");
 
 		// assert
 		assertSame(created1, result.getCreated());
@@ -142,27 +141,26 @@ public class NodeLabelServiceImplTest {
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel1.setCreated(created1);
 		nodeLabel1.setIdentifier(1);
-		Language language = new Language();
-		nodeLabel1.setLanguage(language);
+		Language language1 = new Language();
+		nodeLabel1.setLanguage(language1);
 		nodeLabel1.setLexicalValue("value");
 		Date modified1 =
 			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		nodeLabel1.setModified(modified1);
-		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		nodeLabel1.setThesaurusArray(thesaurusArray);
+		ThesaurusArray thesaurusArray1 = new ThesaurusArray();
+		nodeLabel1.setThesaurusArray(thesaurusArray1);
 		when(nodeLabelDAO.update(Mockito.<NodeLabel>any()))
 			.thenReturn(nodeLabel1);
-		NodeLabel nodeLabel2 = mock(NodeLabel.class);
 
 		// act
-		NodeLabel result = service.updateOrCreate(nodeLabel2);
+		NodeLabel result = service.updateOrCreate(new NodeLabel());
 
 		// assert
 		assertSame(created1, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
-		assertSame(language, result.getLanguage());
+		assertSame(language1, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
 		assertSame(modified1, result.getModified());
-		assertSame(thesaurusArray, result.getThesaurusArray());
+		assertSame(thesaurusArray1, result.getThesaurusArray());
 	}
 }

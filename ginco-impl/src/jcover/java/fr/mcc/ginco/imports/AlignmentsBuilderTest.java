@@ -48,7 +48,8 @@ public class AlignmentsBuilderTest {
 			.thenReturn(list);
 		Resource skosConcept = mock(Resource.class);
 		when(skosConcept.getURI())
-			.thenReturn("foo");
-		assertTrue((service.buildAlignments(skosConcept, new ThesaurusConcept())).isEmpty());
+			.thenReturn("/some/path.html");
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
+		assertTrue((service.buildAlignments(skosConcept, concept)).isEmpty());
 	}
 }

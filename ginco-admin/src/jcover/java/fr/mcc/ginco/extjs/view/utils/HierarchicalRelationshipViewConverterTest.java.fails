@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ConceptHierarchicalRelationship;
@@ -11,6 +12,10 @@ import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.pojo.HierarchicalRelationshipView;
 import fr.mcc.ginco.services.IConceptHierarchicalRelationshipService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +46,10 @@ class HierarchicalRelationshipViewConverterTest {
 
 	@Test
 	void getParentViews1() {
-		assertThat(service.getParentViews(new ThesaurusConcept()), empty());
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
+		when(concept.getParentConcepts())
+			.thenReturn(new HashSet<ThesaurusConcept>());
+		assertThat(service.getParentViews(concept), empty());
 	}
 
 	@Test
@@ -55,7 +63,43 @@ class HierarchicalRelationshipViewConverterTest {
 	}
 
 	@Test
-	void getChildrenViewsConceptIsNullReturnsEmpty() {
+	void getChildrenViews1() {
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		assertThat(service.getChildrenViews(new ThesaurusConcept()), empty());
+	}
+
+	@Test
+	void getChildrenViews2() {
+
+		// arrange
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setIdentifier("data");
+		list.add(thesaurusConcept);
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(list);
+		when(thesaurusConceptService.getConceptTitle(Mockito.<ThesaurusConcept>any()))
+			.thenReturn("foo=bar");
+		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
+			 new ConceptHierarchicalRelationship();
+		conceptHierarchicalRelationship.setRole(1);
+		when(conceptHierarchicalRelationshipService.getByChildAndParentIds(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(conceptHierarchicalRelationship);
+
+		// act
+		List<HierarchicalRelationshipView> result =
+			 service.getChildrenViews(new ThesaurusConcept());
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getIdentifier(), is("data"));
+		assertThat(result.get(0).getLabel(), is("foo=bar"));
+		assertThat(result.get(0).getRole(), is(1));
+	}
+
+	@Test
+	void getChildrenViewsConceptIsNull() {
 		assertThat(service.getChildrenViews(null), empty());
 	}
 

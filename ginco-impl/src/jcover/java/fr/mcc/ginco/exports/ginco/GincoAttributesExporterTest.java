@@ -1,7 +1,6 @@
 package fr.mcc.ginco.exports.ginco;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomConceptAttribute;
@@ -47,8 +46,7 @@ public class GincoAttributesExporterTest {
 		List<CustomConceptAttribute> list = new ArrayList<CustomConceptAttribute>();
 		when(conceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(list);
-		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
-		assertSame(list, service.getExportedConceptAttributes(thesaurusConcept).getList());
+		assertSame(list, service.getExportedConceptAttributes(new ThesaurusConcept()).getList());
 	}
 
 	@Test
