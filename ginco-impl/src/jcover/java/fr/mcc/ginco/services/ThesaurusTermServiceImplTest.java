@@ -332,27 +332,10 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void importSandBoxTermsDefaultStatusIsOne() {
-
-		// arrange
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(thesaurusTerm);
+	public void importSandBoxTermsDefaultStatusIsOneReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
 		when(thesaurusDAO.getById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
-		when(generatorService.generate(Mockito.<Class>any()))
-			.thenReturn("foo");
-		HashMap<String, Language> termLexicalValues =
-			 new HashMap<String, Language>();
-		termLexicalValues.put("foo", new Language());
-
-		// act
-		List<ThesaurusTerm> result =
-			 service.importSandBoxTerms(termLexicalValues, "1234", 1);
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(thesaurusTerm, result.get(0));
+		assertTrue((service.importSandBoxTerms(new HashMap<String, Language>(), "1234", 1)).isEmpty());
 	}
 
 	@Test

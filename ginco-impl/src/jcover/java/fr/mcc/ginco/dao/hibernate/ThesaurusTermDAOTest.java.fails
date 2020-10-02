@@ -752,7 +752,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList();
-		list.add("foo");
+		list.add(new Object());
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -776,7 +776,7 @@ public class ThesaurusTermDAOTest {
 
 		// assert
 		assertEquals(1, result.size());
-		// pojo String
+		// pojo Object
 	}
 
 	@Test

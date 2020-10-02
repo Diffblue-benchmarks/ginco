@@ -31,29 +31,12 @@ public class ThesaurusTermUtilsTest {
 	}
 
 	@Test
-	public void getPreferedTerms1() {
+	public void getPreferedTerms() {
 		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setPrefered(false);
 		listOfTerms.add(thesaurusTerm);
 		assertTrue((service.getPreferedTerms(listOfTerms)).isEmpty());
-	}
-
-	@Test
-	public void getPreferedTerms2() {
-
-		// arrange
-		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setPrefered(true);
-		listOfTerms.add(thesaurusTerm);
-
-		// act
-		List<ThesaurusTerm> result = service.getPreferedTerms(listOfTerms);
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(thesaurusTerm, result.get(0));
 	}
 
 	@Test

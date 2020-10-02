@@ -11,6 +11,7 @@ import org.hibernate.event.spi.EventSource;
 import org.hibernate.event.spi.PostUpdateEvent;
 import org.hibernate.persister.entity.EntityPersister;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Unit tests for fr.mcc.ginco.audit.utils.UpdateEnversListerner

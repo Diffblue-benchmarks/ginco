@@ -162,7 +162,7 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void storeCustomConceptAttribute() {
+	public void storeCustomConceptAttribute1() throws java.io.IOException, CloneNotSupportedException {
 		ArrayList<CustomConceptAttribute> customAttributeToImport =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
@@ -172,12 +172,25 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void storeCustomConceptAttributeCustomAttributeToImportIsEmpty() {
-		service.storeCustomConceptAttribute(new ArrayList<CustomConceptAttribute>(), new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
+	public void storeCustomConceptAttribute2() throws java.io.IOException, CloneNotSupportedException {
+		when(customConceptAttributeDAO.update(Mockito.<CustomConceptAttribute>any()))
+			.thenReturn(new CustomConceptAttribute());
+		ArrayList<CustomConceptAttribute> customAttributeToImport =
+			 new ArrayList<CustomConceptAttribute>();
+		CustomConceptAttribute customConceptAttribute2 =
+			 new CustomConceptAttribute();
+		CustomConceptAttributeType type4 = new CustomConceptAttributeType();
+		type4.setCode("DE");
+		customConceptAttribute2.setType(type4);
+		customAttributeToImport.add(customConceptAttribute2);
+		HashMap<String, CustomConceptAttributeType> savedTypes =
+			 new HashMap<String, CustomConceptAttributeType>();
+		savedTypes.put("DE", new CustomConceptAttributeType());
+		service.storeCustomConceptAttribute(customAttributeToImport, new ThesaurusConcept(), savedTypes);
 	}
 
 	@Test
-	public void storeCustomTermAttribute() {
+	public void storeCustomTermAttribute1() throws java.io.IOException, CloneNotSupportedException {
 		ArrayList<CustomTermAttribute> customAttributeToImport =
 			 new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
@@ -187,7 +200,19 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void storeCustomTermAttributeCustomAttributeToImportIsEmpty() {
-		service.storeCustomTermAttribute(new ArrayList<CustomTermAttribute>(), new ThesaurusTerm(), new HashMap<String, CustomTermAttributeType>());
+	public void storeCustomTermAttribute2() throws java.io.IOException, CloneNotSupportedException {
+		when(customTermAttributeDAO.update(Mockito.<CustomTermAttribute>any()))
+			.thenReturn(new CustomTermAttribute());
+		ArrayList<CustomTermAttribute> customAttributeToImport =
+			 new ArrayList<CustomTermAttribute>();
+		CustomTermAttribute customTermAttribute2 = new CustomTermAttribute();
+		CustomTermAttributeType type4 = new CustomTermAttributeType();
+		type4.setCode("DE");
+		customTermAttribute2.setType(type4);
+		customAttributeToImport.add(customTermAttribute2);
+		HashMap<String, CustomTermAttributeType> savedTypes =
+			 new HashMap<String, CustomTermAttributeType>();
+		savedTypes.put("DE", new CustomTermAttributeType());
+		service.storeCustomTermAttribute(customAttributeToImport, new ThesaurusTerm(), savedTypes);
 	}
 }

@@ -43,46 +43,38 @@ public class ThesaurusArrayBuilderTest {
 	}
 
 	@Test
-	public void buildArrayBuiltArraysIsEmpty() throws java.util.NoSuchElementException {
-
-		// arrange
+	public void buildArray() throws java.util.NoSuchElementException, java.io.IOException, CloneNotSupportedException {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
 		Resource skosCollection = mock(Resource.class);
 		when(skosCollection.getURI())
 			.thenReturn("/some/path.html")
-			.thenReturn("/some/path.html");
+			.thenReturn("");
 		when(skosCollection.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
 		Model model = mock(Model.class);
-		Thesaurus thesaurus1 = new Thesaurus();
-		HashMap<String, ThesaurusArray> builtArrays =
-			 new HashMap<String, ThesaurusArray>();
-
-		// act
+		Thesaurus thesaurus = mock(Thesaurus.class);
 		ThesaurusArray result =
-			 service.buildArray(skosCollection, model, thesaurus1, builtArrays);
-
-		// assert
+			 service.buildArray(skosCollection, model, thesaurus, new HashMap<String, ThesaurusArray>());
 		assertTrue((result.getConcepts()).isEmpty());
 		assertEquals("/some/path.html", result.getIdentifier());
 		assertNull(result.getNotation());
 		assertTrue(result.getOrdered());
 		assertNull(result.getParent());
 		assertNull(result.getSuperOrdinateConcept());
-		assertSame(thesaurus1, result.getThesaurus());
-		assertSame(result, builtArrays.get("/some/path.html"));
+		assertSame(thesaurus, result.getThesaurus());
 	}
 
 	@Test
-	public void getChildrenArraysBuiltArraysIsEmptyReturnsEmpty() throws java.util.NoSuchElementException {
+	public void getChildrenArraysReturnsEmpty() throws java.util.NoSuchElementException, java.io.IOException, CloneNotSupportedException {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
 		Resource skosCollection = mock(Resource.class);
 		when(skosCollection.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
-		assertTrue((service.getChildrenArrays(skosCollection, new Thesaurus(), new HashMap<String, ThesaurusArray>())).isEmpty());
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		assertTrue((service.getChildrenArrays(skosCollection, thesaurus, new HashMap<String, ThesaurusArray>())).isEmpty());
 	}
 }

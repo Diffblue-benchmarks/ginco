@@ -1,20 +1,16 @@
 package fr.mcc.ginco.imports.ginco;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Alignment;
 import fr.mcc.ginco.beans.AlignmentConcept;
 import fr.mcc.ginco.beans.AlignmentResource;
-import fr.mcc.ginco.beans.AlignmentType;
-import fr.mcc.ginco.beans.ExternalThesaurus;
 import fr.mcc.ginco.dao.IAlignmentDAO;
 import fr.mcc.ginco.dao.IExternalThesaurusDAO;
 import fr.mcc.ginco.dao.IGenericDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 import fr.mcc.ginco.exports.result.bean.JaxbList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -22,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -56,56 +51,12 @@ public class GincoAlignmentImporterTest {
 	}
 
 	@Test
-	public void storeAlignments1() {
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		alignments.put("foo", new JaxbList<Alignment>());
-		assertTrue((service.storeAlignments(alignments)).isEmpty());
+	public void storeAlignmentsReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+		assertTrue((service.storeAlignments(new HashMap<String, JaxbList<Alignment>>())).isEmpty());
 	}
 
 	@Test
-	public void storeAlignments2() {
-		when(alignmentDAO.update(Mockito.<Alignment>any()))
-			.thenReturn(new Alignment());
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
-		Alignment alignment2 = new Alignment();
-		alignment2.setAlignmentType(new AlignmentType());
-		list1.add(alignment2);
-		alignments.put("foo", new JaxbList<Alignment>(list1));
-		assertTrue((service.storeAlignments(alignments)).isEmpty());
-	}
-
-	@Test
-	public void storeExternalThesauruses1() {
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		alignments.put("foo", new JaxbList<Alignment>());
-		service.storeExternalThesauruses(alignments, new HashSet<Alignment>());
-	}
-
-	@Test
-	public void storeExternalThesauruses2() {
-		when(externalThesaurusDAO.findBySourceExternalId(Mockito.<String>any()))
-			.thenReturn(new ExternalThesaurus());
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
-		Alignment alignment1 = new Alignment();
-		alignment1.setExternalTargetThesaurus(new ExternalThesaurus());
-		list1.add(alignment1);
-		alignments.put("foo", new JaxbList<Alignment>(list1));
-		service.storeExternalThesauruses(alignments, new HashSet<Alignment>());
-	}
-
-	@Test
-	public void storeExternalThesauruses3() {
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		ArrayList<Alignment> list1 = new ArrayList<Alignment>();
-		list1.add(new Alignment());
-		alignments.put("foo", new JaxbList<Alignment>(list1));
-		service.storeExternalThesauruses(alignments, new HashSet<Alignment>());
+	public void storeExternalThesaurusesBannedAlignmentsIsEmpty() throws java.io.IOException, CloneNotSupportedException {
+		service.storeExternalThesauruses(new HashMap<String, JaxbList<Alignment>>(), new HashSet<Alignment>());
 	}
 }

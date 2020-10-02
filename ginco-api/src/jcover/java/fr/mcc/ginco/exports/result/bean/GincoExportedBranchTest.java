@@ -1,6 +1,7 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -39,24 +40,11 @@ import org.junit.jupiter.api.Test;
 class GincoExportedBranchTest {
 
 	@Test
-	void factory() throws java.text.ParseException {
+	void factory() throws java.io.IOException, CloneNotSupportedException, java.text.ParseException {
 		GincoExportedBranch gincoExportedBranch = new GincoExportedBranch();
-		HashMap<String, JaxbList<Alignment>> alignments =
-			 new HashMap<String, JaxbList<Alignment>>();
-		JaxbList<Alignment> jaxbList1 = new JaxbList<Alignment>();
-		alignments.put("foo", jaxbList1);
-		gincoExportedBranch.setAlignments(alignments);
-		HashMap<String, JaxbList<Note>> conceptNotes =
-			 new HashMap<String, JaxbList<Note>>();
-		JaxbList<Note> jaxbList3 = new JaxbList<Note>();
-		conceptNotes.put("foo", jaxbList3);
-		gincoExportedBranch.setConceptNotes(conceptNotes);
-		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> parentConceptRelationship =
-			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		JaxbList<ConceptHierarchicalRelationship> jaxbList5 =
-			 new JaxbList<ConceptHierarchicalRelationship>();
-		parentConceptRelationship.put("foo", jaxbList5);
-		gincoExportedBranch.setHierarchicalRelationship(parentConceptRelationship);
+		gincoExportedBranch.setAlignments(new HashMap<String, JaxbList<Alignment>>());
+		gincoExportedBranch.setConceptNotes(new HashMap<String, JaxbList<Note>>());
+		gincoExportedBranch.setHierarchicalRelationship(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>());
 		ThesaurusConcept rootConcept = new ThesaurusConcept();
 		rootConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
 		rootConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
@@ -100,11 +88,7 @@ class GincoExportedBranchTest {
 		rootConcept.setThesaurus(thesaurus1);
 		rootConcept.setTopConcept(false);
 		gincoExportedBranch.setRootConcept(rootConcept);
-		HashMap<String, JaxbList<Note>> termNotes =
-			 new HashMap<String, JaxbList<Note>>();
-		JaxbList<Note> jaxbList7 = new JaxbList<Note>();
-		termNotes.put("foo", jaxbList7);
-		gincoExportedBranch.setTermNotes(termNotes);
+		gincoExportedBranch.setTermNotes(new HashMap<String, JaxbList<Note>>());
 		ArrayList<CustomConceptAttributeType> conceptAttributeTypes =
 			 new ArrayList<CustomConceptAttributeType>();
 		CustomConceptAttributeType customConceptAttributeType =
@@ -145,12 +129,7 @@ class GincoExportedBranchTest {
 		customConceptAttributeType.setValue("value");
 		conceptAttributeTypes.add(customConceptAttributeType);
 		gincoExportedBranch.setConceptAttributeTypes(conceptAttributeTypes);
-		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
-			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
-		JaxbList<CustomConceptAttribute> jaxbList9 =
-			 new JaxbList<CustomConceptAttribute>();
-		conceptAttributes.put("foo", jaxbList9);
-		gincoExportedBranch.setConceptAttributes(conceptAttributes);
+		gincoExportedBranch.setConceptAttributes(new HashMap<String, JaxbList<CustomConceptAttribute>>());
 		ArrayList<ThesaurusConcept> concepts = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
@@ -187,10 +166,10 @@ class GincoExportedBranchTest {
 		thesaurus3.setSource("foo");
 		thesaurus3.setSubject("foo");
 		thesaurus3.setTitle("Mr");
-		ThesaurusType type5 = new ThesaurusType();
-		type5.setIdentifier(1);
-		type5.setLabel("label");
-		thesaurus3.setType(type5);
+		ThesaurusType type3 = new ThesaurusType();
+		type3.setIdentifier(1);
+		type3.setLabel("label");
+		thesaurus3.setType(type3);
 		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusConcept.setThesaurus(thesaurus3);
 		thesaurusConcept.setTopConcept(false);
@@ -226,34 +205,29 @@ class GincoExportedBranchTest {
 		thesaurus4.setSource("foo");
 		thesaurus4.setSubject("foo");
 		thesaurus4.setTitle("Mr");
-		ThesaurusType type6 = new ThesaurusType();
-		type6.setIdentifier(1);
-		type6.setLabel("label");
-		thesaurus4.setType(type6);
+		ThesaurusType type4 = new ThesaurusType();
+		type4.setIdentifier(1);
+		type4.setLabel("label");
+		thesaurus4.setType(type4);
 		thesaurus4.setVersions(new HashSet<ThesaurusVersionHistory>());
 		customTermAttributeType.setThesaurus(thesaurus4);
 		customTermAttributeType.setValue("value");
 		termAttributeTypes.add(customTermAttributeType);
 		gincoExportedBranch.setTermAttributeTypes(termAttributeTypes);
-		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
-			 new HashMap<String, JaxbList<CustomTermAttribute>>();
-		JaxbList<CustomTermAttribute> jaxbList11 =
-			 new JaxbList<CustomTermAttribute>();
-		termAttributes.put("foo", jaxbList11);
-		gincoExportedBranch.setTermAttributes(termAttributes);
+		gincoExportedBranch.setTermAttributes(new HashMap<String, JaxbList<CustomTermAttribute>>());
 		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		ThesaurusConcept concept5 = new ThesaurusConcept();
-		concept5.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
-		concept5.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
-		concept5.setConceptArrays(new HashSet<ThesaurusArray>());
-		concept5.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept5.setIdentifier("data");
-		concept5.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		concept5.setNotation("DE");
-		concept5.setParentConcepts(new HashSet<ThesaurusConcept>());
-		concept5.setRootConcepts(new HashSet<ThesaurusConcept>());
-		concept5.setStatus(1);
+		ThesaurusConcept concept = new ThesaurusConcept();
+		concept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		concept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		concept.setConceptArrays(new HashSet<ThesaurusArray>());
+		concept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		concept.setIdentifier("data");
+		concept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		concept.setNotation("DE");
+		concept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		concept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		concept.setStatus(1);
 		Thesaurus thesaurus5 = new Thesaurus();
 		thesaurus5.setArchived(false);
 		thesaurus5.setContributor("foo");
@@ -275,27 +249,27 @@ class GincoExportedBranchTest {
 		thesaurus5.setTitle("Mr");
 		thesaurus5.setType(new ThesaurusType());
 		thesaurus5.setVersions(new HashSet<ThesaurusVersionHistory>());
-		concept5.setThesaurus(thesaurus5);
-		concept5.setTopConcept(false);
-		thesaurusTerm.setConcept(concept5);
+		concept.setThesaurus(thesaurus5);
+		concept.setTopConcept(false);
+		thesaurusTerm.setConcept(concept);
 		thesaurusTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusTerm.setHidden(false);
 		thesaurusTerm.setIdentifier("data");
-		Language language5 = new Language();
-		language5.setId("1234");
-		language5.setPart1("foo");
-		language5.setPrincipalLanguage(false);
-		language5.setRefname("root");
-		language5.setTopLanguage(false);
-		thesaurusTerm.setLanguage(language5);
+		Language language = new Language();
+		language.setId("1234");
+		language.setPart1("foo");
+		language.setPrincipalLanguage(false);
+		language.setRefname("root");
+		language.setTopLanguage(false);
+		thesaurusTerm.setLanguage(language);
 		thesaurusTerm.setLexicalValue("value");
 		thesaurusTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusTerm.setPrefered(false);
-		ThesaurusTermRole role3 = new ThesaurusTermRole();
-		role3.setCode("DE");
-		role3.setDefaultRole(false);
-		role3.setLabel("label");
-		thesaurusTerm.setRole(role3);
+		ThesaurusTermRole role = new ThesaurusTermRole();
+		role.setCode("DE");
+		role.setDefaultRole(false);
+		role.setLabel("label");
+		thesaurusTerm.setRole(role);
 		thesaurusTerm.setSource("foo");
 		thesaurusTerm.setStatus(1);
 		Thesaurus thesaurus6 = new Thesaurus();
@@ -322,27 +296,27 @@ class GincoExportedBranchTest {
 		thesaurus6.setSource("foo");
 		thesaurus6.setSubject("foo");
 		thesaurus6.setTitle("Mr");
-		ThesaurusType type10 = new ThesaurusType();
-		type10.setIdentifier(1);
-		type10.setLabel("label");
-		thesaurus6.setType(type10);
+		ThesaurusType type6 = new ThesaurusType();
+		type6.setIdentifier(1);
+		type6.setLabel("label");
+		thesaurus6.setType(type6);
 		thesaurus6.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusTerm.setThesaurus(thesaurus6);
 		terms.add(thesaurusTerm);
 		gincoExportedBranch.setTerms(terms);
-		assertThat(gincoExportedBranch.getAlignments().get("foo"), sameInstance(jaxbList1));
-		assertThat(gincoExportedBranch.getConceptNotes().get("foo"), sameInstance(jaxbList3));
-		assertThat(gincoExportedBranch.getHierarchicalRelationship().get("foo"), sameInstance(jaxbList5));
+		assertThat(gincoExportedBranch.getAlignments(), is(notNullValue()));
+		assertThat(gincoExportedBranch.getConceptNotes(), is(notNullValue()));
+		assertThat(gincoExportedBranch.getHierarchicalRelationship(), is(notNullValue()));
 		assertThat(gincoExportedBranch.getRootConcept(), sameInstance(rootConcept));
-		assertThat(gincoExportedBranch.getTermNotes().get("foo"), sameInstance(jaxbList7));
+		assertThat(gincoExportedBranch.getTermNotes(), is(notNullValue()));
 		assertThat(gincoExportedBranch.getConceptAttributeTypes().size(), is(1));
 		assertThat(gincoExportedBranch.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedBranch.getConceptAttributes().get("foo"), sameInstance(jaxbList9));
+		assertThat(gincoExportedBranch.getConceptAttributes(), is(notNullValue()));
 		assertThat(gincoExportedBranch.getConcepts().size(), is(1));
 		assertThat(gincoExportedBranch.getConcepts().get(0), sameInstance(thesaurusConcept));
 		assertThat(gincoExportedBranch.getTermAttributeTypes().size(), is(1));
 		assertThat(gincoExportedBranch.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedBranch.getTermAttributes().get("foo"), sameInstance(jaxbList11));
+		assertThat(gincoExportedBranch.getTermAttributes(), is(notNullValue()));
 		assertThat(gincoExportedBranch.getTerms().size(), is(1));
 		assertThat(gincoExportedBranch.getTerms().get(0), sameInstance(thesaurusTerm));
 	}

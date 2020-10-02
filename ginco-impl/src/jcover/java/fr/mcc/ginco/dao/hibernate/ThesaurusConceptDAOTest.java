@@ -541,4 +541,63 @@ public class ThesaurusConceptDAOTest {
 		assertEquals(1, result.size());
 		// pojo Object
 	}
+
+	@Test
+	public void getPaginatedAvailableConceptsOfGroupLikeIsHelloAndLimitIsOneAndOnlyValidatedConceptsIsFalseAndStartIndexIsOne() throws org.hibernate.HibernateException, org.hibernate.UnknownProfileException, javax.naming.NamingException {
+
+		// arrange
+		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
+		List list = new ArrayList();
+		list.add(new Object());
+		Criteria criteria1 = mock(Criteria.class);
+		Criteria criteria2 = mock(Criteria.class);
+		Criteria criteria3 = mock(Criteria.class);
+		Criteria criteria4 = mock(Criteria.class);
+		Criteria criteria5 = mock(Criteria.class);
+		Criteria criteria6 = mock(Criteria.class);
+		Criteria criteria7 = mock(Criteria.class);
+		Criteria criteria8 = mock(Criteria.class);
+		Criteria criteria9 = mock(Criteria.class);
+		when(criteria9.setResultTransformer(Mockito.<org.hibernate.transform.ResultTransformer>any()))
+			.thenReturn(criteria8);
+		Criteria criteria10 = mock(Criteria.class);
+		Criteria criteria11 = mock(Criteria.class);
+		when(criteria11.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria10)
+			.thenReturn(criteria4)
+			.thenReturn(criteria3)
+			.thenReturn(criteria2)
+			.thenReturn(criteria1);
+		when(criteria11.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
+			.thenReturn(criteria5);
+		when(criteria11.list())
+			.thenReturn(list);
+		when(criteria11.setFirstResult(anyInt()))
+			.thenReturn(criteria6);
+		when(criteria11.setMaxResults(anyInt()))
+			.thenReturn(criteria7);
+		when(criteria11.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
+			.thenReturn(criteria9);
+		Criteria criteria12 = mock(Criteria.class);
+		when(criteria12.createCriteria(Mockito.<String>any(), Mockito.<String>any(), Mockito.<org.hibernate.sql.JoinType>any()))
+			.thenReturn(criteria11);
+		Criteria criteria13 = mock(Criteria.class);
+		when(criteria13.add(Mockito.<org.hibernate.criterion.Criterion>any()))
+			.thenReturn(criteria12);
+		Session session = mock(Session.class);
+		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
+			.thenReturn(criteria13);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+		when(sessionFactory.getCurrentSession())
+			.thenReturn(session);
+		thesaurusConceptDAO.setSessionFactory(sessionFactory);
+
+		// act
+		List<ThesaurusConcept> result =
+			 thesaurusConceptDAO.getPaginatedAvailableConceptsOfGroup(1, 1, "1234", "1234", false, "hello");
+
+		// assert
+		assertEquals(1, result.size());
+		// pojo Object
+	}
 }

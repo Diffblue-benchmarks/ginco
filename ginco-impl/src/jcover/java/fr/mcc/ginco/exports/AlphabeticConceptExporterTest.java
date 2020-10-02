@@ -107,7 +107,6 @@ public class AlphabeticConceptExporterTest {
 		List<Note> list7 = new ArrayList<Note>();
 		Note note3 = new Note();
 		note3.setNoteType(new NoteType());
-		note3.setTerm(new ThesaurusTerm());
 		list7.add(note3);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(list7);

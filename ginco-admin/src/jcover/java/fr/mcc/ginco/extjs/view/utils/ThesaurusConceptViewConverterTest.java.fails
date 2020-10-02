@@ -378,6 +378,7 @@ class ThesaurusConceptViewConverterTest {
 		ArrayList<AlignmentResourceView> targetResources =
 			 new ArrayList<AlignmentResourceView>();
 		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
+		alignmentResourceView.setExternalTargetResource("foo");
 		alignmentResourceView.setIdentifier(1);
 		targetResources.add(alignmentResourceView);
 		alignmentView.setTargetResources(targetResources);

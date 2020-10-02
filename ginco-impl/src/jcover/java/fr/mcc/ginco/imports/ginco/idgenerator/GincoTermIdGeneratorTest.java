@@ -38,13 +38,11 @@ public class GincoTermIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdForTermIdMappingIsEmptyReturnsFoo() {
+	public void getIdForTermReturnsFoo() throws java.io.IOException, CloneNotSupportedException {
 		when(thesaurusTermDAO.getById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusTerm());
 		when(generatorService.generate(Mockito.<Class>any()))
 			.thenReturn("foo");
-		HashMap<String, String> idMapping = new HashMap<String, String>();
-		assertEquals("foo", service.getIdForTerm("1234", idMapping));
-		assertEquals("foo", idMapping.get("1234"));
+		assertEquals("foo", service.getIdForTerm("1234", new HashMap<String, String>()));
 	}
 }

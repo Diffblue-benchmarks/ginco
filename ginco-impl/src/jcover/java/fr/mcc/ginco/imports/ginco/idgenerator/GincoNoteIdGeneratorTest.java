@@ -1,7 +1,6 @@
 package fr.mcc.ginco.imports.ginco.idgenerator;
 
-import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertTrue;
 
 import fr.mcc.ginco.beans.Note;
 import fr.mcc.ginco.exports.result.bean.JaxbList;
@@ -12,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -34,13 +32,7 @@ public class GincoNoteIdGeneratorTest {
 	}
 
 	@Test
-	public void getNotesWithNewIdsIdMappingIsEmpty() {
-		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
-			.thenReturn("1234");
-		HashMap<String, JaxbList<Note>> notes =
-			 new HashMap<String, JaxbList<Note>>();
-		JaxbList<Note> jaxbList1 = new JaxbList<Note>();
-		notes.put("foo", jaxbList1);
-		assertSame(jaxbList1, service.getNotesWithNewIds(notes, new HashMap<String, String>()).get("1234"));
+	public void getNotesWithNewIdsReturnsEmpty() throws java.io.IOException, CloneNotSupportedException {
+		assertTrue(service.getNotesWithNewIds(new HashMap<String, JaxbList<Note>>(), new HashMap<String, String>()).isEmpty());
 	}
 }

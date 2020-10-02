@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import org.hibernate.envers.configuration.AuditConfiguration;
 import org.hibernate.event.spi.PostDeleteEvent;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Unit tests for fr.mcc.ginco.audit.utils.DeleteEnversListener

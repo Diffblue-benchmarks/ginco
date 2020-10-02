@@ -25,21 +25,21 @@ public class GincoIdMapParserTest {
 	}
 
 	@Test
-	public void getNewId1() {
+	public void getNewId1() throws java.io.IOException, CloneNotSupportedException {
 		assertEquals("1234", service.getNewId("1234", new HashMap<String, String>()));
 	}
 
 	@Test
-	public void getNewId2() {
+	public void getNewId2() throws java.io.IOException, CloneNotSupportedException {
 		HashMap<String, String> idMapping = new HashMap<String, String>();
-		idMapping.put("foo", "Mapping for old id ");
-		assertEquals("Mapping for old id ", service.getNewId("foo", idMapping));
+		idMapping.put("1234", "");
+		assertEquals("1234", service.getNewId("1234", idMapping));
 	}
 
 	@Test
-	public void getNewIdReturnsFoo() {
+	public void getNewIdReturnsFoo() throws java.io.IOException, CloneNotSupportedException {
 		HashMap<String, String> idMapping = new HashMap<String, String>();
-		idMapping.put("foo", "");
-		assertEquals("foo", service.getNewId("foo", idMapping));
+		idMapping.put("1234", "foo");
+		assertEquals("foo", service.getNewId("1234", idMapping));
 	}
 }

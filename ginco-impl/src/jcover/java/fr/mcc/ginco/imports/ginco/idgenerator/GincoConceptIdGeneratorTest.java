@@ -36,29 +36,25 @@ public class GincoConceptIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdForConcept1() {
+	public void getIdForConcept1() throws java.io.IOException, CloneNotSupportedException {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234");
 		when(generatorService.generate(Mockito.<Class>any()))
-			.thenReturn(" with new id ");
-		HashMap<String, String> idMapping = new HashMap<String, String>();
-		assertEquals(" with new id ", service.getIdForConcept("1234", idMapping));
-		assertEquals(" with new id ", idMapping.get("1234"));
+			.thenReturn("foo");
+		assertEquals("foo", service.getIdForConcept("1234", new HashMap<String, String>()));
 	}
 
 	@Test
-	public void getIdForConcept2() {
+	public void getIdForConcept2() throws java.io.IOException, CloneNotSupportedException {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("");
 		when(generatorService.generate(Mockito.<Class>any()))
-			.thenReturn(" with new id ");
-		HashMap<String, String> idMapping = new HashMap<String, String>();
-		assertEquals(" with new id ", service.getIdForConcept("1234", idMapping));
-		assertEquals(" with new id ", idMapping.get("1234"));
+			.thenReturn("foo");
+		assertEquals("foo", service.getIdForConcept("1234", new HashMap<String, String>()));
 	}
 
 	@Test
-	public void getIdForConcept3() {
+	public void getIdForConcept3() throws java.io.IOException, CloneNotSupportedException {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn(" with new id ");
 		assertEquals(" with new id ", service.getIdForConcept("1234", new HashMap<String, String>()));

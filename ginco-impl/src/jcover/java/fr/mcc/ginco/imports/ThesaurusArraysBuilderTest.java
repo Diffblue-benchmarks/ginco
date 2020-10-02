@@ -55,7 +55,7 @@ public class ThesaurusArraysBuilderTest {
 	}
 
 	@Test
-	public void buildArraysBuiltArraysIsEmpty() {
+	public void buildArrays() throws java.io.IOException, CloneNotSupportedException {
 		when(thesaurusArrayDAO.update(Mockito.<ThesaurusArray>any()))
 			.thenReturn(new ThesaurusArray());
 		when(skosNodeLabelBuilder.buildNodeLabel(Mockito.<Resource>any(), Mockito.<Thesaurus>any(), Mockito.<ThesaurusArray>any()))
@@ -74,7 +74,7 @@ public class ThesaurusArraysBuilderTest {
 	}
 
 	@Test
-	public void buildChildrenArraysBuiltArraysIsEmpty() {
+	public void buildChildrenArrays() throws java.io.IOException, CloneNotSupportedException {
 		when(thesaurusArrayDAO.getById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusArray());
 		when(thesaurusArrayDAO.update(Mockito.<ThesaurusArray>any()))
