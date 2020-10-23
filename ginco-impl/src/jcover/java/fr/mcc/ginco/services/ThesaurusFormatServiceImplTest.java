@@ -26,7 +26,7 @@ import org.mockito.MockitoAnnotations;
 public class ThesaurusFormatServiceImplTest {
 
 	@Mock(name = "thesaurusFormatDAO")
-	private IGenericDAO<fr.mcc.ginco.beans.ThesaurusFormat, Integer> thesaurusFormatDAO;
+	private IGenericDAO<ThesaurusFormat, Integer> thesaurusFormatDAO;
 
 	@InjectMocks
 	private ThesaurusFormatServiceImpl service;

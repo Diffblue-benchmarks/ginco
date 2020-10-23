@@ -27,7 +27,7 @@ import org.mockito.MockitoAnnotations;
 public class AlignmentTypeServiceImplTest {
 
 	@Mock(name = "alignmentTypeDAO")
-	private IGenericDAO<fr.mcc.ginco.beans.AlignmentType, Integer> alignmentTypeDAO;
+	private IGenericDAO<AlignmentType, Integer> alignmentTypeDAO;
 
 	@InjectMocks
 	private AlignmentTypeServiceImpl service;

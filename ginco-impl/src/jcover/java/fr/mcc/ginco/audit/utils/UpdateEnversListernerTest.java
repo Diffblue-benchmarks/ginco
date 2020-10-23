@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.Serializable;
 
+import org.hibernate.cfg.Configuration;
 import org.hibernate.envers.configuration.AuditConfiguration;
 import org.hibernate.event.spi.EventSource;
 import org.hibernate.event.spi.PostUpdateEvent;
@@ -37,6 +38,6 @@ public class UpdateEnversListernerTest {
 		when(persister.getEntityName())
 			.thenReturn("entity");
 		EventSource source = mock(EventSource.class);
-		new UpdateEnversListerner(new AuditConfiguration(new org.hibernate.cfg.Configuration())).onPostUpdate(new PostUpdateEvent(new Object(), id, state, oldState, dirtyProperties, persister, source));
+		new UpdateEnversListerner(new AuditConfiguration(new Configuration())).onPostUpdate(new PostUpdateEvent(new Object(), id, state, oldState, dirtyProperties, persister, source));
 	}
 }

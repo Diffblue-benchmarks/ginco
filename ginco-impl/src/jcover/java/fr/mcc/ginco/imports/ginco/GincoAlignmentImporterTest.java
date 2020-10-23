@@ -29,13 +29,13 @@ import org.mockito.MockitoAnnotations;
 public class GincoAlignmentImporterTest {
 
 	@Mock(name = "alignmentConceptDAO")
-	private IGenericDAO<fr.mcc.ginco.beans.AlignmentConcept, Integer> alignmentConceptDAO;
+	private IGenericDAO<AlignmentConcept, Integer> alignmentConceptDAO;
 
 	@Mock(name = "alignmentDAO")
 	private IAlignmentDAO alignmentDAO;
 
 	@Mock(name = "alignmentResourceDAO")
-	private IGenericDAO<fr.mcc.ginco.beans.AlignmentResource, Integer> alignmentResourceDAO;
+	private IGenericDAO<AlignmentResource, Integer> alignmentResourceDAO;
 
 	@Mock(name = "externalThesaurusDAO")
 	private IExternalThesaurusDAO externalThesaurusDAO;

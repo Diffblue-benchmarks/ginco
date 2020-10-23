@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import fr.mcc.ginco.beans.ThesaurusArk;
 import fr.mcc.ginco.dao.IGenericDAO;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Before;
@@ -25,7 +26,7 @@ import org.mockito.MockitoAnnotations;
 public class ThesaurusArkServiceImplTest {
 
 	@Mock(name = "thesaurusArkDAO")
-	private IGenericDAO<fr.mcc.ginco.beans.ThesaurusArk, Integer> thesaurusArkDAO;
+	private IGenericDAO<ThesaurusArk, Integer> thesaurusArkDAO;
 
 	@InjectMocks
 	private ThesaurusArkServiceImpl service;
@@ -39,8 +40,7 @@ public class ThesaurusArkServiceImplTest {
 
 		// arrange
 		ThesaurusArk thesaurusArk1 = new ThesaurusArk();
-		Date created1 =
-			 new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurusArk1.setCreated(created1);
 		thesaurusArk1.setEntity("entity");
 		thesaurusArk1.setIdentifier("data");

@@ -27,7 +27,7 @@ import org.mockito.MockitoAnnotations;
 public class AdminUserServiceImplTest {
 
 	@Mock(name = "adminUserDAO")
-	private IGenericDAO<fr.mcc.ginco.beans.AdminUser, String> adminUserDAO;
+	private IGenericDAO<AdminUser, String> adminUserDAO;
 
 	@InjectMocks
 	private AdminUserServiceImpl service;

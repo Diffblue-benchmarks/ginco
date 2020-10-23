@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.Serializable;
 
+import org.hibernate.cfg.Configuration;
 import org.hibernate.envers.configuration.AuditConfiguration;
 import org.hibernate.event.spi.EventSource;
 import org.hibernate.event.spi.PostInsertEvent;
@@ -35,6 +36,6 @@ public class InsertEnversListenerTest {
 		when(persister.getEntityName())
 			.thenReturn("entity");
 		EventSource source = mock(EventSource.class);
-		new InsertEnversListener(new AuditConfiguration(new org.hibernate.cfg.Configuration())).onPostInsert(new PostInsertEvent("foo", id, state, persister, source));
+		new InsertEnversListener(new AuditConfiguration(new Configuration())).onPostInsert(new PostInsertEvent("foo", id, state, persister, source));
 	}
 }

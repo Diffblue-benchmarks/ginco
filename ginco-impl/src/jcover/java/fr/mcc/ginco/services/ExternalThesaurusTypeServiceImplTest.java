@@ -26,7 +26,7 @@ import org.mockito.MockitoAnnotations;
 public class ExternalThesaurusTypeServiceImplTest {
 
 	@Mock(name = "externalThesaurusTypeDAO")
-	private IGenericDAO<fr.mcc.ginco.beans.ExternalThesaurusType, Integer> externalThesaurusTypeDAO;
+	private IGenericDAO<ExternalThesaurusType, Integer> externalThesaurusTypeDAO;
 
 	@InjectMocks
 	private ExternalThesaurusTypeServiceImpl service;
