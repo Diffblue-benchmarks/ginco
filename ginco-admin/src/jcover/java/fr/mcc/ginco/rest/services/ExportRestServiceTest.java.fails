@@ -133,7 +133,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"HIER_Mr_2020-10-23_20:59:09.txt\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"HIER_Mr_2020-10-23_22:07:18.txt\""));
 	}
 
 	@Test
@@ -201,7 +201,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"ALPH_Mr_2020-10-23_20:59:12.txt\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"ALPH_Mr_2020-10-23_22:07:21.txt\""));
 	}
 
 	@Test
@@ -264,7 +264,7 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Mr_2020-10-23_20:59:12.xml\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Mr_2020-10-23_22:07:21.xml\""));
 	}
 
 	@Test
@@ -342,6 +342,6 @@ class ExportRestServiceTest {
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().get("Content-Disposition"), hasSize(1));
-		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Branch_foo_bar_2020-10-23_20:59:12.xml\""));
+		assertThat(result.getStringHeaders().get("Content-Disposition").get(0), is("attachment; filename=\"GINCO_Branch_foo_bar_2020-10-23_22:07:21.xml\""));
 	}
 }
