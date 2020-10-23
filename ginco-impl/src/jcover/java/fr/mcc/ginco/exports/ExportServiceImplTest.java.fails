@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.AssociativeRelationship;
 import fr.mcc.ginco.beans.SplitNonPreferredTerm;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
@@ -102,7 +103,7 @@ public class ExportServiceImplTest {
 	public void getHierarchicalText2() {
 		List<ThesaurusConcept> list1 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept1 = new ThesaurusConcept();
-		thesaurusConcept1.setConceptArrays(new HashSet<ThesaurusArray>());
+		thesaurusConcept1.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
 		thesaurusConcept1.setIdentifier("data");
 		list1.add(thesaurusConcept1);
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))
