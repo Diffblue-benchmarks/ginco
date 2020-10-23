@@ -100,6 +100,58 @@ class ThesaurusArrayViewConverterTest {
 	}
 
 	@Test
+	void convert3() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("foo=bar");
+		NodeLabel nodeLabel1 = new NodeLabel();
+		nodeLabel1.setLexicalValue("value");
+		NodeLabel nodeLabel2 = new NodeLabel();
+		nodeLabel2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		nodeLabel2.setIdentifier(1);
+		Language language2 = new Language();
+		language2.setId("1234");
+		nodeLabel2.setLanguage(language2);
+		nodeLabel2.setLexicalValue("value");
+		nodeLabel2.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		when(nodeLabelService.getByThesaurusArray(Mockito.<String>any()))
+			.thenReturn(nodeLabel1);
+		when(nodeLabelService.getByThesaurusArrayAndLanguage(Mockito.<String>any()))
+			.thenReturn(nodeLabel2);
+		ThesaurusArray source4 = new ThesaurusArray();
+		source4.setIdentifier("data");
+		source4.setOrdered(false);
+		ThesaurusArray parent4 = new ThesaurusArray();
+		parent4.setIdentifier("data");
+		source4.setParent(parent4);
+		ThesaurusConcept superOrdinateConcept6 = new ThesaurusConcept();
+		superOrdinateConcept6.setIdentifier("data");
+		source4.setSuperOrdinateConcept(superOrdinateConcept6);
+		Thesaurus thesaurus10 = new Thesaurus();
+		thesaurus10.setIdentifier("data");
+		source4.setThesaurus(thesaurus10);
+
+		// act
+		ThesaurusArrayView result = service.convert(source4);
+
+		// assert
+		assertThat(result.getConcepts(), empty());
+		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLabel(), is("value"));
+		assertThat(result.getLanguage(), is("1234"));
+		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(result.getNodeLabelId(), is(1));
+		assertThat(result.getOrder(), is(false));
+		assertThat(result.getParentArrayId(), is("data"));
+		assertThat(result.getParentArrayLabel(), is("value"));
+		assertThat(result.getSuperOrdinateId(), is("data"));
+		assertThat(result.getSuperOrdinateLabel(), is("foo=bar"));
+		assertThat(result.getThesaurusId(), is("data"));
+	}
+
+	@Test
 	void convert1() throws java.text.ParseException {
 
 		// arrange

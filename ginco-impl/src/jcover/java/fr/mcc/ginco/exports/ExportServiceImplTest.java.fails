@@ -16,6 +16,7 @@ import fr.mcc.ginco.services.IThesaurusArrayService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -101,6 +102,7 @@ public class ExportServiceImplTest {
 	public void getHierarchicalText2() {
 		List<ThesaurusConcept> list1 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept1 = new ThesaurusConcept();
+		thesaurusConcept1.setConceptArrays(new HashSet<ThesaurusArray>());
 		thesaurusConcept1.setIdentifier("data");
 		list1.add(thesaurusConcept1);
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))

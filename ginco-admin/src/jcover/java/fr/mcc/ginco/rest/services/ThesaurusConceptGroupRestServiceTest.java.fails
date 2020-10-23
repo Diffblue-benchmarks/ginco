@@ -173,12 +173,10 @@ class ThesaurusConceptGroupRestServiceTest {
 		thesaurusConceptGroupView.setParentGroupLabel("label");
 		thesaurusConceptGroupView.setThesaurusId("1234");
 		thesaurusConceptGroupView.setType("text/plain");
-		ThesaurusConceptGroup thesaurusConceptGroup1 = new ThesaurusConceptGroup();
-		thesaurusConceptGroup1.setIsDynamic(false);
 		when(thesaurusConceptGroupViewConverter.convert(Mockito.<ThesaurusConceptGroup>any()))
 			.thenReturn(thesaurusConceptGroupView);
 		when(thesaurusConceptGroupViewConverter.convert(Mockito.<ThesaurusConceptGroupView>any()))
-			.thenReturn(thesaurusConceptGroup1);
+			.thenReturn(new ThesaurusConceptGroup());
 		when(thesaurusConceptGroupService.updateThesaurusConceptGroup(Mockito.<ThesaurusConceptGroup>any(), Mockito.<ThesaurusConceptGroupLabel>any()))
 			.thenReturn(new ThesaurusConceptGroup());
 		when(thesaurusConceptGroupLabelViewConverter.convert(Mockito.<ThesaurusConceptGroupView>any()))
