@@ -1,0 +1,89 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Role;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.UserRole;
+import fr.mcc.ginco.extjs.view.pojo.UserRoleView;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IUserRoleService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.UserRoleViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {UserRoleViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class UserRoleViewConverterTest {
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "userRoleService")
+	private IUserRoleService userRoleService;
+
+	@Autowired
+	private UserRoleViewConverter service;
+
+	@Test
+	void convert1() {
+
+		// arrange
+		UserRole userRole = new UserRole();
+		userRole.setIdentifier(1);
+		userRole.setRole(Role.MANAGER);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		userRole.setThesaurus(thesaurus);
+		userRole.setUsername("root");
+
+		// act
+		UserRoleView result = service.convert(userRole);
+
+		// assert
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getRole(), is(0));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getUsername(), is("root"));
+	}
+
+	@Test
+	void convert2() {
+
+		// arrange
+		UserRole userRole = new UserRole();
+		userRole.setIdentifier(1);
+		when(userRoleService.getUserRole(Mockito.<Integer>any()))
+			.thenReturn(userRole);
+		Thesaurus thesaurus2 = new Thesaurus();
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus2);
+		UserRoleView userRoleView = new UserRoleView();
+		userRoleView.setIdentifier(1);
+		userRoleView.setRole(1);
+		userRoleView.setUsername("root");
+
+		// act
+		UserRole result = service.convert(userRoleView);
+
+		// assert
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getRole(), is(Role.EXPERT));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus2));
+		assertThat(result.getUsername(), is("root"));
+	}
+}

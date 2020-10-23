@@ -1,0 +1,62 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusArrayConcept;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusArrayConceptView;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ThesaurusArrayConceptViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusArrayConceptViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusArrayConceptViewConverterTest {
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@Autowired
+	private ThesaurusArrayConceptViewConverter service;
+
+	@Test
+	void convert() {
+
+		// arrange
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(thesaurusConcept);
+		ThesaurusArrayConceptView thesaurusArrayConceptView =
+			 new ThesaurusArrayConceptView();
+		thesaurusArrayConceptView.setIdentifier("data");
+		thesaurusArrayConceptView.setOrder(1);
+		ThesaurusArray array = new ThesaurusArray();
+		array.setIdentifier("data");
+
+		// act
+		ThesaurusArrayConcept result =
+			 service.convert(thesaurusArrayConceptView, array);
+
+		// assert
+		assertThat(result.getArrayOrder(), is(1));
+		assertThat(result.getConcepts(), sameInstance(thesaurusConcept));
+		assertThat(result.getIdentifier().getConceptId(), is("data"));
+		assertThat(result.getIdentifier().getThesaurusArrayId(), is("data"));
+	}
+}

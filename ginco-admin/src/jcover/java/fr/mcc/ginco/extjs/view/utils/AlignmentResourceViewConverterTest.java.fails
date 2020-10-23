@@ -1,0 +1,108 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
+
+import fr.mcc.ginco.beans.Alignment;
+import fr.mcc.ginco.beans.AlignmentResource;
+import fr.mcc.ginco.extjs.view.pojo.AlignmentResourceView;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.AlignmentResourceViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {AlignmentResourceViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class AlignmentResourceViewConverterTest {
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@Autowired
+	private AlignmentResourceViewConverter service;
+
+	@Test
+	void convertResourceConcept() {
+
+		// arrange
+		AlignmentResource alignmentResource = new AlignmentResource();
+		alignmentResource.setExternalTargetResource("foo");
+		alignmentResource.setIdentifier(1);
+
+		// act
+		AlignmentResourceView result =
+			 service.convertResourceConcept(alignmentResource);
+
+		// assert
+		assertThat(result.getExternalTargetResource(), is("foo"));
+		assertThat(result.getIdentifier(), is(1));
+	}
+
+	@Test
+	void convertAlignmentResourceView1() {
+
+		// arrange
+		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
+		alignmentResourceView.setIdentifier(1);
+		Alignment alignment = new Alignment();
+
+		// act
+		AlignmentResource result =
+			 service.convertAlignmentResourceView(alignmentResourceView, alignment);
+
+		// assert
+		assertThat(result.getAlignment(), sameInstance(alignment));
+		assertThat(result.getExternalTargetResource(), is(nullValue()));
+		assertThat(result.getIdentifier(), is(1));
+	}
+
+	@Test
+	void convertAlignmentResourceView2() {
+
+		// arrange
+		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
+		alignmentResourceView.setExternalTargetResource("foo");
+		Alignment alignment = new Alignment();
+
+		// act
+		AlignmentResource result =
+			 service.convertAlignmentResourceView(alignmentResourceView, alignment);
+
+		// assert
+		assertThat(result.getAlignment(), sameInstance(alignment));
+		assertThat(result.getExternalTargetResource(), is("foo"));
+		assertThat(result.getIdentifier(), is(nullValue()));
+	}
+
+	@Test
+	void convertAlignmentResourceView3() {
+
+		// arrange
+		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
+		alignmentResourceView.setExternalTargetResource("foo");
+		alignmentResourceView.setIdentifier(1);
+		Alignment alignment = mock(Alignment.class);
+
+		// act
+		AlignmentResource result =
+			 service.convertAlignmentResourceView(alignmentResourceView, alignment);
+
+		// assert
+		assertThat(result.getAlignment(), sameInstance(alignment));
+		assertThat(result.getExternalTargetResource(), is("foo"));
+		assertThat(result.getIdentifier(), is(1));
+	}
+}

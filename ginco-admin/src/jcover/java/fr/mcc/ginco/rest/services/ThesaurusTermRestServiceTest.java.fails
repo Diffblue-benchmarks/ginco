@@ -1,0 +1,281 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Note;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.GenericStatusView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusTermView;
+import fr.mcc.ginco.extjs.view.utils.TermViewConverter;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.INoteService;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IThesaurusTermService;
+import fr.mcc.ginco.services.IUserRoleService;
+import fr.mcc.ginco.solr.IConceptIndexerService;
+import fr.mcc.ginco.solr.INoteIndexerService;
+import fr.mcc.ginco.solr.ITermIndexerService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.ThesaurusTermRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusTermRestService.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusTermRestServiceTest {
+
+	@MockBean(name = "conceptIndexerService")
+	private IConceptIndexerService conceptIndexerService;
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "noteIndexerService")
+	private INoteIndexerService noteIndexerService;
+
+	@MockBean(name = "noteService")
+	private INoteService noteService;
+
+	@MockBean(name = "termIndexerService")
+	private ITermIndexerService termIndexerService;
+
+	@MockBean(name = "termViewConverter")
+	private TermViewConverter termViewConverter;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "thesaurusTermService")
+	private IThesaurusTermService thesaurusTermService;
+
+	@MockBean(name = "userRoleService")
+	private IUserRoleService userRoleService;
+
+	@Autowired
+	private ThesaurusTermRestService service;
+
+	@Test
+	void getSandboxedThesaurusTerms1() {
+		when(thesaurusTermService.getPaginatedThesaurusSandoxedTermsList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusTerm>());
+		when(thesaurusTermService.getSandboxedTermsCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		ExtJsonFormLoadData<List<ThesaurusTermView>> result =
+			 service.getSandboxedThesaurusTerms(1, 1, "1234", false);
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getSandboxedThesaurusTerms2() {
+
+		// arrange
+		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		list.add(new ThesaurusTerm());
+		when(thesaurusTermService.getPaginatedThesaurusSandoxedTermsList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
+			.thenReturn(list);
+		when(thesaurusTermService.getSandboxedTermsCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		when(termViewConverter.convert(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(thesaurusTermView);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusTermView>> result =
+			 service.getSandboxedThesaurusTerms(1, 1, "1234", false);
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusTermView));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getPreferredThesaurusTermsLimitIsOneAndOnlyNotOrphanConceptsIsFalseAndStartIndexIsOne() {
+
+		// arrange
+		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		list.add(new ThesaurusTerm());
+		when(thesaurusTermService.getPaginatedThesaurusPreferredTermsList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<Boolean>any()))
+			.thenReturn(list);
+		when(thesaurusTermService.getPreferredTermsCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		when(termViewConverter.convert(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(thesaurusTermView);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusTermView>> result =
+			 service.getPreferredThesaurusTerms(1, 1, "1234", false);
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusTermView));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getThesaurusTerm() {
+
+		// arrange
+		when(thesaurusTermService.getThesaurusTermById(Mockito.<String>any()))
+			.thenReturn(new ThesaurusTerm());
+		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		thesaurusTermView.setConceptId("1234");
+		ArrayList<String> conceptsPath = new ArrayList<String>();
+		conceptsPath.add("/bin/bash");
+		thesaurusTermView.setConceptsPath(conceptsPath);
+		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setHidden(false);
+		thesaurusTermView.setIdentifier("data");
+		thesaurusTermView.setLanguage("foo");
+		thesaurusTermView.setLexicalValue("value");
+		thesaurusTermView.setModified("foo");
+		thesaurusTermView.setPrefered(false);
+		thesaurusTermView.setRole("admin");
+		thesaurusTermView.setSource("foo");
+		thesaurusTermView.setStatus(1);
+		thesaurusTermView.setThesaurusId("1234");
+		thesaurusTermView.setTopistopterm(false);
+		when(termViewConverter.convert(Mockito.<ThesaurusTerm>any(), anyBoolean()))
+			.thenReturn(thesaurusTermView);
+
+		// act
+		ThesaurusTermView result = service.getThesaurusTerm("1234");
+
+		// assert
+		assertThat(result.getConceptId(), is("1234"));
+		assertThat(result.getConceptsPath(), hasSize(1));
+		assertThat(result.getConceptsPath().get(0), is("/bin/bash"));
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getHidden(), is(false));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is("foo"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getPrefered(), is(false));
+		assertThat(result.getRole(), is("admin"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("1234"));
+		assertThat(result.getTopistopterm(), is(false));
+	}
+
+	@Test
+	void destroyTerm() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		when(thesaurusTermService.destroyThesaurusTerm(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(new ThesaurusTerm());
+		when(thesaurusTermService.getThesaurusTermById(Mockito.<String>any()))
+			.thenReturn(new ThesaurusTerm());
+		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		thesaurusTermView.setConceptId("1234");
+		ArrayList<String> conceptsPath1 = new ArrayList<String>();
+		conceptsPath1.add("/bin/bash");
+		thesaurusTermView.setConceptsPath(conceptsPath1);
+		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setHidden(false);
+		thesaurusTermView.setIdentifier("data");
+		thesaurusTermView.setLanguage("foo");
+		thesaurusTermView.setLexicalValue("value");
+		thesaurusTermView.setModified("foo");
+		thesaurusTermView.setPrefered(false);
+		thesaurusTermView.setRole("admin");
+		thesaurusTermView.setSource("foo");
+		thesaurusTermView.setStatus(1);
+		thesaurusTermView.setThesaurusId("1234");
+		thesaurusTermView.setTopistopterm(false);
+		when(termViewConverter.convert(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(thesaurusTermView);
+		List<Note> list = new ArrayList<Note>();
+		list.add(new Note());
+		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(list);
+
+		// act
+		ThesaurusTermView result = service.destroyTerm(new ThesaurusTermView());
+
+		// assert
+		assertThat(result.getConceptId(), is("1234"));
+		assertThat(result.getConceptsPath(), hasSize(1));
+		assertThat(result.getConceptsPath().get(0), is("/bin/bash"));
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getHidden(), is(false));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is("foo"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getPrefered(), is(false));
+		assertThat(result.getRole(), is("admin"));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("1234"));
+		assertThat(result.getTopistopterm(), is(false));
+		Mockito.verify(termIndexerService).removeTerm(ArgumentMatchers.<ThesaurusTerm>any());
+		Mockito.verify(noteIndexerService).removeNote(ArgumentMatchers.<Note>any());
+	}
+
+	@Test
+	void getAllTermStatus() {
+		ExtJsonFormLoadData<List<GenericStatusView>> result =
+			 service.getAllTermStatus();
+		assertThat(result.getData().size(), is(3));
+		assertThat(result.getData().get(0).getStatus(), is(0));
+		assertThat(result.getData().get(0).getStatusLabel(), is("Candidat"));
+		assertThat(result.getData().get(1).getStatus(), is(1));
+		assertThat(result.getData().get(1).getStatusLabel(), is("Validé"));
+		assertThat(result.getData().get(2).getStatus(), is(2));
+		assertThat(result.getData().get(2).getStatusLabel(), is("Rejeté"));
+		assertThat(result.getTotal(), is(3L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void checkTermUnicityReturnsFalse() {
+		when(thesaurusTermService.isTermExist(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(true);
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		when(languagesService.getLanguageById(Mockito.<String>any()))
+			.thenReturn(new Language());
+		assertThat(service.checkTermUnicity("1234", "value", "/some/path.html"), is(false));
+	}
+
+	@Test
+	void checkTermUnicityReturnsTrue() {
+		when(thesaurusTermService.isTermExist(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(false);
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		when(languagesService.getLanguageById(Mockito.<String>any()))
+			.thenReturn(new Language());
+		assertThat(service.checkTermUnicity("1234", "value", "/some/path.html"), is(true));
+	}
+}

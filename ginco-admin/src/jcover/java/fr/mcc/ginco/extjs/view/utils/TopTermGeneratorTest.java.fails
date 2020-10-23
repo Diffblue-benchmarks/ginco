@@ -1,0 +1,103 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
+import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
+import fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.TopTermGenerator
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {TopTermGenerator.class})
+@ExtendWith(SpringExtension.class)
+class TopTermGeneratorTest {
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusListNodeFactory")
+	private ThesaurusListNodeFactory thesaurusListNodeFactory;
+
+	@Autowired
+	private TopTermGenerator service;
+
+	@Test
+	void generateTopTerm() throws java.text.ParseException {
+
+		// arrange
+		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
+		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setIdentifier("data");
+		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setNotation("DE");
+		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setStatus(1);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		thesaurusConcept.setThesaurus(thesaurus);
+		thesaurusConcept.setTopConcept(false);
+		list.add(thesaurusConcept);
+		when(thesaurusConceptService.getConceptWithChildrenIdentifers(Mockito.<String>any()))
+			.thenReturn(new HashSet<String>());
+		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any(), anyInt()))
+			.thenReturn(list);
+
+		// act
+		List<IThesaurusListNode> result = service.generateTopTerm("1234");
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getChildren(), empty());
+		assertThat(result.get(0).getIconCls(), is("icon-warning"));
+		assertThat(result.get(0).getId(), is("1491e265-4f6b-4de9-8a3b-6dfca29253d7"));
+		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
+		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));
+		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.WARNING));
+		assertThat(result.get(0).isDisplayable(), is(false));
+		assertThat(result.get(0).isExpanded(), is(false));
+		assertThat(result.get(0).isLeaf(), is(true));
+	}
+
+	@Test
+	void generateTopTermReturnsEmpty() {
+		when(thesaurusConceptService.getConceptWithChildrenIdentifers(Mockito.<String>any()))
+			.thenReturn(new HashSet<String>());
+		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any(), anyInt()))
+			.thenReturn(new ArrayList<ThesaurusConcept>());
+		assertThat(service.generateTopTerm("1234"), empty());
+	}
+}

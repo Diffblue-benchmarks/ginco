@@ -1,0 +1,58 @@
+package fr.mcc.ginco.services;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.ThesaurusArrayConcept;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.dao.IGenericDAO;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.services.ThesaurusArrayConceptServiceImpl
+ *
+ * @author Diffblue Cover
+ */
+
+public class ThesaurusArrayConceptServiceImplTest {
+
+	@Mock(name = "thesaurusArrayConceptDAO")
+	private IGenericDAO<ThesaurusArrayConcept, ThesaurusArrayConcept.Id> thesaurusArrayConceptDAO;
+
+	@InjectMocks
+	private ThesaurusArrayConceptServiceImpl service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void geThesaurusArrayConceptConceptIdIsHello() {
+
+		// arrange
+		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
+		thesaurusArrayConcept.setArrayOrder(1);
+		ThesaurusConcept concept = new ThesaurusConcept();
+		thesaurusArrayConcept.setConcepts(concept);
+		ThesaurusArrayConcept.Id identifier6 = new ThesaurusArrayConcept.Id();
+		thesaurusArrayConcept.setIdentifier(identifier6);
+		when(thesaurusArrayConceptDAO.getById(Mockito.<ThesaurusArrayConcept.Id>any()))
+			.thenReturn(thesaurusArrayConcept);
+
+		// act
+		ThesaurusArrayConcept result =
+			 service.geThesaurusArrayConcept("1234", "hello");
+
+		// assert
+		assertEquals(1, (int) result.getArrayOrder());
+		assertSame(concept, result.getConcepts());
+		assertSame(identifier6, result.getIdentifier());
+	}
+}

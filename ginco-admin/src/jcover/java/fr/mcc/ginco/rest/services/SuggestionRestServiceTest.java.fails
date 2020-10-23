@@ -1,0 +1,147 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Suggestion;
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.SuggestionView;
+import fr.mcc.ginco.extjs.view.utils.SuggestionViewConverter;
+import fr.mcc.ginco.services.ISuggestionService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.SuggestionRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {SuggestionRestService.class})
+@ExtendWith(SpringExtension.class)
+class SuggestionRestServiceTest {
+
+	@MockBean(name = "suggestionService")
+	private ISuggestionService suggestionService;
+
+	@MockBean(name = "suggestionViewConverter")
+	private SuggestionViewConverter suggestionViewConverter;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@Autowired
+	private SuggestionRestService service;
+
+	@Test
+	void getSuggestions1() {
+		when(suggestionService.getConceptSuggestionCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		when(suggestionService.getConceptSuggestionPaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(new ArrayList<Suggestion>());
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.getSuggestions("1234", "1234", 1, 1);
+		assertThat(result.getData(), empty());
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getSuggestions2() {
+
+		// arrange
+		SuggestionView suggestionView = new SuggestionView();
+		when(suggestionViewConverter.convert(Mockito.<Suggestion>any()))
+			.thenReturn(suggestionView);
+		List<Suggestion> list = new ArrayList<Suggestion>();
+		list.add(new Suggestion());
+		when(suggestionService.getConceptSuggestionCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		when(suggestionService.getConceptSuggestionPaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.getSuggestions("1234", "1234", 1, 1);
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(suggestionView));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void updateSuggestions() {
+
+		// arrange
+		SuggestionView suggestionView1 = new SuggestionView();
+		when(suggestionViewConverter.convert(Mockito.<Suggestion>any()))
+			.thenReturn(suggestionView1);
+		when(suggestionViewConverter.convert(Mockito.<SuggestionView>any()))
+			.thenReturn(new Suggestion());
+		when(suggestionService.createOrUpdateSuggestion(Mockito.<Suggestion>any()))
+			.thenReturn(new Suggestion());
+		ArrayList<SuggestionView> suggestionViews = new ArrayList<SuggestionView>();
+		suggestionViews.add(new SuggestionView());
+
+		// act
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.updateSuggestions(suggestionViews);
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(suggestionView1));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void createSuggestions() {
+
+		// arrange
+		SuggestionView suggestionView1 = new SuggestionView();
+		when(suggestionViewConverter.convert(Mockito.<Suggestion>any()))
+			.thenReturn(suggestionView1);
+		when(suggestionViewConverter.convert(Mockito.<SuggestionView>any()))
+			.thenReturn(new Suggestion());
+		when(suggestionService.createOrUpdateSuggestion(Mockito.<Suggestion>any()))
+			.thenReturn(new Suggestion());
+		ArrayList<SuggestionView> suggestionViews = new ArrayList<SuggestionView>();
+		suggestionViews.add(new SuggestionView());
+
+		// act
+		ExtJsonFormLoadData<List<SuggestionView>> result =
+			 service.createSuggestions(suggestionViews, "1234", "1234");
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(suggestionView1));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void destroySuggestions() {
+		when(suggestionViewConverter.convert(Mockito.<SuggestionView>any()))
+			.thenReturn(new Suggestion());
+		when(suggestionService.deleteSuggestion(Mockito.<Suggestion>any()))
+			.thenReturn(new Suggestion());
+		ArrayList<SuggestionView> suggestionViews = new ArrayList<SuggestionView>();
+		suggestionViews.add(new SuggestionView());
+		service.destroySuggestions(suggestionViews);
+	}
+}

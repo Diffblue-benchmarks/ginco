@@ -1,0 +1,126 @@
+package fr.mcc.ginco.imports.ginco.idgenerator;
+
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.Alignment;
+import fr.mcc.ginco.beans.ConceptHierarchicalRelationship;
+import fr.mcc.ginco.beans.CustomConceptAttribute;
+import fr.mcc.ginco.beans.CustomTermAttribute;
+import fr.mcc.ginco.beans.Note;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.exports.result.bean.GincoExportedBranch;
+import fr.mcc.ginco.exports.result.bean.JaxbList;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Unit tests for fr.mcc.ginco.imports.ginco.idgenerator.GincoConceptBranchIdGenerator
+ *
+ * @author Diffblue Cover
+ */
+
+public class GincoConceptBranchIdGeneratorTest {
+
+	@Mock(name = "gincoAlignmentIdGenerator")
+	private GincoAlignmentIdGenerator gincoAlignmentIdGenerator;
+
+	@Mock(name = "gincoConceptIdGenerator")
+	private GincoConceptIdGenerator gincoConceptIdGenerator;
+
+	@Mock(name = "gincoCustomAttrIdGenerator")
+	private GincoCustomAttributesIdGenerator gincoCustomAttrIdGenerator;
+
+	@Mock(name = "gincoNoteIdGenerator")
+	private GincoNoteIdGenerator gincoNoteIdGenerator;
+
+	@Mock(name = "gincoRelationshipIdGenerator")
+	private GincoRelationshipIdGenerator gincoRelationshipIdGenerator;
+
+	@Mock(name = "gincoTermIdGenerator")
+	private GincoTermIdGenerator gincoTermIdGenerator;
+
+	@InjectMocks
+	private GincoConceptBranchIdGenerator service;
+
+	@Before public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void resetIdsForExportedBranch() {
+
+		// arrange
+		when(gincoTermIdGenerator.getIdForTerm(Mockito.<String>any(), Mockito.<Map<String, String>>any()))
+			.thenReturn("1234");
+		when(gincoRelationshipIdGenerator.getIdsForHierarchicalRelations(Mockito.<Map<String, JaxbList<ConceptHierarchicalRelationship>>>any(), Mockito.<Map<String, String>>any()))
+			.thenReturn(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>());
+		when(gincoNoteIdGenerator.getNotesWithNewIds(Mockito.<Map<String, JaxbList<Note>>>any(), Mockito.<Map<String, String>>any()))
+			.thenReturn(new HashMap<String, JaxbList<Note>>())
+			.thenReturn(new HashMap<String, JaxbList<Note>>());
+		when(gincoCustomAttrIdGenerator.getIdsForCustomConceptAttributes(Mockito.<Map<String, JaxbList<CustomConceptAttribute>>>any(), Mockito.<Map<String, String>>any()))
+			.thenReturn(new HashMap<String, JaxbList<CustomConceptAttribute>>());
+		when(gincoCustomAttrIdGenerator.getIdsForCustomTermAttributes(Mockito.<Map<String, JaxbList<CustomTermAttribute>>>any(), Mockito.<Map<String, String>>any()))
+			.thenReturn(new HashMap<String, JaxbList<CustomTermAttribute>>());
+		when(gincoConceptIdGenerator.getIdForConcept(Mockito.<String>any(), Mockito.<Map<String, String>>any()))
+			.thenReturn("1234")
+			.thenReturn("1234")
+			.thenReturn("1234");
+		when(gincoAlignmentIdGenerator.getIdsForAlignments(Mockito.<Map<String, JaxbList<Alignment>>>any(), Mockito.<Map<String, String>>any()))
+			.thenReturn(new HashMap<String, JaxbList<Alignment>>());
+		GincoExportedBranch branchToUpdate = new GincoExportedBranch();
+		HashMap<String, JaxbList<Alignment>> alignments =
+			 new HashMap<String, JaxbList<Alignment>>();
+		branchToUpdate.setAlignments(alignments);
+		HashMap<String, JaxbList<Note>> conceptNotes =
+			 new HashMap<String, JaxbList<Note>>();
+		branchToUpdate.setConceptNotes(conceptNotes);
+		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> parentConceptRelationship =
+			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
+		branchToUpdate.setHierarchicalRelationship(parentConceptRelationship);
+		HashMap<String, JaxbList<Note>> termNotes =
+			 new HashMap<String, JaxbList<Note>>();
+		branchToUpdate.setTermNotes(termNotes);
+		HashMap<String, JaxbList<CustomConceptAttribute>> conceptAttributes =
+			 new HashMap<String, JaxbList<CustomConceptAttribute>>();
+		branchToUpdate.setConceptAttributes(conceptAttributes);
+		ArrayList<ThesaurusConcept> concepts = new ArrayList<ThesaurusConcept>();
+		concepts.add(new ThesaurusConcept());
+		branchToUpdate.setConcepts(concepts);
+		HashMap<String, JaxbList<CustomTermAttribute>> termAttributes =
+			 new HashMap<String, JaxbList<CustomTermAttribute>>();
+		branchToUpdate.setTermAttributes(termAttributes);
+		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		thesaurusTerm.setConcept(new ThesaurusConcept());
+		terms.add(thesaurusTerm);
+		branchToUpdate.setTerms(terms);
+
+		// act
+		service.resetIdsForExportedBranch(branchToUpdate);
+
+		// assert
+		Mockito.verify(alignments).clear();
+		Mockito.verify(alignments).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<Alignment>>>any());
+		Mockito.verify(conceptNotes).clear();
+		Mockito.verify(conceptNotes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<Note>>>any());
+		Mockito.verify(parentConceptRelationship).clear();
+		Mockito.verify(parentConceptRelationship).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<ConceptHierarchicalRelationship>>>any());
+		Mockito.verify(termNotes).clear();
+		Mockito.verify(termNotes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<Note>>>any());
+		Mockito.verify(conceptAttributes).clear();
+		Mockito.verify(conceptAttributes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<CustomConceptAttribute>>>any());
+		Mockito.verify(termAttributes).clear();
+		Mockito.verify(termAttributes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<CustomTermAttribute>>>any());
+	}
+}

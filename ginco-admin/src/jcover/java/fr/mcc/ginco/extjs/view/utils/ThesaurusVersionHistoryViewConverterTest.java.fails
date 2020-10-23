@@ -1,0 +1,182 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusVersionHistoryView;
+import fr.mcc.ginco.services.IThesaurusService;
+import fr.mcc.ginco.services.IThesaurusVersionHistoryService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ThesaurusVersionHistoryViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusVersionHistoryViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusVersionHistoryViewConverterTest {
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@MockBean(name = "thesaurusVersionHistoryService")
+	private IThesaurusVersionHistoryService thesaurusVersionHistoryService;
+
+	@Autowired
+	private ThesaurusVersionHistoryViewConverter service;
+
+	@Test
+	void convert1() {
+
+		// arrange
+		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
+		source1.setIdentifier("data");
+		source1.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		source1.setThesaurus(thesaurus);
+		source1.setThisVersion(false);
+		source1.setVersionNote("1.0");
+
+		// act
+		ThesaurusVersionHistoryView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getThisVersion(), is(false));
+		assertThat(result.getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convert2() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		source1.setStatus(1);
+		source1.setThisVersion(false);
+		source1.setVersionNote("1.0");
+
+		// act
+		ThesaurusVersionHistoryView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThisVersion(), is(false));
+		assertThat(result.getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convert3() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		source1.setStatus(1);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		when(thesaurus.getIdentifier())
+			.thenReturn("data");
+		source1.setThesaurus(thesaurus);
+		source1.setThisVersion(false);
+		source1.setVersionNote("1.0");
+
+		// act
+		ThesaurusVersionHistoryView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getThisVersion(), is(false));
+		assertThat(result.getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convertList() throws java.text.ParseException {
+
+		// arrange
+		ArrayList<ThesaurusVersionHistory> thesaurusHistoryList =
+			 new ArrayList<ThesaurusVersionHistory>();
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 new ThesaurusVersionHistory();
+		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusVersionHistory.setIdentifier("data");
+		thesaurusVersionHistory.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		thesaurusVersionHistory.setThesaurus(thesaurus);
+		thesaurusVersionHistory.setThisVersion(false);
+		thesaurusVersionHistory.setVersionNote("1.0");
+		thesaurusHistoryList.add(thesaurusVersionHistory);
+
+		// act
+		List<ThesaurusVersionHistoryView> result =
+			 service.convertList(thesaurusHistoryList);
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0).getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
+		assertThat(result.get(0).getIdentifier(), is("data"));
+		assertThat(result.get(0).getStatus(), is(1));
+		assertThat(result.get(0).getThesaurusId(), is("data"));
+		assertThat(result.get(0).getThisVersion(), is(false));
+		assertThat(result.get(0).getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convertViewList() {
+
+		// arrange
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 new ThesaurusVersionHistory();
+		when(thesaurusVersionHistoryService.getThesaurusVersionHistoryById(Mockito.<String>any()))
+			.thenReturn(thesaurusVersionHistory);
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		ArrayList<ThesaurusVersionHistoryView> versionViews =
+			 new ArrayList<ThesaurusVersionHistoryView>();
+		ThesaurusVersionHistoryView thesaurusVersionHistoryView =
+			 new ThesaurusVersionHistoryView();
+		thesaurusVersionHistoryView.setIdentifier("data");
+		versionViews.add(thesaurusVersionHistoryView);
+
+		// act
+		List<ThesaurusVersionHistory> result = service.convertViewList(versionViews);
+
+		// assert
+		assertThat(result.size(), is(1));
+		assertThat(result.get(0), sameInstance(thesaurusVersionHistory));
+	}
+}

@@ -1,0 +1,165 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.SplitNonPreferredTerm;
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.SplitNonPreferredTermView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusTermView;
+import fr.mcc.ginco.extjs.view.utils.SplitNonPreferredTermViewConverter;
+import fr.mcc.ginco.services.ISplitNonPreferredTermService;
+import fr.mcc.ginco.solr.IComplexConceptIndexerService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.SplitNonPreferredTermRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {SplitNonPreferredTermRestService.class})
+@ExtendWith(SpringExtension.class)
+class SplitNonPreferredTermRestServiceTest {
+
+	@MockBean(name = "complexConceptIndexerService")
+	private IComplexConceptIndexerService complexConceptIndexerService;
+
+	@MockBean(name = "splitNonPreferredTermService")
+	private ISplitNonPreferredTermService splitNonPreferredTermService;
+
+	@MockBean(name = "splitNonPreferredTermViewConverter")
+	private SplitNonPreferredTermViewConverter splitNonPreferredTermViewConverter;
+
+	@Autowired
+	private SplitNonPreferredTermRestService service;
+
+	@Test
+	void getTerm() {
+
+		// arrange
+		SplitNonPreferredTermView splitNonPreferredTermView =
+			 new SplitNonPreferredTermView();
+		splitNonPreferredTermView.setCreated("foo");
+		splitNonPreferredTermView.setIdentifier("data");
+		splitNonPreferredTermView.setLanguage("foo");
+		splitNonPreferredTermView.setLexicalValue("value");
+		splitNonPreferredTermView.setModified("foo");
+		ArrayList<ThesaurusTermView> preferredTerms1 =
+			 new ArrayList<ThesaurusTermView>();
+		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		preferredTerms1.add(thesaurusTermView);
+		splitNonPreferredTermView.setPreferredTerms(preferredTerms1);
+		splitNonPreferredTermView.setSource("foo");
+		splitNonPreferredTermView.setStatus(1);
+		splitNonPreferredTermView.setThesaurusId("1234");
+		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTerm>any()))
+			.thenReturn(splitNonPreferredTermView);
+		when(splitNonPreferredTermService.getSplitNonPreferredTermById(Mockito.<String>any()))
+			.thenReturn(new SplitNonPreferredTerm());
+
+		// act
+		SplitNonPreferredTermView result = service.getTerm("1234");
+
+		// assert
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is("foo"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getPreferredTerms().size(), is(1));
+		assertThat(result.getPreferredTerms().get(0), sameInstance(thesaurusTermView));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("1234"));
+	}
+
+	@Test
+	void updateTerm() throws fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		SplitNonPreferredTermView splitNonPreferredTermView =
+			 new SplitNonPreferredTermView();
+		splitNonPreferredTermView.setCreated("foo");
+		splitNonPreferredTermView.setIdentifier("data");
+		splitNonPreferredTermView.setLanguage("foo");
+		splitNonPreferredTermView.setLexicalValue("value");
+		splitNonPreferredTermView.setModified("foo");
+		splitNonPreferredTermView.setPreferredTerms(new ArrayList<ThesaurusTermView>());
+		splitNonPreferredTermView.setSource("foo");
+		splitNonPreferredTermView.setStatus(1);
+		splitNonPreferredTermView.setThesaurusId("1234");
+		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTerm>any()))
+			.thenReturn(splitNonPreferredTermView);
+		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTermView>any()))
+			.thenReturn(new SplitNonPreferredTerm());
+		when(splitNonPreferredTermService.updateSplitNonPreferredTerm(Mockito.<SplitNonPreferredTerm>any()))
+			.thenReturn(new SplitNonPreferredTerm());
+
+		// act
+		SplitNonPreferredTermView result =
+			 service.updateTerm(new SplitNonPreferredTermView());
+
+		// assert
+		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is("foo"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getPreferredTerms(), empty());
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("1234"));
+		Mockito.verify(complexConceptIndexerService).addComplexConcept(ArgumentMatchers.<SplitNonPreferredTerm>any());
+	}
+
+	@Test
+	void getListLimitIsOneAndStartIndexIsOne() {
+
+		// arrange
+		SplitNonPreferredTermView splitNonPreferredTermView =
+			 new SplitNonPreferredTermView();
+		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTerm>any()))
+			.thenReturn(splitNonPreferredTermView);
+		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
+		list.add(new SplitNonPreferredTerm());
+		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
+			.thenReturn(1L);
+		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
+			.thenReturn(list);
+
+		// act
+		ExtJsonFormLoadData<List<SplitNonPreferredTermView>> result =
+			 service.getList(1, 1, "1234");
+
+		// assert
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(splitNonPreferredTermView));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void destroyTerm() throws fr.mcc.ginco.exceptions.TechnicalException {
+		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTermView>any()))
+			.thenReturn(new SplitNonPreferredTerm());
+		when(splitNonPreferredTermService.destroySplitNonPreferredTerm(Mockito.<SplitNonPreferredTerm>any()))
+			.thenReturn(new SplitNonPreferredTerm());
+		service.destroyTerm(new SplitNonPreferredTermView());
+		Mockito.verify(complexConceptIndexerService).removeComplexConcept(ArgumentMatchers.<SplitNonPreferredTerm>any());
+	}
+}
