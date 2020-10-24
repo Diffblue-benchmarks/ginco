@@ -1,7 +1,7 @@
 package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.mock;
@@ -88,8 +88,8 @@ class AlignmentTest {
 		assertThat(alignment.getInternalTargetThesaurus(), sameInstance(internalTargetThesaurus));
 		assertThat(alignment.getModified(), sameInstance(modified));
 		assertThat(alignment.getSourceConcept(), sameInstance(sourceConcept));
-		assertThat(alignment.getTargetConcepts(), is(notNullValue()));
-		assertThat(alignment.getTargetResources(), is(notNullValue()));
+		assertThat(alignment.getTargetConcepts(), empty());
+		assertThat(alignment.getTargetResources(), empty());
 		assertThat(alignment.isAndRelation(), is(false));
 	}
 

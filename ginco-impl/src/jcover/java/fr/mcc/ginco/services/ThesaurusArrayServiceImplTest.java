@@ -2,20 +2,18 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
-import fr.mcc.ginco.beans.ThesaurusArrayConcept;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IThesaurusArrayDAO;
 import fr.mcc.ginco.dao.IThesaurusConceptDAO;
 import fr.mcc.ginco.helpers.ThesaurusArrayHelper;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -57,7 +55,6 @@ public class ThesaurusArrayServiceImplTest {
 
 		// arrange
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		thesaurusArray.setConcepts(new HashSet<ThesaurusArrayConcept>());
 		thesaurusArray.setIdentifier("data");
 		thesaurusArray.setNotation("DE");
 		thesaurusArray.setOrdered(false);
@@ -74,7 +71,7 @@ public class ThesaurusArrayServiceImplTest {
 		ThesaurusArray result = service.getThesaurusArrayById("1234");
 
 		// assert
-		assertNotNull(result.getConcepts());
+		assertTrue((result.getConcepts()).isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
@@ -107,7 +104,6 @@ public class ThesaurusArrayServiceImplTest {
 
 		// arrange
 		ThesaurusArray thesaurusArray1 = new ThesaurusArray();
-		thesaurusArray1.setConcepts(new HashSet<ThesaurusArrayConcept>());
 		thesaurusArray1.setIdentifier("data");
 		thesaurusArray1.setNotation("DE");
 		thesaurusArray1.setOrdered(false);
@@ -125,7 +121,7 @@ public class ThesaurusArrayServiceImplTest {
 			 service.updateOnlyThesaurusArray(new ThesaurusArray());
 
 		// assert
-		assertNotNull(result.getConcepts());
+		assertTrue((result.getConcepts()).isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
@@ -139,7 +135,6 @@ public class ThesaurusArrayServiceImplTest {
 
 		// arrange
 		ThesaurusArray thesaurusArray1 = new ThesaurusArray();
-		thesaurusArray1.setConcepts(new HashSet<ThesaurusArrayConcept>());
 		thesaurusArray1.setIdentifier("data");
 		thesaurusArray1.setNotation("DE");
 		thesaurusArray1.setOrdered(false);
@@ -156,7 +151,7 @@ public class ThesaurusArrayServiceImplTest {
 		ThesaurusArray result = service.destroyThesaurusArray(new ThesaurusArray());
 
 		// assert
-		assertNotNull(result.getConcepts());
+		assertTrue((result.getConcepts()).isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());

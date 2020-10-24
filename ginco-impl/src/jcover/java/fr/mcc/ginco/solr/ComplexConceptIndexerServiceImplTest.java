@@ -49,6 +49,20 @@ public class ComplexConceptIndexerServiceImplTest {
 	}
 
 	@Test
+	public void addComplexConcepts() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
+		when(solrServer.add(Mockito.<SolrInputDocument>any()))
+			.thenReturn(new UpdateResponse());
+		when(solrServer.commit())
+			.thenReturn(new UpdateResponse());
+		when(complexConceptSolrConverter.convertSolrComplexConcept(Mockito.<SplitNonPreferredTerm>any()))
+			.thenReturn(new SolrInputDocument());
+		ArrayList<SplitNonPreferredTerm> complexConcepts =
+			 new ArrayList<SplitNonPreferredTerm>();
+		complexConcepts.add(new SplitNonPreferredTerm());
+		service.addComplexConcepts(complexConcepts);
+	}
+
+	@Test
 	public void addComplexConceptsComplexConceptsIsEmpty() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
 		when(solrServer.commit())
 			.thenReturn(new UpdateResponse());

@@ -1,5 +1,6 @@
 package fr.mcc.ginco.imports.ginco.idgenerator;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Alignment;
@@ -81,6 +82,7 @@ public class GincoConceptBranchIdGeneratorTest {
 		GincoExportedBranch branchToUpdate = new GincoExportedBranch();
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
+		alignments.put("", new JaxbList<Alignment>());
 		branchToUpdate.setAlignments(alignments);
 		HashMap<String, JaxbList<Note>> conceptNotes =
 			 new HashMap<String, JaxbList<Note>>();
@@ -110,6 +112,7 @@ public class GincoConceptBranchIdGeneratorTest {
 		service.resetIdsForExportedBranch(branchToUpdate);
 
 		// assert
+		assertTrue(branchToUpdate.getAlignments().isEmpty());
 		Mockito.verify(alignments).clear();
 		Mockito.verify(alignments).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<Alignment>>>any());
 		Mockito.verify(conceptNotes).clear();

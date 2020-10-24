@@ -38,11 +38,13 @@ public class GincoTermIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdForTermReturnsFoo() {
+	public void getIdForTermIdMappingIsFooReturnsFoo() {
 		when(thesaurusTermDAO.getById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusTerm());
 		when(generatorService.generate(Mockito.<Class>any()))
 			.thenReturn("foo");
-		assertEquals("foo", service.getIdForTerm("1234", new HashMap<String, String>()));
+		HashMap<String, String> idMapping = new HashMap<String, String>();
+		idMapping.put("", "foo");
+		assertEquals("foo", service.getIdForTerm("1234", idMapping));
 	}
 }

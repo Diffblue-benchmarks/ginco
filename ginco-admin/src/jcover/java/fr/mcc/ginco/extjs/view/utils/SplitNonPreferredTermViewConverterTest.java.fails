@@ -2,8 +2,8 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.anyBoolean;
@@ -332,7 +332,7 @@ class SplitNonPreferredTermViewConverterTest {
 		assertThat(result.getLanguage(), sameInstance(language3));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(Math.abs(result.getModified().getTime()-new Date().getTime())<=10_000L, is(true));
-		assertThat(result.getPreferredTerms(), is(notNullValue()));
+		assertThat(result.getPreferredTerms(), hasSize(1));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurus(), sameInstance(thesaurus1));

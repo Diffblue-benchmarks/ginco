@@ -107,9 +107,7 @@ public class AlphabeticConceptExporterTest {
 		list6.add(note2);
 		List<Note> list7 = new ArrayList<Note>();
 		Note note3 = new Note();
-		NoteType noteType3 = new NoteType();
-		noteType3.setIsConcept(false);
-		note3.setNoteType(noteType3);
+		note3.setNoteType(new NoteType());
 		list7.add(note3);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(list7);

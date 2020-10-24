@@ -57,12 +57,7 @@ public class GincoRelationshipImporterTest {
 	}
 
 	@Test
-	public void storeHierarchicalRelationship1() {
-		assertTrue((service.storeHierarchicalRelationship(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>())).isEmpty());
-	}
-
-	@Test
-	public void storeHierarchicalRelationship2() {
+	public void storeHierarchicalRelationship() {
 
 		// arrange
 		ThesaurusConcept thesaurusConcept3 = new ThesaurusConcept();
@@ -95,17 +90,17 @@ public class GincoRelationshipImporterTest {
 	}
 
 	@Test
+	public void storeHierarchicalRelationshipRelationsToImportIsEmpty() {
+		assertTrue((service.storeHierarchicalRelationship(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>())).isEmpty());
+	}
+
+	@Test
 	public void storeHierarchicalRelationshipRelationsToImportIsNull() {
 		assertTrue((service.storeHierarchicalRelationship(null)).isEmpty());
 	}
 
 	@Test
-	public void storeAssociativeRelationship1() {
-		assertTrue((service.storeAssociativeRelationship(new GincoExportedThesaurus())).isEmpty());
-	}
-
-	@Test
-	public void storeAssociativeRelationship2() {
+	public void storeAssociativeRelationshipReturnsEmpty() {
 		assertTrue((service.storeAssociativeRelationship(new GincoExportedThesaurus())).isEmpty());
 	}
 }

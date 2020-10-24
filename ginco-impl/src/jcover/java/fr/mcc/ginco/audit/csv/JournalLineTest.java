@@ -1,7 +1,6 @@
 package fr.mcc.ginco.audit.csv;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -39,9 +38,9 @@ public class JournalLineTest {
 		assertEquals("1234", journalLine.getConceptId());
 		assertSame(eventDate, journalLine.getEventDate());
 		assertTrue(JournalEventsEnum.THESAURUS_CREATED == journalLine.getEventType());
-		assertNotNull(journalLine.getNewGenericTerm());
+		assertTrue((journalLine.getNewGenericTerm()).isEmpty());
 		assertEquals("value", journalLine.getNewLexicalValue());
-		assertNotNull(journalLine.getOldGenericTerm());
+		assertTrue((journalLine.getOldGenericTerm()).isEmpty());
 		assertEquals("value", journalLine.getOldLexicalValue());
 		assertEquals(1, (int) journalLine.getRevisionNumber());
 		assertEquals(1, (int) journalLine.getStatus());

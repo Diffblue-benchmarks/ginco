@@ -1,7 +1,6 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -251,19 +250,19 @@ class GincoExportedBranchTest {
 		thesaurusTerm.setThesaurus(thesaurus6);
 		terms.add(thesaurusTerm);
 		gincoExportedBranch.setTerms(terms);
-		assertThat(gincoExportedBranch.getAlignments(), is(notNullValue()));
-		assertThat(gincoExportedBranch.getConceptNotes(), is(notNullValue()));
-		assertThat(gincoExportedBranch.getHierarchicalRelationship(), is(notNullValue()));
+		assertThat(gincoExportedBranch.getAlignments().isEmpty(), is(true));
+		assertThat(gincoExportedBranch.getConceptNotes().isEmpty(), is(true));
+		assertThat(gincoExportedBranch.getHierarchicalRelationship().isEmpty(), is(true));
 		assertThat(gincoExportedBranch.getRootConcept(), sameInstance(rootConcept));
-		assertThat(gincoExportedBranch.getTermNotes(), is(notNullValue()));
+		assertThat(gincoExportedBranch.getTermNotes().isEmpty(), is(true));
 		assertThat(gincoExportedBranch.getConceptAttributeTypes().size(), is(1));
 		assertThat(gincoExportedBranch.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedBranch.getConceptAttributes(), is(notNullValue()));
+		assertThat(gincoExportedBranch.getConceptAttributes().isEmpty(), is(true));
 		assertThat(gincoExportedBranch.getConcepts().size(), is(1));
 		assertThat(gincoExportedBranch.getConcepts().get(0), sameInstance(thesaurusConcept));
 		assertThat(gincoExportedBranch.getTermAttributeTypes().size(), is(1));
 		assertThat(gincoExportedBranch.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedBranch.getTermAttributes(), is(notNullValue()));
+		assertThat(gincoExportedBranch.getTermAttributes().isEmpty(), is(true));
 		assertThat(gincoExportedBranch.getTerms().size(), is(1));
 		assertThat(gincoExportedBranch.getTerms().get(0), sameInstance(thesaurusTerm));
 	}

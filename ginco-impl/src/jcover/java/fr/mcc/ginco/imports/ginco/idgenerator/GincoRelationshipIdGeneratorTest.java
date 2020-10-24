@@ -36,7 +36,7 @@ public class GincoRelationshipIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForHierarchicalRelations1() {
+	public void getIdsForHierarchicalRelations() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234");
 		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relations =
@@ -48,7 +48,7 @@ public class GincoRelationshipIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForHierarchicalRelations2() {
+	public void getIdsForHierarchicalRelationsIdMappingIsFoo() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234")
 			.thenReturn("1234")
@@ -64,11 +64,13 @@ public class GincoRelationshipIdGeneratorTest {
 		JaxbList<ConceptHierarchicalRelationship> jaxbList =
 			 new JaxbList<ConceptHierarchicalRelationship>(list);
 		relations.put("", jaxbList);
-		assertSame(jaxbList, service.getIdsForHierarchicalRelations(relations, new HashMap<String, String>()).get("1234"));
+		HashMap<String, String> idMapping = new HashMap<String, String>();
+		idMapping.put("", "foo");
+		assertSame(jaxbList, service.getIdsForHierarchicalRelations(relations, idMapping).get("1234"));
 	}
 
 	@Test
-	public void getIdsForHierarchicalRelationsReturnsEmpty() {
+	public void getIdsForHierarchicalRelationsRelationsIsEmptyReturnsEmpty() {
 		assertTrue(service.getIdsForHierarchicalRelations(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>(), new HashMap<String, String>()).isEmpty());
 	}
 }

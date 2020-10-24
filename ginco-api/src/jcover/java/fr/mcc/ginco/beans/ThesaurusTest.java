@@ -1,7 +1,8 @@
 package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -58,9 +59,9 @@ class ThesaurusTest {
 		assertThat(thesaurus.getCreator(), sameInstance(creator));
 		assertThat(thesaurus.getDate(), sameInstance(date));
 		assertThat(thesaurus.getDescription(), is("some text"));
-		assertThat(thesaurus.getFormat(), is(notNullValue()));
+		assertThat(thesaurus.getFormat(), empty());
 		assertThat(thesaurus.getIdentifier(), is("data"));
-		assertThat(thesaurus.getLang(), is(notNullValue()));
+		assertThat(thesaurus.getLang(), empty());
 		assertThat(thesaurus.getPublisher(), is("foo"));
 		assertThat(thesaurus.getRelation(), is("DE"));
 		assertThat(thesaurus.getRights(), is("foo"));
@@ -69,7 +70,7 @@ class ThesaurusTest {
 		assertThat(thesaurus.getThesaurusId(), is("data"));
 		assertThat(thesaurus.getTitle(), is("Mr"));
 		assertThat(thesaurus.getType(), sameInstance(type));
-		assertThat(thesaurus.getVersions(), is(notNullValue()));
+		assertThat(thesaurus.getVersions(), empty());
 		assertThat(thesaurus.isArchived(), is(false));
 		assertThat(thesaurus.isDefaultTopConcept(), is(false));
 		assertThat(thesaurus.isPolyHierarchical(), is(false));
@@ -77,11 +78,29 @@ class ThesaurusTest {
 
 	@Test
 	void addLang() {
-		new Thesaurus().addLang(new Language());
+
+		// arrange
+		Thesaurus thesaurus = new Thesaurus();
+		Language item = new Language();
+
+		// act
+		thesaurus.addLang(item);
+
+		// assert
+		assertThat(thesaurus.getLang(), hasSize(1));
 	}
 
 	@Test
 	void addFormat() {
-		new Thesaurus().addFormat(new ThesaurusFormat());
+
+		// arrange
+		Thesaurus thesaurus = new Thesaurus();
+		ThesaurusFormat item = new ThesaurusFormat();
+
+		// act
+		thesaurus.addFormat(item);
+
+		// assert
+		assertThat(thesaurus.getFormat(), hasSize(1));
 	}
 }

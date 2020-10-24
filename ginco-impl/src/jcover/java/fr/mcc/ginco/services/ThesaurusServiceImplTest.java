@@ -2,7 +2,6 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -80,9 +79,7 @@ public class ThesaurusServiceImplTest {
 		thesaurus.setDate(date);
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
-		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
 		thesaurus.setIdentifier("data");
-		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");
 		thesaurus.setRelation("DE");
@@ -106,9 +103,9 @@ public class ThesaurusServiceImplTest {
 		assertSame(creator, result.getCreator());
 		assertSame(date, result.getDate());
 		assertEquals("some text", result.getDescription());
-		assertNotNull(result.getFormat());
+		assertTrue((result.getFormat()).isEmpty());
 		assertEquals("data", result.getIdentifier());
-		assertNotNull(result.getLang());
+		assertTrue((result.getLang()).isEmpty());
 		assertEquals("foo", result.getPublisher());
 		assertEquals("DE", result.getRelation());
 		assertEquals("foo", result.getRights());
@@ -117,7 +114,7 @@ public class ThesaurusServiceImplTest {
 		assertEquals("data", result.getThesaurusId());
 		assertEquals("Mr", result.getTitle());
 		assertSame(type, result.getType());
-		assertNotNull(result.getVersions());
+		assertTrue((result.getVersions()).isEmpty());
 		assertFalse(result.isArchived());
 		assertFalse(result.isDefaultTopConcept());
 		assertFalse(result.isPolyHierarchical());
@@ -281,9 +278,7 @@ public class ThesaurusServiceImplTest {
 		thesaurus.setDate(date1);
 		thesaurus.setDefaultTopConcept(false);
 		thesaurus.setDescription("some text");
-		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
 		thesaurus.setIdentifier("data");
-		thesaurus.setLang(new HashSet<Language>());
 		thesaurus.setPolyHierarchical(false);
 		thesaurus.setPublisher("foo");
 		thesaurus.setRelation("DE");
@@ -307,9 +302,9 @@ public class ThesaurusServiceImplTest {
 		assertSame(creator1, result.getCreator());
 		assertSame(date1, result.getDate());
 		assertEquals("some text", result.getDescription());
-		assertNotNull(result.getFormat());
+		assertTrue((result.getFormat()).isEmpty());
 		assertEquals("data", result.getIdentifier());
-		assertNotNull(result.getLang());
+		assertTrue((result.getLang()).isEmpty());
 		assertEquals("foo", result.getPublisher());
 		assertEquals("DE", result.getRelation());
 		assertEquals("foo", result.getRights());
@@ -318,7 +313,7 @@ public class ThesaurusServiceImplTest {
 		assertEquals("data", result.getThesaurusId());
 		assertEquals("Mr", result.getTitle());
 		assertSame(type1, result.getType());
-		assertNotNull(result.getVersions());
+		assertTrue((result.getVersions()).isEmpty());
 		assertFalse(result.isArchived());
 		assertFalse(result.isDefaultTopConcept());
 		assertFalse(result.isPolyHierarchical());

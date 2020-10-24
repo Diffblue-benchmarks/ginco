@@ -39,7 +39,7 @@ public class GincoCustomAttributesIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForCustomConceptAttributes1() {
+	public void getIdsForCustomConceptAttributes() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
@@ -51,7 +51,12 @@ public class GincoCustomAttributesIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForCustomConceptAttributes2() {
+	public void getIdsForCustomConceptAttributesCustomConceptAttributesIsEmptyReturnsEmpty() {
+		assertTrue(service.getIdsForCustomConceptAttributes(new HashMap<String, JaxbList<CustomConceptAttribute>>(), new HashMap<String, String>()).isEmpty());
+	}
+
+	@Test
+	public void getIdsForCustomConceptAttributesIdMappingIsFoo() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomConceptAttribute>> customConceptAttributes =
@@ -64,16 +69,13 @@ public class GincoCustomAttributesIdGeneratorTest {
 		JaxbList<CustomConceptAttribute> jaxbList =
 			 new JaxbList<CustomConceptAttribute>(list);
 		customConceptAttributes.put("", jaxbList);
-		assertSame(jaxbList, service.getIdsForCustomConceptAttributes(customConceptAttributes, new HashMap<String, String>()).get("1234"));
+		HashMap<String, String> idMapping = new HashMap<String, String>();
+		idMapping.put("", "foo");
+		assertSame(jaxbList, service.getIdsForCustomConceptAttributes(customConceptAttributes, idMapping).get("1234"));
 	}
 
 	@Test
-	public void getIdsForCustomConceptAttributesReturnsEmpty() {
-		assertTrue(service.getIdsForCustomConceptAttributes(new HashMap<String, JaxbList<CustomConceptAttribute>>(), new HashMap<String, String>()).isEmpty());
-	}
-
-	@Test
-	public void getIdsForCustomTermAttributes1() {
+	public void getIdsForCustomTermAttributes() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
@@ -84,7 +86,12 @@ public class GincoCustomAttributesIdGeneratorTest {
 	}
 
 	@Test
-	public void getIdsForCustomTermAttributes2() {
+	public void getIdsForCustomTermAttributesCustomTermAttributesIsEmptyReturnsEmpty() {
+		assertTrue(service.getIdsForCustomTermAttributes(new HashMap<String, JaxbList<CustomTermAttribute>>(), new HashMap<String, String>()).isEmpty());
+	}
+
+	@Test
+	public void getIdsForCustomTermAttributesIdMappingIsFoo() {
 		when(gincoIdMapParser.getNewId(Mockito.<String>any(), Mockito.<java.util.Map<String, String>>any()))
 			.thenReturn("1234");
 		HashMap<String, JaxbList<CustomTermAttribute>> customTermAttributes =
@@ -96,11 +103,8 @@ public class GincoCustomAttributesIdGeneratorTest {
 		JaxbList<CustomTermAttribute> jaxbList =
 			 new JaxbList<CustomTermAttribute>(list);
 		customTermAttributes.put("", jaxbList);
-		assertSame(jaxbList, service.getIdsForCustomTermAttributes(customTermAttributes, new HashMap<String, String>()).get("1234"));
-	}
-
-	@Test
-	public void getIdsForCustomTermAttributesReturnsEmpty() {
-		assertTrue(service.getIdsForCustomTermAttributes(new HashMap<String, JaxbList<CustomTermAttribute>>(), new HashMap<String, String>()).isEmpty());
+		HashMap<String, String> idMapping = new HashMap<String, String>();
+		idMapping.put("", "foo");
+		assertSame(jaxbList, service.getIdsForCustomTermAttributes(customTermAttributes, idMapping).get("1234"));
 	}
 }

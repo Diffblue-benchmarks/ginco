@@ -329,7 +329,31 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void importSandBoxTermsDefaultStatusIsOneReturnsEmpty() {
+	public void importSandBoxTerms() {
+
+		// arrange
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(thesaurusTerm);
+		when(thesaurusDAO.getById(Mockito.<String>any()))
+			.thenReturn(new Thesaurus());
+		when(generatorService.generate(Mockito.<Class>any()))
+			.thenReturn("foo");
+		HashMap<String, Language> termLexicalValues =
+			 new HashMap<String, Language>();
+		termLexicalValues.put("", new Language());
+
+		// act
+		List<ThesaurusTerm> result =
+			 service.importSandBoxTerms(termLexicalValues, "1234", 1);
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void importSandBoxTermsTermLexicalValuesIsEmptyReturnsEmpty() {
 		when(thesaurusDAO.getById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
 		assertTrue((service.importSandBoxTerms(new HashMap<String, Language>(), "1234", 1)).isEmpty());

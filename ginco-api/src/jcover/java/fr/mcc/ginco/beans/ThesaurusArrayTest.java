@@ -1,7 +1,7 @@
 package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -220,7 +220,7 @@ class ThesaurusArrayTest {
 		thesaurus7.setType(type5);
 		thesaurus7.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusArray.setThesaurus(thesaurus7);
-		assertThat(thesaurusArray.getConcepts(), is(notNullValue()));
+		assertThat(thesaurusArray.getConcepts(), empty());
 		assertThat(thesaurusArray.getIdentifier(), is("data"));
 		assertThat(thesaurusArray.getNotation(), is("DE"));
 		assertThat(thesaurusArray.getOrdered(), is(false));

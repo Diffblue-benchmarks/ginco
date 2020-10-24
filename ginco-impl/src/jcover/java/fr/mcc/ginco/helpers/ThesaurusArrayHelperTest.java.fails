@@ -71,6 +71,7 @@ public class ThesaurusArrayHelperTest {
 		thesaurusArrayConcept.setIdentifier(new ThesaurusArrayConcept.Id());
 		concepts2.add(thesaurusArrayConcept);
 		assertSame(array, service.saveArrayConcepts(array, concepts2));
+		assertEquals(1, array.getConcepts().size());
 		Mockito.verify(concepts1).clear();
 	}
 

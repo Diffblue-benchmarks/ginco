@@ -1,21 +1,19 @@
 package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.SplitNonPreferredTerm;
 import fr.mcc.ginco.beans.Thesaurus;
-import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.dao.ISplitNonPreferredTermDAO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -56,7 +54,6 @@ public class SplitNonPreferredTermServiceImplTest {
 		splitNonPreferredTerm.setLexicalValue("value");
 		Date modified = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		splitNonPreferredTerm.setModified(modified);
-		splitNonPreferredTerm.setPreferredTerms(new HashSet<ThesaurusTerm>());
 		splitNonPreferredTerm.setSource("foo");
 		splitNonPreferredTerm.setStatus(1);
 		Thesaurus thesaurus = mock(Thesaurus.class);
@@ -73,7 +70,7 @@ public class SplitNonPreferredTermServiceImplTest {
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
 		assertSame(modified, result.getModified());
-		assertNotNull(result.getPreferredTerms());
+		assertTrue((result.getPreferredTerms()).isEmpty());
 		assertEquals("foo", result.getSource());
 		assertEquals(1, (int) result.getStatus());
 		assertSame(thesaurus, result.getThesaurus());

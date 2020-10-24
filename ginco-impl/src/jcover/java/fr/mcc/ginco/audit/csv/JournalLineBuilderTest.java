@@ -283,7 +283,7 @@ public class JournalLineBuilderTest {
 	}
 
 	@Test
-	public void buildConceptHierarchyChanged() {
+	public void buildConceptHierarchyChangedCurrentGenericConceptIsEmptyAndOldGenericConceptIsEmpty() {
 
 		// arrange
 		ThesaurusConcept conceptAtRevision = mock(ThesaurusConcept.class);

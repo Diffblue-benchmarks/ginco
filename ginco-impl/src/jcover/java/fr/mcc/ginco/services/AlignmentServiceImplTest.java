@@ -2,8 +2,8 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +22,6 @@ import fr.mcc.ginco.dao.IGenericDAO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -81,8 +80,6 @@ public class AlignmentServiceImplTest {
 		alignment.setModified(modified1);
 		ThesaurusConcept sourceConcept = new ThesaurusConcept();
 		alignment.setSourceConcept(sourceConcept);
-		alignment.setTargetConcepts(new HashSet<AlignmentConcept>());
-		alignment.setTargetResources(new HashSet<AlignmentResource>());
 		when(alignmentDAO.getById(Mockito.<String>any()))
 			.thenReturn(alignment);
 
@@ -98,8 +95,8 @@ public class AlignmentServiceImplTest {
 		assertSame(internalTargetThesaurus, result.getInternalTargetThesaurus());
 		assertSame(modified1, result.getModified());
 		assertSame(sourceConcept, result.getSourceConcept());
-		assertNotNull(result.getTargetConcepts());
-		assertNotNull(result.getTargetResources());
+		assertTrue((result.getTargetConcepts()).isEmpty());
+		assertTrue((result.getTargetResources()).isEmpty());
 		assertFalse(result.isAndRelation());
 	}
 

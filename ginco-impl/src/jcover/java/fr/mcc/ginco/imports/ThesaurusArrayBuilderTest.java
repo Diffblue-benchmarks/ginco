@@ -43,20 +43,26 @@ public class ThesaurusArrayBuilderTest {
 	}
 
 	@Test
-	public void buildArray() {
+	public void buildArrayBuiltArraysIsEmpty() {
+
+		// arrange
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
 		Resource skosCollection = mock(Resource.class);
 		when(skosCollection.getURI())
 			.thenReturn("/some/path.html")
-			.thenReturn("");
+			.thenReturn("/some/path.html");
 		when(skosCollection.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
 		Model model = mock(Model.class);
-		Thesaurus thesaurus = mock(Thesaurus.class);
+		Thesaurus thesaurus = new Thesaurus();
+
+		// act
 		ThesaurusArray result =
 			 service.buildArray(skosCollection, model, thesaurus, new HashMap<String, ThesaurusArray>());
+
+		// assert
 		assertTrue((result.getConcepts()).isEmpty());
 		assertEquals("/some/path.html", result.getIdentifier());
 		assertNull(result.getNotation());
@@ -67,14 +73,13 @@ public class ThesaurusArrayBuilderTest {
 	}
 
 	@Test
-	public void getChildrenArraysReturnsEmpty() {
+	public void getChildrenArraysBuiltArraysIsEmptyReturnsEmpty() {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
 		Resource skosCollection = mock(Resource.class);
 		when(skosCollection.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		assertTrue((service.getChildrenArrays(skosCollection, thesaurus, new HashMap<String, ThesaurusArray>())).isEmpty());
+		assertTrue((service.getChildrenArrays(skosCollection, new Thesaurus(), new HashMap<String, ThesaurusArray>())).isEmpty());
 	}
 }

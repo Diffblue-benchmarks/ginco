@@ -142,6 +142,7 @@ class ThesaurusConceptRestServiceTest {
 		thesaurusConceptView.setStatus(1);
 		ArrayList<ThesaurusTermView> terms = new ArrayList<ThesaurusTermView>();
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		thesaurusTermView.setStatus(1);
 		terms.add(thesaurusTermView);
 		thesaurusConceptView.setTerms(terms);
 		thesaurusConceptView.setThesaurusId("1234");

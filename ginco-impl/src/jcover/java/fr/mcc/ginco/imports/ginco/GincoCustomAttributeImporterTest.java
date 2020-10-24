@@ -162,17 +162,7 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void storeCustomConceptAttribute1() {
-		ArrayList<CustomConceptAttribute> customAttributeToImport =
-			 new ArrayList<CustomConceptAttribute>();
-		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
-		customConceptAttribute.setType(new CustomConceptAttributeType());
-		customAttributeToImport.add(customConceptAttribute);
-		service.storeCustomConceptAttribute(customAttributeToImport, new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
-	}
-
-	@Test
-	public void storeCustomConceptAttribute2() {
+	public void storeCustomConceptAttribute() {
 		when(customConceptAttributeDAO.update(Mockito.<CustomConceptAttribute>any()))
 			.thenReturn(new CustomConceptAttribute());
 		ArrayList<CustomConceptAttribute> customAttributeToImport =
@@ -190,17 +180,17 @@ public class GincoCustomAttributeImporterTest {
 	}
 
 	@Test
-	public void storeCustomTermAttribute1() {
-		ArrayList<CustomTermAttribute> customAttributeToImport =
-			 new ArrayList<CustomTermAttribute>();
-		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
-		customTermAttribute.setType(new CustomTermAttributeType());
-		customAttributeToImport.add(customTermAttribute);
-		service.storeCustomTermAttribute(customAttributeToImport, new ThesaurusTerm(), new HashMap<String, CustomTermAttributeType>());
+	public void storeCustomConceptAttributeSavedTypesIsEmpty() {
+		ArrayList<CustomConceptAttribute> customAttributeToImport =
+			 new ArrayList<CustomConceptAttribute>();
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		customConceptAttribute.setType(new CustomConceptAttributeType());
+		customAttributeToImport.add(customConceptAttribute);
+		service.storeCustomConceptAttribute(customAttributeToImport, new ThesaurusConcept(), new HashMap<String, CustomConceptAttributeType>());
 	}
 
 	@Test
-	public void storeCustomTermAttribute2() {
+	public void storeCustomTermAttribute() {
 		when(customTermAttributeDAO.update(Mockito.<CustomTermAttribute>any()))
 			.thenReturn(new CustomTermAttribute());
 		ArrayList<CustomTermAttribute> customAttributeToImport =
@@ -214,5 +204,15 @@ public class GincoCustomAttributeImporterTest {
 			 new HashMap<String, CustomTermAttributeType>();
 		savedTypes.put("DE", new CustomTermAttributeType());
 		service.storeCustomTermAttribute(customAttributeToImport, new ThesaurusTerm(), savedTypes);
+	}
+
+	@Test
+	public void storeCustomTermAttributeSavedTypesIsEmpty() {
+		ArrayList<CustomTermAttribute> customAttributeToImport =
+			 new ArrayList<CustomTermAttribute>();
+		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
+		customTermAttribute.setType(new CustomTermAttributeType());
+		customAttributeToImport.add(customTermAttribute);
+		service.storeCustomTermAttribute(customAttributeToImport, new ThesaurusTerm(), new HashMap<String, CustomTermAttributeType>());
 	}
 }

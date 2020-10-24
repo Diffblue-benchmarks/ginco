@@ -1,7 +1,7 @@
 package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -73,7 +73,7 @@ class SplitNonPreferredTermTest {
 		assertThat(splitNonPreferredTerm.getLanguage(), sameInstance(language));
 		assertThat(splitNonPreferredTerm.getLexicalValue(), is("value"));
 		assertThat(splitNonPreferredTerm.getModified(), sameInstance(modified));
-		assertThat(splitNonPreferredTerm.getPreferredTerms(), is(notNullValue()));
+		assertThat(splitNonPreferredTerm.getPreferredTerms(), empty());
 		assertThat(splitNonPreferredTerm.getSource(), is("foo"));
 		assertThat(splitNonPreferredTerm.getStatus(), is(1));
 		assertThat(splitNonPreferredTerm.getThesaurus(), sameInstance(thesaurus));

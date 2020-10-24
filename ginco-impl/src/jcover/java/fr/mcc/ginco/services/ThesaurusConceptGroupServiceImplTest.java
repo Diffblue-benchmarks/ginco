@@ -2,9 +2,9 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
@@ -73,7 +73,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 
 		// assert
 		assertSame(conceptGroupType1, result.getConceptGroupType());
-		assertNotNull(result.getConcepts());
+		assertTrue((result.getConcepts()).isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertFalse(result.getIsDynamic());
 		assertEquals("DE", result.getNotation());
@@ -142,7 +142,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 
 		// assert
 		assertSame(conceptGroupType1, result.getConceptGroupType());
-		assertNotNull(result.getConcepts());
+		assertTrue((result.getConcepts()).isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertFalse(result.getIsDynamic());
 		assertEquals("DE", result.getNotation());

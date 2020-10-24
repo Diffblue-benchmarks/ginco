@@ -2,7 +2,6 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
@@ -512,7 +511,7 @@ class AlignmentViewConverterTest {
 		assertThat(Math.abs(result.getModified().getTime()-new Date().getTime())<=10_000L, is(true));
 		assertThat(result.getSourceConcept(), sameInstance(convertedConcept));
 		assertThat(result.getTargetConcepts(), hasSize(1));
-		assertThat(result.getTargetResources(), is(notNullValue()));
+		assertThat(result.getTargetResources(), empty());
 		assertThat(result.isAndRelation(), is(false));
 	}
 }

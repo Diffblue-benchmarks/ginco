@@ -37,7 +37,7 @@ public class GincoIdMapParserTest {
 	}
 
 	@Test
-	public void getNewIdReturnsFoo() {
+	public void getNewIdIdMappingIsFooReturnsFoo() {
 		HashMap<String, String> idMapping = new HashMap<String, String>();
 		idMapping.put("1234", "foo");
 		assertEquals("foo", service.getNewId("1234", idMapping));

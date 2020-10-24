@@ -46,7 +46,7 @@ public class GincoNoteIdGeneratorTest {
 	}
 
 	@Test
-	public void getNotesWithNewIdsReturnsEmpty() {
+	public void getNotesWithNewIdsNotesIsEmptyReturnsEmpty() {
 		assertTrue(service.getNotesWithNewIds(new HashMap<String, JaxbList<Note>>(), new HashMap<String, String>()).isEmpty());
 	}
 }

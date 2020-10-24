@@ -1,7 +1,7 @@
 package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -240,7 +240,7 @@ class ThesaurusConceptGroupTest {
 		thesaurus7.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusConceptGroup.setThesaurus(thesaurus7);
 		assertThat(thesaurusConceptGroup.getConceptGroupType(), sameInstance(conceptGroupType1));
-		assertThat(thesaurusConceptGroup.getConcepts(), is(notNullValue()));
+		assertThat(thesaurusConceptGroup.getConcepts(), empty());
 		assertThat(thesaurusConceptGroup.getIdentifier(), is("data"));
 		assertThat(thesaurusConceptGroup.getIsDynamic(), is(false));
 		assertThat(thesaurusConceptGroup.getNotation(), is("DE"));

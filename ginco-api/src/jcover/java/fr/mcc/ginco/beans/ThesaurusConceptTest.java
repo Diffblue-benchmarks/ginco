@@ -1,7 +1,7 @@
 package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -65,15 +65,15 @@ class ThesaurusConceptTest {
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusConcept.setThesaurus(thesaurus);
 		thesaurusConcept.setTopConcept(false);
-		assertThat(thesaurusConcept.getAssociativeRelationshipLeft(), is(notNullValue()));
-		assertThat(thesaurusConcept.getAssociativeRelationshipRight(), is(notNullValue()));
-		assertThat(thesaurusConcept.getConceptArrays(), is(notNullValue()));
+		assertThat(thesaurusConcept.getAssociativeRelationshipLeft(), empty());
+		assertThat(thesaurusConcept.getAssociativeRelationshipRight(), empty());
+		assertThat(thesaurusConcept.getConceptArrays(), empty());
 		assertThat(thesaurusConcept.getCreated(), sameInstance(created1));
 		assertThat(thesaurusConcept.getIdentifier(), is("data"));
 		assertThat(thesaurusConcept.getModified(), sameInstance(modified));
 		assertThat(thesaurusConcept.getNotation(), is("DE"));
-		assertThat(thesaurusConcept.getParentConcepts(), is(notNullValue()));
-		assertThat(thesaurusConcept.getRootConcepts(), is(notNullValue()));
+		assertThat(thesaurusConcept.getParentConcepts(), empty());
+		assertThat(thesaurusConcept.getRootConcepts(), empty());
 		assertThat(thesaurusConcept.getStatus(), is(1));
 		assertThat(thesaurusConcept.getThesaurus(), sameInstance(thesaurus));
 		assertThat(thesaurusConcept.getTopConcept(), is(false));

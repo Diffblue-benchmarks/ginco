@@ -1,7 +1,8 @@
 package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.HashSet;
@@ -24,7 +25,7 @@ class GincoRevEntityTest {
 		gincoRevEntity.setUsername("root");
 		gincoRevEntity.setId(1);
 		gincoRevEntity.setTimestamp(1L);
-		assertThat(gincoRevEntity.getModifiedEntityTypes(), is(notNullValue()));
+		assertThat(gincoRevEntity.getModifiedEntityTypes(), empty());
 		assertThat(gincoRevEntity.getThesaurusId(), is("1234"));
 		assertThat(gincoRevEntity.getUsername(), is("root"));
 		assertThat(gincoRevEntity.getTimestamp(), is(1L));
@@ -32,6 +33,15 @@ class GincoRevEntityTest {
 
 	@Test
 	void addModifiedEntityType() {
-		new GincoRevEntity().addModifiedEntityType(new GincoRevModifiedEntityType());
+
+		// arrange
+		GincoRevEntity gincoRevEntity = new GincoRevEntity();
+		GincoRevModifiedEntityType revEntity = new GincoRevModifiedEntityType();
+
+		// act
+		gincoRevEntity.addModifiedEntityType(revEntity);
+
+		// assert
+		assertThat(gincoRevEntity.getModifiedEntityTypes(), hasSize(1));
 	}
 }

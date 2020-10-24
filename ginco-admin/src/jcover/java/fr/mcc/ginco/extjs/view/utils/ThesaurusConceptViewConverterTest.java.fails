@@ -2,7 +2,6 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
@@ -440,15 +439,15 @@ class ThesaurusConceptViewConverterTest {
 		ThesaurusConcept result = service.convert(source3);
 
 		// assert
-		assertThat(result.getAssociativeRelationshipLeft(), is(notNullValue()));
-		assertThat(result.getAssociativeRelationshipRight(), is(notNullValue()));
-		assertThat(result.getConceptArrays(), is(notNullValue()));
+		assertThat(result.getAssociativeRelationshipLeft(), empty());
+		assertThat(result.getAssociativeRelationshipRight(), empty());
+		assertThat(result.getConceptArrays(), empty());
 		assertThat(result.getCreated(), sameInstance(created2));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(Math.abs(result.getModified().getTime()-new Date().getTime())<=10_000L, is(true));
 		assertThat(result.getNotation(), is("DE"));
-		assertThat(result.getParentConcepts(), is(notNullValue()));
-		assertThat(result.getRootConcepts(), is(notNullValue()));
+		assertThat(result.getParentConcepts(), empty());
+		assertThat(result.getRootConcepts(), empty());
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurus(), sameInstance(thesaurus1));
 		assertThat(result.getTopConcept(), is(false));

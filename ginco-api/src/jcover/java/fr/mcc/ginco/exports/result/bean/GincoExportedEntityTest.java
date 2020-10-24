@@ -1,7 +1,6 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -203,12 +202,12 @@ class GincoExportedEntityTest {
 		gincoExportedEntity.setTerms(terms);
 		assertThat(gincoExportedEntity.getConceptAttributeTypes().size(), is(1));
 		assertThat(gincoExportedEntity.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedEntity.getConceptAttributes(), is(notNullValue()));
+		assertThat(gincoExportedEntity.getConceptAttributes().isEmpty(), is(true));
 		assertThat(gincoExportedEntity.getConcepts().size(), is(1));
 		assertThat(gincoExportedEntity.getConcepts().get(0), sameInstance(thesaurusConcept));
 		assertThat(gincoExportedEntity.getTermAttributeTypes().size(), is(1));
 		assertThat(gincoExportedEntity.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedEntity.getTermAttributes(), is(notNullValue()));
+		assertThat(gincoExportedEntity.getTermAttributes().isEmpty(), is(true));
 		assertThat(gincoExportedEntity.getTerms().size(), is(1));
 		assertThat(gincoExportedEntity.getTerms().get(0), sameInstance(thesaurusTerm));
 	}

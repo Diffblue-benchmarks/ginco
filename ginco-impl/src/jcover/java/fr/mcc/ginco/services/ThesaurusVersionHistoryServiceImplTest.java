@@ -118,7 +118,7 @@ public class ThesaurusVersionHistoryServiceImplTest {
 	}
 
 	@Test
-	public void publishThesaurus1() throws java.text.ParseException {
+	public void publishThesaurusUserIdIsRoot() throws java.text.ParseException {
 
 		// arrange
 		ThesaurusVersionHistory thesaurusVersionHistory1 =
@@ -139,42 +139,6 @@ public class ThesaurusVersionHistoryServiceImplTest {
 			.thenReturn(list);
 		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
 			.thenReturn(thesaurusVersionHistory1);
-		when(generatorService.generate(Mockito.<Class>any()))
-			.thenReturn("foo");
-
-		// act
-		ThesaurusVersionHistory result =
-			 service.publishThesaurus(new Thesaurus(), "root");
-
-		// assert
-		assertSame(date3, result.getDate());
-		assertEquals("data", result.getIdentifier());
-		assertEquals(1, (int) result.getStatus());
-		assertSame(thesaurus1, result.getThesaurus());
-		assertFalse(result.getThisVersion());
-		assertEquals("root", result.getUserId());
-		assertEquals("1.0", result.getVersionNote());
-	}
-
-	@Test
-	public void publishThesaurus2() throws java.text.ParseException {
-
-		// arrange
-		ThesaurusVersionHistory thesaurusVersionHistory =
-			 new ThesaurusVersionHistory();
-		Date date3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusVersionHistory.setDate(date3);
-		thesaurusVersionHistory.setIdentifier("data");
-		thesaurusVersionHistory.setStatus(1);
-		Thesaurus thesaurus1 = new Thesaurus();
-		thesaurusVersionHistory.setThesaurus(thesaurus1);
-		thesaurusVersionHistory.setThisVersion(false);
-		thesaurusVersionHistory.setUserId("root");
-		thesaurusVersionHistory.setVersionNote("1.0");
-		when(thesaurusVersionHistoryDAO.findAllOtherThisVersionTrueByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusVersionHistory>());
-		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
-			.thenReturn(thesaurusVersionHistory);
 		when(generatorService.generate(Mockito.<Class>any()))
 			.thenReturn("foo");
 

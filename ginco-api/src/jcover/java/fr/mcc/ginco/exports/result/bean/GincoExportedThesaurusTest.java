@@ -1,7 +1,6 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -436,30 +435,30 @@ class GincoExportedThesaurusTest {
 		thesaurusTerm.setThesaurus(thesaurus14);
 		terms.add(thesaurusTerm);
 		gincoExportedThesaurus.setTerms(terms);
-		assertThat(gincoExportedThesaurus.getAlignments(), is(notNullValue()));
-		assertThat(gincoExportedThesaurus.getAssociativeRelationship(), is(notNullValue()));
+		assertThat(gincoExportedThesaurus.getAlignments().isEmpty(), is(true));
+		assertThat(gincoExportedThesaurus.getAssociativeRelationship().isEmpty(), is(true));
 		assertThat(gincoExportedThesaurus.getComplexConcepts().size(), is(1));
 		assertThat(gincoExportedThesaurus.getComplexConcepts().get(0), sameInstance(splitNonPreferredTerm));
-		assertThat(gincoExportedThesaurus.getConceptArrayLabels(), is(notNullValue()));
+		assertThat(gincoExportedThesaurus.getConceptArrayLabels().isEmpty(), is(true));
 		assertThat(gincoExportedThesaurus.getConceptArrays().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConceptArrays().get(0), sameInstance(thesaurusArray));
-		assertThat(gincoExportedThesaurus.getConceptGroupLabels(), is(notNullValue()));
+		assertThat(gincoExportedThesaurus.getConceptGroupLabels().isEmpty(), is(true));
 		assertThat(gincoExportedThesaurus.getConceptGroups().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConceptGroups().get(0), sameInstance(thesaurusConceptGroup));
-		assertThat(gincoExportedThesaurus.getConceptNotes(), is(notNullValue()));
-		assertThat(gincoExportedThesaurus.getHierarchicalRelationship(), is(notNullValue()));
-		assertThat(gincoExportedThesaurus.getTermNotes(), is(notNullValue()));
+		assertThat(gincoExportedThesaurus.getConceptNotes().isEmpty(), is(true));
+		assertThat(gincoExportedThesaurus.getHierarchicalRelationship().isEmpty(), is(true));
+		assertThat(gincoExportedThesaurus.getTermNotes().isEmpty(), is(true));
 		assertThat(gincoExportedThesaurus.getThesaurus(), sameInstance(thesaurus8));
 		assertThat(gincoExportedThesaurus.getThesaurusVersions().size(), is(1));
 		assertThat(gincoExportedThesaurus.getThesaurusVersions().get(0), sameInstance(thesaurusVersionHistory));
 		assertThat(gincoExportedThesaurus.getConceptAttributeTypes().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedThesaurus.getConceptAttributes(), is(notNullValue()));
+		assertThat(gincoExportedThesaurus.getConceptAttributes().isEmpty(), is(true));
 		assertThat(gincoExportedThesaurus.getConcepts().size(), is(1));
 		assertThat(gincoExportedThesaurus.getConcepts().get(0), sameInstance(thesaurusConcept));
 		assertThat(gincoExportedThesaurus.getTermAttributeTypes().size(), is(1));
 		assertThat(gincoExportedThesaurus.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedThesaurus.getTermAttributes(), is(notNullValue()));
+		assertThat(gincoExportedThesaurus.getTermAttributes().isEmpty(), is(true));
 		assertThat(gincoExportedThesaurus.getTerms().size(), is(1));
 		assertThat(gincoExportedThesaurus.getTerms().get(0), sameInstance(thesaurusTerm));
 	}

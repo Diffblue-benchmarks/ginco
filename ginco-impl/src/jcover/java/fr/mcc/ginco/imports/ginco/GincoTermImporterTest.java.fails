@@ -53,30 +53,7 @@ public class GincoTermImporterTest {
 	}
 
 	@Test
-	public void storeTerms1() {
-
-		// arrange
-		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
-		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(thesaurusTerm1);
-		GincoExportedEntity exportedThesaurus = new GincoExportedEntity();
-		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
-		thesaurusTerm2.setIdentifier("data");
-		terms.add(thesaurusTerm2);
-		exportedThesaurus.setTerms(terms);
-
-		// act
-		List<ThesaurusTerm> result =
-			 service.storeTerms(exportedThesaurus, new Thesaurus(), new HashMap<String, CustomTermAttributeType>());
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(thesaurusTerm1, result.get(0));
-	}
-
-	@Test
-	public void storeTerms2() {
+	public void storeTerms() {
 
 		// arrange
 		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
@@ -92,10 +69,13 @@ public class GincoTermImporterTest {
 		thesaurusTerm2.setIdentifier("data");
 		terms.add(thesaurusTerm2);
 		exportedThesaurus.setTerms(terms);
+		HashMap<String, CustomTermAttributeType> savedTypes =
+			 new HashMap<String, CustomTermAttributeType>();
+		savedTypes.put("", new CustomTermAttributeType());
 
 		// act
 		List<ThesaurusTerm> result =
-			 service.storeTerms(exportedThesaurus, new Thesaurus(), new HashMap<String, CustomTermAttributeType>());
+			 service.storeTerms(exportedThesaurus, new Thesaurus(), savedTypes);
 
 		// assert
 		assertEquals(1, result.size());
@@ -104,12 +84,30 @@ public class GincoTermImporterTest {
 	}
 
 	@Test
-	public void storeTermNotes1() {
-		assertTrue((service.storeTermNotes(new HashMap<String, JaxbList<Note>>())).isEmpty());
+	public void storeTermsSavedTypesIsEmpty() {
+
+		// arrange
+		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
+		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(thesaurusTerm1);
+		GincoExportedEntity exportedThesaurus = new GincoExportedEntity();
+		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
+		thesaurusTerm2.setIdentifier("data");
+		terms.add(thesaurusTerm2);
+		exportedThesaurus.setTerms(terms);
+
+		// act
+		List<ThesaurusTerm> result =
+			 service.storeTerms(exportedThesaurus, new Thesaurus(), new HashMap<String, CustomTermAttributeType>());
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm1, result.get(0));
 	}
 
 	@Test
-	public void storeTermNotes2() {
+	public void storeTermNotes() {
 
 		// arrange
 		when(thesaurusTermDAO.getById(Mockito.<String>any()))
@@ -129,6 +127,11 @@ public class GincoTermImporterTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(note1, result.get(0));
+	}
+
+	@Test
+	public void storeTermNotesTermNotesToImportIsEmpty() {
+		assertTrue((service.storeTermNotes(new HashMap<String, JaxbList<Note>>())).isEmpty());
 	}
 
 	@Test

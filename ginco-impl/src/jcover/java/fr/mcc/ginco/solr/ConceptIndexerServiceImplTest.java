@@ -49,6 +49,20 @@ public class ConceptIndexerServiceImplTest {
 	}
 
 	@Test
+	public void addConcepts() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
+		when(solrServer.add(Mockito.<SolrInputDocument>any()))
+			.thenReturn(new UpdateResponse());
+		when(solrServer.commit())
+			.thenReturn(new UpdateResponse());
+		when(conceptSolrConverter.convertSolrConcept(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(new SolrInputDocument());
+		ArrayList<ThesaurusConcept> thesaurusConcepts =
+			 new ArrayList<ThesaurusConcept>();
+		thesaurusConcepts.add(new ThesaurusConcept());
+		service.addConcepts(thesaurusConcepts);
+	}
+
+	@Test
 	public void addConceptsThesaurusConceptsIsEmpty() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException, fr.mcc.ginco.exceptions.TechnicalException {
 		when(solrServer.commit())
 			.thenReturn(new UpdateResponse());

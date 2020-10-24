@@ -2,7 +2,6 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
@@ -12,7 +11,6 @@ import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.NodeLabel;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusArray;
-import fr.mcc.ginco.beans.ThesaurusArrayConcept;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusArrayView;
 import fr.mcc.ginco.services.INodeLabelService;
@@ -22,7 +20,6 @@ import fr.mcc.ginco.services.IThesaurusService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -73,24 +70,23 @@ class ThesaurusArrayViewConverterTest {
 			.thenReturn(thesaurusConcept);
 		ThesaurusArray thesaurusArray1 = new ThesaurusArray();
 		ThesaurusArray thesaurusArray2 = new ThesaurusArray();
-		thesaurusArray2.setConcepts(new HashSet<ThesaurusArrayConcept>());
 		thesaurusArray2.setIdentifier("data");
 		thesaurusArray2.setNotation("DE");
 		when(thesaurusArrayService.getThesaurusArrayById(Mockito.<String>any()))
 			.thenReturn(thesaurusArray2)
 			.thenReturn(thesaurusArray1);
-		ThesaurusArrayView source12 = new ThesaurusArrayView();
-		source12.setIdentifier("data");
-		source12.setOrder(false);
-		source12.setParentArrayId("1234");
-		source12.setSuperOrdinateId("1234");
-		source12.setThesaurusId("1234");
+		ThesaurusArrayView source13 = new ThesaurusArrayView();
+		source13.setIdentifier("data");
+		source13.setOrder(false);
+		source13.setParentArrayId("1234");
+		source13.setSuperOrdinateId("1234");
+		source13.setThesaurusId("1234");
 
 		// act
-		ThesaurusArray result = service.convert(source12);
+		ThesaurusArray result = service.convert(source13);
 
 		// assert
-		assertThat(result.getConcepts(), is(notNullValue()));
+		assertThat(result.getConcepts(), empty());
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getNotation(), is("DE"));
 		assertThat(result.getOrdered(), is(false));
