@@ -70,21 +70,21 @@ public class AssociativeRelationshipServiceImplTest {
 	@Test
 	public void getAssociatedConceptsIdStatusIsCandidate() {
 		List<String> list = new ArrayList<String>();
-		list.add("foo");
+		list.add("hello");
 		when(associativeRelationshipDAO.getAssociatedConcepts(Mockito.<ThesaurusConcept>any(), Mockito.<ConceptStatusEnum>any()))
 			.thenReturn(list);
 		assertEquals(1, service.getAssociatedConceptsId(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).size());
-		assertEquals("foo", service.getAssociatedConceptsId(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).get(0));
+		assertEquals("hello", service.getAssociatedConceptsId(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).get(0));
 	}
 
 	@Test
 	public void getAssociatedConceptsId() {
 		List<String> list = new ArrayList<String>();
-		list.add("foo");
+		list.add("hello");
 		when(associativeRelationshipDAO.getAssociatedConcepts(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(list);
 		assertEquals(1, service.getAssociatedConceptsId(new ThesaurusConcept()).size());
-		assertEquals("foo", service.getAssociatedConceptsId(new ThesaurusConcept()).get(0));
+		assertEquals("hello", service.getAssociatedConceptsId(new ThesaurusConcept()).get(0));
 	}
 
 	@Test

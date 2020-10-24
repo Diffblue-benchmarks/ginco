@@ -174,7 +174,9 @@ public class ThesaurusServiceImplTest {
 	public void updateThesaurus() {
 		List<ThesaurusVersionHistory> list =
 			 new ArrayList<ThesaurusVersionHistory>();
-		list.add(new ThesaurusVersionHistory());
+		ThesaurusVersionHistory thesaurusVersionHistory =
+			 mock(ThesaurusVersionHistory.class);
+		list.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
 			.thenReturn(list);
 		when(thesaurusDAO.update(Mockito.<Thesaurus>any()))
@@ -188,60 +190,52 @@ public class ThesaurusServiceImplTest {
 		List<ThesaurusVersionHistory> list =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
-			 new ThesaurusVersionHistory();
-		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusVersionHistory.setIdentifier("data");
-		thesaurusVersionHistory.setStatus(1);
-		Thesaurus thesaurus1 = mock(Thesaurus.class);
-		thesaurusVersionHistory.setThesaurus(thesaurus1);
-		thesaurusVersionHistory.setThisVersion(false);
-		thesaurusVersionHistory.setUserId("root");
-		thesaurusVersionHistory.setVersionNote("1.0");
+			 mock(ThesaurusVersionHistory.class);
 		list.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
 			.thenReturn(list);
-		Thesaurus thesaurus2 = new Thesaurus();
-		thesaurus2.setArchived(false);
-		thesaurus2.setContributor("foo");
-		thesaurus2.setCoverage("foo");
-		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator2 = new ThesaurusOrganization();
-		creator2.setEmail("info@diffblue.com");
-		creator2.setHomepage("foo");
-		creator2.setIdentifier(1);
-		creator2.setName("Acme");
-		thesaurus2.setCreator(creator2);
-		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus2.setDefaultTopConcept(false);
-		thesaurus2.setDescription("some text");
-		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus2.setIdentifier("data");
-		thesaurus2.setLang(new HashSet<Language>());
-		thesaurus2.setPolyHierarchical(false);
-		thesaurus2.setPublisher("foo");
-		thesaurus2.setRelation("DE");
-		thesaurus2.setRights("foo");
-		thesaurus2.setSource("foo");
-		thesaurus2.setSubject("foo");
-		thesaurus2.setTitle("Mr");
-		ThesaurusType type2 = new ThesaurusType();
-		type2.setIdentifier(1);
-		type2.setLabel("label");
-		thesaurus2.setType(type2);
-		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		creator1.setEmail("info@diffblue.com");
+		creator1.setHomepage("foo");
+		creator1.setIdentifier(1);
+		creator1.setName("Acme");
+		thesaurus.setCreator(creator1);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type1 = new ThesaurusType();
+		type1.setIdentifier(1);
+		type1.setLabel("label");
+		thesaurus.setType(type1);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		when(thesaurusDAO.update(Mockito.<Thesaurus>any()))
-			.thenReturn(thesaurus2);
+			.thenReturn(thesaurus);
 		Thesaurus object = new Thesaurus();
 		object.setArchived(false);
 		object.setContributor("foo");
 		object.setCoverage("foo");
 		object.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator3 = new ThesaurusOrganization();
-		creator3.setEmail("info@diffblue.com");
-		creator3.setHomepage("foo");
-		creator3.setIdentifier(1);
-		creator3.setName("Acme");
-		object.setCreator(creator3);
+		ThesaurusOrganization creator2 = new ThesaurusOrganization();
+		creator2.setEmail("info@diffblue.com");
+		creator2.setHomepage("foo");
+		creator2.setIdentifier(1);
+		creator2.setName("Acme");
+		object.setCreator(creator2);
 		object.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		object.setDefaultTopConcept(false);
 		object.setDescription("some text");
@@ -255,10 +249,10 @@ public class ThesaurusServiceImplTest {
 		object.setSource("foo");
 		object.setSubject("foo");
 		object.setTitle("Mr");
-		ThesaurusType type3 = new ThesaurusType();
-		type3.setIdentifier(1);
-		type3.setLabel("label");
-		object.setType(type3);
+		ThesaurusType type2 = new ThesaurusType();
+		type2.setIdentifier(1);
+		type2.setLabel("label");
+		object.setType(type2);
 		object.setVersions(new HashSet<ThesaurusVersionHistory>());
 		assertSame(object, service.updateThesaurusDate(object));
 		assertEquals(true, Math.abs(object.getDate().getTime()-new Date().getTime())<=10_000L);

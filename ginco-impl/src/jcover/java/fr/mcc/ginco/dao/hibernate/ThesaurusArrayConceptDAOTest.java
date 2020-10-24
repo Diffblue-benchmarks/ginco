@@ -45,11 +45,11 @@ public class ThesaurusArrayConceptDAOTest {
 	}
 
 	@Test
-	public void getAssociatedConceptsReturnsFoo() throws org.hibernate.HibernateException {
+	public void getAssociatedConceptsReturnsSmith() throws org.hibernate.HibernateException {
 		ThesaurusArrayConceptDAO thesaurusArrayConceptDAO =
 			 new ThesaurusArrayConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -67,7 +67,7 @@ public class ThesaurusArrayConceptDAOTest {
 			.thenReturn(session);
 		thesaurusArrayConceptDAO.setSessionFactory(sessionFactory);
 		assertEquals(1, thesaurusArrayConceptDAO.getAssociatedConcepts("1234").size());
-		assertEquals("foo", thesaurusArrayConceptDAO.getAssociatedConcepts("1234").get(0));
+		assertEquals("Smith", thesaurusArrayConceptDAO.getAssociatedConcepts("1234").get(0));
 	}
 
 	@Test
@@ -77,7 +77,7 @@ public class ThesaurusArrayConceptDAOTest {
 		ThesaurusArrayConceptDAO thesaurusArrayConceptDAO =
 			 new ThesaurusArrayConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -229,7 +229,7 @@ public class ThesaurusArrayConceptDAOTest {
 		ThesaurusArrayConceptDAO thesaurusArrayConceptDAO =
 			 new ThesaurusArrayConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))

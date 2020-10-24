@@ -8,18 +8,13 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.AssociativeRelationship;
-import fr.mcc.ginco.beans.Thesaurus;
-import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
 import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
 import fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -50,24 +45,11 @@ class OrphansGeneratorTest {
 	private OrphansGenerator service;
 
 	@Test
-	void generateOrphans() throws java.text.ParseException {
+	void generateOrphans() {
 
 		// arrange
 		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
-		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setIdentifier("data");
-		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setNotation("DE");
-		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setStatus(1);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		thesaurusConcept.setThesaurus(thesaurus);
-		thesaurusConcept.setTopConcept(false);
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		list.add(thesaurusConcept);
 		when(thesaurusConceptService.getOrphanThesaurusConcepts(Mockito.<String>any(), anyInt()))
 			.thenReturn(list);
@@ -79,7 +61,7 @@ class OrphansGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("c7092b28-03d3-4905-a866-508fb623c6af"));
+		assertThat(result.get(0).getId(), is("e45a0b71-0ebe-4e76-b7ab-2bc9e43f8cc5"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

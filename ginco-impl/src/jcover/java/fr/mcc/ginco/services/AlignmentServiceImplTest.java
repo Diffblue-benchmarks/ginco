@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
@@ -169,7 +170,8 @@ public class AlignmentServiceImplTest {
 		when(externalThesaurusDAO.findAll())
 			.thenReturn(list1);
 		List<Alignment> list2 = new ArrayList<Alignment>();
-		list2.add(new Alignment());
+		Alignment alignment = mock(Alignment.class);
+		list2.add(alignment);
 		when(alignmentDAO.findByExternalThesaurus(Mockito.<Integer>any()))
 			.thenReturn(list2);
 		service.deleteExternalThesauruses();

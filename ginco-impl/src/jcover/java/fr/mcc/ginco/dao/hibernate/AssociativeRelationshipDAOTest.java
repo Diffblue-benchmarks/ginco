@@ -50,7 +50,7 @@ public class AssociativeRelationshipDAOTest {
 		AssociativeRelationshipDAO associativeRelationshipDAO =
 			 new AssociativeRelationshipDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -71,7 +71,7 @@ public class AssociativeRelationshipDAOTest {
 			.thenReturn(session);
 		associativeRelationshipDAO.setSessionFactory(sessionFactory);
 		assertEquals(1, associativeRelationshipDAO.getAssociatedConcepts(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).size());
-		assertEquals("foo", associativeRelationshipDAO.getAssociatedConcepts(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).get(0));
+		assertEquals("Smith", associativeRelationshipDAO.getAssociatedConcepts(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).get(0));
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class AssociativeRelationshipDAOTest {
 		AssociativeRelationshipDAO associativeRelationshipDAO =
 			 new AssociativeRelationshipDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -97,7 +97,7 @@ public class AssociativeRelationshipDAOTest {
 			.thenReturn(session);
 		associativeRelationshipDAO.setSessionFactory(sessionFactory);
 		assertEquals(1, associativeRelationshipDAO.getAssociatedConcepts(new ThesaurusConcept()).size());
-		assertEquals("foo", associativeRelationshipDAO.getAssociatedConcepts(new ThesaurusConcept()).get(0));
+		assertEquals("Smith", associativeRelationshipDAO.getAssociatedConcepts(new ThesaurusConcept()).get(0));
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class AssociativeRelationshipDAOTest {
 		AssociativeRelationshipDAO associativeRelationshipDAO =
 			 new AssociativeRelationshipDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);

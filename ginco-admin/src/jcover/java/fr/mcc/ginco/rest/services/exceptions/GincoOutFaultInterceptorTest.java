@@ -23,16 +23,16 @@ class GincoOutFaultInterceptorTest {
 		GincoOutFaultInterceptor gincoOutFaultInterceptor =
 			 new GincoOutFaultInterceptor();
 		LinkedList<String> i1 = new LinkedList<String>();
-		i1.add("foo=bar");
+		i1.add("an error has happened");
 		gincoOutFaultInterceptor.setAfter(i1);
 		LinkedList<String> i2 = new LinkedList<String>();
-		i2.add("foo=bar");
+		i2.add("an error has happened");
 		gincoOutFaultInterceptor.setBefore(i2);
 		assertThat(gincoOutFaultInterceptor.getAdditionalInterceptors(), is(nullValue()));
 		assertThat(gincoOutFaultInterceptor.getAfter(), hasSize(1));
-		assertThat(gincoOutFaultInterceptor.getAfter(), hasItem("foo=bar"));
+		assertThat(gincoOutFaultInterceptor.getAfter(), hasItem("an error has happened"));
 		assertThat(gincoOutFaultInterceptor.getBefore(), hasSize(1));
-		assertThat(gincoOutFaultInterceptor.getBefore(), hasItem("foo=bar"));
+		assertThat(gincoOutFaultInterceptor.getBefore(), hasItem("an error has happened"));
 		assertThat(gincoOutFaultInterceptor.getId(), is("fr.mcc.ginco.rest.services.exceptions.GincoOutFaultInterceptor"));
 		assertThat(gincoOutFaultInterceptor.getPhase(), is("marshal"));
 	}

@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Note;
@@ -246,7 +247,8 @@ class ThesaurusConceptRestServiceTest {
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(thesaurusConceptReducedView);
 		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
-		list.add(new ThesaurusConcept());
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
+		list.add(thesaurusConcept);
 		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(list);
 

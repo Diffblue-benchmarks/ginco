@@ -51,7 +51,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
@@ -93,7 +93,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -163,7 +163,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -192,7 +192,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -301,7 +301,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -345,7 +345,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -389,7 +389,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -422,7 +422,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -455,7 +455,7 @@ public class ThesaurusTermDAOTest {
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo=bar");
+		list.add("Smith");
 		Query query1 = mock(Query.class);
 		Query query2 = mock(Query.class);
 		Query query3 = mock(Query.class);

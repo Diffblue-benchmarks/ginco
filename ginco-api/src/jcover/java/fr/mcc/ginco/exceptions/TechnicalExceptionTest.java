@@ -20,6 +20,9 @@ class TechnicalExceptionTest {
 		cause.setStackTrace(new StackTraceElement[] { });
 		TechnicalException technicalException =
 			 new TechnicalException("an error has happened", cause);
+		StackTraceElement[] stackTrace =
+			 new StackTraceElement[] { new StackTraceElement("java.lang.Object", "toString", "Object.java", 1) };
+		technicalException.setStackTrace(stackTrace);
 		assertThat(technicalException.getCause().getCause(), is(nullValue()));
 		assertThat(technicalException.getCause().getMessage(), is(nullValue()));
 		assertThat(technicalException.getMessage(), is("an error has happened"));

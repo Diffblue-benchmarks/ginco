@@ -70,10 +70,10 @@ public class GincoThesaurusBuilderTest {
 		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
 			.thenReturn(thesaurusVersionHistory1);
 		GincoExportedThesaurus exportedThesaurus = new GincoExportedThesaurus();
-		ArrayList<ThesaurusVersionHistory> versions7 =
+		ArrayList<ThesaurusVersionHistory> versions4 =
 			 new ArrayList<ThesaurusVersionHistory>();
-		versions7.add(new ThesaurusVersionHistory());
-		exportedThesaurus.setThesaurusVersions(versions7);
+		versions4.add(new ThesaurusVersionHistory());
+		exportedThesaurus.setThesaurusVersions(versions4);
 
 		// act
 		List<ThesaurusVersionHistory> result =

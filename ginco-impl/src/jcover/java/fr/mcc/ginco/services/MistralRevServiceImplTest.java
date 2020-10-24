@@ -70,7 +70,7 @@ public class MistralRevServiceImplTest {
 		when(thesaurusService.getThesaurusList())
 			.thenReturn(new ArrayList<Thesaurus>());
 		List list2 = new ArrayList<String>();
-		list2.add("foo=bar");
+		list2.add("Smith");
 		Query query = mock(Query.class);
 		SQLQuery obj = mock(SQLQuery.class);
 		when(obj.list())

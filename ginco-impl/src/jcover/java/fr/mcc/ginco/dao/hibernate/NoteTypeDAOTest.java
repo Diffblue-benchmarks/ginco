@@ -38,7 +38,7 @@ public class NoteTypeDAOTest {
 		// arrange
 		NoteTypeDAO noteTypeDAO = new NoteTypeDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -67,7 +67,7 @@ public class NoteTypeDAOTest {
 		// arrange
 		NoteTypeDAO noteTypeDAO = new NoteTypeDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);

@@ -41,7 +41,7 @@ public class SplitNonPreferredTermDAOTest {
 		SplitNonPreferredTermDAO splitNonPreferredTermDAO =
 			 new SplitNonPreferredTermDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))

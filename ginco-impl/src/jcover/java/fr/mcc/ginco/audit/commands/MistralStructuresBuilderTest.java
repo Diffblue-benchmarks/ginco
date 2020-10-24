@@ -3,6 +3,7 @@ package fr.mcc.ginco.audit.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.audit.utils.AuditHelper;
@@ -101,8 +102,9 @@ public class MistralStructuresBuilderTest {
 	@Test
 	public void getNotPreferredTermsByTerm1() {
 		ArrayList<ThesaurusTerm> currentTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setPrefered(false);
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
+		when(thesaurusTerm.getPrefered())
+			.thenReturn(false);
 		currentTerms.add(thesaurusTerm);
 		assertTrue(service.getNotPreferredTermsByTerm(currentTerms).isEmpty());
 	}

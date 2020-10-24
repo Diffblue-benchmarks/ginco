@@ -40,7 +40,7 @@ public class LanguageDAOTest {
 		// arrange
 		LanguageDAO languageDAO = new LanguageDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -78,7 +78,7 @@ public class LanguageDAOTest {
 		// arrange
 		LanguageDAO languageDAO = new LanguageDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);

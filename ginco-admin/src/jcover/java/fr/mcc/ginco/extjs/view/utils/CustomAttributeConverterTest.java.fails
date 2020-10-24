@@ -72,59 +72,7 @@ class CustomAttributeConverterTest {
 	private CustomAttributeConverter service;
 
 	@Test
-	void convertTermAttribute1() {
-
-		// arrange
-		CustomTermAttribute source1 = new CustomTermAttribute();
-		ThesaurusTerm entity = new ThesaurusTerm();
-		entity.setIdentifier("data");
-		source1.setEntity(entity);
-		Language language2 = new Language();
-		language2.setId("1234");
-		source1.setLanguage(language2);
-		source1.setLexicalValue("value");
-		CustomTermAttributeType type2 = new CustomTermAttributeType();
-		type2.setIdentifier(1);
-		source1.setType(type2);
-
-		// act
-		GenericCustomAttributeView result = service.convertTermAttribute(source1);
-
-		// assert
-		assertThat(result.getEntityid(), is("data"));
-		assertThat(result.getLang(), is("1234"));
-		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getTypeid(), is(1));
-	}
-
-	@Test
-	void convertConceptAttribute1() {
-
-		// arrange
-		CustomConceptAttribute source1 = new CustomConceptAttribute();
-		ThesaurusConcept entity = new ThesaurusConcept();
-		entity.setIdentifier("data");
-		source1.setEntity(entity);
-		Language language = new Language();
-		language.setId("1234");
-		source1.setLanguage(language);
-		source1.setLexicalValue("value");
-		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
-		type2.setIdentifier(1);
-		source1.setType(type2);
-
-		// act
-		GenericCustomAttributeView result = service.convertConceptAttribute(source1);
-
-		// assert
-		assertThat(result.getEntityid(), is("data"));
-		assertThat(result.getLang(), is("1234"));
-		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getTypeid(), is(1));
-	}
-
-	@Test
-	void convertConceptAttribute2() {
+	void convertConceptAttribute() {
 
 		// arrange
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
@@ -156,7 +104,7 @@ class CustomAttributeConverterTest {
 	}
 
 	@Test
-	void convertTermAttribute2() {
+	void convertTermAttribute() {
 
 		// arrange
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
@@ -201,9 +149,9 @@ class CustomAttributeConverterTest {
 		language2.setId("1234");
 		customTermAttribute.setLanguage(language2);
 		customTermAttribute.setLexicalValue("value");
-		CustomTermAttributeType type2 = new CustomTermAttributeType();
-		type2.setIdentifier(1);
-		customTermAttribute.setType(type2);
+		CustomTermAttributeType type = new CustomTermAttributeType();
+		type.setIdentifier(1);
+		customTermAttribute.setType(type);
 		sourceList.add(customTermAttribute);
 
 		// act
@@ -232,9 +180,9 @@ class CustomAttributeConverterTest {
 		language.setId("1234");
 		customConceptAttribute.setLanguage(language);
 		customConceptAttribute.setLexicalValue("value");
-		CustomConceptAttributeType type2 = new CustomConceptAttributeType();
-		type2.setIdentifier(1);
-		customConceptAttribute.setType(type2);
+		CustomConceptAttributeType type = new CustomConceptAttributeType();
+		type.setIdentifier(1);
+		customConceptAttribute.setType(type);
 		sourceList.add(customConceptAttribute);
 
 		// act

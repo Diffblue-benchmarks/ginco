@@ -52,7 +52,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -114,7 +114,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -195,7 +195,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -229,7 +229,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -258,10 +258,10 @@ public class ThesaurusConceptDAOTest {
 	}
 
 	@Test
-	public void getIdentifiersOfConceptsWithChildren() throws org.hibernate.HibernateException {
+	public void getIdentifiersOfConceptsWithChildrenReturnsSmith() throws org.hibernate.HibernateException {
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo=bar");
+		list.add("Smith");
 		Query query = mock(Query.class);
 		SQLQuery obj = mock(SQLQuery.class);
 		when(obj.list())
@@ -276,7 +276,7 @@ public class ThesaurusConceptDAOTest {
 			.thenReturn(session);
 		thesaurusConceptDAO.setSessionFactory(sessionFactory);
 		assertEquals(1, thesaurusConceptDAO.getIdentifiersOfConceptsWithChildren("1234").size());
-		assertEquals("foo=bar", thesaurusConceptDAO.getIdentifiersOfConceptsWithChildren("1234").get(0));
+		assertEquals("Smith", thesaurusConceptDAO.getIdentifiersOfConceptsWithChildren("1234").get(0));
 	}
 
 	@Test
@@ -285,7 +285,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -343,7 +343,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -399,7 +399,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -432,7 +432,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -466,7 +466,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -501,7 +501,7 @@ public class ThesaurusConceptDAOTest {
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		Criteria criteria1 = mock(Criteria.class);
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
 		Criteria criteria4 = mock(Criteria.class);
@@ -536,7 +536,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -594,7 +594,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -651,7 +651,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -710,7 +710,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -785,7 +785,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo=bar");
+		list.add("Smith");
 		Query query1 = mock(Query.class);
 		Query query2 = mock(Query.class);
 		Query query3 = mock(Query.class);
@@ -827,7 +827,7 @@ public class ThesaurusConceptDAOTest {
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);

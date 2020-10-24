@@ -19,6 +19,9 @@ class BusinessExceptionTest {
 	void factory1() {
 		BusinessException businessException =
 			 new BusinessException("an error has happened", "an error has happened");
+		StackTraceElement[] stackTrace =
+			 new StackTraceElement[] { new StackTraceElement("java.lang.Object", "toString", "Object.java", 1) };
+		businessException.setStackTrace(stackTrace);
 		assertThat(businessException.getToFormat(), is(nullValue()));
 		assertThat(businessException.getUserMessageKey(), is("an error has happened"));
 		assertThat(businessException.getCause(), is(nullValue()));
@@ -31,6 +34,9 @@ class BusinessExceptionTest {
 		cause.setStackTrace(new StackTraceElement[] { });
 		BusinessException businessException =
 			 new BusinessException("an error has happened", "an error has happened", cause);
+		StackTraceElement[] stackTrace =
+			 new StackTraceElement[] { new StackTraceElement("java.lang.Object", "toString", "Object.java", 1) };
+		businessException.setStackTrace(stackTrace);
 		assertThat(businessException.getToFormat(), is(nullValue()));
 		assertThat(businessException.getUserMessageKey(), is("an error has happened"));
 		assertThat(businessException.getCause().getCause(), is(nullValue()));
@@ -40,11 +46,14 @@ class BusinessExceptionTest {
 
 	@Test
 	void factory3() {
-		Object element = new Object();
-		Object[] toFormat = new Object[] { element };
+		Object object = new Object();
+		Object[] toFormat = new Object[] { object };
 		BusinessException businessException =
 			 new BusinessException("an error has happened", "an error has happened", toFormat);
-		assertThat(businessException.getToFormat()[0], sameInstance(element));
+		StackTraceElement[] stackTrace =
+			 new StackTraceElement[] { new StackTraceElement("java.lang.Object", "toString", "Object.java", 1) };
+		businessException.setStackTrace(stackTrace);
+		assertThat(businessException.getToFormat()[0], sameInstance(object));
 		assertThat(businessException.getUserMessageKey(), is("an error has happened"));
 		assertThat(businessException.getCause(), is(nullValue()));
 		assertThat(businessException.getMessage(), is("an error has happened"));

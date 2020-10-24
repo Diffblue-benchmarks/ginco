@@ -41,7 +41,7 @@ public class ThesaurusVersionHistoryDAOTest {
 		ThesaurusVersionHistoryDAO thesaurusVersionHistoryDAO =
 			 new ThesaurusVersionHistoryDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -75,7 +75,7 @@ public class ThesaurusVersionHistoryDAOTest {
 		ThesaurusVersionHistoryDAO thesaurusVersionHistoryDAO =
 			 new ThesaurusVersionHistoryDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);

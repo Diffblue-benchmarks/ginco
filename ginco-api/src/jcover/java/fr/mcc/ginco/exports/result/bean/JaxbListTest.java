@@ -19,15 +19,15 @@ class JaxbListTest {
 	@Test
 	void factory() {
 		ArrayList<String> list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		assertThat(new JaxbList<String>(list).getList(), hasSize(1));
-		assertThat(new JaxbList<String>(list).getList().get(0), is("foo"));
+		assertThat(new JaxbList<String>(list).getList().get(0), is("Smith"));
 	}
 
 	@Test
 	void isEmptyReturnsFalse() {
 		ArrayList<String> list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		assertThat(new JaxbList<String>(list).isEmpty(), is(false));
 	}
 

@@ -39,7 +39,7 @@ public class NoteDAOTest {
 		// arrange
 		NoteDAO noteDAO = new NoteDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -77,7 +77,7 @@ public class NoteDAOTest {
 		// arrange
 		NoteDAO noteDAO = new NoteDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);
@@ -115,7 +115,7 @@ public class NoteDAOTest {
 		// arrange
 		NoteDAO noteDAO = new NoteDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);

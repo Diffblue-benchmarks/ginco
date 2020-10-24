@@ -18,6 +18,9 @@ class ThesaurusArchivedAccessDeniedExceptionTest {
 	void factory() {
 		ThesaurusArchivedAccessDeniedException thesaurusArchivedAccessDeniedException =
 			 new ThesaurusArchivedAccessDeniedException("an error has happened");
+		StackTraceElement[] stackTrace =
+			 new StackTraceElement[] { new StackTraceElement("java.lang.Object", "toString", "Object.java", 1) };
+		thesaurusArchivedAccessDeniedException.setStackTrace(stackTrace);
 		assertThat(thesaurusArchivedAccessDeniedException.getCause(), is(nullValue()));
 		assertThat(thesaurusArchivedAccessDeniedException.getMessage(), is("an error has happened"));
 	}

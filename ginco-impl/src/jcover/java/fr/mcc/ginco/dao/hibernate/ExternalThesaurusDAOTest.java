@@ -39,7 +39,7 @@ public class ExternalThesaurusDAOTest {
 		// arrange
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -69,7 +69,7 @@ public class ExternalThesaurusDAOTest {
 		// arrange
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.list())
@@ -97,7 +97,7 @@ public class ExternalThesaurusDAOTest {
 		// arrange
 		ExternalThesaurusDAO externalThesaurusDAO = new ExternalThesaurusDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.list())

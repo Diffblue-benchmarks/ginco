@@ -52,6 +52,21 @@ public class NoteIndexerServiceImplTest {
 	}
 
 	@Test
+	public void addNotes() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException {
+		when(solrServer.add(Mockito.<SolrInputDocument>any()))
+			.thenReturn(new UpdateResponse());
+		when(solrServer.commit())
+			.thenReturn(new UpdateResponse());
+		when(noteSolrConverter.convertSolrNote(Mockito.<Note>any()))
+			.thenReturn(new SolrInputDocument());
+		ArrayList<Note> notes = new ArrayList<Note>();
+		Note note = new Note();
+		note.setTerm(new ThesaurusTerm());
+		notes.add(note);
+		service.addNotes(notes);
+	}
+
+	@Test
 	public void addNotesNotesIsEmpty() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException {
 		when(solrServer.commit())
 			.thenReturn(new UpdateResponse());

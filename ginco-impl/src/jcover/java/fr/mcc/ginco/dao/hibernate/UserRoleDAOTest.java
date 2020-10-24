@@ -60,7 +60,7 @@ public class UserRoleDAOTest {
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -89,7 +89,7 @@ public class UserRoleDAOTest {
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))

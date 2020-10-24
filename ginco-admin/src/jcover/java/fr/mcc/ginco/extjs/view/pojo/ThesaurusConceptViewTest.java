@@ -27,29 +27,18 @@ class ThesaurusConceptViewTest {
 		alignmentView.setCreated("foo");
 		ArrayList<ExternalThesaurusView> externalThesaurus =
 			 new ArrayList<ExternalThesaurusView>();
-		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
-		externalThesaurusView.setExternalId("1234");
-		externalThesaurusView.setExternalThesaurusType(1);
-		externalThesaurusView.setIdentifier(1);
-		externalThesaurus.add(externalThesaurusView);
+		externalThesaurus.add(new ExternalThesaurusView());
 		alignmentView.setExternalThesaurus(externalThesaurus);
 		alignmentView.setIdentifier("data");
 		alignmentView.setInternalThesaurusId("1234");
 		alignmentView.setModified("foo");
 		ArrayList<AlignmentConceptView> targetConcepts =
 			 new ArrayList<AlignmentConceptView>();
-		AlignmentConceptView alignmentConceptView = new AlignmentConceptView();
-		alignmentConceptView.setExternalTargetConcept("hello");
-		alignmentConceptView.setIdentifier(1);
-		alignmentConceptView.setInternalTargetConcept("hello");
-		targetConcepts.add(alignmentConceptView);
+		targetConcepts.add(new AlignmentConceptView());
 		alignmentView.setTargetConcepts(targetConcepts);
 		ArrayList<AlignmentResourceView> targetResources =
 			 new ArrayList<AlignmentResourceView>();
-		AlignmentResourceView alignmentResourceView = new AlignmentResourceView();
-		alignmentResourceView.setExternalTargetResource("foo");
-		alignmentResourceView.setIdentifier(1);
-		targetResources.add(alignmentResourceView);
+		targetResources.add(new AlignmentResourceView());
 		alignmentView.setTargetResources(targetResources);
 		alignments.add(alignmentView);
 		thesaurusConceptView.setAlignments(alignments);

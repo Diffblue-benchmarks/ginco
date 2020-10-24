@@ -38,7 +38,7 @@ public class ThesaurusArrayDAOTest {
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -70,7 +70,7 @@ public class ThesaurusArrayDAOTest {
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -101,7 +101,7 @@ public class ThesaurusArrayDAOTest {
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
@@ -131,7 +131,7 @@ public class ThesaurusArrayDAOTest {
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -163,7 +163,7 @@ public class ThesaurusArrayDAOTest {
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -195,7 +195,7 @@ public class ThesaurusArrayDAOTest {
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -227,7 +227,7 @@ public class ThesaurusArrayDAOTest {
 		// arrange
 		ThesaurusArrayDAO thesaurusArrayDAO = new ThesaurusArrayDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))

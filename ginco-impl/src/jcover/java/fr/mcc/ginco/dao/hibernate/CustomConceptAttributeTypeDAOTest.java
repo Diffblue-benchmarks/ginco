@@ -49,7 +49,7 @@ public class CustomConceptAttributeTypeDAOTest {
 		CustomConceptAttributeTypeDAO customConceptAttributeTypeDAO =
 			 new CustomConceptAttributeTypeDAO();
 		List list = new ArrayList<String>();
-		list.add("foo");
+		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
 			.thenReturn(list);

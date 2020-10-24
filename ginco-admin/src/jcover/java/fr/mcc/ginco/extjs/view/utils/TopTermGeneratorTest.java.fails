@@ -8,16 +8,12 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import fr.mcc.ginco.beans.AssociativeRelationship;
-import fr.mcc.ginco.beans.Thesaurus;
-import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
 import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
 import fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -51,24 +47,11 @@ class TopTermGeneratorTest {
 	private TopTermGenerator service;
 
 	@Test
-	void generateTopTerm() throws java.text.ParseException {
+	void generateTopTerm() {
 
 		// arrange
 		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
-		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setIdentifier("data");
-		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setNotation("DE");
-		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setStatus(1);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		thesaurusConcept.setThesaurus(thesaurus);
-		thesaurusConcept.setTopConcept(false);
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		list.add(thesaurusConcept);
 		when(thesaurusConceptService.getConceptWithChildrenIdentifers(Mockito.<String>any()))
 			.thenReturn(new HashSet<String>());
@@ -82,7 +65,7 @@ class TopTermGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("b1423db0-80ae-4606-847f-6600bb0e3643"));
+		assertThat(result.get(0).getId(), is("d0db69c1-59d6-4c10-9e92-789b1a10e79a"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

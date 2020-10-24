@@ -4,6 +4,8 @@ import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusTerm;
 
+import java.util.ArrayList;
+
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
@@ -44,6 +46,19 @@ public class TermIndexerServiceImplTest {
 		when(solrServer.commit())
 			.thenReturn(new UpdateResponse());
 		service.addTerm(new ThesaurusTerm());
+	}
+
+	@Test
+	public void addTerms() throws org.apache.solr.client.solrj.SolrServerException, java.io.IOException {
+		when(termSolrConverter.convertSolrTerm(Mockito.<ThesaurusTerm>any()))
+			.thenReturn(new SolrInputDocument());
+		when(solrServer.add(Mockito.<SolrInputDocument>any()))
+			.thenReturn(new UpdateResponse());
+		when(solrServer.commit())
+			.thenReturn(new UpdateResponse());
+		ArrayList<ThesaurusTerm> thesaurusTerms = new ArrayList<ThesaurusTerm>();
+		thesaurusTerms.add(new ThesaurusTerm());
+		service.addTerms(thesaurusTerms);
 	}
 
 	@Test
