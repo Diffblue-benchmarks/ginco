@@ -10,12 +10,12 @@ import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for fr.mcc.ginco.rest.services.exceptions.TechnicalExceptionMapper
+ * Unit tests for fr.mcc.ginco.rest.services.exceptions.ThesaurusArchivedAccessDeniedExceptionMapper
  *
  * @author Diffblue Cover
  */
 
-class TechnicalExceptionMapperTest {
+class ThesaurusArchivedAccessDeniedExceptionMapperTest {
 
 	@Test
 	void toResponse() throws IllegalStateException {
@@ -25,13 +25,14 @@ class TechnicalExceptionMapperTest {
 		exception.setStackTrace(new StackTraceElement[] { });
 
 		// act
-		Response result = new TechnicalExceptionMapper().toResponse(exception);
+		Response result =
+			 new ThesaurusArchivedAccessDeniedExceptionMapper().toResponse(exception);
 
 		// assert
 		assertThat(result.getAllowedMethods(), empty());
 		assertThat(result.getCookies().isEmpty(), is(true));
 		assertThat(result.getDate(), is(nullValue()));
-		assertThat((String) result.getEntity(), is("{\"success\":false, \"message\": \"Erreur technique, veuillez contacter un administrateur\"}"));
+		assertThat((String) result.getEntity(), is("{\"success\":false, \"message\": \"Ce th\\u00E9saurus est archiv\\u00E9, seule la suppression est autoris\\u00E9e\"}"));
 		assertThat(result.getEntityTag(), is(nullValue()));
 		assertThat(result.getLanguage(), is(nullValue()));
 		assertThat(result.getLastModified(), is(nullValue()));
@@ -41,7 +42,7 @@ class TechnicalExceptionMapperTest {
 		assertThat(result.getMediaType(), is(nullValue()));
 		assertThat(result.getMetadata().isEmpty(), is(true));
 		assertThat(result.getStatus(), is(200));
-		assertThat(result.getStatusInfo().getFamily(), is(Response.Family.SUCCESSFUL));
+		assertThat(result.getStatusInfo().getFamily(), is(Response.Status.Family.SUCCESSFUL));
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().isEmpty(), is(true));

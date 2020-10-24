@@ -75,15 +75,15 @@ class ThesaurusArrayViewConverterTest {
 		when(thesaurusArrayService.getThesaurusArrayById(Mockito.<String>any()))
 			.thenReturn(thesaurusArray2)
 			.thenReturn(thesaurusArray1);
-		ThesaurusArrayView source13 = new ThesaurusArrayView();
-		source13.setIdentifier("data");
-		source13.setOrder(false);
-		source13.setParentArrayId("1234");
-		source13.setSuperOrdinateId("1234");
-		source13.setThesaurusId("1234");
+		ThesaurusArrayView source12 = new ThesaurusArrayView();
+		source12.setIdentifier("data");
+		source12.setOrder(false);
+		source12.setParentArrayId("1234");
+		source12.setSuperOrdinateId("1234");
+		source12.setThesaurusId("1234");
 
 		// act
-		ThesaurusArray result = service.convert(source13);
+		ThesaurusArray result = service.convert(source12);
 
 		// assert
 		assertThat(result.getConcepts(), empty());

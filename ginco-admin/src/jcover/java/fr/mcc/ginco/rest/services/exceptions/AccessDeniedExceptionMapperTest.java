@@ -41,7 +41,7 @@ class AccessDeniedExceptionMapperTest {
 		assertThat(result.getMediaType(), is(nullValue()));
 		assertThat(result.getMetadata().isEmpty(), is(true));
 		assertThat(result.getStatus(), is(200));
-		assertThat(result.getStatusInfo().getFamily(), is(Response.Family.SUCCESSFUL));
+		assertThat(result.getStatusInfo().getFamily(), is(Response.Status.Family.SUCCESSFUL));
 		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
 		assertThat(result.getStatusInfo().getStatusCode(), is(200));
 		assertThat(result.getStringHeaders().isEmpty(), is(true));
