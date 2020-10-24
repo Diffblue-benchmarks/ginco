@@ -5,7 +5,6 @@ import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
 import org.hibernate.cfg.Configuration;
@@ -40,7 +39,7 @@ public class AuditQueryBuilderTest {
 	}
 
 	@Test
-	public void getEntityAddedQuery2() throws java.text.ParseException {
+	public void getEntityAddedQuery() throws java.text.ParseException {
 		AuditReaderImplementor auditReaderImplementor =
 			 mock(AuditReaderImplementor.class);
 		AuditReader auditReader = mock(AuditReader.class);
@@ -64,7 +63,7 @@ public class AuditQueryBuilderTest {
 	}
 
 	@Test
-	public void getPreviousVersionQueryClazzIsStringAndCurrentRevisionIsOne() {
+	public void getPreviousVersionQueryClazzIsStringAndCurrentRevisionIsOneAndIdentifierIsData() {
 		AuditReaderImplementor auditReaderImplementor =
 			 mock(AuditReaderImplementor.class);
 		AuditReader auditReader = mock(AuditReader.class);
@@ -72,8 +71,7 @@ public class AuditQueryBuilderTest {
 			.thenReturn(new AuditQueryCreator(new AuditConfiguration(new Configuration()), auditReaderImplementor));
 		when(auditReaderService.getAuditReader())
 			.thenReturn(auditReader);
-		Serializable identifier = mock(Serializable.class);
-		// pojo AuditQuery service.getPreviousVersionQuery(String.class, identifier, 1)
+		// pojo AuditQuery service.getPreviousVersionQuery(String.class, "data", 1)
 	}
 
 	@Test
@@ -89,14 +87,13 @@ public class AuditQueryBuilderTest {
 	}
 
 	@Test
-	public void getEntityAddedQuery1() {
+	public void getEntityAddedQueryIdentifierIsData() {
 		AuditReaderImplementor auditReaderImplementor =
 			 mock(AuditReaderImplementor.class);
 		AuditReader reader = mock(AuditReader.class);
 		when(reader.createQuery())
 			.thenReturn(new AuditQueryCreator(new AuditConfiguration(new Configuration()), auditReaderImplementor));
-		Serializable identifier = mock(Serializable.class);
-		// pojo AuditQuery service.getEntityAddedQuery(reader, String.class, identifier)
+		// pojo AuditQuery service.getEntityAddedQuery(reader, String.class, "data")
 	}
 
 	@Test

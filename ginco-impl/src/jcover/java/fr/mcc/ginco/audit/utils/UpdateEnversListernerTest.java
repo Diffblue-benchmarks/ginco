@@ -4,8 +4,6 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.Serializable;
-
 import org.hibernate.cfg.Configuration;
 import org.hibernate.envers.configuration.AuditConfiguration;
 import org.hibernate.event.spi.EventSource;
@@ -30,7 +28,6 @@ public class UpdateEnversListernerTest {
 
 	@Test
 	public void onPostUpdate() {
-		Serializable id = mock(Serializable.class);
 		Object[] state = new Object[] { new Object() };
 		Object[] oldState = new Object[] { new Object() };
 		int[] dirtyProperties = new int[] { 1 };
@@ -38,6 +35,6 @@ public class UpdateEnversListernerTest {
 		when(persister.getEntityName())
 			.thenReturn("entity");
 		EventSource source = mock(EventSource.class);
-		new UpdateEnversListerner(new AuditConfiguration(new Configuration())).onPostUpdate(new PostUpdateEvent(new Object(), id, state, oldState, dirtyProperties, persister, source));
+		new UpdateEnversListerner(new AuditConfiguration(new Configuration())).onPostUpdate(new PostUpdateEvent(new Object(), "OX13QD", state, oldState, dirtyProperties, persister, source));
 	}
 }

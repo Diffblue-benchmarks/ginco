@@ -2,9 +2,7 @@ package fr.mcc.ginco.security;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.mock;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +20,7 @@ class BasePermissionEvaluatorTest {
 	@Test
 	void hasPermission() {
 		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), new Object(), "foo"), is(false));
+		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), "1234", "BASIC", "foo"), is(false));
 	}
 
 	@Test
@@ -29,11 +28,5 @@ class BasePermissionEvaluatorTest {
 		List list = new ArrayList<String>();
 		list.add("foo");
 		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), list, new Object()), is(false));
-	}
-
-	@Test
-	void hasPermissionTargetTypeIsBASIC() {
-		Serializable targetId = mock(Serializable.class);
-		assertThat(new BasePermissionEvaluator().hasPermission(new TestingAuthenticationToken("bar", "admin"), targetId, "BASIC", "foo"), is(false));
 	}
 }

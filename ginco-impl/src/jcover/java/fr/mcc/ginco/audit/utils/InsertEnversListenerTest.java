@@ -4,8 +4,6 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.Serializable;
-
 import org.hibernate.cfg.Configuration;
 import org.hibernate.envers.configuration.AuditConfiguration;
 import org.hibernate.event.spi.EventSource;
@@ -30,12 +28,11 @@ public class InsertEnversListenerTest {
 
 	@Test
 	public void onPostInsert() {
-		Serializable id = mock(Serializable.class);
 		Object[] state = new Object[] { new Object() };
 		EntityPersister persister = mock(EntityPersister.class);
 		when(persister.getEntityName())
 			.thenReturn("entity");
 		EventSource source = mock(EventSource.class);
-		new InsertEnversListener(new AuditConfiguration(new Configuration())).onPostInsert(new PostInsertEvent("foo", id, state, persister, source));
+		new InsertEnversListener(new AuditConfiguration(new Configuration())).onPostInsert(new PostInsertEvent("foo", "OX13QD", state, persister, source));
 	}
 }

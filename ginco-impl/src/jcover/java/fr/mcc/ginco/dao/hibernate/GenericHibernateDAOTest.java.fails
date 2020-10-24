@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.dao.IGenericDAO;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +29,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void factory() {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertSame(sessionFactory, genericHibernateDAO.getSessionFactory());
@@ -39,40 +38,38 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void loadById() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		Session session = mock(Session.class);
-		when(session.load(Mockito.<Class>any(), Mockito.<Serializable>any()))
+		when(session.load(Mockito.<Class>any(), Mockito.<java.io.Serializable>any()))
 			.thenReturn(new Object());
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
-		Serializable id = mock(Serializable.class);
-		assertTrue(genericHibernateDAO.loadById(id) instanceof Object);
-		// pojo Object (Object) genericHibernateDAO.loadById(id)
+		assertTrue(genericHibernateDAO.loadById("1234") instanceof Object);
+		// pojo Object (Object) genericHibernateDAO.loadById("1234")
 	}
 
 	@Test
 	public void getById() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		Session session = mock(Session.class);
-		when(session.get(Mockito.<Class>any(), Mockito.<Serializable>any()))
+		when(session.get(Mockito.<Class>any(), Mockito.<java.io.Serializable>any()))
 			.thenReturn(new Object());
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
-		Serializable id = mock(Serializable.class);
-		assertTrue(genericHibernateDAO.getById(id) instanceof Object);
-		// pojo Object (Object) genericHibernateDAO.getById(id)
+		assertTrue(genericHibernateDAO.getById("1234") instanceof Object);
+		// pojo Object (Object) genericHibernateDAO.getById("1234")
 	}
 
 	@Test
 	public void getByExternalIdReturnsSmith() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		List list = new ArrayList<String>();
 		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
@@ -94,8 +91,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void findAll() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		List list = new ArrayList<String>();
 		list.add("Smith");
 		Criteria criteria = mock(Criteria.class);
@@ -114,8 +111,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void findAllOrderIsAsc() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		List list = new ArrayList<String>();
 		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
@@ -137,8 +134,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void findAllOrderIsDesc() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		List list = new ArrayList<String>();
 		list.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
@@ -160,8 +157,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void makePersistent() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -173,8 +170,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void update() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -186,8 +183,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void delete() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -201,8 +198,8 @@ public class GenericHibernateDAOTest {
 	public void flush() throws org.hibernate.HibernateException {
 
 		// arrange
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
@@ -218,8 +215,8 @@ public class GenericHibernateDAOTest {
 
 	@Test
 	public void getCurrentSession() throws org.hibernate.HibernateException {
-		GenericHibernateDAO<String, Serializable> genericHibernateDAO =
-			 new GenericHibernateDAO<String, Serializable>(String.class);
+		GenericHibernateDAO<String, String> genericHibernateDAO =
+			 new GenericHibernateDAO<String, String>(String.class);
 		Session session = mock(Session.class);
 		SessionFactory sessionFactory = mock(SessionFactory.class);
 		when(sessionFactory.getCurrentSession())
