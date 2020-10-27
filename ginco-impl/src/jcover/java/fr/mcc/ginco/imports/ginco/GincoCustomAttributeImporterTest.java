@@ -102,10 +102,7 @@ public class GincoCustomAttributeImporterTest {
 			.thenReturn(customTermAttributeType1);
 		ArrayList<CustomTermAttributeType> customAttributeTypesToImport =
 			 new ArrayList<CustomTermAttributeType>();
-		CustomTermAttributeType customTermAttributeType2 =
-			 new CustomTermAttributeType();
-		customTermAttributeType2.setIdentifier(1);
-		customAttributeTypesToImport.add(customTermAttributeType2);
+		customAttributeTypesToImport.add(new CustomTermAttributeType());
 		assertTrue(service.getBranchCustomTermAttributeTypes(customAttributeTypesToImport, new Thesaurus()).isEmpty());
 	}
 
