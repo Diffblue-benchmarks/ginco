@@ -1,7 +1,6 @@
 package fr.mcc.ginco.rest.services.exceptions;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 
@@ -18,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class TechnicalExceptionMapperTest {
 
 	@Test
-	void toResponse() throws IllegalStateException {
+	void toResponse() {
 
 		// arrange
 		Exception exception = new Exception();
@@ -28,22 +27,8 @@ class TechnicalExceptionMapperTest {
 		Response result = new TechnicalExceptionMapper().toResponse(exception);
 
 		// assert
-		assertThat(result.getAllowedMethods(), empty());
 		assertThat(result.getCookies().isEmpty(), is(true));
-		assertThat(result.getDate(), is(nullValue()));
-		assertThat((String) result.getEntity(), is("{\"success\":false, \"message\": \"Erreur technique, veuillez contacter un administrateur\"}"));
-		assertThat(result.getEntityTag(), is(nullValue()));
-		assertThat(result.getLanguage(), is(nullValue()));
-		assertThat(result.getLastModified(), is(nullValue()));
-		assertThat(result.getLength(), is(-1));
-		assertThat(result.getLinks(), empty());
-		assertThat(result.getLocation(), is(nullValue()));
 		assertThat(result.getMediaType(), is(nullValue()));
-		assertThat(result.getMetadata().isEmpty(), is(true));
 		assertThat(result.getStatus(), is(200));
-		assertThat(result.getStatusInfo().getFamily(), is(Response.Status.Family.SUCCESSFUL));
-		assertThat(result.getStatusInfo().getReasonPhrase(), is("OK"));
-		assertThat(result.getStatusInfo().getStatusCode(), is(200));
-		assertThat(result.getStringHeaders().isEmpty(), is(true));
 	}
 }
