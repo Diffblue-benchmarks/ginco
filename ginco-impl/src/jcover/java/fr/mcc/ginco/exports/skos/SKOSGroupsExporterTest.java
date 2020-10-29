@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -85,6 +84,6 @@ public class SKOSGroupsExporterTest {
 		Model model = mock(Model.class);
 		OntModel ontModel2 = mock(OntModel.class);
 		assertSame(model, service.exportGroups(new Thesaurus(), model, ontModel2));
-		Mockito.verify(skosGroupExporter).exportGroup(ArgumentMatchers.<Thesaurus>any(), ArgumentMatchers.<ThesaurusConceptGroup>any(), ArgumentMatchers.<Model>any());
+		Mockito.verify(skosGroupExporter).exportGroup(Mockito.<Thesaurus>any(), Mockito.<ThesaurusConceptGroup>any(), Mockito.<Model>any());
 	}
 }

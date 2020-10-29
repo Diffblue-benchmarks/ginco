@@ -6,6 +6,7 @@ import static org.hamcrest.core.Is.is;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class DateUtilTest {
 
 	@Test
 	void testToString() throws java.text.ParseException {
-		assertThat(DateUtil.toString(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", DateUtil.toString(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))), is(true));
 		assertThat(DateUtil.toString(null), is(nullValue()));
 	}
 

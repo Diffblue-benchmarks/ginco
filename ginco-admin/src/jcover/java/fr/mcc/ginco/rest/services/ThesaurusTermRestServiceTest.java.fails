@@ -31,7 +31,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -240,8 +239,8 @@ class ThesaurusTermRestServiceTest {
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurusId(), is("1234"));
 		assertThat(result.getTopistopterm(), is(false));
-		Mockito.verify(termIndexerService).removeTerm(ArgumentMatchers.<ThesaurusTerm>any());
-		Mockito.verify(noteIndexerService).removeNote(ArgumentMatchers.<Note>any());
+		Mockito.verify(termIndexerService).removeTerm(Mockito.<ThesaurusTerm>any());
+		Mockito.verify(noteIndexerService).removeNote(Mockito.<Note>any());
 	}
 
 	@Test

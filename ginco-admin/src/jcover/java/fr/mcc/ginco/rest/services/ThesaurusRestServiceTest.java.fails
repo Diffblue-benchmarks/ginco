@@ -29,10 +29,10 @@ import fr.mcc.ginco.solr.IThesaurusIndexerService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -197,7 +197,7 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("+"));
 		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(result.getDate(), is("1999-12-31"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), hasSize(1));
@@ -292,7 +292,7 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("+"));
 		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(result.getDate(), is("1999-12-31"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), hasSize(1));
@@ -326,7 +326,7 @@ class ThesaurusRestServiceTest {
 		service.destroyVocabulary(new ThesaurusView());
 
 		// assert
-		Mockito.verify(thesaurusIndexerService).removeThesaurusIndex(ArgumentMatchers.eq("data"));
+		Mockito.verify(thesaurusIndexerService).removeThesaurusIndex(Mockito.eq("data"));
 	}
 
 	@Test
@@ -364,7 +364,7 @@ class ThesaurusRestServiceTest {
 		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
 		assertThat(service.publishVocabulary("1234", "root"), is("{\"success\":true,\"data\":{\"identifier\":\"data\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":1293753600000,\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":1293753600000,\"defaultTopConcept\":false,\"archived\":false,\"type\":{\"identifier\":1,\"label\":\"label\"},\"creator\":{\"identifier\":1,\"name\":\"Acme\",\"homepage\":\"foo\",\"email\":\"info@diffblue.com\"},\"polyHierarchical\":false,\"format\":[],\"thesaurusId\":\"data\"},\"total\":null}"));
-		Mockito.verify(thesaurusService).publishThesaurus(ArgumentMatchers.<Thesaurus>any());
+		Mockito.verify(thesaurusService).publishThesaurus(Mockito.<Thesaurus>any());
 	}
 
 	@Test

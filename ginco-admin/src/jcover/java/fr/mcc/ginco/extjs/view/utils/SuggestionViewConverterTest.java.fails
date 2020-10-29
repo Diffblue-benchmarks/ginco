@@ -17,6 +17,7 @@ import fr.mcc.ginco.services.IThesaurusTermService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,7 +72,7 @@ class SuggestionViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getContent(), is("hello"));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getCreator(), is("+"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));
@@ -132,7 +133,7 @@ class SuggestionViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is("data"));
 		assertThat(result.getContent(), is("hello"));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getCreator(), is("+"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));

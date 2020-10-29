@@ -5,6 +5,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +54,7 @@ class ThesaurusViewTest {
 		assertThat(thesaurusView.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(thesaurusView.getCreatorHomepage(), is("+"));
 		assertThat(thesaurusView.getCreatorName(), is("Acme"));
-		assertThat(thesaurusView.getDate(), is("1999-12-31"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2}", thesaurusView.getDate()), is(true));
 		assertThat(thesaurusView.getDefaultTopConcept(), is(false));
 		assertThat(thesaurusView.getDescription(), is("some text"));
 		assertThat(thesaurusView.getFormats(), hasSize(1));

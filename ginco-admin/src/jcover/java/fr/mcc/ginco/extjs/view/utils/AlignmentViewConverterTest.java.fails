@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -93,11 +94,11 @@ class AlignmentViewConverterTest {
 		// assert
 		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getExternalThesaurus(), is(nullValue()));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is("data"));
-		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));
 	}
@@ -128,12 +129,12 @@ class AlignmentViewConverterTest {
 		// assert
 		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getExternalThesaurus().size(), is(1));
 		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is("data"));
-		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));
 	}
@@ -160,12 +161,12 @@ class AlignmentViewConverterTest {
 		// assert
 		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
-		assertThat(result.getCreated(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getExternalThesaurus().size(), is(1));
 		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is(nullValue()));
-		assertThat(result.getModified(), is("2010-12-31 00:00:00"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));
 	}

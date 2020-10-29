@@ -12,7 +12,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -96,11 +95,11 @@ public class SKOSHierarchicalRelationshipRolesExporterTest {
 			.thenReturn(literal2)
 			.thenReturn(literal1);
 		assertSame(model2, service.exportHierarchicalRelationshipRoles(model2, ontModel));
-		Mockito.verify(objectProperty1).addLabel(ArgumentMatchers.<Literal>any());
-		Mockito.verify(objectProperty2).addLabel(ArgumentMatchers.<Literal>any());
-		Mockito.verify(objectProperty3).addLabel(ArgumentMatchers.<Literal>any());
-		Mockito.verify(objectProperty4).addLabel(ArgumentMatchers.<Literal>any());
-		Mockito.verify(objectProperty5).addLabel(ArgumentMatchers.<Literal>any());
-		Mockito.verify(objectProperty6).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(objectProperty1).addLabel(Mockito.<Literal>any());
+		Mockito.verify(objectProperty2).addLabel(Mockito.<Literal>any());
+		Mockito.verify(objectProperty3).addLabel(Mockito.<Literal>any());
+		Mockito.verify(objectProperty4).addLabel(Mockito.<Literal>any());
+		Mockito.verify(objectProperty5).addLabel(Mockito.<Literal>any());
+		Mockito.verify(objectProperty6).addLabel(Mockito.<Literal>any());
 	}
 }

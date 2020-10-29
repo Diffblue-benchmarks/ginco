@@ -18,7 +18,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -61,6 +60,6 @@ public class SKOSAssociativeRelationshipRolesExporterTest {
 		when(ontModel.createLiteral(Mockito.<String>any()))
 			.thenReturn(literal);
 		assertSame(model, service.exportAssociativeRelationshipRoles(model, ontModel));
-		Mockito.verify(objectProperty).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(objectProperty).addLabel(Mockito.<Literal>any());
 	}
 }

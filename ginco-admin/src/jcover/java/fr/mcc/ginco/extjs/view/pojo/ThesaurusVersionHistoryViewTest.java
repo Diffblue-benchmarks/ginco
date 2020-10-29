@@ -3,6 +3,8 @@ package fr.mcc.ginco.extjs.view.pojo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import java.util.regex.Pattern;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,7 +25,7 @@ class ThesaurusVersionHistoryViewTest {
 		thesaurusVersionHistoryView.setThesaurusId("1234");
 		thesaurusVersionHistoryView.setThisVersion(false);
 		thesaurusVersionHistoryView.setVersionNote("1.0");
-		assertThat(thesaurusVersionHistoryView.getDate(), is("1999-12-31"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2}", thesaurusVersionHistoryView.getDate()), is(true));
 		assertThat(thesaurusVersionHistoryView.getIdentifier(), is("data"));
 		assertThat(thesaurusVersionHistoryView.getStatus(), is(1));
 		assertThat(thesaurusVersionHistoryView.getThesaurusId(), is("1234"));

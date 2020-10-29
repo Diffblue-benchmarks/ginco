@@ -26,7 +26,6 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 /**
@@ -228,8 +227,8 @@ public class ThesaurusTermDAOTest {
 		ThesaurusTerm termToUpdate = new ThesaurusTerm();
 		termToUpdate.setHidden(false);
 		assertSame(termToUpdate, thesaurusTermDAO.update(termToUpdate, false));
-		Mockito.verify(session1).saveOrUpdate(ArgumentMatchers.<Object>any());
-		Mockito.verify(session2).setFlushMode(ArgumentMatchers.<FlushMode>any());
+		Mockito.verify(session1).saveOrUpdate(Mockito.<Object>any());
+		Mockito.verify(session2).setFlushMode(Mockito.<FlushMode>any());
 	}
 
 	@Test

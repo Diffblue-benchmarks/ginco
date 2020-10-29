@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -135,8 +134,8 @@ public class ExportServiceImplTest {
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
 			.thenReturn(list2);
 		assertTrue((service.getAlphabeticalText(new Thesaurus())).isEmpty());
-		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(ArgumentMatchers.eq((Integer) 1), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<SplitNonPreferredTerm>any());
-		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(ArgumentMatchers.eq((Integer) 0), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<SplitNonPreferredTerm>any());
+		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(Mockito.eq((Integer) 1), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
+		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(Mockito.eq((Integer) 0), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
 	}
 
 	@Test
@@ -166,8 +165,8 @@ public class ExportServiceImplTest {
 		assertEquals(1, result.size());
 		assertEquals(0, (int) result.get(0).getTabs());
 		assertEquals("foo=bar", result.get(0).getText());
-		Mockito.verify(alphabeticConceptExporter).addConceptInfo(ArgumentMatchers.eq((Integer) 1), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<ThesaurusConcept>any());
-		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(ArgumentMatchers.eq((Integer) 1), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<SplitNonPreferredTerm>any());
-		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(ArgumentMatchers.eq((Integer) 0), ArgumentMatchers.<List<FormattedLine>>any(), ArgumentMatchers.<SplitNonPreferredTerm>any());
+		Mockito.verify(alphabeticConceptExporter).addConceptInfo(Mockito.eq((Integer) 1), Mockito.<List<FormattedLine>>any(), Mockito.<ThesaurusConcept>any());
+		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(Mockito.eq((Integer) 1), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
+		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(Mockito.eq((Integer) 0), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
 	}
 }

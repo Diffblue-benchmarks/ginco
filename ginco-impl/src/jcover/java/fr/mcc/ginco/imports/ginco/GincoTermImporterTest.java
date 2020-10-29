@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -80,7 +79,7 @@ public class GincoTermImporterTest {
 		// assert
 		assertEquals(1, result.size());
 		assertSame(thesaurusTerm1, result.get(0));
-		Mockito.verify(gincoCustomAttributeImporter).storeCustomTermAttribute(ArgumentMatchers.<List<CustomTermAttribute>>any(), ArgumentMatchers.<ThesaurusTerm>any(), ArgumentMatchers.<Map<String, CustomTermAttributeType>>any());
+		Mockito.verify(gincoCustomAttributeImporter).storeCustomTermAttribute(Mockito.<List<CustomTermAttribute>>any(), Mockito.<ThesaurusTerm>any(), Mockito.<Map<String, CustomTermAttributeType>>any());
 	}
 
 	@Test

@@ -13,7 +13,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -57,14 +56,14 @@ public class SKOSGroupOntologyExporterTest {
 			.thenReturn(literal2)
 			.thenReturn(literal1);
 		assertSame(ontModel, service.buildGroupOntologyModel(ontModel));
-		Mockito.verify(objectProperty1).addDomain(ArgumentMatchers.<Resource>any());
-		Mockito.verify(objectProperty1).addRange(ArgumentMatchers.<Resource>any());
-		Mockito.verify(objectProperty1).addLabel(ArgumentMatchers.<Literal>any());
-		Mockito.verify(objectProperty2).addDomain(ArgumentMatchers.<Resource>any());
-		Mockito.verify(objectProperty2).addRange(ArgumentMatchers.<Resource>any());
-		Mockito.verify(objectProperty2).addLabel(ArgumentMatchers.<Literal>any());
-		Mockito.verify(ontClass).addSuperClass(ArgumentMatchers.<Resource>any());
-		Mockito.verify(ontClass).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(objectProperty1).addDomain(Mockito.<Resource>any());
+		Mockito.verify(objectProperty1).addRange(Mockito.<Resource>any());
+		Mockito.verify(objectProperty1).addLabel(Mockito.<Literal>any());
+		Mockito.verify(objectProperty2).addDomain(Mockito.<Resource>any());
+		Mockito.verify(objectProperty2).addRange(Mockito.<Resource>any());
+		Mockito.verify(objectProperty2).addLabel(Mockito.<Literal>any());
+		Mockito.verify(ontClass).addSuperClass(Mockito.<Resource>any());
+		Mockito.verify(ontClass).addLabel(Mockito.<Literal>any());
 	}
 
 	@Test
@@ -80,7 +79,7 @@ public class SKOSGroupOntologyExporterTest {
 		when(ontmodel.createLiteral(Mockito.<String>any()))
 			.thenReturn(literal);
 		assertNotNull(service.addGroupTypeToOntModel(ontmodel, "BASIC"));
-		Mockito.verify(ontClass).addSuperClass(ArgumentMatchers.<Resource>any());
-		Mockito.verify(ontClass).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(ontClass).addSuperClass(Mockito.<Resource>any());
+		Mockito.verify(ontClass).addLabel(Mockito.<Literal>any());
 	}
 }

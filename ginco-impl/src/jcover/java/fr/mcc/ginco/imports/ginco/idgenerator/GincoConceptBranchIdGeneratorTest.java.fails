@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -114,16 +113,16 @@ public class GincoConceptBranchIdGeneratorTest {
 		// assert
 		assertTrue(branchToUpdate.getAlignments().isEmpty());
 		Mockito.verify(alignments).clear();
-		Mockito.verify(alignments).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<Alignment>>>any());
+		Mockito.verify(alignments).putAll(Mockito.<Map<? extends String, ? extends JaxbList<Alignment>>>any());
 		Mockito.verify(conceptNotes).clear();
-		Mockito.verify(conceptNotes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<Note>>>any());
+		Mockito.verify(conceptNotes).putAll(Mockito.<Map<? extends String, ? extends JaxbList<Note>>>any());
 		Mockito.verify(parentConceptRelationship).clear();
-		Mockito.verify(parentConceptRelationship).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<ConceptHierarchicalRelationship>>>any());
+		Mockito.verify(parentConceptRelationship).putAll(Mockito.<Map<? extends String, ? extends JaxbList<ConceptHierarchicalRelationship>>>any());
 		Mockito.verify(termNotes).clear();
-		Mockito.verify(termNotes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<Note>>>any());
+		Mockito.verify(termNotes).putAll(Mockito.<Map<? extends String, ? extends JaxbList<Note>>>any());
 		Mockito.verify(conceptAttributes).clear();
-		Mockito.verify(conceptAttributes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<CustomConceptAttribute>>>any());
+		Mockito.verify(conceptAttributes).putAll(Mockito.<Map<? extends String, ? extends JaxbList<CustomConceptAttribute>>>any());
 		Mockito.verify(termAttributes).clear();
-		Mockito.verify(termAttributes).putAll(ArgumentMatchers.<Map<? extends String, ? extends JaxbList<CustomTermAttribute>>>any());
+		Mockito.verify(termAttributes).putAll(Mockito.<Map<? extends String, ? extends JaxbList<CustomTermAttribute>>>any());
 	}
 }

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -120,6 +119,6 @@ public class SKOSConceptExporterTest {
 		when(ontModel.createLiteral(Mockito.<String>any()))
 			.thenReturn(literal);
 		assertSame(model13, service.exportConceptSKOS(concept, new ThesaurusConcept(), model13, ontModel));
-		Mockito.verify(datatypeProperty).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(datatypeProperty).addLabel(Mockito.<Literal>any());
 	}
 }

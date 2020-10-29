@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -124,7 +123,7 @@ class SplitNonPreferredTermRestServiceTest {
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurusId(), is("1234"));
-		Mockito.verify(complexConceptIndexerService).addComplexConcept(ArgumentMatchers.<SplitNonPreferredTerm>any());
+		Mockito.verify(complexConceptIndexerService).addComplexConcept(Mockito.<SplitNonPreferredTerm>any());
 	}
 
 	@Test
@@ -160,6 +159,6 @@ class SplitNonPreferredTermRestServiceTest {
 		when(splitNonPreferredTermService.destroySplitNonPreferredTerm(Mockito.<SplitNonPreferredTerm>any()))
 			.thenReturn(new SplitNonPreferredTerm());
 		service.destroyTerm(new SplitNonPreferredTermView());
-		Mockito.verify(complexConceptIndexerService).removeComplexConcept(ArgumentMatchers.<SplitNonPreferredTerm>any());
+		Mockito.verify(complexConceptIndexerService).removeComplexConcept(Mockito.<SplitNonPreferredTerm>any());
 	}
 }

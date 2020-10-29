@@ -26,7 +26,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -243,15 +242,15 @@ public class GincoRevServiceImplTest {
 		thesaurus2.setType(type2);
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		assertTrue(service.getLogJournal(thesaurus2).getPath().startsWith(System.getProperty("java.io.tmpdir")));
-		Mockito.verify(auditCSVWriter).writeHeader(ArgumentMatchers.<BufferedWriter>any());
+		Mockito.verify(auditCSVWriter).writeHeader(Mockito.<BufferedWriter>any());
 		InOrder inOrder = Mockito.inOrder(auditCSVWriter);
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
-		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(ArgumentMatchers.<JournalLine>any(), ArgumentMatchers.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
+		inOrder.verify(auditCSVWriter, Mockito.calls(1)).writeJournalLine(Mockito.<JournalLine>any(), Mockito.<BufferedWriter>any());
 	}
 }

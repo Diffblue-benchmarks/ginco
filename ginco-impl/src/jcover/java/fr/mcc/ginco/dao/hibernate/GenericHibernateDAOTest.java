@@ -16,7 +16,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 /**
@@ -165,7 +164,7 @@ public class GenericHibernateDAOTest {
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertEquals("entity", genericHibernateDAO.makePersistent("entity"));
-		Mockito.verify(session).saveOrUpdate(ArgumentMatchers.eq("entity"));
+		Mockito.verify(session).saveOrUpdate(Mockito.eq("entity"));
 	}
 
 	@Test
@@ -178,7 +177,7 @@ public class GenericHibernateDAOTest {
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertEquals("entity", genericHibernateDAO.update("entity"));
-		Mockito.verify(session).saveOrUpdate(ArgumentMatchers.eq("entity"));
+		Mockito.verify(session).saveOrUpdate(Mockito.eq("entity"));
 	}
 
 	@Test
@@ -191,7 +190,7 @@ public class GenericHibernateDAOTest {
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
 		assertEquals("entity", genericHibernateDAO.delete("entity"));
-		Mockito.verify(session).delete(ArgumentMatchers.eq("entity"));
+		Mockito.verify(session).delete(Mockito.eq("entity"));
 	}
 
 	@Test

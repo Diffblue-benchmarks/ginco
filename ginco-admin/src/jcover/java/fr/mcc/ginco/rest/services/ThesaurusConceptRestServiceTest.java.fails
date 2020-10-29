@@ -41,7 +41,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -334,8 +333,8 @@ class ThesaurusConceptRestServiceTest {
 		service.destroyConcept(new ThesaurusConceptView());
 
 		// assert
-		Mockito.verify(noteIndexerService).removeNote(ArgumentMatchers.<Note>any());
-		Mockito.verify(conceptIndexerService).removeConcept(ArgumentMatchers.<ThesaurusConcept>any());
+		Mockito.verify(noteIndexerService).removeNote(Mockito.<Note>any());
+		Mockito.verify(conceptIndexerService).removeConcept(Mockito.<ThesaurusConcept>any());
 	}
 
 	@Test

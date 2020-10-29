@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -58,7 +57,7 @@ public class SKOSCustomConceptAttributeExporterTest {
 		when(ontModel.createLiteral(Mockito.<String>any()))
 			.thenReturn(literal);
 		assertSame(model, service.exportCustomConceptAttributes(new ThesaurusConcept(), model, conceptResource, ontModel));
-		Mockito.verify(datatypeProperty).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(datatypeProperty).addLabel(Mockito.<Literal>any());
 	}
 
 	@Test
@@ -81,6 +80,6 @@ public class SKOSCustomConceptAttributeExporterTest {
 		when(ontModel.createLiteral(Mockito.<String>any()))
 			.thenReturn(literal);
 		assertSame(model, service.exportCustomConceptAttributes(new ThesaurusConcept(), model, conceptResource, ontModel));
-		Mockito.verify(datatypeProperty).addLabel(ArgumentMatchers.<Literal>any());
+		Mockito.verify(datatypeProperty).addLabel(Mockito.<Literal>any());
 	}
 }

@@ -18,7 +18,6 @@ import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -83,9 +82,9 @@ public class IndexerServiceImplTest {
 		when(noteService.getAllNotes())
 			.thenReturn(new ArrayList<Note>());
 		service.forceIndexing();
-		Mockito.verify(termIndexerService).addTerms(ArgumentMatchers.<List<ThesaurusTerm>>any());
-		Mockito.verify(noteIndexerService).addNotes(ArgumentMatchers.<List<Note>>any());
-		Mockito.verify(conceptIndexerService).addConcepts(ArgumentMatchers.<List<ThesaurusConcept>>any());
-		Mockito.verify(complexConceptIndexerService).addComplexConcepts(ArgumentMatchers.<List<SplitNonPreferredTerm>>any());
+		Mockito.verify(termIndexerService).addTerms(Mockito.<List<ThesaurusTerm>>any());
+		Mockito.verify(noteIndexerService).addNotes(Mockito.<List<Note>>any());
+		Mockito.verify(conceptIndexerService).addConcepts(Mockito.<List<ThesaurusConcept>>any());
+		Mockito.verify(complexConceptIndexerService).addComplexConcepts(Mockito.<List<SplitNonPreferredTerm>>any());
 	}
 }
