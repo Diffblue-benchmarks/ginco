@@ -105,6 +105,8 @@ public class SKOSImportUtilsTest {
 
 	@Test
 	public void getSkosDateSkosDateIsEmpty() {
-		assertEquals(true, Math.abs(service.getSkosDate("").getTime()-new Date().getTime())<=10_000L);
+		assertEquals(true, 
+			Math.abs(service.getSkosDate("").getTime() - new Date().getTime())
+			<= 10_000L);
 	}
 }

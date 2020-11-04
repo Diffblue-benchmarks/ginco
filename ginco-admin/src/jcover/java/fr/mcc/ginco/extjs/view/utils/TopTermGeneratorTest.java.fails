@@ -65,7 +65,7 @@ class TopTermGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("eab6d7fa-5eb0-4bea-94af-9e88ae152e82"));
+		assertThat(result.get(0).getId(), is("10f03655-05ab-41d0-b647-20ca2b8a48f6"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

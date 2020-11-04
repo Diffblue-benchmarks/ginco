@@ -37,6 +37,8 @@ class DateUtilTest {
 
 	@Test
 	void nowDate() {
-		assertThat(Math.abs(DateUtil.nowDate().getTime()-new Date().getTime())<=10_000L, is(true));
+		assertThat(
+			Math.abs(DateUtil.nowDate().getTime() - new Date().getTime())
+			<= 10_000L, is(true));
 	}
 }
