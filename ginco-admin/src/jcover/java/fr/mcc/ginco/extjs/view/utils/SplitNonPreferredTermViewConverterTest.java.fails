@@ -1,0 +1,343 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.SplitNonPreferredTerm;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusTermRole;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
+import fr.mcc.ginco.extjs.view.pojo.SplitNonPreferredTermView;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusTermView;
+import fr.mcc.ginco.services.ILanguagesService;
+import fr.mcc.ginco.services.ISplitNonPreferredTermService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.regex.Pattern;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.SplitNonPreferredTermViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {SplitNonPreferredTermViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class SplitNonPreferredTermViewConverterTest {
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "languagesService")
+	private ILanguagesService languagesService;
+
+	@MockBean(name = "splitNonPreferredTermService")
+	private ISplitNonPreferredTermService splitNonPreferredTermService;
+
+	@MockBean(name = "termViewConverter")
+	private TermViewConverter termViewConverter;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private SplitNonPreferredTermViewConverter service;
+
+	@Test
+	void convert2() throws java.text.ParseException {
+
+		// arrange
+		SplitNonPreferredTerm source1 = new SplitNonPreferredTerm();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setSource("foo");
+		source1.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		source1.setThesaurus(thesaurus);
+
+		// act
+		SplitNonPreferredTermView result = service.convert(source1);
+
+		// assert
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getPreferredTerms(), empty());
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("data"));
+	}
+
+	@Test
+	void convert3() throws java.text.ParseException {
+
+		// arrange
+		SplitNonPreferredTerm source1 = new SplitNonPreferredTerm();
+		source1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		Language language = new Language();
+		language.setId("1234");
+		source1.setLanguage(language);
+		source1.setLexicalValue("value");
+		source1.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setSource("foo");
+		source1.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		source1.setThesaurus(thesaurus);
+
+		// act
+		SplitNonPreferredTermView result = service.convert(source1);
+
+		// assert
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), is("1234"));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getPreferredTerms(), empty());
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("data"));
+	}
+
+	@Test
+	void convertSourceIsNull() {
+		SplitNonPreferredTermView result =
+			 service.convert((SplitNonPreferredTerm) null);
+		assertThat(result.getCreated(), is(nullValue()));
+		assertThat(result.getIdentifier(), is(nullValue()));
+		assertThat(result.getLanguage(), is(nullValue()));
+		assertThat(result.getLexicalValue(), is(nullValue()));
+		assertThat(result.getModified(), is(nullValue()));
+		assertThat(result.getPreferredTerms(), is(nullValue()));
+		assertThat(result.getSource(), is(nullValue()));
+		assertThat(result.getStatus(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+	}
+
+	@Test
+	void convert1() throws java.text.ParseException {
+
+		// arrange
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		creator1.setEmail("info@diffblue.com");
+		creator1.setHomepage("foo");
+		creator1.setIdentifier(1);
+		creator1.setName("Acme");
+		thesaurus1.setCreator(creator1);
+		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setLang(new HashSet<Language>());
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		ThesaurusType type1 = new ThesaurusType();
+		type1.setIdentifier(1);
+		type1.setLabel("label");
+		thesaurus1.setType(type1);
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus1);
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
+		thesaurusTerm.setConcept(concept);
+		thesaurusTerm.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusTerm.setHidden(false);
+		thesaurusTerm.setIdentifier("data");
+		Language language1 = new Language();
+		language1.setId("1234");
+		language1.setPart1("foo");
+		language1.setPrincipalLanguage(false);
+		language1.setRefname("root");
+		language1.setTopLanguage(false);
+		thesaurusTerm.setLanguage(language1);
+		thesaurusTerm.setLexicalValue("value");
+		thesaurusTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusTerm.setPrefered(false);
+		ThesaurusTermRole role1 = new ThesaurusTermRole();
+		role1.setCode("DE");
+		role1.setDefaultRole(false);
+		role1.setLabel("label");
+		thesaurusTerm.setRole(role1);
+		thesaurusTerm.setSource("foo");
+		thesaurusTerm.setStatus(1);
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setArchived(false);
+		thesaurus2.setContributor("foo");
+		thesaurus2.setCoverage("foo");
+		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator2 = new ThesaurusOrganization();
+		creator2.setEmail("info@diffblue.com");
+		creator2.setHomepage("foo");
+		creator2.setIdentifier(1);
+		creator2.setName("Acme");
+		thesaurus2.setCreator(creator2);
+		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus2.setDefaultTopConcept(false);
+		thesaurus2.setDescription("some text");
+		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus2.setIdentifier("data");
+		thesaurus2.setLang(new HashSet<Language>());
+		thesaurus2.setPolyHierarchical(false);
+		thesaurus2.setPublisher("foo");
+		thesaurus2.setRelation("DE");
+		thesaurus2.setRights("foo");
+		thesaurus2.setSource("foo");
+		thesaurus2.setSubject("foo");
+		thesaurus2.setTitle("Mr");
+		ThesaurusType type2 = new ThesaurusType();
+		type2.setIdentifier(1);
+		type2.setLabel("label");
+		thesaurus2.setType(type2);
+		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusTerm.setThesaurus(thesaurus2);
+		when(termViewConverter.convert(Mockito.<ThesaurusTermView>any(), anyBoolean()))
+			.thenReturn(thesaurusTerm);
+		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
+		Date created4 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		splitNonPreferredTerm.setCreated(created4);
+		splitNonPreferredTerm.setIdentifier("data");
+		Language language2 = new Language();
+		language2.setId("1234");
+		language2.setPart1("foo");
+		language2.setPrincipalLanguage(false);
+		language2.setRefname("root");
+		language2.setTopLanguage(false);
+		splitNonPreferredTerm.setLanguage(language2);
+		splitNonPreferredTerm.setLexicalValue("value");
+		splitNonPreferredTerm.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		splitNonPreferredTerm.setPreferredTerms(new HashSet<ThesaurusTerm>());
+		splitNonPreferredTerm.setSource("foo");
+		splitNonPreferredTerm.setStatus(1);
+		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setArchived(false);
+		thesaurus3.setContributor("foo");
+		thesaurus3.setCoverage("foo");
+		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator3 = new ThesaurusOrganization();
+		creator3.setEmail("info@diffblue.com");
+		creator3.setHomepage("foo");
+		creator3.setIdentifier(1);
+		creator3.setName("Acme");
+		thesaurus3.setCreator(creator3);
+		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus3.setDefaultTopConcept(false);
+		thesaurus3.setDescription("some text");
+		thesaurus3.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus3.setIdentifier("data");
+		thesaurus3.setLang(new HashSet<Language>());
+		thesaurus3.setPolyHierarchical(false);
+		thesaurus3.setPublisher("foo");
+		thesaurus3.setRelation("DE");
+		thesaurus3.setRights("foo");
+		thesaurus3.setSource("foo");
+		thesaurus3.setSubject("foo");
+		thesaurus3.setTitle("Mr");
+		ThesaurusType type3 = new ThesaurusType();
+		type3.setIdentifier(1);
+		type3.setLabel("label");
+		thesaurus3.setType(type3);
+		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
+		splitNonPreferredTerm.setThesaurus(thesaurus3);
+		when(splitNonPreferredTermService.getSplitNonPreferredTermById(Mockito.<String>any()))
+			.thenReturn(splitNonPreferredTerm);
+		Language language3 = new Language();
+		language3.setId("1234");
+		language3.setPart1("foo");
+		language3.setPrincipalLanguage(false);
+		language3.setRefname("root");
+		language3.setTopLanguage(false);
+		when(languagesService.getLanguageById(Mockito.<String>any()))
+			.thenReturn(language3);
+		SplitNonPreferredTermView source6 = new SplitNonPreferredTermView();
+		source6.setCreated("foo");
+		source6.setIdentifier("data");
+		source6.setLanguage("foo");
+		source6.setLexicalValue("value");
+		source6.setModified("foo");
+		ArrayList<ThesaurusTermView> preferredTerms2 =
+			 new ArrayList<ThesaurusTermView>();
+		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		thesaurusTermView.setConceptId("1234");
+		ArrayList<String> conceptsPath = new ArrayList<String>();
+		conceptsPath.add("/bin/bash");
+		thesaurusTermView.setConceptsPath(conceptsPath);
+		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setHidden(false);
+		thesaurusTermView.setIdentifier("data");
+		thesaurusTermView.setLanguage("foo");
+		thesaurusTermView.setLexicalValue("value");
+		thesaurusTermView.setModified("foo");
+		thesaurusTermView.setPrefered(false);
+		thesaurusTermView.setRole("admin");
+		thesaurusTermView.setSource("foo");
+		thesaurusTermView.setStatus(1);
+		thesaurusTermView.setThesaurusId("1234");
+		thesaurusTermView.setTopistopterm(false);
+		preferredTerms2.add(thesaurusTermView);
+		source6.setPreferredTerms(preferredTerms2);
+		source6.setSource("foo");
+		source6.setStatus(1);
+		source6.setThesaurusId("1234");
+
+		// act
+		SplitNonPreferredTerm result = service.convert(source6);
+
+		// assert
+		assertThat(result.getCreated(), sameInstance(created4));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getLanguage(), sameInstance(language3));
+		assertThat(result.getLexicalValue(), is("value"));
+		assertThat(
+			Math.abs(result.getModified().getTime() - new Date().getTime())
+			<= 10_000L, is(true));
+		assertThat(result.getPreferredTerms(), hasSize(1));
+		assertThat(result.getSource(), is("foo"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus1));
+	}
+}
