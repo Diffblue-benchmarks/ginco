@@ -91,14 +91,14 @@ class SOAPThesaurusServiceImplTest {
 		// assert
 		assertThat(result.getContributor(), is("foo"));
 		assertThat(result.getCoverage(), is("foo"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("foo"));
 		assertThat(result.getCreatorName(), is("Acme"));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), empty());
 		assertThat(result.getLanguages(), empty());
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPublisher(), is("foo"));
 		assertThat(result.getRelation(), is("DE"));
 		assertThat(result.getRights(), is("foo"));
@@ -141,14 +141,14 @@ class SOAPThesaurusServiceImplTest {
 		// assert
 		assertThat(result.getContributor(), is("foo"));
 		assertThat(result.getCoverage(), is("foo"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getCreatorEmail(), is(nullValue()));
 		assertThat(result.getCreatorHomepage(), is(nullValue()));
 		assertThat(result.getCreatorName(), is(nullValue()));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), empty());
 		assertThat(result.getLanguages(), empty());
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPublisher(), is("foo"));
 		assertThat(result.getRelation(), is("DE"));
 		assertThat(result.getRights(), is("foo"));
@@ -196,14 +196,14 @@ class SOAPThesaurusServiceImplTest {
 		// assert
 		assertThat(result.getContributor(), is("foo"));
 		assertThat(result.getCoverage(), is("foo"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("foo"));
 		assertThat(result.getCreatorName(), is("Acme"));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), empty());
 		assertThat(result.getLanguages(), empty());
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPublisher(), is("foo"));
 		assertThat(result.getRelation(), is("DE"));
 		assertThat(result.getRights(), is("foo"));
@@ -248,14 +248,14 @@ class SOAPThesaurusServiceImplTest {
 		// assert
 		assertThat(result.getContributor(), is("foo"));
 		assertThat(result.getCoverage(), is("foo"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("foo"));
 		assertThat(result.getCreatorName(), is("Acme"));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), empty());
 		assertThat(result.getLanguages(), empty());
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPublisher(), is("foo"));
 		assertThat(result.getRelation(), is("DE"));
 		assertThat(result.getRights(), is("foo"));

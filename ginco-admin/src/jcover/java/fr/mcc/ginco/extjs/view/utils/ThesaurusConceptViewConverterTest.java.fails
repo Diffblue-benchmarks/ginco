@@ -87,7 +87,7 @@ class ThesaurusConceptViewConverterTest {
 	private ThesaurusConceptViewConverter service;
 
 	@Test
-	void convert3() {
+	void convert1() {
 
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
@@ -108,7 +108,7 @@ class ThesaurusConceptViewConverterTest {
 	}
 
 	@Test
-	void convert5() {
+	void convert3() {
 
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
@@ -126,7 +126,7 @@ class ThesaurusConceptViewConverterTest {
 	}
 
 	@Test
-	void convert1() throws java.text.ParseException {
+	void convert4() throws java.text.ParseException {
 
 		// arrange
 		when(thesaurusConceptService.getRecursiveParentsByConceptId(Mockito.<String>any()))
@@ -183,9 +183,9 @@ class ThesaurusConceptViewConverterTest {
 		assertThat(result.getChildConcepts(), sameInstance(list2));
 		assertThat(result.getConceptsPath(), hasSize(1));
 		assertThat(result.getConceptsPath().get(0), is("data"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getNotation(), is("DE"));
 		assertThat(result.getParentConcepts(), sameInstance(list3));
 		assertThat(result.getRootConcepts(), empty());
@@ -198,7 +198,7 @@ class ThesaurusConceptViewConverterTest {
 	}
 
 	@Test
-	void convert2() throws java.text.ParseException {
+	void convert5() throws java.text.ParseException {
 
 		// arrange
 		List<ThesaurusConcept> list1 = new ArrayList<ThesaurusConcept>();
@@ -261,9 +261,9 @@ class ThesaurusConceptViewConverterTest {
 		assertThat(result.getConceptsPath(), hasSize(2));
 		assertThat(result.getConceptsPath().get(0), is("data"));
 		assertThat(result.getConceptsPath().get(1), is("data"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getNotation(), is("DE"));
 		assertThat(result.getParentConcepts(), sameInstance(list3));
 		assertThat(result.getRootConcepts(), empty());
@@ -276,7 +276,7 @@ class ThesaurusConceptViewConverterTest {
 	}
 
 	@Test
-	void convert4() throws java.text.ParseException {
+	void convert2() throws java.text.ParseException {
 
 		// arrange
 		Thesaurus thesaurus1 = new Thesaurus();

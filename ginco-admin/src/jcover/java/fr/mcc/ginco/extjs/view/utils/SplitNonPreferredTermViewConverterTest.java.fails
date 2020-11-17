@@ -88,11 +88,11 @@ class SplitNonPreferredTermViewConverterTest {
 		SplitNonPreferredTermView result = service.convert(source1);
 
 		// assert
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is(nullValue()));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPreferredTerms(), empty());
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
@@ -121,11 +121,11 @@ class SplitNonPreferredTermViewConverterTest {
 		SplitNonPreferredTermView result = service.convert(source1);
 
 		// assert
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPreferredTerms(), empty());
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));

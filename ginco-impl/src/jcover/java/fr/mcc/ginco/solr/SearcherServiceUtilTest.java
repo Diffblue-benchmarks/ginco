@@ -3,6 +3,8 @@ package fr.mcc.ginco.solr;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.regex.Pattern;
+
 import org.apache.solr.common.SolrDocumentList;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +28,9 @@ public class SearcherServiceUtilTest {
 
 	@Test
 	public void addAndQuery() {
-		assertEquals("+data:java.lang.Object@6d9c638 ", service.addAndQuery("data", new Object(), null, false));
-		assertEquals("+data:[ java.lang.Object@7dc5e7b4Z TO * ] ", service.addAndQuery("data", new Object(), true, false));
-		assertEquals("+data:[ * TO java.lang.Object@1ee0005Z ] ", service.addAndQuery("data", new Object(), false, true));
+		assertTrue(Pattern.matches("\\+data:java\\.lang\\.Object@[0-9a-f]+ ", service.addAndQuery("data", new Object(), null, false)));
+		assertTrue(Pattern.matches("\\+data:\\[ java\\.lang\\.Object@[0-9a-f]+Z TO \\* \\] ", service.addAndQuery("data", new Object(), true, false)));
+		assertTrue(Pattern.matches("\\+data:\\[ \\* TO java\\.lang\\.Object@[0-9a-f]+Z \\] ", service.addAndQuery("data", new Object(), false, true)));
 		assertEquals("+ :[ * TO fooZ ] ", service.addAndQuery(" ", "foo", false, false));
 		assertEquals("", service.addAndQuery("data", null, false, false));
 	}

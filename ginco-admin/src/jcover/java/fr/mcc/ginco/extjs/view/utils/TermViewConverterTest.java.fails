@@ -99,12 +99,12 @@ class TermViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getConceptsPath(), is(nullValue()));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPrefered(), is(false));
 		assertThat(result.getRole(), is("DE"));
 		assertThat(result.getSource(), is("foo"));
@@ -136,12 +136,12 @@ class TermViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getConceptsPath(), is(nullValue()));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is(nullValue()));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getPrefered(), is(false));
 		assertThat(result.getRole(), is(nullValue()));
 		assertThat(result.getSource(), is("foo"));

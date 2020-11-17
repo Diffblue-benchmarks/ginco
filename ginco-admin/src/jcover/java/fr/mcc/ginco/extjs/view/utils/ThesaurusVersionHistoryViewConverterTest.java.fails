@@ -17,6 +17,7 @@ import fr.mcc.ginco.services.IThesaurusVersionHistoryService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -88,7 +89,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 		ThesaurusVersionHistoryView result = service.convert(source1);
 
 		// assert
-		assertThat(result.getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
+		assertThat(Pattern.matches("Fri [A-Z][a-z]{2} \\d{1,2} \\d{2,4}:\\d{1,2}:\\d{2} UTC 2010", result.getDate()), is(true));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurusId(), is(nullValue()));
@@ -115,7 +116,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 		ThesaurusVersionHistoryView result = service.convert(source1);
 
 		// assert
-		assertThat(result.getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
+		assertThat(Pattern.matches("Fri [A-Z][a-z]{2} \\d{1,2} \\d{2,4}:\\d{1,2}:\\d{2} UTC 2010", result.getDate()), is(true));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurusId(), is("data"));
@@ -147,7 +148,7 @@ class ThesaurusVersionHistoryViewConverterTest {
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getDate(), is("Fri Dec 31 00:00:00 UTC 2010"));
+		assertThat(Pattern.matches("Fri [A-Z][a-z]{2} \\d{1,2} \\d{2,4}:\\d{1,2}:\\d{2} UTC 2010", result.get(0).getDate()), is(true));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getStatus(), is(1));
 		assertThat(result.get(0).getThesaurusId(), is("data"));

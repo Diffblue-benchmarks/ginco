@@ -20,13 +20,13 @@ class DateUtilTest {
 
 	@Test
 	void testToString() throws java.text.ParseException {
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", DateUtil.toString(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", DateUtil.toString(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))), is(true));
 		assertThat(DateUtil.toString(null), is(nullValue()));
 	}
 
 	@Test
 	void toISO8601String() throws java.text.ParseException {
-		assertThat(DateUtil.toISO8601String(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")), is("2010-12-31T00:00:00Z"));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}T\\d{1,2}:\\d{2}:\\d{2}Z", DateUtil.toISO8601String(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))), is(true));
 		assertThat(DateUtil.toISO8601String(null), is(nullValue()));
 	}
 

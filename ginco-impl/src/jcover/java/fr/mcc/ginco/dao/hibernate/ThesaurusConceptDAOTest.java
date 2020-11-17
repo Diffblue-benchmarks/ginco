@@ -784,13 +784,15 @@ public class ThesaurusConceptDAOTest {
 
 		// arrange
 		ThesaurusConceptDAO thesaurusConceptDAO = new ThesaurusConceptDAO();
+		List list = new ArrayList<String>();
+		list.add("Smith");
 		Query query1 = mock(Query.class);
 		Query query2 = mock(Query.class);
 		Query query3 = mock(Query.class);
 		Query query4 = mock(Query.class);
 		SQLQuery obj1 = mock(SQLQuery.class);
 		when(obj1.list())
-			.thenReturn(new ArrayList<String>());
+			.thenReturn(list);
 		when(obj1.setFetchSize(anyInt()))
 			.thenReturn(query2);
 		when(obj1.setFirstResult(anyInt()))

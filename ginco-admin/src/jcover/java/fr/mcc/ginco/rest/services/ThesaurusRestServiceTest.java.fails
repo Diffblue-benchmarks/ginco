@@ -200,7 +200,7 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("+"));
 		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), hasSize(1));
@@ -295,7 +295,7 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("+"));
 		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
 		assertThat(result.getFormats(), hasSize(1));
@@ -415,7 +415,7 @@ class ThesaurusRestServiceTest {
 	}
 
 	@Test
-	void archiveVocabulary() throws java.text.ParseException, java.io.IOException {
+	void archiveVocabulary() throws java.io.IOException {
 		ThesaurusView thesaurusView = new ThesaurusView();
 		thesaurusView.setArchived(false);
 		thesaurusView.setCanBeDeleted(false);
@@ -445,98 +445,13 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setType(1);
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
-		Thesaurus thesaurus1 = new Thesaurus();
-		thesaurus1.setArchived(false);
-		thesaurus1.setContributor("foo");
-		thesaurus1.setCoverage("foo");
-		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator1 = mock(ThesaurusOrganization.class);
-		thesaurus1.setCreator(creator1);
-		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus1.setDefaultTopConcept(false);
-		thesaurus1.setDescription("some text");
-		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus1.setIdentifier("data");
-		thesaurus1.setLang(new HashSet<Language>());
-		thesaurus1.setPolyHierarchical(false);
-		thesaurus1.setPublisher("foo");
-		thesaurus1.setRelation("DE");
-		thesaurus1.setRights("foo");
-		thesaurus1.setSource("foo");
-		thesaurus1.setSubject("foo");
-		thesaurus1.setTitle("Mr");
-		ThesaurusType type1 = new ThesaurusType();
-		type1.setIdentifier(1);
-		type1.setLabel("label");
-		thesaurus1.setType(type1);
-		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
-		Thesaurus thesaurus2 = new Thesaurus();
-		thesaurus2.setArchived(false);
-		thesaurus2.setContributor("foo");
-		thesaurus2.setCoverage("foo");
-		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator2 = new ThesaurusOrganization();
-		creator2.setEmail("info@diffblue.com");
-		creator2.setHomepage("foo");
-		creator2.setIdentifier(1);
-		creator2.setName("Acme");
-		thesaurus2.setCreator(creator2);
-		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus2.setDefaultTopConcept(false);
-		thesaurus2.setDescription("some text");
-		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus2.setIdentifier("data");
-		thesaurus2.setLang(new HashSet<Language>());
-		thesaurus2.setPolyHierarchical(false);
-		thesaurus2.setPublisher("foo");
-		thesaurus2.setRelation("DE");
-		thesaurus2.setRights("foo");
-		thesaurus2.setSource("foo");
-		thesaurus2.setSubject("foo");
-		thesaurus2.setTitle("Mr");
-		ThesaurusType type2 = new ThesaurusType();
-		type2.setIdentifier(1);
-		type2.setLabel("label");
-		thesaurus2.setType(type2);
-		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
-		Thesaurus thesaurus3 = new Thesaurus();
-		thesaurus3.setArchived(false);
-		thesaurus3.setContributor("foo");
-		thesaurus3.setCoverage("foo");
-		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator3 = new ThesaurusOrganization();
-		creator3.setEmail("info@diffblue.com");
-		creator3.setHomepage("foo");
-		creator3.setIdentifier(1);
-		creator3.setName("Acme");
-		thesaurus3.setCreator(creator3);
-		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus3.setDefaultTopConcept(false);
-		thesaurus3.setDescription("some text");
-		thesaurus3.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus3.setIdentifier("data");
-		thesaurus3.setLang(new HashSet<Language>());
-		thesaurus3.setPolyHierarchical(false);
-		thesaurus3.setPublisher("foo");
-		thesaurus3.setRelation("DE");
-		thesaurus3.setRights("foo");
-		thesaurus3.setSource("foo");
-		thesaurus3.setSubject("foo");
-		thesaurus3.setTitle("Mr");
-		ThesaurusType type3 = new ThesaurusType();
-		type3.setIdentifier(1);
-		type3.setLabel("label");
-		thesaurus3.setType(type3);
-		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
 		when(thesaurusService.archiveThesaurus(Mockito.<Thesaurus>any()))
-			.thenReturn(thesaurus2);
+			.thenReturn(new Thesaurus());
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(thesaurus3);
+			.thenReturn(new Thesaurus());
 		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
-			.thenReturn(thesaurus1);
-		assertThat(service.archiveVocabulary("1234"), equalTo(
-			"{\"success\":true,\"data\":{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"1999-12-31\",\"description\":\"some "
-			+ "text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"foo\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"+\",\"creatorEmail\":\"info@diffblue.com\",\"polyHierarchical\":false,\"languages\":[\"foo\"],\"formats\":[1],\"thesaurusId\":\"1234\"},\"total\":null}"));
+			.thenReturn(new Thesaurus());
+		assertThat(Pattern.matches("\\{\"success\":true,\"data\":\\{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"\\d{4}-\\d{1,2}-\\d{1,2}\",\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"foo\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"\\+\",\"creatorEmail\":\"info@diffblue\\.com\",\"polyHierarchical\":false,\"languages\":\\[\"foo\"\\],\"formats\":\\[1\\],\"thesaurusId\":\"1234\"\\},\"total\":null\\}", service.archiveVocabulary("1234")), is(true));
 	}
 
 	@Test

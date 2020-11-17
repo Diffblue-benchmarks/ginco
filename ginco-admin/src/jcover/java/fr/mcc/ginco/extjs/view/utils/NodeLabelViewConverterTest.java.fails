@@ -69,11 +69,11 @@ class NodeLabelViewConverterTest {
 		NodeLabelView result = service.convert(source1);
 
 		// assert
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is(nullValue()));
-		assertThat(Pattern.matches("\\d{2,4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
 		assertThat(result.getThesaurusArrayId(), is("data"));
 	}
 
