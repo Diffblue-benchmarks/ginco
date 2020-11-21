@@ -87,7 +87,7 @@ class ThesaurusConceptViewConverterTest {
 	private ThesaurusConceptViewConverter service;
 
 	@Test
-	void convert1() {
+	void convert3() {
 
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
@@ -108,7 +108,7 @@ class ThesaurusConceptViewConverterTest {
 	}
 
 	@Test
-	void convert3() {
+	void convert2() {
 
 		// arrange
 		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
@@ -276,7 +276,7 @@ class ThesaurusConceptViewConverterTest {
 	}
 
 	@Test
-	void convert2() throws java.text.ParseException {
+	void convert1() throws java.text.ParseException {
 
 		// arrange
 		Thesaurus thesaurus1 = new Thesaurus();
