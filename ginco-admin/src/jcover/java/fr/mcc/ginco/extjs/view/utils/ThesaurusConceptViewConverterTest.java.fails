@@ -472,7 +472,6 @@ class ThesaurusConceptViewConverterTest {
 		hierarchicalRelationshipView1.setIdentifier("data");
 		childConcepts.add(hierarchicalRelationshipView1);
 		conceptView.setChildConcepts(childConcepts);
-		conceptView.setNotation("DE");
 		assertThat(service.convertAddedChildren(conceptView), empty());
 	}
 
