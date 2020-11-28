@@ -61,7 +61,7 @@ class OrphansGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("6b1671fe-6ed1-4600-bd84-912cb0f515ff"));
+		assertThat(result.get(0).getId(), is("8b2b6021-b1cd-444a-aa48-da3c13b18efe"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));
