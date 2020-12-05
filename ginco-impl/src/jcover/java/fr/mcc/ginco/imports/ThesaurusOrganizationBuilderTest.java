@@ -38,23 +38,6 @@ public class ThesaurusOrganizationBuilderTest {
 	public void getCreator1() {
 		RDFNode obj = mock(RDFNode.class);
 		when(obj.isLiteral())
-			.thenReturn(false);
-		when(obj.isResource())
-			.thenReturn(false);
-		Statement statement = mock(Statement.class);
-		when(statement.getObject())
-			.thenReturn(obj);
-		Resource skosThesaurus = mock(Resource.class);
-		when(skosThesaurus.getProperty(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
-			.thenReturn(statement);
-		Model model = mock(Model.class);
-		assertNull(service.getCreator(skosThesaurus, model));
-	}
-
-	@Test
-	public void getCreator2() {
-		RDFNode obj = mock(RDFNode.class);
-		when(obj.isLiteral())
 			.thenReturn(true);
 		when(obj.isResource())
 			.thenReturn(false);
@@ -75,7 +58,73 @@ public class ThesaurusOrganizationBuilderTest {
 	}
 
 	@Test
-	public void getCreator3() {
+	public void getCreator2() {
+		Resource resource1 = mock(Resource.class);
+		RDFNode obj = mock(RDFNode.class);
+		when(obj.asResource())
+			.thenReturn(resource1);
+		when(obj.isResource())
+			.thenReturn(true);
+		Statement statement1 = mock(Statement.class);
+		when(statement1.getObject())
+			.thenReturn(obj);
+		Resource skosThesaurus = mock(Resource.class);
+		when(skosThesaurus.getProperty(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
+			.thenReturn(statement1);
+		Statement statement2 = mock(Statement.class);
+		when(statement2.getString())
+			.thenReturn("bar");
+		Statement statement3 = mock(Statement.class);
+		when(statement3.getString())
+			.thenReturn("foo");
+		Statement statement4 = mock(Statement.class);
+		when(statement4.getString())
+			.thenReturn("foo");
+		Resource resource2 = mock(Resource.class);
+		when(resource2.getProperty(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
+			.thenReturn(statement4)
+			.thenReturn(statement3)
+			.thenReturn(statement2);
+		Resource resource3 = mock(Resource.class);
+		when(resource3.asResource())
+			.thenReturn(resource2);
+		Statement statement5 = mock(Statement.class);
+		when(statement5.getSubject())
+			.thenReturn(resource3);
+		StmtIterator stmtIterator = mock(StmtIterator.class);
+		when(stmtIterator.hasNext())
+			.thenReturn(true);
+		when(stmtIterator.next())
+			.thenReturn(statement5);
+		Model model = mock(Model.class);
+		when(model.listStatements(Mockito.<com.hp.hpl.jena.rdf.model.Selector>any()))
+			.thenReturn(stmtIterator);
+		ThesaurusOrganization result = service.getCreator(skosThesaurus, model);
+		assertEquals("bar", result.getEmail());
+		assertEquals("foo", result.getHomepage());
+		assertNull(result.getIdentifier());
+		assertEquals("foo", result.getName());
+	}
+
+	@Test
+	public void getCreatorReturnsNull1() {
+		RDFNode obj = mock(RDFNode.class);
+		when(obj.isLiteral())
+			.thenReturn(false);
+		when(obj.isResource())
+			.thenReturn(false);
+		Statement statement = mock(Statement.class);
+		when(statement.getObject())
+			.thenReturn(obj);
+		Resource skosThesaurus = mock(Resource.class);
+		when(skosThesaurus.getProperty(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
+			.thenReturn(statement);
+		Model model = mock(Model.class);
+		assertNull(service.getCreator(skosThesaurus, model));
+	}
+
+	@Test
+	public void getCreatorReturnsNull2() {
 		Resource resource = mock(Resource.class);
 		RDFNode obj = mock(RDFNode.class);
 		when(obj.asResource())

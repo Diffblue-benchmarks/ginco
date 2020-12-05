@@ -9,6 +9,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.hp.hpl.jena.ontology.ObjectProperty;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
@@ -110,7 +111,38 @@ public class ConceptBuilderTest {
 	}
 
 	@Test
-	public void buildConceptAssociativerelationshipRelatedTypesIsEmptyReturnsEmpty() {
+	public void buildConceptAssociativerelationship() {
+		Resource resource = mock(Resource.class);
+		when(resource.getURI())
+			.thenReturn("/some/path.html")
+			.thenReturn("/some/path.html");
+		RDFNode obj = mock(RDFNode.class);
+		when(obj.asResource())
+			.thenReturn(resource);
+		Statement statement = mock(Statement.class);
+		when(statement.getObject())
+			.thenReturn(obj);
+		StmtIterator stmtIterator = mock(StmtIterator.class);
+		when(stmtIterator.hasNext())
+			.thenReturn(true)
+			.thenReturn(false);
+		when(stmtIterator.next())
+			.thenReturn(statement);
+		Resource skosConcept = mock(Resource.class);
+		when(skosConcept.getURI())
+			.thenReturn("/some/path.html")
+			.thenReturn("/some/path.html");
+		when(skosConcept.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
+			.thenReturn(stmtIterator);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		ArrayList<ObjectProperty> relatedTypes = new ArrayList<ObjectProperty>();
+		ObjectProperty objectProperty = mock(ObjectProperty.class);
+		relatedTypes.add(objectProperty);
+		assertTrue((service.buildConceptAssociativerelationship(skosConcept, thesaurus, relatedTypes)).isEmpty());
+	}
+
+	@Test
+	public void buildConceptAssociativerelationshipRelatedTypesIsEmpty() {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
