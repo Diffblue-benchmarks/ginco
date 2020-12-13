@@ -48,11 +48,11 @@ class OrphansGeneratorTest {
 	void generateOrphans() {
 
 		// arrange
-		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
-		list.add(thesaurusConcept);
+		arrayList.add(thesaurusConcept);
 		when(thesaurusConceptService.getOrphanThesaurusConcepts(Mockito.<String>any(), anyInt()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<IThesaurusListNode> result = service.generateOrphans("1234");
@@ -61,7 +61,7 @@ class OrphansGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("f67960a2-2b6d-47a8-bd44-aa9007a88621"));
+		assertThat(result.get(0).getId(), is("a86b78df-f70e-4a93-aa92-40ced4e0427b"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

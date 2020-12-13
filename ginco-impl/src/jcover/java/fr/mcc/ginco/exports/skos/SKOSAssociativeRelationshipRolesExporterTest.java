@@ -14,7 +14,6 @@ import fr.mcc.ginco.beans.AssociativeRelationshipRole;
 import fr.mcc.ginco.services.IAssociativeRelationshipRoleService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,11 +42,11 @@ public class SKOSAssociativeRelationshipRolesExporterTest {
 
 	@Test
 	public void exportAssociativeRelationshipRoles() {
-		List<AssociativeRelationshipRole> list =
+		ArrayList<AssociativeRelationshipRole> arrayList =
 			 new ArrayList<AssociativeRelationshipRole>();
-		list.add(new AssociativeRelationshipRole());
+		arrayList.add(new AssociativeRelationshipRole());
 		when(associativeRelationshipRoleService.getAllAssociationTermRole())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Model model = mock(Model.class);
 		Literal literal = mock(Literal.class);
 		Resource resource = mock(Resource.class);

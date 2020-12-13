@@ -104,11 +104,11 @@ public class AlignmentServiceImplTest {
 	public void getAlignmentsBySourceConceptIdConceptIdentifierIsData() {
 
 		// arrange
-		List<Alignment> list = new ArrayList<Alignment>();
+		ArrayList<Alignment> arrayList = new ArrayList<Alignment>();
 		Alignment alignment = new Alignment();
-		list.add(alignment);
+		arrayList.add(alignment);
 		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Alignment> result = service.getAlignmentsBySourceConceptId("data");
@@ -120,12 +120,12 @@ public class AlignmentServiceImplTest {
 
 	@Test
 	public void saveAlignments() {
-		List<Alignment> list = new ArrayList<Alignment>();
+		ArrayList<Alignment> arrayList = new ArrayList<Alignment>();
 		Alignment alignment2 = new Alignment();
 		alignment2.setIdentifier("data");
-		list.add(alignment2);
+		arrayList.add(alignment2);
 		when(alignmentDAO.findBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(alignmentDAO.update(Mockito.<Alignment>any()))
 			.thenReturn(new Alignment());
 		ThesaurusConcept concept = new ThesaurusConcept();
@@ -162,15 +162,15 @@ public class AlignmentServiceImplTest {
 
 	@Test
 	public void deleteExternalThesauruses() {
-		List<ExternalThesaurus> list1 = new ArrayList<ExternalThesaurus>();
-		list1.add(new ExternalThesaurus());
+		ArrayList<ExternalThesaurus> arrayList1 = new ArrayList<ExternalThesaurus>();
+		arrayList1.add(new ExternalThesaurus());
 		when(externalThesaurusDAO.findAll())
-			.thenReturn(list1);
-		List<Alignment> list2 = new ArrayList<Alignment>();
+			.thenReturn(arrayList1);
+		ArrayList<Alignment> arrayList2 = new ArrayList<Alignment>();
 		Alignment alignment = mock(Alignment.class);
-		list2.add(alignment);
+		arrayList2.add(alignment);
 		when(alignmentDAO.findByExternalThesaurus(Mockito.<Integer>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		service.deleteExternalThesauruses();
 	}
 }

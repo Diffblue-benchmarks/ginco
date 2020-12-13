@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Thesaurus;
@@ -76,26 +77,30 @@ class BaseRestServiceTest {
 	void getTreeContent1() {
 
 		// arrange
-		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		ArrayList<Thesaurus> arrayList1 = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
 		ThesaurusOrganization creator = new ThesaurusOrganization();
 		creator.setName("Acme");
 		thesaurus.setCreator(creator);
 		thesaurus.setIdentifier("data");
 		thesaurus.setTitle("Mr");
-		list1.add(thesaurus);
+		arrayList1.add(thesaurus);
 		when(thesaurusService.getThesaurusList())
-			.thenReturn(list1);
-		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+			.thenReturn(arrayList1);
+		ArrayList<IThesaurusListNode> arrayList2 =
+			 new ArrayList<IThesaurusListNode>();
+		IThesaurusListNode obj = mock(IThesaurusListNode.class);
+		arrayList2.add(obj);
 		when(foldersGenerator.generateFolders(Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 
 		// act
 		List<IThesaurusListNode> result = service.getTreeContent("data");
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getChildren().size(), is(1));
+		assertThat(result.get(0).getChildren().get(0), sameInstance(obj));
 		assertThat(result.get(0).getIconCls(), is(nullValue()));
 		assertThat(result.get(0).getId(), is("data"));
 		assertThat(result.get(0).getOrganizationName(), is("Acme"));
@@ -111,7 +116,7 @@ class BaseRestServiceTest {
 	void getTreeContent2() {
 
 		// arrange
-		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		ArrayList<Thesaurus> arrayList1 = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setArchived(true);
 		ThesaurusOrganization creator = new ThesaurusOrganization();
@@ -119,19 +124,23 @@ class BaseRestServiceTest {
 		thesaurus.setCreator(creator);
 		thesaurus.setIdentifier("data");
 		thesaurus.setTitle("Mr");
-		list1.add(thesaurus);
+		arrayList1.add(thesaurus);
 		when(thesaurusService.getThesaurusList())
-			.thenReturn(list1);
-		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+			.thenReturn(arrayList1);
+		ArrayList<IThesaurusListNode> arrayList2 =
+			 new ArrayList<IThesaurusListNode>();
+		IThesaurusListNode obj = mock(IThesaurusListNode.class);
+		arrayList2.add(obj);
 		when(foldersGenerator.generateFolders(Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 
 		// act
 		List<IThesaurusListNode> result = service.getTreeContent("data");
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getChildren().size(), is(1));
+		assertThat(result.get(0).getChildren().get(0), sameInstance(obj));
 		assertThat(result.get(0).getIconCls(), is("archived"));
 		assertThat(result.get(0).getId(), is("data"));
 		assertThat(result.get(0).getOrganizationName(), is("Acme"));
@@ -147,24 +156,28 @@ class BaseRestServiceTest {
 	void getTreeContent3() {
 
 		// arrange
-		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		ArrayList<Thesaurus> arrayList1 = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setArchived(false);
 		thesaurus.setIdentifier("data");
 		thesaurus.setTitle("Mr");
-		list1.add(thesaurus);
+		arrayList1.add(thesaurus);
 		when(thesaurusService.getThesaurusList())
-			.thenReturn(list1);
-		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+			.thenReturn(arrayList1);
+		ArrayList<IThesaurusListNode> arrayList2 =
+			 new ArrayList<IThesaurusListNode>();
+		IThesaurusListNode obj = mock(IThesaurusListNode.class);
+		arrayList2.add(obj);
 		when(foldersGenerator.generateFolders(Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 
 		// act
 		List<IThesaurusListNode> result = service.getTreeContent("data");
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getChildren().size(), is(1));
+		assertThat(result.get(0).getChildren().get(0), sameInstance(obj));
 		assertThat(result.get(0).getIconCls(), is(nullValue()));
 		assertThat(result.get(0).getId(), is("data"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
@@ -180,7 +193,7 @@ class BaseRestServiceTest {
 	void getTreeContent4() {
 
 		// arrange
-		List<Thesaurus> list1 = new ArrayList<Thesaurus>();
+		ArrayList<Thesaurus> arrayList1 = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setArchived(false);
 		ThesaurusOrganization creator = new ThesaurusOrganization();
@@ -188,19 +201,18 @@ class BaseRestServiceTest {
 		thesaurus.setCreator(creator);
 		thesaurus.setIdentifier("data");
 		thesaurus.setTitle("Mr");
-		list1.add(thesaurus);
+		arrayList1.add(thesaurus);
 		when(thesaurusService.getThesaurusList())
-			.thenReturn(list1);
-		List<IThesaurusListNode> list2 = new ArrayList<IThesaurusListNode>();
+			.thenReturn(arrayList1);
 		when(foldersGenerator.generateFolders(Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(new ArrayList<IThesaurusListNode>());
 
 		// act
 		List<IThesaurusListNode> result = service.getTreeContent("data");
 
 		// assert
 		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getChildren(), sameInstance(list2));
+		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is(nullValue()));
 		assertThat(result.get(0).getId(), is("data"));
 		assertThat(result.get(0).getOrganizationName(), is("Acme"));

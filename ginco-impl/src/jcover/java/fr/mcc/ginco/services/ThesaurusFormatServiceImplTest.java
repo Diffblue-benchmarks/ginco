@@ -39,11 +39,11 @@ public class ThesaurusFormatServiceImplTest {
 	public void getThesaurusFormatList() {
 
 		// arrange
-		List<ThesaurusFormat> list = new ArrayList<ThesaurusFormat>();
+		ArrayList<ThesaurusFormat> arrayList = new ArrayList<ThesaurusFormat>();
 		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
-		list.add(thesaurusFormat);
+		arrayList.add(thesaurusFormat);
 		when(thesaurusFormatDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusFormat> result = service.getThesaurusFormatList();

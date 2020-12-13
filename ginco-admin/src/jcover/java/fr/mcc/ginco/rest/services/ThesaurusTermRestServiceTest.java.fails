@@ -94,11 +94,11 @@ class ThesaurusTermRestServiceTest {
 	void getSandboxedThesaurusTerms2() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
-		list.add(thesaurusTerm);
+		arrayList.add(thesaurusTerm);
 		when(thesaurusTermService.getPaginatedThesaurusSandoxedTermsList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(thesaurusTermService.getSandboxedTermsCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
@@ -120,10 +120,10 @@ class ThesaurusTermRestServiceTest {
 	void getPreferredThesaurusTermsLimitIsOneAndOnlyNotOrphanConceptsIsFalseAndStartIndexIsOne() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
-		list.add(new ThesaurusTerm());
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		arrayList.add(new ThesaurusTerm());
 		when(thesaurusTermService.getPaginatedThesaurusPreferredTermsList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<Boolean>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(thesaurusTermService.getPreferredTermsCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
@@ -215,10 +215,10 @@ class ThesaurusTermRestServiceTest {
 		thesaurusTermView.setTopistopterm(false);
 		when(termViewConverter.convert(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(thesaurusTermView);
-		List<Note> list = new ArrayList<Note>();
-		list.add(new Note());
+		ArrayList<Note> arrayList = new ArrayList<Note>();
+		arrayList.add(new Note());
 		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ThesaurusTermView result = service.destroyTerm(new ThesaurusTermView());

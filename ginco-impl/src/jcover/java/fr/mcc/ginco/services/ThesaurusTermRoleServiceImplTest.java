@@ -59,11 +59,11 @@ public class ThesaurusTermRoleServiceImplTest {
 	public void getAllThesaurusTermRole() {
 
 		// arrange
-		List<ThesaurusTermRole> list = new ArrayList<ThesaurusTermRole>();
+		ArrayList<ThesaurusTermRole> arrayList = new ArrayList<ThesaurusTermRole>();
 		ThesaurusTermRole thesaurusTermRole = new ThesaurusTermRole();
-		list.add(thesaurusTermRole);
+		arrayList.add(thesaurusTermRole);
 		when(thesaurusTermRoleDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusTermRole> result = service.getAllThesaurusTermRole();

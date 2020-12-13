@@ -48,11 +48,11 @@ class ChildrenGeneratorTest {
 	void getChildrenByConceptId() {
 
 		// arrange
-		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
-		list.add(thesaurusConcept);
+		arrayList.add(thesaurusConcept);
 		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), anyInt(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<IThesaurusListNode> result = service.getChildrenByConceptId("1234");
@@ -61,7 +61,7 @@ class ChildrenGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("75ff2df3-2ee8-4f80-8604-4942b11bc20d"));
+		assertThat(result.get(0).getId(), is("ddb2e3db-6282-403e-8e7f-7c61e44c6e7e"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

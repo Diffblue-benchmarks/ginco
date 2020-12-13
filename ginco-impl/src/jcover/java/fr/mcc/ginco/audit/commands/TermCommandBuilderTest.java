@@ -9,7 +9,6 @@ import fr.mcc.ginco.beans.ThesaurusTerm;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,10 +57,11 @@ public class TermCommandBuilderTest {
 
 	@Test
 	public void buildDeletedTermsLinesReturnsEmpty() {
-		Map<String, ThesaurusTerm> map = new HashMap<String, ThesaurusTerm>();
-		map.put("value", new ThesaurusTerm());
+		HashMap<String, ThesaurusTerm> hashMap =
+			 new HashMap<String, ThesaurusTerm>();
+		hashMap.put("value", new ThesaurusTerm());
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(map);
+			.thenReturn(hashMap);
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
 		thesaurusTerm2.setLexicalValue("value");
@@ -82,14 +82,15 @@ public class TermCommandBuilderTest {
 
 	@Test
 	public void buildChangedTermsLines2() {
-		Map<String, ThesaurusTerm> map2 = new HashMap<String, ThesaurusTerm>();
+		HashMap<String, ThesaurusTerm> hashMap2 =
+			 new HashMap<String, ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
 		thesaurusTerm1.setPrefered(false);
-		map2.put("value", thesaurusTerm1);
+		hashMap2.put("value", thesaurusTerm1);
 		when(mistralStructuresBuilder.getNotPreferredTermsByTerm(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, List<ThesaurusTerm>>());
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(map2);
+			.thenReturn(hashMap2);
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
 		thesaurusTerm2.setLexicalValue("value");
@@ -113,12 +114,13 @@ public class TermCommandBuilderTest {
 
 	@Test
 	public void buildAddedPrefTermsLines2() {
-		Map<String, ThesaurusTerm> map2 = new HashMap<String, ThesaurusTerm>();
-		map2.put("value", new ThesaurusTerm());
+		HashMap<String, ThesaurusTerm> hashMap2 =
+			 new HashMap<String, ThesaurusTerm>();
+		hashMap2.put("value", new ThesaurusTerm());
 		when(mistralStructuresBuilder.getNotPreferredTermsByTerm(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, List<ThesaurusTerm>>());
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(map2);
+			.thenReturn(hashMap2);
 		ArrayList<ThesaurusTerm> currentTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm3 = new ThesaurusTerm();
 		thesaurusTerm3.setPrefered(false);

@@ -15,7 +15,6 @@ import fr.mcc.ginco.beans.ThesaurusTerm;
 import fr.mcc.ginco.services.INoteService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,13 +43,13 @@ public class SKOSNotesExporterTest {
 
 	@Test
 	public void exportNotes() {
-		List<Note> list2 = new ArrayList<Note>();
+		ArrayList<Note> arrayList2 = new ArrayList<Note>();
 		Note note = new Note();
 		note.setLanguage(new Language());
 		note.setNoteType(new NoteType());
-		list2.add(note);
+		arrayList2.add(note);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(new ArrayList<Note>());
 		Resource resource = mock(Resource.class);

@@ -22,7 +22,6 @@ import java.io.BufferedWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class GincoRevServiceImplTest {
 		thesaurusVersionHistory.setVersionNote("1.0");
 		when(thesaurusVersionHistoryDAO.getLastPublishedVersionByThesaurusId(Mockito.<String>any()))
 			.thenReturn(thesaurusVersionHistory);
-		List<JournalLine> list1 = new ArrayList<JournalLine>();
+		ArrayList<JournalLine> arrayList1 = new ArrayList<JournalLine>();
 		JournalLine journalLine1 = new JournalLine();
 		journalLine1.setAuthorId("1234");
 		journalLine1.setConceptId("1234");
@@ -90,8 +89,8 @@ public class GincoRevServiceImplTest {
 		journalLine1.setStatus(1);
 		journalLine1.setTermId("1234");
 		journalLine1.setTermRole("admin");
-		list1.add(journalLine1);
-		List<JournalLine> list2 = new ArrayList<JournalLine>();
+		arrayList1.add(journalLine1);
+		ArrayList<JournalLine> arrayList2 = new ArrayList<JournalLine>();
 		JournalLine journalLine2 = new JournalLine();
 		journalLine2.setAuthorId("1234");
 		journalLine2.setConceptId("1234");
@@ -105,8 +104,8 @@ public class GincoRevServiceImplTest {
 		journalLine2.setStatus(1);
 		journalLine2.setTermId("1234");
 		journalLine2.setTermRole("admin");
-		list2.add(journalLine2);
-		List<JournalLine> list3 = new ArrayList<JournalLine>();
+		arrayList2.add(journalLine2);
+		ArrayList<JournalLine> arrayList3 = new ArrayList<JournalLine>();
 		JournalLine journalLine3 = new JournalLine();
 		journalLine3.setAuthorId("1234");
 		journalLine3.setConceptId("1234");
@@ -120,8 +119,8 @@ public class GincoRevServiceImplTest {
 		journalLine3.setStatus(1);
 		journalLine3.setTermId("1234");
 		journalLine3.setTermRole("admin");
-		list3.add(journalLine3);
-		List<JournalLine> list4 = new ArrayList<JournalLine>();
+		arrayList3.add(journalLine3);
+		ArrayList<JournalLine> arrayList4 = new ArrayList<JournalLine>();
 		JournalLine journalLine4 = new JournalLine();
 		journalLine4.setAuthorId("1234");
 		journalLine4.setConceptId("1234");
@@ -135,16 +134,16 @@ public class GincoRevServiceImplTest {
 		journalLine4.setStatus(1);
 		journalLine4.setTermId("1234");
 		journalLine4.setTermRole("admin");
-		list4.add(journalLine4);
+		arrayList4.add(journalLine4);
 		when(thesaurusTermAuditReader.getTermAdded(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list4);
+			.thenReturn(arrayList4);
 		when(thesaurusTermAuditReader.getTermAttachmentChanged(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list1);
+			.thenReturn(arrayList1);
 		when(thesaurusTermAuditReader.getTermLexicalValueChanged(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(thesaurusTermAuditReader.getTermRoleChanged(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list3);
-		List<JournalLine> list5 = new ArrayList<JournalLine>();
+			.thenReturn(arrayList3);
+		ArrayList<JournalLine> arrayList5 = new ArrayList<JournalLine>();
 		JournalLine journalLine5 = new JournalLine();
 		journalLine5.setAuthorId("1234");
 		journalLine5.setConceptId("1234");
@@ -158,8 +157,8 @@ public class GincoRevServiceImplTest {
 		journalLine5.setStatus(1);
 		journalLine5.setTermId("1234");
 		journalLine5.setTermRole("admin");
-		list5.add(journalLine5);
-		List<JournalLine> list6 = new ArrayList<JournalLine>();
+		arrayList5.add(journalLine5);
+		ArrayList<JournalLine> arrayList6 = new ArrayList<JournalLine>();
 		JournalLine journalLine6 = new JournalLine();
 		journalLine6.setAuthorId("1234");
 		journalLine6.setConceptId("1234");
@@ -173,8 +172,8 @@ public class GincoRevServiceImplTest {
 		journalLine6.setStatus(1);
 		journalLine6.setTermId("1234");
 		journalLine6.setTermRole("admin");
-		list6.add(journalLine6);
-		List<JournalLine> list7 = new ArrayList<JournalLine>();
+		arrayList6.add(journalLine6);
+		ArrayList<JournalLine> arrayList7 = new ArrayList<JournalLine>();
 		JournalLine journalLine7 = new JournalLine();
 		journalLine7.setAuthorId("1234");
 		journalLine7.setConceptId("1234");
@@ -188,14 +187,14 @@ public class GincoRevServiceImplTest {
 		journalLine7.setStatus(1);
 		journalLine7.setTermId("1234");
 		journalLine7.setTermRole("admin");
-		list7.add(journalLine7);
+		arrayList7.add(journalLine7);
 		when(thesaurusConceptAuditReader.getConceptAdded(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list7);
+			.thenReturn(arrayList7);
 		when(thesaurusConceptAuditReader.getConceptHierarchyChanged(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list6);
+			.thenReturn(arrayList6);
 		when(thesaurusConceptAuditReader.getConceptStatusChanged(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list5);
-		List<JournalLine> list8 = new ArrayList<JournalLine>();
+			.thenReturn(arrayList5);
+		ArrayList<JournalLine> arrayList8 = new ArrayList<JournalLine>();
 		JournalLine journalLine8 = new JournalLine();
 		journalLine8.setAuthorId("1234");
 		journalLine8.setConceptId("1234");
@@ -209,9 +208,9 @@ public class GincoRevServiceImplTest {
 		journalLine8.setStatus(1);
 		journalLine8.setTermId("1234");
 		journalLine8.setTermRole("admin");
-		list8.add(journalLine8);
+		arrayList8.add(journalLine8);
 		when(thesaurusAuditReader.getThesaurusAdded(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any()))
-			.thenReturn(list8);
+			.thenReturn(arrayList8);
 		Thesaurus thesaurus2 = new Thesaurus();
 		thesaurus2.setArchived(false);
 		thesaurus2.setContributor("foo");

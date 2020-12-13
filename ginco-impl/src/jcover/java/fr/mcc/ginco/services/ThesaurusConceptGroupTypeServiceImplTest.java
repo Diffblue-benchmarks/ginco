@@ -39,13 +39,13 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 	public void getConceptGroupTypeList() {
 
 		// arrange
-		List<ThesaurusConceptGroupType> list =
+		ArrayList<ThesaurusConceptGroupType> arrayList =
 			 new ArrayList<ThesaurusConceptGroupType>();
 		ThesaurusConceptGroupType thesaurusConceptGroupType =
 			 new ThesaurusConceptGroupType();
-		list.add(thesaurusConceptGroupType);
+		arrayList.add(thesaurusConceptGroupType);
 		when(thesaurusConceptGroupTypeDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusConceptGroupType> result = service.getConceptGroupTypeList();

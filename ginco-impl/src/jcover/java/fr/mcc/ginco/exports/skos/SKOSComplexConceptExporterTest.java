@@ -13,7 +13,6 @@ import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.services.ISplitNonPreferredTermService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,14 +60,15 @@ public class SKOSComplexConceptExporterTest {
 
 	@Test
 	public void exportComplexConcept2() {
-		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
+		ArrayList<SplitNonPreferredTerm> arrayList =
+			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		splitNonPreferredTerm.setLanguage(new Language());
 		splitNonPreferredTerm.setStatus(1);
 		splitNonPreferredTerm.setThesaurus(new Thesaurus());
-		list.add(splitNonPreferredTerm);
+		arrayList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Model model1 = mock(Model.class);
 		Model model2 = mock(Model.class);
 		Resource resource1 = mock(Resource.class);
@@ -102,15 +102,16 @@ public class SKOSComplexConceptExporterTest {
 
 	@Test
 	public void exportComplexConcept3() {
-		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
+		ArrayList<SplitNonPreferredTerm> arrayList =
+			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		splitNonPreferredTerm.setLanguage(new Language());
 		splitNonPreferredTerm.setSource("foo");
 		splitNonPreferredTerm.setStatus(1);
 		splitNonPreferredTerm.setThesaurus(new Thesaurus());
-		list.add(splitNonPreferredTerm);
+		arrayList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Model model1 = mock(Model.class);
 		Model model2 = mock(Model.class);
 		Resource resource1 = mock(Resource.class);

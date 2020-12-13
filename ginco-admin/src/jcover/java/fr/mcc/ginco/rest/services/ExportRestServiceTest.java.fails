@@ -16,7 +16,6 @@ import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ws.rs.core.Response;
 
@@ -67,10 +66,10 @@ class ExportRestServiceTest {
 		thesaurus.setTitle("Mr");
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus);
-		List<FormattedLine> list = new ArrayList<FormattedLine>();
-		list.add(new FormattedLine(1, "hello"));
+		ArrayList<FormattedLine> arrayList = new ArrayList<FormattedLine>();
+		arrayList.add(new FormattedLine(1, "hello"));
 		when(exportService.getHierarchicalText(Mockito.<Thesaurus>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		Response result = service.getHierarchical("1234");
@@ -89,10 +88,10 @@ class ExportRestServiceTest {
 		thesaurus.setTitle("Mr");
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus);
-		List<FormattedLine> list = new ArrayList<FormattedLine>();
-		list.add(new FormattedLine(1, "hello"));
+		ArrayList<FormattedLine> arrayList = new ArrayList<FormattedLine>();
+		arrayList.add(new FormattedLine(1, "hello"));
 		when(exportService.getAlphabeticalText(Mockito.<Thesaurus>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		Response result = service.getAlphabetical("1234");

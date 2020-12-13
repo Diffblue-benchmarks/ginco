@@ -102,11 +102,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getPaginatedThesaurusSandoxedTermsListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		list.add(thesaurusTerm);
+		arrayList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findPaginatedSandboxedItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusTerm> result =
@@ -121,11 +121,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getTermsByConceptId() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		list.add(thesaurusTerm);
+		arrayList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusTerm> result = service.getTermsByConceptId("1234");
@@ -199,11 +199,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getAllTerms2() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		list.add(thesaurusTerm);
+		arrayList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusTerm> result = service.getAllTerms();
@@ -217,11 +217,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getPaginatedThesaurusSandoxedValidatedTermsListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		list.add(thesaurusTerm);
+		arrayList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findPaginatedSandboxedValidatedItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusTerm> result =
@@ -295,11 +295,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getAllTerms1() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		list.add(thesaurusTerm);
+		arrayList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findTermsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusTerm> result = service.getAllTerms("1234");
@@ -313,11 +313,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getPaginatedThesaurusPreferredTermsListLimitIsOneAndOnlyNotOrphanConceptsIsFalseAndStartIndexIsOne() {
 
 		// arrange
-		List<ThesaurusTerm> list = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		list.add(thesaurusTerm);
+		arrayList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findPaginatedPreferredItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<Boolean>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusTerm> result =

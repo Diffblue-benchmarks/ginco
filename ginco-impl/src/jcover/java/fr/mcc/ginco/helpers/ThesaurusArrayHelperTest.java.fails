@@ -82,10 +82,10 @@ public class ThesaurusArrayHelperTest {
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
-		List<String> list = new ArrayList<String>();
-		list.add("hello");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("hello");
 		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusConcept> result = service.getArrayConcepts("1234");
@@ -99,11 +99,12 @@ public class ThesaurusArrayHelperTest {
 	public void getArrayConceptRelations() {
 
 		// arrange
-		List<ThesaurusArrayConcept> list = new ArrayList<ThesaurusArrayConcept>();
+		ArrayList<ThesaurusArrayConcept> arrayList =
+			 new ArrayList<ThesaurusArrayConcept>();
 		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
-		list.add(thesaurusArrayConcept);
+		arrayList.add(thesaurusArrayConcept);
 		when(thesaurusArrayConceptDAO.getThesaurusArrayConceptsByArray(Mockito.<ThesaurusArray>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusArrayConcept> result =

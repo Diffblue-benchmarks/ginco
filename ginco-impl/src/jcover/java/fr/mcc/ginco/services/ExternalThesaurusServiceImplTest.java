@@ -82,11 +82,11 @@ public class ExternalThesaurusServiceImplTest {
 	public void getExternalThesaurusList() {
 
 		// arrange
-		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
+		ArrayList<ExternalThesaurus> arrayList = new ArrayList<ExternalThesaurus>();
 		ExternalThesaurus externalThesaurus = new ExternalThesaurus();
-		list.add(externalThesaurus);
+		arrayList.add(externalThesaurus);
 		when(externalThesaurusDAO.findAllByExternalIdQuery(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ExternalThesaurus> result = service.getExternalThesaurusList("1234");

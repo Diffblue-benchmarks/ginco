@@ -134,12 +134,13 @@ class SplitNonPreferredTermRestServiceTest {
 			 new SplitNonPreferredTermView();
 		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTerm>any()))
 			.thenReturn(splitNonPreferredTermView);
-		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
-		list.add(new SplitNonPreferredTerm());
+		ArrayList<SplitNonPreferredTerm> arrayList =
+			 new ArrayList<SplitNonPreferredTerm>();
+		arrayList.add(new SplitNonPreferredTerm());
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<SplitNonPreferredTermView>> result =

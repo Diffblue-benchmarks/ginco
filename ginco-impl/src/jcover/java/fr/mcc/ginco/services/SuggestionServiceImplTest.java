@@ -43,11 +43,11 @@ public class SuggestionServiceImplTest {
 	public void getConceptSuggestionPaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<Suggestion> list = new ArrayList<Suggestion>();
+		ArrayList<Suggestion> arrayList = new ArrayList<Suggestion>();
 		Suggestion suggestion = new Suggestion();
-		list.add(suggestion);
+		arrayList.add(suggestion);
 		when(suggestionDAO.findConceptPaginatedSuggestions(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Suggestion> result =
@@ -62,11 +62,11 @@ public class SuggestionServiceImplTest {
 	public void getTermSuggestionPaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<Suggestion> list = new ArrayList<Suggestion>();
+		ArrayList<Suggestion> arrayList = new ArrayList<Suggestion>();
 		Suggestion suggestion = new Suggestion();
-		list.add(suggestion);
+		arrayList.add(suggestion);
 		when(suggestionDAO.findTermPaginatedSuggestions(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Suggestion> result =
@@ -188,11 +188,11 @@ public class SuggestionServiceImplTest {
 	public void getSuggestionPaginatedListByRecipientLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<Suggestion> list = new ArrayList<Suggestion>();
+		ArrayList<Suggestion> arrayList = new ArrayList<Suggestion>();
 		Suggestion suggestion = new Suggestion();
-		list.add(suggestion);
+		arrayList.add(suggestion);
 		when(suggestionDAO.findPaginatedSuggestionsByRecipient(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Suggestion> result =

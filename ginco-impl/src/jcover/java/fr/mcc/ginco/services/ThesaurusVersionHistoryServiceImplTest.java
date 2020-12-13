@@ -48,13 +48,13 @@ public class ThesaurusVersionHistoryServiceImplTest {
 	public void getVersionsByThesaurusId() {
 
 		// arrange
-		List<ThesaurusVersionHistory> list =
+		ArrayList<ThesaurusVersionHistory> arrayList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 new ThesaurusVersionHistory();
-		list.add(thesaurusVersionHistory);
+		arrayList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusVersionHistory> result =
@@ -106,14 +106,14 @@ public class ThesaurusVersionHistoryServiceImplTest {
 
 	@Test
 	public void hasPublishedVersion2() {
-		List<ThesaurusVersionHistory> list =
+		ArrayList<ThesaurusVersionHistory> arrayList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 new ThesaurusVersionHistory();
 		thesaurusVersionHistory.setStatus(1);
-		list.add(thesaurusVersionHistory);
+		arrayList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		assertFalse(service.hasPublishedVersion(new Thesaurus()));
 	}
 
@@ -132,11 +132,11 @@ public class ThesaurusVersionHistoryServiceImplTest {
 		thesaurusVersionHistory1.setThisVersion(false);
 		thesaurusVersionHistory1.setUserId("root");
 		thesaurusVersionHistory1.setVersionNote("1.0");
-		List<ThesaurusVersionHistory> list =
+		ArrayList<ThesaurusVersionHistory> arrayList =
 			 new ArrayList<ThesaurusVersionHistory>();
-		list.add(new ThesaurusVersionHistory());
+		arrayList.add(new ThesaurusVersionHistory());
 		when(thesaurusVersionHistoryDAO.findAllOtherThisVersionTrueByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
 			.thenReturn(thesaurusVersionHistory1);
 		when(generatorService.generate(Mockito.<Class>any()))

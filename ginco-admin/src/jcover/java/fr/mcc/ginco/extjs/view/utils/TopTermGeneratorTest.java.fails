@@ -17,7 +17,6 @@ import fr.mcc.ginco.services.IThesaurusConceptService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,13 +49,13 @@ class TopTermGeneratorTest {
 	void generateTopTerm() {
 
 		// arrange
-		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
-		list.add(thesaurusConcept);
+		arrayList.add(thesaurusConcept);
 		when(thesaurusConceptService.getConceptWithChildrenIdentifers(Mockito.<String>any()))
 			.thenReturn(new HashSet<String>());
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any(), anyInt()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<IThesaurusListNode> result = service.generateTopTerm("1234");
@@ -65,7 +64,7 @@ class TopTermGeneratorTest {
 		assertThat(result.size(), is(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("78acedf2-5e6c-4178-a919-878e39772d46"));
+		assertThat(result.get(0).getId(), is("cb12849b-f44b-45bf-a9b2-940b53761ae4"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

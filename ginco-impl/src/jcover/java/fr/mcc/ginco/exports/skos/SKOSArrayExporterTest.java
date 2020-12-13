@@ -15,7 +15,6 @@ import fr.mcc.ginco.services.INodeLabelService;
 import fr.mcc.ginco.services.IThesaurusArrayService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,10 +46,10 @@ public class SKOSArrayExporterTest {
 
 	@Test
 	public void exportCollections1() {
-		List<ThesaurusArray> list2 = new ArrayList<ThesaurusArray>();
-		list2.add(new ThesaurusArray());
+		ArrayList<ThesaurusArray> arrayList2 = new ArrayList<ThesaurusArray>();
+		arrayList2.add(new ThesaurusArray());
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(thesaurusArrayService.getChildrenArrays(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
 		NodeLabel nodeLabel = new NodeLabel();
@@ -82,14 +81,14 @@ public class SKOSArrayExporterTest {
 
 	@Test
 	public void exportCollections2() {
-		List<ThesaurusArray> list1 = new ArrayList<ThesaurusArray>();
-		list1.add(new ThesaurusArray());
-		List<ThesaurusArray> list2 = new ArrayList<ThesaurusArray>();
-		list2.add(new ThesaurusArray());
+		ArrayList<ThesaurusArray> arrayList1 = new ArrayList<ThesaurusArray>();
+		arrayList1.add(new ThesaurusArray());
+		ArrayList<ThesaurusArray> arrayList2 = new ArrayList<ThesaurusArray>();
+		arrayList2.add(new ThesaurusArray());
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(thesaurusArrayService.getChildrenArrays(Mockito.<String>any()))
-			.thenReturn(list1);
+			.thenReturn(arrayList1);
 		NodeLabel nodeLabel = new NodeLabel();
 		nodeLabel.setLanguage(new Language());
 		when(nodeLabelService.getByThesaurusArray(Mockito.<String>any()))

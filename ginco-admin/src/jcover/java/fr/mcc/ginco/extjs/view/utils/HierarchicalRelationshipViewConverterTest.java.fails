@@ -16,7 +16,6 @@ import fr.mcc.ginco.services.IThesaurusConceptService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -67,12 +66,12 @@ class HierarchicalRelationshipViewConverterTest {
 	void getChildrenViews() {
 
 		// arrange
-		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setIdentifier("data");
-		list.add(thesaurusConcept);
+		arrayList.add(thesaurusConcept);
 		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(thesaurusConceptService.getConceptTitle(Mockito.<ThesaurusConcept>any()))
 			.thenReturn("foo=bar");
 		ConceptHierarchicalRelationship conceptHierarchicalRelationship =

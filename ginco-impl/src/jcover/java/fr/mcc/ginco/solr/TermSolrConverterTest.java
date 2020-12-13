@@ -23,7 +23,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.junit.Before;
@@ -187,7 +186,7 @@ public class TermSolrConverterTest {
 	public void convertSolrTerm2() throws java.text.ParseException {
 
 		// arrange
-		List<Note> list = new ArrayList<Note>();
+		ArrayList<Note> arrayList = new ArrayList<Note>();
 		Note note = new Note();
 		ThesaurusConcept concept1 = mock(ThesaurusConcept.class);
 		note.setConcept(concept1);
@@ -267,9 +266,9 @@ public class TermSolrConverterTest {
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		termId.setThesaurus(thesaurus2);
 		note.setTerm(termId);
-		list.add(note);
+		arrayList.add(note);
 		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		ThesaurusConcept concept3 = new ThesaurusConcept();
 		concept3.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());

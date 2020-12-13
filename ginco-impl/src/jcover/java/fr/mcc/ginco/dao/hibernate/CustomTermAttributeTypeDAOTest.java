@@ -48,11 +48,11 @@ public class CustomTermAttributeTypeDAOTest {
 		// arrange
 		CustomTermAttributeTypeDAO customTermAttributeTypeDAO =
 			 new CustomTermAttributeTypeDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);

@@ -8,7 +8,6 @@ import fr.mcc.ginco.beans.ThesaurusConcept;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -12,7 +12,6 @@ import fr.mcc.ginco.exports.result.bean.JaxbList;
 import fr.mcc.ginco.services.INoteService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,12 +43,22 @@ public class GincoTermExporterTest {
 
 	@Test
 	public void getExportTermNotes() {
-		List<Note> list = new ArrayList<Note>();
+
+		// arrange
+		ArrayList<Note> arrayList = new ArrayList<Note>();
+		Note note = new Note();
+		arrayList.add(note);
 		when(noteService.getTermNoteCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
-		assertSame(list, service.getExportTermNotes(new ThesaurusTerm()).getList());
+			.thenReturn(arrayList);
+
+		// act
+		JaxbList<Note> result = service.getExportTermNotes(new ThesaurusTerm());
+
+		// assert
+		assertEquals(1, result.getList().size());
+		assertSame(note, result.getList().get(0));
 	}
 
 	@Test

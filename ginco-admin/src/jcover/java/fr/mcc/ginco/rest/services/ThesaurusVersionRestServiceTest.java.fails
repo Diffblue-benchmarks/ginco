@@ -47,22 +47,26 @@ class ThesaurusVersionRestServiceTest {
 	void getVersions() {
 
 		// arrange
-		List<ThesaurusVersionHistoryView> list1 =
+		ArrayList<ThesaurusVersionHistoryView> arrayList1 =
 			 new ArrayList<ThesaurusVersionHistoryView>();
+		ThesaurusVersionHistoryView thesaurusVersionHistoryView =
+			 new ThesaurusVersionHistoryView();
+		arrayList1.add(thesaurusVersionHistoryView);
 		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
-			.thenReturn(list1);
-		List<ThesaurusVersionHistory> list2 =
+			.thenReturn(arrayList1);
+		ArrayList<ThesaurusVersionHistory> arrayList2 =
 			 new ArrayList<ThesaurusVersionHistory>();
-		list2.add(new ThesaurusVersionHistory());
+		arrayList2.add(new ThesaurusVersionHistory());
 		when(thesaurusVersionHistoryService.getVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result =
 			 service.getVersions("1234");
 
 		// assert
-		assertThat(result.getData(), sameInstance(list1));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusVersionHistoryView));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
 	}
@@ -90,15 +94,18 @@ class ThesaurusVersionRestServiceTest {
 	void updateVersionsVersionViewsIsEmpty() {
 
 		// arrange
-		List<ThesaurusVersionHistoryView> list1 =
+		ArrayList<ThesaurusVersionHistoryView> arrayList1 =
 			 new ArrayList<ThesaurusVersionHistoryView>();
-		List<ThesaurusVersionHistory> list2 =
+		ThesaurusVersionHistoryView thesaurusVersionHistoryView1 =
+			 new ThesaurusVersionHistoryView();
+		arrayList1.add(thesaurusVersionHistoryView1);
+		ArrayList<ThesaurusVersionHistory> arrayList2 =
 			 new ArrayList<ThesaurusVersionHistory>();
-		list2.add(new ThesaurusVersionHistory());
+		arrayList2.add(new ThesaurusVersionHistory());
 		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
-			.thenReturn(list1);
+			.thenReturn(arrayList1);
 		when(thesaurusVersionHistoryViewConverter.convertViewList(Mockito.<List<ThesaurusVersionHistoryView>>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(thesaurusVersionHistoryService.createOrUpdateVersion(Mockito.<ThesaurusVersionHistory>any()))
 			.thenReturn(new ThesaurusVersionHistory());
 
@@ -107,7 +114,8 @@ class ThesaurusVersionRestServiceTest {
 			 service.updateVersions(new ArrayList<ThesaurusVersionHistoryView>());
 
 		// assert
-		assertThat(result.getData(), sameInstance(list1));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusVersionHistoryView1));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}

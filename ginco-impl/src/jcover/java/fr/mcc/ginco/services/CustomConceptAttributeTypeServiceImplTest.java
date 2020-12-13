@@ -41,13 +41,13 @@ public class CustomConceptAttributeTypeServiceImplTest {
 	public void getAttributeTypesByThesaurus() {
 
 		// arrange
-		List<CustomConceptAttributeType> list =
+		ArrayList<CustomConceptAttributeType> arrayList =
 			 new ArrayList<CustomConceptAttributeType>();
 		CustomConceptAttributeType customConceptAttributeType =
 			 new CustomConceptAttributeType();
-		list.add(customConceptAttributeType);
+		arrayList.add(customConceptAttributeType);
 		when(customConceptAttributeTypeDAO.getAttributesByThesaurus(Mockito.<Thesaurus>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<CustomConceptAttributeType> result =

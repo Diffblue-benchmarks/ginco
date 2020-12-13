@@ -67,13 +67,13 @@ class SuggestionRestServiceTest {
 		SuggestionView suggestionView = new SuggestionView();
 		when(suggestionViewConverter.convert(Mockito.<Suggestion>any()))
 			.thenReturn(suggestionView);
-		List<Suggestion> list = new ArrayList<Suggestion>();
+		ArrayList<Suggestion> arrayList = new ArrayList<Suggestion>();
 		Suggestion suggestion = mock(Suggestion.class);
-		list.add(suggestion);
+		arrayList.add(suggestion);
 		when(suggestionService.getConceptSuggestionCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(suggestionService.getConceptSuggestionPaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<SuggestionView>> result =

@@ -10,7 +10,6 @@ import static org.mockito.Mockito.when;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -69,11 +68,11 @@ public class GenericHibernateDAOTest {
 	public void getByExternalIdReturnsSmith() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -92,11 +91,11 @@ public class GenericHibernateDAOTest {
 	public void findAll() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria = mock(Criteria.class);
 		when(criteria.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria);
@@ -112,11 +111,11 @@ public class GenericHibernateDAOTest {
 	public void findAllOrderIsAsc() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -135,11 +134,11 @@ public class GenericHibernateDAOTest {
 	public void findAllOrderIsDesc() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);

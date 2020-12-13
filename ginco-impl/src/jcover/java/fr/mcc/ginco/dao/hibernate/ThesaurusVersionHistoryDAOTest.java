@@ -40,8 +40,8 @@ public class ThesaurusVersionHistoryDAOTest {
 		// arrange
 		ThesaurusVersionHistoryDAO thesaurusVersionHistoryDAO =
 			 new ThesaurusVersionHistoryDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -50,7 +50,7 @@ public class ThesaurusVersionHistoryDAOTest {
 		when(criteria3.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);
@@ -74,8 +74,8 @@ public class ThesaurusVersionHistoryDAOTest {
 		// arrange
 		ThesaurusVersionHistoryDAO thesaurusVersionHistoryDAO =
 			 new ThesaurusVersionHistoryDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -85,7 +85,7 @@ public class ThesaurusVersionHistoryDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria4.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria4);

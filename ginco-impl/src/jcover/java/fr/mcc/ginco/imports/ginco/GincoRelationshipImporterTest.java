@@ -72,13 +72,13 @@ public class GincoRelationshipImporterTest {
 			.thenReturn(new ConceptHierarchicalRelationship());
 		HashMap<String, JaxbList<ConceptHierarchicalRelationship>> relationsToImport =
 			 new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>();
-		ArrayList<ConceptHierarchicalRelationship> list2 =
+		ArrayList<ConceptHierarchicalRelationship> list =
 			 new ArrayList<ConceptHierarchicalRelationship>();
 		ConceptHierarchicalRelationship conceptHierarchicalRelationship2 =
 			 new ConceptHierarchicalRelationship();
 		conceptHierarchicalRelationship2.setIdentifier(new ConceptHierarchicalRelationship.Id());
-		list2.add(conceptHierarchicalRelationship2);
-		relationsToImport.put("", new JaxbList<ConceptHierarchicalRelationship>(list2));
+		list.add(conceptHierarchicalRelationship2);
+		relationsToImport.put("", new JaxbList<ConceptHierarchicalRelationship>(list));
 
 		// act
 		List<ThesaurusConcept> result =

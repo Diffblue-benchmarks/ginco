@@ -109,9 +109,12 @@ class ThesaurusArrayRestServiceTest {
 	void getAllConceptArraysByThesaurusId() {
 
 		// arrange
-		List<ThesaurusArrayView> list1 = new ArrayList<ThesaurusArrayView>();
+		ArrayList<ThesaurusArrayView> arrayList1 =
+			 new ArrayList<ThesaurusArrayView>();
+		ThesaurusArrayView thesaurusArrayView = new ThesaurusArrayView();
+		arrayList1.add(thesaurusArrayView);
 		when(thesaurusArrayViewConverter.convert(Mockito.<List<ThesaurusArray>>any()))
-			.thenReturn(list1);
+			.thenReturn(arrayList1);
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
 
@@ -120,7 +123,8 @@ class ThesaurusArrayRestServiceTest {
 			 service.getAllConceptArraysByThesaurusId("1234", "1234");
 
 		// assert
-		assertThat(result.getData(), sameInstance(list1));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusArrayView));
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
 	}

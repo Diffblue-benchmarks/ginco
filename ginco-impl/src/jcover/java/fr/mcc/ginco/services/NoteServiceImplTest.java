@@ -45,11 +45,11 @@ public class NoteServiceImplTest {
 	public void getConceptNotePaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<Note> list = new ArrayList<Note>();
+		ArrayList<Note> arrayList = new ArrayList<Note>();
 		Note note = new Note();
-		list.add(note);
+		arrayList.add(note);
 		when(noteDAO.findConceptPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Note> result = service.getConceptNotePaginatedList("1234", 1, 1);
@@ -63,11 +63,11 @@ public class NoteServiceImplTest {
 	public void getTermNotePaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<Note> list = new ArrayList<Note>();
+		ArrayList<Note> arrayList = new ArrayList<Note>();
 		Note note = new Note();
-		list.add(note);
+		arrayList.add(note);
 		when(noteDAO.findTermPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Note> result = service.getTermNotePaginatedList("1234", 1, 1);
@@ -209,11 +209,11 @@ public class NoteServiceImplTest {
 	public void getAllNotes() {
 
 		// arrange
-		List<Note> list = new ArrayList<Note>();
+		ArrayList<Note> arrayList = new ArrayList<Note>();
 		Note note = new Note();
-		list.add(note);
+		arrayList.add(note);
 		when(noteDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Note> result = service.getAllNotes();
@@ -227,11 +227,11 @@ public class NoteServiceImplTest {
 	public void getNotesByThesaurusId() {
 
 		// arrange
-		List<Note> list = new ArrayList<Note>();
+		ArrayList<Note> arrayList = new ArrayList<Note>();
 		Note note = new Note();
-		list.add(note);
+		arrayList.add(note);
 		when(noteDAO.findNotesByThesaurusId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Note> result = service.getNotesByThesaurusId("1234");

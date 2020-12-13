@@ -18,7 +18,6 @@ import fr.mcc.ginco.services.IThesaurusConceptService;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -94,10 +93,11 @@ public class SKOSGroupExporterTest {
 
 	@Test
 	public void exportGroup2() {
-		List<ThesaurusConceptGroup> list = new ArrayList<ThesaurusConceptGroup>();
-		list.add(new ThesaurusConceptGroup());
+		ArrayList<ThesaurusConceptGroup> arrayList =
+			 new ArrayList<ThesaurusConceptGroup>();
+		arrayList.add(new ThesaurusConceptGroup());
 		when(thesaurusConceptGroupService.getChildGroups(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
 			 new ThesaurusConceptGroupLabel();
 		thesaurusConceptGroupLabel.setLanguage(new Language());

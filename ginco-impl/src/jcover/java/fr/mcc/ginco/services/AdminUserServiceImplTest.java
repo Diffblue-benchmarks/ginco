@@ -47,11 +47,11 @@ public class AdminUserServiceImplTest {
 	public void getAllAdmin() {
 
 		// arrange
-		List<AdminUser> list = new ArrayList<AdminUser>();
+		ArrayList<AdminUser> arrayList = new ArrayList<AdminUser>();
 		AdminUser adminUser = new AdminUser();
-		list.add(adminUser);
+		arrayList.add(adminUser);
 		when(adminUserDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<AdminUser> result = service.getAllAdmin();

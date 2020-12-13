@@ -100,11 +100,12 @@ public class ThesaurusConceptGroupServiceImplTest {
 	public void getAllThesaurusConceptGroupsByThesaurusId() {
 
 		// arrange
-		List<ThesaurusConceptGroup> list = new ArrayList<ThesaurusConceptGroup>();
+		ArrayList<ThesaurusConceptGroup> arrayList =
+			 new ArrayList<ThesaurusConceptGroup>();
 		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
-		list.add(thesaurusConceptGroup);
+		arrayList.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupDAO.findThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusConceptGroup> result =
@@ -155,11 +156,12 @@ public class ThesaurusConceptGroupServiceImplTest {
 	public void getChildGroups() {
 
 		// arrange
-		List<ThesaurusConceptGroup> list = new ArrayList<ThesaurusConceptGroup>();
+		ArrayList<ThesaurusConceptGroup> arrayList =
+			 new ArrayList<ThesaurusConceptGroup>();
 		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
-		list.add(thesaurusConceptGroup);
+		arrayList.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupDAO.getChildGroups(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusConceptGroup> result = service.getChildGroups("1234");

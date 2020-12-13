@@ -1,6 +1,7 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
@@ -86,11 +87,11 @@ class ThesaurusRestServiceTest {
 	void getAllThesaurusTypes() {
 
 		// arrange
-		List<ThesaurusType> list = new ArrayList<ThesaurusType>();
+		ArrayList<ThesaurusType> arrayList = new ArrayList<ThesaurusType>();
 		ThesaurusType thesaurusType = new ThesaurusType();
-		list.add(thesaurusType);
+		arrayList.add(thesaurusType);
 		when(thesaurusTypeService.getThesaurusTypeList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusType> result = service.getAllThesaurusTypes();
@@ -102,17 +103,10 @@ class ThesaurusRestServiceTest {
 
 	@Test
 	void getTopLanguages() {
-
-		// arrange
-		List<Language> list = new ArrayList<Language>();
 		when(thesaurusService.getThesaurusLanguages(Mockito.<String>any()))
-			.thenReturn(list);
-
-		// act
+			.thenReturn(new ArrayList<Language>());
 		ExtJsonFormLoadData<List<Language>> result = service.getTopLanguages("1234");
-
-		// assert
-		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getData(), empty());
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}
@@ -121,15 +115,18 @@ class ThesaurusRestServiceTest {
 	void getTopLanguagesThesaurusIdIsEmpty() {
 
 		// arrange
-		List<Language> list2 = new ArrayList<Language>();
+		ArrayList<Language> arrayList2 = new ArrayList<Language>();
+		Language language2 = new Language();
+		arrayList2.add(language2);
 		when(languagesService.getTopLanguagesList())
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 
 		// act
 		ExtJsonFormLoadData<List<Language>> result = service.getTopLanguages("");
 
 		// assert
-		assertThat(result.getData(), sameInstance(list2));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(language2));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}
@@ -138,11 +135,11 @@ class ThesaurusRestServiceTest {
 	void getAllThesaurusFormats() {
 
 		// arrange
-		List<ThesaurusFormat> list = new ArrayList<ThesaurusFormat>();
+		ArrayList<ThesaurusFormat> arrayList = new ArrayList<ThesaurusFormat>();
 		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
-		list.add(thesaurusFormat);
+		arrayList.add(thesaurusFormat);
 		when(thesaurusFormatService.getThesaurusFormatList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusFormat> result = service.getAllThesaurusFormats();
@@ -226,10 +223,10 @@ class ThesaurusRestServiceTest {
 		ThesaurusView thesaurusView = new ThesaurusView();
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
-		List<Thesaurus> list = new ArrayList<Thesaurus>();
-		list.add(new Thesaurus());
+		ArrayList<Thesaurus> arrayList = new ArrayList<Thesaurus>();
+		arrayList.add(new Thesaurus());
 		when(thesaurusService.getThesaurusList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusView>> result = service.getVocabularies();
@@ -458,11 +455,12 @@ class ThesaurusRestServiceTest {
 	void getAllAuthors() {
 
 		// arrange
-		List<ThesaurusOrganization> list = new ArrayList<ThesaurusOrganization>();
+		ArrayList<ThesaurusOrganization> arrayList =
+			 new ArrayList<ThesaurusOrganization>();
 		ThesaurusOrganization thesaurusOrganization = new ThesaurusOrganization();
-		list.add(thesaurusOrganization);
+		arrayList.add(thesaurusOrganization);
 		when(thesaurusOrganizationService.getOrganizationsWithData())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ThesaurusOrganization> result = service.getAllAuthors();

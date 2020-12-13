@@ -39,11 +39,11 @@ public class LanguageDAOTest {
 
 		// arrange
 		LanguageDAO languageDAO = new LanguageDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -77,11 +77,11 @@ public class LanguageDAOTest {
 
 		// arrange
 		LanguageDAO languageDAO = new LanguageDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);

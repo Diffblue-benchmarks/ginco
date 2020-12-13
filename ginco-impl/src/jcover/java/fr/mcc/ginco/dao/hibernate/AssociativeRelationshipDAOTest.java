@@ -49,14 +49,14 @@ public class AssociativeRelationshipDAOTest {
 	public void getAssociatedConceptsStatusIsCandidate() throws org.hibernate.HibernateException {
 		AssociativeRelationshipDAO associativeRelationshipDAO =
 			 new AssociativeRelationshipDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria3 = mock(Criteria.class);
 		when(criteria3.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
 			.thenReturn(criteria2);
@@ -78,11 +78,11 @@ public class AssociativeRelationshipDAOTest {
 	public void getAssociatedConcepts() throws org.hibernate.HibernateException {
 		AssociativeRelationshipDAO associativeRelationshipDAO =
 			 new AssociativeRelationshipDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.setProjection(Mockito.<org.hibernate.criterion.Projection>any()))
 			.thenReturn(criteria1);
@@ -106,11 +106,11 @@ public class AssociativeRelationshipDAOTest {
 		// arrange
 		AssociativeRelationshipDAO associativeRelationshipDAO =
 			 new AssociativeRelationshipDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);

@@ -49,8 +49,8 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
@@ -66,7 +66,7 @@ public class ThesaurusTermDAOTest {
 			.thenReturn(criteria4);
 		Criteria criteria6 = mock(Criteria.class);
 		when(criteria6.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(criteria6.setMaxResults(anyInt()))
 			.thenReturn(criteria5);
 		Session session = mock(Session.class);
@@ -91,8 +91,8 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -111,7 +111,7 @@ public class ThesaurusTermDAOTest {
 		when(criteria7.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria7.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(criteria7.setMaxResults(anyInt()))
 			.thenReturn(criteria6);
 		Session session = mock(Session.class);
@@ -161,11 +161,11 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -190,11 +190,11 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -299,11 +299,11 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
 		when(criteria3.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
@@ -343,11 +343,11 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
 		when(criteria3.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
@@ -387,11 +387,11 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -420,11 +420,11 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -453,15 +453,15 @@ public class ThesaurusTermDAOTest {
 
 		// arrange
 		ThesaurusTermDAO thesaurusTermDAO = new ThesaurusTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Query query1 = mock(Query.class);
 		Query query2 = mock(Query.class);
 		Query query3 = mock(Query.class);
 		Query query4 = mock(Query.class);
 		SQLQuery obj1 = mock(SQLQuery.class);
 		when(obj1.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(obj1.setFetchSize(anyInt()))
 			.thenReturn(query2);
 		when(obj1.setFirstResult(anyInt()))

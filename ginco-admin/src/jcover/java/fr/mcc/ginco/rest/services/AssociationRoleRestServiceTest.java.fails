@@ -40,17 +40,21 @@ class AssociationRoleRestServiceTest {
 	void getAllRoles() {
 
 		// arrange
-		List<AssociativeRelationshipRole> list =
+		ArrayList<AssociativeRelationshipRole> arrayList =
 			 new ArrayList<AssociativeRelationshipRole>();
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
+		arrayList.add(associativeRelationshipRole);
 		when(associativeRelationshipRoleService.getAllAssociationTermRole())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<AssociativeRelationshipRole>> result =
 			 service.getAllRoles();
 
 		// assert
-		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(associativeRelationshipRole));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}

@@ -16,7 +16,6 @@ import fr.mcc.ginco.dao.ILanguageDAO;
 import fr.mcc.ginco.services.INoteTypeService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,10 +50,10 @@ public class ConceptNoteBuilderTest {
 
 	@Test
 	public void buildConceptNotesReturnsEmpty() {
-		List<NoteType> list = new ArrayList<NoteType>();
-		list.add(new NoteType());
+		ArrayList<NoteType> arrayList = new ArrayList<NoteType>();
+		arrayList.add(new NoteType());
 		when(noteTypeService.getConceptNoteTypeList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);

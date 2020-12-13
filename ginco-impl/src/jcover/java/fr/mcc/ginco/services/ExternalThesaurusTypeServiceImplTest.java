@@ -39,11 +39,12 @@ public class ExternalThesaurusTypeServiceImplTest {
 	public void getExternalThesaurusTypeList() {
 
 		// arrange
-		List<ExternalThesaurusType> list = new ArrayList<ExternalThesaurusType>();
+		ArrayList<ExternalThesaurusType> arrayList =
+			 new ArrayList<ExternalThesaurusType>();
 		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
-		list.add(externalThesaurusType);
+		arrayList.add(externalThesaurusType);
 		when(externalThesaurusTypeDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ExternalThesaurusType> result = service.getExternalThesaurusTypeList();

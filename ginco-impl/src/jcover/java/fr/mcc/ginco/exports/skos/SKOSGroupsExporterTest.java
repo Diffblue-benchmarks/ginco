@@ -15,7 +15,6 @@ import fr.mcc.ginco.services.IThesaurusConceptGroupService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,17 +63,18 @@ public class SKOSGroupsExporterTest {
 
 	@Test
 	public void exportGroups2() {
-		List<ThesaurusConceptGroupType> list1 =
+		ArrayList<ThesaurusConceptGroupType> arrayList1 =
 			 new ArrayList<ThesaurusConceptGroupType>();
-		list1.add(new ThesaurusConceptGroupType());
+		arrayList1.add(new ThesaurusConceptGroupType());
 		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
-			.thenReturn(list1);
-		List<ThesaurusConceptGroup> list2 = new ArrayList<ThesaurusConceptGroup>();
+			.thenReturn(arrayList1);
+		ArrayList<ThesaurusConceptGroup> arrayList2 =
+			 new ArrayList<ThesaurusConceptGroup>();
 		ThesaurusConceptGroup thesaurusConceptGroup =
 			 mock(ThesaurusConceptGroup.class);
-		list2.add(thesaurusConceptGroup);
+		arrayList2.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		OntClass ontClass = mock(OntClass.class);
 		OntModel ontModel1 = mock(OntModel.class);
 		when(skosGroupOntologyExporter.addGroupTypeToOntModel(Mockito.<OntModel>any(), Mockito.<String>any()))

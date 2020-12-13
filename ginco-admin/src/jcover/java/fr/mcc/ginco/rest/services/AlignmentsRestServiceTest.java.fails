@@ -54,11 +54,11 @@ class AlignmentsRestServiceTest {
 	void getAlignmentTypes() {
 
 		// arrange
-		List<AlignmentType> list = new ArrayList<AlignmentType>();
+		ArrayList<AlignmentType> arrayList = new ArrayList<AlignmentType>();
 		AlignmentType alignmentType = new AlignmentType();
-		list.add(alignmentType);
+		arrayList.add(alignmentType);
 		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<AlignmentType> result = service.getAlignmentTypes();
@@ -72,11 +72,12 @@ class AlignmentsRestServiceTest {
 	void getExternalThesaurusTypes() {
 
 		// arrange
-		List<ExternalThesaurusType> list = new ArrayList<ExternalThesaurusType>();
+		ArrayList<ExternalThesaurusType> arrayList =
+			 new ArrayList<ExternalThesaurusType>();
 		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
-		list.add(externalThesaurusType);
+		arrayList.add(externalThesaurusType);
 		when(externalThesaurusTypeService.getExternalThesaurusTypeList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ExternalThesaurusType> result = service.getExternalThesaurusTypes();
@@ -93,10 +94,10 @@ class AlignmentsRestServiceTest {
 		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
 		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
 			.thenReturn(externalThesaurusView);
-		List<ExternalThesaurus> list = new ArrayList<ExternalThesaurus>();
-		list.add(new ExternalThesaurus());
+		ArrayList<ExternalThesaurus> arrayList = new ArrayList<ExternalThesaurus>();
+		arrayList.add(new ExternalThesaurus());
 		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<ExternalThesaurusView> result =

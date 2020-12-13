@@ -76,50 +76,50 @@ public class ExportServiceImplTest {
 
 	@Test
 	public void getHierarchicalText1() {
-		List<ThesaurusConcept> list1 = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept1 = new ThesaurusConcept();
 		thesaurusConcept1.setIdentifier("data");
-		list1.add(thesaurusConcept1);
+		arrayList1.add(thesaurusConcept1);
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))
-			.thenReturn(list1);
-		List<ThesaurusArray> list3 = new ArrayList<ThesaurusArray>();
-		list3.add(new ThesaurusArray());
+			.thenReturn(arrayList1);
+		ArrayList<ThesaurusArray> arrayList3 = new ArrayList<ThesaurusArray>();
+		arrayList3.add(new ThesaurusArray());
 		when(thesaurusArrayService.getArraysWithoutParentArray(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
 		when(thesaurusArrayService.getArraysWithoutParentConcept(Mockito.<String>any()))
-			.thenReturn(list3);
-		List<ThesaurusConcept> list4 = new ArrayList<ThesaurusConcept>();
+			.thenReturn(arrayList3);
+		ArrayList<ThesaurusConcept> arrayList4 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept2 = new ThesaurusConcept();
 		thesaurusConcept2.setIdentifier("data");
-		list4.add(thesaurusConcept2);
+		arrayList4.add(thesaurusConcept2);
 		when(thesaurusArrayHelper.getArrayConcepts(Mockito.<String>any()))
-			.thenReturn(list4);
+			.thenReturn(arrayList4);
 		assertTrue((service.getHierarchicalText(new Thesaurus())).isEmpty());
 	}
 
 	@Test
 	public void getHierarchicalText2() {
-		List<ThesaurusConcept> list1 = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept1 = new ThesaurusConcept();
 		thesaurusConcept1.setIdentifier("data");
-		list1.add(thesaurusConcept1);
+		arrayList1.add(thesaurusConcept1);
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))
-			.thenReturn(list1);
-		List<ThesaurusArray> list2 = new ArrayList<ThesaurusArray>();
+			.thenReturn(arrayList1);
+		ArrayList<ThesaurusArray> arrayList2 = new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray1 = mock(ThesaurusArray.class);
-		list2.add(thesaurusArray1);
-		List<ThesaurusArray> list3 = new ArrayList<ThesaurusArray>();
-		list3.add(new ThesaurusArray());
+		arrayList2.add(thesaurusArray1);
+		ArrayList<ThesaurusArray> arrayList3 = new ArrayList<ThesaurusArray>();
+		arrayList3.add(new ThesaurusArray());
 		when(thesaurusArrayService.getArraysWithoutParentArray(Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(thesaurusArrayService.getArraysWithoutParentConcept(Mockito.<String>any()))
-			.thenReturn(list3);
-		List<ThesaurusConcept> list4 = new ArrayList<ThesaurusConcept>();
+			.thenReturn(arrayList3);
+		ArrayList<ThesaurusConcept> arrayList4 = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept2 = new ThesaurusConcept();
 		thesaurusConcept2.setIdentifier("data");
-		list4.add(thesaurusConcept2);
+		arrayList4.add(thesaurusConcept2);
 		when(thesaurusArrayHelper.getArrayConcepts(Mockito.<String>any()))
-			.thenReturn(list4);
+			.thenReturn(arrayList4);
 		assertTrue((service.getHierarchicalText(new Thesaurus())).isEmpty());
 	}
 
@@ -127,12 +127,13 @@ public class ExportServiceImplTest {
 	public void getAlphabeticalText1() {
 		when(thesaurusConceptService.getConceptsByThesaurusId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
-		List<SplitNonPreferredTerm> list2 = new ArrayList<SplitNonPreferredTerm>();
-		list2.add(new SplitNonPreferredTerm());
+		ArrayList<SplitNonPreferredTerm> arrayList2 =
+			 new ArrayList<SplitNonPreferredTerm>();
+		arrayList2.add(new SplitNonPreferredTerm());
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		assertTrue((service.getAlphabeticalText(new Thesaurus())).isEmpty());
 		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(Mockito.eq((Integer) 1), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
 		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(Mockito.eq((Integer) 0), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
@@ -142,19 +143,20 @@ public class ExportServiceImplTest {
 	public void getAlphabeticalText2() {
 
 		// arrange
-		List<ThesaurusConcept> list1 = new ArrayList<ThesaurusConcept>();
-		list1.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
+		arrayList1.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getConceptTitle(Mockito.<ThesaurusConcept>any()))
 			.thenReturn("foo=bar")
 			.thenReturn("foo=bar");
 		when(thesaurusConceptService.getConceptsByThesaurusId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any()))
-			.thenReturn(list1);
-		List<SplitNonPreferredTerm> list2 = new ArrayList<SplitNonPreferredTerm>();
-		list2.add(new SplitNonPreferredTerm());
+			.thenReturn(arrayList1);
+		ArrayList<SplitNonPreferredTerm> arrayList2 =
+			 new ArrayList<SplitNonPreferredTerm>();
+		arrayList2.add(new SplitNonPreferredTerm());
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(alphabeticalExportedItemComparator.compare(Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any(), Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any()))
 			.thenReturn(1);
 

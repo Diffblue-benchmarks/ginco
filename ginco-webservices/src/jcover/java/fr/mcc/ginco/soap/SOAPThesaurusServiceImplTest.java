@@ -35,14 +35,14 @@ class SOAPThesaurusServiceImplTest {
 
 		// arrange
 		SOAPThesaurusServiceImpl obj = new SOAPThesaurusServiceImpl();
-		List<Thesaurus> list = new ArrayList<Thesaurus>();
+		ArrayList<Thesaurus> arrayList = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setIdentifier("data");
 		thesaurus.setTitle("Mr");
-		list.add(thesaurus);
+		arrayList.add(thesaurus);
 		IThesaurusService thesaurusService = mock(IThesaurusService.class);
 		when(thesaurusService.getThesaurusList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		obj.setThesaurusService(thesaurusService);
 
 		// act

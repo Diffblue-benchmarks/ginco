@@ -61,18 +61,21 @@ class ThesaurusConceptGroupRestServiceTest {
 	void getConceptGroupTypes() {
 
 		// arrange
-		List<ThesaurusConceptGroupType> list =
+		ArrayList<ThesaurusConceptGroupType> arrayList =
 			 new ArrayList<ThesaurusConceptGroupType>();
-		list.add(new ThesaurusConceptGroupType());
+		ThesaurusConceptGroupType thesaurusConceptGroupType =
+			 new ThesaurusConceptGroupType();
+		arrayList.add(thesaurusConceptGroupType);
 		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusConceptGroupType>> result =
 			 service.getConceptGroupTypes();
 
 		// assert
-		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptGroupType));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
 	}
@@ -131,10 +134,13 @@ class ThesaurusConceptGroupRestServiceTest {
 	void getAllConceptGroupsByThesaurusId() {
 
 		// arrange
-		List<ThesaurusConceptGroupView> list1 =
+		ArrayList<ThesaurusConceptGroupView> arrayList1 =
 			 new ArrayList<ThesaurusConceptGroupView>();
+		ThesaurusConceptGroupView thesaurusConceptGroupView =
+			 new ThesaurusConceptGroupView();
+		arrayList1.add(thesaurusConceptGroupView);
 		when(thesaurusConceptGroupViewConverter.convert(Mockito.<List<ThesaurusConceptGroup>>any()))
-			.thenReturn(list1);
+			.thenReturn(arrayList1);
 		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConceptGroup>());
 
@@ -143,7 +149,8 @@ class ThesaurusConceptGroupRestServiceTest {
 			 service.getAllConceptGroupsByThesaurusId("1234", "1234");
 
 		// assert
-		assertThat(result.getData(), sameInstance(list1));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptGroupView));
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
 	}

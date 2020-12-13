@@ -69,20 +69,20 @@ public class AssociativeRelationshipServiceImplTest {
 
 	@Test
 	public void getAssociatedConceptsIdStatusIsCandidate() {
-		List<String> list = new ArrayList<String>();
-		list.add("hello");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("hello");
 		when(associativeRelationshipDAO.getAssociatedConcepts(Mockito.<ThesaurusConcept>any(), Mockito.<ConceptStatusEnum>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		assertEquals(1, service.getAssociatedConceptsId(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).size());
 		assertEquals("hello", service.getAssociatedConceptsId(new ThesaurusConcept(), ConceptStatusEnum.CANDIDATE).get(0));
 	}
 
 	@Test
 	public void getAssociatedConceptsId() {
-		List<String> list = new ArrayList<String>();
-		list.add("hello");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("hello");
 		when(associativeRelationshipDAO.getAssociatedConcepts(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		assertEquals(1, service.getAssociatedConceptsId(new ThesaurusConcept()).size());
 		assertEquals("hello", service.getAssociatedConceptsId(new ThesaurusConcept()).get(0));
 	}
@@ -91,13 +91,13 @@ public class AssociativeRelationshipServiceImplTest {
 	public void getAssociatedConceptsRelationships() {
 
 		// arrange
-		List<AssociativeRelationship> list =
+		ArrayList<AssociativeRelationship> arrayList =
 			 new ArrayList<AssociativeRelationship>();
 		AssociativeRelationship associativeRelationship =
 			 new AssociativeRelationship();
-		list.add(associativeRelationship);
+		arrayList.add(associativeRelationship);
 		when(associativeRelationshipDAO.getAssociationsForConcept(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<AssociativeRelationship> result =

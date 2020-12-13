@@ -40,11 +40,11 @@ public class LanguagesServiceImplTest {
 	public void getLanguagesListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<Language> list = new ArrayList<Language>();
+		ArrayList<Language> arrayList = new ArrayList<Language>();
 		Language language = new Language();
-		list.add(language);
+		arrayList.add(language);
 		when(languagesDAO.findPaginatedItems(Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Language> result = service.getLanguagesList(1, 1);
@@ -58,11 +58,11 @@ public class LanguagesServiceImplTest {
 	public void getTopLanguagesList() {
 
 		// arrange
-		List<Language> list = new ArrayList<Language>();
+		ArrayList<Language> arrayList = new ArrayList<Language>();
 		Language language = new Language();
-		list.add(language);
+		arrayList.add(language);
 		when(languagesDAO.findTopLanguages())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Language> result = service.getTopLanguagesList();

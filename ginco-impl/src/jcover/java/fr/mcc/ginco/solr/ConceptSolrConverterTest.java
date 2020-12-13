@@ -23,7 +23,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.junit.Before;
@@ -152,7 +151,7 @@ public class ConceptSolrConverterTest {
 		thesaurus2.setType(type2);
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusTerm1.setThesaurus(thesaurus2);
-		List<ThesaurusTerm> list1 = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> arrayList1 = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
 		ThesaurusConcept concept2 = new ThesaurusConcept();
 		concept2.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
@@ -239,12 +238,12 @@ public class ConceptSolrConverterTest {
 		thesaurus4.setType(type4);
 		thesaurus4.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusTerm2.setThesaurus(thesaurus4);
-		list1.add(thesaurusTerm2);
+		arrayList1.add(thesaurusTerm2);
 		when(thesaurusConceptService.getConceptPreferredTerm(Mockito.<String>any()))
 			.thenReturn(thesaurusTerm1);
 		when(thesaurusConceptService.getConceptPreferredTerms(Mockito.<String>any()))
-			.thenReturn(list1);
-		List<Note> list2 = new ArrayList<Note>();
+			.thenReturn(arrayList1);
+		ArrayList<Note> arrayList2 = new ArrayList<Note>();
 		Note note = new Note();
 		ThesaurusConcept concept3 = new ThesaurusConcept();
 		concept3.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
@@ -357,9 +356,9 @@ public class ConceptSolrConverterTest {
 		thesaurus7.setVersions(new HashSet<ThesaurusVersionHistory>());
 		termId.setThesaurus(thesaurus7);
 		note.setTerm(termId);
-		list2.add(note);
+		arrayList2.add(note);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
 		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());

@@ -80,11 +80,12 @@ public class SplitNonPreferredTermServiceImplTest {
 	public void getSplitNonPreferredTermListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
+		ArrayList<SplitNonPreferredTerm> arrayList =
+			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
-		list.add(splitNonPreferredTerm);
+		arrayList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermDAO.findItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<SplitNonPreferredTerm> result =
@@ -106,11 +107,12 @@ public class SplitNonPreferredTermServiceImplTest {
 	public void getAllSplitNonPreferredTerms() {
 
 		// arrange
-		List<SplitNonPreferredTerm> list = new ArrayList<SplitNonPreferredTerm>();
+		ArrayList<SplitNonPreferredTerm> arrayList =
+			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
-		list.add(splitNonPreferredTerm);
+		arrayList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<SplitNonPreferredTerm> result = service.getAllSplitNonPreferredTerms();

@@ -39,8 +39,8 @@ public class ThesaurusConceptGroupDAOTest {
 		// arrange
 		ThesaurusConceptGroupDAO thesaurusConceptGroupDAO =
 			 new ThesaurusConceptGroupDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
@@ -48,7 +48,7 @@ public class ThesaurusConceptGroupDAOTest {
 			.thenReturn(criteria2)
 			.thenReturn(criteria1);
 		when(criteria3.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);
@@ -72,15 +72,15 @@ public class ThesaurusConceptGroupDAOTest {
 		// arrange
 		ThesaurusConceptGroupDAO thesaurusConceptGroupDAO =
 			 new ThesaurusConceptGroupDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		Criteria criteria3 = mock(Criteria.class);
 		when(criteria3.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria2);
 		when(criteria3.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria3);
@@ -104,14 +104,14 @@ public class ThesaurusConceptGroupDAOTest {
 		// arrange
 		ThesaurusConceptGroupDAO thesaurusConceptGroupDAO =
 			 new ThesaurusConceptGroupDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any(), Mockito.<String>any()))
 			.thenReturn(criteria2);

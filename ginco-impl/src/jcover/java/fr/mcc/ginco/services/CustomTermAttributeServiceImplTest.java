@@ -42,11 +42,12 @@ public class CustomTermAttributeServiceImplTest {
 	public void getAttributesByEntity() {
 
 		// arrange
-		List<CustomTermAttribute> list = new ArrayList<CustomTermAttribute>();
+		ArrayList<CustomTermAttribute> arrayList =
+			 new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
-		list.add(customTermAttribute);
+		arrayList.add(customTermAttribute);
 		when(customTermAttributeDAO.getAttributesByEntity(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<CustomTermAttribute> result =

@@ -40,8 +40,8 @@ public class SplitNonPreferredTermDAOTest {
 		// arrange
 		SplitNonPreferredTermDAO splitNonPreferredTermDAO =
 			 new SplitNonPreferredTermDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
@@ -54,7 +54,7 @@ public class SplitNonPreferredTermDAOTest {
 			.thenReturn(criteria3);
 		Criteria criteria5 = mock(Criteria.class);
 		when(criteria5.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(criteria5.setMaxResults(anyInt()))
 			.thenReturn(criteria4);
 		Session session = mock(Session.class);

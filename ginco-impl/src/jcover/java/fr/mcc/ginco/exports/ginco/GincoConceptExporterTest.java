@@ -1,5 +1,6 @@
 package fr.mcc.ginco.exports.ginco;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -10,14 +11,13 @@ import fr.mcc.ginco.beans.AssociativeRelationship;
 import fr.mcc.ginco.beans.Note;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.dao.IConceptHierarchicalRelationshipDAO;
+import fr.mcc.ginco.exports.result.bean.JaxbList;
 import fr.mcc.ginco.services.IAlignmentService;
 import fr.mcc.ginco.services.IAssociativeRelationshipService;
 import fr.mcc.ginco.services.INoteService;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,12 +55,23 @@ public class GincoConceptExporterTest {
 
 	@Test
 	public void getExportConceptNotes() {
-		List<Note> list = new ArrayList<Note>();
+
+		// arrange
+		ArrayList<Note> arrayList = new ArrayList<Note>();
+		Note note = new Note();
+		arrayList.add(note);
 		when(noteService.getConceptNoteCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
-		assertSame(list, service.getExportConceptNotes(new ThesaurusConcept()).getList());
+			.thenReturn(arrayList);
+
+		// act
+		JaxbList<Note> result =
+			 service.getExportConceptNotes(new ThesaurusConcept());
+
+		// assert
+		assertEquals(1, result.getList().size());
+		assertSame(note, result.getList().get(0));
 	}
 
 	@Test
@@ -73,18 +84,41 @@ public class GincoConceptExporterTest {
 
 	@Test
 	public void getExportAssociativeRelationShip() {
-		List<AssociativeRelationship> list =
+
+		// arrange
+		ArrayList<AssociativeRelationship> arrayList =
 			 new ArrayList<AssociativeRelationship>();
+		AssociativeRelationship associativeRelationship =
+			 new AssociativeRelationship();
+		arrayList.add(associativeRelationship);
 		when(associativeRelationshipService.getAssociatedConceptsRelationships(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(list);
-		assertSame(list, service.getExportAssociativeRelationShip(new ThesaurusConcept()).getList());
+			.thenReturn(arrayList);
+
+		// act
+		JaxbList<AssociativeRelationship> result =
+			 service.getExportAssociativeRelationShip(new ThesaurusConcept());
+
+		// assert
+		assertEquals(1, result.getList().size());
+		assertSame(associativeRelationship, result.getList().get(0));
 	}
 
 	@Test
 	public void getExportAlignments() {
-		List<Alignment> list = new ArrayList<Alignment>();
+
+		// arrange
+		ArrayList<Alignment> arrayList = new ArrayList<Alignment>();
+		Alignment alignment = new Alignment();
+		arrayList.add(alignment);
 		when(alignmentService.getAlignmentsBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(list);
-		assertSame(list, service.getExportAlignments(new ThesaurusConcept()).getList());
+			.thenReturn(arrayList);
+
+		// act
+		JaxbList<Alignment> result =
+			 service.getExportAlignments(new ThesaurusConcept());
+
+		// assert
+		assertEquals(1, result.getList().size());
+		assertSame(alignment, result.getList().get(0));
 	}
 }

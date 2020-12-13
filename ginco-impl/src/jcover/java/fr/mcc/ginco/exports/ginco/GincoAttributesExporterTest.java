@@ -1,5 +1,6 @@
 package fr.mcc.ginco.exports.ginco;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
@@ -7,11 +8,11 @@ import fr.mcc.ginco.beans.CustomConceptAttribute;
 import fr.mcc.ginco.beans.CustomTermAttribute;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.exports.result.bean.JaxbList;
 import fr.mcc.ginco.services.ICustomConceptAttributeService;
 import fr.mcc.ginco.services.ICustomTermAttributeService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,17 +44,41 @@ public class GincoAttributesExporterTest {
 
 	@Test
 	public void getExportedConceptAttributes() {
-		List<CustomConceptAttribute> list = new ArrayList<CustomConceptAttribute>();
+
+		// arrange
+		ArrayList<CustomConceptAttribute> arrayList =
+			 new ArrayList<CustomConceptAttribute>();
+		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
+		arrayList.add(customConceptAttribute);
 		when(conceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(list);
-		assertSame(list, service.getExportedConceptAttributes(new ThesaurusConcept()).getList());
+			.thenReturn(arrayList);
+
+		// act
+		JaxbList<CustomConceptAttribute> result =
+			 service.getExportedConceptAttributes(new ThesaurusConcept());
+
+		// assert
+		assertEquals(1, result.getList().size());
+		assertSame(customConceptAttribute, result.getList().get(0));
 	}
 
 	@Test
 	public void getExportedTermAttributes() {
-		List<CustomTermAttribute> list = new ArrayList<CustomTermAttribute>();
+
+		// arrange
+		ArrayList<CustomTermAttribute> arrayList =
+			 new ArrayList<CustomTermAttribute>();
+		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
+		arrayList.add(customTermAttribute);
 		when(termAttributeService.getAttributesByEntity(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(list);
-		assertSame(list, service.getExportedTermAttributes(new ThesaurusTerm()).getList());
+			.thenReturn(arrayList);
+
+		// act
+		JaxbList<CustomTermAttribute> result =
+			 service.getExportedTermAttributes(new ThesaurusTerm());
+
+		// assert
+		assertEquals(1, result.getList().size());
+		assertSame(customTermAttribute, result.getList().get(0));
 	}
 }

@@ -53,10 +53,10 @@ class UserRoleRestServiceTest {
 		UserRoleView userRoleView = new UserRoleView();
 		when(userRoleViewConverter.convert(Mockito.<UserRole>any()))
 			.thenReturn(userRoleView);
-		List<UserRole> list = new ArrayList<UserRole>();
-		list.add(new UserRole());
+		ArrayList<UserRole> arrayList = new ArrayList<UserRole>();
+		arrayList.add(new UserRole());
 		when(userRoleService.getThesaurusUsers(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<UserRoleView>> result =

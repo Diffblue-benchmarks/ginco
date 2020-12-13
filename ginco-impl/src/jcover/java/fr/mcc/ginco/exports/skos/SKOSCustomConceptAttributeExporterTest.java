@@ -16,7 +16,6 @@ import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.services.ICustomConceptAttributeService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,14 +61,15 @@ public class SKOSCustomConceptAttributeExporterTest {
 
 	@Test
 	public void exportCustomConceptAttributes2() {
-		List<CustomConceptAttribute> list = new ArrayList<CustomConceptAttribute>();
+		ArrayList<CustomConceptAttribute> arrayList =
+			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
 		CustomConceptAttributeType type1 = new CustomConceptAttributeType();
 		type1.setExportable(false);
 		customConceptAttribute.setType(type1);
-		list.add(customConceptAttribute);
+		arrayList.add(customConceptAttribute);
 		when(customConceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Model model = mock(Model.class);
 		Resource conceptResource = mock(Resource.class);
 		Literal literal = mock(Literal.class);

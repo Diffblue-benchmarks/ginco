@@ -18,7 +18,6 @@ import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusTermService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -142,11 +141,11 @@ class FolderGeneratorTest {
 	void getArrays() {
 
 		// arrange
-		List<ThesaurusArray> list = new ArrayList<ThesaurusArray>();
+		ArrayList<ThesaurusArray> arrayList = new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray = mock(ThesaurusArray.class);
-		list.add(thesaurusArray);
+		arrayList.add(thesaurusArray);
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		IThesaurusListNode result = service.getArrays("1234");
@@ -199,12 +198,13 @@ class FolderGeneratorTest {
 	void getGroups() {
 
 		// arrange
-		List<ThesaurusConceptGroup> list = new ArrayList<ThesaurusConceptGroup>();
+		ArrayList<ThesaurusConceptGroup> arrayList =
+			 new ArrayList<ThesaurusConceptGroup>();
 		ThesaurusConceptGroup thesaurusConceptGroup =
 			 mock(ThesaurusConceptGroup.class);
-		list.add(thesaurusConceptGroup);
+		arrayList.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		IThesaurusListNode result = service.getGroups("1234");

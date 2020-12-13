@@ -40,11 +40,11 @@ public class AlignmentTypeServiceImplTest {
 	public void getAlignmentTypeList() {
 
 		// arrange
-		List<AlignmentType> list = new ArrayList<AlignmentType>();
+		ArrayList<AlignmentType> arrayList = new ArrayList<AlignmentType>();
 		AlignmentType alignmentType = new AlignmentType();
-		list.add(alignmentType);
+		arrayList.add(alignmentType);
 		when(alignmentTypeDAO.findAll())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<AlignmentType> result = service.getAlignmentTypeList();

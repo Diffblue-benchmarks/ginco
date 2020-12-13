@@ -183,10 +183,13 @@ class ThesaurusConceptRestServiceTest {
 	void getConceptsByThesaurusIdLimitIsOneAndOnlyValidatedConceptsIsFalseAndStartIndexIsOne() {
 
 		// arrange
-		List<ThesaurusConceptReducedView> list1 =
+		ArrayList<ThesaurusConceptReducedView> arrayList1 =
 			 new ArrayList<ThesaurusConceptReducedView>();
+		ThesaurusConceptReducedView thesaurusConceptReducedView =
+			 new ThesaurusConceptReducedView();
+		arrayList1.add(thesaurusConceptReducedView);
 		when(thesaurusConceptViewConverter.convert(Mockito.<List<ThesaurusConcept>>any()))
-			.thenReturn(list1);
+			.thenReturn(arrayList1);
 		when(thesaurusConceptService.getConceptsByThesaurusIdCount(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any(), Mockito.<String>any()))
 			.thenReturn(1L);
 		when(thesaurusConceptService.getPaginatedConceptsByThesaurusId(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any(), Mockito.<String>any()))
@@ -197,7 +200,8 @@ class ThesaurusConceptRestServiceTest {
 			 service.getConceptsByThesaurusId(1, 1, "1234", "1234", "1234", false, "1234");
 
 		// assert
-		assertThat(result.getData(), sameInstance(list1));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
 	}
@@ -245,11 +249,11 @@ class ThesaurusConceptRestServiceTest {
 			 new ThesaurusConceptReducedView();
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(thesaurusConceptReducedView);
-		List<ThesaurusConcept> list = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
-		list.add(thesaurusConcept);
+		arrayList.add(thesaurusConcept);
 		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
@@ -270,10 +274,10 @@ class ThesaurusConceptRestServiceTest {
 			 new ThesaurusConceptReducedView();
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(thesaurusConceptReducedView);
-		List<ThesaurusConcept> list2 = new ArrayList<ThesaurusConcept>();
-		list2.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> arrayList2 = new ArrayList<ThesaurusConcept>();
+		arrayList2.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getAvailableConceptsOfArray(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(thesaurusConceptService.getAvailableConceptsOfArray(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
 
@@ -296,10 +300,10 @@ class ThesaurusConceptRestServiceTest {
 			 new ThesaurusConceptReducedView();
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(thesaurusConceptReducedView);
-		List<ThesaurusConcept> list2 = new ArrayList<ThesaurusConcept>();
-		list2.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> arrayList2 = new ArrayList<ThesaurusConcept>();
+		arrayList2.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getAvailableConceptsOfGroup(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(thesaurusConceptService.getAvailableConceptsOfGroup(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
 
@@ -324,10 +328,10 @@ class ThesaurusConceptRestServiceTest {
 			.thenReturn(new ThesaurusConcept());
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusConcept());
-		List<Note> list = new ArrayList<Note>();
-		list.add(new Note());
+		ArrayList<Note> arrayList = new ArrayList<Note>();
+		arrayList.add(new Note());
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		service.destroyConcept(new ThesaurusConceptView());

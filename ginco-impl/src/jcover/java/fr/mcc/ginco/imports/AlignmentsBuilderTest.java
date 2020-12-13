@@ -11,7 +11,6 @@ import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.services.IAlignmentTypeService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,10 +41,10 @@ public class AlignmentsBuilderTest {
 
 	@Test
 	public void buildAlignmentsReturnsEmpty() {
-		List<AlignmentType> list = new ArrayList<AlignmentType>();
-		list.add(new AlignmentType());
+		ArrayList<AlignmentType> arrayList = new ArrayList<AlignmentType>();
+		arrayList.add(new AlignmentType());
 		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Resource skosConcept = mock(Resource.class);
 		when(skosConcept.getURI())
 			.thenReturn("/some/path.html");

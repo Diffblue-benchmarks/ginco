@@ -13,7 +13,6 @@ import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
 import fr.mcc.ginco.services.IThesaurusConceptService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,15 +65,15 @@ public class SKOSExportServiceImplTest {
 
 	@Test
 	public void getSKOSExport() {
-		List<ThesaurusConcept> list1 = new ArrayList<ThesaurusConcept>();
-		list1.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
+		arrayList1.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))
-			.thenReturn(list1);
-		List<ThesaurusConceptGroupType> list2 =
+			.thenReturn(arrayList1);
+		ArrayList<ThesaurusConceptGroupType> arrayList2 =
 			 new ArrayList<ThesaurusConceptGroupType>();
-		list2.add(new ThesaurusConceptGroupType());
+		arrayList2.add(new ThesaurusConceptGroupType());
 		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		Model model1 = mock(Model.class);
 		when(skosThesaurusExporter.exportThesaurusSKOS(Mockito.<Thesaurus>any(), Mockito.<Model>any()))
 			.thenReturn(model1);

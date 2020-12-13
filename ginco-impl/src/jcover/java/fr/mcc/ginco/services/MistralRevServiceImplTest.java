@@ -14,7 +14,6 @@ import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -69,12 +68,12 @@ public class MistralRevServiceImplTest {
 			.thenReturn(new Thesaurus());
 		when(thesaurusService.getThesaurusList())
 			.thenReturn(new ArrayList<Thesaurus>());
-		List list2 = new ArrayList<String>();
-		list2.add("Smith");
+		ArrayList<String> arrayList2 = new ArrayList<String>();
+		arrayList2.add("Smith");
 		Query query = mock(Query.class);
 		SQLQuery obj = mock(SQLQuery.class);
 		when(obj.list())
-			.thenReturn(list2);
+			.thenReturn(arrayList2);
 		when(obj.setLong(Mockito.<String>any(), anyLong()))
 			.thenReturn(query);
 		Session session = mock(Session.class);

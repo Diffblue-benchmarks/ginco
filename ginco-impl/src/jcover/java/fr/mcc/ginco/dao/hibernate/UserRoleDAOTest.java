@@ -59,14 +59,14 @@ public class UserRoleDAOTest {
 
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria2);
@@ -88,14 +88,14 @@ public class UserRoleDAOTest {
 
 		// arrange
 		UserRoleDAO userRoleDAO = new UserRoleDAO();
-		List list = new ArrayList<String>();
-		list.add("Smith");
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
 		when(criteria2.list())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria2);

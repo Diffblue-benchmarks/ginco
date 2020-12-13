@@ -40,15 +40,18 @@ class TermRoleRestServiceTest {
 	void getAllRoles() {
 
 		// arrange
-		List<ThesaurusTermRole> list = new ArrayList<ThesaurusTermRole>();
+		ArrayList<ThesaurusTermRole> arrayList = new ArrayList<ThesaurusTermRole>();
+		ThesaurusTermRole thesaurusTermRole = new ThesaurusTermRole();
+		arrayList.add(thesaurusTermRole);
 		when(thesaurusTermRoleService.getAllThesaurusTermRole())
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusTermRole>> result = service.getAllRoles();
 
 		// assert
-		assertThat(result.getData(), sameInstance(list));
+		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusTermRole));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
 	}

@@ -153,11 +153,11 @@ public class ThesaurusServiceImplTest {
 	public void getThesaurusList() {
 
 		// arrange
-		List<Thesaurus> list = new ArrayList<Thesaurus>();
+		ArrayList<Thesaurus> arrayList = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
-		list.add(thesaurus);
+		arrayList.add(thesaurus);
 		when(thesaurusDAO.findAll(Mockito.<String>any(), Mockito.<fr.mcc.ginco.dao.IGenericDAO.SortingTypes>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 
 		// act
 		List<Thesaurus> result = service.getThesaurusList();
@@ -169,13 +169,13 @@ public class ThesaurusServiceImplTest {
 
 	@Test
 	public void updateThesaurus() {
-		List<ThesaurusVersionHistory> list =
+		ArrayList<ThesaurusVersionHistory> arrayList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 mock(ThesaurusVersionHistory.class);
-		list.add(thesaurusVersionHistory);
+		arrayList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		when(thesaurusDAO.update(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
 		Thesaurus object = new Thesaurus();
@@ -184,13 +184,13 @@ public class ThesaurusServiceImplTest {
 
 	@Test
 	public void updateThesaurusDate() throws java.text.ParseException {
-		List<ThesaurusVersionHistory> list =
+		ArrayList<ThesaurusVersionHistory> arrayList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 mock(ThesaurusVersionHistory.class);
-		list.add(thesaurusVersionHistory);
+		arrayList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(list);
+			.thenReturn(arrayList);
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setArchived(false);
 		thesaurus.setContributor("foo");
