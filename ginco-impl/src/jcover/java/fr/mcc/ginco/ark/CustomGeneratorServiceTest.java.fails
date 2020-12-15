@@ -41,6 +41,6 @@ public class CustomGeneratorServiceTest {
 		thesaurusArk.setIdentifier("data");
 		when(thesaurusArkService.createThesaurusArk(Mockito.<ThesaurusArk>any()))
 			.thenReturn(thesaurusArk);
-		assertEquals("null/ark:/null/e8c11530-15fe-4e93-bdd5-300a3a29d1b9", service.generate(String.class));
+		assertEquals("null/ark:/null/1f6628d5-f6bb-4412-b4e4-7c96906e6d9e", service.generate(String.class));
 	}
 }
