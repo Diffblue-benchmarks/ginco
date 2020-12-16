@@ -226,7 +226,6 @@ public class ThesaurusTermDAOTest {
 		thesaurusTermDAO.setSessionFactory(sessionFactory);
 		ThesaurusTerm termToUpdate = new ThesaurusTerm();
 		termToUpdate.setHidden(false);
-		termToUpdate.setSource("foo");
 		assertSame(termToUpdate, thesaurusTermDAO.update(termToUpdate, false));
 		Mockito.verify(session1).saveOrUpdate(Mockito.<Object>any());
 		Mockito.verify(session2).setFlushMode(Mockito.<FlushMode>any());
