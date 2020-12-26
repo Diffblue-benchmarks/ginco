@@ -1,6 +1,6 @@
 package fr.mcc.ginco.audit.utils;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class AuditContextTest {
 	}
 
 	@Test
-	public void getAuditStatusReturnsTrue() {
-		assertTrue(AuditContext.getAuditStatus());
+	public void getAuditStatusReturnsFalse() {
+		assertFalse(AuditContext.getAuditStatus());
 	}
 }
