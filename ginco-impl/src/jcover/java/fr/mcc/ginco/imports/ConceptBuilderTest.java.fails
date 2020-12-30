@@ -14,8 +14,16 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.AssociativeRelationshipRole;
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.dao.IConceptHierarchicalRelationshipDAO;
 import fr.mcc.ginco.services.IAssociativeRelationshipRoleService;
 import fr.mcc.ginco.services.IConceptHierarchicalRelationshipServiceUtil;
@@ -23,6 +31,7 @@ import fr.mcc.ginco.services.IConceptHierarchicalRelationshipServiceUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -112,9 +121,12 @@ public class ConceptBuilderTest {
 
 	@Test
 	public void buildConceptAssociativerelationship() {
+		AssociativeRelationshipRole associativeRelationshipRole =
+			 new AssociativeRelationshipRole();
+		when(associativeRelationshipRoleService.getDefaultAssociativeRelationshipRoleRole())
+			.thenReturn(associativeRelationshipRole);
 		Resource resource = mock(Resource.class);
 		when(resource.getURI())
-			.thenReturn("/some/path.html")
 			.thenReturn("/some/path.html");
 		RDFNode obj = mock(RDFNode.class);
 		when(obj.asResource())
@@ -130,19 +142,20 @@ public class ConceptBuilderTest {
 			.thenReturn(statement);
 		Resource skosConcept = mock(Resource.class);
 		when(skosConcept.getURI())
-			.thenReturn("/some/path.html")
 			.thenReturn("/some/path.html");
+		when(skosConcept.hasProperty(Mockito.<com.hp.hpl.jena.rdf.model.Property>any(), Mockito.<RDFNode>any()))
+			.thenReturn(false);
 		when(skosConcept.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
 		Thesaurus thesaurus = mock(Thesaurus.class);
 		ArrayList<ObjectProperty> relatedTypes = new ArrayList<ObjectProperty>();
 		ObjectProperty objectProperty = mock(ObjectProperty.class);
 		relatedTypes.add(objectProperty);
-		assertTrue((service.buildConceptAssociativerelationship(skosConcept, thesaurus, relatedTypes)).isEmpty());
+		assertEquals(1, service.buildConceptAssociativerelationship(skosConcept, thesaurus, relatedTypes).size());
 	}
 
 	@Test
-	public void buildConceptAssociativerelationshipRelatedTypesIsEmpty() {
+	public void buildConceptAssociativerelationshipRelatedTypesIsEmptyReturnsEmpty() {
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
@@ -153,5 +166,146 @@ public class ConceptBuilderTest {
 			.thenReturn(stmtIterator);
 		Thesaurus thesaurus = mock(Thesaurus.class);
 		assertTrue((service.buildConceptAssociativerelationship(skosConcept, thesaurus, new ArrayList<ObjectProperty>())).isEmpty());
+	}
+
+	@Test
+	public void buildConceptHierarchicalRelationshipsBroaderTypesIsEmptyReturnsEmpty() {
+		StmtIterator stmtIterator = mock(StmtIterator.class);
+		when(stmtIterator.hasNext())
+			.thenReturn(false);
+		Resource skosConcept = mock(Resource.class);
+		when(skosConcept.getURI())
+			.thenReturn("/some/path.html")
+			.thenReturn("/some/path.html");
+		when(skosConcept.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
+			.thenReturn(stmtIterator);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		assertTrue((service.buildConceptHierarchicalRelationships(skosConcept, thesaurus, new ArrayList<ObjectProperty>()).get(/* pojo ThesaurusConcept getAssociativeRelationshipLeft, getAssociativeRelationshipRight, getConceptArrays, getCreated, getIdentifier, getModified, getNotation, getParentConcepts, getRootConcepts, getStatus, getThesaurus, getTopConcept */)).isEmpty());
+	}
+
+	@Test
+	public void buildConceptRoot() throws java.text.ParseException {
+
+		// arrange
+		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
+		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setIdentifier("data");
+		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setNotation("DE");
+		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setStatus(1);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		creator1.setEmail("info@diffblue.com");
+		creator1.setHomepage("foo");
+		creator1.setIdentifier(1);
+		creator1.setName("Acme");
+		thesaurus1.setCreator(creator1);
+		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setLang(new HashSet<Language>());
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		ThesaurusType type1 = new ThesaurusType();
+		type1.setIdentifier(1);
+		type1.setLabel("label");
+		thesaurus1.setType(type1);
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConcept.setThesaurus(thesaurus1);
+		thesaurusConcept.setTopConcept(false);
+		arrayList.add(thesaurusConcept);
+		when(conceptHierarchicalRelationshipServiceUtil.getRootConcepts(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(arrayList);
+		Resource skosConcept = mock(Resource.class);
+		when(skosConcept.getURI())
+			.thenReturn("/some/path.html")
+			.thenReturn("/some/path.html");
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setArchived(false);
+		thesaurus2.setContributor("foo");
+		thesaurus2.setCoverage("foo");
+		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator2 = new ThesaurusOrganization();
+		creator2.setEmail("info@diffblue.com");
+		creator2.setHomepage("foo");
+		creator2.setIdentifier(1);
+		creator2.setName("Acme");
+		thesaurus2.setCreator(creator2);
+		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus2.setDefaultTopConcept(false);
+		thesaurus2.setDescription("some text");
+		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus2.setIdentifier("data");
+		thesaurus2.setLang(new HashSet<Language>());
+		thesaurus2.setPolyHierarchical(false);
+		thesaurus2.setPublisher("foo");
+		thesaurus2.setRelation("DE");
+		thesaurus2.setRights("foo");
+		thesaurus2.setSource("foo");
+		thesaurus2.setSubject("foo");
+		thesaurus2.setTitle("Mr");
+		ThesaurusType type2 = new ThesaurusType();
+		type2.setIdentifier(1);
+		type2.setLabel("label");
+		thesaurus2.setType(type2);
+		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
+
+		// act
+		ThesaurusConcept result = service.buildConceptRoot(skosConcept, thesaurus2);
+
+		// assert
+		assertNull(result.getAssociativeRelationshipLeft());
+		assertNull(result.getAssociativeRelationshipRight());
+		assertNull(result.getConceptArrays());
+		assertEquals(new Date("Dec 31 2010"), result.getCreated());
+		assertEquals("/some/path.html", result.getIdentifier());
+		assertEquals(new Date("Dec 31 2010"), result.getModified());
+		assertEquals("foo", result.getNotation());
+		assertTrue((result.getParentConcepts()).isEmpty());
+		assertEquals(1, result.getRootConcepts().size());
+		assertEquals(1, (int) result.getStatus());
+		assertEquals("foo", result.getThesaurus().getContributor());
+		assertEquals("foo", result.getThesaurus().getCoverage());
+		assertEquals(new Date("Dec 31 2010"), result.getThesaurus().getCreated());
+		assertEquals("info@diffblue.com", result.getThesaurus().getCreator().getEmail());
+		assertEquals("foo", result.getThesaurus().getCreator().getHomepage());
+		assertEquals(1, (int) result.getThesaurus().getCreator().getIdentifier());
+		assertEquals("Acme", result.getThesaurus().getCreator().getName());
+		assertEquals(new Date("Dec 31 2010"), result.getThesaurus().getDate());
+		assertEquals("some text", result.getThesaurus().getDescription());
+		assertTrue((result.getThesaurus().getFormat()).isEmpty());
+		assertEquals("data", result.getThesaurus().getIdentifier());
+		assertTrue((result.getThesaurus().getLang()).isEmpty());
+		assertEquals("foo", result.getThesaurus().getPublisher());
+		assertEquals("DE", result.getThesaurus().getRelation());
+		assertEquals("Building concept with uri : ", result.getThesaurus().getRights());
+		assertEquals("foo", result.getThesaurus().getSource());
+		assertEquals("foo", result.getThesaurus().getSubject());
+		assertEquals("data", result.getThesaurus().getThesaurusId());
+		assertEquals("Mr", result.getThesaurus().getTitle());
+		assertEquals(1, (int) result.getThesaurus().getType().getIdentifier());
+		assertEquals("label", result.getThesaurus().getType().getLabel());
+		assertTrue((result.getThesaurus().getVersions()).isEmpty());
+		assertFalse(result.getThesaurus().isArchived());
+		assertFalse(result.getThesaurus().isDefaultTopConcept());
+		assertFalse(result.getThesaurus().isPolyHierarchical());
+		assertFalse(result.getTopConcept());
 	}
 }
