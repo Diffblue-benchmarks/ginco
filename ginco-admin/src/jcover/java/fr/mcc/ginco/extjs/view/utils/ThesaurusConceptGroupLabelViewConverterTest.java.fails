@@ -80,7 +80,7 @@ class ThesaurusConceptGroupLabelViewConverterTest {
 		ArrayList<String> concepts = new ArrayList<String>();
 		concepts.add("hello");
 		thesaurusConceptGroupViewJAXBElement.setConcepts(concepts);
-		thesaurusConceptGroupViewJAXBElement.setCreated("hello");
+		thesaurusConceptGroupViewJAXBElement.setCreated("someone");
 		thesaurusConceptGroupViewJAXBElement.setGroupConceptLabelId(1);
 		thesaurusConceptGroupViewJAXBElement.setIdentifier("data");
 		thesaurusConceptGroupViewJAXBElement.setIsDynamic(false);

@@ -20,7 +20,7 @@ class SplitNonPreferredTermViewTest {
 	void factory() {
 		SplitNonPreferredTermView splitNonPreferredTermView =
 			 new SplitNonPreferredTermView();
-		splitNonPreferredTermView.setCreated("foo");
+		splitNonPreferredTermView.setCreated("someone");
 		splitNonPreferredTermView.setIdentifier("data");
 		splitNonPreferredTermView.setLanguage("foo");
 		splitNonPreferredTermView.setLexicalValue("value");
@@ -32,7 +32,7 @@ class SplitNonPreferredTermViewTest {
 		ArrayList<String> conceptsPath = new ArrayList<String>();
 		conceptsPath.add("/bin/bash");
 		thesaurusTermView.setConceptsPath(conceptsPath);
-		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setCreated("someone");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
@@ -49,7 +49,7 @@ class SplitNonPreferredTermViewTest {
 		splitNonPreferredTermView.setSource("foo");
 		splitNonPreferredTermView.setStatus(1);
 		splitNonPreferredTermView.setThesaurusId("1234");
-		assertThat(splitNonPreferredTermView.getCreated(), is("foo"));
+		assertThat(splitNonPreferredTermView.getCreated(), is("someone"));
 		assertThat(splitNonPreferredTermView.getIdentifier(), is("data"));
 		assertThat(splitNonPreferredTermView.getLanguage(), is("foo"));
 		assertThat(splitNonPreferredTermView.getLexicalValue(), is("value"));

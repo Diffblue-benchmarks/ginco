@@ -87,7 +87,7 @@ public class SuggestionServiceImplTest {
 		suggestion.setContent("hello");
 		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		suggestion.setCreated(created3);
-		suggestion.setCreator("+");
+		suggestion.setCreator("someone");
 		suggestion.setIdentifier(1);
 		suggestion.setRecipient("1234");
 		ThesaurusTerm term = new ThesaurusTerm();
@@ -102,7 +102,7 @@ public class SuggestionServiceImplTest {
 		assertSame(concept1, result.getConcept());
 		assertEquals("hello", result.getContent());
 		assertSame(created3, result.getCreated());
-		assertEquals("+", result.getCreator());
+		assertEquals("someone", result.getCreator());
 		assertEquals(1, (int) result.getIdentifier());
 		assertEquals("1234", result.getRecipient());
 		assertSame(term, result.getTerm());
@@ -118,7 +118,7 @@ public class SuggestionServiceImplTest {
 		suggestion1.setContent("hello");
 		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		suggestion1.setCreated(created3);
-		suggestion1.setCreator("+");
+		suggestion1.setCreator("someone");
 		suggestion1.setIdentifier(1);
 		suggestion1.setRecipient("1234");
 		ThesaurusTerm term1 = new ThesaurusTerm();
@@ -133,7 +133,7 @@ public class SuggestionServiceImplTest {
 		assertSame(concept1, result.getConcept());
 		assertEquals("hello", result.getContent());
 		assertSame(created3, result.getCreated());
-		assertEquals("+", result.getCreator());
+		assertEquals("someone", result.getCreator());
 		assertEquals(1, (int) result.getIdentifier());
 		assertEquals("1234", result.getRecipient());
 		assertSame(term1, result.getTerm());
@@ -149,7 +149,7 @@ public class SuggestionServiceImplTest {
 		suggestion1.setContent("hello");
 		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		suggestion1.setCreated(created3);
-		suggestion1.setCreator("+");
+		suggestion1.setCreator("someone");
 		suggestion1.setIdentifier(1);
 		suggestion1.setRecipient("1234");
 		ThesaurusTerm term1 = new ThesaurusTerm();
@@ -164,7 +164,7 @@ public class SuggestionServiceImplTest {
 		assertSame(concept1, result.getConcept());
 		assertEquals("hello", result.getContent());
 		assertSame(created3, result.getCreated());
-		assertEquals("+", result.getCreator());
+		assertEquals("someone", result.getCreator());
 		assertEquals(1, (int) result.getIdentifier());
 		assertEquals("1234", result.getRecipient());
 		assertSame(term1, result.getTerm());

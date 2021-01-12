@@ -23,7 +23,7 @@ class ThesaurusConceptGroupViewTest {
 		ArrayList<String> concepts = new ArrayList<String>();
 		concepts.add("hello");
 		thesaurusConceptGroupView.setConcepts(concepts);
-		thesaurusConceptGroupView.setCreated("hello");
+		thesaurusConceptGroupView.setCreated("someone");
 		thesaurusConceptGroupView.setGroupConceptLabelId(1);
 		thesaurusConceptGroupView.setIdentifier("data");
 		thesaurusConceptGroupView.setIsDynamic(false);
@@ -39,7 +39,7 @@ class ThesaurusConceptGroupViewTest {
 		thesaurusConceptGroupView.setType("text/plain");
 		assertThat(thesaurusConceptGroupView.getConcepts(), hasSize(1));
 		assertThat(thesaurusConceptGroupView.getConcepts().get(0), is("hello"));
-		assertThat(thesaurusConceptGroupView.getCreated(), is("hello"));
+		assertThat(thesaurusConceptGroupView.getCreated(), is("someone"));
 		assertThat(thesaurusConceptGroupView.getGroupConceptLabelId(), is(1));
 		assertThat(thesaurusConceptGroupView.getIdentifier(), is("data"));
 		assertThat(thesaurusConceptGroupView.getIsDynamic(), is(false));

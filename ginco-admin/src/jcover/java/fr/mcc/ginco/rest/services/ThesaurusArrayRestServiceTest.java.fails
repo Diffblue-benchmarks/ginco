@@ -68,7 +68,7 @@ class ThesaurusArrayRestServiceTest {
 			 new ThesaurusArrayConceptView();
 		concepts1.add(thesaurusArrayConceptView);
 		thesaurusArrayView.setConcepts(concepts1);
-		thesaurusArrayView.setCreated("foo");
+		thesaurusArrayView.setCreated("someone");
 		thesaurusArrayView.setIdentifier("data");
 		thesaurusArrayView.setLabel("label");
 		thesaurusArrayView.setLanguage("foo");
@@ -91,7 +91,7 @@ class ThesaurusArrayRestServiceTest {
 		// assert
 		assertThat(result.getConcepts().size(), is(1));
 		assertThat(result.getConcepts().get(0), sameInstance(thesaurusArrayConceptView));
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("label"));
 		assertThat(result.getLanguage(), is("foo"));
@@ -142,7 +142,7 @@ class ThesaurusArrayRestServiceTest {
 			 new ThesaurusArrayConceptView();
 		concepts1.add(thesaurusArrayConceptView1);
 		thesaurusArrayView.setConcepts(concepts1);
-		thesaurusArrayView.setCreated("foo");
+		thesaurusArrayView.setCreated("someone");
 		thesaurusArrayView.setIdentifier("data");
 		thesaurusArrayView.setLabel("label");
 		thesaurusArrayView.setLanguage("foo");
@@ -177,7 +177,7 @@ class ThesaurusArrayRestServiceTest {
 		// assert
 		assertThat(result.getConcepts().size(), is(1));
 		assertThat(result.getConcepts().get(0), sameInstance(thesaurusArrayConceptView1));
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("label"));
 		assertThat(result.getLanguage(), is("foo"));

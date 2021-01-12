@@ -24,9 +24,9 @@ class ThesaurusViewTest {
 		thesaurusView.setCanBeDeleted(false);
 		thesaurusView.setContributor("foo");
 		thesaurusView.setCoverage("foo");
-		thesaurusView.setCreated("foo");
+		thesaurusView.setCreated("someone");
 		thesaurusView.setCreatorEmail("info@diffblue.com");
-		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorHomepage("someone");
 		thesaurusView.setCreatorName("Acme");
 		thesaurusView.setDate("1999-12-31");
 		thesaurusView.setDefaultTopConcept(false);
@@ -50,9 +50,9 @@ class ThesaurusViewTest {
 		assertThat(thesaurusView.getCanBeDeleted(), is(false));
 		assertThat(thesaurusView.getContributor(), is("foo"));
 		assertThat(thesaurusView.getCoverage(), is("foo"));
-		assertThat(thesaurusView.getCreated(), is("foo"));
+		assertThat(thesaurusView.getCreated(), is("someone"));
 		assertThat(thesaurusView.getCreatorEmail(), is("info@diffblue.com"));
-		assertThat(thesaurusView.getCreatorHomepage(), is("+"));
+		assertThat(thesaurusView.getCreatorHomepage(), is("someone"));
 		assertThat(thesaurusView.getCreatorName(), is("Acme"));
 		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", thesaurusView.getDate()), is(true));
 		assertThat(thesaurusView.getDefaultTopConcept(), is(false));

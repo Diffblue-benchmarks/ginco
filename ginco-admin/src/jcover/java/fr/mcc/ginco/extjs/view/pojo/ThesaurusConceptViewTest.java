@@ -24,7 +24,7 @@ class ThesaurusConceptViewTest {
 		AlignmentView alignmentView = new AlignmentView();
 		alignmentView.setAlignmentType(1);
 		alignmentView.setAndRelation(false);
-		alignmentView.setCreated("foo");
+		alignmentView.setCreated("someone");
 		ArrayList<ExternalThesaurusView> externalThesaurus =
 			 new ArrayList<ExternalThesaurusView>();
 		externalThesaurus.add(new ExternalThesaurusView());
@@ -63,7 +63,7 @@ class ThesaurusConceptViewTest {
 		ArrayList<String> conceptsPath1 = new ArrayList<String>();
 		conceptsPath1.add("/bin/bash");
 		thesaurusConceptView.setConceptsPath(conceptsPath1);
-		thesaurusConceptView.setCreated("hello");
+		thesaurusConceptView.setCreated("someone");
 		thesaurusConceptView.setIdentifier("data");
 		thesaurusConceptView.setModified("hello");
 		thesaurusConceptView.setNotation("DE");
@@ -86,7 +86,7 @@ class ThesaurusConceptViewTest {
 		ArrayList<String> conceptsPath2 = new ArrayList<String>();
 		conceptsPath2.add("/bin/bash");
 		thesaurusTermView.setConceptsPath(conceptsPath2);
-		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setCreated("someone");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
@@ -111,7 +111,7 @@ class ThesaurusConceptViewTest {
 		assertThat(thesaurusConceptView.getChildConcepts().get(0), sameInstance(hierarchicalRelationshipView1));
 		assertThat(thesaurusConceptView.getConceptsPath(), hasSize(1));
 		assertThat(thesaurusConceptView.getConceptsPath().get(0), is("/bin/bash"));
-		assertThat(thesaurusConceptView.getCreated(), is("hello"));
+		assertThat(thesaurusConceptView.getCreated(), is("someone"));
 		assertThat(thesaurusConceptView.getIdentifier(), is("data"));
 		assertThat(thesaurusConceptView.getModified(), is("hello"));
 		assertThat(thesaurusConceptView.getNotation(), is("DE"));

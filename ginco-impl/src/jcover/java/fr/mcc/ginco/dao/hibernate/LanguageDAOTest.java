@@ -105,7 +105,7 @@ public class LanguageDAOTest {
 	}
 
 	@Test
-	public void getByPart1Part1IsFooReturnsNull() throws org.hibernate.HibernateException {
+	public void getByPart1Part1IsSomeoneReturnsNull() throws org.hibernate.HibernateException {
 		LanguageDAO languageDAO = new LanguageDAO();
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
@@ -123,6 +123,6 @@ public class LanguageDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		languageDAO.setSessionFactory(sessionFactory);
-		assertNull(languageDAO.getByPart1("foo"));
+		assertNull(languageDAO.getByPart1("someone"));
 	}
 }

@@ -158,9 +158,9 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setCanBeDeleted(false);
 		thesaurusView.setContributor("foo");
 		thesaurusView.setCoverage("foo");
-		thesaurusView.setCreated("foo");
+		thesaurusView.setCreated("someone");
 		thesaurusView.setCreatorEmail("info@diffblue.com");
-		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorHomepage("someone");
 		thesaurusView.setCreatorName("Acme");
 		thesaurusView.setDate("1999-12-31");
 		thesaurusView.setDefaultTopConcept(false);
@@ -193,9 +193,9 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCanBeDeleted(), is(false));
 		assertThat(result.getContributor(), is("foo"));
 		assertThat(result.getCoverage(), is("foo"));
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
-		assertThat(result.getCreatorHomepage(), is("+"));
+		assertThat(result.getCreatorHomepage(), is("someone"));
 		assertThat(result.getCreatorName(), is("Acme"));
 		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
 		assertThat(result.getDefaultTopConcept(), is(false));
@@ -247,9 +247,9 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setCanBeDeleted(false);
 		thesaurusView.setContributor("foo");
 		thesaurusView.setCoverage("foo");
-		thesaurusView.setCreated("foo");
+		thesaurusView.setCreated("someone");
 		thesaurusView.setCreatorEmail("info@diffblue.com");
-		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorHomepage("someone");
 		thesaurusView.setCreatorName("Acme");
 		thesaurusView.setDate("1999-12-31");
 		thesaurusView.setDefaultTopConcept(false);
@@ -288,9 +288,9 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCanBeDeleted(), is(false));
 		assertThat(result.getContributor(), is("foo"));
 		assertThat(result.getCoverage(), is("foo"));
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
-		assertThat(result.getCreatorHomepage(), is("+"));
+		assertThat(result.getCreatorHomepage(), is("someone"));
 		assertThat(result.getCreatorName(), is("Acme"));
 		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
 		assertThat(result.getDefaultTopConcept(), is(false));
@@ -418,9 +418,9 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setCanBeDeleted(false);
 		thesaurusView.setContributor("foo");
 		thesaurusView.setCoverage("foo");
-		thesaurusView.setCreated("foo");
+		thesaurusView.setCreated("someone");
 		thesaurusView.setCreatorEmail("info@diffblue.com");
-		thesaurusView.setCreatorHomepage("+");
+		thesaurusView.setCreatorHomepage("someone");
 		thesaurusView.setCreatorName("Acme");
 		thesaurusView.setDate("1999-12-31");
 		thesaurusView.setDefaultTopConcept(false);
@@ -448,7 +448,7 @@ class ThesaurusRestServiceTest {
 			.thenReturn(new Thesaurus());
 		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
-		assertThat(Pattern.matches("\\{\"success\":true,\"data\":\\{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"\\d{4}-\\d{1,2}-\\d{1,2}\",\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"foo\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"\\+\",\"creatorEmail\":\"info@diffblue\\.com\",\"polyHierarchical\":false,\"languages\":\\[\"foo\"\\],\"formats\":\\[1\\],\"thesaurusId\":\"1234\"\\},\"total\":null\\}", service.archiveVocabulary("1234")), is(true));
+		assertThat(Pattern.matches("\\{\"success\":true,\"data\":\\{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"\\d{4}-\\d{1,2}-\\d{1,2}\",\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"someone\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"someone\",\"creatorEmail\":\"info@diffblue\\.com\",\"polyHierarchical\":false,\"languages\":\\[\"foo\"\\],\"formats\":\\[1\\],\"thesaurusId\":\"1234\"\\},\"total\":null\\}", service.archiveVocabulary("1234")), is(true));
 	}
 
 	@Test

@@ -481,7 +481,7 @@ class ThesaurusNoteViewConverterTest {
 			.thenReturn(language2);
 		ThesaurusNoteView source6 = new ThesaurusNoteView();
 		source6.setConceptId("1234");
-		source6.setCreated("foo");
+		source6.setCreated("someone");
 		source6.setIdentifier("data");
 		source6.setLanguage("foo");
 		source6.setLexicalValue("value");

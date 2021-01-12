@@ -121,9 +121,9 @@ class ThesaurusViewConverterTest {
 		source2.setCanBeDeleted(false);
 		source2.setContributor("foo");
 		source2.setCoverage("foo");
-		source2.setCreated("foo");
+		source2.setCreated("someone");
 		source2.setCreatorEmail("info@diffblue.com");
-		source2.setCreatorHomepage("+");
+		source2.setCreatorHomepage("someone");
 		source2.setCreatorName("Acme");
 		source2.setDate("1999-12-31");
 		source2.setDefaultTopConcept(false);
@@ -152,7 +152,7 @@ class ThesaurusViewConverterTest {
 		assertThat(result.getCoverage(), is("foo"));
 		assertThat(result.getCreated(), sameInstance(created1));
 		assertThat(result.getCreator().getEmail(), is("info@diffblue.com"));
-		assertThat(result.getCreator().getHomepage(), is("+"));
+		assertThat(result.getCreator().getHomepage(), is("someone"));
 		assertThat(result.getCreator().getIdentifier(), is(nullValue()));
 		assertThat(result.getCreator().getName(), is("Acme"));
 		assertThat(
@@ -235,9 +235,9 @@ class ThesaurusViewConverterTest {
 		source2.setCanBeDeleted(false);
 		source2.setContributor("foo");
 		source2.setCoverage("foo");
-		source2.setCreated("foo");
+		source2.setCreated("someone");
 		source2.setCreatorEmail("info@diffblue.com");
-		source2.setCreatorHomepage("+");
+		source2.setCreatorHomepage("someone");
 		source2.setCreatorName("Acme");
 		source2.setDate("1999-12-31");
 		source2.setDefaultTopConcept(false);

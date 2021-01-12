@@ -67,7 +67,7 @@ class SuggestionTest {
 		suggestion.setContent("hello");
 		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		suggestion.setCreated(created3);
-		suggestion.setCreator("+");
+		suggestion.setCreator("someone");
 		suggestion.setIdentifier(1);
 		suggestion.setRecipient("1234");
 		ThesaurusTerm term = new ThesaurusTerm();
@@ -160,7 +160,7 @@ class SuggestionTest {
 		assertThat(suggestion.getConcept(), sameInstance(concept1));
 		assertThat(suggestion.getContent(), is("hello"));
 		assertThat(suggestion.getCreated(), sameInstance(created3));
-		assertThat(suggestion.getCreator(), is("+"));
+		assertThat(suggestion.getCreator(), is("someone"));
 		assertThat(suggestion.getIdentifier(), is(1));
 		assertThat(suggestion.getRecipient(), is("1234"));
 		assertThat(suggestion.getTerm(), sameInstance(term));

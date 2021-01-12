@@ -21,7 +21,7 @@ class AlignmentViewTest {
 		AlignmentView alignmentView = new AlignmentView();
 		alignmentView.setAlignmentType(1);
 		alignmentView.setAndRelation(false);
-		alignmentView.setCreated("foo");
+		alignmentView.setCreated("someone");
 		ArrayList<ExternalThesaurusView> externalThesaurus =
 			 new ArrayList<ExternalThesaurusView>();
 		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
@@ -50,7 +50,7 @@ class AlignmentViewTest {
 		alignmentView.setTargetResources(targetResources);
 		assertThat(alignmentView.getAlignmentType(), is(1));
 		assertThat(alignmentView.getAndRelation(), is(false));
-		assertThat(alignmentView.getCreated(), is("foo"));
+		assertThat(alignmentView.getCreated(), is("someone"));
 		assertThat(alignmentView.getExternalThesaurus().size(), is(1));
 		assertThat(alignmentView.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
 		assertThat(alignmentView.getIdentifier(), is("data"));

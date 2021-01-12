@@ -428,7 +428,7 @@ class AlignmentViewConverterTest {
 		AlignmentView alignmentView = new AlignmentView();
 		alignmentView.setAlignmentType(1);
 		alignmentView.setAndRelation(false);
-		alignmentView.setCreated("foo");
+		alignmentView.setCreated("someone");
 		ArrayList<ExternalThesaurusView> externalThesaurus2 =
 			 new ArrayList<ExternalThesaurusView>();
 		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();

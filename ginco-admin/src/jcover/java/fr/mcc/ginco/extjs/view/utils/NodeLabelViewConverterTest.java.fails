@@ -122,7 +122,7 @@ class NodeLabelViewConverterTest {
 		thesaurusArrayConceptView.setOrder(1);
 		concepts.add(thesaurusArrayConceptView);
 		thesaurusConceptViewJAXBElement.setConcepts(concepts);
-		thesaurusConceptViewJAXBElement.setCreated("foo");
+		thesaurusConceptViewJAXBElement.setCreated("someone");
 		thesaurusConceptViewJAXBElement.setIdentifier("data");
 		thesaurusConceptViewJAXBElement.setLabel("label");
 		thesaurusConceptViewJAXBElement.setLanguage("foo");

@@ -53,7 +53,7 @@ class SplitNonPreferredTermRestServiceTest {
 		// arrange
 		SplitNonPreferredTermView splitNonPreferredTermView =
 			 new SplitNonPreferredTermView();
-		splitNonPreferredTermView.setCreated("foo");
+		splitNonPreferredTermView.setCreated("someone");
 		splitNonPreferredTermView.setIdentifier("data");
 		splitNonPreferredTermView.setLanguage("foo");
 		splitNonPreferredTermView.setLexicalValue("value");
@@ -75,7 +75,7 @@ class SplitNonPreferredTermRestServiceTest {
 		SplitNonPreferredTermView result = service.getTerm("1234");
 
 		// assert
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
 		assertThat(result.getLexicalValue(), is("value"));
@@ -93,7 +93,7 @@ class SplitNonPreferredTermRestServiceTest {
 		// arrange
 		SplitNonPreferredTermView splitNonPreferredTermView =
 			 new SplitNonPreferredTermView();
-		splitNonPreferredTermView.setCreated("foo");
+		splitNonPreferredTermView.setCreated("someone");
 		splitNonPreferredTermView.setIdentifier("data");
 		splitNonPreferredTermView.setLanguage("foo");
 		splitNonPreferredTermView.setLexicalValue("value");
@@ -114,7 +114,7 @@ class SplitNonPreferredTermRestServiceTest {
 			 service.updateTerm(new SplitNonPreferredTermView());
 
 		// assert
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
 		assertThat(result.getLexicalValue(), is("value"));

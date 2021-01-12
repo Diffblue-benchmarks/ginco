@@ -152,7 +152,7 @@ class ThesaurusTermRestServiceTest {
 		ArrayList<String> conceptsPath = new ArrayList<String>();
 		conceptsPath.add("/bin/bash");
 		thesaurusTermView.setConceptsPath(conceptsPath);
-		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setCreated("someone");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
@@ -174,7 +174,7 @@ class ThesaurusTermRestServiceTest {
 		assertThat(result.getConceptId(), is("1234"));
 		assertThat(result.getConceptsPath(), hasSize(1));
 		assertThat(result.getConceptsPath().get(0), is("/bin/bash"));
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
@@ -201,7 +201,7 @@ class ThesaurusTermRestServiceTest {
 		ArrayList<String> conceptsPath1 = new ArrayList<String>();
 		conceptsPath1.add("/bin/bash");
 		thesaurusTermView.setConceptsPath(conceptsPath1);
-		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setCreated("someone");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
@@ -227,7 +227,7 @@ class ThesaurusTermRestServiceTest {
 		assertThat(result.getConceptId(), is("1234"));
 		assertThat(result.getConceptsPath(), hasSize(1));
 		assertThat(result.getConceptsPath().get(0), is("/bin/bash"));
-		assertThat(result.getCreated(), is("foo"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
@@ -251,9 +251,9 @@ class ThesaurusTermRestServiceTest {
 		assertThat(result.getData().get(0).getStatus(), is(0));
 		assertThat(result.getData().get(0).getStatusLabel(), is("Candidat"));
 		assertThat(result.getData().get(1).getStatus(), is(1));
-		assertThat(result.getData().get(1).getStatusLabel(), is("Validé"));
+		assertThat(result.getData().get(1).getStatusLabel(), is("Valid\u00e9"));
 		assertThat(result.getData().get(2).getStatus(), is(2));
-		assertThat(result.getData().get(2).getStatusLabel(), is("Rejeté"));
+		assertThat(result.getData().get(2).getStatusLabel(), is("Rejet\u00e9"));
 		assertThat(result.getTotal(), is(3L));
 		assertThat(result.isSuccess(), is(true));
 	}

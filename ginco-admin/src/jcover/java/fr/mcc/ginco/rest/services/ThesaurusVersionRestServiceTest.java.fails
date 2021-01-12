@@ -79,13 +79,13 @@ class ThesaurusVersionRestServiceTest {
 		assertThat(result.getData().get(0).getStatus(), is(0));
 		assertThat(result.getData().get(0).getStatusLabel(), is("Projet"));
 		assertThat(result.getData().get(1).getStatus(), is(1));
-		assertThat(result.getData().get(1).getStatusLabel(), is("Validé"));
+		assertThat(result.getData().get(1).getStatusLabel(), is("Valid\u00e9"));
 		assertThat(result.getData().get(2).getStatus(), is(2));
-		assertThat(result.getData().get(2).getStatusLabel(), is("Publié"));
+		assertThat(result.getData().get(2).getStatusLabel(), is("Publi\u00e9"));
 		assertThat(result.getData().get(3).getStatus(), is(3));
-		assertThat(result.getData().get(3).getStatusLabel(), is("Déprécié"));
+		assertThat(result.getData().get(3).getStatusLabel(), is("D\u00e9pr\u00e9ci\u00e9"));
 		assertThat(result.getData().get(4).getStatus(), is(4));
-		assertThat(result.getData().get(4).getStatusLabel(), is("Prohibé"));
+		assertThat(result.getData().get(4).getStatusLabel(), is("Prohib\u00e9"));
 		assertThat(result.getTotal(), is(5L));
 		assertThat(result.isSuccess(), is(true));
 	}

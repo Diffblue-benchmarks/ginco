@@ -89,7 +89,7 @@ class ThesaurusConceptGroupRestServiceTest {
 		ArrayList<String> concepts1 = new ArrayList<String>();
 		concepts1.add("hello");
 		thesaurusConceptGroupView.setConcepts(concepts1);
-		thesaurusConceptGroupView.setCreated("hello");
+		thesaurusConceptGroupView.setCreated("someone");
 		thesaurusConceptGroupView.setGroupConceptLabelId(1);
 		thesaurusConceptGroupView.setIdentifier("data");
 		thesaurusConceptGroupView.setIsDynamic(false);
@@ -114,7 +114,7 @@ class ThesaurusConceptGroupRestServiceTest {
 		// assert
 		assertThat(result.getConcepts(), hasSize(1));
 		assertThat(result.getConcepts().get(0), is("hello"));
-		assertThat(result.getCreated(), is("hello"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getGroupConceptLabelId(), is(1));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getIsDynamic(), is(false));
@@ -166,7 +166,7 @@ class ThesaurusConceptGroupRestServiceTest {
 		ArrayList<String> concepts1 = new ArrayList<String>();
 		concepts1.add("hello");
 		thesaurusConceptGroupView.setConcepts(concepts1);
-		thesaurusConceptGroupView.setCreated("hello");
+		thesaurusConceptGroupView.setCreated("someone");
 		thesaurusConceptGroupView.setGroupConceptLabelId(1);
 		thesaurusConceptGroupView.setIdentifier("data");
 		thesaurusConceptGroupView.setIsDynamic(false);
@@ -196,7 +196,7 @@ class ThesaurusConceptGroupRestServiceTest {
 		// assert
 		assertThat(result.getConcepts(), hasSize(1));
 		assertThat(result.getConcepts().get(0), is("hello"));
-		assertThat(result.getCreated(), is("hello"));
+		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getGroupConceptLabelId(), is(1));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getIsDynamic(), is(false));

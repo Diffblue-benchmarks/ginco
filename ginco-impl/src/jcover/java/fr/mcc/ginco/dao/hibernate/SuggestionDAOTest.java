@@ -112,7 +112,7 @@ public class SuggestionDAOTest {
 	}
 
 	@Test
-	public void findPaginatedSuggestionsByRecipientLimitIsOneAndStartIndexIsOne() throws org.hibernate.HibernateException {
+	public void findPaginatedSuggestionsByRecipientLimitIsOneAndRecipientIsSomeoneAndStartIndexIsOne() throws org.hibernate.HibernateException {
 
 		// arrange
 		SuggestionDAO suggestionDAO = new SuggestionDAO();
@@ -143,7 +143,7 @@ public class SuggestionDAOTest {
 
 		// act
 		List<Suggestion> result =
-			 suggestionDAO.findPaginatedSuggestionsByRecipient("1234", 1, 1);
+			 suggestionDAO.findPaginatedSuggestionsByRecipient("someone", 1, 1);
 
 		// assert
 		assertEquals(1, result.size());

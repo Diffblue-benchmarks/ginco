@@ -102,7 +102,7 @@ public class LanguagesServiceImplTest {
 	}
 
 	@Test
-	public void getLanguageByPart1() {
+	public void getLanguageByPart1Part1IsSomeone() {
 
 		// arrange
 		Language language = new Language();
@@ -113,7 +113,7 @@ public class LanguagesServiceImplTest {
 			.thenReturn(language);
 
 		// act
-		Language result = service.getLanguageByPart1("/some/path.html");
+		Language result = service.getLanguageByPart1("someone");
 
 		// assert
 		assertEquals("1234", result.getId());

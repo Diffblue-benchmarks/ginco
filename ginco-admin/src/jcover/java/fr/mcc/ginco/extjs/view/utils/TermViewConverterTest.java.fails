@@ -273,7 +273,7 @@ class TermViewConverterTest {
 		ArrayList<String> conceptsPath = new ArrayList<String>();
 		conceptsPath.add("/bin/bash");
 		source4.setConceptsPath(conceptsPath);
-		source4.setCreated("foo");
+		source4.setCreated("someone");
 		source4.setHidden(false);
 		source4.setIdentifier("data");
 		source4.setLanguage("foo");

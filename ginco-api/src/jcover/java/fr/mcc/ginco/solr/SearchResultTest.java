@@ -20,7 +20,7 @@ class SearchResultTest {
 	void factory() {
 		SearchResult searchResult = new SearchResult();
 		searchResult.setConceptId("1234");
-		searchResult.setCreated("foo");
+		searchResult.setCreated("someone");
 		searchResult.setIdentifier("data");
 		ArrayList<String> languages = new ArrayList<String>();
 		languages.add("foo");
@@ -33,7 +33,7 @@ class SearchResultTest {
 		searchResult.setType("BASIC");
 		searchResult.setTypeExt("html");
 		assertThat(searchResult.getConceptId(), is("1234"));
-		assertThat(searchResult.getCreated(), is("foo"));
+		assertThat(searchResult.getCreated(), is("someone"));
 		assertThat(searchResult.getIdentifier(), is("data"));
 		assertThat(searchResult.getLanguages(), hasSize(1));
 		assertThat(searchResult.getLanguages().get(0), is("foo"));

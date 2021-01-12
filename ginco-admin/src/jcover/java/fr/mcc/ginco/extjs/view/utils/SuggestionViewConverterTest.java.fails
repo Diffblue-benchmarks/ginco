@@ -56,7 +56,7 @@ class SuggestionViewConverterTest {
 		Suggestion suggestion = new Suggestion();
 		suggestion.setContent("hello");
 		suggestion.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		suggestion.setCreator("+");
+		suggestion.setCreator("someone");
 		suggestion.setIdentifier(1);
 		suggestion.setRecipient("1234");
 		ThesaurusTerm term = new ThesaurusTerm();
@@ -73,7 +73,7 @@ class SuggestionViewConverterTest {
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getContent(), is("hello"));
 		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
-		assertThat(result.getCreator(), is("+"));
+		assertThat(result.getCreator(), is("someone"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));
 		assertThat(result.getTermId(), is("data"));
@@ -92,7 +92,7 @@ class SuggestionViewConverterTest {
 		concept1.setThesaurus(thesaurus1);
 		suggestion.setConcept(concept1);
 		suggestion.setContent("hello");
-		suggestion.setCreator("+");
+		suggestion.setCreator("someone");
 		suggestion.setIdentifier(1);
 		suggestion.setRecipient("1234");
 
@@ -103,7 +103,7 @@ class SuggestionViewConverterTest {
 		assertThat(result.getConceptId(), is("data"));
 		assertThat(result.getContent(), is("hello"));
 		assertThat(result.getCreated(), is(nullValue()));
-		assertThat(result.getCreator(), is("+"));
+		assertThat(result.getCreator(), is("someone"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));
 		assertThat(result.getTermId(), is(nullValue()));
@@ -123,7 +123,7 @@ class SuggestionViewConverterTest {
 		suggestion.setConcept(concept);
 		suggestion.setContent("hello");
 		suggestion.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		suggestion.setCreator("+");
+		suggestion.setCreator("someone");
 		suggestion.setIdentifier(1);
 		suggestion.setRecipient("1234");
 
@@ -134,7 +134,7 @@ class SuggestionViewConverterTest {
 		assertThat(result.getConceptId(), is("data"));
 		assertThat(result.getContent(), is("hello"));
 		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
-		assertThat(result.getCreator(), is("+"));
+		assertThat(result.getCreator(), is("someone"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));
 		assertThat(result.getTermId(), is(nullValue()));
@@ -159,7 +159,7 @@ class SuggestionViewConverterTest {
 		SuggestionView source5 = new SuggestionView();
 		source5.setConceptId("1234");
 		source5.setContent("hello");
-		source5.setCreator("+");
+		source5.setCreator("someone");
 		source5.setIdentifier(1);
 		source5.setRecipient("1234");
 
@@ -170,7 +170,7 @@ class SuggestionViewConverterTest {
 		assertThat(result.getConcept(), sameInstance(thesaurusConcept));
 		assertThat(result.getContent(), is("hello"));
 		assertThat(result.getCreated(), sameInstance(created3));
-		assertThat(result.getCreator(), is("+"));
+		assertThat(result.getCreator(), is("someone"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));
 		assertThat(result.getTerm(), sameInstance(term));

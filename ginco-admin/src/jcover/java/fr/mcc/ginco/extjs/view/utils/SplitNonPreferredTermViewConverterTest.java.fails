@@ -294,7 +294,7 @@ class SplitNonPreferredTermViewConverterTest {
 		when(languagesService.getLanguageById(Mockito.<String>any()))
 			.thenReturn(language3);
 		SplitNonPreferredTermView source6 = new SplitNonPreferredTermView();
-		source6.setCreated("foo");
+		source6.setCreated("someone");
 		source6.setIdentifier("data");
 		source6.setLanguage("foo");
 		source6.setLexicalValue("value");
@@ -306,7 +306,7 @@ class SplitNonPreferredTermViewConverterTest {
 		ArrayList<String> conceptsPath = new ArrayList<String>();
 		conceptsPath.add("/bin/bash");
 		thesaurusTermView.setConceptsPath(conceptsPath);
-		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setCreated("someone");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");

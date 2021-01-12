@@ -23,7 +23,7 @@ class ThesaurusTermViewTest {
 		ArrayList<String> conceptsPath = new ArrayList<String>();
 		conceptsPath.add("/bin/bash");
 		thesaurusTermView.setConceptsPath(conceptsPath);
-		thesaurusTermView.setCreated("foo");
+		thesaurusTermView.setCreated("someone");
 		thesaurusTermView.setHidden(false);
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
@@ -38,7 +38,7 @@ class ThesaurusTermViewTest {
 		assertThat(thesaurusTermView.getConceptId(), is("1234"));
 		assertThat(thesaurusTermView.getConceptsPath(), hasSize(1));
 		assertThat(thesaurusTermView.getConceptsPath().get(0), is("/bin/bash"));
-		assertThat(thesaurusTermView.getCreated(), is("foo"));
+		assertThat(thesaurusTermView.getCreated(), is("someone"));
 		assertThat(thesaurusTermView.getHidden(), is(false));
 		assertThat(thesaurusTermView.getIdentifier(), is("data"));
 		assertThat(thesaurusTermView.getLanguage(), is("foo"));

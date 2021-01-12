@@ -21,9 +21,9 @@ class FullThesaurusTest {
 		FullThesaurus fullThesaurus = new FullThesaurus();
 		fullThesaurus.setContributor("something");
 		fullThesaurus.setCoverage("something");
-		fullThesaurus.setCreated("something");
+		fullThesaurus.setCreated("someone");
 		fullThesaurus.setCreatorEmail("info@diffblue.com");
-		fullThesaurus.setCreatorHomepage("+");
+		fullThesaurus.setCreatorHomepage("someone");
 		fullThesaurus.setCreatorName("Acme");
 		fullThesaurus.setDescription("some text");
 		ArrayList<String> formats = new ArrayList<String>();
@@ -43,9 +43,9 @@ class FullThesaurusTest {
 		fullThesaurus.setTitle("Mr");
 		assertThat(fullThesaurus.getContributor(), is("something"));
 		assertThat(fullThesaurus.getCoverage(), is("something"));
-		assertThat(fullThesaurus.getCreated(), is("something"));
+		assertThat(fullThesaurus.getCreated(), is("someone"));
 		assertThat(fullThesaurus.getCreatorEmail(), is("info@diffblue.com"));
-		assertThat(fullThesaurus.getCreatorHomepage(), is("+"));
+		assertThat(fullThesaurus.getCreatorHomepage(), is("someone"));
 		assertThat(fullThesaurus.getCreatorName(), is("Acme"));
 		assertThat(fullThesaurus.getDescription(), is("some text"));
 		assertThat(fullThesaurus.getFormats(), hasSize(1));
