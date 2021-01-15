@@ -19,13 +19,13 @@ class EncodedControlTest {
 
 	@Test
 	void newBundleBaseNameIsAcmeAndReloadIsFalseReturnsNull() throws IllegalAccessException, InstantiationException, java.io.IOException {
-		assertThat(new EncodedControl("foo").newBundle("Acme", new Locale("en"), "java.properties", ClassLoader.getSystemClassLoader(), false), is(nullValue()));
+		assertThat(new EncodedControl("bar").newBundle("Acme", new Locale("en"), "java.properties", ClassLoader.getSystemClassLoader(), false), is(nullValue()));
 	}
 
 	@Test
 	void getFormats() {
-		assertThat(new EncodedControl("foo").getFormats("foo"), hasSize(2));
-		assertThat(new EncodedControl("foo").getFormats("foo").get(0), is("java.class"));
-		assertThat(new EncodedControl("foo").getFormats("foo").get(1), is("java.properties"));
+		assertThat(new EncodedControl("UTF-8").getFormats("foo"), hasSize(2));
+		assertThat(new EncodedControl("UTF-8").getFormats("foo").get(0), is("java.class"));
+		assertThat(new EncodedControl("UTF-8").getFormats("foo").get(1), is("java.properties"));
 	}
 }
