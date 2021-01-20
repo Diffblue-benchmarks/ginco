@@ -26,7 +26,7 @@ class SearchResultTest {
 		languages.add("foo");
 		searchResult.setLanguages(languages);
 		searchResult.setLexicalValue("value");
-		searchResult.setModified("foo");
+		searchResult.setModified("someone");
 		searchResult.setStatus(1);
 		searchResult.setThesaurusId("1234");
 		searchResult.setThesaurusTitle("Mr");
@@ -38,7 +38,7 @@ class SearchResultTest {
 		assertThat(searchResult.getLanguages(), hasSize(1));
 		assertThat(searchResult.getLanguages().get(0), is("foo"));
 		assertThat(searchResult.getLexicalValue(), is("value"));
-		assertThat(searchResult.getModified(), is("foo"));
+		assertThat(searchResult.getModified(), is("someone"));
 		assertThat(searchResult.getStatus(), is(1));
 		assertThat(searchResult.getThesaurusId(), is("1234"));
 		assertThat(searchResult.getThesaurusTitle(), is("Mr"));

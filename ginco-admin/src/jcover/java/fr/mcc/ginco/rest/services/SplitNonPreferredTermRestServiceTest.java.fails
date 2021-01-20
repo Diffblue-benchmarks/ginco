@@ -57,7 +57,7 @@ class SplitNonPreferredTermRestServiceTest {
 		splitNonPreferredTermView.setIdentifier("data");
 		splitNonPreferredTermView.setLanguage("foo");
 		splitNonPreferredTermView.setLexicalValue("value");
-		splitNonPreferredTermView.setModified("foo");
+		splitNonPreferredTermView.setModified("someone");
 		ArrayList<ThesaurusTermView> preferredTerms1 =
 			 new ArrayList<ThesaurusTermView>();
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
@@ -79,7 +79,7 @@ class SplitNonPreferredTermRestServiceTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getPreferredTerms().size(), is(1));
 		assertThat(result.getPreferredTerms().get(0), sameInstance(thesaurusTermView));
 		assertThat(result.getSource(), is("foo"));
@@ -97,7 +97,7 @@ class SplitNonPreferredTermRestServiceTest {
 		splitNonPreferredTermView.setIdentifier("data");
 		splitNonPreferredTermView.setLanguage("foo");
 		splitNonPreferredTermView.setLexicalValue("value");
-		splitNonPreferredTermView.setModified("foo");
+		splitNonPreferredTermView.setModified("someone");
 		splitNonPreferredTermView.setPreferredTerms(new ArrayList<ThesaurusTermView>());
 		splitNonPreferredTermView.setSource("foo");
 		splitNonPreferredTermView.setStatus(1);
@@ -118,7 +118,7 @@ class SplitNonPreferredTermRestServiceTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getPreferredTerms(), empty());
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));

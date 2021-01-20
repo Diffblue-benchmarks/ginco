@@ -127,7 +127,7 @@ class ThesaurusConceptRestServiceTest {
 		thesaurusConceptView.setConceptsPath(conceptsPath1);
 		thesaurusConceptView.setCreated("someone");
 		thesaurusConceptView.setIdentifier("data");
-		thesaurusConceptView.setModified("hello");
+		thesaurusConceptView.setModified("someone");
 		thesaurusConceptView.setNotation("DE");
 		ArrayList<HierarchicalRelationshipView> parentConcepts1 =
 			 new ArrayList<HierarchicalRelationshipView>();
@@ -165,7 +165,7 @@ class ThesaurusConceptRestServiceTest {
 		assertThat(result.getConceptsPath().get(0), is("/bin/bash"));
 		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getModified(), is("hello"));
+		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getNotation(), is("DE"));
 		assertThat(result.getParentConcepts().size(), is(1));
 		assertThat(result.getParentConcepts().get(0), sameInstance(hierarchicalRelationshipView2));

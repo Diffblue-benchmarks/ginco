@@ -298,7 +298,7 @@ class SplitNonPreferredTermViewConverterTest {
 		source6.setIdentifier("data");
 		source6.setLanguage("foo");
 		source6.setLexicalValue("value");
-		source6.setModified("foo");
+		source6.setModified("someone");
 		ArrayList<ThesaurusTermView> preferredTerms2 =
 			 new ArrayList<ThesaurusTermView>();
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
@@ -311,7 +311,7 @@ class SplitNonPreferredTermViewConverterTest {
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
 		thesaurusTermView.setLexicalValue("value");
-		thesaurusTermView.setModified("foo");
+		thesaurusTermView.setModified("someone");
 		thesaurusTermView.setPrefered(false);
 		thesaurusTermView.setRole("admin");
 		thesaurusTermView.setSource("foo");

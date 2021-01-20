@@ -29,7 +29,7 @@ class ThesaurusConceptGroupViewTest {
 		thesaurusConceptGroupView.setIsDynamic(false);
 		thesaurusConceptGroupView.setLabel("label");
 		thesaurusConceptGroupView.setLanguage("hello");
-		thesaurusConceptGroupView.setModified("hello");
+		thesaurusConceptGroupView.setModified("someone");
 		thesaurusConceptGroupView.setNotation("DE");
 		thesaurusConceptGroupView.setParentConceptId("1234");
 		thesaurusConceptGroupView.setParentConceptLabel("label");
@@ -45,7 +45,7 @@ class ThesaurusConceptGroupViewTest {
 		assertThat(thesaurusConceptGroupView.getIsDynamic(), is(false));
 		assertThat(thesaurusConceptGroupView.getLabel(), is("label"));
 		assertThat(thesaurusConceptGroupView.getLanguage(), is("hello"));
-		assertThat(thesaurusConceptGroupView.getModified(), is("hello"));
+		assertThat(thesaurusConceptGroupView.getModified(), is("someone"));
 		assertThat(thesaurusConceptGroupView.getNotation(), is("DE"));
 		assertThat(thesaurusConceptGroupView.getParentConceptId(), is("1234"));
 		assertThat(thesaurusConceptGroupView.getParentConceptLabel(), is("label"));

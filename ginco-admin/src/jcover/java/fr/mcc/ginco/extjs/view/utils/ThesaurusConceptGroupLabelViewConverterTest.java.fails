@@ -86,7 +86,7 @@ class ThesaurusConceptGroupLabelViewConverterTest {
 		thesaurusConceptGroupViewJAXBElement.setIsDynamic(false);
 		thesaurusConceptGroupViewJAXBElement.setLabel("label");
 		thesaurusConceptGroupViewJAXBElement.setLanguage("hello");
-		thesaurusConceptGroupViewJAXBElement.setModified("hello");
+		thesaurusConceptGroupViewJAXBElement.setModified("someone");
 		thesaurusConceptGroupViewJAXBElement.setNotation("DE");
 		thesaurusConceptGroupViewJAXBElement.setParentConceptId("1234");
 		thesaurusConceptGroupViewJAXBElement.setParentConceptLabel("label");

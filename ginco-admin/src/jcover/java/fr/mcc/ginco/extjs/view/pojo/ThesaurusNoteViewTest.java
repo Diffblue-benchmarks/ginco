@@ -21,7 +21,7 @@ class ThesaurusNoteViewTest {
 		thesaurusNoteView.setIdentifier("data");
 		thesaurusNoteView.setLanguage("foo");
 		thesaurusNoteView.setLexicalValue("value");
-		thesaurusNoteView.setModified("foo");
+		thesaurusNoteView.setModified("someone");
 		thesaurusNoteView.setSource("foo");
 		thesaurusNoteView.setTermId("1234");
 		thesaurusNoteView.setThesaurusId("1234");
@@ -31,7 +31,7 @@ class ThesaurusNoteViewTest {
 		assertThat(thesaurusNoteView.getIdentifier(), is("data"));
 		assertThat(thesaurusNoteView.getLanguage(), is("foo"));
 		assertThat(thesaurusNoteView.getLexicalValue(), is("value"));
-		assertThat(thesaurusNoteView.getModified(), is("foo"));
+		assertThat(thesaurusNoteView.getModified(), is("someone"));
 		assertThat(thesaurusNoteView.getSource(), is("foo"));
 		assertThat(thesaurusNoteView.getTermId(), is("1234"));
 		assertThat(thesaurusNoteView.getThesaurusId(), is("1234"));

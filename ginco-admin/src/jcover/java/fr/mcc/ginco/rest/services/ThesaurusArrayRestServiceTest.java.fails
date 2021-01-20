@@ -72,7 +72,7 @@ class ThesaurusArrayRestServiceTest {
 		thesaurusArrayView.setIdentifier("data");
 		thesaurusArrayView.setLabel("label");
 		thesaurusArrayView.setLanguage("foo");
-		thesaurusArrayView.setModified("foo");
+		thesaurusArrayView.setModified("someone");
 		thesaurusArrayView.setNodeLabelId(1);
 		thesaurusArrayView.setOrder(false);
 		thesaurusArrayView.setParentArrayId("1234");
@@ -95,7 +95,7 @@ class ThesaurusArrayRestServiceTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("label"));
 		assertThat(result.getLanguage(), is("foo"));
-		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getNodeLabelId(), is(1));
 		assertThat(result.getOrder(), is(false));
 		assertThat(result.getParentArrayId(), is("1234"));
@@ -146,7 +146,7 @@ class ThesaurusArrayRestServiceTest {
 		thesaurusArrayView.setIdentifier("data");
 		thesaurusArrayView.setLabel("label");
 		thesaurusArrayView.setLanguage("foo");
-		thesaurusArrayView.setModified("foo");
+		thesaurusArrayView.setModified("someone");
 		thesaurusArrayView.setNodeLabelId(1);
 		thesaurusArrayView.setOrder(false);
 		thesaurusArrayView.setParentArrayId("1234");
@@ -181,7 +181,7 @@ class ThesaurusArrayRestServiceTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLabel(), is("label"));
 		assertThat(result.getLanguage(), is("foo"));
-		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getNodeLabelId(), is(1));
 		assertThat(result.getOrder(), is(false));
 		assertThat(result.getParentArrayId(), is("1234"));

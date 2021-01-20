@@ -278,7 +278,7 @@ class TermViewConverterTest {
 		source4.setIdentifier("data");
 		source4.setLanguage("foo");
 		source4.setLexicalValue("value");
-		source4.setModified("foo");
+		source4.setModified("someone");
 		source4.setPrefered(false);
 		source4.setRole("admin");
 		source4.setSource("foo");

@@ -485,7 +485,7 @@ class ThesaurusNoteViewConverterTest {
 		source6.setIdentifier("data");
 		source6.setLanguage("foo");
 		source6.setLexicalValue("value");
-		source6.setModified("foo");
+		source6.setModified("someone");
 		source6.setSource("foo");
 		source6.setTermId("1234");
 		source6.setThesaurusId("1234");

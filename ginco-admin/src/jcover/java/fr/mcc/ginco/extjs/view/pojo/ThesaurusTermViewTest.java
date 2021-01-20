@@ -28,7 +28,7 @@ class ThesaurusTermViewTest {
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
 		thesaurusTermView.setLexicalValue("value");
-		thesaurusTermView.setModified("foo");
+		thesaurusTermView.setModified("someone");
 		thesaurusTermView.setPrefered(false);
 		thesaurusTermView.setRole("admin");
 		thesaurusTermView.setSource("foo");
@@ -43,7 +43,7 @@ class ThesaurusTermViewTest {
 		assertThat(thesaurusTermView.getIdentifier(), is("data"));
 		assertThat(thesaurusTermView.getLanguage(), is("foo"));
 		assertThat(thesaurusTermView.getLexicalValue(), is("value"));
-		assertThat(thesaurusTermView.getModified(), is("foo"));
+		assertThat(thesaurusTermView.getModified(), is("someone"));
 		assertThat(thesaurusTermView.getPrefered(), is(false));
 		assertThat(thesaurusTermView.getRole(), is("admin"));
 		assertThat(thesaurusTermView.getSource(), is("foo"));

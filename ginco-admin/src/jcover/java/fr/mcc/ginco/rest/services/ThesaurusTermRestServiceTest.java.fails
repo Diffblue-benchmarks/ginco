@@ -157,7 +157,7 @@ class ThesaurusTermRestServiceTest {
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
 		thesaurusTermView.setLexicalValue("value");
-		thesaurusTermView.setModified("foo");
+		thesaurusTermView.setModified("someone");
 		thesaurusTermView.setPrefered(false);
 		thesaurusTermView.setRole("admin");
 		thesaurusTermView.setSource("foo");
@@ -179,7 +179,7 @@ class ThesaurusTermRestServiceTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getPrefered(), is(false));
 		assertThat(result.getRole(), is("admin"));
 		assertThat(result.getSource(), is("foo"));
@@ -206,7 +206,7 @@ class ThesaurusTermRestServiceTest {
 		thesaurusTermView.setIdentifier("data");
 		thesaurusTermView.setLanguage("foo");
 		thesaurusTermView.setLexicalValue("value");
-		thesaurusTermView.setModified("foo");
+		thesaurusTermView.setModified("someone");
 		thesaurusTermView.setPrefered(false);
 		thesaurusTermView.setRole("admin");
 		thesaurusTermView.setSource("foo");
@@ -232,7 +232,7 @@ class ThesaurusTermRestServiceTest {
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("foo"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(result.getModified(), is("foo"));
+		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getPrefered(), is(false));
 		assertThat(result.getRole(), is("admin"));
 		assertThat(result.getSource(), is("foo"));

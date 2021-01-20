@@ -32,7 +32,7 @@ class FullThesaurusTest {
 		ArrayList<String> languages = new ArrayList<String>();
 		languages.add("something");
 		fullThesaurus.setLanguages(languages);
-		fullThesaurus.setModified("something");
+		fullThesaurus.setModified("someone");
 		fullThesaurus.setPublisher("something");
 		fullThesaurus.setRelation("DE");
 		fullThesaurus.setRights("something");
@@ -52,7 +52,7 @@ class FullThesaurusTest {
 		assertThat(fullThesaurus.getFormats().get(0), is("yyyy-MM-dd"));
 		assertThat(fullThesaurus.getLanguages(), hasSize(1));
 		assertThat(fullThesaurus.getLanguages().get(0), is("something"));
-		assertThat(fullThesaurus.getModified(), is("something"));
+		assertThat(fullThesaurus.getModified(), is("someone"));
 		assertThat(fullThesaurus.getPublisher(), is("something"));
 		assertThat(fullThesaurus.getRelation(), is("DE"));
 		assertThat(fullThesaurus.getRights(), is("something"));

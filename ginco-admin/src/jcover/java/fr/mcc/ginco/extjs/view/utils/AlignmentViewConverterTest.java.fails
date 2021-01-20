@@ -439,7 +439,7 @@ class AlignmentViewConverterTest {
 		alignmentView.setExternalThesaurus(externalThesaurus2);
 		alignmentView.setIdentifier("data");
 		alignmentView.setInternalThesaurusId("1234");
-		alignmentView.setModified("foo");
+		alignmentView.setModified("someone");
 		ArrayList<AlignmentConceptView> targetConcepts3 =
 			 new ArrayList<AlignmentConceptView>();
 		AlignmentConceptView alignmentConceptView = new AlignmentConceptView();

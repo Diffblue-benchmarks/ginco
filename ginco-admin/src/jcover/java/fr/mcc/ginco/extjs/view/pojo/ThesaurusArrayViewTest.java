@@ -32,7 +32,7 @@ class ThesaurusArrayViewTest {
 		thesaurusArrayView.setIdentifier("data");
 		thesaurusArrayView.setLabel("label");
 		thesaurusArrayView.setLanguage("foo");
-		thesaurusArrayView.setModified("foo");
+		thesaurusArrayView.setModified("someone");
 		thesaurusArrayView.setNodeLabelId(1);
 		thesaurusArrayView.setOrder(false);
 		thesaurusArrayView.setParentArrayId("1234");
@@ -46,7 +46,7 @@ class ThesaurusArrayViewTest {
 		assertThat(thesaurusArrayView.getIdentifier(), is("data"));
 		assertThat(thesaurusArrayView.getLabel(), is("label"));
 		assertThat(thesaurusArrayView.getLanguage(), is("foo"));
-		assertThat(thesaurusArrayView.getModified(), is("foo"));
+		assertThat(thesaurusArrayView.getModified(), is("someone"));
 		assertThat(thesaurusArrayView.getNodeLabelId(), is(1));
 		assertThat(thesaurusArrayView.getOrder(), is(false));
 		assertThat(thesaurusArrayView.getParentArrayId(), is("1234"));
