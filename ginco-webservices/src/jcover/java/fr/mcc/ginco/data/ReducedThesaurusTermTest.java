@@ -1,6 +1,7 @@
 package fr.mcc.ginco.data;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -92,7 +93,7 @@ class ReducedThesaurusTermTest {
 		assertThat(reducedThesaurusTerm.getIdentifier(), is("data"));
 		assertThat(reducedThesaurusTerm.getLanguageId(), is("1234"));
 		assertThat(reducedThesaurusTerm.getLexicalValue(), is("value"));
-		assertThat(reducedThesaurusTerm.getNotes().size(), is(1));
+		assertThat(reducedThesaurusTerm.getNotes(), hasSize(1));
 		assertThat(reducedThesaurusTerm.getNotes().get(0), sameInstance(note));
 		assertThat(reducedThesaurusTerm.getStatus(), is(TermStatusEnum.CANDIDATE));
 	}

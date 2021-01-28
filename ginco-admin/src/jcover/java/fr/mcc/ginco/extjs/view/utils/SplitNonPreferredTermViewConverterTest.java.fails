@@ -2,8 +2,10 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.anyBoolean;
@@ -88,11 +90,11 @@ class SplitNonPreferredTermViewConverterTest {
 		SplitNonPreferredTermView result = service.convert(source1);
 
 		// assert
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is(nullValue()));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getPreferredTerms(), empty());
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
@@ -121,11 +123,11 @@ class SplitNonPreferredTermViewConverterTest {
 		SplitNonPreferredTermView result = service.convert(source1);
 
 		// assert
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getPreferredTerms(), empty());
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
@@ -336,6 +338,7 @@ class SplitNonPreferredTermViewConverterTest {
 			Math.abs(result.getModified().getTime() - new Date().getTime())
 			<= 10_000L, is(true));
 		assertThat(result.getPreferredTerms(), hasSize(1));
+		assertThat(result.getPreferredTerms(), hasItem(thesaurusTerm));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurus(), sameInstance(thesaurus1));

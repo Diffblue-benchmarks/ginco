@@ -48,13 +48,13 @@ public class ThesaurusVersionHistoryServiceImplTest {
 	public void getVersionsByThesaurusId() {
 
 		// arrange
-		ArrayList<ThesaurusVersionHistory> arrayList =
+		ArrayList<ThesaurusVersionHistory> thesaurusVersionHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 new ThesaurusVersionHistory();
-		arrayList.add(thesaurusVersionHistory);
+		thesaurusVersionHistoryList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusVersionHistoryList);
 
 		// act
 		List<ThesaurusVersionHistory> result =
@@ -106,14 +106,14 @@ public class ThesaurusVersionHistoryServiceImplTest {
 
 	@Test
 	public void hasPublishedVersion2() {
-		ArrayList<ThesaurusVersionHistory> arrayList =
+		ArrayList<ThesaurusVersionHistory> thesaurusVersionHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 new ThesaurusVersionHistory();
 		thesaurusVersionHistory.setStatus(1);
-		arrayList.add(thesaurusVersionHistory);
+		thesaurusVersionHistoryList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusVersionHistoryList);
 		assertFalse(service.hasPublishedVersion(new Thesaurus()));
 	}
 
@@ -132,11 +132,11 @@ public class ThesaurusVersionHistoryServiceImplTest {
 		thesaurusVersionHistory1.setThisVersion(false);
 		thesaurusVersionHistory1.setUserId("root");
 		thesaurusVersionHistory1.setVersionNote("1.0");
-		ArrayList<ThesaurusVersionHistory> arrayList =
+		ArrayList<ThesaurusVersionHistory> thesaurusVersionHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
-		arrayList.add(new ThesaurusVersionHistory());
+		thesaurusVersionHistoryList.add(new ThesaurusVersionHistory());
 		when(thesaurusVersionHistoryDAO.findAllOtherThisVersionTrueByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusVersionHistoryList);
 		when(thesaurusVersionHistoryDAO.update(Mockito.<ThesaurusVersionHistory>any()))
 			.thenReturn(thesaurusVersionHistory1);
 		when(generatorService.generate(Mockito.<Class>any()))

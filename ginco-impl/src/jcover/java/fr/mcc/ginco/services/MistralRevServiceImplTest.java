@@ -68,12 +68,12 @@ public class MistralRevServiceImplTest {
 			.thenReturn(new Thesaurus());
 		when(thesaurusService.getThesaurusList())
 			.thenReturn(new ArrayList<Thesaurus>());
-		ArrayList<String> arrayList2 = new ArrayList<String>();
-		arrayList2.add("Smith");
+		ArrayList<String> stringList = new ArrayList<String>();
+		stringList.add("Smith");
 		Query query = mock(Query.class);
 		SQLQuery obj = mock(SQLQuery.class);
 		when(obj.list())
-			.thenReturn(arrayList2);
+			.thenReturn(stringList);
 		when(obj.setLong(Mockito.<String>any(), anyLong()))
 			.thenReturn(query);
 		Session session = mock(Session.class);

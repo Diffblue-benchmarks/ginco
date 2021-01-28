@@ -46,10 +46,11 @@ public class SKOSArrayExporterTest {
 
 	@Test
 	public void exportCollections1() {
-		ArrayList<ThesaurusArray> arrayList2 = new ArrayList<ThesaurusArray>();
-		arrayList2.add(new ThesaurusArray());
+		ArrayList<ThesaurusArray> thesaurusArrayList2 =
+			 new ArrayList<ThesaurusArray>();
+		thesaurusArrayList2.add(new ThesaurusArray());
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusArrayList2);
 		when(thesaurusArrayService.getChildrenArrays(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
 		NodeLabel nodeLabel = new NodeLabel();
@@ -81,14 +82,16 @@ public class SKOSArrayExporterTest {
 
 	@Test
 	public void exportCollections2() {
-		ArrayList<ThesaurusArray> arrayList1 = new ArrayList<ThesaurusArray>();
-		arrayList1.add(new ThesaurusArray());
-		ArrayList<ThesaurusArray> arrayList2 = new ArrayList<ThesaurusArray>();
-		arrayList2.add(new ThesaurusArray());
+		ArrayList<ThesaurusArray> thesaurusArrayList1 =
+			 new ArrayList<ThesaurusArray>();
+		thesaurusArrayList1.add(new ThesaurusArray());
+		ArrayList<ThesaurusArray> thesaurusArrayList2 =
+			 new ArrayList<ThesaurusArray>();
+		thesaurusArrayList2.add(new ThesaurusArray());
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusArrayList2);
 		when(thesaurusArrayService.getChildrenArrays(Mockito.<String>any()))
-			.thenReturn(arrayList1);
+			.thenReturn(thesaurusArrayList1);
 		NodeLabel nodeLabel = new NodeLabel();
 		nodeLabel.setLanguage(new Language());
 		when(nodeLabelService.getByThesaurusArray(Mockito.<String>any()))

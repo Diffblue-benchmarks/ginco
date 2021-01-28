@@ -43,6 +43,6 @@ public class ConceptHierarchicalRelationshipServiceUtilTest {
 
 	@Test
 	public void getRootConceptsReturnsEmpty() {
-		assertTrue((service.getRootConcepts(new ThesaurusConcept())).isEmpty());
+		assertTrue(service.getRootConcepts(new ThesaurusConcept()).isEmpty());
 	}
 }

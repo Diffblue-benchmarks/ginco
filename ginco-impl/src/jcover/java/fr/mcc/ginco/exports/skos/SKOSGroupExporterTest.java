@@ -93,11 +93,11 @@ public class SKOSGroupExporterTest {
 
 	@Test
 	public void exportGroup2() {
-		ArrayList<ThesaurusConceptGroup> arrayList =
+		ArrayList<ThesaurusConceptGroup> thesaurusConceptGroupList =
 			 new ArrayList<ThesaurusConceptGroup>();
-		arrayList.add(new ThesaurusConceptGroup());
+		thesaurusConceptGroupList.add(new ThesaurusConceptGroup());
 		when(thesaurusConceptGroupService.getChildGroups(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptGroupList);
 		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
 			 new ThesaurusConceptGroupLabel();
 		thesaurusConceptGroupLabel.setLanguage(new Language());

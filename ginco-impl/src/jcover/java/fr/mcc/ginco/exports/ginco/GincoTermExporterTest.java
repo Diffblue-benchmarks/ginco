@@ -45,13 +45,13 @@ public class GincoTermExporterTest {
 	public void getExportTermNotes() {
 
 		// arrange
-		ArrayList<Note> arrayList = new ArrayList<Note>();
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
-		arrayList.add(note);
+		noteList.add(note);
 		when(noteService.getTermNoteCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 
 		// act
 		JaxbList<Note> result = service.getExportTermNotes(new ThesaurusTerm());

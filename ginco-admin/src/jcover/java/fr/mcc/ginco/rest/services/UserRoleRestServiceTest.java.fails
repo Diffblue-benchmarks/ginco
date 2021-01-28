@@ -1,6 +1,7 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
@@ -53,17 +54,17 @@ class UserRoleRestServiceTest {
 		UserRoleView userRoleView = new UserRoleView();
 		when(userRoleViewConverter.convert(Mockito.<UserRole>any()))
 			.thenReturn(userRoleView);
-		ArrayList<UserRole> arrayList = new ArrayList<UserRole>();
-		arrayList.add(new UserRole());
+		ArrayList<UserRole> userRoleList = new ArrayList<UserRole>();
+		userRoleList.add(new UserRole());
 		when(userRoleService.getThesaurusUsers(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(userRoleList);
 
 		// act
 		ExtJsonFormLoadData<List<UserRoleView>> result =
 			 service.getThesaurusUsers("root");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(userRoleView));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
@@ -72,7 +73,7 @@ class UserRoleRestServiceTest {
 	@Test
 	void getAvailableRoles() {
 		ExtJsonFormLoadData<List<RoleView>> result = service.getAvailableRoles();
-		assertThat(result.getData().size(), is(2));
+		assertThat(result.getData(), hasSize(2));
 		assertThat(result.getData().get(0).getRole(), is(0));
 		assertThat(result.getData().get(0).getRoleLabel(), is("Responsable op\u00e9rationnel"));
 		assertThat(result.getData().get(1).getRole(), is(1));
@@ -100,7 +101,7 @@ class UserRoleRestServiceTest {
 			 service.updateThesaurusUsers(userRoleViews);
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(userRoleView2));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));

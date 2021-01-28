@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.node;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.mock;
@@ -35,7 +36,7 @@ class WarningNodeTest {
 		warningNode.setThesaurusId("1234");
 		warningNode.setTitle("Mr");
 		warningNode.setType(ThesaurusListNodeType.THESAURUS);
-		assertThat(warningNode.getChildren().size(), is(1));
+		assertThat(warningNode.getChildren(), hasSize(1));
 		assertThat(warningNode.getChildren().get(0), sameInstance(obj));
 		assertThat(warningNode.getIconCls(), is("DE"));
 		assertThat(warningNode.getId(), is("1234"));

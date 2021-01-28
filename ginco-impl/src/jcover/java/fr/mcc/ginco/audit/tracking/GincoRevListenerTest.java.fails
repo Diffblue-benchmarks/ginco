@@ -1,6 +1,7 @@
 package fr.mcc.ginco.audit.tracking;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import fr.mcc.ginco.beans.GincoRevEntity;
@@ -47,6 +48,7 @@ public class GincoRevListenerTest {
 
 		// assert
 		assertEquals(1, ((GincoRevEntity) revisionEntity).getModifiedEntityTypes().size());
+		assertTrue(((GincoRevEntity) revisionEntity).getModifiedEntityTypes().contains(/* pojo GincoRevModifiedEntityType getId, getRevision */));
 	}
 
 	@Test

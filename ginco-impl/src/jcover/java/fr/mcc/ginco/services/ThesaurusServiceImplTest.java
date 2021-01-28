@@ -103,9 +103,9 @@ public class ThesaurusServiceImplTest {
 		assertSame(creator, result.getCreator());
 		assertSame(date, result.getDate());
 		assertEquals("some text", result.getDescription());
-		assertTrue((result.getFormat()).isEmpty());
+		assertTrue(result.getFormat().isEmpty());
 		assertEquals("data", result.getIdentifier());
-		assertTrue((result.getLang()).isEmpty());
+		assertTrue(result.getLang().isEmpty());
 		assertEquals("foo", result.getPublisher());
 		assertEquals("DE", result.getRelation());
 		assertEquals("foo", result.getRights());
@@ -114,7 +114,7 @@ public class ThesaurusServiceImplTest {
 		assertEquals("data", result.getThesaurusId());
 		assertEquals("Mr", result.getTitle());
 		assertSame(type, result.getType());
-		assertTrue((result.getVersions()).isEmpty());
+		assertTrue(result.getVersions().isEmpty());
 		assertFalse(result.isArchived());
 		assertFalse(result.isDefaultTopConcept());
 		assertFalse(result.isPolyHierarchical());
@@ -132,9 +132,9 @@ public class ThesaurusServiceImplTest {
 		assertEquals("default.thesaurus.creator.name", result.getCreator().getName());
 		assertNull(result.getDate());
 		assertEquals("default.thesaurus.description", result.getDescription());
-		assertTrue((result.getFormat()).isEmpty());
+		assertTrue(result.getFormat().isEmpty());
 		assertNull(result.getIdentifier());
-		assertTrue((result.getLang()).isEmpty());
+		assertTrue(result.getLang().isEmpty());
 		assertEquals("default.thesaurus.publisher", result.getPublisher());
 		assertNull(result.getRelation());
 		assertEquals("default.thesaurus.rights", result.getRights());
@@ -153,11 +153,11 @@ public class ThesaurusServiceImplTest {
 	public void getThesaurusList() {
 
 		// arrange
-		ArrayList<Thesaurus> arrayList = new ArrayList<Thesaurus>();
+		ArrayList<Thesaurus> thesaurusList = new ArrayList<Thesaurus>();
 		Thesaurus thesaurus = new Thesaurus();
-		arrayList.add(thesaurus);
+		thesaurusList.add(thesaurus);
 		when(thesaurusDAO.findAll(Mockito.<String>any(), Mockito.<fr.mcc.ginco.dao.IGenericDAO.SortingTypes>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusList);
 
 		// act
 		List<Thesaurus> result = service.getThesaurusList();
@@ -169,13 +169,13 @@ public class ThesaurusServiceImplTest {
 
 	@Test
 	public void updateThesaurus() {
-		ArrayList<ThesaurusVersionHistory> arrayList =
+		ArrayList<ThesaurusVersionHistory> thesaurusVersionHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 mock(ThesaurusVersionHistory.class);
-		arrayList.add(thesaurusVersionHistory);
+		thesaurusVersionHistoryList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusVersionHistoryList);
 		when(thesaurusDAO.update(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
 		Thesaurus object = new Thesaurus();
@@ -184,13 +184,13 @@ public class ThesaurusServiceImplTest {
 
 	@Test
 	public void updateThesaurusDate() throws java.text.ParseException {
-		ArrayList<ThesaurusVersionHistory> arrayList =
+		ArrayList<ThesaurusVersionHistory> thesaurusVersionHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 mock(ThesaurusVersionHistory.class);
-		arrayList.add(thesaurusVersionHistory);
+		thesaurusVersionHistoryList.add(thesaurusVersionHistory);
 		when(thesaurusVersionHistoryDAO.findVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusVersionHistoryList);
 		Thesaurus thesaurus = new Thesaurus();
 		thesaurus.setArchived(false);
 		thesaurus.setContributor("foo");
@@ -261,7 +261,7 @@ public class ThesaurusServiceImplTest {
 	public void getThesaurusLanguagesReturnsEmpty() {
 		when(thesaurusDAO.getById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
-		assertTrue((service.getThesaurusLanguages("1234")).isEmpty());
+		assertTrue(service.getThesaurusLanguages("1234").isEmpty());
 	}
 
 	@Test
@@ -304,9 +304,9 @@ public class ThesaurusServiceImplTest {
 		assertSame(creator1, result.getCreator());
 		assertSame(date1, result.getDate());
 		assertEquals("some text", result.getDescription());
-		assertTrue((result.getFormat()).isEmpty());
+		assertTrue(result.getFormat().isEmpty());
 		assertEquals("data", result.getIdentifier());
-		assertTrue((result.getLang()).isEmpty());
+		assertTrue(result.getLang().isEmpty());
 		assertEquals("foo", result.getPublisher());
 		assertEquals("DE", result.getRelation());
 		assertEquals("foo", result.getRights());
@@ -315,7 +315,7 @@ public class ThesaurusServiceImplTest {
 		assertEquals("data", result.getThesaurusId());
 		assertEquals("Mr", result.getTitle());
 		assertSame(type1, result.getType());
-		assertTrue((result.getVersions()).isEmpty());
+		assertTrue(result.getVersions().isEmpty());
 		assertFalse(result.isArchived());
 		assertFalse(result.isDefaultTopConcept());
 		assertFalse(result.isPolyHierarchical());

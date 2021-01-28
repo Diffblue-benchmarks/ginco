@@ -42,11 +42,11 @@ public class SKOSAssociativeRelationshipRolesExporterTest {
 
 	@Test
 	public void exportAssociativeRelationshipRoles() {
-		ArrayList<AssociativeRelationshipRole> arrayList =
+		ArrayList<AssociativeRelationshipRole> associativeRelationshipRoleList =
 			 new ArrayList<AssociativeRelationshipRole>();
-		arrayList.add(new AssociativeRelationshipRole());
+		associativeRelationshipRoleList.add(new AssociativeRelationshipRole());
 		when(associativeRelationshipRoleService.getAllAssociationTermRole())
-			.thenReturn(arrayList);
+			.thenReturn(associativeRelationshipRoleList);
 		Model model = mock(Model.class);
 		Literal literal = mock(Literal.class);
 		Resource resource = mock(Resource.class);

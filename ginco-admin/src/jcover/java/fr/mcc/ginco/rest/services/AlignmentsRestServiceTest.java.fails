@@ -1,7 +1,7 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
 
@@ -54,17 +54,17 @@ class AlignmentsRestServiceTest {
 	void getAlignmentTypes() {
 
 		// arrange
-		ArrayList<AlignmentType> arrayList = new ArrayList<AlignmentType>();
+		ArrayList<AlignmentType> alignmentTypeList = new ArrayList<AlignmentType>();
 		AlignmentType alignmentType = new AlignmentType();
-		arrayList.add(alignmentType);
+		alignmentTypeList.add(alignmentType);
 		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(arrayList);
+			.thenReturn(alignmentTypeList);
 
 		// act
 		List<AlignmentType> result = service.getAlignmentTypes();
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(alignmentType));
 	}
 
@@ -72,18 +72,18 @@ class AlignmentsRestServiceTest {
 	void getExternalThesaurusTypes() {
 
 		// arrange
-		ArrayList<ExternalThesaurusType> arrayList =
+		ArrayList<ExternalThesaurusType> externalThesaurusTypeList =
 			 new ArrayList<ExternalThesaurusType>();
 		ExternalThesaurusType externalThesaurusType = new ExternalThesaurusType();
-		arrayList.add(externalThesaurusType);
+		externalThesaurusTypeList.add(externalThesaurusType);
 		when(externalThesaurusTypeService.getExternalThesaurusTypeList())
-			.thenReturn(arrayList);
+			.thenReturn(externalThesaurusTypeList);
 
 		// act
 		List<ExternalThesaurusType> result = service.getExternalThesaurusTypes();
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(externalThesaurusType));
 	}
 
@@ -94,17 +94,18 @@ class AlignmentsRestServiceTest {
 		ExternalThesaurusView externalThesaurusView = new ExternalThesaurusView();
 		when(externalThesaurusViewConverter.convertExternalThesaurus(Mockito.<ExternalThesaurus>any()))
 			.thenReturn(externalThesaurusView);
-		ArrayList<ExternalThesaurus> arrayList = new ArrayList<ExternalThesaurus>();
-		arrayList.add(new ExternalThesaurus());
+		ArrayList<ExternalThesaurus> externalThesaurusList =
+			 new ArrayList<ExternalThesaurus>();
+		externalThesaurusList.add(new ExternalThesaurus());
 		when(externalThesaurusService.getExternalThesaurusList(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(externalThesaurusList);
 
 		// act
 		List<ExternalThesaurusView> result =
 			 service.getExternalThesauruses("foo=bar");
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(externalThesaurusView));
 	}
 }

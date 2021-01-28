@@ -33,18 +33,30 @@ public class ThesaurusTermUtilsTest {
 	}
 
 	@Test
-	public void getPreferedTerms() {
+	public void getPreferedTerms1() {
+
+		// arrange
+		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		thesaurusTerm.setPrefered(true);
+		listOfTerms.add(thesaurusTerm);
+
+		// act
+		List<ThesaurusTerm> result = service.getPreferedTerms(listOfTerms);
+
+		// assert
+		assertEquals(1, result.size());
+		assertSame(thesaurusTerm, result.get(0));
+	}
+
+	@Test
+	public void getPreferedTerms2() {
 		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTerm.getPrefered())
 			.thenReturn(false);
 		listOfTerms.add(thesaurusTerm);
-		assertTrue((service.getPreferedTerms(listOfTerms)).isEmpty());
-	}
-
-	@Test
-	public void getPreferedTermsListOfTermsIsEmpty() {
-		assertTrue((service.getPreferedTerms(new ArrayList<ThesaurusTerm>())).isEmpty());
+		assertTrue(service.getPreferedTerms(listOfTerms).isEmpty());
 	}
 
 	@Test
@@ -63,7 +75,7 @@ public class ThesaurusTermUtilsTest {
 		when(thesaurusTerm.getPrefered())
 			.thenReturn(false);
 		listOfTerms.add(thesaurusTerm);
-		assertTrue((service.getPreferedTermsByLang(listOfTerms, "1234")).isEmpty());
+		assertTrue(service.getPreferedTermsByLang(listOfTerms, "1234").isEmpty());
 	}
 
 	@Test
@@ -96,11 +108,12 @@ public class ThesaurusTermUtilsTest {
 		thesaurusTerm.setLanguage(language);
 		thesaurusTerm.setPrefered(true);
 		listOfTerms.add(thesaurusTerm);
-		assertTrue((service.getPreferedTermsByLang(listOfTerms, "1234")).isEmpty());
+		assertTrue(service.getPreferedTermsByLang(listOfTerms, "1234").isEmpty());
 	}
 
 	@Test
-	public void getPreferedTermsByLangListOfTermsIsEmpty() {
-		assertTrue((service.getPreferedTermsByLang(new ArrayList<ThesaurusTerm>(), "1234")).isEmpty());
+	public void getters() {
+		assertTrue(service.getPreferedTermsByLang(new ArrayList<ThesaurusTerm>(), "1234").isEmpty());
+		assertTrue(service.getPreferedTerms(new ArrayList<ThesaurusTerm>()).isEmpty());
 	}
 }

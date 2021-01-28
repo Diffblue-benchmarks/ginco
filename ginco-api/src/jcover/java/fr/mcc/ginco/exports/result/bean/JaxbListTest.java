@@ -1,10 +1,11 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +21,7 @@ class JaxbListTest {
 	void factory() {
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("Smith");
-		assertThat(new JaxbList<String>(list).getList(), hasSize(1));
-		assertThat(new JaxbList<String>(list).getList().get(0), is("Smith"));
+		assertThat(new JaxbList<String>(list).getList(), equalTo(Arrays.asList("Smith")));
 	}
 
 	@Test

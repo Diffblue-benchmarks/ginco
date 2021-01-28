@@ -1,6 +1,7 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.anEmptyMap;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
@@ -66,16 +67,16 @@ class ExportRestServiceTest {
 		thesaurus.setTitle("Mr");
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus);
-		ArrayList<FormattedLine> arrayList = new ArrayList<FormattedLine>();
-		arrayList.add(new FormattedLine(1, "hello"));
+		ArrayList<FormattedLine> formattedLineList = new ArrayList<FormattedLine>();
+		formattedLineList.add(new FormattedLine(1, "hello"));
 		when(exportService.getHierarchicalText(Mockito.<Thesaurus>any()))
-			.thenReturn(arrayList);
+			.thenReturn(formattedLineList);
 
 		// act
 		Response result = service.getHierarchical("1234");
 
 		// assert
-		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getCookies(), anEmptyMap());
 		assertThat(result.getMediaType(), is(nullValue()));
 		assertThat(result.getStatus(), is(200));
 	}
@@ -88,16 +89,16 @@ class ExportRestServiceTest {
 		thesaurus.setTitle("Mr");
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus);
-		ArrayList<FormattedLine> arrayList = new ArrayList<FormattedLine>();
-		arrayList.add(new FormattedLine(1, "hello"));
+		ArrayList<FormattedLine> formattedLineList = new ArrayList<FormattedLine>();
+		formattedLineList.add(new FormattedLine(1, "hello"));
 		when(exportService.getAlphabeticalText(Mockito.<Thesaurus>any()))
-			.thenReturn(arrayList);
+			.thenReturn(formattedLineList);
 
 		// act
 		Response result = service.getAlphabetical("1234");
 
 		// assert
-		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getCookies(), anEmptyMap());
 		assertThat(result.getMediaType(), is(nullValue()));
 		assertThat(result.getStatus(), is(200));
 	}
@@ -109,7 +110,7 @@ class ExportRestServiceTest {
 		when(gincoThesaurusExportService.getThesaurusExport(Mockito.<Thesaurus>any()))
 			.thenReturn("foo");
 		Response result = service.getGincoThesaurusExport("1234");
-		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getCookies(), anEmptyMap());
 		assertThat(result.getMediaType(), is(nullValue()));
 		assertThat(result.getStatus(), is(200));
 	}
@@ -123,7 +124,7 @@ class ExportRestServiceTest {
 		when(gincoBranchExportService.getBranchExport(Mockito.<ThesaurusConcept>any()))
 			.thenReturn("Acme");
 		Response result = service.getGincoBranchExport("1234");
-		assertThat(result.getCookies().isEmpty(), is(true));
+		assertThat(result.getCookies(), anEmptyMap());
 		assertThat(result.getMediaType(), is(nullValue()));
 		assertThat(result.getStatus(), is(200));
 	}

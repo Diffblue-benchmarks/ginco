@@ -1,6 +1,7 @@
 package fr.mcc.ginco.data;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -124,12 +125,12 @@ class ReducedThesaurusConceptTest {
 		parents2.add(reducedThesaurusConcept5);
 		reducedThesaurusConcept1.setParents(parents2);
 		reducedThesaurusConcept1.setStatus(ConceptStatusEnum.CANDIDATE);
-		assertThat(reducedThesaurusConcept1.getAssociates().size(), is(1));
+		assertThat(reducedThesaurusConcept1.getAssociates(), hasSize(1));
 		assertThat(reducedThesaurusConcept1.getAssociates().get(0), sameInstance(reducedThesaurusConcept2));
 		assertThat(reducedThesaurusConcept1.getIdentifier(), is("data"));
-		assertThat(reducedThesaurusConcept1.getNotes().size(), is(1));
+		assertThat(reducedThesaurusConcept1.getNotes(), hasSize(1));
 		assertThat(reducedThesaurusConcept1.getNotes().get(0), sameInstance(note2));
-		assertThat(reducedThesaurusConcept1.getParents().size(), is(1));
+		assertThat(reducedThesaurusConcept1.getParents(), hasSize(1));
 		assertThat(reducedThesaurusConcept1.getParents().get(0), sameInstance(reducedThesaurusConcept5));
 		assertThat(reducedThesaurusConcept1.getStatus(), is(ConceptStatusEnum.CANDIDATE));
 	}

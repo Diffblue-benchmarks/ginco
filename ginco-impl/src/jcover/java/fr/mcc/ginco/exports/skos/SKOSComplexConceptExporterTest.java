@@ -60,15 +60,15 @@ public class SKOSComplexConceptExporterTest {
 
 	@Test
 	public void exportComplexConcept2() {
-		ArrayList<SplitNonPreferredTerm> arrayList =
+		ArrayList<SplitNonPreferredTerm> splitNonPreferredTermList =
 			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		splitNonPreferredTerm.setLanguage(new Language());
 		splitNonPreferredTerm.setStatus(1);
 		splitNonPreferredTerm.setThesaurus(new Thesaurus());
-		arrayList.add(splitNonPreferredTerm);
+		splitNonPreferredTermList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(splitNonPreferredTermList);
 		Model model1 = mock(Model.class);
 		Model model2 = mock(Model.class);
 		Resource resource1 = mock(Resource.class);
@@ -102,16 +102,16 @@ public class SKOSComplexConceptExporterTest {
 
 	@Test
 	public void exportComplexConcept3() {
-		ArrayList<SplitNonPreferredTerm> arrayList =
+		ArrayList<SplitNonPreferredTerm> splitNonPreferredTermList =
 			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
 		splitNonPreferredTerm.setLanguage(new Language());
 		splitNonPreferredTerm.setSource("foo");
 		splitNonPreferredTerm.setStatus(1);
 		splitNonPreferredTerm.setThesaurus(new Thesaurus());
-		arrayList.add(splitNonPreferredTerm);
+		splitNonPreferredTermList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(splitNonPreferredTermList);
 		Model model1 = mock(Model.class);
 		Model model2 = mock(Model.class);
 		Resource resource1 = mock(Resource.class);

@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -54,7 +55,7 @@ class SplitNonPreferredTermViewTest {
 		assertThat(splitNonPreferredTermView.getLanguage(), is("foo"));
 		assertThat(splitNonPreferredTermView.getLexicalValue(), is("value"));
 		assertThat(splitNonPreferredTermView.getModified(), is("someone"));
-		assertThat(splitNonPreferredTermView.getPreferredTerms().size(), is(1));
+		assertThat(splitNonPreferredTermView.getPreferredTerms(), hasSize(1));
 		assertThat(splitNonPreferredTermView.getPreferredTerms().get(0), sameInstance(thesaurusTermView));
 		assertThat(splitNonPreferredTermView.getSource(), is("foo"));
 		assertThat(splitNonPreferredTermView.getStatus(), is(1));

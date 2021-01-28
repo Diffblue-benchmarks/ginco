@@ -2,8 +2,10 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.mock;
@@ -94,11 +96,11 @@ class AlignmentViewConverterTest {
 		// assert
 		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getExternalThesaurus(), is(nullValue()));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is("data"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));
 	}
@@ -129,12 +131,12 @@ class AlignmentViewConverterTest {
 		// assert
 		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
-		assertThat(result.getExternalThesaurus().size(), is(1));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
+		assertThat(result.getExternalThesaurus(), hasSize(1));
 		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is("data"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));
 	}
@@ -161,12 +163,12 @@ class AlignmentViewConverterTest {
 		// assert
 		assertThat(result.getAlignmentType(), is(1));
 		assertThat(result.getAndRelation(), is(false));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
-		assertThat(result.getExternalThesaurus().size(), is(1));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
+		assertThat(result.getExternalThesaurus(), hasSize(1));
 		assertThat(result.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getInternalThesaurusId(), is(nullValue()));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getTargetConcepts(), empty());
 		assertThat(result.getTargetResources(), is(nullValue()));
 	}
@@ -514,6 +516,7 @@ class AlignmentViewConverterTest {
 			<= 10_000L, is(true));
 		assertThat(result.getSourceConcept(), sameInstance(convertedConcept));
 		assertThat(result.getTargetConcepts(), hasSize(1));
+		assertThat(result.getTargetConcepts(), hasItem(alignmentConcept));
 		assertThat(result.getTargetResources(), empty());
 		assertThat(result.isAndRelation(), is(false));
 	}

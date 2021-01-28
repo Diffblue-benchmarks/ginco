@@ -40,13 +40,13 @@ public class AssociativeRelationshipRoleServiceImplTest {
 	public void getAllAssociationTermRole() {
 
 		// arrange
-		ArrayList<AssociativeRelationshipRole> arrayList =
+		ArrayList<AssociativeRelationshipRole> associativeRelationshipRoleList =
 			 new ArrayList<AssociativeRelationshipRole>();
 		AssociativeRelationshipRole associativeRelationshipRole =
 			 new AssociativeRelationshipRole();
-		arrayList.add(associativeRelationshipRole);
+		associativeRelationshipRoleList.add(associativeRelationshipRole);
 		when(associativeRelationshipRoleDAO.findAll())
-			.thenReturn(arrayList);
+			.thenReturn(associativeRelationshipRoleList);
 
 		// act
 		List<AssociativeRelationshipRole> result =

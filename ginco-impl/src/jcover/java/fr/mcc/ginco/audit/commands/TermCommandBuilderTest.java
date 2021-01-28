@@ -57,16 +57,16 @@ public class TermCommandBuilderTest {
 
 	@Test
 	public void buildDeletedTermsLinesReturnsEmpty() {
-		HashMap<String, ThesaurusTerm> hashMap =
+		HashMap<String, ThesaurusTerm> thesaurusTermMap =
 			 new HashMap<String, ThesaurusTerm>();
-		hashMap.put("value", new ThesaurusTerm());
+		thesaurusTermMap.put("value", new ThesaurusTerm());
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(hashMap);
+			.thenReturn(thesaurusTermMap);
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
 		thesaurusTerm2.setLexicalValue("value");
 		previousTerms.add(thesaurusTerm2);
-		assertTrue((service.buildDeletedTermsLines(previousTerms, new ArrayList<ThesaurusTerm>())).isEmpty());
+		assertTrue(service.buildDeletedTermsLines(previousTerms, new ArrayList<ThesaurusTerm>()).isEmpty());
 	}
 
 	@Test
@@ -77,26 +77,26 @@ public class TermCommandBuilderTest {
 			.thenReturn(new HashMap<String, ThesaurusTerm>());
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
 		previousTerms.add(new ThesaurusTerm());
-		assertTrue((service.buildChangedTermsLines(previousTerms, new ArrayList<ThesaurusTerm>())).isEmpty());
+		assertTrue(service.buildChangedTermsLines(previousTerms, new ArrayList<ThesaurusTerm>()).isEmpty());
 	}
 
 	@Test
 	public void buildChangedTermsLines2() {
-		HashMap<String, ThesaurusTerm> hashMap2 =
+		HashMap<String, ThesaurusTerm> thesaurusTermMap =
 			 new HashMap<String, ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
 		thesaurusTerm1.setPrefered(false);
-		hashMap2.put("value", thesaurusTerm1);
+		thesaurusTermMap.put("value", thesaurusTerm1);
 		when(mistralStructuresBuilder.getNotPreferredTermsByTerm(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, List<ThesaurusTerm>>());
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(hashMap2);
+			.thenReturn(thesaurusTermMap);
 		ArrayList<ThesaurusTerm> previousTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
 		thesaurusTerm2.setLexicalValue("value");
 		thesaurusTerm2.setPrefered(false);
 		previousTerms.add(thesaurusTerm2);
-		assertTrue((service.buildChangedTermsLines(previousTerms, new ArrayList<ThesaurusTerm>())).isEmpty());
+		assertTrue(service.buildChangedTermsLines(previousTerms, new ArrayList<ThesaurusTerm>()).isEmpty());
 	}
 
 	@Test
@@ -109,22 +109,22 @@ public class TermCommandBuilderTest {
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
 		thesaurusTerm2.setPrefered(false);
 		currentTerms.add(thesaurusTerm2);
-		assertTrue((service.buildAddedPrefTermsLines(new ArrayList<ThesaurusTerm>(), currentTerms)).isEmpty());
+		assertTrue(service.buildAddedPrefTermsLines(new ArrayList<ThesaurusTerm>(), currentTerms).isEmpty());
 	}
 
 	@Test
 	public void buildAddedPrefTermsLines2() {
-		HashMap<String, ThesaurusTerm> hashMap2 =
+		HashMap<String, ThesaurusTerm> thesaurusTermMap =
 			 new HashMap<String, ThesaurusTerm>();
-		hashMap2.put("value", new ThesaurusTerm());
+		thesaurusTermMap.put("value", new ThesaurusTerm());
 		when(mistralStructuresBuilder.getNotPreferredTermsByTerm(Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(new HashMap<String, List<ThesaurusTerm>>());
 		when(mistralStructuresBuilder.getTermVersionsView(Mockito.<List<ThesaurusTerm>>any()))
-			.thenReturn(hashMap2);
+			.thenReturn(thesaurusTermMap);
 		ArrayList<ThesaurusTerm> currentTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm3 = new ThesaurusTerm();
 		thesaurusTerm3.setPrefered(false);
 		currentTerms.add(thesaurusTerm3);
-		assertTrue((service.buildAddedPrefTermsLines(new ArrayList<ThesaurusTerm>(), currentTerms)).isEmpty());
+		assertTrue(service.buildAddedPrefTermsLines(new ArrayList<ThesaurusTerm>(), currentTerms).isEmpty());
 	}
 }

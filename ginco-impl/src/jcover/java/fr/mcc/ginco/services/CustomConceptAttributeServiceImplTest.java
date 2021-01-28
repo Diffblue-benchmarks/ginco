@@ -42,12 +42,12 @@ public class CustomConceptAttributeServiceImplTest {
 	public void getAttributesByEntity() {
 
 		// arrange
-		ArrayList<CustomConceptAttribute> arrayList =
+		ArrayList<CustomConceptAttribute> customConceptAttributeList =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
-		arrayList.add(customConceptAttribute);
+		customConceptAttributeList.add(customConceptAttribute);
 		when(customConceptAttributeDAO.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(arrayList);
+			.thenReturn(customConceptAttributeList);
 
 		// act
 		List<CustomConceptAttribute> result =

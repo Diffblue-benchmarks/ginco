@@ -38,9 +38,9 @@ public class JournalLineTest {
 		assertEquals("1234", journalLine.getConceptId());
 		assertSame(eventDate, journalLine.getEventDate());
 		assertTrue(JournalEventsEnum.THESAURUS_CREATED == journalLine.getEventType());
-		assertTrue((journalLine.getNewGenericTerm()).isEmpty());
+		assertTrue(journalLine.getNewGenericTerm().isEmpty());
 		assertEquals("value", journalLine.getNewLexicalValue());
-		assertTrue((journalLine.getOldGenericTerm()).isEmpty());
+		assertTrue(journalLine.getOldGenericTerm().isEmpty());
 		assertEquals("value", journalLine.getOldLexicalValue());
 		assertEquals(1, (int) journalLine.getRevisionNumber());
 		assertEquals(1, (int) journalLine.getStatus());

@@ -61,15 +61,15 @@ public class SKOSCustomConceptAttributeExporterTest {
 
 	@Test
 	public void exportCustomConceptAttributes2() {
-		ArrayList<CustomConceptAttribute> arrayList =
+		ArrayList<CustomConceptAttribute> customConceptAttributeList =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
 		CustomConceptAttributeType type1 = new CustomConceptAttributeType();
 		type1.setExportable(false);
 		customConceptAttribute.setType(type1);
-		arrayList.add(customConceptAttribute);
+		customConceptAttributeList.add(customConceptAttribute);
 		when(customConceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(arrayList);
+			.thenReturn(customConceptAttributeList);
 		Model model = mock(Model.class);
 		Resource conceptResource = mock(Resource.class);
 		Literal literal = mock(Literal.class);

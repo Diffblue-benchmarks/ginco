@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -94,7 +95,7 @@ class CustomAttributesTypesConverterTest {
 			 service.convertList(sourceList, false);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getCode(), is("DE"));
 		assertThat(result.get(0).getExportable(), is(nullValue()));
 		assertThat(result.get(0).getIdentifier(), is(1));

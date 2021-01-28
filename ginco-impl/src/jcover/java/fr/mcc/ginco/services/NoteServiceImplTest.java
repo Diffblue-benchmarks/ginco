@@ -45,11 +45,11 @@ public class NoteServiceImplTest {
 	public void getConceptNotePaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<Note> arrayList = new ArrayList<Note>();
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
-		arrayList.add(note);
+		noteList.add(note);
 		when(noteDAO.findConceptPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 
 		// act
 		List<Note> result = service.getConceptNotePaginatedList("1234", 1, 1);
@@ -63,11 +63,11 @@ public class NoteServiceImplTest {
 	public void getTermNotePaginatedListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<Note> arrayList = new ArrayList<Note>();
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
-		arrayList.add(note);
+		noteList.add(note);
 		when(noteDAO.findTermPaginatedNotes(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 
 		// act
 		List<Note> result = service.getTermNotePaginatedList("1234", 1, 1);
@@ -209,11 +209,11 @@ public class NoteServiceImplTest {
 	public void getAllNotes() {
 
 		// arrange
-		ArrayList<Note> arrayList = new ArrayList<Note>();
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
-		arrayList.add(note);
+		noteList.add(note);
 		when(noteDAO.findAll())
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 
 		// act
 		List<Note> result = service.getAllNotes();
@@ -227,11 +227,11 @@ public class NoteServiceImplTest {
 	public void getNotesByThesaurusId() {
 
 		// arrange
-		ArrayList<Note> arrayList = new ArrayList<Note>();
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
-		arrayList.add(note);
+		noteList.add(note);
 		when(noteDAO.findNotesByThesaurusId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 
 		// act
 		List<Note> result = service.getNotesByThesaurusId("1234");

@@ -73,7 +73,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 
 		// assert
 		assertSame(conceptGroupType1, result.getConceptGroupType());
-		assertTrue((result.getConcepts()).isEmpty());
+		assertTrue(result.getConcepts().isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertFalse(result.getIsDynamic());
 		assertEquals("DE", result.getNotation());
@@ -100,12 +100,12 @@ public class ThesaurusConceptGroupServiceImplTest {
 	public void getAllThesaurusConceptGroupsByThesaurusId() {
 
 		// arrange
-		ArrayList<ThesaurusConceptGroup> arrayList =
+		ArrayList<ThesaurusConceptGroup> thesaurusConceptGroupList =
 			 new ArrayList<ThesaurusConceptGroup>();
 		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
-		arrayList.add(thesaurusConceptGroup);
+		thesaurusConceptGroupList.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupDAO.findThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptGroupList);
 
 		// act
 		List<ThesaurusConceptGroup> result =
@@ -143,7 +143,7 @@ public class ThesaurusConceptGroupServiceImplTest {
 
 		// assert
 		assertSame(conceptGroupType1, result.getConceptGroupType());
-		assertTrue((result.getConcepts()).isEmpty());
+		assertTrue(result.getConcepts().isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertFalse(result.getIsDynamic());
 		assertEquals("DE", result.getNotation());
@@ -156,12 +156,12 @@ public class ThesaurusConceptGroupServiceImplTest {
 	public void getChildGroups() {
 
 		// arrange
-		ArrayList<ThesaurusConceptGroup> arrayList =
+		ArrayList<ThesaurusConceptGroup> thesaurusConceptGroupList =
 			 new ArrayList<ThesaurusConceptGroup>();
 		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
-		arrayList.add(thesaurusConceptGroup);
+		thesaurusConceptGroupList.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupDAO.getChildGroups(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptGroupList);
 
 		// act
 		List<ThesaurusConceptGroup> result = service.getChildGroups("1234");

@@ -186,7 +186,7 @@ public class TermSolrConverterTest {
 	public void convertSolrTerm2() throws java.text.ParseException {
 
 		// arrange
-		ArrayList<Note> arrayList = new ArrayList<Note>();
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
 		ThesaurusConcept concept1 = mock(ThesaurusConcept.class);
 		note.setConcept(concept1);
@@ -266,9 +266,9 @@ public class TermSolrConverterTest {
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		termId.setThesaurus(thesaurus2);
 		note.setTerm(termId);
-		arrayList.add(note);
+		noteList.add(note);
 		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		ThesaurusConcept concept3 = new ThesaurusConcept();
 		concept3.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());

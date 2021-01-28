@@ -1,6 +1,7 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.when;
@@ -89,7 +90,7 @@ class ThesaurusArrayRestServiceTest {
 		ThesaurusArrayView result = service.getThesaurusArrayById("1234");
 
 		// assert
-		assertThat(result.getConcepts().size(), is(1));
+		assertThat(result.getConcepts(), hasSize(1));
 		assertThat(result.getConcepts().get(0), sameInstance(thesaurusArrayConceptView));
 		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));
@@ -109,12 +110,12 @@ class ThesaurusArrayRestServiceTest {
 	void getAllConceptArraysByThesaurusId() {
 
 		// arrange
-		ArrayList<ThesaurusArrayView> arrayList1 =
+		ArrayList<ThesaurusArrayView> thesaurusArrayViewList =
 			 new ArrayList<ThesaurusArrayView>();
 		ThesaurusArrayView thesaurusArrayView = new ThesaurusArrayView();
-		arrayList1.add(thesaurusArrayView);
+		thesaurusArrayViewList.add(thesaurusArrayView);
 		when(thesaurusArrayViewConverter.convert(Mockito.<List<ThesaurusArray>>any()))
-			.thenReturn(arrayList1);
+			.thenReturn(thesaurusArrayViewList);
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
 
@@ -123,7 +124,7 @@ class ThesaurusArrayRestServiceTest {
 			 service.getAllConceptArraysByThesaurusId("1234", "1234");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusArrayView));
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
@@ -175,7 +176,7 @@ class ThesaurusArrayRestServiceTest {
 			 service.updateThesaurusArray(thesaurusArrayViewJAXBElement);
 
 		// assert
-		assertThat(result.getConcepts().size(), is(1));
+		assertThat(result.getConcepts(), hasSize(1));
 		assertThat(result.getConcepts().get(0), sameInstance(thesaurusArrayConceptView1));
 		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));

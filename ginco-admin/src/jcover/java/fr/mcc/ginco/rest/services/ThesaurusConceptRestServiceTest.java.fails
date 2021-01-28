@@ -2,20 +2,31 @@ package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Note;
 import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
 import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
 import fr.mcc.ginco.beans.ThesaurusTerm;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
 import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.AlignmentConceptView;
+import fr.mcc.ginco.extjs.view.pojo.AlignmentResourceView;
 import fr.mcc.ginco.extjs.view.pojo.AlignmentView;
 import fr.mcc.ginco.extjs.view.pojo.AssociativeRelationshipView;
+import fr.mcc.ginco.extjs.view.pojo.ExternalThesaurusView;
 import fr.mcc.ginco.extjs.view.pojo.GenericRoleView;
 import fr.mcc.ginco.extjs.view.pojo.GenericStatusView;
 import fr.mcc.ginco.extjs.view.pojo.HierarchicalRelationshipView;
@@ -36,7 +47,10 @@ import fr.mcc.ginco.solr.IConceptIndexerService;
 import fr.mcc.ginco.solr.INoteIndexerService;
 import fr.mcc.ginco.solr.ITermIndexerService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -100,7 +114,7 @@ class ThesaurusConceptRestServiceTest {
 	private ThesaurusConceptRestService service;
 
 	@Test
-	void getConceptById() {
+	void getConceptById() throws java.text.ParseException {
 
 		// arrange
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
@@ -108,18 +122,42 @@ class ThesaurusConceptRestServiceTest {
 		ThesaurusConceptView thesaurusConceptView = new ThesaurusConceptView();
 		ArrayList<AlignmentView> alignments = new ArrayList<AlignmentView>();
 		AlignmentView alignmentView = new AlignmentView();
+		alignmentView.setAlignmentType(1);
+		alignmentView.setAndRelation(false);
+		alignmentView.setCreated("someone");
+		ArrayList<ExternalThesaurusView> externalThesaurus =
+			 new ArrayList<ExternalThesaurusView>();
+		externalThesaurus.add(new ExternalThesaurusView());
+		alignmentView.setExternalThesaurus(externalThesaurus);
+		alignmentView.setIdentifier("data");
+		alignmentView.setInternalThesaurusId("1234");
+		alignmentView.setModified("someone");
+		ArrayList<AlignmentConceptView> targetConcepts =
+			 new ArrayList<AlignmentConceptView>();
+		targetConcepts.add(new AlignmentConceptView());
+		alignmentView.setTargetConcepts(targetConcepts);
+		ArrayList<AlignmentResourceView> targetResources =
+			 new ArrayList<AlignmentResourceView>();
+		targetResources.add(new AlignmentResourceView());
+		alignmentView.setTargetResources(targetResources);
 		alignments.add(alignmentView);
 		thesaurusConceptView.setAlignments(alignments);
 		ArrayList<AssociativeRelationshipView> associatedConcepts =
 			 new ArrayList<AssociativeRelationshipView>();
 		AssociativeRelationshipView associativeRelationshipView =
 			 new AssociativeRelationshipView();
+		associativeRelationshipView.setIdentifier("data");
+		associativeRelationshipView.setLabel("label");
+		associativeRelationshipView.setRoleCode("DE");
 		associatedConcepts.add(associativeRelationshipView);
 		thesaurusConceptView.setAssociatedConcepts(associatedConcepts);
 		ArrayList<HierarchicalRelationshipView> childConcepts =
 			 new ArrayList<HierarchicalRelationshipView>();
 		HierarchicalRelationshipView hierarchicalRelationshipView1 =
 			 new HierarchicalRelationshipView();
+		hierarchicalRelationshipView1.setIdentifier("data");
+		hierarchicalRelationshipView1.setLabel("label");
+		hierarchicalRelationshipView1.setRole(1);
 		childConcepts.add(hierarchicalRelationshipView1);
 		thesaurusConceptView.setChildConcepts(childConcepts);
 		ArrayList<String> conceptsPath1 = new ArrayList<String>();
@@ -133,6 +171,9 @@ class ThesaurusConceptRestServiceTest {
 			 new ArrayList<HierarchicalRelationshipView>();
 		HierarchicalRelationshipView hierarchicalRelationshipView2 =
 			 new HierarchicalRelationshipView();
+		hierarchicalRelationshipView2.setIdentifier("data");
+		hierarchicalRelationshipView2.setLabel("label");
+		hierarchicalRelationshipView2.setRole(1);
 		parentConcepts1.add(hierarchicalRelationshipView2);
 		thesaurusConceptView.setParentConcepts(parentConcepts1);
 		ArrayList<String> rootConcepts1 = new ArrayList<String>();
@@ -141,6 +182,22 @@ class ThesaurusConceptRestServiceTest {
 		thesaurusConceptView.setStatus(1);
 		ArrayList<ThesaurusTermView> terms = new ArrayList<ThesaurusTermView>();
 		ThesaurusTermView thesaurusTermView = new ThesaurusTermView();
+		thesaurusTermView.setConceptId("1234");
+		ArrayList<String> conceptsPath2 = new ArrayList<String>();
+		conceptsPath2.add("/bin/bash");
+		thesaurusTermView.setConceptsPath(conceptsPath2);
+		thesaurusTermView.setCreated("someone");
+		thesaurusTermView.setHidden(false);
+		thesaurusTermView.setIdentifier("data");
+		thesaurusTermView.setLanguage("foo");
+		thesaurusTermView.setLexicalValue("value");
+		thesaurusTermView.setModified("someone");
+		thesaurusTermView.setPrefered(false);
+		thesaurusTermView.setRole("admin");
+		thesaurusTermView.setSource("foo");
+		thesaurusTermView.setStatus(1);
+		thesaurusTermView.setThesaurusId("1234");
+		thesaurusTermView.setTopistopterm(false);
 		terms.add(thesaurusTermView);
 		thesaurusConceptView.setTerms(terms);
 		thesaurusConceptView.setThesaurusId("1234");
@@ -148,31 +205,71 @@ class ThesaurusConceptRestServiceTest {
 		thesaurusConceptView.setTopistopterm(false);
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any(), Mockito.<List<ThesaurusTerm>>any()))
 			.thenReturn(thesaurusConceptView);
+		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
+		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setIdentifier("data");
+		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConcept.setNotation("DE");
+		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConcept.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = new ThesaurusOrganization();
+		creator.setEmail("info@diffblue.com");
+		creator.setHomepage("foo");
+		creator.setIdentifier(1);
+		creator.setName("Acme");
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConcept.setThesaurus(thesaurus);
+		thesaurusConcept.setTopConcept(false);
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
-			.thenReturn(new ThesaurusConcept());
+			.thenReturn(thesaurusConcept);
 
 		// act
 		ThesaurusConceptView result = service.getConceptById("1234");
 
 		// assert
-		assertThat(result.getAlignments().size(), is(1));
+		assertThat(result.getAlignments(), hasSize(1));
 		assertThat(result.getAlignments().get(0), sameInstance(alignmentView));
-		assertThat(result.getAssociatedConcepts().size(), is(1));
+		assertThat(result.getAssociatedConcepts(), hasSize(1));
 		assertThat(result.getAssociatedConcepts().get(0), sameInstance(associativeRelationshipView));
-		assertThat(result.getChildConcepts().size(), is(1));
+		assertThat(result.getChildConcepts(), hasSize(1));
 		assertThat(result.getChildConcepts().get(0), sameInstance(hierarchicalRelationshipView1));
-		assertThat(result.getConceptsPath(), hasSize(1));
-		assertThat(result.getConceptsPath().get(0), is("/bin/bash"));
+		assertThat(result.getConceptsPath(), equalTo(Arrays.asList("/bin/bash")));
 		assertThat(result.getCreated(), is("someone"));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getModified(), is("someone"));
 		assertThat(result.getNotation(), is("DE"));
-		assertThat(result.getParentConcepts().size(), is(1));
+		assertThat(result.getParentConcepts(), hasSize(1));
 		assertThat(result.getParentConcepts().get(0), sameInstance(hierarchicalRelationshipView2));
-		assertThat(result.getRootConcepts(), hasSize(1));
-		assertThat(result.getRootConcepts().get(0), is("hello"));
+		assertThat(result.getRootConcepts(), equalTo(Arrays.asList("hello")));
 		assertThat(result.getStatus(), is(1));
-		assertThat(result.getTerms().size(), is(1));
+		assertThat(result.getTerms(), hasSize(1));
 		assertThat(result.getTerms().get(0), sameInstance(thesaurusTermView));
 		assertThat(result.getThesaurusId(), is("1234"));
 		assertThat(result.getTopconcept(), is(false));
@@ -183,13 +280,13 @@ class ThesaurusConceptRestServiceTest {
 	void getConceptsByThesaurusIdLimitIsOneAndOnlyValidatedConceptsIsFalseAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<ThesaurusConceptReducedView> arrayList1 =
+		ArrayList<ThesaurusConceptReducedView> thesaurusConceptReducedViewList =
 			 new ArrayList<ThesaurusConceptReducedView>();
 		ThesaurusConceptReducedView thesaurusConceptReducedView =
 			 new ThesaurusConceptReducedView();
-		arrayList1.add(thesaurusConceptReducedView);
+		thesaurusConceptReducedViewList.add(thesaurusConceptReducedView);
 		when(thesaurusConceptViewConverter.convert(Mockito.<List<ThesaurusConcept>>any()))
-			.thenReturn(arrayList1);
+			.thenReturn(thesaurusConceptReducedViewList);
 		when(thesaurusConceptService.getConceptsByThesaurusIdCount(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any(), Mockito.<String>any()))
 			.thenReturn(1L);
 		when(thesaurusConceptService.getPaginatedConceptsByThesaurusId(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any(), Mockito.<String>any()))
@@ -200,7 +297,7 @@ class ThesaurusConceptRestServiceTest {
 			 service.getConceptsByThesaurusId(1, 1, "1234", "1234", "1234", false, "1234");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
@@ -224,7 +321,7 @@ class ThesaurusConceptRestServiceTest {
 			 service.getSimpleConcepts(associatedConcepts);
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
@@ -249,18 +346,19 @@ class ThesaurusConceptRestServiceTest {
 			 new ThesaurusConceptReducedView();
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(thesaurusConceptReducedView);
-		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
-		arrayList.add(thesaurusConcept);
+		thesaurusConceptList.add(thesaurusConcept);
 		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptList);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
 			 service.getSimpleChildrenConcepts("hello", "hello");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
@@ -274,10 +372,11 @@ class ThesaurusConceptRestServiceTest {
 			 new ThesaurusConceptReducedView();
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(thesaurusConceptReducedView);
-		ArrayList<ThesaurusConcept> arrayList2 = new ArrayList<ThesaurusConcept>();
-		arrayList2.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> thesaurusConceptList2 =
+			 new ArrayList<ThesaurusConcept>();
+		thesaurusConceptList2.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getAvailableConceptsOfArray(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusConceptList2);
 		when(thesaurusConceptService.getAvailableConceptsOfArray(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
 
@@ -286,7 +385,7 @@ class ThesaurusConceptRestServiceTest {
 			 service.getAvailableConceptsOfArray(1, 1, "1234", "1234", "hello");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
@@ -300,10 +399,11 @@ class ThesaurusConceptRestServiceTest {
 			 new ThesaurusConceptReducedView();
 		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(thesaurusConceptReducedView);
-		ArrayList<ThesaurusConcept> arrayList2 = new ArrayList<ThesaurusConcept>();
-		arrayList2.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> thesaurusConceptList2 =
+			 new ArrayList<ThesaurusConcept>();
+		thesaurusConceptList2.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getAvailableConceptsOfGroup(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusConceptList2);
 		when(thesaurusConceptService.getAvailableConceptsOfGroup(Mockito.<String>any(), Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
 
@@ -312,7 +412,7 @@ class ThesaurusConceptRestServiceTest {
 			 service.getAvailableConceptsOfGroup(1, 1, "1234", "1234", "hello");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
 		assertThat(result.getTotal(), is(0L));
 		assertThat(result.isSuccess(), is(true));
@@ -328,10 +428,10 @@ class ThesaurusConceptRestServiceTest {
 			.thenReturn(new ThesaurusConcept());
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusConcept());
-		ArrayList<Note> arrayList = new ArrayList<Note>();
-		arrayList.add(new Note());
+		ArrayList<Note> noteList = new ArrayList<Note>();
+		noteList.add(new Note());
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 
 		// act
 		service.destroyConcept(new ThesaurusConceptView());
@@ -345,7 +445,7 @@ class ThesaurusConceptRestServiceTest {
 	void getAllConceptStatus() {
 		ExtJsonFormLoadData<List<GenericStatusView>> result =
 			 service.getAllConceptStatus();
-		assertThat(result.getData().size(), is(5));
+		assertThat(result.getData(), hasSize(5));
 		assertThat(result.getData().get(0).getStatus(), is(0));
 		assertThat(result.getData().get(0).getStatusLabel(), is("Candidat"));
 		assertThat(result.getData().get(1).getStatus(), is(1));
@@ -364,7 +464,7 @@ class ThesaurusConceptRestServiceTest {
 	void getAllHierarchicalRelationRoles() {
 		ExtJsonFormLoadData<List<GenericRoleView>> result =
 			 service.getAllHierarchicalRelationRoles();
-		assertThat(result.getData().size(), is(4));
+		assertThat(result.getData(), hasSize(4));
 		assertThat(result.getData().get(0).getRole(), is(0));
 		assertThat(result.getData().get(0).getRoleLabel(), is("TG-TS"));
 		assertThat(result.getData().get(1).getRole(), is(1));

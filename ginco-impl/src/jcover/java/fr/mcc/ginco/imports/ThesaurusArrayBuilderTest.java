@@ -63,7 +63,7 @@ public class ThesaurusArrayBuilderTest {
 			 service.buildArray(skosCollection, model, thesaurus, new HashMap<String, ThesaurusArray>());
 
 		// assert
-		assertTrue((result.getConcepts()).isEmpty());
+		assertTrue(result.getConcepts().isEmpty());
 		assertEquals("/some/path.html", result.getIdentifier());
 		assertNull(result.getNotation());
 		assertTrue(result.getOrdered());
@@ -80,6 +80,6 @@ public class ThesaurusArrayBuilderTest {
 		Resource skosCollection = mock(Resource.class);
 		when(skosCollection.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
-		assertTrue((service.getChildrenArrays(skosCollection, new Thesaurus(), new HashMap<String, ThesaurusArray>())).isEmpty());
+		assertTrue(service.getChildrenArrays(skosCollection, new Thesaurus(), new HashMap<String, ThesaurusArray>()).isEmpty());
 	}
 }

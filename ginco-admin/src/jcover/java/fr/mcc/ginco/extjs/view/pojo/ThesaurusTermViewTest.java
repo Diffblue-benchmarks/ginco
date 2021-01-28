@@ -1,10 +1,11 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,8 +37,7 @@ class ThesaurusTermViewTest {
 		thesaurusTermView.setThesaurusId("1234");
 		thesaurusTermView.setTopistopterm(false);
 		assertThat(thesaurusTermView.getConceptId(), is("1234"));
-		assertThat(thesaurusTermView.getConceptsPath(), hasSize(1));
-		assertThat(thesaurusTermView.getConceptsPath().get(0), is("/bin/bash"));
+		assertThat(thesaurusTermView.getConceptsPath(), equalTo(Arrays.asList("/bin/bash")));
 		assertThat(thesaurusTermView.getCreated(), is("someone"));
 		assertThat(thesaurusTermView.getHidden(), is(false));
 		assertThat(thesaurusTermView.getIdentifier(), is("data"));

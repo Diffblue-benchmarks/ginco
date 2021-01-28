@@ -40,13 +40,13 @@ public class CustomTermAttributeTypeServiceImplTest {
 	public void getAttributeTypesByThesaurus() {
 
 		// arrange
-		ArrayList<CustomTermAttributeType> arrayList =
+		ArrayList<CustomTermAttributeType> customTermAttributeTypeList =
 			 new ArrayList<CustomTermAttributeType>();
 		CustomTermAttributeType customTermAttributeType =
 			 new CustomTermAttributeType();
-		arrayList.add(customTermAttributeType);
+		customTermAttributeTypeList.add(customTermAttributeType);
 		when(customTermAttributeTypeDAO.getAttributesByThesaurus(Mockito.<Thesaurus>any()))
-			.thenReturn(arrayList);
+			.thenReturn(customTermAttributeTypeList);
 
 		// act
 		List<CustomTermAttributeType> result =

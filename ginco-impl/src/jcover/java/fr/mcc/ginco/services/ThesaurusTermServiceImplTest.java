@@ -102,11 +102,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getPaginatedThesaurusSandoxedTermsListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findPaginatedSandboxedItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 
 		// act
 		List<ThesaurusTerm> result =
@@ -121,11 +121,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getTermsByConceptId() {
 
 		// arrange
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 
 		// act
 		List<ThesaurusTerm> result = service.getTermsByConceptId("1234");
@@ -199,11 +199,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getAllTerms2() {
 
 		// arrange
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findAll())
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 
 		// act
 		List<ThesaurusTerm> result = service.getAllTerms();
@@ -217,11 +217,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getPaginatedThesaurusSandoxedValidatedTermsListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findPaginatedSandboxedValidatedItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 
 		// act
 		List<ThesaurusTerm> result =
@@ -295,11 +295,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getAllTerms1() {
 
 		// arrange
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findTermsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 
 		// act
 		List<ThesaurusTerm> result = service.getAllTerms("1234");
@@ -313,11 +313,11 @@ public class ThesaurusTermServiceImplTest {
 	public void getPaginatedThesaurusPreferredTermsListLimitIsOneAndOnlyNotOrphanConceptsIsFalseAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermDAO.findPaginatedPreferredItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any(), Mockito.<Boolean>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 
 		// act
 		List<ThesaurusTerm> result =
@@ -356,7 +356,7 @@ public class ThesaurusTermServiceImplTest {
 	public void importSandBoxTermsTermLexicalValuesIsEmptyReturnsEmpty() {
 		when(thesaurusDAO.getById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
-		assertTrue((service.importSandBoxTerms(new HashMap<String, Language>(), "1234", 1)).isEmpty());
+		assertTrue(service.importSandBoxTerms(new HashMap<String, Language>(), "1234", 1).isEmpty());
 	}
 
 	@Test

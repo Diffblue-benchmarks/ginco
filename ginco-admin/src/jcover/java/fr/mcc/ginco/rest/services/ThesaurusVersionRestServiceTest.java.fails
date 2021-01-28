@@ -1,6 +1,7 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -47,25 +48,25 @@ class ThesaurusVersionRestServiceTest {
 	void getVersions() {
 
 		// arrange
-		ArrayList<ThesaurusVersionHistoryView> arrayList1 =
+		ArrayList<ThesaurusVersionHistoryView> thesaurusVersionHistoryViewList =
 			 new ArrayList<ThesaurusVersionHistoryView>();
 		ThesaurusVersionHistoryView thesaurusVersionHistoryView =
 			 new ThesaurusVersionHistoryView();
-		arrayList1.add(thesaurusVersionHistoryView);
+		thesaurusVersionHistoryViewList.add(thesaurusVersionHistoryView);
 		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
-			.thenReturn(arrayList1);
-		ArrayList<ThesaurusVersionHistory> arrayList2 =
+			.thenReturn(thesaurusVersionHistoryViewList);
+		ArrayList<ThesaurusVersionHistory> thesaurusVersionHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
-		arrayList2.add(new ThesaurusVersionHistory());
+		thesaurusVersionHistoryList.add(new ThesaurusVersionHistory());
 		when(thesaurusVersionHistoryService.getVersionsByThesaurusId(Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusVersionHistoryList);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusVersionHistoryView>> result =
 			 service.getVersions("1234");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusVersionHistoryView));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
@@ -75,7 +76,7 @@ class ThesaurusVersionRestServiceTest {
 	void getAllVersionStatus() {
 		ExtJsonFormLoadData<List<GenericStatusView>> result =
 			 service.getAllVersionStatus();
-		assertThat(result.getData().size(), is(5));
+		assertThat(result.getData(), hasSize(5));
 		assertThat(result.getData().get(0).getStatus(), is(0));
 		assertThat(result.getData().get(0).getStatusLabel(), is("Projet"));
 		assertThat(result.getData().get(1).getStatus(), is(1));
@@ -94,18 +95,18 @@ class ThesaurusVersionRestServiceTest {
 	void updateVersionsVersionViewsIsEmpty() {
 
 		// arrange
-		ArrayList<ThesaurusVersionHistoryView> arrayList1 =
+		ArrayList<ThesaurusVersionHistoryView> thesaurusVersionHistoryViewList =
 			 new ArrayList<ThesaurusVersionHistoryView>();
 		ThesaurusVersionHistoryView thesaurusVersionHistoryView1 =
 			 new ThesaurusVersionHistoryView();
-		arrayList1.add(thesaurusVersionHistoryView1);
-		ArrayList<ThesaurusVersionHistory> arrayList2 =
+		thesaurusVersionHistoryViewList.add(thesaurusVersionHistoryView1);
+		ArrayList<ThesaurusVersionHistory> thesaurusVersionHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
-		arrayList2.add(new ThesaurusVersionHistory());
+		thesaurusVersionHistoryList.add(new ThesaurusVersionHistory());
 		when(thesaurusVersionHistoryViewConverter.convertList(Mockito.<List<ThesaurusVersionHistory>>any()))
-			.thenReturn(arrayList1);
+			.thenReturn(thesaurusVersionHistoryViewList);
 		when(thesaurusVersionHistoryViewConverter.convertViewList(Mockito.<List<ThesaurusVersionHistoryView>>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusVersionHistoryList);
 		when(thesaurusVersionHistoryService.createOrUpdateVersion(Mockito.<ThesaurusVersionHistory>any()))
 			.thenReturn(new ThesaurusVersionHistory());
 
@@ -114,7 +115,7 @@ class ThesaurusVersionRestServiceTest {
 			 service.updateVersions(new ArrayList<ThesaurusVersionHistoryView>());
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusVersionHistoryView1));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));

@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -40,7 +41,7 @@ class ThesaurusArrayViewTest {
 		thesaurusArrayView.setSuperOrdinateId("1234");
 		thesaurusArrayView.setSuperOrdinateLabel("label");
 		thesaurusArrayView.setThesaurusId("1234");
-		assertThat(thesaurusArrayView.getConcepts().size(), is(1));
+		assertThat(thesaurusArrayView.getConcepts(), hasSize(1));
 		assertThat(thesaurusArrayView.getConcepts().get(0), sameInstance(thesaurusArrayConceptView));
 		assertThat(thesaurusArrayView.getCreated(), is("someone"));
 		assertThat(thesaurusArrayView.getIdentifier(), is("data"));

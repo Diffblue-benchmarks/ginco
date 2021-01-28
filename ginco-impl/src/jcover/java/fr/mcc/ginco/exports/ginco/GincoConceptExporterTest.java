@@ -57,13 +57,13 @@ public class GincoConceptExporterTest {
 	public void getExportConceptNotes() {
 
 		// arrange
-		ArrayList<Note> arrayList = new ArrayList<Note>();
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
-		arrayList.add(note);
+		noteList.add(note);
 		when(noteService.getConceptNoteCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList);
+			.thenReturn(noteList);
 
 		// act
 		JaxbList<Note> result =
@@ -79,20 +79,20 @@ public class GincoConceptExporterTest {
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		when(thesaurusConcept.getParentConcepts())
 			.thenReturn(new HashSet<ThesaurusConcept>());
-		assertTrue((service.getExportHierarchicalConcepts(thesaurusConcept).getList()).isEmpty());
+		assertTrue(service.getExportHierarchicalConcepts(thesaurusConcept).getList().isEmpty());
 	}
 
 	@Test
 	public void getExportAssociativeRelationShip() {
 
 		// arrange
-		ArrayList<AssociativeRelationship> arrayList =
+		ArrayList<AssociativeRelationship> associativeRelationshipList =
 			 new ArrayList<AssociativeRelationship>();
 		AssociativeRelationship associativeRelationship =
 			 new AssociativeRelationship();
-		arrayList.add(associativeRelationship);
+		associativeRelationshipList.add(associativeRelationship);
 		when(associativeRelationshipService.getAssociatedConceptsRelationships(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(arrayList);
+			.thenReturn(associativeRelationshipList);
 
 		// act
 		JaxbList<AssociativeRelationship> result =
@@ -107,11 +107,11 @@ public class GincoConceptExporterTest {
 	public void getExportAlignments() {
 
 		// arrange
-		ArrayList<Alignment> arrayList = new ArrayList<Alignment>();
+		ArrayList<Alignment> alignmentList = new ArrayList<Alignment>();
 		Alignment alignment = new Alignment();
-		arrayList.add(alignment);
+		alignmentList.add(alignment);
 		when(alignmentService.getAlignmentsBySourceConceptId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(alignmentList);
 
 		// act
 		JaxbList<Alignment> result =

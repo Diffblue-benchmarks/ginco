@@ -60,7 +60,7 @@ public class GincoAlignmentImporterTest {
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
 		alignments.put("", new JaxbList<Alignment>());
-		assertTrue((service.storeAlignments(alignments)).isEmpty());
+		assertTrue(service.storeAlignments(alignments).isEmpty());
 	}
 
 	@Test
@@ -74,12 +74,12 @@ public class GincoAlignmentImporterTest {
 		alignment2.setAlignmentType(new AlignmentType());
 		list.add(alignment2);
 		alignments.put("", new JaxbList<Alignment>(list));
-		assertTrue((service.storeAlignments(alignments)).isEmpty());
+		assertTrue(service.storeAlignments(alignments).isEmpty());
 	}
 
 	@Test
 	public void storeAlignmentsAlignmentsIsEmpty() {
-		assertTrue((service.storeAlignments(new HashMap<String, JaxbList<Alignment>>())).isEmpty());
+		assertTrue(service.storeAlignments(new HashMap<String, JaxbList<Alignment>>()).isEmpty());
 	}
 
 	@Test

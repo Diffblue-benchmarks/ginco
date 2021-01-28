@@ -91,16 +91,16 @@ public class GincoRelationshipImporterTest {
 
 	@Test
 	public void storeHierarchicalRelationshipRelationsToImportIsEmpty() {
-		assertTrue((service.storeHierarchicalRelationship(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>())).isEmpty());
+		assertTrue(service.storeHierarchicalRelationship(new HashMap<String, JaxbList<ConceptHierarchicalRelationship>>()).isEmpty());
 	}
 
 	@Test
 	public void storeHierarchicalRelationshipRelationsToImportIsNull() {
-		assertTrue((service.storeHierarchicalRelationship(null)).isEmpty());
+		assertTrue(service.storeHierarchicalRelationship(null).isEmpty());
 	}
 
 	@Test
 	public void storeAssociativeRelationshipReturnsEmpty() {
-		assertTrue((service.storeAssociativeRelationship(new GincoExportedThesaurus())).isEmpty());
+		assertTrue(service.storeAssociativeRelationship(new GincoExportedThesaurus()).isEmpty());
 	}
 }

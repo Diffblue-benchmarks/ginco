@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -72,7 +73,7 @@ class SuggestionViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getContent(), is("hello"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getCreator(), is("someone"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));
@@ -133,7 +134,7 @@ class SuggestionViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is("data"));
 		assertThat(result.getContent(), is("hello"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getCreator(), is("someone"));
 		assertThat(result.getIdentifier(), is(1));
 		assertThat(result.getRecipient(), is("1234"));

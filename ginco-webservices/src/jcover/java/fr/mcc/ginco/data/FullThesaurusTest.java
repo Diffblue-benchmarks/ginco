@@ -1,10 +1,11 @@
 package fr.mcc.ginco.data;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,10 +49,8 @@ class FullThesaurusTest {
 		assertThat(fullThesaurus.getCreatorHomepage(), is("someone"));
 		assertThat(fullThesaurus.getCreatorName(), is("Acme"));
 		assertThat(fullThesaurus.getDescription(), is("some text"));
-		assertThat(fullThesaurus.getFormats(), hasSize(1));
-		assertThat(fullThesaurus.getFormats().get(0), is("yyyy-MM-dd"));
-		assertThat(fullThesaurus.getLanguages(), hasSize(1));
-		assertThat(fullThesaurus.getLanguages().get(0), is("something"));
+		assertThat(fullThesaurus.getFormats(), equalTo(Arrays.asList("yyyy-MM-dd")));
+		assertThat(fullThesaurus.getLanguages(), equalTo(Arrays.asList("something")));
 		assertThat(fullThesaurus.getModified(), is("someone"));
 		assertThat(fullThesaurus.getPublisher(), is("something"));
 		assertThat(fullThesaurus.getRelation(), is("DE"));

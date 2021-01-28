@@ -51,7 +51,7 @@ public class ThesaurusTermAuditReaderTest {
 			.thenReturn(new ArrayList<String>());
 		when(auditQueryBuilder.getEntityAddedQuery(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any()))
 			.thenReturn(auditQuery);
-		assertTrue((service.getTermAdded(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue(service.getTermAdded(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")).isEmpty());
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class ThesaurusTermAuditReaderTest {
 			.thenReturn(new ArrayList<String>());
 		when(auditQueryBuilder.getPropertyChangedQueryOnUpdate(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any(), Mockito.<String>any()))
 			.thenReturn(auditQuery);
-		assertTrue((service.getTermRoleChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue(service.getTermRoleChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")).isEmpty());
 	}
 
 	@Test
@@ -71,7 +71,7 @@ public class ThesaurusTermAuditReaderTest {
 			.thenReturn(new ArrayList<String>());
 		when(auditQueryBuilder.getPropertyChangedQueryOnUpdate(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any(), Mockito.<String>any()))
 			.thenReturn(auditQuery);
-		assertTrue((service.getTermLexicalValueChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue(service.getTermLexicalValueChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")).isEmpty());
 	}
 
 	@Test
@@ -81,6 +81,6 @@ public class ThesaurusTermAuditReaderTest {
 			.thenReturn(new ArrayList<String>());
 		when(auditQueryBuilder.getPropertyChangedQueryOnUpdate(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any(), Mockito.<String>any()))
 			.thenReturn(auditQuery);
-		assertTrue((service.getTermAttachmentChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue(service.getTermAttachmentChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")).isEmpty());
 	}
 }

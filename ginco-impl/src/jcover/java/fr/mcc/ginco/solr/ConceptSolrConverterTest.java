@@ -151,7 +151,7 @@ public class ConceptSolrConverterTest {
 		thesaurus2.setType(type2);
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusTerm1.setThesaurus(thesaurus2);
-		ArrayList<ThesaurusTerm> arrayList1 = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm2 = new ThesaurusTerm();
 		ThesaurusConcept concept2 = new ThesaurusConcept();
 		concept2.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
@@ -238,12 +238,12 @@ public class ConceptSolrConverterTest {
 		thesaurus4.setType(type4);
 		thesaurus4.setVersions(new HashSet<ThesaurusVersionHistory>());
 		thesaurusTerm2.setThesaurus(thesaurus4);
-		arrayList1.add(thesaurusTerm2);
+		thesaurusTermList.add(thesaurusTerm2);
 		when(thesaurusConceptService.getConceptPreferredTerm(Mockito.<String>any()))
 			.thenReturn(thesaurusTerm1);
 		when(thesaurusConceptService.getConceptPreferredTerms(Mockito.<String>any()))
-			.thenReturn(arrayList1);
-		ArrayList<Note> arrayList2 = new ArrayList<Note>();
+			.thenReturn(thesaurusTermList);
+		ArrayList<Note> noteList = new ArrayList<Note>();
 		Note note = new Note();
 		ThesaurusConcept concept3 = new ThesaurusConcept();
 		concept3.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
@@ -356,9 +356,9 @@ public class ConceptSolrConverterTest {
 		thesaurus7.setVersions(new HashSet<ThesaurusVersionHistory>());
 		termId.setThesaurus(thesaurus7);
 		note.setTerm(termId);
-		arrayList2.add(note);
+		noteList.add(note);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(noteList);
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
 		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());

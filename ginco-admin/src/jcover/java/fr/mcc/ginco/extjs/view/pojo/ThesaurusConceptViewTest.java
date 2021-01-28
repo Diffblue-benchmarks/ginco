@@ -1,11 +1,13 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsSame.sameInstance;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -103,24 +105,22 @@ class ThesaurusConceptViewTest {
 		thesaurusConceptView.setThesaurusId("1234");
 		thesaurusConceptView.setTopconcept(false);
 		thesaurusConceptView.setTopistopterm(false);
-		assertThat(thesaurusConceptView.getAlignments().size(), is(1));
+		assertThat(thesaurusConceptView.getAlignments(), hasSize(1));
 		assertThat(thesaurusConceptView.getAlignments().get(0), sameInstance(alignmentView));
-		assertThat(thesaurusConceptView.getAssociatedConcepts().size(), is(1));
+		assertThat(thesaurusConceptView.getAssociatedConcepts(), hasSize(1));
 		assertThat(thesaurusConceptView.getAssociatedConcepts().get(0), sameInstance(associativeRelationshipView));
-		assertThat(thesaurusConceptView.getChildConcepts().size(), is(1));
+		assertThat(thesaurusConceptView.getChildConcepts(), hasSize(1));
 		assertThat(thesaurusConceptView.getChildConcepts().get(0), sameInstance(hierarchicalRelationshipView1));
-		assertThat(thesaurusConceptView.getConceptsPath(), hasSize(1));
-		assertThat(thesaurusConceptView.getConceptsPath().get(0), is("/bin/bash"));
+		assertThat(thesaurusConceptView.getConceptsPath(), equalTo(Arrays.asList("/bin/bash")));
 		assertThat(thesaurusConceptView.getCreated(), is("someone"));
 		assertThat(thesaurusConceptView.getIdentifier(), is("data"));
 		assertThat(thesaurusConceptView.getModified(), is("someone"));
 		assertThat(thesaurusConceptView.getNotation(), is("DE"));
-		assertThat(thesaurusConceptView.getParentConcepts().size(), is(1));
+		assertThat(thesaurusConceptView.getParentConcepts(), hasSize(1));
 		assertThat(thesaurusConceptView.getParentConcepts().get(0), sameInstance(hierarchicalRelationshipView2));
-		assertThat(thesaurusConceptView.getRootConcepts(), hasSize(1));
-		assertThat(thesaurusConceptView.getRootConcepts().get(0), is("hello"));
+		assertThat(thesaurusConceptView.getRootConcepts(), equalTo(Arrays.asList("hello")));
 		assertThat(thesaurusConceptView.getStatus(), is(1));
-		assertThat(thesaurusConceptView.getTerms().size(), is(1));
+		assertThat(thesaurusConceptView.getTerms(), hasSize(1));
 		assertThat(thesaurusConceptView.getTerms().get(0), sameInstance(thesaurusTermView));
 		assertThat(thesaurusConceptView.getThesaurusId(), is("1234"));
 		assertThat(thesaurusConceptView.getTopconcept(), is(false));

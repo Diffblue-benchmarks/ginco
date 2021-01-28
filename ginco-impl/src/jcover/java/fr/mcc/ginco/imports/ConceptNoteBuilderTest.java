@@ -50,10 +50,10 @@ public class ConceptNoteBuilderTest {
 
 	@Test
 	public void buildConceptNotesReturnsEmpty() {
-		ArrayList<NoteType> arrayList = new ArrayList<NoteType>();
-		arrayList.add(new NoteType());
+		ArrayList<NoteType> noteTypeList = new ArrayList<NoteType>();
+		noteTypeList.add(new NoteType());
 		when(noteTypeService.getConceptNoteTypeList())
-			.thenReturn(arrayList);
+			.thenReturn(noteTypeList);
 		StmtIterator stmtIterator = mock(StmtIterator.class);
 		when(stmtIterator.hasNext())
 			.thenReturn(false);
@@ -63,6 +63,6 @@ public class ConceptNoteBuilderTest {
 		when(skosConcept.listProperties(Mockito.<com.hp.hpl.jena.rdf.model.Property>any()))
 			.thenReturn(stmtIterator);
 		ThesaurusConcept concept1 = mock(ThesaurusConcept.class);
-		assertTrue((service.buildConceptNotes(skosConcept, concept1, new ThesaurusTerm(), new Thesaurus())).isEmpty());
+		assertTrue(service.buildConceptNotes(skosConcept, concept1, new ThesaurusTerm(), new Thesaurus()).isEmpty());
 	}
 }

@@ -40,11 +40,11 @@ public class NoteTypeServiceImplTest {
 	public void getConceptNoteTypeList() {
 
 		// arrange
-		ArrayList<NoteType> arrayList = new ArrayList<NoteType>();
+		ArrayList<NoteType> noteTypeList = new ArrayList<NoteType>();
 		NoteType noteType = new NoteType();
-		arrayList.add(noteType);
+		noteTypeList.add(noteType);
 		when(noteTypeDAO.findConceptNoteTypes())
-			.thenReturn(arrayList);
+			.thenReturn(noteTypeList);
 
 		// act
 		List<NoteType> result = service.getConceptNoteTypeList();
@@ -58,11 +58,11 @@ public class NoteTypeServiceImplTest {
 	public void getTermNoteTypeList() {
 
 		// arrange
-		ArrayList<NoteType> arrayList = new ArrayList<NoteType>();
+		ArrayList<NoteType> noteTypeList = new ArrayList<NoteType>();
 		NoteType noteType = new NoteType();
-		arrayList.add(noteType);
+		noteTypeList.add(noteType);
 		when(noteTypeDAO.findTermNoteTypes())
-			.thenReturn(arrayList);
+			.thenReturn(noteTypeList);
 
 		// act
 		List<NoteType> result = service.getTermNoteTypeList();

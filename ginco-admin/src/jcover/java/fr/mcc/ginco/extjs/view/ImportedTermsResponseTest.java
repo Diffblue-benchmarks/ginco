@@ -1,10 +1,10 @@
 package fr.mcc.ginco.extjs.view;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,6 @@ class ImportedTermsResponseTest {
 		ArrayList<String> termsInError = new ArrayList<String>();
 		termsInError.add("foo");
 		importedTermsResponse.setTermsInError(termsInError);
-		assertThat(importedTermsResponse.getTermsInError(), hasSize(1));
-		assertThat(importedTermsResponse.getTermsInError().get(0), is("foo"));
+		assertThat(importedTermsResponse.getTermsInError(), equalTo(Arrays.asList("foo")));
 	}
 }

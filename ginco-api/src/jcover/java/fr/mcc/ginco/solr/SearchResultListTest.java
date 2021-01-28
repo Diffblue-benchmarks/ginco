@@ -1,6 +1,7 @@
 package fr.mcc.ginco.solr;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,6 @@ class SearchResultListTest {
 	void factory() {
 		SearchResultList searchResultList = new SearchResultList();
 		searchResultList.setNumFound(1L);
-		assertTrue((searchResultList).isEmpty());
+		assertThat(searchResultList.isEmpty(), is(true));
 	}
 }

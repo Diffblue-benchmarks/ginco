@@ -63,11 +63,11 @@ public class GincoArrayImporterTest {
 
 	@Test
 	public void storeArrayLabels1() {
-		assertTrue((service.storeArrayLabels(new GincoExportedThesaurus())).isEmpty());
+		assertTrue(service.storeArrayLabels(new GincoExportedThesaurus()).isEmpty());
 	}
 
 	@Test
 	public void storeArrayLabels2() {
-		assertTrue((service.storeArrayLabels(new GincoExportedThesaurus())).isEmpty());
+		assertTrue(service.storeArrayLabels(new GincoExportedThesaurus()).isEmpty());
 	}
 }

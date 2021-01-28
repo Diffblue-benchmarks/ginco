@@ -2,6 +2,7 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.anyInt;
@@ -48,20 +49,21 @@ class OrphansGeneratorTest {
 	void generateOrphans() {
 
 		// arrange
-		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
-		arrayList.add(thesaurusConcept);
+		thesaurusConceptList.add(thesaurusConcept);
 		when(thesaurusConceptService.getOrphanThesaurusConcepts(Mockito.<String>any(), anyInt()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptList);
 
 		// act
 		List<IThesaurusListNode> result = service.generateOrphans("1234");
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("eefdf6f2-08ea-4d91-b922-b9da07980de0"));
+		assertThat(result.get(0).getId(), is("b1158d46-4e6d-4148-b613-0746509969a9"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

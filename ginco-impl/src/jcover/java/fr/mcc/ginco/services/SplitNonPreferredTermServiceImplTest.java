@@ -70,7 +70,7 @@ public class SplitNonPreferredTermServiceImplTest {
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
 		assertSame(modified, result.getModified());
-		assertTrue((result.getPreferredTerms()).isEmpty());
+		assertTrue(result.getPreferredTerms().isEmpty());
 		assertEquals("foo", result.getSource());
 		assertEquals(1, (int) result.getStatus());
 		assertSame(thesaurus, result.getThesaurus());
@@ -80,12 +80,12 @@ public class SplitNonPreferredTermServiceImplTest {
 	public void getSplitNonPreferredTermListLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<SplitNonPreferredTerm> arrayList =
+		ArrayList<SplitNonPreferredTerm> splitNonPreferredTermList =
 			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
-		arrayList.add(splitNonPreferredTerm);
+		splitNonPreferredTermList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermDAO.findItems(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(splitNonPreferredTermList);
 
 		// act
 		List<SplitNonPreferredTerm> result =
@@ -107,12 +107,12 @@ public class SplitNonPreferredTermServiceImplTest {
 	public void getAllSplitNonPreferredTerms() {
 
 		// arrange
-		ArrayList<SplitNonPreferredTerm> arrayList =
+		ArrayList<SplitNonPreferredTerm> splitNonPreferredTermList =
 			 new ArrayList<SplitNonPreferredTerm>();
 		SplitNonPreferredTerm splitNonPreferredTerm = new SplitNonPreferredTerm();
-		arrayList.add(splitNonPreferredTerm);
+		splitNonPreferredTermList.add(splitNonPreferredTerm);
 		when(splitNonPreferredTermDAO.findAll())
-			.thenReturn(arrayList);
+			.thenReturn(splitNonPreferredTermList);
 
 		// act
 		List<SplitNonPreferredTerm> result = service.getAllSplitNonPreferredTerms();

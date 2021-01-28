@@ -78,14 +78,14 @@ public class SKOSTermsExporterTest {
 
 	@Test
 	public void exportConceptNotPreferredTerms2() {
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setHidden(false);
 		thesaurusTerm.setLanguage(new Language());
 		thesaurusTerm.setPrefered(false);
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 		Model model1 = mock(Model.class);
 		when(skosModelTermsExporter.exportConceptNotPreferredTerm(Mockito.<ThesaurusTerm>any(), Mockito.<Model>any(), Mockito.<Resource>any(), anyBoolean()))
 			.thenReturn(model1);
@@ -99,14 +99,14 @@ public class SKOSTermsExporterTest {
 
 	@Test
 	public void exportConceptNotPreferredTerms3() {
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setHidden(true);
 		thesaurusTerm.setLanguage(new Language());
 		thesaurusTerm.setPrefered(false);
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 		Model model1 = mock(Model.class);
 		when(skosModelTermsExporter.exportConceptNotPreferredTerm(Mockito.<ThesaurusTerm>any(), Mockito.<Model>any(), Mockito.<Resource>any(), anyBoolean()))
 			.thenReturn(model1);
@@ -120,12 +120,12 @@ public class SKOSTermsExporterTest {
 
 	@Test
 	public void exportConceptNotPreferredTerms4() {
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setPrefered(true);
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 		Model model1 = mock(Model.class);
 		Model model2 = mock(Model.class);
 		Model model3 = mock(Model.class);

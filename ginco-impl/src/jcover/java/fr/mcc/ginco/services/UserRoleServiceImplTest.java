@@ -61,11 +61,11 @@ public class UserRoleServiceImplTest {
 	public void getThesaurusUsersThesaurusIdIsRoot() {
 
 		// arrange
-		ArrayList<UserRole> arrayList = new ArrayList<UserRole>();
+		ArrayList<UserRole> userRoleList = new ArrayList<UserRole>();
 		UserRole userRole = new UserRole();
-		arrayList.add(userRole);
+		userRoleList.add(userRole);
 		when(userRoleDAO.getUserRolesOnThesaurus(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(userRoleList);
 
 		// act
 		List<UserRole> result = service.getThesaurusUsers("root");
@@ -102,11 +102,11 @@ public class UserRoleServiceImplTest {
 	public void getUserRolesUsernameIsRoot() {
 
 		// arrange
-		ArrayList<UserRole> arrayList = new ArrayList<UserRole>();
+		ArrayList<UserRole> userRoleList = new ArrayList<UserRole>();
 		UserRole userRole = new UserRole();
-		arrayList.add(userRole);
+		userRoleList.add(userRole);
 		when(userRoleDAO.getUserRoles(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(userRoleList);
 
 		// act
 		List<UserRole> result = service.getUserRoles("root");

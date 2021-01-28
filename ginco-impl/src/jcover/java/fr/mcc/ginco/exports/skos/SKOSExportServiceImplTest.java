@@ -65,15 +65,16 @@ public class SKOSExportServiceImplTest {
 
 	@Test
 	public void getSKOSExport() {
-		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
-		arrayList1.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
+		thesaurusConceptList.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))
-			.thenReturn(arrayList1);
-		ArrayList<ThesaurusConceptGroupType> arrayList2 =
+			.thenReturn(thesaurusConceptList);
+		ArrayList<ThesaurusConceptGroupType> thesaurusConceptGroupTypeList =
 			 new ArrayList<ThesaurusConceptGroupType>();
-		arrayList2.add(new ThesaurusConceptGroupType());
+		thesaurusConceptGroupTypeList.add(new ThesaurusConceptGroupType());
 		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusConceptGroupTypeList);
 		Model model1 = mock(Model.class);
 		when(skosThesaurusExporter.exportThesaurusSKOS(Mockito.<Thesaurus>any(), Mockito.<Model>any()))
 			.thenReturn(model1);

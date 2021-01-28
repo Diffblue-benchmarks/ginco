@@ -65,6 +65,6 @@ public class TermBuilderTest {
 			.thenReturn(stmtIterator2)
 			.thenReturn(stmtIterator1);
 		Thesaurus thesaurus1 = mock(Thesaurus.class);
-		assertTrue((service.buildTerms(skosConcept, thesaurus1, new ThesaurusConcept())).isEmpty());
+		assertTrue(service.buildTerms(skosConcept, thesaurus1, new ThesaurusConcept()).isEmpty());
 	}
 }

@@ -2,8 +2,9 @@ package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -31,6 +32,7 @@ import fr.mcc.ginco.solr.IThesaurusIndexerService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -87,17 +89,17 @@ class ThesaurusRestServiceTest {
 	void getAllThesaurusTypes() {
 
 		// arrange
-		ArrayList<ThesaurusType> arrayList = new ArrayList<ThesaurusType>();
+		ArrayList<ThesaurusType> thesaurusTypeList = new ArrayList<ThesaurusType>();
 		ThesaurusType thesaurusType = new ThesaurusType();
-		arrayList.add(thesaurusType);
+		thesaurusTypeList.add(thesaurusType);
 		when(thesaurusTypeService.getThesaurusTypeList())
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTypeList);
 
 		// act
 		List<ThesaurusType> result = service.getAllThesaurusTypes();
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(thesaurusType));
 	}
 
@@ -115,17 +117,17 @@ class ThesaurusRestServiceTest {
 	void getTopLanguagesThesaurusIdIsEmpty() {
 
 		// arrange
-		ArrayList<Language> arrayList2 = new ArrayList<Language>();
+		ArrayList<Language> languageList2 = new ArrayList<Language>();
 		Language language2 = new Language();
-		arrayList2.add(language2);
+		languageList2.add(language2);
 		when(languagesService.getTopLanguagesList())
-			.thenReturn(arrayList2);
+			.thenReturn(languageList2);
 
 		// act
 		ExtJsonFormLoadData<List<Language>> result = service.getTopLanguages("");
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(language2));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));
@@ -135,22 +137,23 @@ class ThesaurusRestServiceTest {
 	void getAllThesaurusFormats() {
 
 		// arrange
-		ArrayList<ThesaurusFormat> arrayList = new ArrayList<ThesaurusFormat>();
+		ArrayList<ThesaurusFormat> thesaurusFormatList =
+			 new ArrayList<ThesaurusFormat>();
 		ThesaurusFormat thesaurusFormat = new ThesaurusFormat();
-		arrayList.add(thesaurusFormat);
+		thesaurusFormatList.add(thesaurusFormat);
 		when(thesaurusFormatService.getThesaurusFormatList())
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusFormatList);
 
 		// act
 		List<ThesaurusFormat> result = service.getAllThesaurusFormats();
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(thesaurusFormat));
 	}
 
 	@Test
-	void getVocabularyById() {
+	void getVocabularyById() throws java.text.ParseException {
 
 		// arrange
 		ThesaurusView thesaurusView = new ThesaurusView();
@@ -182,8 +185,33 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setType(1);
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setArchived(false);
+		thesaurus.setContributor("foo");
+		thesaurus.setCoverage("foo");
+		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator = mock(ThesaurusOrganization.class);
+		thesaurus.setCreator(creator);
+		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus.setDefaultTopConcept(false);
+		thesaurus.setDescription("some text");
+		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus.setIdentifier("data");
+		thesaurus.setLang(new HashSet<Language>());
+		thesaurus.setPolyHierarchical(false);
+		thesaurus.setPublisher("foo");
+		thesaurus.setRelation("DE");
+		thesaurus.setRights("foo");
+		thesaurus.setSource("foo");
+		thesaurus.setSubject("foo");
+		thesaurus.setTitle("Mr");
+		ThesaurusType type = new ThesaurusType();
+		type.setIdentifier(1);
+		type.setLabel("label");
+		thesaurus.setType(type);
+		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus);
 
 		// act
 		ThesaurusView result = service.getVocabularyById("1234");
@@ -197,14 +225,12 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("someone"));
 		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
+		assertThat(result.getDate(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2}"));
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
-		assertThat(result.getFormats(), hasSize(1));
-		assertThat(result.getFormats().get(0), is(1));
+		assertThat(result.getFormats(), equalTo(Arrays.asList(1)));
 		assertThat(result.getId(), is("1234"));
-		assertThat(result.getLanguages(), hasSize(1));
-		assertThat(result.getLanguages().get(0), is("foo"));
+		assertThat(result.getLanguages(), equalTo(Arrays.asList("foo")));
 		assertThat(result.getPolyHierarchical(), is(false));
 		assertThat(result.getPublisher(), is("foo"));
 		assertThat(result.getRelation(), is("DE"));
@@ -223,23 +249,23 @@ class ThesaurusRestServiceTest {
 		ThesaurusView thesaurusView = new ThesaurusView();
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
-		ArrayList<Thesaurus> arrayList = new ArrayList<Thesaurus>();
-		arrayList.add(new Thesaurus());
+		ArrayList<Thesaurus> thesaurusList = new ArrayList<Thesaurus>();
+		thesaurusList.add(new Thesaurus());
 		when(thesaurusService.getThesaurusList())
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusList);
 
 		// act
 		ExtJsonFormLoadData<List<ThesaurusView>> result = service.getVocabularies();
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(thesaurusView));
 		assertThat(result.getTotal(), is(1L));
 		assertThat(result.isSuccess(), is(true));
 	}
 
 	@Test
-	void updateVocabulary() throws fr.mcc.ginco.exceptions.TechnicalException {
+	void updateVocabulary() throws java.text.ParseException {
 
 		// arrange
 		ThesaurusView thesaurusView = new ThesaurusView();
@@ -269,19 +295,127 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setSubject("foo");
 		thesaurusView.setTitle("Mr");
 		thesaurusView.setType(1);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator1 = mock(ThesaurusOrganization.class);
+		thesaurus1.setCreator(creator1);
+		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setLang(new HashSet<Language>());
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		ThesaurusType type1 = new ThesaurusType();
+		type1.setIdentifier(1);
+		type1.setLabel("label");
+		thesaurus1.setType(type1);
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
 		when(thesaurusViewConverter.convert(Mockito.<ThesaurusView>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus1);
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setArchived(false);
+		thesaurus2.setContributor("foo");
+		thesaurus2.setCoverage("foo");
+		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator2 = new ThesaurusOrganization();
+		creator2.setEmail("info@diffblue.com");
+		creator2.setHomepage("foo");
+		creator2.setIdentifier(1);
+		creator2.setName("Acme");
+		thesaurus2.setCreator(creator2);
+		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus2.setDefaultTopConcept(false);
+		thesaurus2.setDescription("some text");
+		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus2.setIdentifier("data");
+		thesaurus2.setLang(new HashSet<Language>());
+		thesaurus2.setPolyHierarchical(false);
+		thesaurus2.setPublisher("foo");
+		thesaurus2.setRelation("DE");
+		thesaurus2.setRights("foo");
+		thesaurus2.setSource("foo");
+		thesaurus2.setSubject("foo");
+		thesaurus2.setTitle("Mr");
+		ThesaurusType type2 = new ThesaurusType();
+		type2.setIdentifier(1);
+		type2.setLabel("label");
+		thesaurus2.setType(type2);
+		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setArchived(false);
+		thesaurus3.setContributor("foo");
+		thesaurus3.setCoverage("foo");
+		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator3 = new ThesaurusOrganization();
+		creator3.setEmail("info@diffblue.com");
+		creator3.setHomepage("foo");
+		creator3.setIdentifier(1);
+		creator3.setName("Acme");
+		thesaurus3.setCreator(creator3);
+		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus3.setDefaultTopConcept(false);
+		thesaurus3.setDescription("some text");
+		thesaurus3.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus3.setIdentifier("data");
+		thesaurus3.setLang(new HashSet<Language>());
+		thesaurus3.setPolyHierarchical(false);
+		thesaurus3.setPublisher("foo");
+		thesaurus3.setRelation("DE");
+		thesaurus3.setRights("foo");
+		thesaurus3.setSource("foo");
+		thesaurus3.setSubject("foo");
 		thesaurus3.setTitle("Mr");
+		ThesaurusType type3 = new ThesaurusType();
+		type3.setIdentifier(1);
+		type3.setLabel("label");
+		thesaurus3.setType(type3);
+		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus3);
 		when(thesaurusService.updateThesaurus(Mockito.<Thesaurus>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus2);
+		ThesaurusView thesaurusViewJAXBElement = new ThesaurusView();
+		thesaurusViewJAXBElement.setArchived(false);
+		thesaurusViewJAXBElement.setCanBeDeleted(false);
+		thesaurusViewJAXBElement.setContributor("foo");
+		thesaurusViewJAXBElement.setCoverage("foo");
+		thesaurusViewJAXBElement.setCreated("someone");
+		thesaurusViewJAXBElement.setCreatorEmail("info@diffblue.com");
+		thesaurusViewJAXBElement.setCreatorHomepage("someone");
+		thesaurusViewJAXBElement.setCreatorName("Acme");
+		thesaurusViewJAXBElement.setDate("1999-12-31");
+		thesaurusViewJAXBElement.setDefaultTopConcept(false);
+		thesaurusViewJAXBElement.setDescription("some text");
+		ArrayList<Integer> formats2 = new ArrayList<Integer>();
+		formats2.add(1);
+		thesaurusViewJAXBElement.setFormats(formats2);
+		thesaurusViewJAXBElement.setId("1234");
+		ArrayList<String> lang5 = new ArrayList<String>();
+		lang5.add("foo");
+		thesaurusViewJAXBElement.setLanguages(lang5);
+		thesaurusViewJAXBElement.setPolyHierarchical(false);
+		thesaurusViewJAXBElement.setPublisher("foo");
+		thesaurusViewJAXBElement.setRelation("DE");
+		thesaurusViewJAXBElement.setRights("foo");
+		thesaurusViewJAXBElement.setSource("foo");
+		thesaurusViewJAXBElement.setSubject("foo");
+		thesaurusViewJAXBElement.setTitle("Mr");
+		thesaurusViewJAXBElement.setType(1);
 
 		// act
-		ThesaurusView result = service.updateVocabulary(new ThesaurusView());
+		ThesaurusView result = service.updateVocabulary(thesaurusViewJAXBElement);
 
 		// assert
 		assertThat(result.getArchived(), is(false));
@@ -292,14 +426,12 @@ class ThesaurusRestServiceTest {
 		assertThat(result.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(result.getCreatorHomepage(), is("someone"));
 		assertThat(result.getCreatorName(), is("Acme"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", result.getDate()), is(true));
+		assertThat(result.getDate(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2}"));
 		assertThat(result.getDefaultTopConcept(), is(false));
 		assertThat(result.getDescription(), is("some text"));
-		assertThat(result.getFormats(), hasSize(1));
-		assertThat(result.getFormats().get(0), is(1));
+		assertThat(result.getFormats(), equalTo(Arrays.asList(1)));
 		assertThat(result.getId(), is("1234"));
-		assertThat(result.getLanguages(), hasSize(1));
-		assertThat(result.getLanguages().get(0), is("foo"));
+		assertThat(result.getLanguages(), equalTo(Arrays.asList("foo")));
 		assertThat(result.getPolyHierarchical(), is(false));
 		assertThat(result.getPublisher(), is("foo"));
 		assertThat(result.getRelation(), is("DE"));
@@ -448,25 +580,25 @@ class ThesaurusRestServiceTest {
 			.thenReturn(new Thesaurus());
 		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
-		assertThat(Pattern.matches("\\{\"success\":true,\"data\":\\{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"\\d{4}-\\d{1,2}-\\d{1,2}\",\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"someone\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"someone\",\"creatorEmail\":\"info@diffblue\\.com\",\"polyHierarchical\":false,\"languages\":\\[\"foo\"\\],\"formats\":\\[1\\],\"thesaurusId\":\"1234\"\\},\"total\":null\\}", service.archiveVocabulary("1234")), is(true));
+		assertThat(service.archiveVocabulary("1234"), matchesPattern("\\{\"success\":true,\"data\":\\{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"\\d{4}-\\d{1,2}-\\d{1,2}\",\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"someone\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"someone\",\"creatorEmail\":\"info@diffblue\\.com\",\"polyHierarchical\":false,\"languages\":\\[\"foo\"\\],\"formats\":\\[1\\],\"thesaurusId\":\"1234\"\\},\"total\":null\\}"));
 	}
 
 	@Test
 	void getAllAuthors() {
 
 		// arrange
-		ArrayList<ThesaurusOrganization> arrayList =
+		ArrayList<ThesaurusOrganization> thesaurusOrganizationList =
 			 new ArrayList<ThesaurusOrganization>();
 		ThesaurusOrganization thesaurusOrganization = new ThesaurusOrganization();
-		arrayList.add(thesaurusOrganization);
+		thesaurusOrganizationList.add(thesaurusOrganization);
 		when(thesaurusOrganizationService.getOrganizationsWithData())
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusOrganizationList);
 
 		// act
 		List<ThesaurusOrganization> result = service.getAllAuthors();
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(thesaurusOrganization));
 	}
 

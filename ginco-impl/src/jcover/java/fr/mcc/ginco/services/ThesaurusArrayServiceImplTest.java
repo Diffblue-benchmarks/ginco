@@ -71,7 +71,7 @@ public class ThesaurusArrayServiceImplTest {
 		ThesaurusArray result = service.getThesaurusArrayById("1234");
 
 		// assert
-		assertTrue((result.getConcepts()).isEmpty());
+		assertTrue(result.getConcepts().isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
@@ -84,11 +84,12 @@ public class ThesaurusArrayServiceImplTest {
 	public void getAllThesaurusArrayByThesaurusId() {
 
 		// arrange
-		ArrayList<ThesaurusArray> arrayList = new ArrayList<ThesaurusArray>();
+		ArrayList<ThesaurusArray> thesaurusArrayList =
+			 new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		arrayList.add(thesaurusArray);
+		thesaurusArrayList.add(thesaurusArray);
 		when(thesaurusArrayDAO.getThesaurusArrayListByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusArrayList);
 
 		// act
 		List<ThesaurusArray> result =
@@ -121,7 +122,7 @@ public class ThesaurusArrayServiceImplTest {
 			 service.updateOnlyThesaurusArray(new ThesaurusArray());
 
 		// assert
-		assertTrue((result.getConcepts()).isEmpty());
+		assertTrue(result.getConcepts().isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
@@ -151,7 +152,7 @@ public class ThesaurusArrayServiceImplTest {
 		ThesaurusArray result = service.destroyThesaurusArray(new ThesaurusArray());
 
 		// assert
-		assertTrue((result.getConcepts()).isEmpty());
+		assertTrue(result.getConcepts().isEmpty());
 		assertEquals("data", result.getIdentifier());
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
@@ -164,11 +165,12 @@ public class ThesaurusArrayServiceImplTest {
 	public void getSubOrdinatedArrays() {
 
 		// arrange
-		ArrayList<ThesaurusArray> arrayList = new ArrayList<ThesaurusArray>();
+		ArrayList<ThesaurusArray> thesaurusArrayList =
+			 new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		arrayList.add(thesaurusArray);
+		thesaurusArrayList.add(thesaurusArray);
 		when(thesaurusArrayDAO.getConceptSuperOrdinateArrays(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusArrayList);
 
 		// act
 		List<ThesaurusArray> result = service.getSubOrdinatedArrays("1234");
@@ -182,11 +184,12 @@ public class ThesaurusArrayServiceImplTest {
 	public void getArraysWithoutParentConcept() {
 
 		// arrange
-		ArrayList<ThesaurusArray> arrayList = new ArrayList<ThesaurusArray>();
+		ArrayList<ThesaurusArray> thesaurusArrayList =
+			 new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		arrayList.add(thesaurusArray);
+		thesaurusArrayList.add(thesaurusArray);
 		when(thesaurusArrayDAO.getArraysWithoutSuperordinatedConcept(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusArrayList);
 
 		// act
 		List<ThesaurusArray> result = service.getArraysWithoutParentConcept("1234");
@@ -200,11 +203,12 @@ public class ThesaurusArrayServiceImplTest {
 	public void getArraysWithoutParentArray() {
 
 		// arrange
-		ArrayList<ThesaurusArray> arrayList = new ArrayList<ThesaurusArray>();
+		ArrayList<ThesaurusArray> thesaurusArrayList =
+			 new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		arrayList.add(thesaurusArray);
+		thesaurusArrayList.add(thesaurusArray);
 		when(thesaurusArrayDAO.getArraysWithoutParentArray(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusArrayList);
 
 		// act
 		List<ThesaurusArray> result = service.getArraysWithoutParentArray("1234");
@@ -218,11 +222,12 @@ public class ThesaurusArrayServiceImplTest {
 	public void getChildrenArrays() {
 
 		// arrange
-		ArrayList<ThesaurusArray> arrayList = new ArrayList<ThesaurusArray>();
+		ArrayList<ThesaurusArray> thesaurusArrayList =
+			 new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray = new ThesaurusArray();
-		arrayList.add(thesaurusArray);
+		thesaurusArrayList.add(thesaurusArray);
 		when(thesaurusArrayDAO.getChildrenArrays(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusArrayList);
 
 		// act
 		List<ThesaurusArray> result = service.getChildrenArrays("1234");

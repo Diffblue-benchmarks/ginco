@@ -63,18 +63,18 @@ public class SKOSGroupsExporterTest {
 
 	@Test
 	public void exportGroups2() {
-		ArrayList<ThesaurusConceptGroupType> arrayList1 =
+		ArrayList<ThesaurusConceptGroupType> thesaurusConceptGroupTypeList =
 			 new ArrayList<ThesaurusConceptGroupType>();
-		arrayList1.add(new ThesaurusConceptGroupType());
+		thesaurusConceptGroupTypeList.add(new ThesaurusConceptGroupType());
 		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
-			.thenReturn(arrayList1);
-		ArrayList<ThesaurusConceptGroup> arrayList2 =
+			.thenReturn(thesaurusConceptGroupTypeList);
+		ArrayList<ThesaurusConceptGroup> thesaurusConceptGroupList =
 			 new ArrayList<ThesaurusConceptGroup>();
 		ThesaurusConceptGroup thesaurusConceptGroup =
 			 mock(ThesaurusConceptGroup.class);
-		arrayList2.add(thesaurusConceptGroup);
+		thesaurusConceptGroupList.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusConceptGroupList);
 		OntClass ontClass = mock(OntClass.class);
 		OntModel ontModel1 = mock(OntModel.class);
 		when(skosGroupOntologyExporter.addGroupTypeToOntModel(Mockito.<OntModel>any(), Mockito.<String>any()))

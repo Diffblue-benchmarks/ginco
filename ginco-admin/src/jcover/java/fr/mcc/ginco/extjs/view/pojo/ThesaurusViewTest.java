@@ -1,10 +1,12 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
@@ -54,14 +56,12 @@ class ThesaurusViewTest {
 		assertThat(thesaurusView.getCreatorEmail(), is("info@diffblue.com"));
 		assertThat(thesaurusView.getCreatorHomepage(), is("someone"));
 		assertThat(thesaurusView.getCreatorName(), is("Acme"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", thesaurusView.getDate()), is(true));
+		assertThat(thesaurusView.getDate(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2}"));
 		assertThat(thesaurusView.getDefaultTopConcept(), is(false));
 		assertThat(thesaurusView.getDescription(), is("some text"));
-		assertThat(thesaurusView.getFormats(), hasSize(1));
-		assertThat(thesaurusView.getFormats().get(0), is(1));
+		assertThat(thesaurusView.getFormats(), equalTo(Arrays.asList(1)));
 		assertThat(thesaurusView.getId(), is("1234"));
-		assertThat(thesaurusView.getLanguages(), hasSize(1));
-		assertThat(thesaurusView.getLanguages().get(0), is("foo"));
+		assertThat(thesaurusView.getLanguages(), equalTo(Arrays.asList("foo")));
 		assertThat(thesaurusView.getPolyHierarchical(), is(false));
 		assertThat(thesaurusView.getPublisher(), is("foo"));
 		assertThat(thesaurusView.getRelation(), is("DE"));

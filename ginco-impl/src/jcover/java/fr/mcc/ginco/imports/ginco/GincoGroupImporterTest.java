@@ -64,11 +64,11 @@ public class GincoGroupImporterTest {
 
 	@Test
 	public void storeGroupLabels1() {
-		assertTrue((service.storeGroupLabels(new GincoExportedThesaurus())).isEmpty());
+		assertTrue(service.storeGroupLabels(new GincoExportedThesaurus()).isEmpty());
 	}
 
 	@Test
 	public void storeGroupLabels2() {
-		assertTrue((service.storeGroupLabels(new GincoExportedThesaurus())).isEmpty());
+		assertTrue(service.storeGroupLabels(new GincoExportedThesaurus()).isEmpty());
 	}
 }

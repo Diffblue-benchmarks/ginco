@@ -1,10 +1,11 @@
 package fr.mcc.ginco.extjs.view;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,10 +28,8 @@ class ImportedThesaurusResponseTest {
 		externalConceptIds.add("hello");
 		importedThesaurusResponse.setExternalConceptIds(externalConceptIds);
 		importedThesaurusResponse.setThesaurusTitle("Mr");
-		assertThat(importedThesaurusResponse.getConceptsMissingAlignments(), hasSize(1));
-		assertThat(importedThesaurusResponse.getConceptsMissingAlignments().get(0), is("hello"));
-		assertThat(importedThesaurusResponse.getExternalConceptIds(), hasSize(1));
-		assertThat(importedThesaurusResponse.getExternalConceptIds().get(0), is("hello"));
+		assertThat(importedThesaurusResponse.getConceptsMissingAlignments(), equalTo(Arrays.asList("hello")));
+		assertThat(importedThesaurusResponse.getExternalConceptIds(), equalTo(Arrays.asList("hello")));
 		assertThat(importedThesaurusResponse.getThesaurusTitle(), is("Mr"));
 	}
 }

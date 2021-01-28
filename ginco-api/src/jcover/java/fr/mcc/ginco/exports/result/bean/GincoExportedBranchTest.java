@@ -1,7 +1,8 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.anEmptyMap;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsSame.sameInstance;
 
 import fr.mcc.ginco.beans.Alignment;
@@ -250,20 +251,20 @@ class GincoExportedBranchTest {
 		thesaurusTerm.setThesaurus(thesaurus6);
 		terms.add(thesaurusTerm);
 		gincoExportedBranch.setTerms(terms);
-		assertThat(gincoExportedBranch.getAlignments().isEmpty(), is(true));
-		assertThat(gincoExportedBranch.getConceptNotes().isEmpty(), is(true));
-		assertThat(gincoExportedBranch.getHierarchicalRelationship().isEmpty(), is(true));
+		assertThat(gincoExportedBranch.getAlignments(), anEmptyMap());
+		assertThat(gincoExportedBranch.getConceptNotes(), anEmptyMap());
+		assertThat(gincoExportedBranch.getHierarchicalRelationship(), anEmptyMap());
 		assertThat(gincoExportedBranch.getRootConcept(), sameInstance(rootConcept));
-		assertThat(gincoExportedBranch.getTermNotes().isEmpty(), is(true));
-		assertThat(gincoExportedBranch.getConceptAttributeTypes().size(), is(1));
+		assertThat(gincoExportedBranch.getTermNotes(), anEmptyMap());
+		assertThat(gincoExportedBranch.getConceptAttributeTypes(), hasSize(1));
 		assertThat(gincoExportedBranch.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedBranch.getConceptAttributes().isEmpty(), is(true));
-		assertThat(gincoExportedBranch.getConcepts().size(), is(1));
+		assertThat(gincoExportedBranch.getConceptAttributes(), anEmptyMap());
+		assertThat(gincoExportedBranch.getConcepts(), hasSize(1));
 		assertThat(gincoExportedBranch.getConcepts().get(0), sameInstance(thesaurusConcept));
-		assertThat(gincoExportedBranch.getTermAttributeTypes().size(), is(1));
+		assertThat(gincoExportedBranch.getTermAttributeTypes(), hasSize(1));
 		assertThat(gincoExportedBranch.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedBranch.getTermAttributes().isEmpty(), is(true));
-		assertThat(gincoExportedBranch.getTerms().size(), is(1));
+		assertThat(gincoExportedBranch.getTermAttributes(), anEmptyMap());
+		assertThat(gincoExportedBranch.getTerms(), hasSize(1));
 		assertThat(gincoExportedBranch.getTerms().get(0), sameInstance(thesaurusTerm));
 	}
 }

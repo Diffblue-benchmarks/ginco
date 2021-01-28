@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.anyInt;
@@ -159,7 +160,7 @@ class CustomAttributeConverterTest {
 			 service.convertListTerm(sourceList);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getEntityid(), is("data"));
 		assertThat(result.get(0).getLang(), is("1234"));
 		assertThat(result.get(0).getLexicalValue(), is("value"));
@@ -190,7 +191,7 @@ class CustomAttributeConverterTest {
 			 service.convertListConcept(sourceList);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getEntityid(), is("data"));
 		assertThat(result.get(0).getLang(), is("1234"));
 		assertThat(result.get(0).getLexicalValue(), is("value"));

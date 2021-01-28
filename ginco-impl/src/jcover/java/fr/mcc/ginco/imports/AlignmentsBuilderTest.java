@@ -41,14 +41,14 @@ public class AlignmentsBuilderTest {
 
 	@Test
 	public void buildAlignmentsReturnsEmpty() {
-		ArrayList<AlignmentType> arrayList = new ArrayList<AlignmentType>();
-		arrayList.add(new AlignmentType());
+		ArrayList<AlignmentType> alignmentTypeList = new ArrayList<AlignmentType>();
+		alignmentTypeList.add(new AlignmentType());
 		when(alignmentTypeService.getAlignmentTypeList())
-			.thenReturn(arrayList);
+			.thenReturn(alignmentTypeList);
 		Resource skosConcept = mock(Resource.class);
 		when(skosConcept.getURI())
 			.thenReturn("/some/path.html");
 		ThesaurusConcept concept = mock(ThesaurusConcept.class);
-		assertTrue((service.buildAlignments(skosConcept, concept)).isEmpty());
+		assertTrue(service.buildAlignments(skosConcept, concept).isEmpty());
 	}
 }

@@ -1,7 +1,8 @@
 package fr.mcc.ginco.exports.result.bean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.anEmptyMap;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsSame.sameInstance;
 
 import fr.mcc.ginco.beans.AssociativeRelationship;
@@ -200,15 +201,15 @@ class GincoExportedEntityTest {
 		thesaurusTerm.setThesaurus(thesaurus5);
 		terms.add(thesaurusTerm);
 		gincoExportedEntity.setTerms(terms);
-		assertThat(gincoExportedEntity.getConceptAttributeTypes().size(), is(1));
+		assertThat(gincoExportedEntity.getConceptAttributeTypes(), hasSize(1));
 		assertThat(gincoExportedEntity.getConceptAttributeTypes().get(0), sameInstance(customConceptAttributeType));
-		assertThat(gincoExportedEntity.getConceptAttributes().isEmpty(), is(true));
-		assertThat(gincoExportedEntity.getConcepts().size(), is(1));
+		assertThat(gincoExportedEntity.getConceptAttributes(), anEmptyMap());
+		assertThat(gincoExportedEntity.getConcepts(), hasSize(1));
 		assertThat(gincoExportedEntity.getConcepts().get(0), sameInstance(thesaurusConcept));
-		assertThat(gincoExportedEntity.getTermAttributeTypes().size(), is(1));
+		assertThat(gincoExportedEntity.getTermAttributeTypes(), hasSize(1));
 		assertThat(gincoExportedEntity.getTermAttributeTypes().get(0), sameInstance(customTermAttributeType));
-		assertThat(gincoExportedEntity.getTermAttributes().isEmpty(), is(true));
-		assertThat(gincoExportedEntity.getTerms().size(), is(1));
+		assertThat(gincoExportedEntity.getTermAttributes(), anEmptyMap());
+		assertThat(gincoExportedEntity.getTerms(), hasSize(1));
 		assertThat(gincoExportedEntity.getTerms().get(0), sameInstance(thesaurusTerm));
 	}
 }

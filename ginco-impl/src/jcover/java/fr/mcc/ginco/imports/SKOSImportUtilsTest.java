@@ -72,7 +72,7 @@ public class SKOSImportUtilsTest {
 		when(model.listStatements(Mockito.<com.hp.hpl.jena.rdf.model.Selector>any()))
 			.thenReturn(stmtIterator);
 		Resource resource = mock(Resource.class);
-		assertTrue((service.getSKOSRessources(model, resource)).isEmpty());
+		assertTrue(service.getSKOSRessources(model, resource).isEmpty());
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class SKOSImportUtilsTest {
 		OntModel model = mock(OntModel.class);
 		when(model.listObjectProperties())
 			.thenReturn(extendedIterator);
-		assertTrue((service.getRelatedTypeProperty(model)).isEmpty());
+		assertTrue(service.getRelatedTypeProperty(model).isEmpty());
 	}
 
 	@Test
@@ -104,7 +104,7 @@ public class SKOSImportUtilsTest {
 		OntModel model = mock(OntModel.class);
 		when(model.listObjectProperties())
 			.thenReturn(extendedIterator);
-		assertTrue((service.getRelatedTypeProperty(model)).isEmpty());
+		assertTrue(service.getRelatedTypeProperty(model).isEmpty());
 	}
 
 	@Test

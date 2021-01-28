@@ -1,6 +1,7 @@
 package fr.mcc.ginco.extjs.view.pojo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -51,14 +52,14 @@ class AlignmentViewTest {
 		assertThat(alignmentView.getAlignmentType(), is(1));
 		assertThat(alignmentView.getAndRelation(), is(false));
 		assertThat(alignmentView.getCreated(), is("someone"));
-		assertThat(alignmentView.getExternalThesaurus().size(), is(1));
+		assertThat(alignmentView.getExternalThesaurus(), hasSize(1));
 		assertThat(alignmentView.getExternalThesaurus().get(0), sameInstance(externalThesaurusView));
 		assertThat(alignmentView.getIdentifier(), is("data"));
 		assertThat(alignmentView.getInternalThesaurusId(), is("1234"));
 		assertThat(alignmentView.getModified(), is("someone"));
-		assertThat(alignmentView.getTargetConcepts().size(), is(1));
+		assertThat(alignmentView.getTargetConcepts(), hasSize(1));
 		assertThat(alignmentView.getTargetConcepts().get(0), sameInstance(alignmentConceptView));
-		assertThat(alignmentView.getTargetResources().size(), is(1));
+		assertThat(alignmentView.getTargetResources(), hasSize(1));
 		assertThat(alignmentView.getTargetResources().get(0), sameInstance(alignmentResourceView));
 	}
 }

@@ -302,9 +302,9 @@ public class JournalLineBuilderTest {
 		assertEquals("data", result.getConceptId());
 		assertEquals("Thu Jan 01 00:00:00 UTC 1970", result.getEventDate().toString());
 		assertTrue(JournalEventsEnum.THESAURUSCONCEPT_HIERARCHY_UPDATE == result.getEventType());
-		assertTrue((result.getNewGenericTerm()).isEmpty());
+		assertTrue(result.getNewGenericTerm().isEmpty());
 		assertNull(result.getNewLexicalValue());
-		assertTrue((result.getOldGenericTerm()).isEmpty());
+		assertTrue(result.getOldGenericTerm().isEmpty());
 		assertNull(result.getOldLexicalValue());
 		assertEquals(1, (int) result.getRevisionNumber());
 		assertNull(result.getStatus());

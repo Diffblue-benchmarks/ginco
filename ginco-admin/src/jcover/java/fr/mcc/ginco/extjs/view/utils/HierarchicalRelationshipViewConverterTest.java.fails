@@ -2,6 +2,7 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.mock;
@@ -66,12 +67,13 @@ class HierarchicalRelationshipViewConverterTest {
 	void getChildrenViews() {
 
 		// arrange
-		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setIdentifier("data");
-		arrayList.add(thesaurusConcept);
+		thesaurusConceptList.add(thesaurusConcept);
 		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptList);
 		when(thesaurusConceptService.getConceptTitle(Mockito.<ThesaurusConcept>any()))
 			.thenReturn("foo=bar");
 		ConceptHierarchicalRelationship conceptHierarchicalRelationship =
@@ -85,7 +87,7 @@ class HierarchicalRelationshipViewConverterTest {
 			 service.getChildrenViews(new ThesaurusConcept());
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getLabel(), is("foo=bar"));
 		assertThat(result.get(0).getRole(), is(1));

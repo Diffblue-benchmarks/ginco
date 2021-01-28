@@ -43,13 +43,13 @@ public class SKOSNotesExporterTest {
 
 	@Test
 	public void exportNotes() {
-		ArrayList<Note> arrayList2 = new ArrayList<Note>();
+		ArrayList<Note> noteList2 = new ArrayList<Note>();
 		Note note = new Note();
 		note.setLanguage(new Language());
 		note.setNoteType(new NoteType());
-		arrayList2.add(note);
+		noteList2.add(note);
 		when(noteService.getConceptNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(noteList2);
 		when(noteService.getTermNotePaginatedList(Mockito.<String>any(), Mockito.<Integer>any(), Mockito.<Integer>any()))
 			.thenReturn(new ArrayList<Note>());
 		Resource resource = mock(Resource.class);

@@ -39,11 +39,11 @@ public class ThesaurusTypeServiceImplTest {
 	public void getThesaurusTypeList() {
 
 		// arrange
-		ArrayList<ThesaurusType> arrayList = new ArrayList<ThesaurusType>();
+		ArrayList<ThesaurusType> thesaurusTypeList = new ArrayList<ThesaurusType>();
 		ThesaurusType thesaurusType = new ThesaurusType();
-		arrayList.add(thesaurusType);
+		thesaurusTypeList.add(thesaurusType);
 		when(thesaurusTypeDAO.findAll(Mockito.<String>any(), Mockito.<fr.mcc.ginco.dao.IGenericDAO.SortingTypes>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTypeList);
 
 		// act
 		List<ThesaurusType> result = service.getThesaurusTypeList();

@@ -41,6 +41,6 @@ public class AuditHelperTest {
 		ArrayList<ThesaurusConcept> allThesaurusConcepts =
 			 new ArrayList<ThesaurusConcept>();
 		allThesaurusConcepts.add(new ThesaurusConcept());
-		assertTrue((service.getConceptChildrenAtRevision(1, concept, allThesaurusConcepts)).isEmpty());
+		assertTrue(service.getConceptChildrenAtRevision(1, concept, allThesaurusConcepts).isEmpty());
 	}
 }

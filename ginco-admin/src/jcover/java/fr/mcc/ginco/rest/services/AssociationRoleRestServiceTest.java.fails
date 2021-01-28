@@ -1,6 +1,7 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -40,20 +41,20 @@ class AssociationRoleRestServiceTest {
 	void getAllRoles() {
 
 		// arrange
-		ArrayList<AssociativeRelationshipRole> arrayList =
+		ArrayList<AssociativeRelationshipRole> associativeRelationshipRoleList =
 			 new ArrayList<AssociativeRelationshipRole>();
 		AssociativeRelationshipRole associativeRelationshipRole =
 			 new AssociativeRelationshipRole();
-		arrayList.add(associativeRelationshipRole);
+		associativeRelationshipRoleList.add(associativeRelationshipRole);
 		when(associativeRelationshipRoleService.getAllAssociationTermRole())
-			.thenReturn(arrayList);
+			.thenReturn(associativeRelationshipRoleList);
 
 		// act
 		ExtJsonFormLoadData<List<AssociativeRelationshipRole>> result =
 			 service.getAllRoles();
 
 		// assert
-		assertThat(result.getData().size(), is(1));
+		assertThat(result.getData(), hasSize(1));
 		assertThat(result.getData().get(0), sameInstance(associativeRelationshipRole));
 		assertThat(result.getTotal(), is(nullValue()));
 		assertThat(result.isSuccess(), is(true));

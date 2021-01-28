@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import fr.mcc.ginco.dao.IGenericDAO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -68,11 +69,11 @@ public class GenericHibernateDAOTest {
 	public void getByExternalIdReturnsSmith() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add("Smith");
+		ArrayList<String> stringList = new ArrayList<String>();
+		stringList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(arrayList);
+			.thenReturn(stringList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.add(Mockito.<org.hibernate.criterion.Criterion>any()))
 			.thenReturn(criteria1);
@@ -83,19 +84,18 @@ public class GenericHibernateDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
-		assertEquals(1, genericHibernateDAO.getByExternalId("1234").size());
-		assertEquals("Smith", genericHibernateDAO.getByExternalId("1234").get(0));
+		assertEquals(Arrays.asList("Smith"), genericHibernateDAO.getByExternalId("1234"));
 	}
 
 	@Test
 	public void findAll() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add("Smith");
+		ArrayList<String> stringList = new ArrayList<String>();
+		stringList.add("Smith");
 		Criteria criteria = mock(Criteria.class);
 		when(criteria.list())
-			.thenReturn(arrayList);
+			.thenReturn(stringList);
 		Session session = mock(Session.class);
 		when(session.createCriteria(Mockito.<Class>any()))
 			.thenReturn(criteria);
@@ -103,19 +103,18 @@ public class GenericHibernateDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
-		assertEquals(1, genericHibernateDAO.findAll().size());
-		assertEquals("Smith", genericHibernateDAO.findAll().get(0));
+		assertEquals(Arrays.asList("Smith"), genericHibernateDAO.findAll());
 	}
 
 	@Test
 	public void findAllOrderIsAsc() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add("Smith");
+		ArrayList<String> stringList = new ArrayList<String>();
+		stringList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(arrayList);
+			.thenReturn(stringList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -126,19 +125,18 @@ public class GenericHibernateDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
-		assertEquals(1, genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.asc).size());
-		assertEquals("Smith", genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.asc).get(0));
+		assertEquals(Arrays.asList("Smith"), genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.asc));
 	}
 
 	@Test
 	public void findAllOrderIsDesc() throws org.hibernate.HibernateException {
 		GenericHibernateDAO<String, String> genericHibernateDAO =
 			 new GenericHibernateDAO<String, String>(String.class);
-		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add("Smith");
+		ArrayList<String> stringList = new ArrayList<String>();
+		stringList.add("Smith");
 		Criteria criteria1 = mock(Criteria.class);
 		when(criteria1.list())
-			.thenReturn(arrayList);
+			.thenReturn(stringList);
 		Criteria criteria2 = mock(Criteria.class);
 		when(criteria2.addOrder(Mockito.<org.hibernate.criterion.Order>any()))
 			.thenReturn(criteria1);
@@ -149,8 +147,7 @@ public class GenericHibernateDAOTest {
 		when(sessionFactory.getCurrentSession())
 			.thenReturn(session);
 		genericHibernateDAO.setSessionFactory(sessionFactory);
-		assertEquals(1, genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.desc).size());
-		assertEquals("Smith", genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.desc).get(0));
+		assertEquals(Arrays.asList("Smith"), genericHibernateDAO.findAll("foo", IGenericDAO.SortingTypes.desc));
 	}
 
 	@Test

@@ -1,6 +1,7 @@
 package fr.mcc.ginco.data;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -40,7 +41,7 @@ class ReducedThesaurusArrayTest {
 		reducedThesaurusArray.setTitle("Mr");
 		assertThat(reducedThesaurusArray.getIdentifier(), is("data"));
 		assertThat(reducedThesaurusArray.getOrdered(), is(false));
-		assertThat(reducedThesaurusArray.getTerms().size(), is(1));
+		assertThat(reducedThesaurusArray.getTerms(), hasSize(1));
 		assertThat(reducedThesaurusArray.getTerms().get(0), sameInstance(reducedThesaurusTerm));
 		assertThat(reducedThesaurusArray.getTitle(), is("Mr"));
 	}

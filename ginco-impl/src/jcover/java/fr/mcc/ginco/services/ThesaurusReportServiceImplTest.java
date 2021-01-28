@@ -54,17 +54,18 @@ public class ThesaurusReportServiceImplTest {
 		thesaurusTerm.setLexicalValue("value");
 		when(thesaurusConceptService.getConceptPreferredTerm(Mockito.<String>any()))
 			.thenReturn(thesaurusTerm);
-		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setIdentifier("data");
 		Thesaurus thesaurus3 = new Thesaurus();
 		thesaurus3.setIdentifier("data");
 		thesaurusConcept.setThesaurus(thesaurus3);
-		arrayList.add(thesaurusConcept);
+		thesaurusConceptList.add(thesaurusConcept);
 		when(conceptDAO.countConceptsWoNotes(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(conceptDAO.getConceptsWoNotes(Mockito.<String>any(), anyInt(), anyInt()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptList);
 
 		// act
 		SearchResultList result =
@@ -93,17 +94,18 @@ public class ThesaurusReportServiceImplTest {
 		thesaurusTerm.setLexicalValue("value");
 		when(thesaurusConceptService.getConceptPreferredTerm(Mockito.<String>any()))
 			.thenReturn(thesaurusTerm);
-		ArrayList<ThesaurusConcept> arrayList = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		thesaurusConcept.setIdentifier("data");
 		Thesaurus thesaurus3 = new Thesaurus();
 		thesaurus3.setIdentifier("data");
 		thesaurusConcept.setThesaurus(thesaurus3);
-		arrayList.add(thesaurusConcept);
+		thesaurusConceptList.add(thesaurusConcept);
 		when(conceptDAO.countConceptsAlignedToMyThes(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(conceptDAO.getConceptsAlignedToMyThes(Mockito.<String>any(), anyInt(), anyInt()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusConceptList);
 
 		// act
 		SearchResultList result =
@@ -128,15 +130,15 @@ public class ThesaurusReportServiceImplTest {
 	public void getTermsWithoutNotesLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
-		ArrayList<ThesaurusTerm> arrayList = new ArrayList<ThesaurusTerm>();
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
 		thesaurusTerm.setIdentifier("data");
 		thesaurusTerm.setLexicalValue("value");
-		arrayList.add(thesaurusTerm);
+		thesaurusTermList.add(thesaurusTerm);
 		when(termDAO.countTermsWoNotes(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(termDAO.getTermsWoNotes(Mockito.<String>any(), anyInt(), anyInt()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusTermList);
 
 		// act
 		SearchResultList result =

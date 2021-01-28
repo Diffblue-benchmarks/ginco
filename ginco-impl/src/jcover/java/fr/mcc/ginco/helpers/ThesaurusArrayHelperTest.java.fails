@@ -2,6 +2,7 @@ package fr.mcc.ginco.helpers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusArray;
@@ -55,6 +56,7 @@ public class ThesaurusArrayHelperTest {
 		concepts4.add(thesaurusArrayConcept);
 		assertSame(array, service.saveArrayConcepts(array, concepts4));
 		assertEquals(1, array.getConcepts().size());
+		assertTrue(array.getConcepts().contains(thesaurusArrayConcept));
 	}
 
 	@Test
@@ -72,6 +74,7 @@ public class ThesaurusArrayHelperTest {
 		concepts2.add(thesaurusArrayConcept);
 		assertSame(array, service.saveArrayConcepts(array, concepts2));
 		assertEquals(1, array.getConcepts().size());
+		assertTrue(array.getConcepts().contains(thesaurusArrayConcept));
 		Mockito.verify(concepts1).clear();
 	}
 
@@ -82,10 +85,10 @@ public class ThesaurusArrayHelperTest {
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
 		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
-		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add("hello");
+		ArrayList<String> stringList = new ArrayList<String>();
+		stringList.add("hello");
 		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
-			.thenReturn(arrayList);
+			.thenReturn(stringList);
 
 		// act
 		List<ThesaurusConcept> result = service.getArrayConcepts("1234");
@@ -99,12 +102,12 @@ public class ThesaurusArrayHelperTest {
 	public void getArrayConceptRelations() {
 
 		// arrange
-		ArrayList<ThesaurusArrayConcept> arrayList =
+		ArrayList<ThesaurusArrayConcept> thesaurusArrayConceptList =
 			 new ArrayList<ThesaurusArrayConcept>();
 		ThesaurusArrayConcept thesaurusArrayConcept = new ThesaurusArrayConcept();
-		arrayList.add(thesaurusArrayConcept);
+		thesaurusArrayConceptList.add(thesaurusArrayConcept);
 		when(thesaurusArrayConceptDAO.getThesaurusArrayConceptsByArray(Mockito.<ThesaurusArray>any()))
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusArrayConceptList);
 
 		// act
 		List<ThesaurusArrayConcept> result =

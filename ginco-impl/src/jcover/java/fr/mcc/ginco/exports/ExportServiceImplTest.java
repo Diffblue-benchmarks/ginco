@@ -76,65 +76,72 @@ public class ExportServiceImplTest {
 
 	@Test
 	public void getHierarchicalText1() {
-		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> thesaurusConceptList1 =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept1 = new ThesaurusConcept();
 		thesaurusConcept1.setIdentifier("data");
-		arrayList1.add(thesaurusConcept1);
+		thesaurusConceptList1.add(thesaurusConcept1);
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))
-			.thenReturn(arrayList1);
-		ArrayList<ThesaurusArray> arrayList3 = new ArrayList<ThesaurusArray>();
-		arrayList3.add(new ThesaurusArray());
+			.thenReturn(thesaurusConceptList1);
+		ArrayList<ThesaurusArray> thesaurusArrayList2 =
+			 new ArrayList<ThesaurusArray>();
+		thesaurusArrayList2.add(new ThesaurusArray());
 		when(thesaurusArrayService.getArraysWithoutParentArray(Mockito.<String>any()))
 			.thenReturn(new ArrayList<ThesaurusArray>());
 		when(thesaurusArrayService.getArraysWithoutParentConcept(Mockito.<String>any()))
-			.thenReturn(arrayList3);
-		ArrayList<ThesaurusConcept> arrayList4 = new ArrayList<ThesaurusConcept>();
+			.thenReturn(thesaurusArrayList2);
+		ArrayList<ThesaurusConcept> thesaurusConceptList2 =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept2 = new ThesaurusConcept();
 		thesaurusConcept2.setIdentifier("data");
-		arrayList4.add(thesaurusConcept2);
+		thesaurusConceptList2.add(thesaurusConcept2);
 		when(thesaurusArrayHelper.getArrayConcepts(Mockito.<String>any()))
-			.thenReturn(arrayList4);
-		assertTrue((service.getHierarchicalText(new Thesaurus())).isEmpty());
+			.thenReturn(thesaurusConceptList2);
+		assertTrue(service.getHierarchicalText(new Thesaurus()).isEmpty());
 	}
 
 	@Test
 	public void getHierarchicalText2() {
-		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
+		ArrayList<ThesaurusConcept> thesaurusConceptList1 =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept1 = new ThesaurusConcept();
 		thesaurusConcept1.setIdentifier("data");
-		arrayList1.add(thesaurusConcept1);
+		thesaurusConceptList1.add(thesaurusConcept1);
 		when(thesaurusConceptService.getTopTermThesaurusConcepts(Mockito.<String>any()))
-			.thenReturn(arrayList1);
-		ArrayList<ThesaurusArray> arrayList2 = new ArrayList<ThesaurusArray>();
+			.thenReturn(thesaurusConceptList1);
+		ArrayList<ThesaurusArray> thesaurusArrayList1 =
+			 new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray1 = mock(ThesaurusArray.class);
-		arrayList2.add(thesaurusArray1);
-		ArrayList<ThesaurusArray> arrayList3 = new ArrayList<ThesaurusArray>();
-		arrayList3.add(new ThesaurusArray());
+		thesaurusArrayList1.add(thesaurusArray1);
+		ArrayList<ThesaurusArray> thesaurusArrayList2 =
+			 new ArrayList<ThesaurusArray>();
+		thesaurusArrayList2.add(new ThesaurusArray());
 		when(thesaurusArrayService.getArraysWithoutParentArray(Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(thesaurusArrayList1);
 		when(thesaurusArrayService.getArraysWithoutParentConcept(Mockito.<String>any()))
-			.thenReturn(arrayList3);
-		ArrayList<ThesaurusConcept> arrayList4 = new ArrayList<ThesaurusConcept>();
+			.thenReturn(thesaurusArrayList2);
+		ArrayList<ThesaurusConcept> thesaurusConceptList2 =
+			 new ArrayList<ThesaurusConcept>();
 		ThesaurusConcept thesaurusConcept2 = new ThesaurusConcept();
 		thesaurusConcept2.setIdentifier("data");
-		arrayList4.add(thesaurusConcept2);
+		thesaurusConceptList2.add(thesaurusConcept2);
 		when(thesaurusArrayHelper.getArrayConcepts(Mockito.<String>any()))
-			.thenReturn(arrayList4);
-		assertTrue((service.getHierarchicalText(new Thesaurus())).isEmpty());
+			.thenReturn(thesaurusConceptList2);
+		assertTrue(service.getHierarchicalText(new Thesaurus()).isEmpty());
 	}
 
 	@Test
 	public void getAlphabeticalText1() {
 		when(thesaurusConceptService.getConceptsByThesaurusId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
-		ArrayList<SplitNonPreferredTerm> arrayList2 =
+		ArrayList<SplitNonPreferredTerm> splitNonPreferredTermList =
 			 new ArrayList<SplitNonPreferredTerm>();
-		arrayList2.add(new SplitNonPreferredTerm());
+		splitNonPreferredTermList.add(new SplitNonPreferredTerm());
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(arrayList2);
-		assertTrue((service.getAlphabeticalText(new Thesaurus())).isEmpty());
+			.thenReturn(splitNonPreferredTermList);
+		assertTrue(service.getAlphabeticalText(new Thesaurus()).isEmpty());
 		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(Mockito.eq((Integer) 1), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
 		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(Mockito.eq((Integer) 0), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
 	}
@@ -143,20 +150,21 @@ public class ExportServiceImplTest {
 	public void getAlphabeticalText2() {
 
 		// arrange
-		ArrayList<ThesaurusConcept> arrayList1 = new ArrayList<ThesaurusConcept>();
-		arrayList1.add(new ThesaurusConcept());
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
+		thesaurusConceptList.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getConceptTitle(Mockito.<ThesaurusConcept>any()))
 			.thenReturn("foo=bar")
 			.thenReturn("foo=bar");
 		when(thesaurusConceptService.getConceptsByThesaurusId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any()))
-			.thenReturn(arrayList1);
-		ArrayList<SplitNonPreferredTerm> arrayList2 =
+			.thenReturn(thesaurusConceptList);
+		ArrayList<SplitNonPreferredTerm> splitNonPreferredTermList =
 			 new ArrayList<SplitNonPreferredTerm>();
-		arrayList2.add(new SplitNonPreferredTerm());
+		splitNonPreferredTermList.add(new SplitNonPreferredTerm());
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(arrayList2);
+			.thenReturn(splitNonPreferredTermList);
 		when(alphabeticalExportedItemComparator.compare(Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any(), Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any()))
 			.thenReturn(1);
 

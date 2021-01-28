@@ -39,6 +39,6 @@ public class HierarchyCommandBuilderTest {
 		when(mistralStructuresBuilder.buildHierarchyStructure(Mockito.<List<ThesaurusConcept>>any(), Mockito.<Number>any(), Mockito.<String>any()))
 			.thenReturn(new HashMap<String, List<String>>())
 			.thenReturn(new HashMap<String, List<String>>());
-		assertTrue((service.buildHierarchyChanges(new ArrayList<ThesaurusConcept>(), new ArrayList<ThesaurusConcept>(), 1, 1, "Diffblue")).isEmpty());
+		assertTrue(service.buildHierarchyChanges(new ArrayList<ThesaurusConcept>(), new ArrayList<ThesaurusConcept>(), 1, 1, "Diffblue").isEmpty());
 	}
 }

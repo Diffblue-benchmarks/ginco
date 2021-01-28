@@ -38,12 +38,12 @@ public class ThesaurusOrganizationServiceImplTest {
 	public void getOrganizationsWithData() throws fr.mcc.ginco.exceptions.TechnicalException {
 
 		// arrange
-		ArrayList<ThesaurusOrganization> arrayList =
+		ArrayList<ThesaurusOrganization> thesaurusOrganizationList =
 			 new ArrayList<ThesaurusOrganization>();
 		ThesaurusOrganization thesaurusOrganization = new ThesaurusOrganization();
-		arrayList.add(thesaurusOrganization);
+		thesaurusOrganizationList.add(thesaurusOrganization);
 		when(thesaurusOrganizationDAO.getFilteredOrganizationNames())
-			.thenReturn(arrayList);
+			.thenReturn(thesaurusOrganizationList);
 
 		// act
 		List<ThesaurusOrganization> result = service.getOrganizationsWithData();

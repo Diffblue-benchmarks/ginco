@@ -51,7 +51,7 @@ public class ThesaurusConceptAuditReaderTest {
 			.thenReturn(new ArrayList<String>());
 		when(auditQueryBuilder.getEntityAddedQuery(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any()))
 			.thenReturn(auditQuery);
-		assertTrue((service.getConceptAdded(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue(service.getConceptAdded(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")).isEmpty());
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class ThesaurusConceptAuditReaderTest {
 			.thenReturn(new ArrayList<String>());
 		when(auditQueryBuilder.getPropertyChangedQueryOnUpdate(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any(), Mockito.<String>any()))
 			.thenReturn(auditQuery);
-		assertTrue((service.getConceptHierarchyChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue(service.getConceptHierarchyChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")).isEmpty());
 	}
 
 	@Test
@@ -71,6 +71,6 @@ public class ThesaurusConceptAuditReaderTest {
 			.thenReturn(new ArrayList<String>());
 		when(auditQueryBuilder.getPropertyChangedQueryOnUpdate(Mockito.<Thesaurus>any(), Mockito.<java.util.Date>any(), Mockito.<Class<?>>any(), Mockito.<String>any()))
 			.thenReturn(auditQuery);
-		assertTrue((service.getConceptStatusChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"))).isEmpty());
+		assertTrue(service.getConceptStatusChanged(new Thesaurus(), new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31")).isEmpty());
 	}
 }

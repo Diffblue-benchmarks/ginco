@@ -45,6 +45,6 @@ public class SearcherServiceUtilTest {
 
 	@Test
 	public void getSearchResultListListIsEmptyReturnsEmpty() {
-		assertTrue((service.getSearchResultList(new SolrDocumentList())).isEmpty());
+		assertTrue(service.getSearchResultList(new SolrDocumentList()).isEmpty());
 	}
 }

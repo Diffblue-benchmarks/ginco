@@ -1,10 +1,11 @@
 package fr.mcc.ginco.solr;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,8 +36,7 @@ class SearchResultTest {
 		assertThat(searchResult.getConceptId(), is("1234"));
 		assertThat(searchResult.getCreated(), is("someone"));
 		assertThat(searchResult.getIdentifier(), is("data"));
-		assertThat(searchResult.getLanguages(), hasSize(1));
-		assertThat(searchResult.getLanguages().get(0), is("foo"));
+		assertThat(searchResult.getLanguages(), equalTo(Arrays.asList("foo")));
 		assertThat(searchResult.getLexicalValue(), is("value"));
 		assertThat(searchResult.getModified(), is("someone"));
 		assertThat(searchResult.getStatus(), is(1));

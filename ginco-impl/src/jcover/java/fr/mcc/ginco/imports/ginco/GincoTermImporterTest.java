@@ -130,11 +130,11 @@ public class GincoTermImporterTest {
 
 	@Test
 	public void storeTermNotesTermNotesToImportIsEmpty() {
-		assertTrue((service.storeTermNotes(new HashMap<String, JaxbList<Note>>())).isEmpty());
+		assertTrue(service.storeTermNotes(new HashMap<String, JaxbList<Note>>()).isEmpty());
 	}
 
 	@Test
 	public void storeTermNotesTermNotesToImportIsNull() {
-		assertTrue((service.storeTermNotes(null)).isEmpty());
+		assertTrue(service.storeTermNotes(null).isEmpty());
 	}
 }

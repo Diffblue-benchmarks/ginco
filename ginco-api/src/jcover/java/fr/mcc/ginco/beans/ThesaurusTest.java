@@ -2,7 +2,8 @@ package fr.mcc.ginco.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 
@@ -88,6 +89,7 @@ class ThesaurusTest {
 
 		// assert
 		assertThat(thesaurus.getLang(), hasSize(1));
+		assertThat(thesaurus.getLang(), hasItem(item));
 	}
 
 	@Test
@@ -102,5 +104,6 @@ class ThesaurusTest {
 
 		// assert
 		assertThat(thesaurus.getFormat(), hasSize(1));
+		assertThat(thesaurus.getFormat(), hasItem(item));
 	}
 }

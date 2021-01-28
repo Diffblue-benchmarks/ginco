@@ -1,6 +1,8 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -99,12 +101,12 @@ class TermViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getConceptsPath(), is(nullValue()));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is("1234"));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getPrefered(), is(false));
 		assertThat(result.getRole(), is("DE"));
 		assertThat(result.getSource(), is("foo"));
@@ -136,12 +138,12 @@ class TermViewConverterTest {
 		// assert
 		assertThat(result.getConceptId(), is(nullValue()));
 		assertThat(result.getConceptsPath(), is(nullValue()));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getCreated()), is(true));
+		assertThat(result.getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getHidden(), is(false));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), is(nullValue()));
 		assertThat(result.getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.getModified()), is(true));
+		assertThat(result.getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.getPrefered(), is(false));
 		assertThat(result.getRole(), is(nullValue()));
 		assertThat(result.getSource(), is("foo"));
@@ -329,7 +331,7 @@ class TermViewConverterTest {
 			 service.convertTermViewsInTerms(termViews, false);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(thesaurusTerm));
 	}
 }

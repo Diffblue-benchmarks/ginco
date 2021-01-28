@@ -2,6 +2,8 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -91,7 +93,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert1() throws java.text.ParseException {
+	void convert2() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -117,13 +119,13 @@ class ThesaurusNoteViewConverterTest {
 		List<ThesaurusNoteView> result = service.convert(source1);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getConceptId(), is(nullValue()));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getCreated()), is(true));
+		assertThat(result.get(0).getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getLanguage(), is("1234"));
 		assertThat(result.get(0).getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getModified()), is(true));
+		assertThat(result.get(0).getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.get(0).getSource(), is("foo"));
 		assertThat(result.get(0).getTermId(), is("data"));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
@@ -131,7 +133,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert2() throws java.text.ParseException {
+	void convert3() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -156,52 +158,13 @@ class ThesaurusNoteViewConverterTest {
 		List<ThesaurusNoteView> result = service.convert(source1);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getConceptId(), is("data"));
 		assertThat(result.get(0).getCreated(), is(nullValue()));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getLanguage(), is("1234"));
 		assertThat(result.get(0).getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getModified()), is(true));
-		assertThat(result.get(0).getSource(), is("foo"));
-		assertThat(result.get(0).getTermId(), is(nullValue()));
-		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
-		assertThat(result.get(0).getType(), is("DE"));
-	}
-
-	@Test
-	void convert3() throws java.text.ParseException {
-
-		// arrange
-		ArrayList<Note> source1 = new ArrayList<Note>();
-		Note note = new Note();
-		ThesaurusConcept concept1 = new ThesaurusConcept();
-		concept1.setIdentifier("data");
-		concept1.setThesaurus(new Thesaurus());
-		note.setConcept(concept1);
-		note.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		note.setIdentifier("data");
-		Language lang = new Language();
-		lang.setId("1234");
-		note.setLanguage(lang);
-		note.setLexicalValue("value");
-		NoteType noteType = new NoteType();
-		noteType.setCode("DE");
-		note.setNoteType(noteType);
-		note.setSource("foo");
-		source1.add(note);
-
-		// act
-		List<ThesaurusNoteView> result = service.convert(source1);
-
-		// assert
-		assertThat(result.size(), is(1));
-		assertThat(result.get(0).getConceptId(), is("data"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getCreated()), is(true));
-		assertThat(result.get(0).getIdentifier(), is("data"));
-		assertThat(result.get(0).getLanguage(), is("1234"));
-		assertThat(result.get(0).getLexicalValue(), is("value"));
-		assertThat(result.get(0).getModified(), is(nullValue()));
+		assertThat(result.get(0).getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.get(0).getSource(), is("foo"));
 		assertThat(result.get(0).getTermId(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
@@ -224,6 +187,45 @@ class ThesaurusNoteViewConverterTest {
 		lang.setId("1234");
 		note.setLanguage(lang);
 		note.setLexicalValue("value");
+		NoteType noteType = new NoteType();
+		noteType.setCode("DE");
+		note.setNoteType(noteType);
+		note.setSource("foo");
+		source1.add(note);
+
+		// act
+		List<ThesaurusNoteView> result = service.convert(source1);
+
+		// assert
+		assertThat(result, hasSize(1));
+		assertThat(result.get(0).getConceptId(), is("data"));
+		assertThat(result.get(0).getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
+		assertThat(result.get(0).getIdentifier(), is("data"));
+		assertThat(result.get(0).getLanguage(), is("1234"));
+		assertThat(result.get(0).getLexicalValue(), is("value"));
+		assertThat(result.get(0).getModified(), is(nullValue()));
+		assertThat(result.get(0).getSource(), is("foo"));
+		assertThat(result.get(0).getTermId(), is(nullValue()));
+		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
+		assertThat(result.get(0).getType(), is("DE"));
+	}
+
+	@Test
+	void convert5() throws java.text.ParseException {
+
+		// arrange
+		ArrayList<Note> source1 = new ArrayList<Note>();
+		Note note = new Note();
+		ThesaurusConcept concept1 = new ThesaurusConcept();
+		concept1.setIdentifier("data");
+		concept1.setThesaurus(new Thesaurus());
+		note.setConcept(concept1);
+		note.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		note.setIdentifier("data");
+		Language lang = new Language();
+		lang.setId("1234");
+		note.setLanguage(lang);
+		note.setLexicalValue("value");
 		note.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		NoteType noteType = new NoteType();
 		noteType.setCode("DE");
@@ -234,13 +236,13 @@ class ThesaurusNoteViewConverterTest {
 		List<ThesaurusNoteView> result = service.convert(source1);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getConceptId(), is("data"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getCreated()), is(true));
+		assertThat(result.get(0).getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getLanguage(), is("1234"));
 		assertThat(result.get(0).getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getModified()), is(true));
+		assertThat(result.get(0).getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.get(0).getSource(), is(nullValue()));
 		assertThat(result.get(0).getTermId(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
@@ -248,7 +250,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert5() throws java.text.ParseException {
+	void convert6() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -274,13 +276,13 @@ class ThesaurusNoteViewConverterTest {
 		List<ThesaurusNoteView> result = service.convert(source1);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getConceptId(), is("data"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getCreated()), is(true));
+		assertThat(result.get(0).getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getLanguage(), is("1234"));
 		assertThat(result.get(0).getLexicalValue(), is("value"));
-		assertThat(Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}", result.get(0).getModified()), is(true));
+		assertThat(result.get(0).getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
 		assertThat(result.get(0).getSource(), is("foo"));
 		assertThat(result.get(0).getTermId(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
@@ -293,7 +295,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert6() throws java.text.ParseException {
+	void convert1() throws java.text.ParseException {
 
 		// arrange
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
@@ -533,7 +535,7 @@ class ThesaurusNoteViewConverterTest {
 		List<Note> result = service.convertToNote(source6);
 
 		// assert
-		assertThat(result.size(), is(1));
+		assertThat(result, hasSize(1));
 		assertThat(result.get(0), sameInstance(note));
 	}
 }

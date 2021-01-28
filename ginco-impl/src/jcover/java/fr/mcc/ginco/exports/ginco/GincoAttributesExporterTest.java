@@ -46,12 +46,12 @@ public class GincoAttributesExporterTest {
 	public void getExportedConceptAttributes() {
 
 		// arrange
-		ArrayList<CustomConceptAttribute> arrayList =
+		ArrayList<CustomConceptAttribute> customConceptAttributeList =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
-		arrayList.add(customConceptAttribute);
+		customConceptAttributeList.add(customConceptAttribute);
 		when(conceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(arrayList);
+			.thenReturn(customConceptAttributeList);
 
 		// act
 		JaxbList<CustomConceptAttribute> result =
@@ -66,12 +66,12 @@ public class GincoAttributesExporterTest {
 	public void getExportedTermAttributes() {
 
 		// arrange
-		ArrayList<CustomTermAttribute> arrayList =
+		ArrayList<CustomTermAttribute> customTermAttributeList =
 			 new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute = new CustomTermAttribute();
-		arrayList.add(customTermAttribute);
+		customTermAttributeList.add(customTermAttribute);
 		when(termAttributeService.getAttributesByEntity(Mockito.<ThesaurusTerm>any()))
-			.thenReturn(arrayList);
+			.thenReturn(customTermAttributeList);
 
 		// act
 		JaxbList<CustomTermAttribute> result =

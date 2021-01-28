@@ -2,9 +2,10 @@ package fr.mcc.ginco.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
@@ -24,8 +25,6 @@ class EncodedControlTest {
 
 	@Test
 	void getFormats() {
-		assertThat(new EncodedControl("UTF-8").getFormats("foo"), hasSize(2));
-		assertThat(new EncodedControl("UTF-8").getFormats("foo").get(0), is("java.class"));
-		assertThat(new EncodedControl("UTF-8").getFormats("foo").get(1), is("java.properties"));
+		assertThat(new EncodedControl("UTF-8").getFormats("foo"), equalTo(Arrays.asList("java.class", "java.properties")));
 	}
 }
