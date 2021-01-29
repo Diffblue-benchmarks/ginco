@@ -69,6 +69,20 @@ public class ThesaurusTermUtilsTest {
 	}
 
 	@Test
+	public void generatePrefTermsText() {
+		ArrayList<ThesaurusTerm> terms = new ArrayList<ThesaurusTerm>();
+		Language language = new Language();
+		language.setId("1234");
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
+		when(thesaurusTerm.getLanguage())
+			.thenReturn(language);
+		when(thesaurusTerm.getLexicalValue())
+			.thenReturn("foo");
+		terms.add(thesaurusTerm);
+		assertEquals("foo@1234", service.generatePrefTermsText(terms));
+	}
+
+	@Test
 	public void getPreferedTermsByLang1() {
 		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);

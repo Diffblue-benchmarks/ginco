@@ -2,16 +2,23 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusConceptGroup;
 import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
+import fr.mcc.ginco.extjs.view.enums.ThesaurusListNodeType;
+import fr.mcc.ginco.extjs.view.node.IThesaurusListNode;
 import fr.mcc.ginco.extjs.view.node.ThesaurusListBasicNode;
 import fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory;
 import fr.mcc.ginco.services.IThesaurusConceptGroupLabelService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,9 +51,47 @@ class GroupsGeneratorTest {
 	private GroupsGenerator service;
 
 	@Test
-	void generateGroupsReturnsEmpty() {
+	void generateGroups() {
+
+		// arrange
+		ThesaurusListBasicNode thesaurusListBasicNode = new ThesaurusListBasicNode();
+		thesaurusListBasicNode.setIconCls("DE");
+		thesaurusListBasicNode.setOrganizationName("Smith");
+		when(thesaurusListNodeFactory.getListBasicNode())
+			.thenReturn(thesaurusListBasicNode);
+		ArrayList<ThesaurusConceptGroup> thesaurusConceptGroupList =
+			 new ArrayList<ThesaurusConceptGroup>();
+		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
+		thesaurusConceptGroup.setIdentifier("data");
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurus5.setIdentifier("data");
+		thesaurusConceptGroup.setThesaurus(thesaurus5);
+		thesaurusConceptGroupList.add(thesaurusConceptGroup);
 		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
-			.thenReturn(new ArrayList<ThesaurusConceptGroup>());
-		assertThat(service.generateGroups("1234"), empty());
+			.thenReturn(thesaurusConceptGroupList);
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
+			 new ThesaurusConceptGroupLabel();
+		Language language = new Language();
+		language.setId("1234");
+		thesaurusConceptGroupLabel.setLanguage(language);
+		thesaurusConceptGroupLabel.setLexicalValue("value");
+		when(thesaurusConceptGroupLabelService.getByThesaurusConceptGroup(Mockito.<String>any()))
+			.thenReturn(thesaurusConceptGroupLabel);
+
+		// act
+		List<IThesaurusListNode> result = service.generateGroups("1234");
+
+		// assert
+		assertThat(result, hasSize(1));
+		assertThat(result.get(0).getChildren(), empty());
+		assertThat(result.get(0).getIconCls(), is("DE"));
+		assertThat(result.get(0).getId(), is("data"));
+		assertThat(result.get(0).getOrganizationName(), is("Smith"));
+		assertThat(result.get(0).getThesaurusId(), is("data"));
+		assertThat(result.get(0).getTitle(), is("value@1234"));
+		assertThat(result.get(0).getType(), is(ThesaurusListNodeType.GROUPS));
+		assertThat(result.get(0).isDisplayable(), is(true));
+		assertThat(result.get(0).isExpanded(), is(false));
+		assertThat(result.get(0).isLeaf(), is(true));
 	}
 }

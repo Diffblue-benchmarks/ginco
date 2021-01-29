@@ -265,6 +265,68 @@ public class ThesaurusServiceImplTest {
 	}
 
 	@Test
+	public void archiveThesaurus() throws java.text.ParseException, fr.mcc.ginco.exceptions.TechnicalException {
+
+		// arrange
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurus1.setCreated(created1);
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		thesaurus1.setCreator(creator1);
+		Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurus1.setDate(date1);
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		ThesaurusType type1 = new ThesaurusType();
+		thesaurus1.setType(type1);
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
+		when(thesaurusDAO.update(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurus1);
+		when(gincoThesaurusExportService.getThesaurusExport(Mockito.<Thesaurus>any()))
+			.thenReturn("foo");
+		Thesaurus thesaurus2 = new Thesaurus();
+		thesaurus2.setTitle("Mr");
+
+		// act
+		Thesaurus result = service.archiveThesaurus(thesaurus2);
+
+		// assert
+		assertEquals("foo", result.getContributor());
+		assertEquals("foo", result.getCoverage());
+		assertSame(created1, result.getCreated());
+		assertSame(creator1, result.getCreator());
+		assertSame(date1, result.getDate());
+		assertEquals("some text", result.getDescription());
+		assertTrue(result.getFormat().isEmpty());
+		assertEquals("data", result.getIdentifier());
+		assertTrue(result.getLang().isEmpty());
+		assertEquals("foo", result.getPublisher());
+		assertEquals("DE", result.getRelation());
+		assertEquals("foo", result.getRights());
+		assertEquals("foo", result.getSource());
+		assertEquals("foo", result.getSubject());
+		assertEquals("data", result.getThesaurusId());
+		assertEquals("Mr", result.getTitle());
+		assertSame(type1, result.getType());
+		assertTrue(result.getVersions().isEmpty());
+		assertFalse(result.isArchived());
+		assertFalse(result.isDefaultTopConcept());
+		assertFalse(result.isPolyHierarchical());
+		assertTrue(thesaurus2.isArchived());
+	}
+
+	@Test
 	public void destroyThesaurus() throws java.text.ParseException {
 
 		// arrange

@@ -1,0 +1,40 @@
+package fr.mcc.ginco.extjs.view.node;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.node.ThesaurusListNodeFactory
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusListNodeFactory.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusListNodeFactoryTest {
+
+	@Autowired
+	private ThesaurusListNodeFactory service;
+
+	@Test
+	void getListBasicNode() {
+		ThesaurusListBasicNode result = service.getListBasicNode();
+		assertThat(result.getChildren(), is(nullValue()));
+		assertThat(result.getIconCls(), is(nullValue()));
+		assertThat(result.getId(), is(nullValue()));
+		assertThat(result.getOrganizationName(), is(nullValue()));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getTitle(), is(nullValue()));
+		assertThat(result.getType(), is(nullValue()));
+		assertThat(result.isDisplayable(), is(false));
+		assertThat(result.isExpanded(), is(false));
+		assertThat(result.isLeaf(), is(false));
+	}
+}

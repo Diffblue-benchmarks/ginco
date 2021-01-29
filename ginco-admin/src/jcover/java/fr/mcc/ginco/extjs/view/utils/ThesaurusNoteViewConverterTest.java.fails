@@ -93,7 +93,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert2() throws java.text.ParseException {
+	void convert1() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -133,7 +133,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert3() throws java.text.ParseException {
+	void convert2() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -172,7 +172,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert4() throws java.text.ParseException {
+	void convert3() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -211,7 +211,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert5() throws java.text.ParseException {
+	void convert4() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -250,7 +250,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert6() throws java.text.ParseException {
+	void convert5() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -295,7 +295,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert1() throws java.text.ParseException {
+	void convert6() throws java.text.ParseException {
 
 		// arrange
 		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();

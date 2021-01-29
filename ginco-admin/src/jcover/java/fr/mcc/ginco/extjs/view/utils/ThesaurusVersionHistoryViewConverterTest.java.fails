@@ -1,7 +1,6 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
@@ -53,13 +52,89 @@ class ThesaurusVersionHistoryViewConverterTest {
 	private ThesaurusVersionHistoryViewConverter service;
 
 	@Test
-	void convertList1() {
+	void convert1() {
+
+		// arrange
+		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
+		source1.setIdentifier("data");
+		source1.setStatus(1);
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
+		source1.setThesaurus(thesaurus);
+		source1.setThisVersion(false);
+		source1.setVersionNote("1.0");
+
+		// act
+		ThesaurusVersionHistoryView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getDate(), is(nullValue()));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getThisVersion(), is(false));
+		assertThat(result.getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convert2() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		source1.setStatus(1);
+		source1.setThisVersion(false);
+		source1.setVersionNote("1.0");
+
+		// act
+		ThesaurusVersionHistoryView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getDate(), matchesPattern("[A-Z][a-z]{2} [A-Z][a-z]{2} \\d{1,2} \\d{1,2}:\\d{1,2}:\\d{2} [A-Z]{3} \\d{4}"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is(nullValue()));
+		assertThat(result.getThisVersion(), is(false));
+		assertThat(result.getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convert3() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusVersionHistory source1 = new ThesaurusVersionHistory();
+		source1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		source1.setIdentifier("data");
+		source1.setStatus(1);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		when(thesaurus.getIdentifier())
+			.thenReturn("data");
+		source1.setThesaurus(thesaurus);
+		source1.setThisVersion(false);
+		source1.setVersionNote("1.0");
+
+		// act
+		ThesaurusVersionHistoryView result = service.convert(source1);
+
+		// assert
+		assertThat(result.getDate(), matchesPattern("[A-Z][a-z]{2} [A-Z][a-z]{2} \\d{1,2} \\d{1,2}:\\d{1,2}:\\d{2} [A-Z]{3} \\d{4}"));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getStatus(), is(1));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getThisVersion(), is(false));
+		assertThat(result.getVersionNote(), is("1.0"));
+	}
+
+	@Test
+	void convertList() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<ThesaurusVersionHistory> thesaurusHistoryList =
 			 new ArrayList<ThesaurusVersionHistory>();
 		ThesaurusVersionHistory thesaurusVersionHistory =
 			 new ThesaurusVersionHistory();
+		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurusVersionHistory.setIdentifier("data");
 		thesaurusVersionHistory.setStatus(1);
 		Thesaurus thesaurus = new Thesaurus();
@@ -75,79 +150,12 @@ class ThesaurusVersionHistoryViewConverterTest {
 
 		// assert
 		assertThat(result, hasSize(1));
-		assertThat(result.get(0).getDate(), is(nullValue()));
-		assertThat(result.get(0).getIdentifier(), is("data"));
-		assertThat(result.get(0).getStatus(), is(1));
-		assertThat(result.get(0).getThesaurusId(), is("data"));
-		assertThat(result.get(0).getThisVersion(), is(false));
-		assertThat(result.get(0).getVersionNote(), is("1.0"));
-	}
-
-	@Test
-	void convertList2() throws java.text.ParseException {
-
-		// arrange
-		ArrayList<ThesaurusVersionHistory> thesaurusHistoryList =
-			 new ArrayList<ThesaurusVersionHistory>();
-		ThesaurusVersionHistory thesaurusVersionHistory =
-			 new ThesaurusVersionHistory();
-		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusVersionHistory.setIdentifier("data");
-		thesaurusVersionHistory.setStatus(1);
-		thesaurusVersionHistory.setThisVersion(false);
-		thesaurusVersionHistory.setVersionNote("1.0");
-		thesaurusHistoryList.add(thesaurusVersionHistory);
-
-		// act
-		List<ThesaurusVersionHistoryView> result =
-			 service.convertList(thesaurusHistoryList);
-
-		// assert
-		assertThat(result, hasSize(1));
-		assertThat(result.get(0).getDate(), matchesPattern("[A-Z][a-z]{2} [A-Z][a-z]{2} \\d{1,2} \\d{1,2}:\\d{1,2}:\\d{2} [A-Z]{3} \\d{4}"));
-		assertThat(result.get(0).getIdentifier(), is("data"));
-		assertThat(result.get(0).getStatus(), is(1));
-		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
-		assertThat(result.get(0).getThisVersion(), is(false));
-		assertThat(result.get(0).getVersionNote(), is("1.0"));
-	}
-
-	@Test
-	void convertList3() throws java.text.ParseException {
-
-		// arrange
-		ArrayList<ThesaurusVersionHistory> thesaurusHistoryList =
-			 new ArrayList<ThesaurusVersionHistory>();
-		ThesaurusVersionHistory thesaurusVersionHistory =
-			 new ThesaurusVersionHistory();
-		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusVersionHistory.setIdentifier("data");
-		thesaurusVersionHistory.setStatus(1);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		when(thesaurus.getIdentifier())
-			.thenReturn("data");
-		thesaurusVersionHistory.setThesaurus(thesaurus);
-		thesaurusVersionHistory.setThisVersion(false);
-		thesaurusVersionHistory.setVersionNote("1.0");
-		thesaurusHistoryList.add(thesaurusVersionHistory);
-
-		// act
-		List<ThesaurusVersionHistoryView> result =
-			 service.convertList(thesaurusHistoryList);
-
-		// assert
-		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getDate(), matchesPattern("[A-Z][a-z]{2} [A-Z][a-z]{2} \\d{1,2} \\d{1,2}:\\d{1,2}:\\d{2} [A-Z]{3} \\d{4}"));
 		assertThat(result.get(0).getIdentifier(), is("data"));
 		assertThat(result.get(0).getStatus(), is(1));
 		assertThat(result.get(0).getThesaurusId(), is("data"));
 		assertThat(result.get(0).getThisVersion(), is(false));
 		assertThat(result.get(0).getVersionNote(), is("1.0"));
-	}
-
-	@Test
-	void convertListThesaurusHistoryListIsEmptyReturnsEmpty() {
-		assertThat(service.convertList(new ArrayList<ThesaurusVersionHistory>()), empty());
 	}
 
 	@Test

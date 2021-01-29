@@ -1,7 +1,6 @@
 package fr.mcc.ginco.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 
 import org.junit.jupiter.api.Test;
@@ -40,10 +39,10 @@ class GitInfoTest {
 
 	@Test
 	void getters() {
-		assertThat(service.getCommitId(), is(nullValue()));
-		assertThat(service.getGitBranch(), is(nullValue()));
-		assertThat(service.getGitBuildTime(), is(nullValue()));
-		assertThat(service.getGitCommitUserName(), is(nullValue()));
+		assertThat(service.getCommitId(), is("${git.commit.id}"));
+		assertThat(service.getGitBranch(), is("${git.branch}"));
+		assertThat(service.getGitBuildTime(), is("${git.build.time}"));
+		assertThat(service.getGitCommitUserName(), is("${git.commit.user.name}"));
 	}
 
 	@Test
