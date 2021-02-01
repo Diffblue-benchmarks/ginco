@@ -40,8 +40,14 @@ public class ThesaurusVersionHistoryServiceImplTest {
 	@InjectMocks
 	private ThesaurusVersionHistoryServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		ThesaurusVersionHistoryServiceImpl bean = service;
+		java.lang.reflect.Field field =
+			 ThesaurusVersionHistoryServiceImpl.class.getDeclaredField("publishNote");
+		field.setAccessible(true);
+		field.set(bean, "${publish.version.note}");
 	}
 
 	@Test

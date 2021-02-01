@@ -57,7 +57,8 @@ public class GincoRevServiceImplTest {
 	@InjectMocks
 	private GincoRevServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

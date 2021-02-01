@@ -57,7 +57,8 @@ public class GincoThesaurusBuilderTest {
 	@InjectMocks
 	private GincoThesaurusBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

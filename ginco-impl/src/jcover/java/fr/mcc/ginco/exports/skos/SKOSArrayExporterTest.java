@@ -40,7 +40,8 @@ public class SKOSArrayExporterTest {
 	@InjectMocks
 	private SKOSArrayExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

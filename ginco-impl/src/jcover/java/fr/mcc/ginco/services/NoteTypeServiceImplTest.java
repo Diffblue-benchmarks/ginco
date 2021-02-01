@@ -32,7 +32,8 @@ public class NoteTypeServiceImplTest {
 	@InjectMocks
 	private NoteTypeServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

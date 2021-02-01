@@ -35,7 +35,8 @@ public class AlignmentsBuilderTest {
 	@InjectMocks
 	private AlignmentsBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

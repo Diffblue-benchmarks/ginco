@@ -44,8 +44,14 @@ public class ConceptNoteBuilderTest {
 	@InjectMocks
 	private ConceptNoteBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		ConceptNoteBuilder bean = service;
+		java.lang.reflect.Field field =
+			 ConceptNoteBuilder.class.getDeclaredField("defaultLang");
+		field.setAccessible(true);
+		field.set(bean, "${ginco.default.language}");
 	}
 
 	@Test

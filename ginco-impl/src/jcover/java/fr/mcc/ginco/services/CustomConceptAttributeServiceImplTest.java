@@ -34,7 +34,8 @@ public class CustomConceptAttributeServiceImplTest {
 	@InjectMocks
 	private CustomConceptAttributeServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

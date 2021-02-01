@@ -32,7 +32,8 @@ public class AdminUserServiceImplTest {
 	@InjectMocks
 	private AdminUserServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

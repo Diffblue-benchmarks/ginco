@@ -40,7 +40,8 @@ public class ThesaurusTermAuditReaderTest {
 	@InjectMocks
 	private ThesaurusTermAuditReader service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

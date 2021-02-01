@@ -28,8 +28,14 @@ public class NodeLabelComparatorTest {
 	@InjectMocks
 	private NodeLabelComparator service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		NodeLabelComparator bean = service;
+		java.lang.reflect.Field field =
+			 NodeLabelComparator.class.getDeclaredField("defaultLang");
+		field.setAccessible(true);
+		field.set(bean, "${ginco.default.language}");
 	}
 
 	@Test

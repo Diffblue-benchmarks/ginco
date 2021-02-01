@@ -32,7 +32,8 @@ public class AlignmentTypeServiceImplTest {
 	@InjectMocks
 	private AlignmentTypeServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

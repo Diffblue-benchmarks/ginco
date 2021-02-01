@@ -35,7 +35,8 @@ public class UserRoleServiceImplTest {
 	@InjectMocks
 	private UserRoleServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -61,7 +61,8 @@ public class IndexerServiceImplTest {
 	@InjectMocks
 	private IndexerServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

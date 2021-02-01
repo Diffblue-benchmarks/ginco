@@ -31,7 +31,8 @@ public class TermCommandBuilderTest {
 	@InjectMocks
 	private TermCommandBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

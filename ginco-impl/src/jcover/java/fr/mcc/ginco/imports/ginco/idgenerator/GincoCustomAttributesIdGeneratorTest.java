@@ -34,7 +34,8 @@ public class GincoCustomAttributesIdGeneratorTest {
 	@InjectMocks
 	private GincoCustomAttributesIdGenerator service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

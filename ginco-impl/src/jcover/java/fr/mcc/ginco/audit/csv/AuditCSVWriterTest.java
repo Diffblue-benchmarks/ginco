@@ -19,7 +19,8 @@ public class AuditCSVWriterTest {
 	@InjectMocks
 	private AuditCSVWriter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

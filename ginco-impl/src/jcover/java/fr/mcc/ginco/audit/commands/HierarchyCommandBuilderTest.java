@@ -30,7 +30,8 @@ public class HierarchyCommandBuilderTest {
 	@InjectMocks
 	private HierarchyCommandBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

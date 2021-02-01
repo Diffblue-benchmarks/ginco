@@ -49,7 +49,8 @@ public class ConceptSolrConverterTest {
 	@InjectMocks
 	private ConceptSolrConverter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

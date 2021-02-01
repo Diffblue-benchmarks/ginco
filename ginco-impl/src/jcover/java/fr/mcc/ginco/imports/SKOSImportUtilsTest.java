@@ -35,8 +35,14 @@ public class SKOSImportUtilsTest {
 	@InjectMocks
 	private SKOSImportUtils service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		SKOSImportUtils bean = service;
+		java.lang.reflect.Field field =
+			 SKOSImportUtils.class.getDeclaredField("skosDefaultDateFormats");
+		field.setAccessible(true);
+		field.set(bean, new java.util.ArrayList());
 	}
 
 	@Test

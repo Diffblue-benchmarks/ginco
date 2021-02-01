@@ -37,7 +37,8 @@ public class SKOSNotesExporterTest {
 	@InjectMocks
 	private SKOSNotesExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

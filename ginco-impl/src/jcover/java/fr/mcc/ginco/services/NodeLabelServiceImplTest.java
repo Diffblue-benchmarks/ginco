@@ -33,7 +33,8 @@ public class NodeLabelServiceImplTest {
 	@InjectMocks
 	private NodeLabelServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

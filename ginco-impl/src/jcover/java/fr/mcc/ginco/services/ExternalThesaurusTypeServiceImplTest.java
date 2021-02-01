@@ -31,7 +31,8 @@ public class ExternalThesaurusTypeServiceImplTest {
 	@InjectMocks
 	private ExternalThesaurusTypeServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

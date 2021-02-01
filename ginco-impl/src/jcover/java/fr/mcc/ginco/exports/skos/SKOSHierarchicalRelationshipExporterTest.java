@@ -34,7 +34,8 @@ public class SKOSHierarchicalRelationshipExporterTest {
 	@InjectMocks
 	private SKOSHierarchicalRelationshipExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

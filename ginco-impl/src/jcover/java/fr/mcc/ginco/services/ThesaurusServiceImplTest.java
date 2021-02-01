@@ -59,8 +59,22 @@ public class ThesaurusServiceImplTest {
 	@InjectMocks
 	private ThesaurusServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		ThesaurusServiceImpl bean = service;
+		java.lang.reflect.Field field1 =
+			 ThesaurusServiceImpl.class.getDeclaredField("defaultLang");
+		field1.setAccessible(true);
+		field1.set(bean, "${ginco.default.language}");
+		java.lang.reflect.Field field2 =
+			 ThesaurusServiceImpl.class.getDeclaredField("publishPath");
+		field2.setAccessible(true);
+		field2.set(bean, "${publish.path}");
+		java.lang.reflect.Field field3 =
+			 ThesaurusServiceImpl.class.getDeclaredField("archivePath");
+		field3.setAccessible(true);
+		field3.set(bean, "${archive.path}");
 	}
 
 	@Test

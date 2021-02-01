@@ -41,8 +41,14 @@ public class TermBuilderTest {
 	@InjectMocks
 	private TermBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		TermBuilder bean = service;
+		java.lang.reflect.Field field =
+			 TermBuilder.class.getDeclaredField("defaultLang");
+		field.setAccessible(true);
+		field.set(bean, "${ginco.default.language}");
 	}
 
 	@Test

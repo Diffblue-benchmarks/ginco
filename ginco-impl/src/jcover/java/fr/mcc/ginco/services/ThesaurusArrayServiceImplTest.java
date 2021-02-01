@@ -46,7 +46,8 @@ public class ThesaurusArrayServiceImplTest {
 	@InjectMocks
 	private ThesaurusArrayServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

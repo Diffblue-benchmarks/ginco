@@ -31,7 +31,8 @@ public class GincoConceptIdGeneratorTest {
 	@InjectMocks
 	private GincoConceptIdGenerator service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -37,7 +37,8 @@ public class GincoGroupImporterTest {
 	@InjectMocks
 	private GincoGroupImporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

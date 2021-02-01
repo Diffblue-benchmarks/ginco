@@ -38,7 +38,8 @@ public class ThesaurusArrayBuilderTest {
 	@InjectMocks
 	private ThesaurusArrayBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -44,7 +44,8 @@ public class AssociativeRelationshipServiceImplTest {
 	@InjectMocks
 	private AssociativeRelationshipServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

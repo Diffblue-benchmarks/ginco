@@ -32,7 +32,8 @@ public class ComplexConceptSolrConverterTest {
 	@InjectMocks
 	private ComplexConceptSolrConverter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

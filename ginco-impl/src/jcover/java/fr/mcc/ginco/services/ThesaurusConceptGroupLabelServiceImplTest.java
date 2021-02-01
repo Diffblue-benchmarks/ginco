@@ -33,7 +33,8 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 	@InjectMocks
 	private ThesaurusConceptGroupLabelServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

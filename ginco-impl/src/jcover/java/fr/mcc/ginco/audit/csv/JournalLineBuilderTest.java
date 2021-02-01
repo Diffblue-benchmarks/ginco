@@ -33,7 +33,8 @@ public class JournalLineBuilderTest {
 	@InjectMocks
 	private JournalLineBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

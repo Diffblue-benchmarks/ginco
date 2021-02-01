@@ -31,7 +31,8 @@ public class AuditHelperTest {
 	@InjectMocks
 	private AuditHelper service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

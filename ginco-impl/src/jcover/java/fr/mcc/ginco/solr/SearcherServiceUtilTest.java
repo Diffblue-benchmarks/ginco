@@ -22,7 +22,8 @@ public class SearcherServiceUtilTest {
 	@InjectMocks
 	private SearcherServiceUtil service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -28,29 +28,18 @@ public class ThesaurusTermUtilsTest {
 	@InjectMocks
 	private ThesaurusTermUtils service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		ThesaurusTermUtils bean = service;
+		java.lang.reflect.Field field =
+			 ThesaurusTermUtils.class.getDeclaredField("defaultLang");
+		field.setAccessible(true);
+		field.set(bean, "${ginco.default.language}");
 	}
 
 	@Test
-	public void getPreferedTerms1() {
-
-		// arrange
-		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setPrefered(true);
-		listOfTerms.add(thesaurusTerm);
-
-		// act
-		List<ThesaurusTerm> result = service.getPreferedTerms(listOfTerms);
-
-		// assert
-		assertEquals(1, result.size());
-		assertSame(thesaurusTerm, result.get(0));
-	}
-
-	@Test
-	public void getPreferedTerms2() {
+	public void getPreferedTerms() {
 		ArrayList<ThesaurusTerm> listOfTerms = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTerm.getPrefered())

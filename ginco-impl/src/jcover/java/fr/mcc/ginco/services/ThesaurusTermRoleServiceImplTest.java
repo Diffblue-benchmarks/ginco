@@ -32,7 +32,8 @@ public class ThesaurusTermRoleServiceImplTest {
 	@InjectMocks
 	private ThesaurusTermRoleServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -34,7 +34,8 @@ public class SKOSThesaurusExporterTest {
 	@InjectMocks
 	private SKOSThesaurusExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -46,7 +46,8 @@ public class SKOSGroupExporterTest {
 	@InjectMocks
 	private SKOSGroupExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

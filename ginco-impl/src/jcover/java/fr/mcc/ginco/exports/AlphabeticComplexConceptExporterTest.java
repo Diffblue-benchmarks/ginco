@@ -31,7 +31,8 @@ public class AlphabeticComplexConceptExporterTest {
 	@InjectMocks
 	private AlphabeticComplexConceptExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

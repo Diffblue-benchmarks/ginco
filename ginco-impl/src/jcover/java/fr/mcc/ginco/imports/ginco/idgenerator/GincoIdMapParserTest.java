@@ -20,7 +20,8 @@ public class GincoIdMapParserTest {
 	@InjectMocks
 	private GincoIdMapParser service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -47,7 +47,8 @@ public class GincoTermImporterTest {
 	@InjectMocks
 	private GincoTermImporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

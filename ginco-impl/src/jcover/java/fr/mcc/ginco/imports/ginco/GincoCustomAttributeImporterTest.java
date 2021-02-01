@@ -57,7 +57,8 @@ public class GincoCustomAttributeImporterTest {
 	@InjectMocks
 	private GincoCustomAttributeImporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

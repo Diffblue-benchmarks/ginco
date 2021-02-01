@@ -32,7 +32,8 @@ public class CustomTermAttributeTypeServiceImplTest {
 	@InjectMocks
 	private CustomTermAttributeTypeServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

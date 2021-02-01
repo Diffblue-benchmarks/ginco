@@ -59,7 +59,8 @@ public class SKOSExportServiceImplTest {
 	@InjectMocks
 	private SKOSExportServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

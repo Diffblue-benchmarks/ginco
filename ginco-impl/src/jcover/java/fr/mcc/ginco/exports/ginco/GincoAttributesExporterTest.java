@@ -38,7 +38,8 @@ public class GincoAttributesExporterTest {
 	@InjectMocks
 	private GincoAttributesExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

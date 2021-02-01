@@ -70,7 +70,8 @@ public class ExportServiceImplTest {
 	@InjectMocks
 	private ExportServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

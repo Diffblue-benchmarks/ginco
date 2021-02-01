@@ -35,7 +35,8 @@ public class SKOSComplexConceptExporterTest {
 	@InjectMocks
 	private SKOSComplexConceptExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -33,7 +33,8 @@ public class ConceptIndexerServiceImplTest {
 	@InjectMocks
 	private ConceptIndexerServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

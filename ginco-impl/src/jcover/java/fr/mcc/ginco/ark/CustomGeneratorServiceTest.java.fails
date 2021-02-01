@@ -29,8 +29,18 @@ public class CustomGeneratorServiceTest {
 	@InjectMocks
 	private CustomGeneratorService service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		CustomGeneratorService bean = service;
+		java.lang.reflect.Field field1 =
+			 CustomGeneratorService.class.getDeclaredField("nma");
+		field1.setAccessible(true);
+		field1.set(bean, "${application.ark.nma}");
+		java.lang.reflect.Field field2 =
+			 CustomGeneratorService.class.getDeclaredField("naan");
+		field2.setAccessible(true);
+		field2.set(bean, "${application.ark.naan}");
 	}
 
 	@Test
@@ -41,6 +51,6 @@ public class CustomGeneratorServiceTest {
 		thesaurusArk.setIdentifier("data");
 		when(thesaurusArkService.createThesaurusArk(Mockito.<ThesaurusArk>any()))
 			.thenReturn(thesaurusArk);
-		assertEquals("${application.ark.nma}/ark:/${application.ark.naan}/bcdd0aee-6042-4e61-91bb-77abe481777c", service.generate(String.class));
+		assertEquals("${application.ark.nma}/ark:/${application.ark.naan}/361733e8-7a1e-4002-b8f5-51d09ca52c68", service.generate(String.class));
 	}
 }

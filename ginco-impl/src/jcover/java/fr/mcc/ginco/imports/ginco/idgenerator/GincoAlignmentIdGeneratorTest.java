@@ -32,7 +32,8 @@ public class GincoAlignmentIdGeneratorTest {
 	@InjectMocks
 	private GincoAlignmentIdGenerator service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

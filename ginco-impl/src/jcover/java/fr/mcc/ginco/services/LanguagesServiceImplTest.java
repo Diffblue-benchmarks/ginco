@@ -32,7 +32,8 @@ public class LanguagesServiceImplTest {
 	@InjectMocks
 	private LanguagesServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -50,7 +50,8 @@ public class ThesaurusTermServiceImplTest {
 	@InjectMocks
 	private ThesaurusTermServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

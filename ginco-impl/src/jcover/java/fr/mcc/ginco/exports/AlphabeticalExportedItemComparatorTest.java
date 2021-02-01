@@ -20,8 +20,14 @@ public class AlphabeticalExportedItemComparatorTest {
 	@InjectMocks
 	private AlphabeticalExportedItemComparator service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		MockitoAnnotations.initMocks(this);
+		AlphabeticalExportedItemComparator bean = service;
+		java.lang.reflect.Field field =
+			 AlphabeticalExportedItemComparator.class.getDeclaredField("defaultLang");
+		field.setAccessible(true);
+		field.set(bean, "${ginco.default.language}");
 	}
 
 	@Test

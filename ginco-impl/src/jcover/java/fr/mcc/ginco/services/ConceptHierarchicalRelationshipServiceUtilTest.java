@@ -37,7 +37,8 @@ public class ConceptHierarchicalRelationshipServiceUtilTest {
 	@InjectMocks
 	private ConceptHierarchicalRelationshipServiceUtil service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

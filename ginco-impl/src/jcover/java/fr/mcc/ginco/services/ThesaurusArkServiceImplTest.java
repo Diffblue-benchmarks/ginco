@@ -31,7 +31,8 @@ public class ThesaurusArkServiceImplTest {
 	@InjectMocks
 	private ThesaurusArkServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

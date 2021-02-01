@@ -34,7 +34,8 @@ public class AuditQueryBuilderTest {
 	@InjectMocks
 	private AuditQueryBuilder service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

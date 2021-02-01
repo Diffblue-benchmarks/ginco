@@ -28,7 +28,8 @@ public class SKOSGroupOntologyExporterTest {
 	@InjectMocks
 	private SKOSGroupOntologyExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

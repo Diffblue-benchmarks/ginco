@@ -31,7 +31,8 @@ public class ThesaurusConceptGroupTypeServiceImplTest {
 	@InjectMocks
 	private ThesaurusConceptGroupTypeServiceImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

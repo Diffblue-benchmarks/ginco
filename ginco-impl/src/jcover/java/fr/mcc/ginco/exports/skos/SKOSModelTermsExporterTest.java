@@ -27,7 +27,8 @@ public class SKOSModelTermsExporterTest {
 	@InjectMocks
 	private SKOSModelTermsExporter service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 

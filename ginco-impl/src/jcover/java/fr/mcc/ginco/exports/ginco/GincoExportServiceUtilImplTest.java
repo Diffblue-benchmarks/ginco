@@ -39,7 +39,8 @@ public class GincoExportServiceUtilImplTest {
 	@InjectMocks
 	private GincoExportServiceUtilImpl service;
 
-	@Before public void initMocks() {
+	@Before
+	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
 
