@@ -1,20 +1,17 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Language;
-import fr.mcc.ginco.beans.ThesaurusConceptGroup;
 import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
 import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptGroupView;
 import fr.mcc.ginco.services.ILanguagesService;
 import fr.mcc.ginco.services.IThesaurusConceptGroupLabelService;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -46,67 +43,20 @@ class ThesaurusConceptGroupLabelViewConverterTest {
 	private ThesaurusConceptGroupLabelViewConverter service;
 
 	@Test
-	void convert() throws java.text.ParseException {
-
-		// arrange
+	void convert() {
 		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
-			 new ThesaurusConceptGroupLabel();
-		ThesaurusConceptGroup conceptGroup = mock(ThesaurusConceptGroup.class);
-		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setCreated(created1);
-		thesaurusConceptGroupLabel.setIdentifier(1);
-		Language language1 = new Language();
-		language1.setId("1234");
-		language1.setPart1("foo");
-		language1.setPrincipalLanguage(false);
-		language1.setRefname("root");
-		language1.setTopLanguage(false);
-		thesaurusConceptGroupLabel.setLanguage(language1);
-		thesaurusConceptGroupLabel.setLexicalValue("value");
-		thesaurusConceptGroupLabel.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+			 mock(ThesaurusConceptGroupLabel.class);
 		when(thesaurusConceptGroupLabelService.getById(Mockito.<Integer>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
-		Language language2 = new Language();
-		language2.setId("1234");
-		language2.setPart1("foo");
-		language2.setPrincipalLanguage(false);
-		language2.setRefname("root");
-		language2.setTopLanguage(false);
 		when(languagesService.getLanguageById(Mockito.<String>any()))
-			.thenReturn(language2);
+			.thenReturn(new Language());
 		ThesaurusConceptGroupView thesaurusConceptGroupViewJAXBElement =
 			 new ThesaurusConceptGroupView();
-		ArrayList<String> concepts = new ArrayList<String>();
-		concepts.add("hello");
-		thesaurusConceptGroupViewJAXBElement.setConcepts(concepts);
-		thesaurusConceptGroupViewJAXBElement.setCreated("someone");
 		thesaurusConceptGroupViewJAXBElement.setGroupConceptLabelId(1);
-		thesaurusConceptGroupViewJAXBElement.setIdentifier("data");
-		thesaurusConceptGroupViewJAXBElement.setIsDynamic(false);
 		thesaurusConceptGroupViewJAXBElement.setLabel("label");
-		thesaurusConceptGroupViewJAXBElement.setLanguage("hello");
-		thesaurusConceptGroupViewJAXBElement.setModified("someone");
-		thesaurusConceptGroupViewJAXBElement.setNotation("DE");
-		thesaurusConceptGroupViewJAXBElement.setParentConceptId("1234");
-		thesaurusConceptGroupViewJAXBElement.setParentConceptLabel("label");
-		thesaurusConceptGroupViewJAXBElement.setParentGroupId("1234");
-		thesaurusConceptGroupViewJAXBElement.setParentGroupLabel("label");
-		thesaurusConceptGroupViewJAXBElement.setThesaurusId("1234");
-		thesaurusConceptGroupViewJAXBElement.setType("text/plain");
-
-		// act
-		ThesaurusConceptGroupLabel result =
-			 service.convert(thesaurusConceptGroupViewJAXBElement);
-
-		// assert
-		assertThat(result.getConceptGroup(), sameInstance(conceptGroup));
-		assertThat(result.getCreated(), sameInstance(created1));
-		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getLanguage(), sameInstance(language2));
-		assertThat(result.getLexicalValue(), is("label"));
-		assertThat(
-			Math.abs(result.getModified().getTime() - new Date().getTime())
-			<= 10_000L, is(true));
+		assertThat(service.convert(thesaurusConceptGroupViewJAXBElement), is(notNullValue()));
+		Mockito.verify(thesaurusConceptGroupLabel).setLanguage(Mockito.<Language>any());
+		Mockito.verify(thesaurusConceptGroupLabel).setLexicalValue(Mockito.eq("label"));
+		Mockito.verify(thesaurusConceptGroupLabel).setModified(Mockito.<Date>any());
 	}
 }

@@ -81,7 +81,7 @@ public class SKOSTermsExporterTest {
 	public void exportConceptNotPreferredTerms2() {
 		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setHidden(false);
+		thesaurusTerm.setHidden(true);
 		thesaurusTerm.setLanguage(new Language());
 		thesaurusTerm.setPrefered(false);
 		thesaurusTermList.add(thesaurusTerm);
@@ -102,9 +102,30 @@ public class SKOSTermsExporterTest {
 	public void exportConceptNotPreferredTerms3() {
 		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
 		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setHidden(true);
-		thesaurusTerm.setLanguage(new Language());
-		thesaurusTerm.setPrefered(false);
+		thesaurusTerm.setPrefered(true);
+		thesaurusTermList.add(thesaurusTerm);
+		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
+			.thenReturn(thesaurusTermList);
+		Model model1 = mock(Model.class);
+		Model model2 = mock(Model.class);
+		Model model3 = mock(Model.class);
+		Resource conceptResource = mock(Resource.class);
+		assertSame(model3, service.exportConceptNotPreferredTerms("1234", model3, conceptResource));
+	}
+
+	@Test
+	public void exportConceptNotPreferredTerms4() {
+		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
+		when(thesaurusTerm.getHidden())
+			.thenReturn(false)
+			.thenReturn(false);
+		when(thesaurusTerm.getLanguage())
+			.thenReturn(new Language());
+		when(thesaurusTerm.getLexicalValue())
+			.thenReturn("value");
+		when(thesaurusTerm.getPrefered())
+			.thenReturn(false);
 		thesaurusTermList.add(thesaurusTerm);
 		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
 			.thenReturn(thesaurusTermList);
@@ -115,21 +136,6 @@ public class SKOSTermsExporterTest {
 		Model model3 = mock(Model.class);
 		when(model3.add(Mockito.<Resource>any(), Mockito.<com.hp.hpl.jena.rdf.model.Property>any(), Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(model2);
-		Resource conceptResource = mock(Resource.class);
-		assertSame(model3, service.exportConceptNotPreferredTerms("1234", model3, conceptResource));
-	}
-
-	@Test
-	public void exportConceptNotPreferredTerms4() {
-		ArrayList<ThesaurusTerm> thesaurusTermList = new ArrayList<ThesaurusTerm>();
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		thesaurusTerm.setPrefered(true);
-		thesaurusTermList.add(thesaurusTerm);
-		when(thesaurusTermService.getTermsByConceptId(Mockito.<String>any()))
-			.thenReturn(thesaurusTermList);
-		Model model1 = mock(Model.class);
-		Model model2 = mock(Model.class);
-		Model model3 = mock(Model.class);
 		Resource conceptResource = mock(Resource.class);
 		assertSame(model3, service.exportConceptNotPreferredTerms("1234", model3, conceptResource));
 	}

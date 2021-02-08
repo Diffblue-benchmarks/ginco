@@ -273,8 +273,11 @@ public class ThesaurusServiceImplTest {
 
 	@Test
 	public void getThesaurusLanguagesReturnsEmpty() {
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		when(thesaurus.getLang())
+			.thenReturn(new HashSet<Language>());
 		when(thesaurusDAO.getById(Mockito.<String>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus);
 		assertTrue(service.getThesaurusLanguages("1234").isEmpty());
 	}
 

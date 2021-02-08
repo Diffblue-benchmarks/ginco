@@ -1,0 +1,188 @@
+package fr.mcc.ginco.extjs.view.utils;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.ark.IIDGeneratorService;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusConceptGroup;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptGroupView;
+import fr.mcc.ginco.services.IThesaurusConceptGroupLabelService;
+import fr.mcc.ginco.services.IThesaurusConceptGroupService;
+import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
+import fr.mcc.ginco.services.IThesaurusConceptService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.extjs.view.utils.ThesaurusConceptGroupViewConverter
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusConceptGroupViewConverter.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusConceptGroupViewConverterTest {
+
+	@MockBean(name = "generatorService")
+	private IIDGeneratorService generatorService;
+
+	@MockBean(name = "thesaurusConceptGroupLabelService")
+	private IThesaurusConceptGroupLabelService thesaurusConceptGroupLabelService;
+
+	@MockBean(name = "thesaurusConceptGroupService")
+	private IThesaurusConceptGroupService thesaurusConceptGroupService;
+
+	@MockBean(name = "thesaurusConceptGroupTypeService")
+	private IThesaurusConceptGroupTypeService thesaurusConceptGroupTypeService;
+
+	@MockBean(name = "thesaurusConceptService")
+	private IThesaurusConceptService thesaurusConceptService;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private ThesaurusConceptGroupViewConverter service;
+
+	@Test
+	void convert2() {
+
+		// arrange
+		Thesaurus thesaurus1 = new Thesaurus();
+		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
+			.thenReturn(thesaurus1);
+		ThesaurusConcept thesaurusConcept1 = mock(ThesaurusConcept.class);
+		ThesaurusConcept thesaurusConcept2 = new ThesaurusConcept();
+		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
+			.thenReturn(thesaurusConcept2)
+			.thenReturn(thesaurusConcept1);
+		ThesaurusConceptGroupType thesaurusConceptGroupType =
+			 new ThesaurusConceptGroupType();
+		when(thesaurusConceptGroupTypeService.getTypeById(Mockito.<String>any()))
+			.thenReturn(thesaurusConceptGroupType);
+		ThesaurusConceptGroup thesaurusConceptGroup1 = new ThesaurusConceptGroup();
+		ThesaurusConceptGroup thesaurusConceptGroup2 = new ThesaurusConceptGroup();
+		HashSet<ThesaurusConcept> concepts4 = new HashSet<ThesaurusConcept>();
+		thesaurusConceptGroup2.setConcepts(concepts4);
+		thesaurusConceptGroup2.setIdentifier("data");
+		when(thesaurusConceptGroupService.getConceptGroupById(Mockito.<String>any()))
+			.thenReturn(thesaurusConceptGroup2)
+			.thenReturn(thesaurusConceptGroup1);
+		ThesaurusConceptGroupView source9 = new ThesaurusConceptGroupView();
+		ArrayList<String> concepts7 = new ArrayList<String>();
+		concepts7.add("hello");
+		source9.setConcepts(concepts7);
+		source9.setIdentifier("data");
+		source9.setIsDynamic(false);
+		source9.setNotation("DE");
+		source9.setParentConceptId("1234");
+		source9.setParentGroupId("1234");
+		source9.setThesaurusId("1234");
+		source9.setType("text/plain");
+
+		// act
+		ThesaurusConceptGroup result = service.convert(source9);
+
+		// assert
+		assertThat(result.getConceptGroupType(), sameInstance(thesaurusConceptGroupType));
+		assertThat(result.getConcepts(), hasSize(1));
+		assertThat(result.getConcepts(), hasItem(thesaurusConcept2));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getIsDynamic(), is(false));
+		assertThat(result.getNotation(), is("DE"));
+		assertThat(result.getParent(), sameInstance(thesaurusConceptGroup1));
+		assertThat(result.getParentConcept(), sameInstance(thesaurusConcept1));
+		assertThat(result.getThesaurus(), sameInstance(thesaurus1));
+		Mockito.verify(concepts4).clear();
+	}
+
+	@Test
+	void convert1() throws java.text.ParseException {
+
+		// arrange
+		when(thesaurusConceptService.getConceptLabel(Mockito.<String>any()))
+			.thenReturn("label");
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel1 =
+			 new ThesaurusConceptGroupLabel();
+		thesaurusConceptGroupLabel1.setLexicalValue("value");
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel2 =
+			 new ThesaurusConceptGroupLabel();
+		thesaurusConceptGroupLabel2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConceptGroupLabel2.setIdentifier(1);
+		Language language2 = new Language();
+		language2.setId("1234");
+		thesaurusConceptGroupLabel2.setLanguage(language2);
+		thesaurusConceptGroupLabel2.setLexicalValue("value");
+		thesaurusConceptGroupLabel2.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		when(thesaurusConceptGroupLabelService.getByThesaurusConceptGroupAndLanguage(Mockito.<String>any()))
+			.thenReturn(thesaurusConceptGroupLabel2)
+			.thenReturn(thesaurusConceptGroupLabel1);
+		ArrayList<ThesaurusConceptGroup> groups =
+			 new ArrayList<ThesaurusConceptGroup>();
+		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType3 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType3.setCode("DE");
+		thesaurusConceptGroup.setConceptGroupType(conceptGroupType3);
+		thesaurusConceptGroup.setConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConceptGroup.setIdentifier("data");
+		thesaurusConceptGroup.setIsDynamic(false);
+		thesaurusConceptGroup.setNotation("DE");
+		ThesaurusConceptGroup parent3 = new ThesaurusConceptGroup();
+		parent3.setIdentifier("data");
+		thesaurusConceptGroup.setParent(parent3);
+		ThesaurusConcept parentConcept4 = new ThesaurusConcept();
+		parentConcept4.setIdentifier("data");
+		thesaurusConceptGroup.setParentConcept(parentConcept4);
+		Thesaurus thesaurus6 = new Thesaurus();
+		thesaurus6.setIdentifier("data");
+		thesaurusConceptGroup.setThesaurus(thesaurus6);
+		groups.add(thesaurusConceptGroup);
+
+		// act
+		List<ThesaurusConceptGroupView> result = service.convert(groups);
+
+		// assert
+		assertThat(result, hasSize(1));
+		assertThat(result.get(0).getConcepts(), empty());
+		assertThat(result.get(0).getCreated(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
+		assertThat(result.get(0).getGroupConceptLabelId(), is(1));
+		assertThat(result.get(0).getIdentifier(), is("data"));
+		assertThat(result.get(0).getIsDynamic(), is(false));
+		assertThat(result.get(0).getLabel(), is("value"));
+		assertThat(result.get(0).getLanguage(), is("1234"));
+		assertThat(result.get(0).getModified(), matchesPattern("\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}:\\d{2}"));
+		assertThat(result.get(0).getNotation(), is("DE"));
+		assertThat(result.get(0).getParentConceptId(), is("data"));
+		assertThat(result.get(0).getParentConceptLabel(), is("label"));
+		assertThat(result.get(0).getParentGroupId(), is("data"));
+		assertThat(result.get(0).getParentGroupLabel(), is("value"));
+		assertThat(result.get(0).getThesaurusId(), is("data"));
+		assertThat(result.get(0).getType(), is("DE"));
+	}
+}

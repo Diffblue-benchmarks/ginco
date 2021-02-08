@@ -63,9 +63,9 @@ public class NodeLabelBuilderTest {
 		when(skosImportUtils.getSkosDate(Mockito.<String>any()))
 			.thenReturn(date2)
 			.thenReturn(date1);
-		Language language = new Language();
+		Language language1 = new Language();
 		when(languagesDAO.getByPart1(Mockito.<String>any()))
-			.thenReturn(language);
+			.thenReturn(language1);
 		Literal literal = mock(Literal.class);
 		when(literal.getLanguage())
 			.thenReturn("foo");
@@ -97,7 +97,7 @@ public class NodeLabelBuilderTest {
 		// assert
 		assertSame(date2, result.getCreated());
 		assertNull(result.getIdentifier());
-		assertSame(language, result.getLanguage());
+		assertSame(language1, result.getLanguage());
 		assertEquals("foo", result.getLexicalValue());
 		assertSame(date1, result.getModified());
 		assertSame(array, result.getThesaurusArray());

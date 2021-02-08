@@ -1,5 +1,6 @@
 package fr.mcc.ginco.audit.utils;
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -108,14 +109,19 @@ public class AuditQueryBuilderTest {
 
 	@Test
 	public void getEntityAtRevisionClazzIsStringAndRevisionIsOne() {
-		AuditReaderImplementor auditReaderImplementor =
-			 mock(AuditReaderImplementor.class);
+		AuditQuery auditQuery1 = mock(AuditQuery.class);
+		AuditQuery auditQuery2 = mock(AuditQuery.class);
+		when(auditQuery2.add(Mockito.<org.hibernate.envers.query.criteria.AuditCriterion>any()))
+			.thenReturn(auditQuery1);
+		AuditQueryCreator auditQueryCreator = mock(AuditQueryCreator.class);
+		when(auditQueryCreator.forEntitiesAtRevision(Mockito.<Class<?>>any(), Mockito.<Number>any()))
+			.thenReturn(auditQuery2);
 		AuditReader auditReader = mock(AuditReader.class);
 		when(auditReader.createQuery())
-			.thenReturn(new AuditQueryCreator(new AuditConfiguration(new Configuration()), auditReaderImplementor));
+			.thenReturn(auditQueryCreator);
 		when(auditReaderService.getAuditReader())
 			.thenReturn(auditReader);
-		// pojo AuditQuery service.getEntityAtRevision(String.class, 1, "1234")
+		assertNotNull(service.getEntityAtRevision(String.class, 1, "1234"));
 	}
 
 	@Test

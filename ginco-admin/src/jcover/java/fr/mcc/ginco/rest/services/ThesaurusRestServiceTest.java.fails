@@ -153,7 +153,7 @@ class ThesaurusRestServiceTest {
 	}
 
 	@Test
-	void getVocabularyById() throws java.text.ParseException {
+	void getVocabularyById() {
 
 		// arrange
 		ThesaurusView thesaurusView = new ThesaurusView();
@@ -172,9 +172,9 @@ class ThesaurusRestServiceTest {
 		formats.add(1);
 		thesaurusView.setFormats(formats);
 		thesaurusView.setId("1234");
-		ArrayList<String> lang1 = new ArrayList<String>();
-		lang1.add("foo");
-		thesaurusView.setLanguages(lang1);
+		ArrayList<String> lang = new ArrayList<String>();
+		lang.add("foo");
+		thesaurusView.setLanguages(lang);
 		thesaurusView.setPolyHierarchical(false);
 		thesaurusView.setPublisher("foo");
 		thesaurusView.setRelation("DE");
@@ -185,31 +185,7 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setType(1);
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurus.setArchived(false);
-		thesaurus.setContributor("foo");
-		thesaurus.setCoverage("foo");
-		thesaurus.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator = mock(ThesaurusOrganization.class);
-		thesaurus.setCreator(creator);
-		thesaurus.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus.setDefaultTopConcept(false);
-		thesaurus.setDescription("some text");
-		thesaurus.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus.setIdentifier("data");
-		thesaurus.setLang(new HashSet<Language>());
-		thesaurus.setPolyHierarchical(false);
-		thesaurus.setPublisher("foo");
-		thesaurus.setRelation("DE");
-		thesaurus.setRights("foo");
-		thesaurus.setSource("foo");
-		thesaurus.setSubject("foo");
-		thesaurus.setTitle("Mr");
-		ThesaurusType type = new ThesaurusType();
-		type.setIdentifier(1);
-		type.setLabel("label");
-		thesaurus.setType(type);
-		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
+		Thesaurus thesaurus = mock(Thesaurus.class);
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus);
 
@@ -295,31 +271,7 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setSubject("foo");
 		thesaurusView.setTitle("Mr");
 		thesaurusView.setType(1);
-		Thesaurus thesaurus1 = new Thesaurus();
-		thesaurus1.setArchived(false);
-		thesaurus1.setContributor("foo");
-		thesaurus1.setCoverage("foo");
-		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator1 = mock(ThesaurusOrganization.class);
-		thesaurus1.setCreator(creator1);
-		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus1.setDefaultTopConcept(false);
-		thesaurus1.setDescription("some text");
-		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus1.setIdentifier("data");
-		thesaurus1.setLang(new HashSet<Language>());
-		thesaurus1.setPolyHierarchical(false);
-		thesaurus1.setPublisher("foo");
-		thesaurus1.setRelation("DE");
-		thesaurus1.setRights("foo");
-		thesaurus1.setSource("foo");
-		thesaurus1.setSubject("foo");
-		thesaurus1.setTitle("Mr");
-		ThesaurusType type1 = new ThesaurusType();
-		type1.setIdentifier(1);
-		type1.setLabel("label");
-		thesaurus1.setType(type1);
-		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
 		when(thesaurusViewConverter.convert(Mockito.<ThesaurusView>any()))
@@ -329,12 +281,12 @@ class ThesaurusRestServiceTest {
 		thesaurus2.setContributor("foo");
 		thesaurus2.setCoverage("foo");
 		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator2 = new ThesaurusOrganization();
-		creator2.setEmail("info@diffblue.com");
-		creator2.setHomepage("foo");
-		creator2.setIdentifier(1);
-		creator2.setName("Acme");
-		thesaurus2.setCreator(creator2);
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		creator1.setEmail("info@diffblue.com");
+		creator1.setHomepage("foo");
+		creator1.setIdentifier(1);
+		creator1.setName("Acme");
+		thesaurus2.setCreator(creator1);
 		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus2.setDefaultTopConcept(false);
 		thesaurus2.setDescription("some text");
@@ -348,22 +300,22 @@ class ThesaurusRestServiceTest {
 		thesaurus2.setSource("foo");
 		thesaurus2.setSubject("foo");
 		thesaurus2.setTitle("Mr");
-		ThesaurusType type2 = new ThesaurusType();
-		type2.setIdentifier(1);
-		type2.setLabel("label");
-		thesaurus2.setType(type2);
+		ThesaurusType type1 = new ThesaurusType();
+		type1.setIdentifier(1);
+		type1.setLabel("label");
+		thesaurus2.setType(type1);
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
 		Thesaurus thesaurus3 = new Thesaurus();
 		thesaurus3.setArchived(false);
 		thesaurus3.setContributor("foo");
 		thesaurus3.setCoverage("foo");
 		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator3 = new ThesaurusOrganization();
-		creator3.setEmail("info@diffblue.com");
-		creator3.setHomepage("foo");
-		creator3.setIdentifier(1);
-		creator3.setName("Acme");
-		thesaurus3.setCreator(creator3);
+		ThesaurusOrganization creator2 = new ThesaurusOrganization();
+		creator2.setEmail("info@diffblue.com");
+		creator2.setHomepage("foo");
+		creator2.setIdentifier(1);
+		creator2.setName("Acme");
+		thesaurus3.setCreator(creator2);
 		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
 		thesaurus3.setDefaultTopConcept(false);
 		thesaurus3.setDescription("some text");
@@ -377,10 +329,10 @@ class ThesaurusRestServiceTest {
 		thesaurus3.setSource("foo");
 		thesaurus3.setSubject("foo");
 		thesaurus3.setTitle("Mr");
-		ThesaurusType type3 = new ThesaurusType();
-		type3.setIdentifier(1);
-		type3.setLabel("label");
-		thesaurus3.setType(type3);
+		ThesaurusType type2 = new ThesaurusType();
+		type2.setIdentifier(1);
+		type2.setLabel("label");
+		thesaurus3.setType(type2);
 		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(thesaurus3);
@@ -402,9 +354,9 @@ class ThesaurusRestServiceTest {
 		formats2.add(1);
 		thesaurusViewJAXBElement.setFormats(formats2);
 		thesaurusViewJAXBElement.setId("1234");
-		ArrayList<String> lang5 = new ArrayList<String>();
-		lang5.add("foo");
-		thesaurusViewJAXBElement.setLanguages(lang5);
+		ArrayList<String> lang4 = new ArrayList<String>();
+		lang4.add("foo");
+		thesaurusViewJAXBElement.setLanguages(lang4);
 		thesaurusViewJAXBElement.setPolyHierarchical(false);
 		thesaurusViewJAXBElement.setPublisher("foo");
 		thesaurusViewJAXBElement.setRelation("DE");
@@ -451,8 +403,9 @@ class ThesaurusRestServiceTest {
 		thesaurus1.setIdentifier("data");
 		when(thesaurusViewConverter.convert(Mockito.<ThesaurusView>any()))
 			.thenReturn(thesaurus1);
+		Thesaurus thesaurus2 = mock(Thesaurus.class);
 		when(thesaurusService.destroyThesaurus(Mockito.<Thesaurus>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus2);
 
 		// act
 		service.destroyVocabulary(new ThesaurusView());
@@ -464,17 +417,38 @@ class ThesaurusRestServiceTest {
 	@Test
 	void publishVocabulary() throws java.text.ParseException, java.io.IOException {
 		ThesaurusVersionHistory thesaurusVersionHistory =
-			 new ThesaurusVersionHistory();
-		thesaurusVersionHistory.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusVersionHistory.setIdentifier("data");
-		thesaurusVersionHistory.setStatus(1);
-		Thesaurus thesaurus1 = mock(Thesaurus.class);
-		thesaurusVersionHistory.setThesaurus(thesaurus1);
-		thesaurusVersionHistory.setThisVersion(false);
-		thesaurusVersionHistory.setUserId("root");
-		thesaurusVersionHistory.setVersionNote("1.0");
+			 mock(ThesaurusVersionHistory.class);
 		when(thesaurusVersionHistoryService.publishThesaurus(Mockito.<Thesaurus>any(), Mockito.<String>any()))
 			.thenReturn(thesaurusVersionHistory);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		creator1.setEmail("info@diffblue.com");
+		creator1.setHomepage("foo");
+		creator1.setIdentifier(1);
+		creator1.setName("Acme");
+		thesaurus1.setCreator(creator1);
+		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setLang(new HashSet<Language>());
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		ThesaurusType type1 = new ThesaurusType();
+		type1.setIdentifier(1);
+		type1.setLabel("label");
+		thesaurus1.setType(type1);
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
 		Thesaurus thesaurus2 = new Thesaurus();
 		thesaurus2.setArchived(false);
 		thesaurus2.setContributor("foo");
@@ -504,39 +478,10 @@ class ThesaurusRestServiceTest {
 		type2.setLabel("label");
 		thesaurus2.setType(type2);
 		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
-		Thesaurus thesaurus3 = new Thesaurus();
-		thesaurus3.setArchived(false);
-		thesaurus3.setContributor("foo");
-		thesaurus3.setCoverage("foo");
-		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator3 = new ThesaurusOrganization();
-		creator3.setEmail("info@diffblue.com");
-		creator3.setHomepage("foo");
-		creator3.setIdentifier(1);
-		creator3.setName("Acme");
-		thesaurus3.setCreator(creator3);
-		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus3.setDefaultTopConcept(false);
-		thesaurus3.setDescription("some text");
-		thesaurus3.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus3.setIdentifier("data");
-		thesaurus3.setLang(new HashSet<Language>());
-		thesaurus3.setPolyHierarchical(false);
-		thesaurus3.setPublisher("foo");
-		thesaurus3.setRelation("DE");
-		thesaurus3.setRights("foo");
-		thesaurus3.setSource("foo");
-		thesaurus3.setSubject("foo");
-		thesaurus3.setTitle("Mr");
-		ThesaurusType type3 = new ThesaurusType();
-		type3.setIdentifier(1);
-		type3.setLabel("label");
-		thesaurus3.setType(type3);
-		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(thesaurus3);
-		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurus2);
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurus1);
 		assertThat(service.publishVocabulary("1234", "root"), equalTo(
 			"{\"success\":true,\"data\":{\"identifier\":\"data\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":1293753600000,\"description\":\"some "
 			+ "text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":1293753600000,\"defaultTopConcept\":false,\"archived\":false,\"type\":{\"identifier\":1,\"label\":\"label\"},\"creator\":{\"identifier\":1,\"name\":\"Acme\",\"homepage\":\"foo\",\"email\":\"info@diffblue.com\"},\"polyHierarchical\":false,\"format\":[],\"thesaurusId\":\"data\"},\"total\":null}"));
@@ -574,12 +519,13 @@ class ThesaurusRestServiceTest {
 		thesaurusView.setType(1);
 		when(thesaurusViewConverter.convert(Mockito.<Thesaurus>any()))
 			.thenReturn(thesaurusView);
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
 		when(thesaurusService.archiveThesaurus(Mockito.<Thesaurus>any()))
 			.thenReturn(new Thesaurus());
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
 		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus1);
 		assertThat(service.archiveVocabulary("1234"), matchesPattern("\\{\"success\":true,\"data\":\\{\"id\":\"1234\",\"contributor\":\"foo\",\"coverage\":\"foo\",\"date\":\"\\d{4}-\\d{1,2}-\\d{1,2}\",\"description\":\"some text\",\"publisher\":\"foo\",\"relation\":\"DE\",\"rights\":\"foo\",\"source\":\"foo\",\"subject\":\"foo\",\"title\":\"Mr\",\"created\":\"someone\",\"defaultTopConcept\":false,\"archived\":false,\"canBeDeleted\":false,\"type\":1,\"creatorName\":\"Acme\",\"creatorHomepage\":\"someone\",\"creatorEmail\":\"info@diffblue\\.com\",\"polyHierarchical\":false,\"languages\":\\[\"foo\"\\],\"formats\":\\[1\\],\"thesaurusId\":\"1234\"\\},\"total\":null\\}"));
 	}
 

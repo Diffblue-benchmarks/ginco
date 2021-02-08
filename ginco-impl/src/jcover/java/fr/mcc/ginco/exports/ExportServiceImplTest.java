@@ -155,19 +155,14 @@ public class ExportServiceImplTest {
 			 new ArrayList<ThesaurusConcept>();
 		thesaurusConceptList.add(new ThesaurusConcept());
 		when(thesaurusConceptService.getConceptTitle(Mockito.<ThesaurusConcept>any()))
-			.thenReturn("foo=bar")
-			.thenReturn("foo=bar");
+			.thenReturn("Mr")
+			.thenReturn("Mr");
 		when(thesaurusConceptService.getConceptsByThesaurusId(Mockito.<String>any(), Mockito.<String>any(), Mockito.<Boolean>any(), Mockito.<Boolean>any()))
 			.thenReturn(thesaurusConceptList);
-		ArrayList<SplitNonPreferredTerm> splitNonPreferredTermList =
-			 new ArrayList<SplitNonPreferredTerm>();
-		splitNonPreferredTermList.add(new SplitNonPreferredTerm());
 		when(splitNonPreferredTermService.getSplitNonPreferredTermCount(Mockito.<String>any()))
 			.thenReturn(1L);
 		when(splitNonPreferredTermService.getSplitNonPreferredTermList(Mockito.<Integer>any(), Mockito.<Integer>any(), Mockito.<String>any()))
-			.thenReturn(splitNonPreferredTermList);
-		when(alphabeticalExportedItemComparator.compare(Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any(), Mockito.<fr.mcc.ginco.exports.result.bean.AlphabeticalExportedItem>any()))
-			.thenReturn(1);
+			.thenReturn(new ArrayList<SplitNonPreferredTerm>());
 
 		// act
 		List<FormattedLine> result = service.getAlphabeticalText(new Thesaurus());
@@ -175,9 +170,7 @@ public class ExportServiceImplTest {
 		// assert
 		assertEquals(1, result.size());
 		assertEquals(0, (int) result.get(0).getTabs());
-		assertEquals("foo=bar", result.get(0).getText());
+		assertEquals("Mr", result.get(0).getText());
 		Mockito.verify(alphabeticConceptExporter).addConceptInfo(Mockito.eq((Integer) 1), Mockito.<List<FormattedLine>>any(), Mockito.<ThesaurusConcept>any());
-		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptInfo(Mockito.eq((Integer) 1), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
-		Mockito.verify(alphabeticComplexConceptExporter).addComplexConceptTitle(Mockito.eq((Integer) 0), Mockito.<List<FormattedLine>>any(), Mockito.<SplitNonPreferredTerm>any());
 	}
 }

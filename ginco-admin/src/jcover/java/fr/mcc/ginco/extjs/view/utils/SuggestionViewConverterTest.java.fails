@@ -2,9 +2,10 @@ package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Suggestion;
@@ -17,7 +18,6 @@ import fr.mcc.ginco.services.IThesaurusConceptService;
 import fr.mcc.ginco.services.IThesaurusTermService;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
@@ -143,37 +143,22 @@ class SuggestionViewConverterTest {
 	}
 
 	@Test
-	void convert4() throws java.text.ParseException {
-
-		// arrange
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+	void convert4() {
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
-			.thenReturn(thesaurusConcept);
-		Suggestion suggestion = new Suggestion();
-		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		suggestion.setCreated(created3);
-		suggestion.setIdentifier(1);
-		ThesaurusTerm term = new ThesaurusTerm();
-		suggestion.setTerm(term);
+			.thenReturn(new ThesaurusConcept());
+		Suggestion suggestion = mock(Suggestion.class);
 		when(suggestionService.getSuggestionById(Mockito.<Integer>any()))
 			.thenReturn(suggestion);
-		SuggestionView source5 = new SuggestionView();
-		source5.setConceptId("1234");
-		source5.setContent("hello");
-		source5.setCreator("someone");
-		source5.setIdentifier(1);
-		source5.setRecipient("1234");
-
-		// act
-		Suggestion result = service.convert(source5);
-
-		// assert
-		assertThat(result.getConcept(), sameInstance(thesaurusConcept));
-		assertThat(result.getContent(), is("hello"));
-		assertThat(result.getCreated(), sameInstance(created3));
-		assertThat(result.getCreator(), is("someone"));
-		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getRecipient(), is("1234"));
-		assertThat(result.getTerm(), sameInstance(term));
+		SuggestionView source2 = new SuggestionView();
+		source2.setConceptId("1234");
+		source2.setContent("hello");
+		source2.setCreator("someone");
+		source2.setIdentifier(1);
+		source2.setRecipient("1234");
+		assertThat(service.convert(source2), is(notNullValue()));
+		Mockito.verify(suggestion).setConcept(Mockito.<ThesaurusConcept>any());
+		Mockito.verify(suggestion).setContent(Mockito.eq("hello"));
+		Mockito.verify(suggestion).setCreator(Mockito.eq("someone"));
+		Mockito.verify(suggestion).setRecipient(Mockito.eq("1234"));
 	}
 }

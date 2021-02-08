@@ -3,6 +3,7 @@ package fr.mcc.ginco.imports.ginco;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.CustomTermAttribute;
@@ -56,7 +57,7 @@ public class GincoTermImporterTest {
 	public void storeTerms() {
 
 		// arrange
-		ThesaurusTerm thesaurusTerm1 = new ThesaurusTerm();
+		ThesaurusTerm thesaurusTerm1 = mock(ThesaurusTerm.class);
 		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(thesaurusTerm1);
 		GincoExportedEntity exportedThesaurus = new GincoExportedEntity();
@@ -110,8 +111,9 @@ public class GincoTermImporterTest {
 	public void storeTermNotes() {
 
 		// arrange
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTermDAO.getById(Mockito.<String>any()))
-			.thenReturn(new ThesaurusTerm());
+			.thenReturn(thesaurusTerm);
 		Note note1 = new Note();
 		when(noteDAO.update(Mockito.<Note>any()))
 			.thenReturn(note1);

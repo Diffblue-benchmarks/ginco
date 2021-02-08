@@ -87,7 +87,7 @@ public class ThesaurusArrayHelperTest {
 		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		ArrayList<String> stringList = new ArrayList<String>();
-		stringList.add("hello");
+		stringList.add("foo");
 		when(thesaurusArrayConceptDAO.getAssociatedConcepts(Mockito.<String>any()))
 			.thenReturn(stringList);
 

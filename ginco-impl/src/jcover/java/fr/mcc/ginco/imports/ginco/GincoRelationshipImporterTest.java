@@ -3,6 +3,7 @@ package fr.mcc.ginco.imports.ginco;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ConceptHierarchicalRelationship;
@@ -61,12 +62,13 @@ public class GincoRelationshipImporterTest {
 	public void storeHierarchicalRelationship() {
 
 		// arrange
+		ThesaurusConcept thesaurusConcept1 = mock(ThesaurusConcept.class);
 		ThesaurusConcept thesaurusConcept3 = new ThesaurusConcept();
 		when(thesaurusConceptDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept3)
 			.thenReturn(new ThesaurusConcept());
 		when(thesaurusConceptDAO.update(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(new ThesaurusConcept());
+			.thenReturn(thesaurusConcept1);
 		when(conceptHierarchicalRelationshipServiceUtil.getRootConcepts(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(new ArrayList<ThesaurusConcept>());
 		when(conceptHierarchicalRelationshipDAO.update(Mockito.<ConceptHierarchicalRelationship>any()))

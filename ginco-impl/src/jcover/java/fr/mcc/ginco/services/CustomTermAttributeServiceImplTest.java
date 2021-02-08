@@ -77,8 +77,8 @@ public class CustomTermAttributeServiceImplTest {
 		Language language2 = new Language();
 		customTermAttribute.setLanguage(language2);
 		customTermAttribute.setLexicalValue("value");
-		CustomTermAttributeType type3 = new CustomTermAttributeType();
-		customTermAttribute.setType(type3);
+		CustomTermAttributeType type2 = new CustomTermAttributeType();
+		customTermAttribute.setType(type2);
 		when(customTermAttributeDAO.update(Mockito.<CustomTermAttribute>any()))
 			.thenReturn(customTermAttribute);
 
@@ -90,7 +90,7 @@ public class CustomTermAttributeServiceImplTest {
 		assertEquals("data", result.getIdentifier());
 		assertSame(language2, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(type3, result.getType());
+		assertSame(type2, result.getType());
 	}
 
 	@Test
@@ -104,8 +104,8 @@ public class CustomTermAttributeServiceImplTest {
 		Language language2 = new Language();
 		customTermAttribute.setLanguage(language2);
 		customTermAttribute.setLexicalValue("value");
-		CustomTermAttributeType type3 = new CustomTermAttributeType();
-		customTermAttribute.setType(type3);
+		CustomTermAttributeType type2 = new CustomTermAttributeType();
+		customTermAttribute.setType(type2);
 		when(customTermAttributeDAO.getAttributeByType(Mockito.<ThesaurusTerm>any(), Mockito.<fr.mcc.ginco.beans.generic.GenericCustomAttributeType>any()))
 			.thenReturn(customTermAttribute);
 
@@ -118,6 +118,6 @@ public class CustomTermAttributeServiceImplTest {
 		assertEquals("data", result.getIdentifier());
 		assertSame(language2, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(type3, result.getType());
+		assertSame(type2, result.getType());
 	}
 }

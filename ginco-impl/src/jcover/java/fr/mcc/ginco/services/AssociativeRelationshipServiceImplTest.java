@@ -59,8 +59,8 @@ public class AssociativeRelationshipServiceImplTest {
 		associativeRelationship.setConceptLeft(conceptLeft);
 		ThesaurusConcept conceptRight = new ThesaurusConcept();
 		associativeRelationship.setConceptRight(conceptRight);
-		AssociativeRelationship.Id identifier11 = new AssociativeRelationship.Id();
-		associativeRelationship.setIdentifier(identifier11);
+		AssociativeRelationship.Id identifier5 = new AssociativeRelationship.Id();
+		associativeRelationship.setIdentifier(identifier5);
 		AssociativeRelationshipRole relationshipRole =
 			 new AssociativeRelationshipRole();
 		associativeRelationship.setRelationshipRole(relationshipRole);
@@ -74,14 +74,14 @@ public class AssociativeRelationshipServiceImplTest {
 		// assert
 		assertSame(conceptLeft, result.getConceptLeft());
 		assertSame(conceptRight, result.getConceptRight());
-		assertSame(identifier11, result.getIdentifier());
+		assertSame(identifier5, result.getIdentifier());
 		assertSame(relationshipRole, result.getRelationshipRole());
 	}
 
 	@Test
 	public void getAssociatedConceptsIdStatusIsCandidate() throws java.text.ParseException {
 		ArrayList<String> stringList = new ArrayList<String>();
-		stringList.add("hello");
+		stringList.add("foo");
 		when(associativeRelationshipDAO.getAssociatedConcepts(Mockito.<ThesaurusConcept>any(), Mockito.<ConceptStatusEnum>any()))
 			.thenReturn(stringList);
 		ThesaurusConcept concept = new ThesaurusConcept();
@@ -126,13 +126,13 @@ public class AssociativeRelationshipServiceImplTest {
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		concept.setThesaurus(thesaurus);
 		concept.setTopConcept(false);
-		assertEquals(Arrays.asList("hello"), service.getAssociatedConceptsId(concept, ConceptStatusEnum.CANDIDATE));
+		assertEquals(Arrays.asList("foo"), service.getAssociatedConceptsId(concept, ConceptStatusEnum.CANDIDATE));
 	}
 
 	@Test
 	public void getAssociatedConceptsId() throws java.text.ParseException {
 		ArrayList<String> stringList = new ArrayList<String>();
-		stringList.add("hello");
+		stringList.add("foo");
 		when(associativeRelationshipDAO.getAssociatedConcepts(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(stringList);
 		ThesaurusConcept concept = new ThesaurusConcept();
@@ -177,7 +177,7 @@ public class AssociativeRelationshipServiceImplTest {
 		thesaurus.setVersions(new HashSet<ThesaurusVersionHistory>());
 		concept.setThesaurus(thesaurus);
 		concept.setTopConcept(false);
-		assertEquals(Arrays.asList("hello"), service.getAssociatedConceptsId(concept));
+		assertEquals(Arrays.asList("foo"), service.getAssociatedConceptsId(concept));
 	}
 
 	@Test

@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.UserRole;
@@ -86,10 +87,11 @@ class UserRoleRestServiceTest {
 	void updateThesaurusUsers() {
 
 		// arrange
+		UserRole userRole1 = mock(UserRole.class);
 		when(userRoleViewConverter.convert(Mockito.<UserRole>any()))
 			.thenReturn(new UserRoleView());
 		when(userRoleViewConverter.convert(Mockito.<UserRoleView>any()))
-			.thenReturn(new UserRole());
+			.thenReturn(userRole1);
 		when(userRoleService.updateUserRole(Mockito.<UserRole>any()))
 			.thenReturn(new UserRole());
 		ArrayList<UserRoleView> userRoleViews = new ArrayList<UserRoleView>();

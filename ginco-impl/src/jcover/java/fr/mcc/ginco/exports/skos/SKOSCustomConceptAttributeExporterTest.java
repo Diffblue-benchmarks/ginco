@@ -44,33 +44,17 @@ public class SKOSCustomConceptAttributeExporterTest {
 	}
 
 	@Test
-	public void exportCustomConceptAttributes1() {
-		when(customConceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
-			.thenReturn(new ArrayList<CustomConceptAttribute>());
-		Model model = mock(Model.class);
-		Resource conceptResource = mock(Resource.class);
-		Literal literal = mock(Literal.class);
-		DatatypeProperty datatypeProperty = mock(DatatypeProperty.class);
-		OntModel ontModel = mock(OntModel.class);
-		when(ontModel.createDatatypeProperty(Mockito.<String>any()))
-			.thenReturn(datatypeProperty);
-		when(ontModel.createLiteral(Mockito.<String>any()))
-			.thenReturn(literal);
-		assertSame(model, service.exportCustomConceptAttributes(new ThesaurusConcept(), model, conceptResource, ontModel));
-		Mockito.verify(datatypeProperty).addLabel(Mockito.<Literal>any());
-	}
-
-	@Test
-	public void exportCustomConceptAttributes2() {
+	public void exportCustomConceptAttributes() {
 		ArrayList<CustomConceptAttribute> customConceptAttributeList =
 			 new ArrayList<CustomConceptAttribute>();
 		CustomConceptAttribute customConceptAttribute = new CustomConceptAttribute();
-		CustomConceptAttributeType type1 = new CustomConceptAttributeType();
-		type1.setExportable(false);
-		customConceptAttribute.setType(type1);
+		CustomConceptAttributeType type = new CustomConceptAttributeType();
+		type.setExportable(false);
+		customConceptAttribute.setType(type);
 		customConceptAttributeList.add(customConceptAttribute);
 		when(customConceptAttributeService.getAttributesByEntity(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(customConceptAttributeList);
+		ThesaurusConcept concept = mock(ThesaurusConcept.class);
 		Model model = mock(Model.class);
 		Resource conceptResource = mock(Resource.class);
 		Literal literal = mock(Literal.class);
@@ -80,7 +64,7 @@ public class SKOSCustomConceptAttributeExporterTest {
 			.thenReturn(datatypeProperty);
 		when(ontModel.createLiteral(Mockito.<String>any()))
 			.thenReturn(literal);
-		assertSame(model, service.exportCustomConceptAttributes(new ThesaurusConcept(), model, conceptResource, ontModel));
+		assertSame(model, service.exportCustomConceptAttributes(concept, model, conceptResource, ontModel));
 		Mockito.verify(datatypeProperty).addLabel(Mockito.<Literal>any());
 	}
 }

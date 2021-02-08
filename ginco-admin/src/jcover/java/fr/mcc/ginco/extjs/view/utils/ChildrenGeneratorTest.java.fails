@@ -63,7 +63,7 @@ class ChildrenGeneratorTest {
 		assertThat(result, hasSize(1));
 		assertThat(result.get(0).getChildren(), empty());
 		assertThat(result.get(0).getIconCls(), is("icon-warning"));
-		assertThat(result.get(0).getId(), is("1b48eea1-a2b6-4777-b069-d223e2b8357f"));
+		assertThat(result.get(0).getId(), is("11376053-f02e-4878-b83d-4dfd361303bf"));
 		assertThat(result.get(0).getOrganizationName(), is(nullValue()));
 		assertThat(result.get(0).getThesaurusId(), is(nullValue()));
 		assertThat(result.get(0).getTitle(), is("Limite daffichage 0. Utilisez la recherche"));

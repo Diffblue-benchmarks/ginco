@@ -365,6 +365,31 @@ class ThesaurusConceptRestServiceTest {
 	}
 
 	@Test
+	void getSimpleChildrenConceptsLikeIsEmpty() {
+
+		// arrange
+		ThesaurusConceptReducedView thesaurusConceptReducedView =
+			 new ThesaurusConceptReducedView();
+		when(thesaurusConceptViewConverter.convert(Mockito.<ThesaurusConcept>any()))
+			.thenReturn(thesaurusConceptReducedView);
+		ArrayList<ThesaurusConcept> thesaurusConceptList =
+			 new ArrayList<ThesaurusConcept>();
+		thesaurusConceptList.add(new ThesaurusConcept());
+		when(thesaurusConceptService.getChildrenByConceptId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(thesaurusConceptList);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusConceptReducedView>> result =
+			 service.getSimpleChildrenConcepts("hello", "");
+
+		// assert
+		assertThat(result.getData(), hasSize(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptReducedView));
+		assertThat(result.getTotal(), is(nullValue()));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
 	void getAvailableConceptsOfArrayLikeIsHelloAndLimitIsOneAndStartIndexIsOne() {
 
 		// arrange
@@ -422,8 +447,9 @@ class ThesaurusConceptRestServiceTest {
 	void destroyConcept() {
 
 		// arrange
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
 		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus1);
 		when(thesaurusConceptService.destroyThesaurusConcept(Mockito.<ThesaurusConcept>any()))
 			.thenReturn(new ThesaurusConcept());
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))

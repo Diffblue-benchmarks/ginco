@@ -62,10 +62,10 @@ public class ThesaurusConceptGroupServiceImplTest {
 		thesaurusConceptGroup.setNotation("DE");
 		ThesaurusConceptGroup parent1 = new ThesaurusConceptGroup();
 		thesaurusConceptGroup.setParent(parent1);
-		ThesaurusConcept parentConcept4 = new ThesaurusConcept();
-		thesaurusConceptGroup.setParentConcept(parentConcept4);
-		Thesaurus thesaurus7 = new Thesaurus();
-		thesaurusConceptGroup.setThesaurus(thesaurus7);
+		ThesaurusConcept parentConcept3 = new ThesaurusConcept();
+		thesaurusConceptGroup.setParentConcept(parentConcept3);
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurusConceptGroup.setThesaurus(thesaurus5);
 		when(thesaurusConceptGroupDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusConceptGroup);
 
@@ -79,8 +79,8 @@ public class ThesaurusConceptGroupServiceImplTest {
 		assertFalse(result.getIsDynamic());
 		assertEquals("DE", result.getNotation());
 		assertSame(parent1, result.getParent());
-		assertSame(parentConcept4, result.getParentConcept());
-		assertSame(thesaurus7, result.getThesaurus());
+		assertSame(parentConcept3, result.getParentConcept());
+		assertSame(thesaurus5, result.getThesaurus());
 	}
 
 	@Test
@@ -131,10 +131,10 @@ public class ThesaurusConceptGroupServiceImplTest {
 		thesaurusConceptGroup.setNotation("DE");
 		ThesaurusConceptGroup parent1 = new ThesaurusConceptGroup();
 		thesaurusConceptGroup.setParent(parent1);
-		ThesaurusConcept parentConcept4 = new ThesaurusConcept();
-		thesaurusConceptGroup.setParentConcept(parentConcept4);
-		Thesaurus thesaurus7 = new Thesaurus();
-		thesaurusConceptGroup.setThesaurus(thesaurus7);
+		ThesaurusConcept parentConcept3 = new ThesaurusConcept();
+		thesaurusConceptGroup.setParentConcept(parentConcept3);
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurusConceptGroup.setThesaurus(thesaurus5);
 		when(thesaurusConceptGroupDAO.delete(Mockito.<ThesaurusConceptGroup>any()))
 			.thenReturn(thesaurusConceptGroup);
 
@@ -149,8 +149,8 @@ public class ThesaurusConceptGroupServiceImplTest {
 		assertFalse(result.getIsDynamic());
 		assertEquals("DE", result.getNotation());
 		assertSame(parent1, result.getParent());
-		assertSame(parentConcept4, result.getParentConcept());
-		assertSame(thesaurus7, result.getThesaurus());
+		assertSame(parentConcept3, result.getParentConcept());
+		assertSame(thesaurus5, result.getThesaurus());
 	}
 
 	@Test

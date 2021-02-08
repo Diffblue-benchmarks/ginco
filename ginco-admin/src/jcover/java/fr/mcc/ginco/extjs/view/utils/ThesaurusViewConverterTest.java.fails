@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
@@ -196,7 +197,7 @@ class ThesaurusViewConverterTest {
 		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
 		thesaurus.setCreated(created1);
 		ThesaurusOrganization creator = new ThesaurusOrganization();
-		creator.setEmail("bar");
+		creator.setEmail("info@diffblue.com");
 		creator.setHomepage("foo");
 		creator.setIdentifier(1);
 		creator.setName("Acme");
@@ -226,12 +227,7 @@ class ThesaurusViewConverterTest {
 		thesaurusFormat.setLabel("label");
 		when(thesaurusFormatService.getThesaurusFormatById(Mockito.<Integer>any()))
 			.thenReturn(thesaurusFormat);
-		Language language = new Language();
-		language.setId("1234");
-		language.setPart1("foo");
-		language.setPrincipalLanguage(false);
-		language.setRefname("root");
-		language.setTopLanguage(false);
+		Language language = mock(Language.class);
 		when(languagesService.getLanguageById(Mockito.<String>any()))
 			.thenReturn(language);
 		ThesaurusView source2 = new ThesaurusView();

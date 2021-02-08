@@ -1,6 +1,7 @@
 package fr.mcc.ginco.imports.ginco;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.Alignment;
@@ -66,8 +67,9 @@ public class GincoAlignmentImporterTest {
 
 	@Test
 	public void storeAlignments2() {
+		Alignment alignment1 = mock(Alignment.class);
 		when(alignmentDAO.update(Mockito.<Alignment>any()))
-			.thenReturn(new Alignment());
+			.thenReturn(alignment1);
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
 		ArrayList<Alignment> list = new ArrayList<Alignment>();
@@ -93,8 +95,9 @@ public class GincoAlignmentImporterTest {
 
 	@Test
 	public void storeExternalThesauruses2() {
+		ExternalThesaurus externalThesaurus = mock(ExternalThesaurus.class);
 		when(externalThesaurusDAO.findBySourceExternalId(Mockito.<String>any()))
-			.thenReturn(new ExternalThesaurus());
+			.thenReturn(externalThesaurus);
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
 		ArrayList<Alignment> list = new ArrayList<Alignment>();
@@ -107,6 +110,7 @@ public class GincoAlignmentImporterTest {
 
 	@Test
 	public void storeExternalThesauruses3() {
+		ExternalThesaurus externalThesaurus = mock(ExternalThesaurus.class);
 		HashMap<String, JaxbList<Alignment>> alignments =
 			 new HashMap<String, JaxbList<Alignment>>();
 		ArrayList<Alignment> list = new ArrayList<Alignment>();

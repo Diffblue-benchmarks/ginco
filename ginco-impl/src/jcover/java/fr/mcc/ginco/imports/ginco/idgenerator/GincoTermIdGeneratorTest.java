@@ -1,6 +1,7 @@
 package fr.mcc.ginco.imports.ginco.idgenerator;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
@@ -40,8 +41,9 @@ public class GincoTermIdGeneratorTest {
 
 	@Test
 	public void getIdForTermIdMappingIsFooReturnsFoo() {
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTermDAO.getById(Mockito.<String>any()))
-			.thenReturn(new ThesaurusTerm());
+			.thenReturn(thesaurusTerm);
 		when(generatorService.generate(Mockito.<Class>any()))
 			.thenReturn("foo");
 		HashMap<String, String> idMapping = new HashMap<String, String>();

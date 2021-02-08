@@ -63,9 +63,9 @@ class ArraysGeneratorTest {
 			 new ArrayList<ThesaurusArray>();
 		ThesaurusArray thesaurusArray1 = new ThesaurusArray();
 		thesaurusArray1.setIdentifier("data");
-		Thesaurus thesaurus5 = new Thesaurus();
-		thesaurus5.setIdentifier("data");
-		thesaurusArray1.setThesaurus(thesaurus5);
+		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setIdentifier("data");
+		thesaurusArray1.setThesaurus(thesaurus3);
 		thesaurusArrayList.add(thesaurusArray1);
 		when(thesaurusArrayService.getAllThesaurusArrayByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
 			.thenReturn(thesaurusArrayList);

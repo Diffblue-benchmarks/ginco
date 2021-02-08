@@ -1,11 +1,10 @@
 package fr.mcc.ginco.extjs.view.utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -52,7 +51,31 @@ class CustomAttributesTypesConverterTest {
 	private CustomAttributesTypesConverter service;
 
 	@Test
-	void convertList() {
+	void convertIsConceptIsFalse() {
+
+		// arrange
+		GenericCustomAttributeType source = new GenericCustomAttributeType();
+		source.setCode("DE");
+		source.setIdentifier(1);
+		Thesaurus thesaurus = mock(Thesaurus.class);
+		when(thesaurus.getIdentifier())
+			.thenReturn("data");
+		source.setThesaurus(thesaurus);
+		source.setValue("value");
+
+		// act
+		GenericCustomAttributeTypeView result = service.convert(source, false);
+
+		// assert
+		assertThat(result.getCode(), is("DE"));
+		assertThat(result.getExportable(), is(nullValue()));
+		assertThat(result.getIdentifier(), is(1));
+		assertThat(result.getThesaurusId(), is("data"));
+		assertThat(result.getValue(), is("value"));
+	}
+
+	@Test
+	void convertListIsConceptIsFalse() {
 
 		// arrange
 		ArrayList<GenericCustomAttributeType> sourceList =
@@ -61,9 +84,8 @@ class CustomAttributesTypesConverterTest {
 			 new GenericCustomAttributeType();
 		genericCustomAttributeType.setCode("DE");
 		genericCustomAttributeType.setIdentifier(1);
-		Thesaurus thesaurus = mock(Thesaurus.class);
-		when(thesaurus.getIdentifier())
-			.thenReturn("data");
+		Thesaurus thesaurus = new Thesaurus();
+		thesaurus.setIdentifier("data");
 		genericCustomAttributeType.setThesaurus(thesaurus);
 		genericCustomAttributeType.setValue("value");
 		sourceList.add(genericCustomAttributeType);
@@ -82,34 +104,18 @@ class CustomAttributesTypesConverterTest {
 	}
 
 	@Test
-	void convertListSourceListIsEmptyReturnsEmpty() {
-		assertThat(service.convertList(new ArrayList<GenericCustomAttributeType>(), false), empty());
-	}
-
-	@Test
-	void convertIsConceptIsFalse() {
-
-		// arrange
+	void convert() {
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
 			.thenReturn(new Thesaurus());
 		CustomTermAttributeType customTermAttributeType =
-			 new CustomTermAttributeType();
-		customTermAttributeType.setIdentifier(1);
-		Thesaurus thesaurus2 = mock(Thesaurus.class);
-		customTermAttributeType.setThesaurus(thesaurus2);
+			 mock(CustomTermAttributeType.class);
 		when(customTermAttributeTypeService.getAttributeTypeById(anyInt()))
 			.thenReturn(customTermAttributeType);
 		GenericCustomAttributeTypeView view = new GenericCustomAttributeTypeView();
 		view.setCode("DE");
 		view.setValue("value");
-
-		// act
-		GenericCustomAttributeType result = service.convert(view, false);
-
-		// assert
-		assertThat(result.getCode(), is("de"));
-		assertThat(result.getIdentifier(), is(1));
-		assertThat(result.getThesaurus(), sameInstance(thesaurus2));
-		assertThat(result.getValue(), is("value"));
+		assertThat(service.convert(view, false), is(notNullValue()));
+		Mockito.verify(customTermAttributeType).setCode(Mockito.eq("de"));
+		Mockito.verify(customTermAttributeType).setValue(Mockito.eq("value"));
 	}
 }

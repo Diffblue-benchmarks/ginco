@@ -65,12 +65,13 @@ public class MistralRevServiceImplTest {
 
 	@Test
 	public void getAllRevisionsTimestampIsOne() throws org.hibernate.HibernateException, java.io.IOException {
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
 		when(thesaurusService.getThesaurusById(Mockito.<String>any()))
-			.thenReturn(new Thesaurus());
+			.thenReturn(thesaurus1);
 		when(thesaurusService.getThesaurusList())
 			.thenReturn(new ArrayList<Thesaurus>());
 		ArrayList<String> stringList = new ArrayList<String>();
-		stringList.add("Smith");
+		stringList.add("foo=bar");
 		Query query = mock(Query.class);
 		SQLQuery obj = mock(SQLQuery.class);
 		when(obj.list())

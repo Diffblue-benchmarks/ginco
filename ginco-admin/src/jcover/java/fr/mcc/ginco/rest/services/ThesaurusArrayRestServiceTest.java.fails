@@ -166,10 +166,10 @@ class ThesaurusArrayRestServiceTest {
 		when(nodeLabelViewConverter.convert(Mockito.<ThesaurusArrayView>any()))
 			.thenReturn(new NodeLabel());
 		ThesaurusArrayView thesaurusArrayViewJAXBElement = new ThesaurusArrayView();
-		ArrayList<ThesaurusArrayConceptView> concepts13 =
+		ArrayList<ThesaurusArrayConceptView> concepts10 =
 			 new ArrayList<ThesaurusArrayConceptView>();
-		concepts13.add(new ThesaurusArrayConceptView());
-		thesaurusArrayViewJAXBElement.setConcepts(concepts13);
+		concepts10.add(new ThesaurusArrayConceptView());
+		thesaurusArrayViewJAXBElement.setConcepts(concepts10);
 
 		// act
 		ThesaurusArrayView result =

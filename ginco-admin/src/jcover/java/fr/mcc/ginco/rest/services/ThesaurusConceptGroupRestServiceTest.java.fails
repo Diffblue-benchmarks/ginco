@@ -1,0 +1,758 @@
+package fr.mcc.ginco.rest.services;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import fr.mcc.ginco.beans.AssociativeRelationship;
+import fr.mcc.ginco.beans.Language;
+import fr.mcc.ginco.beans.Thesaurus;
+import fr.mcc.ginco.beans.ThesaurusArray;
+import fr.mcc.ginco.beans.ThesaurusConcept;
+import fr.mcc.ginco.beans.ThesaurusConceptGroup;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupLabel;
+import fr.mcc.ginco.beans.ThesaurusConceptGroupType;
+import fr.mcc.ginco.beans.ThesaurusFormat;
+import fr.mcc.ginco.beans.ThesaurusOrganization;
+import fr.mcc.ginco.beans.ThesaurusType;
+import fr.mcc.ginco.beans.ThesaurusVersionHistory;
+import fr.mcc.ginco.extjs.view.ExtJsonFormLoadData;
+import fr.mcc.ginco.extjs.view.pojo.ThesaurusConceptGroupView;
+import fr.mcc.ginco.extjs.view.utils.ThesaurusConceptGroupLabelViewConverter;
+import fr.mcc.ginco.extjs.view.utils.ThesaurusConceptGroupViewConverter;
+import fr.mcc.ginco.services.IThesaurusConceptGroupService;
+import fr.mcc.ginco.services.IThesaurusConceptGroupTypeService;
+import fr.mcc.ginco.services.IThesaurusService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+/**
+ * Unit tests for fr.mcc.ginco.rest.services.ThesaurusConceptGroupRestService
+ *
+ * @author Diffblue Cover
+ */
+
+@ContextConfiguration(classes = {ThesaurusConceptGroupRestService.class})
+@ExtendWith(SpringExtension.class)
+class ThesaurusConceptGroupRestServiceTest {
+
+	@MockBean(name = "thesaurusConceptGroupLabelViewConverter")
+	private ThesaurusConceptGroupLabelViewConverter thesaurusConceptGroupLabelViewConverter;
+
+	@MockBean(name = "thesaurusConceptGroupService")
+	private IThesaurusConceptGroupService thesaurusConceptGroupService;
+
+	@MockBean(name = "thesaurusConceptGroupTypeService")
+	private IThesaurusConceptGroupTypeService thesaurusConceptGroupTypeService;
+
+	@MockBean(name = "thesaurusConceptGroupViewConverter")
+	private ThesaurusConceptGroupViewConverter thesaurusConceptGroupViewConverter;
+
+	@MockBean(name = "thesaurusService")
+	private IThesaurusService thesaurusService;
+
+	@Autowired
+	private ThesaurusConceptGroupRestService service;
+
+	@Test
+	void getConceptGroupTypes() {
+
+		// arrange
+		ArrayList<ThesaurusConceptGroupType> thesaurusConceptGroupTypeList =
+			 new ArrayList<ThesaurusConceptGroupType>();
+		ThesaurusConceptGroupType thesaurusConceptGroupType =
+			 new ThesaurusConceptGroupType();
+		thesaurusConceptGroupTypeList.add(thesaurusConceptGroupType);
+		when(thesaurusConceptGroupTypeService.getConceptGroupTypeList())
+			.thenReturn(thesaurusConceptGroupTypeList);
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusConceptGroupType>> result =
+			 service.getConceptGroupTypes();
+
+		// assert
+		assertThat(result.getData(), hasSize(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptGroupType));
+		assertThat(result.getTotal(), is(1L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void getConceptGroupById() throws java.text.ParseException {
+
+		// arrange
+		ThesaurusConceptGroupView thesaurusConceptGroupView =
+			 new ThesaurusConceptGroupView();
+		ArrayList<String> concepts1 = new ArrayList<String>();
+		concepts1.add("hello");
+		thesaurusConceptGroupView.setConcepts(concepts1);
+		thesaurusConceptGroupView.setCreated("someone");
+		thesaurusConceptGroupView.setGroupConceptLabelId(1);
+		thesaurusConceptGroupView.setIdentifier("data");
+		thesaurusConceptGroupView.setIsDynamic(false);
+		thesaurusConceptGroupView.setLabel("label");
+		thesaurusConceptGroupView.setLanguage("hello");
+		thesaurusConceptGroupView.setModified("someone");
+		thesaurusConceptGroupView.setNotation("DE");
+		thesaurusConceptGroupView.setParentConceptId("1234");
+		thesaurusConceptGroupView.setParentConceptLabel("label");
+		thesaurusConceptGroupView.setParentGroupId("1234");
+		thesaurusConceptGroupView.setParentGroupLabel("label");
+		thesaurusConceptGroupView.setThesaurusId("1234");
+		thesaurusConceptGroupView.setType("text/plain");
+		when(thesaurusConceptGroupViewConverter.convert(Mockito.<ThesaurusConceptGroup>any()))
+			.thenReturn(thesaurusConceptGroupView);
+		ThesaurusConceptGroup thesaurusConceptGroup = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType1 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType1.setCode("DE");
+		conceptGroupType1.setLabel("label");
+		conceptGroupType1.setSkosLabel("label");
+		thesaurusConceptGroup.setConceptGroupType(conceptGroupType1);
+		thesaurusConceptGroup.setConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConceptGroup.setIdentifier("data");
+		thesaurusConceptGroup.setIsDynamic(false);
+		thesaurusConceptGroup.setNotation("DE");
+		ThesaurusConceptGroup parent1 = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType2 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType2.setCode("DE");
+		conceptGroupType2.setLabel("label");
+		conceptGroupType2.setSkosLabel("label");
+		parent1.setConceptGroupType(conceptGroupType2);
+		parent1.setConcepts(new HashSet<ThesaurusConcept>());
+		parent1.setIdentifier("data");
+		parent1.setIsDynamic(false);
+		parent1.setNotation("DE");
+		ThesaurusConceptGroup parent2 = new ThesaurusConceptGroup();
+		parent2.setConceptGroupType(new ThesaurusConceptGroupType());
+		parent2.setConcepts(new HashSet<ThesaurusConcept>());
+		parent2.setIdentifier("data");
+		parent2.setIsDynamic(false);
+		parent2.setNotation("DE");
+		parent2.setParent(new ThesaurusConceptGroup());
+		parent2.setParentConcept(new ThesaurusConcept());
+		parent2.setThesaurus(new Thesaurus());
+		parent1.setParent(parent2);
+		ThesaurusConcept parentConcept2 = new ThesaurusConcept();
+		parentConcept2.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		parentConcept2.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		parentConcept2.setConceptArrays(new HashSet<ThesaurusArray>());
+		parentConcept2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept2.setIdentifier("data");
+		parentConcept2.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept2.setNotation("DE");
+		parentConcept2.setParentConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept2.setRootConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept2.setStatus(1);
+		parentConcept2.setThesaurus(new Thesaurus());
+		parentConcept2.setTopConcept(false);
+		parent1.setParentConcept(parentConcept2);
+		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setArchived(false);
+		thesaurus3.setContributor("foo");
+		thesaurus3.setCoverage("foo");
+		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus3.setCreator(new ThesaurusOrganization());
+		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus3.setDefaultTopConcept(false);
+		thesaurus3.setDescription("some text");
+		thesaurus3.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus3.setIdentifier("data");
+		thesaurus3.setLang(new HashSet<Language>());
+		thesaurus3.setPolyHierarchical(false);
+		thesaurus3.setPublisher("foo");
+		thesaurus3.setRelation("DE");
+		thesaurus3.setRights("foo");
+		thesaurus3.setSource("foo");
+		thesaurus3.setSubject("foo");
+		thesaurus3.setTitle("Mr");
+		thesaurus3.setType(new ThesaurusType());
+		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
+		parent1.setThesaurus(thesaurus3);
+		thesaurusConceptGroup.setParent(parent1);
+		ThesaurusConcept parentConcept3 = new ThesaurusConcept();
+		parentConcept3.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		parentConcept3.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		parentConcept3.setConceptArrays(new HashSet<ThesaurusArray>());
+		parentConcept3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept3.setIdentifier("data");
+		parentConcept3.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept3.setNotation("DE");
+		parentConcept3.setParentConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept3.setRootConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept3.setStatus(1);
+		Thesaurus thesaurus4 = new Thesaurus();
+		thesaurus4.setArchived(false);
+		thesaurus4.setContributor("foo");
+		thesaurus4.setCoverage("foo");
+		thesaurus4.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus4.setCreator(new ThesaurusOrganization());
+		thesaurus4.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus4.setDefaultTopConcept(false);
+		thesaurus4.setDescription("some text");
+		thesaurus4.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus4.setIdentifier("data");
+		thesaurus4.setLang(new HashSet<Language>());
+		thesaurus4.setPolyHierarchical(false);
+		thesaurus4.setPublisher("foo");
+		thesaurus4.setRelation("DE");
+		thesaurus4.setRights("foo");
+		thesaurus4.setSource("foo");
+		thesaurus4.setSubject("foo");
+		thesaurus4.setTitle("Mr");
+		thesaurus4.setType(new ThesaurusType());
+		thesaurus4.setVersions(new HashSet<ThesaurusVersionHistory>());
+		parentConcept3.setThesaurus(thesaurus4);
+		parentConcept3.setTopConcept(false);
+		thesaurusConceptGroup.setParentConcept(parentConcept3);
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurus5.setArchived(false);
+		thesaurus5.setContributor("foo");
+		thesaurus5.setCoverage("foo");
+		thesaurus5.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator3 = new ThesaurusOrganization();
+		creator3.setEmail("info@diffblue.com");
+		creator3.setHomepage("foo");
+		creator3.setIdentifier(1);
+		creator3.setName("Acme");
+		thesaurus5.setCreator(creator3);
+		thesaurus5.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus5.setDefaultTopConcept(false);
+		thesaurus5.setDescription("some text");
+		thesaurus5.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus5.setIdentifier("data");
+		thesaurus5.setLang(new HashSet<Language>());
+		thesaurus5.setPolyHierarchical(false);
+		thesaurus5.setPublisher("foo");
+		thesaurus5.setRelation("DE");
+		thesaurus5.setRights("foo");
+		thesaurus5.setSource("foo");
+		thesaurus5.setSubject("foo");
+		thesaurus5.setTitle("Mr");
+		ThesaurusType type4 = new ThesaurusType();
+		type4.setIdentifier(1);
+		type4.setLabel("label");
+		thesaurus5.setType(type4);
+		thesaurus5.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConceptGroup.setThesaurus(thesaurus5);
+		when(thesaurusConceptGroupService.getConceptGroupById(Mockito.<String>any()))
+			.thenReturn(thesaurusConceptGroup);
+
+		// act
+		ThesaurusConceptGroupView result = service.getConceptGroupById("1234");
+
+		// assert
+		assertThat(result.getConcepts(), equalTo(Arrays.asList("hello")));
+		assertThat(result.getCreated(), is("someone"));
+		assertThat(result.getGroupConceptLabelId(), is(1));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getIsDynamic(), is(false));
+		assertThat(result.getLabel(), is("label"));
+		assertThat(result.getLanguage(), is("hello"));
+		assertThat(result.getModified(), is("someone"));
+		assertThat(result.getNotation(), is("DE"));
+		assertThat(result.getParentConceptId(), is("1234"));
+		assertThat(result.getParentConceptLabel(), is("label"));
+		assertThat(result.getParentGroupId(), is("1234"));
+		assertThat(result.getParentGroupLabel(), is("label"));
+		assertThat(result.getThesaurusId(), is("1234"));
+		assertThat(result.getType(), is("text/plain"));
+	}
+
+	@Test
+	void getAllConceptGroupsByThesaurusId() {
+
+		// arrange
+		ArrayList<ThesaurusConceptGroupView> thesaurusConceptGroupViewList =
+			 new ArrayList<ThesaurusConceptGroupView>();
+		ThesaurusConceptGroupView thesaurusConceptGroupView =
+			 new ThesaurusConceptGroupView();
+		thesaurusConceptGroupViewList.add(thesaurusConceptGroupView);
+		when(thesaurusConceptGroupViewConverter.convert(Mockito.<List<ThesaurusConceptGroup>>any()))
+			.thenReturn(thesaurusConceptGroupViewList);
+		when(thesaurusConceptGroupService.getAllThesaurusConceptGroupsByThesaurusId(Mockito.<String>any(), Mockito.<String>any()))
+			.thenReturn(new ArrayList<ThesaurusConceptGroup>());
+
+		// act
+		ExtJsonFormLoadData<List<ThesaurusConceptGroupView>> result =
+			 service.getAllConceptGroupsByThesaurusId("1234", "1234");
+
+		// assert
+		assertThat(result.getData(), hasSize(1));
+		assertThat(result.getData().get(0), sameInstance(thesaurusConceptGroupView));
+		assertThat(result.getTotal(), is(0L));
+		assertThat(result.isSuccess(), is(true));
+	}
+
+	@Test
+	void updateThesaurusConceptGroup() throws java.text.ParseException {
+
+		// arrange
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator1 = new ThesaurusOrganization();
+		creator1.setEmail("info@diffblue.com");
+		creator1.setHomepage("foo");
+		creator1.setIdentifier(1);
+		creator1.setName("Acme");
+		thesaurus1.setCreator(creator1);
+		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setLang(new HashSet<Language>());
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		ThesaurusType type1 = new ThesaurusType();
+		type1.setIdentifier(1);
+		type1.setLabel("label");
+		thesaurus1.setType(type1);
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurus1);
+		ThesaurusConceptGroupView thesaurusConceptGroupView =
+			 new ThesaurusConceptGroupView();
+		ArrayList<String> concepts1 = new ArrayList<String>();
+		concepts1.add("hello");
+		thesaurusConceptGroupView.setConcepts(concepts1);
+		thesaurusConceptGroupView.setCreated("someone");
+		thesaurusConceptGroupView.setGroupConceptLabelId(1);
+		thesaurusConceptGroupView.setIdentifier("data");
+		thesaurusConceptGroupView.setIsDynamic(false);
+		thesaurusConceptGroupView.setLabel("label");
+		thesaurusConceptGroupView.setLanguage("hello");
+		thesaurusConceptGroupView.setModified("someone");
+		thesaurusConceptGroupView.setNotation("DE");
+		thesaurusConceptGroupView.setParentConceptId("1234");
+		thesaurusConceptGroupView.setParentConceptLabel("label");
+		thesaurusConceptGroupView.setParentGroupId("1234");
+		thesaurusConceptGroupView.setParentGroupLabel("label");
+		thesaurusConceptGroupView.setThesaurusId("1234");
+		thesaurusConceptGroupView.setType("text/plain");
+		ThesaurusConceptGroup thesaurusConceptGroup1 = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType1 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType1.setCode("DE");
+		conceptGroupType1.setLabel("label");
+		conceptGroupType1.setSkosLabel("label");
+		thesaurusConceptGroup1.setConceptGroupType(conceptGroupType1);
+		thesaurusConceptGroup1.setConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConceptGroup1.setIdentifier("data");
+		thesaurusConceptGroup1.setIsDynamic(false);
+		thesaurusConceptGroup1.setNotation("DE");
+		ThesaurusConceptGroup parent1 = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType2 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType2.setCode("DE");
+		conceptGroupType2.setLabel("label");
+		conceptGroupType2.setSkosLabel("label");
+		parent1.setConceptGroupType(conceptGroupType2);
+		parent1.setConcepts(new HashSet<ThesaurusConcept>());
+		parent1.setIdentifier("data");
+		parent1.setIsDynamic(false);
+		parent1.setNotation("DE");
+		ThesaurusConceptGroup parent2 = new ThesaurusConceptGroup();
+		parent2.setConceptGroupType(new ThesaurusConceptGroupType());
+		parent2.setConcepts(new HashSet<ThesaurusConcept>());
+		parent2.setIdentifier("data");
+		parent2.setIsDynamic(false);
+		parent2.setNotation("DE");
+		parent2.setParent(new ThesaurusConceptGroup());
+		parent2.setParentConcept(new ThesaurusConcept());
+		parent2.setThesaurus(new Thesaurus());
+		parent1.setParent(parent2);
+		ThesaurusConcept parentConcept2 = new ThesaurusConcept();
+		parentConcept2.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		parentConcept2.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		parentConcept2.setConceptArrays(new HashSet<ThesaurusArray>());
+		parentConcept2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept2.setIdentifier("data");
+		parentConcept2.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept2.setNotation("DE");
+		parentConcept2.setParentConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept2.setRootConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept2.setStatus(1);
+		parentConcept2.setThesaurus(new Thesaurus());
+		parentConcept2.setTopConcept(false);
+		parent1.setParentConcept(parentConcept2);
+		Thesaurus thesaurus4 = new Thesaurus();
+		thesaurus4.setArchived(false);
+		thesaurus4.setContributor("foo");
+		thesaurus4.setCoverage("foo");
+		thesaurus4.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus4.setCreator(new ThesaurusOrganization());
+		thesaurus4.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus4.setDefaultTopConcept(false);
+		thesaurus4.setDescription("some text");
+		thesaurus4.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus4.setIdentifier("data");
+		thesaurus4.setLang(new HashSet<Language>());
+		thesaurus4.setPolyHierarchical(false);
+		thesaurus4.setPublisher("foo");
+		thesaurus4.setRelation("DE");
+		thesaurus4.setRights("foo");
+		thesaurus4.setSource("foo");
+		thesaurus4.setSubject("foo");
+		thesaurus4.setTitle("Mr");
+		thesaurus4.setType(new ThesaurusType());
+		thesaurus4.setVersions(new HashSet<ThesaurusVersionHistory>());
+		parent1.setThesaurus(thesaurus4);
+		thesaurusConceptGroup1.setParent(parent1);
+		ThesaurusConcept parentConcept3 = new ThesaurusConcept();
+		parentConcept3.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		parentConcept3.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		parentConcept3.setConceptArrays(new HashSet<ThesaurusArray>());
+		parentConcept3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept3.setIdentifier("data");
+		parentConcept3.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept3.setNotation("DE");
+		parentConcept3.setParentConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept3.setRootConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept3.setStatus(1);
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurus5.setArchived(false);
+		thesaurus5.setContributor("foo");
+		thesaurus5.setCoverage("foo");
+		thesaurus5.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus5.setCreator(new ThesaurusOrganization());
+		thesaurus5.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus5.setDefaultTopConcept(false);
+		thesaurus5.setDescription("some text");
+		thesaurus5.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus5.setIdentifier("data");
+		thesaurus5.setLang(new HashSet<Language>());
+		thesaurus5.setPolyHierarchical(false);
+		thesaurus5.setPublisher("foo");
+		thesaurus5.setRelation("DE");
+		thesaurus5.setRights("foo");
+		thesaurus5.setSource("foo");
+		thesaurus5.setSubject("foo");
+		thesaurus5.setTitle("Mr");
+		thesaurus5.setType(new ThesaurusType());
+		thesaurus5.setVersions(new HashSet<ThesaurusVersionHistory>());
+		parentConcept3.setThesaurus(thesaurus5);
+		parentConcept3.setTopConcept(false);
+		thesaurusConceptGroup1.setParentConcept(parentConcept3);
+		Thesaurus thesaurus6 = new Thesaurus();
+		thesaurus6.setArchived(false);
+		thesaurus6.setContributor("foo");
+		thesaurus6.setCoverage("foo");
+		thesaurus6.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator4 = new ThesaurusOrganization();
+		creator4.setEmail("info@diffblue.com");
+		creator4.setHomepage("foo");
+		creator4.setIdentifier(1);
+		creator4.setName("Acme");
+		thesaurus6.setCreator(creator4);
+		thesaurus6.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus6.setDefaultTopConcept(false);
+		thesaurus6.setDescription("some text");
+		thesaurus6.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus6.setIdentifier("data");
+		thesaurus6.setLang(new HashSet<Language>());
+		thesaurus6.setPolyHierarchical(false);
+		thesaurus6.setPublisher("foo");
+		thesaurus6.setRelation("DE");
+		thesaurus6.setRights("foo");
+		thesaurus6.setSource("foo");
+		thesaurus6.setSubject("foo");
+		thesaurus6.setTitle("Mr");
+		ThesaurusType type5 = new ThesaurusType();
+		type5.setIdentifier(1);
+		type5.setLabel("label");
+		thesaurus6.setType(type5);
+		thesaurus6.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConceptGroup1.setThesaurus(thesaurus6);
+		when(thesaurusConceptGroupViewConverter.convert(Mockito.<ThesaurusConceptGroup>any()))
+			.thenReturn(thesaurusConceptGroupView);
+		when(thesaurusConceptGroupViewConverter.convert(Mockito.<ThesaurusConceptGroupView>any()))
+			.thenReturn(thesaurusConceptGroup1);
+		ThesaurusConceptGroup thesaurusConceptGroup2 = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType4 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType4.setCode("DE");
+		conceptGroupType4.setLabel("label");
+		conceptGroupType4.setSkosLabel("label");
+		thesaurusConceptGroup2.setConceptGroupType(conceptGroupType4);
+		thesaurusConceptGroup2.setConcepts(new HashSet<ThesaurusConcept>());
+		thesaurusConceptGroup2.setIdentifier("data");
+		thesaurusConceptGroup2.setIsDynamic(false);
+		thesaurusConceptGroup2.setNotation("DE");
+		ThesaurusConceptGroup parent4 = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType5 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType5.setCode("DE");
+		conceptGroupType5.setLabel("label");
+		conceptGroupType5.setSkosLabel("label");
+		parent4.setConceptGroupType(conceptGroupType5);
+		parent4.setConcepts(new HashSet<ThesaurusConcept>());
+		parent4.setIdentifier("data");
+		parent4.setIsDynamic(false);
+		parent4.setNotation("DE");
+		ThesaurusConceptGroup parent5 = new ThesaurusConceptGroup();
+		parent5.setConceptGroupType(new ThesaurusConceptGroupType());
+		parent5.setConcepts(new HashSet<ThesaurusConcept>());
+		parent5.setIdentifier("data");
+		parent5.setIsDynamic(false);
+		parent5.setNotation("DE");
+		parent5.setParent(new ThesaurusConceptGroup());
+		parent5.setParentConcept(new ThesaurusConcept());
+		parent5.setThesaurus(new Thesaurus());
+		parent4.setParent(parent5);
+		ThesaurusConcept parentConcept5 = new ThesaurusConcept();
+		parentConcept5.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		parentConcept5.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		parentConcept5.setConceptArrays(new HashSet<ThesaurusArray>());
+		parentConcept5.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept5.setIdentifier("data");
+		parentConcept5.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept5.setNotation("DE");
+		parentConcept5.setParentConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept5.setRootConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept5.setStatus(1);
+		parentConcept5.setThesaurus(new Thesaurus());
+		parentConcept5.setTopConcept(false);
+		parent4.setParentConcept(parentConcept5);
+		Thesaurus thesaurus9 = new Thesaurus();
+		thesaurus9.setArchived(false);
+		thesaurus9.setContributor("foo");
+		thesaurus9.setCoverage("foo");
+		thesaurus9.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus9.setCreator(new ThesaurusOrganization());
+		thesaurus9.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus9.setDefaultTopConcept(false);
+		thesaurus9.setDescription("some text");
+		thesaurus9.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus9.setIdentifier("data");
+		thesaurus9.setLang(new HashSet<Language>());
+		thesaurus9.setPolyHierarchical(false);
+		thesaurus9.setPublisher("foo");
+		thesaurus9.setRelation("DE");
+		thesaurus9.setRights("foo");
+		thesaurus9.setSource("foo");
+		thesaurus9.setSubject("foo");
+		thesaurus9.setTitle("Mr");
+		thesaurus9.setType(new ThesaurusType());
+		thesaurus9.setVersions(new HashSet<ThesaurusVersionHistory>());
+		parent4.setThesaurus(thesaurus9);
+		thesaurusConceptGroup2.setParent(parent4);
+		ThesaurusConcept parentConcept6 = new ThesaurusConcept();
+		parentConcept6.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		parentConcept6.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		parentConcept6.setConceptArrays(new HashSet<ThesaurusArray>());
+		parentConcept6.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept6.setIdentifier("data");
+		parentConcept6.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept6.setNotation("DE");
+		parentConcept6.setParentConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept6.setRootConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept6.setStatus(1);
+		Thesaurus thesaurus10 = new Thesaurus();
+		thesaurus10.setArchived(false);
+		thesaurus10.setContributor("foo");
+		thesaurus10.setCoverage("foo");
+		thesaurus10.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus10.setCreator(new ThesaurusOrganization());
+		thesaurus10.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus10.setDefaultTopConcept(false);
+		thesaurus10.setDescription("some text");
+		thesaurus10.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus10.setIdentifier("data");
+		thesaurus10.setLang(new HashSet<Language>());
+		thesaurus10.setPolyHierarchical(false);
+		thesaurus10.setPublisher("foo");
+		thesaurus10.setRelation("DE");
+		thesaurus10.setRights("foo");
+		thesaurus10.setSource("foo");
+		thesaurus10.setSubject("foo");
+		thesaurus10.setTitle("Mr");
+		thesaurus10.setType(new ThesaurusType());
+		thesaurus10.setVersions(new HashSet<ThesaurusVersionHistory>());
+		parentConcept6.setThesaurus(thesaurus10);
+		parentConcept6.setTopConcept(false);
+		thesaurusConceptGroup2.setParentConcept(parentConcept6);
+		Thesaurus thesaurus11 = new Thesaurus();
+		thesaurus11.setArchived(false);
+		thesaurus11.setContributor("foo");
+		thesaurus11.setCoverage("foo");
+		thesaurus11.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		ThesaurusOrganization creator7 = new ThesaurusOrganization();
+		creator7.setEmail("info@diffblue.com");
+		creator7.setHomepage("foo");
+		creator7.setIdentifier(1);
+		creator7.setName("Acme");
+		thesaurus11.setCreator(creator7);
+		thesaurus11.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus11.setDefaultTopConcept(false);
+		thesaurus11.setDescription("some text");
+		thesaurus11.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus11.setIdentifier("data");
+		thesaurus11.setLang(new HashSet<Language>());
+		thesaurus11.setPolyHierarchical(false);
+		thesaurus11.setPublisher("foo");
+		thesaurus11.setRelation("DE");
+		thesaurus11.setRights("foo");
+		thesaurus11.setSource("foo");
+		thesaurus11.setSubject("foo");
+		thesaurus11.setTitle("Mr");
+		ThesaurusType type8 = new ThesaurusType();
+		type8.setIdentifier(1);
+		type8.setLabel("label");
+		thesaurus11.setType(type8);
+		thesaurus11.setVersions(new HashSet<ThesaurusVersionHistory>());
+		thesaurusConceptGroup2.setThesaurus(thesaurus11);
+		when(thesaurusConceptGroupService.updateThesaurusConceptGroup(Mockito.<ThesaurusConceptGroup>any(), Mockito.<ThesaurusConceptGroupLabel>any()))
+			.thenReturn(thesaurusConceptGroup2);
+		ThesaurusConceptGroupLabel thesaurusConceptGroupLabel =
+			 new ThesaurusConceptGroupLabel();
+		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
+		ThesaurusConceptGroupType conceptGroupType7 =
+			 new ThesaurusConceptGroupType();
+		conceptGroupType7.setCode("DE");
+		conceptGroupType7.setLabel("label");
+		conceptGroupType7.setSkosLabel("label");
+		conceptGroup.setConceptGroupType(conceptGroupType7);
+		conceptGroup.setConcepts(new HashSet<ThesaurusConcept>());
+		conceptGroup.setIdentifier("data");
+		conceptGroup.setIsDynamic(false);
+		conceptGroup.setNotation("DE");
+		ThesaurusConceptGroup parent7 = new ThesaurusConceptGroup();
+		parent7.setConceptGroupType(new ThesaurusConceptGroupType());
+		parent7.setConcepts(new HashSet<ThesaurusConcept>());
+		parent7.setIdentifier("data");
+		parent7.setIsDynamic(false);
+		parent7.setNotation("DE");
+		parent7.setParent(new ThesaurusConceptGroup());
+		parent7.setParentConcept(new ThesaurusConcept());
+		parent7.setThesaurus(new Thesaurus());
+		conceptGroup.setParent(parent7);
+		ThesaurusConcept parentConcept8 = new ThesaurusConcept();
+		parentConcept8.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
+		parentConcept8.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
+		parentConcept8.setConceptArrays(new HashSet<ThesaurusArray>());
+		parentConcept8.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept8.setIdentifier("data");
+		parentConcept8.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		parentConcept8.setNotation("DE");
+		parentConcept8.setParentConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept8.setRootConcepts(new HashSet<ThesaurusConcept>());
+		parentConcept8.setStatus(1);
+		parentConcept8.setThesaurus(new Thesaurus());
+		parentConcept8.setTopConcept(false);
+		conceptGroup.setParentConcept(parentConcept8);
+		Thesaurus thesaurus14 = new Thesaurus();
+		thesaurus14.setArchived(false);
+		thesaurus14.setContributor("foo");
+		thesaurus14.setCoverage("foo");
+		thesaurus14.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus14.setCreator(new ThesaurusOrganization());
+		thesaurus14.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus14.setDefaultTopConcept(false);
+		thesaurus14.setDescription("some text");
+		thesaurus14.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus14.setIdentifier("data");
+		thesaurus14.setLang(new HashSet<Language>());
+		thesaurus14.setPolyHierarchical(false);
+		thesaurus14.setPublisher("foo");
+		thesaurus14.setRelation("DE");
+		thesaurus14.setRights("foo");
+		thesaurus14.setSource("foo");
+		thesaurus14.setSubject("foo");
+		thesaurus14.setTitle("Mr");
+		thesaurus14.setType(new ThesaurusType());
+		thesaurus14.setVersions(new HashSet<ThesaurusVersionHistory>());
+		conceptGroup.setThesaurus(thesaurus14);
+		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
+		thesaurusConceptGroupLabel.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurusConceptGroupLabel.setIdentifier(1);
+		Language language2 = new Language();
+		language2.setId("1234");
+		language2.setPart1("foo");
+		language2.setPrincipalLanguage(false);
+		language2.setRefname("root");
+		language2.setTopLanguage(false);
+		thesaurusConceptGroupLabel.setLanguage(language2);
+		thesaurusConceptGroupLabel.setLexicalValue("value");
+		thesaurusConceptGroupLabel.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		when(thesaurusConceptGroupLabelViewConverter.convert(Mockito.<ThesaurusConceptGroupView>any()))
+			.thenReturn(thesaurusConceptGroupLabel);
+		ThesaurusConceptGroupView thesaurusConceptGroupViewJAXBElement =
+			 new ThesaurusConceptGroupView();
+		ArrayList<String> concepts10 = new ArrayList<String>();
+		concepts10.add("hello");
+		thesaurusConceptGroupViewJAXBElement.setConcepts(concepts10);
+		thesaurusConceptGroupViewJAXBElement.setCreated("someone");
+		thesaurusConceptGroupViewJAXBElement.setGroupConceptLabelId(1);
+		thesaurusConceptGroupViewJAXBElement.setIdentifier("data");
+		thesaurusConceptGroupViewJAXBElement.setIsDynamic(false);
+		thesaurusConceptGroupViewJAXBElement.setLabel("label");
+		thesaurusConceptGroupViewJAXBElement.setLanguage("hello");
+		thesaurusConceptGroupViewJAXBElement.setModified("someone");
+		thesaurusConceptGroupViewJAXBElement.setNotation("DE");
+		thesaurusConceptGroupViewJAXBElement.setParentConceptId("1234");
+		thesaurusConceptGroupViewJAXBElement.setParentConceptLabel("label");
+		thesaurusConceptGroupViewJAXBElement.setParentGroupId("1234");
+		thesaurusConceptGroupViewJAXBElement.setParentGroupLabel("label");
+		thesaurusConceptGroupViewJAXBElement.setThesaurusId("1234");
+		thesaurusConceptGroupViewJAXBElement.setType("text/plain");
+
+		// act
+		ThesaurusConceptGroupView result =
+			 service.updateThesaurusConceptGroup(thesaurusConceptGroupViewJAXBElement);
+
+		// assert
+		assertThat(result.getConcepts(), equalTo(Arrays.asList("hello")));
+		assertThat(result.getCreated(), is("someone"));
+		assertThat(result.getGroupConceptLabelId(), is(1));
+		assertThat(result.getIdentifier(), is("data"));
+		assertThat(result.getIsDynamic(), is(false));
+		assertThat(result.getLabel(), is("label"));
+		assertThat(result.getLanguage(), is("hello"));
+		assertThat(result.getModified(), is("someone"));
+		assertThat(result.getNotation(), is("DE"));
+		assertThat(result.getParentConceptId(), is("1234"));
+		assertThat(result.getParentConceptLabel(), is("label"));
+		assertThat(result.getParentGroupId(), is("1234"));
+		assertThat(result.getParentGroupLabel(), is("label"));
+		assertThat(result.getThesaurusId(), is("1234"));
+		assertThat(result.getType(), is("text/plain"));
+	}
+
+	@Test
+	void destroyConceptGroup() {
+		Thesaurus thesaurus1 = mock(Thesaurus.class);
+		when(thesaurusService.updateThesaurusDate(Mockito.<Thesaurus>any()))
+			.thenReturn(thesaurus1);
+		when(thesaurusConceptGroupViewConverter.convert(Mockito.<ThesaurusConceptGroupView>any()))
+			.thenReturn(new ThesaurusConceptGroup());
+		when(thesaurusConceptGroupService.destroyThesaurusConceptGroup(Mockito.<ThesaurusConceptGroup>any()))
+			.thenReturn(new ThesaurusConceptGroup());
+		service.destroyConceptGroup(new ThesaurusConceptGroupView());
+	}
+}

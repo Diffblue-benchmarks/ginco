@@ -2,6 +2,7 @@ package fr.mcc.ginco.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -13,13 +14,10 @@ import fr.mcc.ginco.beans.Language;
 import fr.mcc.ginco.beans.Thesaurus;
 import fr.mcc.ginco.beans.ThesaurusConcept;
 import fr.mcc.ginco.beans.ThesaurusTerm;
-import fr.mcc.ginco.beans.ThesaurusTermRole;
 import fr.mcc.ginco.dao.IThesaurusDAO;
 import fr.mcc.ginco.dao.IThesaurusTermDAO;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,47 +54,11 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void getThesaurusTermById() throws java.text.ParseException {
-
-		// arrange
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		ThesaurusConcept concept = mock(ThesaurusConcept.class);
-		thesaurusTerm.setConcept(concept);
-		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setCreated(created1);
-		thesaurusTerm.setHidden(false);
-		thesaurusTerm.setIdentifier("data");
-		Language language = new Language();
-		thesaurusTerm.setLanguage(language);
-		thesaurusTerm.setLexicalValue("value");
-		Date modified = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setModified(modified);
-		thesaurusTerm.setPrefered(false);
-		ThesaurusTermRole role = new ThesaurusTermRole();
-		thesaurusTerm.setRole(role);
-		thesaurusTerm.setSource("foo");
-		thesaurusTerm.setStatus(1);
-		Thesaurus thesaurus = new Thesaurus();
-		thesaurusTerm.setThesaurus(thesaurus);
+	public void getThesaurusTermById() {
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTermDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusTerm);
-
-		// act
-		ThesaurusTerm result = service.getThesaurusTermById("1234");
-
-		// assert
-		assertSame(concept, result.getConcept());
-		assertSame(created1, result.getCreated());
-		assertFalse(result.getHidden());
-		assertEquals("data", result.getIdentifier());
-		assertSame(language, result.getLanguage());
-		assertEquals("value", result.getLexicalValue());
-		assertSame(modified, result.getModified());
-		assertFalse(result.getPrefered());
-		assertSame(role, result.getRole());
-		assertEquals("foo", result.getSource());
-		assertEquals(1, (int) result.getStatus());
-		assertSame(thesaurus, result.getThesaurus());
+		assertNotNull(service.getThesaurusTermById("1234"));
 	}
 
 	@Test
@@ -151,49 +113,13 @@ public class ThesaurusTermServiceImplTest {
 	}
 
 	@Test
-	public void updateThesaurusTerm() throws java.text.ParseException {
-
-		// arrange
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
-		ThesaurusConcept concept1 = mock(ThesaurusConcept.class);
-		thesaurusTerm.setConcept(concept1);
-		Date created1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setCreated(created1);
-		thesaurusTerm.setHidden(false);
-		thesaurusTerm.setIdentifier("data");
-		Language language1 = new Language();
-		thesaurusTerm.setLanguage(language1);
-		thesaurusTerm.setLexicalValue("value");
-		Date modified1 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusTerm.setModified(modified1);
-		thesaurusTerm.setPrefered(false);
-		ThesaurusTermRole role1 = new ThesaurusTermRole();
-		thesaurusTerm.setRole(role1);
-		thesaurusTerm.setSource("foo");
-		thesaurusTerm.setStatus(1);
-		Thesaurus thesaurus1 = new Thesaurus();
-		thesaurusTerm.setThesaurus(thesaurus1);
+	public void updateThesaurusTerm() {
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(thesaurusTerm);
 		ThesaurusTerm object = new ThesaurusTerm();
 		object.setStatus(1);
-
-		// act
-		ThesaurusTerm result = service.updateThesaurusTerm(object);
-
-		// assert
-		assertSame(concept1, result.getConcept());
-		assertSame(created1, result.getCreated());
-		assertFalse(result.getHidden());
-		assertEquals("data", result.getIdentifier());
-		assertSame(language1, result.getLanguage());
-		assertEquals("value", result.getLexicalValue());
-		assertSame(modified1, result.getModified());
-		assertFalse(result.getPrefered());
-		assertSame(role1, result.getRole());
-		assertEquals("foo", result.getSource());
-		assertEquals(1, (int) result.getStatus());
-		assertSame(thesaurus1, result.getThesaurus());
+		assertNotNull(service.updateThesaurusTerm(object));
 	}
 
 	@Test
@@ -333,7 +259,7 @@ public class ThesaurusTermServiceImplTest {
 	public void importSandBoxTerms() {
 
 		// arrange
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTermDAO.update(Mockito.<ThesaurusTerm>any()))
 			.thenReturn(thesaurusTerm);
 		when(thesaurusDAO.getById(Mockito.<String>any()))

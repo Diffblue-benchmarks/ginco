@@ -98,7 +98,7 @@ class AuthenticationFilterTest {
 		AuthenticationDetailsSource<HttpServletRequest, String> authenticationDetailsSource =
 			 mock(AuthenticationDetailsSource.class);
 		when(authenticationDetailsSource.buildDetails(Mockito.<HttpServletRequest>any()))
-			.thenReturn("foo=bar");
+			.thenReturn("Locked ");
 		authenticationFilter.setAuthenticationDetailsSource(authenticationDetailsSource);
 		AuthenticationFailureHandler failureHandler =
 			 mock(AuthenticationFailureHandler.class);
@@ -129,7 +129,7 @@ class AuthenticationFilterTest {
 		when(request.getParameter(Mockito.<String>any()))
 			.thenReturn("/some/path.html")
 			.thenReturn("/some/path.html")
-			.thenReturn("Locked ");
+			.thenReturn("/some/path.html");
 
 		// act
 		Authentication result =

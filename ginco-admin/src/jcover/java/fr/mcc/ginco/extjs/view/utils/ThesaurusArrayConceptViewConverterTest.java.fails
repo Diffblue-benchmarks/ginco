@@ -3,6 +3,7 @@ package fr.mcc.ginco.extjs.view.utils;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.ThesaurusArray;
@@ -39,7 +40,7 @@ class ThesaurusArrayConceptViewConverterTest {
 	void convert() {
 
 		// arrange
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		ThesaurusArrayConceptView thesaurusArrayConceptView =

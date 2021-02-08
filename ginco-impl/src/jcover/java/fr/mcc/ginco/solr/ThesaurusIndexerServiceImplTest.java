@@ -83,11 +83,11 @@ public class ThesaurusIndexerServiceImplTest {
 			.thenReturn(new UpdateResponse());
 		when(noteService.getNotesByThesaurusId(Mockito.<String>any()))
 			.thenReturn(new ArrayList<Note>());
-		Thesaurus thesaurus8 = new Thesaurus();
-		thesaurus8.setIdentifier("data");
+		Thesaurus thesaurus7 = new Thesaurus();
+		thesaurus7.setIdentifier("data");
 
 		// act
-		service.indexThesaurus(thesaurus8);
+		service.indexThesaurus(thesaurus7);
 
 		// assert
 		Mockito.verify(termIndexerService).addTerms(Mockito.<List<ThesaurusTerm>>any());

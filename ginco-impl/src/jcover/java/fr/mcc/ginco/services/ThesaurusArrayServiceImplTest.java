@@ -61,10 +61,10 @@ public class ThesaurusArrayServiceImplTest {
 		thesaurusArray.setOrdered(false);
 		ThesaurusArray parent1 = new ThesaurusArray();
 		thesaurusArray.setParent(parent1);
-		ThesaurusConcept superOrdinateConcept4 = new ThesaurusConcept();
-		thesaurusArray.setSuperOrdinateConcept(superOrdinateConcept4);
-		Thesaurus thesaurus7 = new Thesaurus();
-		thesaurusArray.setThesaurus(thesaurus7);
+		ThesaurusConcept superOrdinateConcept3 = new ThesaurusConcept();
+		thesaurusArray.setSuperOrdinateConcept(superOrdinateConcept3);
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurusArray.setThesaurus(thesaurus5);
 		when(thesaurusArrayDAO.getById(Mockito.<String>any()))
 			.thenReturn(thesaurusArray);
 
@@ -77,8 +77,8 @@ public class ThesaurusArrayServiceImplTest {
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
 		assertSame(parent1, result.getParent());
-		assertSame(superOrdinateConcept4, result.getSuperOrdinateConcept());
-		assertSame(thesaurus7, result.getThesaurus());
+		assertSame(superOrdinateConcept3, result.getSuperOrdinateConcept());
+		assertSame(thesaurus5, result.getThesaurus());
 	}
 
 	@Test
@@ -111,10 +111,10 @@ public class ThesaurusArrayServiceImplTest {
 		thesaurusArray1.setOrdered(false);
 		ThesaurusArray parent1 = new ThesaurusArray();
 		thesaurusArray1.setParent(parent1);
-		ThesaurusConcept superOrdinateConcept4 = new ThesaurusConcept();
-		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept4);
-		Thesaurus thesaurus7 = new Thesaurus();
-		thesaurusArray1.setThesaurus(thesaurus7);
+		ThesaurusConcept superOrdinateConcept3 = new ThesaurusConcept();
+		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept3);
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurusArray1.setThesaurus(thesaurus5);
 		when(thesaurusArrayDAO.update(Mockito.<ThesaurusArray>any()))
 			.thenReturn(thesaurusArray1);
 
@@ -128,8 +128,8 @@ public class ThesaurusArrayServiceImplTest {
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
 		assertSame(parent1, result.getParent());
-		assertSame(superOrdinateConcept4, result.getSuperOrdinateConcept());
-		assertSame(thesaurus7, result.getThesaurus());
+		assertSame(superOrdinateConcept3, result.getSuperOrdinateConcept());
+		assertSame(thesaurus5, result.getThesaurus());
 	}
 
 	@Test
@@ -142,10 +142,10 @@ public class ThesaurusArrayServiceImplTest {
 		thesaurusArray1.setOrdered(false);
 		ThesaurusArray parent1 = new ThesaurusArray();
 		thesaurusArray1.setParent(parent1);
-		ThesaurusConcept superOrdinateConcept4 = new ThesaurusConcept();
-		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept4);
-		Thesaurus thesaurus7 = new Thesaurus();
-		thesaurusArray1.setThesaurus(thesaurus7);
+		ThesaurusConcept superOrdinateConcept3 = new ThesaurusConcept();
+		thesaurusArray1.setSuperOrdinateConcept(superOrdinateConcept3);
+		Thesaurus thesaurus5 = new Thesaurus();
+		thesaurusArray1.setThesaurus(thesaurus5);
 		when(thesaurusArrayDAO.delete(Mockito.<ThesaurusArray>any()))
 			.thenReturn(thesaurusArray1);
 
@@ -158,8 +158,8 @@ public class ThesaurusArrayServiceImplTest {
 		assertEquals("DE", result.getNotation());
 		assertFalse(result.getOrdered());
 		assertSame(parent1, result.getParent());
-		assertSame(superOrdinateConcept4, result.getSuperOrdinateConcept());
-		assertSame(thesaurus7, result.getThesaurus());
+		assertSame(superOrdinateConcept3, result.getSuperOrdinateConcept());
+		assertSame(thesaurus5, result.getThesaurus());
 	}
 
 	@Test

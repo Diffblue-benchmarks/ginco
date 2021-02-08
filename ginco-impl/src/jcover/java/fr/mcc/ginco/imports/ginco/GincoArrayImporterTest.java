@@ -50,9 +50,9 @@ public class GincoArrayImporterTest {
 		when(thesaurusArrayDAO.update(Mockito.<ThesaurusArray>any()))
 			.thenReturn(thesaurusArray1);
 		GincoExportedThesaurus exportedThesaurus = new GincoExportedThesaurus();
-		ArrayList<ThesaurusArray> conceptArrays4 = new ArrayList<ThesaurusArray>();
-		conceptArrays4.add(new ThesaurusArray());
-		exportedThesaurus.setConceptArrays(conceptArrays4);
+		ArrayList<ThesaurusArray> conceptArrays3 = new ArrayList<ThesaurusArray>();
+		conceptArrays3.add(new ThesaurusArray());
+		exportedThesaurus.setConceptArrays(conceptArrays3);
 
 		// act
 		List<ThesaurusArray> result = service.storeArrays(exportedThesaurus);

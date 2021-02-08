@@ -118,7 +118,7 @@ class ExportRestServiceTest {
 	@Test
 	void getGincoBranchExport() throws fr.mcc.ginco.exceptions.TechnicalException {
 		when(thesaurusConceptService.getConceptTitle(Mockito.<ThesaurusConcept>any()))
-			.thenReturn("foo=bar");
+			.thenReturn("Mr");
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
 			.thenReturn(new ThesaurusConcept());
 		when(gincoBranchExportService.getBranchExport(Mockito.<ThesaurusConcept>any()))

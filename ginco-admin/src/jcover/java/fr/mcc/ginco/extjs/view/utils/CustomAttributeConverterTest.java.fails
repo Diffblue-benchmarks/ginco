@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.ark.IIDGeneratorService;
@@ -76,7 +77,7 @@ class CustomAttributeConverterTest {
 	void convertConceptAttribute() {
 
 		// arrange
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		Language language1 = new Language();
@@ -108,12 +109,12 @@ class CustomAttributeConverterTest {
 	void convertTermAttribute() {
 
 		// arrange
-		ThesaurusTerm thesaurusTerm = new ThesaurusTerm();
+		ThesaurusTerm thesaurusTerm = mock(ThesaurusTerm.class);
 		when(thesaurusTermService.getThesaurusTermById(Mockito.<String>any()))
 			.thenReturn(thesaurusTerm);
-		Language language2 = new Language();
+		Language language1 = new Language();
 		when(languagesService.getLanguageById(Mockito.<String>any()))
-			.thenReturn(language2);
+			.thenReturn(language1);
 		CustomTermAttributeType customTermAttributeType =
 			 new CustomTermAttributeType();
 		when(customTermAttributeTypeService.getAttributeTypeById(anyInt()))
@@ -131,7 +132,7 @@ class CustomAttributeConverterTest {
 		// assert
 		assertThat(result.getEntity(), sameInstance(thesaurusTerm));
 		assertThat(result.getIdentifier(), is("data"));
-		assertThat(result.getLanguage(), sameInstance(language2));
+		assertThat(result.getLanguage(), sameInstance(language1));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getType(), sameInstance(customTermAttributeType));
 	}

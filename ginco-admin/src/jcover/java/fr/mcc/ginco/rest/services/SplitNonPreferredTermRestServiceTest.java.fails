@@ -1,10 +1,10 @@
 package fr.mcc.ginco.rest.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsSame.sameInstance;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import fr.mcc.ginco.beans.SplitNonPreferredTerm;
@@ -99,14 +99,20 @@ class SplitNonPreferredTermRestServiceTest {
 		splitNonPreferredTermView.setLanguage("foo");
 		splitNonPreferredTermView.setLexicalValue("value");
 		splitNonPreferredTermView.setModified("someone");
-		splitNonPreferredTermView.setPreferredTerms(new ArrayList<ThesaurusTermView>());
+		ArrayList<ThesaurusTermView> preferredTerms1 =
+			 new ArrayList<ThesaurusTermView>();
+		ThesaurusTermView thesaurusTermView1 = new ThesaurusTermView();
+		preferredTerms1.add(thesaurusTermView1);
+		splitNonPreferredTermView.setPreferredTerms(preferredTerms1);
 		splitNonPreferredTermView.setSource("foo");
 		splitNonPreferredTermView.setStatus(1);
 		splitNonPreferredTermView.setThesaurusId("1234");
+		SplitNonPreferredTerm splitNonPreferredTerm1 =
+			 mock(SplitNonPreferredTerm.class);
 		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTerm>any()))
 			.thenReturn(splitNonPreferredTermView);
 		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTermView>any()))
-			.thenReturn(new SplitNonPreferredTerm());
+			.thenReturn(splitNonPreferredTerm1);
 		when(splitNonPreferredTermService.updateSplitNonPreferredTerm(Mockito.<SplitNonPreferredTerm>any()))
 			.thenReturn(new SplitNonPreferredTerm());
 
@@ -120,7 +126,8 @@ class SplitNonPreferredTermRestServiceTest {
 		assertThat(result.getLanguage(), is("foo"));
 		assertThat(result.getLexicalValue(), is("value"));
 		assertThat(result.getModified(), is("someone"));
-		assertThat(result.getPreferredTerms(), empty());
+		assertThat(result.getPreferredTerms(), hasSize(1));
+		assertThat(result.getPreferredTerms().get(0), sameInstance(thesaurusTermView1));
 		assertThat(result.getSource(), is("foo"));
 		assertThat(result.getStatus(), is(1));
 		assertThat(result.getThesaurusId(), is("1234"));
@@ -156,8 +163,10 @@ class SplitNonPreferredTermRestServiceTest {
 
 	@Test
 	void destroyTerm() throws fr.mcc.ginco.exceptions.TechnicalException {
+		SplitNonPreferredTerm splitNonPreferredTerm1 =
+			 mock(SplitNonPreferredTerm.class);
 		when(splitNonPreferredTermViewConverter.convert(Mockito.<SplitNonPreferredTermView>any()))
-			.thenReturn(new SplitNonPreferredTerm());
+			.thenReturn(splitNonPreferredTerm1);
 		when(splitNonPreferredTermService.destroySplitNonPreferredTerm(Mockito.<SplitNonPreferredTerm>any()))
 			.thenReturn(new SplitNonPreferredTerm());
 		service.destroyTerm(new SplitNonPreferredTermView());

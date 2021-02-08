@@ -93,7 +93,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert2() throws java.text.ParseException {
+	void convert1() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -133,7 +133,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert3() throws java.text.ParseException {
+	void convert2() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -172,7 +172,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert4() throws java.text.ParseException {
+	void convert3() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -211,7 +211,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert5() throws java.text.ParseException {
+	void convert4() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -250,7 +250,7 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert6() throws java.text.ParseException {
+	void convert5() throws java.text.ParseException {
 
 		// arrange
 		ArrayList<Note> source1 = new ArrayList<Note>();
@@ -295,23 +295,10 @@ class ThesaurusNoteViewConverterTest {
 	}
 
 	@Test
-	void convert1() throws java.text.ParseException {
+	void convert6() throws java.text.ParseException {
 
 		// arrange
-		ThesaurusConcept thesaurusConcept = new ThesaurusConcept();
-		thesaurusConcept.setAssociativeRelationshipLeft(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setAssociativeRelationshipRight(new HashSet<AssociativeRelationship>());
-		thesaurusConcept.setConceptArrays(new HashSet<ThesaurusArray>());
-		thesaurusConcept.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setIdentifier("data");
-		thesaurusConcept.setModified(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurusConcept.setNotation("DE");
-		thesaurusConcept.setParentConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setRootConcepts(new HashSet<ThesaurusConcept>());
-		thesaurusConcept.setStatus(1);
-		Thesaurus thesaurus1 = mock(Thesaurus.class);
-		thesaurusConcept.setThesaurus(thesaurus1);
-		thesaurusConcept.setTopConcept(false);
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
 			.thenReturn(thesaurusConcept);
 		NoteType noteType1 = new NoteType();
@@ -333,40 +320,32 @@ class ThesaurusNoteViewConverterTest {
 		concept1.setParentConcepts(new HashSet<ThesaurusConcept>());
 		concept1.setRootConcepts(new HashSet<ThesaurusConcept>());
 		concept1.setStatus(1);
-		Thesaurus thesaurus2 = new Thesaurus();
-		thesaurus2.setArchived(false);
-		thesaurus2.setContributor("foo");
-		thesaurus2.setCoverage("foo");
-		thesaurus2.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator1 = new ThesaurusOrganization();
-		creator1.setEmail("info@diffblue.com");
-		creator1.setHomepage("foo");
-		creator1.setIdentifier(1);
-		creator1.setName("Acme");
-		thesaurus2.setCreator(creator1);
-		thesaurus2.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus2.setDefaultTopConcept(false);
-		thesaurus2.setDescription("some text");
-		thesaurus2.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus2.setIdentifier("data");
-		thesaurus2.setLang(new HashSet<Language>());
-		thesaurus2.setPolyHierarchical(false);
-		thesaurus2.setPublisher("foo");
-		thesaurus2.setRelation("DE");
-		thesaurus2.setRights("foo");
-		thesaurus2.setSource("foo");
-		thesaurus2.setSubject("foo");
-		thesaurus2.setTitle("Mr");
-		ThesaurusType type1 = new ThesaurusType();
-		type1.setIdentifier(1);
-		type1.setLabel("label");
-		thesaurus2.setType(type1);
-		thesaurus2.setVersions(new HashSet<ThesaurusVersionHistory>());
-		concept1.setThesaurus(thesaurus2);
+		Thesaurus thesaurus1 = new Thesaurus();
+		thesaurus1.setArchived(false);
+		thesaurus1.setContributor("foo");
+		thesaurus1.setCoverage("foo");
+		thesaurus1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setCreator(new ThesaurusOrganization());
+		thesaurus1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus1.setDefaultTopConcept(false);
+		thesaurus1.setDescription("some text");
+		thesaurus1.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus1.setIdentifier("data");
+		thesaurus1.setLang(new HashSet<Language>());
+		thesaurus1.setPolyHierarchical(false);
+		thesaurus1.setPublisher("foo");
+		thesaurus1.setRelation("DE");
+		thesaurus1.setRights("foo");
+		thesaurus1.setSource("foo");
+		thesaurus1.setSubject("foo");
+		thesaurus1.setTitle("Mr");
+		thesaurus1.setType(new ThesaurusType());
+		thesaurus1.setVersions(new HashSet<ThesaurusVersionHistory>());
+		concept1.setThesaurus(thesaurus1);
 		concept1.setTopConcept(false);
 		note.setConcept(concept1);
-		Date created4 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		note.setCreated(created4);
+		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		note.setCreated(created3);
 		note.setIdentifier("data");
 		Language lang2 = new Language();
 		lang2.setId("1234");
@@ -396,28 +375,7 @@ class ThesaurusNoteViewConverterTest {
 		concept2.setParentConcepts(new HashSet<ThesaurusConcept>());
 		concept2.setRootConcepts(new HashSet<ThesaurusConcept>());
 		concept2.setStatus(1);
-		Thesaurus thesaurus3 = new Thesaurus();
-		thesaurus3.setArchived(false);
-		thesaurus3.setContributor("foo");
-		thesaurus3.setCoverage("foo");
-		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus3.setCreator(new ThesaurusOrganization());
-		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus3.setDefaultTopConcept(false);
-		thesaurus3.setDescription("some text");
-		thesaurus3.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus3.setIdentifier("data");
-		thesaurus3.setLang(new HashSet<Language>());
-		thesaurus3.setPolyHierarchical(false);
-		thesaurus3.setPublisher("foo");
-		thesaurus3.setRelation("DE");
-		thesaurus3.setRights("foo");
-		thesaurus3.setSource("foo");
-		thesaurus3.setSubject("foo");
-		thesaurus3.setTitle("Mr");
-		thesaurus3.setType(new ThesaurusType());
-		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
-		concept2.setThesaurus(thesaurus3);
+		concept2.setThesaurus(new Thesaurus());
 		concept2.setTopConcept(false);
 		termId1.setConcept(concept2);
 		termId1.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
@@ -440,36 +398,28 @@ class ThesaurusNoteViewConverterTest {
 		termId1.setRole(role);
 		termId1.setSource("foo");
 		termId1.setStatus(1);
-		Thesaurus thesaurus4 = new Thesaurus();
-		thesaurus4.setArchived(false);
-		thesaurus4.setContributor("foo");
-		thesaurus4.setCoverage("foo");
-		thesaurus4.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		ThesaurusOrganization creator3 = new ThesaurusOrganization();
-		creator3.setEmail("info@diffblue.com");
-		creator3.setHomepage("foo");
-		creator3.setIdentifier(1);
-		creator3.setName("Acme");
-		thesaurus4.setCreator(creator3);
-		thesaurus4.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		thesaurus4.setDefaultTopConcept(false);
-		thesaurus4.setDescription("some text");
-		thesaurus4.setFormat(new HashSet<ThesaurusFormat>());
-		thesaurus4.setIdentifier("data");
-		thesaurus4.setLang(new HashSet<Language>());
-		thesaurus4.setPolyHierarchical(false);
-		thesaurus4.setPublisher("foo");
-		thesaurus4.setRelation("DE");
-		thesaurus4.setRights("foo");
-		thesaurus4.setSource("foo");
-		thesaurus4.setSubject("foo");
-		thesaurus4.setTitle("Mr");
-		ThesaurusType type3 = new ThesaurusType();
-		type3.setIdentifier(1);
-		type3.setLabel("label");
-		thesaurus4.setType(type3);
-		thesaurus4.setVersions(new HashSet<ThesaurusVersionHistory>());
-		termId1.setThesaurus(thesaurus4);
+		Thesaurus thesaurus3 = new Thesaurus();
+		thesaurus3.setArchived(false);
+		thesaurus3.setContributor("foo");
+		thesaurus3.setCoverage("foo");
+		thesaurus3.setCreated(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus3.setCreator(new ThesaurusOrganization());
+		thesaurus3.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
+		thesaurus3.setDefaultTopConcept(false);
+		thesaurus3.setDescription("some text");
+		thesaurus3.setFormat(new HashSet<ThesaurusFormat>());
+		thesaurus3.setIdentifier("data");
+		thesaurus3.setLang(new HashSet<Language>());
+		thesaurus3.setPolyHierarchical(false);
+		thesaurus3.setPublisher("foo");
+		thesaurus3.setRelation("DE");
+		thesaurus3.setRights("foo");
+		thesaurus3.setSource("foo");
+		thesaurus3.setSubject("foo");
+		thesaurus3.setTitle("Mr");
+		thesaurus3.setType(new ThesaurusType());
+		thesaurus3.setVersions(new HashSet<ThesaurusVersionHistory>());
+		termId1.setThesaurus(thesaurus3);
 		note.setTerm(termId1);
 		when(noteService.getNoteById(Mockito.<String>any()))
 			.thenReturn(note);
@@ -481,24 +431,24 @@ class ThesaurusNoteViewConverterTest {
 		language2.setTopLanguage(false);
 		when(languagesService.getLanguageById(Mockito.<String>any()))
 			.thenReturn(language2);
-		ThesaurusNoteView source6 = new ThesaurusNoteView();
-		source6.setConceptId("1234");
-		source6.setCreated("someone");
-		source6.setIdentifier("data");
-		source6.setLanguage("foo");
-		source6.setLexicalValue("value");
-		source6.setModified("someone");
-		source6.setSource("foo");
-		source6.setTermId("1234");
-		source6.setThesaurusId("1234");
-		source6.setType("BASIC");
+		ThesaurusNoteView source5 = new ThesaurusNoteView();
+		source5.setConceptId("1234");
+		source5.setCreated("someone");
+		source5.setIdentifier("data");
+		source5.setLanguage("foo");
+		source5.setLexicalValue("value");
+		source5.setModified("someone");
+		source5.setSource("foo");
+		source5.setTermId("1234");
+		source5.setThesaurusId("1234");
+		source5.setType("BASIC");
 
 		// act
-		Note result = service.convert(source6);
+		Note result = service.convert(source5);
 
 		// assert
 		assertThat(result.getConcept(), sameInstance(thesaurusConcept));
-		assertThat(result.getCreated(), sameInstance(created4));
+		assertThat(result.getCreated(), sameInstance(created3));
 		assertThat(result.getIdentifier(), is("data"));
 		assertThat(result.getLanguage(), sameInstance(language2));
 		assertThat(result.getLexicalValue(), is("value"));
@@ -514,8 +464,9 @@ class ThesaurusNoteViewConverterTest {
 	void convertToNote() {
 
 		// arrange
+		ThesaurusConcept thesaurusConcept = mock(ThesaurusConcept.class);
 		when(thesaurusConceptService.getThesaurusConceptById(Mockito.<String>any()))
-			.thenReturn(new ThesaurusConcept());
+			.thenReturn(thesaurusConcept);
 		when(noteTypeService.getNoteTypeById(Mockito.<String>any()))
 			.thenReturn(new NoteType());
 		Note note = new Note();
@@ -523,16 +474,16 @@ class ThesaurusNoteViewConverterTest {
 			.thenReturn(note);
 		when(languagesService.getLanguageById(Mockito.<String>any()))
 			.thenReturn(new Language());
-		ArrayList<ThesaurusNoteView> source6 = new ArrayList<ThesaurusNoteView>();
+		ArrayList<ThesaurusNoteView> source5 = new ArrayList<ThesaurusNoteView>();
 		ThesaurusNoteView thesaurusNoteView = new ThesaurusNoteView();
 		thesaurusNoteView.setConceptId("1234");
 		thesaurusNoteView.setIdentifier("data");
 		thesaurusNoteView.setLanguage("foo");
 		thesaurusNoteView.setSource("foo");
-		source6.add(thesaurusNoteView);
+		source5.add(thesaurusNoteView);
 
 		// act
-		List<Note> result = service.convertToNote(source6);
+		List<Note> result = service.convertToNote(source5);
 
 		// assert
 		assertThat(result, hasSize(1));

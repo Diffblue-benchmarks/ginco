@@ -46,14 +46,14 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created6 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setCreated(created6);
+		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setCreated(created3);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setModified(modified3);
+		Date modified2 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setModified(modified2);
 		when(thesaurusConceptGroupLabelDAO.findByThesaurusConceptGroupAndLanguage(Mockito.<String>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 
@@ -63,11 +63,11 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 
 		// assert
 		assertSame(conceptGroup, result.getConceptGroup());
-		assertSame(created6, result.getCreated());
+		assertSame(created3, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified3, result.getModified());
+		assertSame(modified2, result.getModified());
 	}
 
 	@Test
@@ -78,14 +78,14 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created6 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setCreated(created6);
+		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setCreated(created3);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setModified(modified3);
+		Date modified2 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setModified(modified2);
 		when(thesaurusConceptGroupLabelDAO.findByThesaurusConceptGroup(Mockito.<String>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 
@@ -95,11 +95,11 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 
 		// assert
 		assertSame(conceptGroup, result.getConceptGroup());
-		assertSame(created6, result.getCreated());
+		assertSame(created3, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified3, result.getModified());
+		assertSame(modified2, result.getModified());
 	}
 
 	@Test
@@ -110,14 +110,14 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup);
-		Date created6 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setCreated(created6);
+		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setCreated(created3);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setModified(modified3);
+		Date modified2 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setModified(modified2);
 		when(thesaurusConceptGroupLabelDAO.getById(Mockito.<Integer>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 
@@ -126,11 +126,11 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 
 		// assert
 		assertSame(conceptGroup, result.getConceptGroup());
-		assertSame(created6, result.getCreated());
+		assertSame(created3, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified3, result.getModified());
+		assertSame(modified2, result.getModified());
 	}
 
 	@Test
@@ -141,14 +141,14 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 			 new ThesaurusConceptGroupLabel();
 		ThesaurusConceptGroup conceptGroup1 = new ThesaurusConceptGroup();
 		thesaurusConceptGroupLabel.setConceptGroup(conceptGroup1);
-		Date created6 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setCreated(created6);
+		Date created3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setCreated(created3);
 		thesaurusConceptGroupLabel.setIdentifier(1);
 		Language language1 = new Language();
 		thesaurusConceptGroupLabel.setLanguage(language1);
 		thesaurusConceptGroupLabel.setLexicalValue("value");
-		Date modified3 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
-		thesaurusConceptGroupLabel.setModified(modified3);
+		Date modified2 = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31");
+		thesaurusConceptGroupLabel.setModified(modified2);
 		when(thesaurusConceptGroupLabelDAO.update(Mockito.<ThesaurusConceptGroupLabel>any()))
 			.thenReturn(thesaurusConceptGroupLabel);
 
@@ -158,10 +158,10 @@ public class ThesaurusConceptGroupLabelServiceImplTest {
 
 		// assert
 		assertSame(conceptGroup1, result.getConceptGroup());
-		assertSame(created6, result.getCreated());
+		assertSame(created3, result.getCreated());
 		assertEquals(1, (int) result.getIdentifier());
 		assertSame(language1, result.getLanguage());
 		assertEquals("value", result.getLexicalValue());
-		assertSame(modified3, result.getModified());
+		assertSame(modified2, result.getModified());
 	}
 }

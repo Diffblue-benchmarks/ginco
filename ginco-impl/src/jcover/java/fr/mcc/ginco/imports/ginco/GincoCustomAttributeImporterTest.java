@@ -197,9 +197,9 @@ public class GincoCustomAttributeImporterTest {
 		ArrayList<CustomTermAttribute> customAttributeToImport =
 			 new ArrayList<CustomTermAttribute>();
 		CustomTermAttribute customTermAttribute2 = new CustomTermAttribute();
-		CustomTermAttributeType type5 = new CustomTermAttributeType();
-		type5.setCode("DE");
-		customTermAttribute2.setType(type5);
+		CustomTermAttributeType type4 = new CustomTermAttributeType();
+		type4.setCode("DE");
+		customTermAttribute2.setType(type4);
 		customAttributeToImport.add(customTermAttribute2);
 		HashMap<String, CustomTermAttributeType> savedTypes =
 			 new HashMap<String, CustomTermAttributeType>();
